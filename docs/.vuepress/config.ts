@@ -5,7 +5,7 @@ import fs from "fs-extra";
 import path from "path";
 
 export default defineUserConfig({
-	base: "/",
+	base: "/documentation/",
 	lang: "en-US",
 	locales: {
 		"/": {
