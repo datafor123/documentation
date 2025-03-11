@@ -57,16 +57,16 @@ export default defineThemeConfig({
 			 */
 			profile: {
 				avatar: "/plume.svg",
-				name: "Optimibi",
-				description: "Optimibi documentation",
+				name: "Datafor",
+				description: "Datafor documentation",
 				// circle: true,
 				//location: "/https://theme-plume.vuejs.press/guide/intro/",
 				// organization: '',
 			},
-			home: "https://www.optimibi.com",
+			home: "https://www.datafor.com.cn",
 			footer: {
-				message: "Optimibi Documentation",
-				copyright: "Copyright ©2025 Optimibi All rights reserved.",
+				message: "Datafor Documentation",
+				copyright: "Copyright ©2025 Datafor All rights reserved.",
 			},
 
 			navbar: enNavbar,
