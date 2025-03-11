@@ -9,9 +9,9 @@ export default defineUserConfig({
 	lang: "en-US",
 	locales: {
 		"/": {
-			title: "optimibi",
+			title: "Datafor",
 			lang: "en-US",
-			description: "Optimibi documentation",
+			description: "Datafor documentation",
 		},
 		// "/zh/": {
 		// 	title: "OPTIMIBI",
