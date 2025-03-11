@@ -6,11 +6,11 @@ description:
 ---
 # Mail Server Configuration
 
-Optimibi allows administrators to configure the mail server, enabling the system to send automated notification emails, such as **alert notifications** and **forgotten password emails**.
+Datafor allows administrators to configure the mail server, enabling the system to send automated notification emails, such as **alert notifications** and **forgotten password emails**.
 
 ## 1. Accessing Mail Server Settings
 
-1. **Log in to the Optimibi admin panel**.
+1. **Log in to the Datafor admin panel**.
 2. In the left-hand menu navigation, click **“Settings”**.
 3. Under **“Settings”**, select **“Mail Server”**.
 

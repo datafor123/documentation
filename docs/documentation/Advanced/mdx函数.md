@@ -5,7 +5,7 @@ permalink: /documentation/Advanced/MDX-Functions/
 
 # MDX Functions
 
-MDX (Multidimensional Expressions) is a powerful query language designed for multidimensional data analysis, commonly utilized in OLAP (Online Analytical Processing) systems. Optimibi leverages MDX to define calculated metrics and perform multidimensional data operations such as querying, aggregating, filtering, and computing.
+MDX (Multidimensional Expressions) is a powerful query language designed for multidimensional data analysis, commonly utilized in OLAP (Online Analytical Processing) systems. Datafor leverages MDX to define calculated metrics and perform multidimensional data operations such as querying, aggregating, filtering, and computing.
 
 This guide provides an overview of essential MDX functions grouped by their common use cases:
 
@@ -110,4 +110,4 @@ This guide provides an overview of essential MDX functions grouped by their comm
 
 ---
 
-MDX functions are essential for effective data analysis in Optimibi, providing flexibility and powerful tools to interact with multidimensional data. Use this guide as a quick reference when building advanced analytical models and reports.
+MDX functions are essential for effective data analysis in Datafor, providing flexibility and powerful tools to interact with multidimensional data. Use this guide as a quick reference when building advanced analytical models and reports.

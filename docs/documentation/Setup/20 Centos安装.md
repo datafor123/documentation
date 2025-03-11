@@ -1,9 +1,9 @@
 ---
-title: Optimibi Installation (CentOS)
-permalink: /documentation/Setup/OptimiBI-Installation-CentOS/
+title: Datafor Installation (CentOS)
+permalink: /documentation/Setup/Datafor-Installation-CentOS/
 ---
 
-# Optimibi Installation (CentOS)
+# Datafor Installation (CentOS)
 
 **Step 1. Switch to the root user**
 
@@ -13,19 +13,19 @@ sudo su root
 
 <div align="left"><img src="./images/image-20220829172346058.png"  /></div>
 
-**Step 2. Create the 'optimibi' user group**
+**Step 2. Create the 'Datafor' user group**
 
 ```
-groupadd optimibi
+groupadd Datafor
 ```
 
 <div align="left"><img src="./images/image-20220829172418679.png"  /></div>
 
-**Step 3. Create the 'optimibi' user, add it to the 'OptimiBI' user group, and set the user password to 'optimibi' as well.**
+**Step 3. Create the 'Datafor' user, add it to the 'Datafor' user group, and set the user password to 'Datafor' as well.**
 
 ```
-adduser optimibi -g optimibi
-passwd optimibi
+adduser Datafor -g Datafor
+passwd Datafor
 ```
 
 <div align="left"><img src="./images/image-20220829172434849.png"  /></div>
@@ -33,7 +33,7 @@ passwd optimibi
 **Step 4. Navigate to the directory containing the installation package and extract the package to the /opt directory.**
 
 ```
-unzip -o optimibi-server_202203240605.zip -d /opt/
+unzip -o Datafor-server_202203240605.zip -d /opt/
 ```
 
 <div align="left"><img src="./images/image-20220829172446528.png"  /></div>
@@ -42,9 +42,9 @@ unzip -o optimibi-server_202203240605.zip -d /opt/
 
 ```
 cd /opt/
-chmod -R 700 optimibi-server
-chown -R optimibi optimibi-server
-chgrp -R optimibi optimibi-server
+chmod -R 700 Datafor-server
+chown -R Datafor Datafor-server
+chgrp -R Datafor Datafor-server
 ```
 
 <div align="left"><img src="./images/image-20220829172501348.png"  /></div>
@@ -53,19 +53,19 @@ chgrp -R optimibi optimibi-server
 
 
 
-## Start OptimiBI
+## Start Datafor
 
-**Please operate as the 'optimibi' user**
+**Please operate as the 'Datafor' user**
 
 ```
-su OptimiBI
-cd /opt/optimibi-server/
+su Datafor
+cd /opt/Datafor-server/
 ```
 
 **Start the service**
 
 ```
-./start-optimibi.sh
+./start-Datafor.sh
 ```
 
 <div align="left"><img src="./images/image-20220829172513074.png"  /></div>
@@ -73,7 +73,7 @@ cd /opt/optimibi-server/
 **Stop Service**
 
 ```
-./stop-optimibi.sh
+./stop-Datafor.sh
 ```
 
 <div align="left"><img src="./images/image-20220829172525119.png"  /></div>
@@ -101,4 +101,4 @@ username  /  password
 
 ## Update the System
 
-Place the update package `optimibi-upload.jar` in the `optimibi-server\update` folder and restart the system.
+Place the update package `Datafor-upload.jar` in the `Datafor-server\update` folder and restart the system.

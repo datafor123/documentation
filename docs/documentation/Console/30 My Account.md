@@ -7,7 +7,7 @@ description: "My Account"
 
 ## **Overview**
 
-The **My Account** section in OptimiBI allows users to manage their **personal information, language preferences, and homepage settings**. This guide explains how to navigate and configure these settings.
+The **My Account** section in Datafor allows users to manage their **personal information, language preferences, and homepage settings**. This guide explains how to navigate and configure these settings.
 
 
 ## **1. Accessing My Account**
@@ -45,7 +45,7 @@ In the **Personal Information** section, users can view and update their basic p
 
 ## **3. Changing Language Preferences**
 
-Users can set their preferred language for the OptimiBI interface.
+Users can set their preferred language for the Datafor interface.
 
 <div align="left"><img src="./images/1739691849012.png" width="50%"/></div>
 

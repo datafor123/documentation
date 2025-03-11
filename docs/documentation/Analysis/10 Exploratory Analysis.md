@@ -7,7 +7,7 @@ description:
 
 ## Overview
 
-Optimibi offers powerful exploratory analysis capabilities that allow users to explore data in reports and dashboards in real-time.
+Datafor offers powerful exploratory analysis capabilities that allow users to explore data in reports and dashboards in real-time.
 
 ## 1. Slicers
 
@@ -59,4 +59,4 @@ Calculations involve creating custom formulas and measures to compute complex da
 
 ## Conclusion
 
-Optimibi's exploratory analysis capabilities enable users to interact with data in real-time, offering flexible and efficient data analysis methods. By utilizing slicers, component filtering, cross-filtering, tooltips, drillthrough, drill down, sorting, and calculations, users can deeply explore data and uncover hidden trends and insights.
+Datafor's exploratory analysis capabilities enable users to interact with data in real-time, offering flexible and efficient data analysis methods. By utilizing slicers, component filtering, cross-filtering, tooltips, drillthrough, drill down, sorting, and calculations, users can deeply explore data and uncover hidden trends and insights.

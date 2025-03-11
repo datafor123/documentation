@@ -7,13 +7,13 @@ description:
 
 ## **Overview**
 
-CAS (Central Authentication Service) enables **single sign-on (SSO)** authentication, allowing users to log into **Optimibi** using a central authentication system. This guide provides step-by-step instructions for configuring CAS authentication in Optimibi.
+CAS (Central Authentication Service) enables **single sign-on (SSO)** authentication, allowing users to log into **Datafor** using a central authentication system. This guide provides step-by-step instructions for configuring CAS authentication in Datafor.
 
 ------
 
 ## **1. Accessing CAS Configuration**
 
-1. **Log in** to the **Optimibi** admin panel.
+1. **Log in** to the **Datafor** admin panel.
 2. Navigate to **Settings** from the left-side menu.
 3. Click on **CAS** under **System Settings**.
 
@@ -30,7 +30,7 @@ The following fields must be configured to enable CAS authentication:
 
 | Parameter   | Description                                                  |
 | ----------- | ------------------------------------------------------------ |
-| **Enabled** | Toggle this option to enable or disable CAS authentication in Optimibi. |
+| **Enabled** | Toggle this option to enable or disable CAS authentication in Datafor. |
 
 ------
 
@@ -58,7 +58,7 @@ The following fields must be configured to enable CAS authentication:
 
 | Parameter                    | Description                                                  |
 | ---------------------------- | ------------------------------------------------------------ |
-| **Initialize User**          | If enabled, new users will be automatically created in Optimibi upon first login. |
+| **Initialize User**          | If enabled, new users will be automatically created in Datafor upon first login. |
 | **Initialization User Type** | Defines the default user type assigned to new users. Example: `Creator`. |
 | **Initialization Role**      | Specifies the default roles assigned to new users.           |
 
@@ -94,7 +94,7 @@ The following fields must be configured to enable CAS authentication:
 
 1. Click **Save** to apply the CAS settings.
 2. Perform a test login using CAS.
-   - If successful: The authentication flow should redirect to the Optimibi dashboard.
+   - If successful: The authentication flow should redirect to the Datafor dashboard.
    - If failed: Check the **CAS server settings, login URL, and CAS implementation type**.
 
 ------
@@ -111,4 +111,4 @@ The following fields must be configured to enable CAS authentication:
 
 ## **Conclusion**
 
-By correctly configuring CAS authentication, **Optimibi** can integrate with a central authentication system, allowing seamless **SSO login** for users. Ensure all parameters are correctly set and perform test logins before deploying CAS authentication to end users.
+By correctly configuring CAS authentication, **Datafor** can integrate with a central authentication system, allowing seamless **SSO login** for users. Ensure all parameters are correctly set and perform test logins before deploying CAS authentication to end users.

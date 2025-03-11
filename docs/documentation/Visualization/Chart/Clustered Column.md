@@ -7,7 +7,7 @@ description:
 
 ## Introduction  
 
-The **Clustered Column Chart** in Optimibi is a widely used visualization component that displays categorical data with vertical bars grouped by category. Each column represents a data point, and multiple series are displayed side by side within the same category, making it easy to compare values across different groups.  
+The **Clustered Column Chart** in Datafor is a widely used visualization component that displays categorical data with vertical bars grouped by category. Each column represents a data point, and multiple series are displayed side by side within the same category, making it easy to compare values across different groups.  
 
 ## Key Features  
 
@@ -26,7 +26,7 @@ The **Clustered Column Chart** in Optimibi is a widely used visualization compon
 
 ## Customization Options  
 
-Optimibi provides a range of customization options for the Clustered Column Chart, including:  
+Datafor provides a range of customization options for the Clustered Column Chart, including:  
 
 - **Axis Configuration**: Customize category and value axes, including labels and scales.  
 - **Color Formatting**: Assign different colors to data series for better visual distinction.  
@@ -46,4 +46,4 @@ Optimibi provides a range of customization options for the Clustered Column Char
 
 ## Summary  
 
-The Clustered Column Chart in Optimibi is an essential visualization tool for comparing grouped data across multiple categories. Its ability to display multiple series side by side makes it ideal for trend analysis, business performance tracking, and detailed comparisons across various datasets.  
+The Clustered Column Chart in Datafor is an essential visualization tool for comparing grouped data across multiple categories. Its ability to display multiple series side by side makes it ideal for trend analysis, business performance tracking, and detailed comparisons across various datasets.  

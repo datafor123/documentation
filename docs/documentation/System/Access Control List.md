@@ -6,11 +6,11 @@ description:
 ---
 # Access Control List
 
-**ACL (Access Control List)** is a crucial feature in Optimibi that enables fine-grained control over user access to reports, data sources, models, and folders. With ACL, you can ensure resource security and restrict access based on user roles and permissions.
+**ACL (Access Control List)** is a crucial feature in Datafor that enables fine-grained control over user access to reports, data sources, models, and folders. With ACL, you can ensure resource security and restrict access based on user roles and permissions.
 
 ## 1. What is ACL?
 
-ACL is a permission control mechanism used to define access rights for resources. In Optimibi, resources include data sources, models, report files, and folders. ACL allows administrators to set permissions for these resources. The available permission levels are:
+ACL is a permission control mechanism used to define access rights for resources. In Datafor, resources include data sources, models, report files, and folders. ACL allows administrators to set permissions for these resources. The available permission levels are:
 
 - **View**: The user can view the resource content.
 - **Edit**: The user can modify the resource.
@@ -44,7 +44,7 @@ Permissions must be explicitly granted to users, roles, or user types for each r
 
 ### 2.2 User-Type-Based Authorization
 
-Optimibi provides three user types:
+Datafor provides three user types:
 
 - **Read-Only Users**: Can only view resources but cannot modify or delete them.
 - **Creator Users**: Can edit and create reports, data models, and other resources.
@@ -56,7 +56,7 @@ ACL can also grant access based on user types. For example, administrators may h
 
 ## 3. Folder and Report Authorization
 
-Folder and report authorization in Optimibi has certain restrictions:
+Folder and report authorization in Datafor has certain restrictions:
 
 - **Private Folders**: Reports and folders within private directories cannot be shared with other users or roles.
 - **Public Folders**: Only reports and subfolders in public folders can be authorized for access by other users or roles.

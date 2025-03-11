@@ -8,7 +8,7 @@ description: "White Label Configuration"
 # **White Label**
 
 ## **Overview**
-OptimiBI allows administrators to customize the platform’s branding through **White Label Configuration**. This includes modifying logos, website icons, copyright statements, and software titles to align with corporate branding.
+Datafor allows administrators to customize the platform’s branding through **White Label Configuration**. This includes modifying logos, website icons, copyright statements, and software titles to align with corporate branding.
 
 ## **Accessing White Label Configuration**
 To configure branding settings:
@@ -59,7 +59,7 @@ To configure branding settings:
 
 ### **Copyright Statement**
 - Displays copyright information for the software.
-- Enter the company’s copyright text, e.g., **"©2025 OptimiBI"**.
+- Enter the company’s copyright text, e.g., **"©2025 Datafor"**.
 
 ### **Software Name Title**
 - Sets the primary software name displayed on the home page.

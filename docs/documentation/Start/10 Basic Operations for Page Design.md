@@ -7,7 +7,7 @@ description: "Basic Operations for Report Design."
 
 # **Basic Operations for Report Design**
 
-OptimiBI provides powerful and flexible dashboard and report creation capabilities, allowing users to efficiently manage and adjust visualization components on the canvas. This document introduces key operations, including adding, deleting, resizing, moving, aligning, distributing, layering, switching types, and copying components, helping users optimize their data visualization design.
+Datafor provides powerful and flexible dashboard and report creation capabilities, allowing users to efficiently manage and adjust visualization components on the canvas. This document introduces key operations, including adding, deleting, resizing, moving, aligning, distributing, layering, switching types, and copying components, helping users optimize their data visualization design.
 
 ---
 
@@ -64,7 +64,7 @@ OptimiBI provides powerful and flexible dashboard and report creation capabiliti
 
 ## **6. Copying and Pasting Components**
 
-OptimiBI supports copying, cutting, and pasting single or multiple components, including cross-page operations.
+Datafor supports copying, cutting, and pasting single or multiple components, including cross-page operations.
 
 ### **Using Toolbar Buttons**
 - Select the components and click the **“Copy”** or **“Cut”** button on the toolbar, then paste them into the desired location.

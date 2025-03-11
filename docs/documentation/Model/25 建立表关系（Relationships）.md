@@ -33,7 +33,7 @@ Supports **one-to-one (1:1)** and **one-to-many (1:N)** relationships, determine
   <div align="left"><img src="./images/1739506758329.png"  width="60%" /></div>
 
 ### **Support for Composite Keys**  
-Optimibi allows multiple fields to be combined into a **composite key** to establish table relationships. This is useful when no single field uniquely identifies records. For example:  
+Datafor allows multiple fields to be combined into a **composite key** to establish table relationships. This is useful when no single field uniquely identifies records. For example:  
 
 - The `sales_fact` table may need to use both `customer_id` and `store_id` as a composite key to match records in the `customer` table.  
 

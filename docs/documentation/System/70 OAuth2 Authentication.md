@@ -7,13 +7,13 @@ description:
 
 ## **Overview**
 
-OAuth2 authentication allows users to securely log in to Optimibi using third-party identity providers (e.g., **Google, Microsoft, GitHub**). This guide explains how to configure OAuth2 authentication in Optimibi, enabling **single sign-on (SSO)** functionality.
+OAuth2 authentication allows users to securely log in to Datafor using third-party identity providers (e.g., **Google, Microsoft, GitHub**). This guide explains how to configure OAuth2 authentication in Datafor, enabling **single sign-on (SSO)** functionality.
 
 ------
 
 ## **1. Accessing OAuth2 Configuration**
 
-1. **Log in** to the **Optimibi** admin panel.
+1. **Log in** to the **Datafor** admin panel.
 
 2. Navigate to **Settings** from the left-side menu.
 
@@ -32,7 +32,7 @@ The following fields must be configured to enable OAuth2 authentication:
 
 | Parameter                        | Description                                                  |
 | -------------------------------- | ------------------------------------------------------------ |
-| **Enable OAuth2 Authentication** | Toggle this option to enable or disable OAuth2 authentication in Optimibi. |
+| **Enable OAuth2 Authentication** | Toggle this option to enable or disable OAuth2 authentication in Datafor. |
 
 ------
 
@@ -77,7 +77,7 @@ The following fields must be configured to enable OAuth2 authentication:
 
 | Parameter             | Description                                                  |
 | --------------------- | ------------------------------------------------------------ |
-| **Auto-create User**  | If enabled, Optimibi will automatically create user accounts upon first login. |
+| **Auto-create User**  | If enabled, Datafor will automatically create user accounts upon first login. |
 | **Default User Type** | The default type assigned to newly created users (e.g., `Reader`). |
 | **Default Role**      | The default roles assigned to new users created via OAuth2 authentication. |
 
@@ -121,7 +121,7 @@ The following fields must be configured to enable OAuth2 authentication:
 
 1. Click **Save** to apply the OAuth2 settings.
 2. Perform a test login using OAuth2.
-   - If successful: The authentication flow should redirect to the Optimibi dashboard.
+   - If successful: The authentication flow should redirect to the Datafor dashboard.
    - If failed: Check the **OAuth2 endpoint URLs, Client ID, Client Secret, and grant type**.
 
 ------
@@ -140,4 +140,4 @@ The following fields must be configured to enable OAuth2 authentication:
 
 ## **Conclusion**
 
-By properly configuring OAuth2 authentication, Optimibi allows users to sign in securely using external identity providers. Ensure all parameters are correctly set and perform test logins before deploying OAuth2 authentication to end users.
+By properly configuring OAuth2 authentication, Datafor allows users to sign in securely using external identity providers. Ensure all parameters are correctly set and perform test logins before deploying OAuth2 authentication to end users.

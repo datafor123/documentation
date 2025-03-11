@@ -7,7 +7,7 @@ description:
 
 
 > **Note:**
-> The term "**report**" in this document refers to the visual reports created using Optimibi or the Visualizer plugin.
+> The term "**report**" in this document refers to the visual reports created using Datafor or the Visualizer plugin.
 
 Reports support XDM (Cross-Document Messaging) for filtering report data without refreshing the report page. XDM allows control over the report's data filtering, styles, and behavior; however, this document focuses solely on data filtering scenarios.
 
@@ -130,7 +130,7 @@ class XDMWorker {
 
    - Obtain the report's embedding mode URL.
 
-     [Reference Document](https://help.Optimibi.com share/jcyfx-report-api)
+     [Reference Document](https://help.Datafor.com share/jcyfx-report-api)
 
    - Add a "delay time parameter" to the report URL:
 
@@ -183,6 +183,6 @@ The `uniqueName` of the `product_department` field in the image below is `[produ
 
 ## Sample Project
 
-Please refer to the sample project: https://github.com/optimibi/xdm-demo
+Please refer to the sample project: https://github.com/Datafor/xdm-demo
 
 <div align="left"><img src="./images/1721293514716.png" width="100%" /></div>

@@ -9,7 +9,7 @@ What-if analysis is a predictive analysis method used to evaluate the impact of 
 
    <div align="left"><img src="./images/gnix5-j1hnn.gif"  width="76%" /></div>
 
-Below is a detailed example demonstrating how to use What-If parameters in Optimibi for sales forecast analysis:
+Below is a detailed example demonstrating how to use What-If parameters in Datafor for sales forecast analysis:
 
 ### Scenario: Sales Forecast Analysis
 
@@ -19,7 +19,7 @@ A retail company wants to forecast the impact of different pricing strategies on
 
 #### Objective
 
-Use Optimibi's What-If parameter feature to simulate the impact of different price adjustment scenarios on sales revenue.
+Use Datafor's What-If parameter feature to simulate the impact of different price adjustment scenarios on sales revenue.
 
 ### Steps
 

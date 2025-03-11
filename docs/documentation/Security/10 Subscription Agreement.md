@@ -13,21 +13,21 @@ tags:
 
 ---
 
-**CAREFULLY READ ALL THE TERMS AND CONDITIONS OF THIS OPTIMIBI SUBSCRIPTION AGREEMENT (THIS “AGREEMENT”).**  
-BY AGREEING TO AN ORDER FORM INCORPORATING THIS AGREEMENT, CLICKING “I ACCEPT”, “CREATE”; PROCEEDING WITH THE INSTALLATION OF THE OPTIMIBI ENTERPRISE SOFTWARE; OR USING THE SOFTWARE, YOU, AS AN AUTHORIZED REPRESENTATIVE OF YOUR COMPANY ON WHOSE BEHALF YOU INSTALL AND/OR USE THE SOFTWARE (“SUBSCRIBER”), ARE ACKNOWLEDGING YOU HAVE READ, UNDERSTAND AND ACCEPT THIS AGREEMENT AND AGREE TO BE BOUND BY ITS TERMS.  
+**CAREFULLY READ ALL THE TERMS AND CONDITIONS OF THIS Datafor SUBSCRIPTION AGREEMENT (THIS “AGREEMENT”).**  
+BY AGREEING TO AN ORDER FORM INCORPORATING THIS AGREEMENT, CLICKING “I ACCEPT”, “CREATE”; PROCEEDING WITH THE INSTALLATION OF THE Datafor ENTERPRISE SOFTWARE; OR USING THE SOFTWARE, YOU, AS AN AUTHORIZED REPRESENTATIVE OF YOUR COMPANY ON WHOSE BEHALF YOU INSTALL AND/OR USE THE SOFTWARE (“SUBSCRIBER”), ARE ACKNOWLEDGING YOU HAVE READ, UNDERSTAND AND ACCEPT THIS AGREEMENT AND AGREE TO BE BOUND BY ITS TERMS.  
 
-IN THE EVENT OF A CONFLICT BETWEEN THIS AGREEMENT, AN OPTIMIBI ORDER FORM OR SOW, AND A SUBSCRIBER PURCHASE ORDER, THIS AGREEMENT, THE OPTIMIBI ORDER FORM OR SOW SHALL GOVERN. IN THE EVENT OF ANY CONFLICT BETWEEN THIS AGREEMENT AND AN OPTIMIBI ORDER FORM OR SOW, THE ORDER FORM OR SOW SHALL GOVERN.  
+IN THE EVENT OF A CONFLICT BETWEEN THIS AGREEMENT, AN Datafor ORDER FORM OR SOW, AND A SUBSCRIBER PURCHASE ORDER, THIS AGREEMENT, THE Datafor ORDER FORM OR SOW SHALL GOVERN. IN THE EVENT OF ANY CONFLICT BETWEEN THIS AGREEMENT AND AN Datafor ORDER FORM OR SOW, THE ORDER FORM OR SOW SHALL GOVERN.  
 
 THE EFFECTIVE DATE OF THIS AGREEMENT SHALL BE THE SUBSCRIPTION START DATE SET ON THE ORDER FORM (“EFFECTIVE DATE”).
 
 
 ## 1. Scope of Agreement
 
-This Agreement sets forth the terms and conditions under which Subscriber or its Affiliates may purchase from the OPTIMIBI entity listed on an applicable Order Form (“OPTIMIBI”, traded as **GraphWay Pty Ltd**, a proprietary company registered in Australia with ABN 71622338096) or its Affiliates:
+This Agreement sets forth the terms and conditions under which Subscriber or its Affiliates may purchase from the Datafor entity listed on an applicable Order Form (“Datafor”, traded as **GraphWay Pty Ltd**, a proprietary company registered in Australia with ABN 71622338096) or its Affiliates:
 
-1. **Subscription Licenses** to use proprietary commercial data analytics and visualization products developed by OPTIMIBI and made available to its subscribers for download through the OPTIMIBI website (the “Site”), including any future updates or upgrades (collectively, the “Software”).
+1. **Subscription Licenses** to use proprietary commercial data analytics and visualization products developed by Datafor and made available to its subscribers for download through the Datafor website (the “Site”), including any future updates or upgrades (collectively, the “Software”).
 2. **Support and Maintenance Services** (“Support Services”).
-3. **Implementation, Training, or Consulting Services** performed by OPTIMIBI or its authorized representatives (“Consulting Services”).
+3. **Implementation, Training, or Consulting Services** performed by Datafor or its authorized representatives (“Consulting Services”).
 
 Support Services and Consulting Services are referred to collectively as “Services.”  
 
@@ -44,19 +44,19 @@ Software and Services ordered for a specific use case (“Project”) will be sp
 
 ## 2. Grant of Limited License
 
-Subject to compliance with this Agreement and applicable Order Form, OPTIMIBI grants Subscriber a **nonexclusive, revocable, non-transferable, non-sublicensable** internal license to use the Software **on-premises or in the Subscriber’s cloud environment**, solely for business purposes per the **Documentation**.
+Subject to compliance with this Agreement and applicable Order Form, Datafor grants Subscriber a **nonexclusive, revocable, non-transferable, non-sublicensable** internal license to use the Software **on-premises or in the Subscriber’s cloud environment**, solely for business purposes per the **Documentation**.
 
 **Key Terms:**
-- **Documentation**: OPTIMIBI’s standard installation materials, training materials, specifications, and online help documents, updated from time to time.
-- **Download & Acceptance**: The Software is deemed accepted upon OPTIMIBI making it available for download.
-- **Intellectual Property**: OPTIMIBI or its licensors retain all **right, title, and interest** in and to the Software, including all patents, copyrights, trademarks, and trade secrets.
+- **Documentation**: Datafor’s standard installation materials, training materials, specifications, and online help documents, updated from time to time.
+- **Download & Acceptance**: The Software is deemed accepted upon Datafor making it available for download.
+- **Intellectual Property**: Datafor or its licensors retain all **right, title, and interest** in and to the Software, including all patents, copyrights, trademarks, and trade secrets.
 
 All rights not expressly granted are **reserved**.  
 
 **Third-Party Open-Source Software:**  
 - Open-source software (“Open-Source Software”) provided with the Software is subject to the applicable third-party license terms, viewable at:  
-  [www.optimibi.com/thirdpartylicenses](www.optimibi.com/thirdpartylicenses).
-- OPTIMIBI ensures that Open-Source Software, when used as delivered and unmodified, does not require disclosure or licensing of the Subscriber’s proprietary source code.
+  [www.Datafor.com/thirdpartylicenses](www.Datafor.com/thirdpartylicenses).
+- Datafor ensures that Open-Source Software, when used as delivered and unmodified, does not require disclosure or licensing of the Subscriber’s proprietary source code.
 
 
 ## 3. License Restrictions and Usage Limit Compliance
@@ -71,21 +71,21 @@ Subscriber **may not**:
 
 **Usage Limits:**  
 - Usage is subject to term, metrics, and quantities set in the Order Form.
-- OPTIMIBI may **verify compliance** during the Subscription term and 12 months thereafter.
+- Datafor may **verify compliance** during the Subscription term and 12 months thereafter.
 - **Excessive Use** beyond licensed limits may result in additional **Upgraded License Fees**.
-- OPTIMIBI may suspend or terminate access for non-payment of Upgraded License Fees.
+- Datafor may suspend or terminate access for non-payment of Upgraded License Fees.
 
 
 ## 4. Fees and Payments
 
 - Payments must be made as per the Order Form or SOW in the specified currency.
-- Subscriber is responsible for applicable **taxes** (excluding OPTIMIBI’s income taxes).
+- Subscriber is responsible for applicable **taxes** (excluding Datafor’s income taxes).
 - Late payments are subject to **1.5% interest per month** or the **highest rate permitted by law**.
 - Fees are **non-refundable and non-cancellable**.
 
 **Resellers & Payment Processors:**
 - Subscriber may purchase through an authorized **Reseller** or **Payment Processor**.
-- Subscriber’s payment relationship with a Reseller/Processor is independent of OPTIMIBI.
+- Subscriber’s payment relationship with a Reseller/Processor is independent of Datafor.
 
 
 ## 5. Confidentiality
@@ -108,19 +108,19 @@ Each party warrants that:
 1. They have the **authority** to enter into this Agreement.
 2. They will **comply with applicable laws**.
 
-### 6.2 OPTIMIBI Warranties
+### 6.2 Datafor Warranties
 - The Software will **materially conform** to its Documentation for **90 days**.
 - Subscriber’s **sole remedy** for a breach is **fixing the Software or a refund**.
 
 ### 6.3 Disclaimer
 - **AS-IS BASIS**: The Software and Services are provided **"as-is"**.
-- **No Warranties**: OPTIMIBI disclaims **all implied warranties**.
+- **No Warranties**: Datafor disclaims **all implied warranties**.
 - **No Guarantee of Uninterrupted Operation**.
 
 
 ## 7. Indemnification
 
-OPTIMIBI will **defend Subscriber** from third-party claims that the Software **infringes intellectual property** and will cover damages/fees, **subject to conditions**.
+Datafor will **defend Subscriber** from third-party claims that the Software **infringes intellectual property** and will cover damages/fees, **subject to conditions**.
 
 Exceptions include:
 - **Combinations with other products**.
@@ -141,7 +141,7 @@ Exceptions include:
 - Either party may **terminate for breach** (with 30-day notice to cure).
 - Upon termination:
   - **Software access ceases**.
-  - **Fees remain due** (unless OPTIMIBI breached).
+  - **Fees remain due** (unless Datafor breached).
 
 
 ## 10. General Provisions

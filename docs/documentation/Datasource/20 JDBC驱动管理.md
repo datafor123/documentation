@@ -7,13 +7,13 @@ description:
 
 # JDBC Driver Management
 
-Optimibi supports managing and configuring different versions of JDBC drivers to support various versions of databases. This feature ensures that your database connections are compatible with the corresponding database versions, preventing connection issues due to driver version mismatches.
+Datafor supports managing and configuring different versions of JDBC drivers to support various versions of databases. This feature ensures that your database connections are compatible with the corresponding database versions, preventing connection issues due to driver version mismatches.
 
 ## Instructions
 
 ### Accessing the Driver Management Interface
 
-1. Log in to the Optimibi platform.
+1. Log in to the Datafor platform.
 
 2. Navigate to the settings page and select "JDBC Driver".
 

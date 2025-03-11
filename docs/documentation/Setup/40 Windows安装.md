@@ -1,27 +1,27 @@
 ---
-title: Optimibi Installation (Windows)
-permalink: /documentation/Setup/OptimiBI-Installation-windows/
+title: Datafor Installation (Windows)
+permalink: /documentation/Setup/Datafor-Installation-windows/
 ---
 
-# Optimibi Installation (Windows)
+# Datafor Installation (Windows)
 
 Log in to Windows as an **Administrator**.
 
 ## Method 1: Run with Window
 
-1. Start optimibi by double-clicking:
+1. Start Datafor by double-clicking:
 
    ```
-   start-optimibi.bat
+   start-Datafor.bat
    ```
 
-2. Stop optimibi by double-clicking:
+2. Stop Datafor by double-clicking:
 
    ```
-   stop-optimibi.bat
+   stop-Datafor.bat
    ```
 
-## Method 2: Run optimibi as a Service
+## Method 2: Run Datafor as a Service
 
 1. Install the service for the first time by double-clicking:
 
@@ -58,4 +58,4 @@ username  /  password
 
 ## Update the System
 
-Place the update package `optimibi-upload.jar` in the `optimibi-server\update` folder and restart the system.
+Place the update package `Datafor-upload.jar` in the `Datafor-server\update` folder and restart the system.

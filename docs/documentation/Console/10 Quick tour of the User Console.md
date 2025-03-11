@@ -6,15 +6,15 @@ permalink: /documentation/Console/Quick-Tour-of-the-Console/
 # **Quick Tour of the Console**
 
 ## **Introduction**
-The Optimibi User Console is designed to provide an intuitive and efficient user experience, helping users manage and analyze data. This guide introduces the main sections of the console to help you get started quickly.
+The Datafor User Console is designed to provide an intuitive and efficient user experience, helping users manage and analyze data. This guide introduces the main sections of the console to help you get started quickly.
 
 ---
 
 ## **1. Home Page Overview**
-After logging into Optimibi, the **Home** page serves as the central hub for accessing reports, dashboards, and data sources.
+After logging into Datafor, the **Home** page serves as the central hub for accessing reports, dashboards, and data sources.
 - **Samples**: A collection of pre-built reports and dashboards to help users get familiar with the system quickly.
 - **Recent**: Displays recently accessed reports for quick navigation.
-- **Getting Started**: Provides learning resources for new users to explore Optimibi’s features.
+- **Getting Started**: Provides learning resources for new users to explore Datafor’s features.
 
 <div align="left"><img src="./images/image-20250225131134931.png"  /></div>
 
@@ -60,4 +60,4 @@ Administrators can manage users and system settings in the **System** section:
 
 ---
 
-The Optimibi User Console provides an efficient environment for data management, report creation, and sharing.
+The Datafor User Console provides an efficient environment for data management, report creation, and sharing.

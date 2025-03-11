@@ -7,13 +7,13 @@ description:
 
 ## **Overview**
 
-LDAP (Lightweight Directory Access Protocol) integration in Optimibi allows administrators to authenticate users using an external LDAP server. This guide provides step-by-step instructions to configure and enable LDAP authentication within Optimibi.
+LDAP (Lightweight Directory Access Protocol) integration in Datafor allows administrators to authenticate users using an external LDAP server. This guide provides step-by-step instructions to configure and enable LDAP authentication within Datafor.
 
 ------
 
 ## **1. Accessing LDAP Settings**
 
-1. **Log in** to the Optimibi **admin panel**.
+1. **Log in** to the Datafor **admin panel**.
 
 2. Navigate to **Settings** in the left-side menu.
 
@@ -52,7 +52,7 @@ The following fields must be properly configured to ensure successful LDAP authe
 
 | Parameter             | Description                                                  |
 | --------------------- | ------------------------------------------------------------ |
-| **Auto-create User**  | If enabled, users will be automatically created in Optimibi if they do not exist in LDAP. |
+| **Auto-create User**  | If enabled, users will be automatically created in Datafor if they do not exist in LDAP. |
 | **Default User Type** | The default type assigned to new users (e.g., `Reader`).     |
 | **Default Role**      | Default roles assigned to new users created through LDAP. Multiple roles can be assigned (e.g., `role2`, `role4`, `role5`). |
 
@@ -78,7 +78,7 @@ The following fields must be properly configured to ensure successful LDAP authe
 ### **Step 4: Configure User Mapping**
 
 - Define the **Username Suffix Template** (`cn=${username},dc=example,dc=com`).
-- Enable **Auto-create User** if users should be automatically created in Optimibi.
+- Enable **Auto-create User** if users should be automatically created in Datafor.
 - Select the **Default User Type** (`Reader`, `Editor`, etc.).
 - Assign **Default Roles** (`role2`, `role4`, `role5`).
 
@@ -113,4 +113,4 @@ The following fields must be properly configured to ensure successful LDAP authe
 
 ## **Conclusion**
 
-By correctly configuring LDAP integration, Optimibi can securely authenticate users from an external directory, reducing the need for manual user management. Ensure all parameters are set correctly, and use the validation feature to test the connection before applying changes.
+By correctly configuring LDAP integration, Datafor can securely authenticate users from an external directory, reducing the need for manual user management. Ensure all parameters are set correctly, and use the validation feature to test the connection before applying changes.

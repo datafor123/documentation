@@ -2,19 +2,19 @@
 title: SAML2 Authentication
 permalink: /documentation/System/SAML2/
 tags: [SAML, Authentication]
-description: "Guide to configuring SAML2 authentication in Optimibi"
+description: "Guide to configuring SAML2 authentication in Datafor"
 ---
 
 
 ## **Overview**
 
-SAML2 (Security Assertion Markup Language 2.0) enables **single sign-on (SSO)** authentication, allowing users to log into **Optimibi** using an **Identity Provider (IdP)** such as **Microsoft Azure AD, Okta, or other SAML2-supported providers**.
+SAML2 (Security Assertion Markup Language 2.0) enables **single sign-on (SSO)** authentication, allowing users to log into **Datafor** using an **Identity Provider (IdP)** such as **Microsoft Azure AD, Okta, or other SAML2-supported providers**.
 
-This guide provides step-by-step instructions to configure SAML2 authentication within Optimibi.
+This guide provides step-by-step instructions to configure SAML2 authentication within Datafor.
 
 ## **1. Accessing SAML2 Configuration**
 
-1. **Log in** to the **Optimibi** admin panel.
+1. **Log in** to the **Datafor** admin panel.
 2. Navigate to **Settings** from the left-side menu.
 3. Click on **SAML2** under **System Settings**.
 
@@ -31,7 +31,7 @@ The following fields must be configured to enable SAML2 authentication:
 
 | Parameter   | Description                                                  |
 | ----------- | ------------------------------------------------------------ |
-| **Enabled** | Toggle this option to enable or disable SAML2 authentication in Optimibi. |
+| **Enabled** | Toggle this option to enable or disable SAML2 authentication in Datafor. |
 
 ------
 
@@ -77,7 +77,7 @@ The following fields must be configured to enable SAML2 authentication:
 
 | Parameter                    | Description                                                  |
 | ---------------------------- | ------------------------------------------------------------ |
-| **Initialize User**          | If enabled, new users will be automatically created in Optimibi upon first login. |
+| **Initialize User**          | If enabled, new users will be automatically created in Datafor upon first login. |
 | **Initialization User Type** | Defines the default user type assigned to new users. Example: `Reader`. |
 | **Initialization Role**      | Specifies the default roles assigned to new users.           |
 
@@ -121,7 +121,7 @@ The following fields must be configured to enable SAML2 authentication:
 
 1. Click **Save** to apply the SAML2 settings.
 2. Perform a test login using SAML2.
-   - If successful: The authentication flow should redirect to the Optimibi dashboard.
+   - If successful: The authentication flow should redirect to the Datafor dashboard.
    - If failed: Check the **IdP settings, SP Entity ID, and attribute mappings**.
 
 ------
@@ -139,4 +139,4 @@ The following fields must be configured to enable SAML2 authentication:
 
 ## **Conclusion**
 
-By correctly configuring SAML2 authentication, **Optimibi** can integrate with external identity providers, allowing seamless **SSO login** for users. Ensure all parameters are correctly set and perform test logins before deploying SAML2 authentication to end users.
+By correctly configuring SAML2 authentication, **Datafor** can integrate with external identity providers, allowing seamless **SSO login** for users. Ensure all parameters are correctly set and perform test logins before deploying SAML2 authentication to end users.

@@ -12,7 +12,7 @@ To enhance security or address password concerns (such as a compromised password
 
 ### 1. Change Password via Administrator
 
-Both "Administrator" and "Manager" users in Optimibi have the privilege to modify passwords for other users.
+Both "Administrator" and "Manager" users in Datafor have the privilege to modify passwords for other users.
 
 **Steps:**
 

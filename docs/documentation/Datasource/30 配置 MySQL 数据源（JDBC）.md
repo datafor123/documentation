@@ -6,13 +6,13 @@ tags:
 
 # **Configuring MySQL Data Source**
 
-This guide explains how to configure a MySQL data source in **Optimibi** to ensure proper data connectivity and access.
+This guide explains how to configure a MySQL data source in **Datafor** to ensure proper data connectivity and access.
 
 ------
 
 ### **1. Access the Data Source Configuration Interface**
 
-1. In the **Optimibi** platform, navigate to **Data Source Management**.
+1. In the **Datafor** platform, navigate to **Data Source Management**.
 
    <div align="left"><img src="./images/1740405167292.png"   /></div>
 
@@ -30,7 +30,7 @@ In the **Basic** configuration section, fill in the following details:
   - Assign a custom name for this data source to facilitate identification in future usage.
 - **Driver**  
   - Select `mysql8` (for MySQL 8 and above).
-  - If the required driver is not listed or needs updating, refer to the [**[JDBC Driver Management](https://help.optimibi.com/documentation/Datasource/JDBC-Driver-Management/)**] documentation to ensure the correct driver files are loaded in Optimibi.
+  - If the required driver is not listed or needs updating, refer to the [**[JDBC Driver Management](https://help.Datafor.com/documentation/Datasource/JDBC-Driver-Management/)**] documentation to ensure the correct driver files are loaded in Datafor.
 - **Host (Server Address)**  
   - Enter the MySQL server address, such as `127.0.0.1` or a remote server IP.
 - **Database**  
@@ -112,4 +112,4 @@ Proper configuration of connection pooling enhances system performance and reduc
    - **Username** and **password** are entered correctly.
    - The database server allows remote access.
    - Advanced parameters (e.g., SSL, time zone) match the actual database settings.
-   - The correct driver version is loaded (refer to the [**[JDBC Driver Management](https://help.optimibi.com/documentation/Datasource/JDBC-Driver-Management/)**] documentation).
+   - The correct driver version is loaded (refer to the [**[JDBC Driver Management](https://help.Datafor.com/documentation/Datasource/JDBC-Driver-Management/)**] documentation).

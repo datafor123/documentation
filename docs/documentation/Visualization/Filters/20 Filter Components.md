@@ -6,7 +6,7 @@ description:
 ---
 # Filters
 
-Optimibi offers a variety of filter components to help users analyze data more flexibly.
+Datafor offers a variety of filter components to help users analyze data more flexibly.
 
 **Filter components include:**
 
