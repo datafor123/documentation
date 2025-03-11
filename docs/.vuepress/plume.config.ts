@@ -89,17 +89,17 @@ export default defineThemeConfig({
 		// 	 */
 		// 	profile: {
 		// 		avatar: "https://theme-plume.vuejs.press/plume.png",
-		// 		name: "Optimibi Docs",
-		// 		description: "Optimibi documentation",
+		// 		name: "Datafor Docs",
+		// 		description: "Datafor documentation",
 		// 		// circle: true,
 		// 		// location: '',
 		// 		// organization: '',
 		// 	},
 
-		// 	home: "https://www.optimibi.com",
+		// 	home: "https://www.Datafor.com",
 		// 	footer: {
-		// 		message: "OPTIMIBI Documentation",
-		// 		copyright: "Copyright ©2025 Optimibi All rights reserved.",
+		// 		message: "Datafor Documentation",
+		// 		copyright: "Copyright ©2025 Datafor All rights reserved.",
 		// 	},
 
 		// 	navbar: zhNavbar,

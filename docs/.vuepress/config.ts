@@ -14,9 +14,9 @@ export default defineUserConfig({
 			description: "Datafor documentation",
 		},
 		// "/zh/": {
-		// 	title: "OPTIMIBI",
+		// 	title: "Datafor",
 		// 	lang: "zh-CN",
-		// 	description: "Optimibi documentation",
+		// 	description: "Datafor documentation",
 		// },
 	},
 

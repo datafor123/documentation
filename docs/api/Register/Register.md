@@ -35,7 +35,7 @@ This API registers a new user account by providing user details and a verificati
 ### **Request Example**
 ```json
 {
-  "company": "optimibi",
+  "company": "Datafor",
   "dept": "IT",
   "description": "dev",
   "dob": "2001-01-01",

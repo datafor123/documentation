@@ -1,19 +1,19 @@
 ﻿---
-title: Optimibi API Overview
+title: Datafor API Overview
 createTime: 2025/02/10 17:14:56
 permalink: /api/index/
-author: Optimibi
+author: Datafor
 tags:
   - API
 description: 
 ---
 
 
-# **Optimibi API Overview**
+# **Datafor API Overview**
 
-Optimibi provides a robust set of APIs that enable seamless interaction with its platform, allowing users to programmatically manage and automate various functionalities. These APIs cover a wide range of features, including **user and role management**, **access control**, **file and folder operations**, **data modeling**, **system configuration**, **user personalization**, and **parameter management**.
+Datafor provides a robust set of APIs that enable seamless interaction with its platform, allowing users to programmatically manage and automate various functionalities. These APIs cover a wide range of features, including **user and role management**, **access control**, **file and folder operations**, **data modeling**, **system configuration**, **user personalization**, and **parameter management**.
 
-This documentation serves as a comprehensive guide to understanding and integrating Optimibi’s API into your workflow.
+This documentation serves as a comprehensive guide to understanding and integrating Datafor’s API into your workflow.
 
 
 ## **1. API Functional Categories**
@@ -46,7 +46,7 @@ This documentation serves as a comprehensive guide to understanding and integrat
 
 ## **2. API Request Format**
 
-Optimibi APIs adhere to **RESTful principles**, utilizing standard HTTP methods for communication:
+Datafor APIs adhere to **RESTful principles**, utilizing standard HTTP methods for communication:
 
 - **GET** – Retrieve data
 - **POST** – Create resources or execute actions
@@ -87,17 +87,17 @@ Proper error handling is recommended to ensure smooth API integration.
 
 ### **3. Programmatic Integration**
 
-- Optimibi APIs can be integrated into applications via scripting languages such as **Python, Java, JavaScript, or any HTTP client**.
+- Datafor APIs can be integrated into applications via scripting languages such as **Python, Java, JavaScript, or any HTTP client**.
 - API access can be embedded into workflows for automated **data processing, reporting, and system configuration**.
 
 
 ## **5. Authentication & Security**
 
-Optimibi supports multiple authentication mechanisms to ensure **secure and controlled API access**.
+Datafor supports multiple authentication mechanisms to ensure **secure and controlled API access**.
 
 ### **1. Session-Based Authentication (Cookie)**
 
-- When authenticated via the **Optimibi web interface**, the session cookie can be used for subsequent API requests.
+- When authenticated via the **Datafor web interface**, the session cookie can be used for subsequent API requests.
 - Requests should include the session cookie in the **HTTP headers**.
 
 **Example (Request Headers):**
@@ -132,13 +132,13 @@ Authorization: Basic YWRtaW46cGFzc3dvcmQ=
 
 ### **3. JWT Token Authentication**
 
-- Optimibi can be configured to support **JWT authentication**.
+- Datafor can be configured to support **JWT authentication**.
 - The token should be included in the request, either in the URL or header.
 
 **Example Usage:**
 
 ```http
-https://your-optimibi-url/api/endpoint?token=<YOUR_VALID_JWT_TOKEN>
+https://your-Datafor-url/api/endpoint?token=<YOUR_VALID_JWT_TOKEN>
 ```
 
 
@@ -152,9 +152,9 @@ https://your-optimibi-url/api/endpoint?token=<YOUR_VALID_JWT_TOKEN>
 
 ## **7. Getting Started**
 
-To quickly start using Optimibi APIs:
+To quickly start using Datafor APIs:
 
-1. **Log in** to Optimibi and obtain the necessary authentication credentials.
+1. **Log in** to Datafor and obtain the necessary authentication credentials.
 2. **Explore available API endpoints** in the documentation.
 3. **Use an API client** (such as Postman or cURL) to test API requests.
 4. **Integrate API calls** into your application workflow.
@@ -165,9 +165,9 @@ For additional details, refer to the **specific API endpoint documentation**.
 
 ## **Conclusion**
 
-Optimibi APIs empower users to efficiently interact with the platform, enabling automation, integration, and advanced data operations. By following best practices and leveraging the provided authentication methods, users can build **secure and scalable** solutions tailored to their needs.
+Datafor APIs empower users to efficiently interact with the platform, enabling automation, integration, and advanced data operations. By following best practices and leveraging the provided authentication methods, users can build **secure and scalable** solutions tailored to their needs.
 
-For further assistance, consult the **detailed API documentation** or contact **Optimibi support**.
+For further assistance, consult the **detailed API documentation** or contact **Datafor support**.
 
 
 
