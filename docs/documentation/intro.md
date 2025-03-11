@@ -26,10 +26,10 @@ Datafor is built to simplify data-driven decision-making through:
 ## **Get Started with Datafor**
 If you're new to Datafor, here’s how you can quickly get up to speed:
 
-1. [**Datafor Overview**](https://help.Datafor.com/documentation/Start/Datafor-Overview/) – Learn how Datafor transforms data analytics.
-2. [**Connecting Your Data**](https://help.Datafor.com/documentation/Datasource/Configuring-MySQL-Data-Source/) – Step-by-step guide to integrating databases and data sources.
-3. [**Creating an Analysis Model**](https://help.Datafor.com/documentation/Model/Creating-an-Analysis-Model/) - Building a model for analysis by defining dimensions, relationships, calculated fields, etc.
-4. [**Creating Your First Report**](https://help.Datafor.com/documentation/Start/Create-Your-First-Analysis-Report/)** – Learn how to build and share insightful reports.
+1. [**Datafor Overview**](https://help.datafor.com.cn/documentation/Start/Datafor-Overview/) – Learn how Datafor transforms data analytics.
+2. [**Connecting Your Data**](https://help.datafor.com.cn/documentation/Datasource/Configuring-MySQL-Data-Source/) – Step-by-step guide to integrating databases and data sources.
+3. [**Creating an Analysis Model**](https://help.datafor.com.cn/documentation/Model/Creating-an-Analysis-Model/) - Building a model for analysis by defining dimensions, relationships, calculated fields, etc.
+4. [**Creating Your First Report**](https://help.datafor.com.cn/documentation/Start/Create-Your-First-Analysis-Report/)** – Learn how to build and share insightful reports.
 
 
 ## **Support & Community**
