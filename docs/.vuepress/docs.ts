@@ -45,31 +45,55 @@ export const documentationNote = defineNoteConfig({
 			prefix: "/documentation/Visualization/",
 			items: [
 				{
-					text: "Page",
-					collapsed: true,
-					prefix: "/documentation/Visualization/Page/",
-					items: "auto",
-				},
-				{
 					text: "Charts",
 					collapsed: true,
 					prefix: "/documentation/Visualization/Chart/",
 					items: "auto",
 				},
 				{
+					text: "Tables",
+					collapsed: true,
+					prefix: "/documentation/Visualization/Table/",
+					items: "auto",
+				},
+				{
+					text: "Maps",
+					collapsed: true,
+					prefix: "/documentation/Visualization/Map/",
+					items: "auto",
+				},				
+				{
 					text: "Filters",
 					collapsed: true,
 					prefix: "/documentation/Visualization/Filters/",
 					items: "auto",
+				},	
+				{
+					text: "Assists",
+					collapsed: true,
+					prefix: "/documentation/Visualization/Assists/",
+					items: "auto",
+				},
+				{
+					text: "Report Page Size and Display Settings",
+					link: "/documentation/Visualization/08 报表页的大小和显示方式.md",
 				},				
 				{
 					text: "Add Charts",
 					link: "/documentation/Visualization/10 添加图表.md",
+				},				
+				{
+					text: "Mobile Layout View",
+					link: "/documentation/Visualization/12 手机布局视图.md",
 				},
 				{
 					text: "Filter Subscriptions for Charts",
 					link: "/documentation/Visualization/20 筛选器订阅.md",
 				},
+				{
+					text: "Multi-Tabbed Page",
+					link: "/documentation/Visualization/25 制作多标签页面.md",
+				},				
 				{
 					text: "Tooltips",
 					link: "/documentation/Visualization/40_图表组件的工具提示.md",
