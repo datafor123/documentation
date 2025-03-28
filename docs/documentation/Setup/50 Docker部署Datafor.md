@@ -27,7 +27,7 @@ Before you start, ensure you have the following:
    - If you haven't already pulled the Datafor Docker image, you can do so by running:
 
      ```shell
-     docker pull Datafor123/Datafor-free:6.06
+     docker pull Datafor/bi-server
      ```
 
    - This command downloads the Datafor Docker image to your local machine.
@@ -37,17 +37,17 @@ Before you start, ensure you have the following:
    - Use the following command to run the Datafor Docker container:
 
      ```shell
-     docker run -itd --name Datafor-free -p 28080:28080 -p 25432:25432 Datafor123/Datafor-free:6.06
+     docker run -itd --name Datafor -p 28080:28080 -p 25432:25432 Datafor/bi-server
      ```
 
    - Command explanation:
 
      - `docker run`: This command is used to create and start a new Docker container.
      - `-itd`: These flags tell Docker to run the container in interactive mode (`-i`), allocate a pseudo-TTY (`-t`), and run it in detached mode (`-d`), which means it will run in the background.
-     - `--name Datafor-free`: Names the container `Datafor-free` for easy reference.
+     - `--name Datafor`: Names the container `Datafor` for easy reference.
      - `-p 28080:28080`: Maps port 28080 on your local machine to port 28080 in the container.
      - `-p 25432:25432`: Maps port 25432 on your local machine to port 25432 in the container.
-     - `Datafor123/Datafor-free:6.06`: Specifies the Docker image to use.
+     - `Datafor/bi-server`: Specifies the Docker image to use.
 
 4. **Verify the Deployment**:
 
@@ -57,7 +57,7 @@ Before you start, ensure you have the following:
      docker ps
      ```
 
-   - This command lists all running containers. You should see `Datafor-free` in the list and its status.
+   - This command lists all running containers. You should see `Datafor` in the list and its status.
 
 5. **Access Datafor**:
 
@@ -69,13 +69,13 @@ Before you start, ensure you have the following:
 - To stop the Datafor container, use:
 
   ```shell
-  docker stop Datafor-free
+  docker stop Datafor
   ```
 
 - To remove the Datafor container, use:
 
   ```shell
-  docker rm Datafor-free
+  docker rm Datafor
   ```
 
 By following these steps, you should be able to deploy and run Datafor on your local machine using Docker.

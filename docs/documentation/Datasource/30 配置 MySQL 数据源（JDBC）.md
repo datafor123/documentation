@@ -112,4 +112,4 @@ Proper configuration of connection pooling enhances system performance and reduc
    - **Username** and **password** are entered correctly.
    - The database server allows remote access.
    - Advanced parameters (e.g., SSL, time zone) match the actual database settings.
-   - The correct driver version is loaded (refer to the [**[JDBC Driver Management](https://help.Datafor.com/documentation/Datasource/JDBC-Driver-Management/)**] documentation).
+   - The correct driver version is loaded (refer to the [**[JDBC Driver Management](/documentation/Datasource/JDBC-Driver-Management/)**] documentation).

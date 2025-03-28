@@ -1,103 +1,111 @@
 ---
-title: Datafor Installation (Ubuntu)
-permalink: /documentation/Setup/Datafor-Installation-Ubuntu/
+title: Installation Guide (Ubuntu)
+permalink: /documentation/Setup/Installation-Ubuntu/
 ---
 
-# Datafor Installation (Ubuntu)
-## Installation Steps
+# Installation Guide (Ubuntu)
 
-**Step 1. Switch to the root user**
+## Step 1: Switch to the Root User
 
-```
-sudo su  
-```
+To begin the installation, switch to the root user by running:
 
-<div align="left"><img src="./images/image-20220829171526492.png"  /></div>
-
-**Step 2. Create the "Datafor" user, and set the user password to "Datafor" as well.**
-
-```
-adduser Datafor
+```bash
+sudo su
 ```
 
-<div align="left"><img src="./images/image-20220829171542736.png"  /></div>
+## Step 2: Create the `biadmin` User
 
-**Step 3. Create a user group and add the "Datafor" user to the "Datafor" user group.**
+Create a user named `biadmin` and set the password:
 
-```
-addgroup Datafor
-addgroup Datafor Datafor
-```
-
-<div align="left"><img src="./images/image-20220829171600582.png"  /></div>
-
-**Step 4. Navigate to the directory where the installation package is located and unzip the package to the /opt path.**
-
-```
-unzip -o Datafor-server_202203210834.zip -d /opt/
+```bash
+adduser biadmin
 ```
 
-<div align="left"><img src="./images/image-20220829171613825.png"  /></div>
+Follow the prompts to set a password and user details.
 
-**Step 5. After the extraction is complete, go to the /opt/ directory and modify permissions.**
+## Step 3: Create the `biadmin` User Group
 
+Create a user group named `biadmin` and add the `biadmin` user to this group:
+
+```bash
+addgroup biadmin
+adduser biadmin biadmin
 ```
+
+## Step 4: Extract the Installation Package
+
+Navigate to the directory where the installation package is located and extract it into the `/opt` directory:
+
+```bash
+unzip -o Datafor-linux-7.02.zip -d /opt/
+```
+
+## Step 5: Set Directory Permissions
+
+Move to the `/opt/` directory and modify the permissions:
+
+```bash
 cd /opt/
-chmod -R 700 Datafor-server
-chown -R Datafor Datafor-server
-chgrp -R Datafor Datafor-server
+chmod -R 700 bi-server
+chown -R biadmin bi-server
+chgrp -R biadmin bi-server
+ls -al bi-server
 ```
 
-<div align="left"><img src="./images/image-20220829171632512.png"  /></div>
+**Installation is now complete.**
 
-**Installation Completed**
+------
 
-Start or stop the service, refer to daily startup procedures.
+# Starting Datafor
 
-## Startup
+**Ensure that you perform the following steps as the `biadmin` user.**
 
-**For daily startup and shutdown, please perform the operations using the "Datafor" user.**
+## Step 1: Switch to `biadmin`
 
-```
-su Datafor
-cd /opt/Datafor-server/
-```
-
-**Start the service**
-
-```
-./start-Datafor.sh
+```bash
+su biadmin
 ```
 
-<div align="left"><img src="./images/image-20220829171648174.png"  /></div>
+## Step 2: Start the Service
 
-**Stop the service**
+Navigate to the Datafor directory and start the server:
 
-```
-./stop-Datafor.sh
-```
-
-<div align="left"><img src="./images/image-20220829171701208.png"  /></div>
-
-**Check the status of the service startup and shutdown**
-
-```
-ps -ef|grep tomcat
+```bash
+cd /opt/bi-server/
+./start-server.sh
 ```
 
-<div align="left"><img src="./images/image-20220829171716368.png"  /></div>
+## Step 3: Stop the Service
 
-**If the command outputs as above, it indicates that the service is in a running state.**
+To stop the service, use:
 
-## Login
+```bash
+./stop-server.sh
+```
 
-URL:  `http://localhost:28080/`
+## Step 4: Check Service Status
 
-username  /  password
+To verify whether the service is running, check the `Tomcat` process:
 
-- `admin` / `password`
-- `demo` / `demo`
+```bash
+ps -ef | grep tomcat
+```
 
-## Update the System
+If the command output shows Tomcat processes running, the service is active.
 
-Place the update package `Datafor-upload.jar` in the `Datafor-server\update` folder and restart the system.
+------
+
+# Logging into Datafor
+
+After installation, access the Datafor web interface using:
+
+- **URL:** http://server-ip:28080/
+- Default Login Credentials:
+  - **Admin:** `admin / password`
+  - **Demo User:** `demo / demo`
+
+------
+
+# Updating the System
+
+To update Datafor, place the update package (e.g., `Datafor-update.jar`) in the `bi-server/update` folder and restart the system.

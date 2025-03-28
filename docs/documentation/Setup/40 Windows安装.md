@@ -1,9 +1,9 @@
 ---
-title: Datafor Installation (Windows)
-permalink: /documentation/Setup/Datafor-Installation-windows/
+title: Installation (Windows)
+permalink: /documentation/Setup/Installation-windows/
 ---
 
-# Datafor Installation (Windows)
+# Installation (Windows)
 
 Log in to Windows as an **Administrator**.
 
@@ -12,13 +12,13 @@ Log in to Windows as an **Administrator**.
 1. Start Datafor by double-clicking:
 
    ```
-   start-Datafor.bat
+   start-server.bat
    ```
 
 2. Stop Datafor by double-clicking:
 
    ```
-   stop-Datafor.bat
+   stop-server.bat
    ```
 
 ## Method 2: Run Datafor as a Service
@@ -49,7 +49,7 @@ Log in to Windows as an **Administrator**.
 
 ## Login
 
-URL:  `http://localhost:28080/`
+URL:  `http://<server-ip>:28080/`
 
 username  /  password
 
@@ -58,4 +58,4 @@ username  /  password
 
 ## Update the System
 
-Place the update package `Datafor-upload.jar` in the `Datafor-server\update` folder and restart the system.
+Place the update package `Datafor-update.jar` in the `bi-server\update` folder and restart the system.
