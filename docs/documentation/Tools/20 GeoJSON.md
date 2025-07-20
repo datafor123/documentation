@@ -17,7 +17,7 @@ Datafor provides a visual tool for managing and maintaining GeoJSON map data. Th
 - Define the central coordinates (latitude and longitude) of each administrative area for GeoJSON map markers  
 - Add sub-regions to maps (Datafor's GeoJSON map component supports drill-down)
 
-![image-20250720155650963](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720155650963.png)
+<div align="left"><img src="./images/image-20250720155650963.png" /></div>
 
 
 
@@ -27,11 +27,11 @@ Datafor provides a visual tool for managing and maintaining GeoJSON map data. Th
 
 1. Click the `➕` icon in the top-right corner of the “Maps” panel to add a country or region map.
 
-![image-20250720153041816](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720153041816.png)
+<div align="left"><img src="./images/image-20250720153041816.png" /></div>
 
 2. The list shows countries or regions included in the “World” map.
 
-![image-20250720153447081](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720153447081.png)
+<div align="left"><img src="./images/image-20250720153447081.png" /></div>
 
 3. For example, select “United States”.
 
@@ -45,11 +45,11 @@ Datafor provides a visual tool for managing and maintaining GeoJSON map data. Th
 
 2. In the upload window, select your GeoJSON file (must be under 1MB).
 
-   ![image-20250720153926842](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720153926842.png)
+   <div align="left"><img src="./images/image-20250720153926842.png" /></div>
 
 3. Click **Save** to complete the binding.
 
-   ![image-20250720153951487](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720153951487.png)
+   <div align="left"><img src="./images/image-20250720153951487.png" /></div>
 
 ### 3️⃣ Set Map Alias
 
@@ -61,7 +61,7 @@ To ensure consistency with your data fields, you can configure a map alias:
 
 2. Enter aliases such as `USA/United States/America` in the pop-up input box.
 
-   ![image-20250720154240888](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720154240888.png)
+   <div align="left"><img src="./images/image-20250720154240888.png" /></div>
 
 3. Click **Save** to apply changes.
 
@@ -80,7 +80,7 @@ If your map includes sub-regions (e.g., states or provinces), you can assign ali
 
 2. In the pop-up window, enter aliases for each sub-region (batch import supported).
 
-   ![image-20250720154514258](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720154514258.png)
+   <div align="left"><img src="./images/image-20250720154514258.png" /></div>
 
 3. Click **Save** to confirm.
 
@@ -96,7 +96,7 @@ You can use the GeoJSON map component to add drill-down sub-region maps (e.g., U
 
 2. In the “Add Sub-map” dropdown, search and select a sub-region (e.g., California).
 
-   ![image-20250720154626191](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720154626191.png)
+   <div align="left"><img src="./images/image-20250720154626191.png" /></div>
 
 3. The added sub-map will appear under the parent map.
 
@@ -104,7 +104,7 @@ You can use the GeoJSON map component to add drill-down sub-region maps (e.g., U
 
 4. You’ll also need to bind GeoJSON data for sub-regions using the same method.
 
-   ![image-20250720154730287](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720154730287.png)
+   <div align="left"><img src="./images/image-20250720154730287.png" /></div>
 
 
 
@@ -114,7 +114,7 @@ Switch to the **Center Point** tab at the top of the map to define region center
 
 1. All regions will be displayed as point markers on the map.
 
-   ![image-20250720154821445](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720154821445.png)
+   <div align="left"><img src="./images/image-20250720154821445.png" /></div>
 
 2. Click the 📍 icon on the right to open the coordinate input window.
 
@@ -123,7 +123,7 @@ Switch to the **Center Point** tab at the top of the map to define region center
 
 3. You can manually enter latitude and longitude or use batch import.
 
-   ![image-20250720154926912](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720154926912.png)
+   <div align="left"><img src="./images/image-20250720154926912.png" /></div>
 
 
 
