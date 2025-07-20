@@ -37,8 +37,6 @@ Datafor provides a visual tool for managing and maintaining GeoJSON map data. Th
 
 <div align="left"><img src="./images/image-20250720153642281.png" width="33%" /></div>
 
-
-
 ### 2️⃣ Bind GeoJSON Map Data File
 
 1. Locate the target map entry (e.g., United States) and click the 📎 icon to bind a data file.
@@ -52,8 +50,6 @@ Datafor provides a visual tool for managing and maintaining GeoJSON map data. Th
 3. Click **Save** to complete the binding.
 
    ![image-20250720153951487](D:\github_projects\docs-datafor\docs\documentation\Tools\images\image-20250720153951487.png)
-
-
 
 ### 3️⃣ Set Map Alias
 
