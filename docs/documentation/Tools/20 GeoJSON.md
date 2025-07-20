@@ -1,11 +1,11 @@
 ---
-title: GeoJSON Map Management
+title: GeoJSON Map
 permalink: /documentation/Tools/GeoJSON/
 tags:
 ---
 
 
-# 🌍 GeoJSON Map Management
+# 🌍 GeoJSON Map
 
 ## Feature Overview
 
