@@ -101,16 +101,6 @@ Use of this API requires authentication. For details about the authentication me
       "type": "Integer",
       "value": "200",
       "desc": "Maximum number of simultaneous queries the system will allow."
-    },
-    {
-      "code": "mondrian.xmla.drillthroughMaxRows",
-      "defaults": "1000",
-      "editable": true,
-      "name": "MaxRows",
-      "range": "Maximum number of SQL rows",
-      "type": "Integer",
-      "value": "1000",
-      "desc": "Limits the number of rows retrieved from SQL."
     }
   ],
   "success": true
