@@ -15,7 +15,7 @@ To achieve this, you can enable **Relative Date Filtering**, which calculates a 
 
 > **Example**: By default, the time filter affects the line chart as shown below, limiting it to the selected month, which is not suitable for trend analysis.
 
-![image-20250731154352593](D:\github_projects\docs-datafor\docs\documentation\Analysis\images\image-20250731154352593.png)
+<div align="left"><img src="./images/image-20250731154352593.png" /></div>
 
 ## Configuration Steps
 
@@ -25,13 +25,13 @@ Relative date filtering involves two main settings: defining the **Reference Tim
 
 > **Note**: The time field can either be the same as the time filter component on the dashboard or a more granular time field.
 
-![image-20250731154400673](D:\github_projects\docs-datafor\docs\documentation\Analysis\images\image-20250731154400673.png)
+<div align="left"><img src="./images/image-20250731154400673.png" /></div>
 
 ### 2. Set the Filter Type to “Relative”
 
 In the filter component’s settings panel, set the **Filter type** to **Relative**. This enables the use of a Reference Time and a Relative Time Condition to dynamically calculate a date range.
 
-![image-20250731154408785](D:\github_projects\docs-datafor\docs\documentation\Analysis\images\image-20250731154408785.png)
+<div align="left"><img src="./images/image-20250731154408785.png" /></div>
 
 ### 3. Choose a Reference Time
 
@@ -39,7 +39,7 @@ Relative date filtering requires a base point, known as the **Reference Time**. 
 
 To base the relative range on the user's selection in the dashboard’s time filter (or time axis component), set the **Reference Time** to that filter component. This ensures the chart will use the selected time as the base for calculating the relative time range.
 
-![image-20250731154415977](D:\github_projects\docs-datafor\docs\documentation\Analysis\images\image-20250731154415977.png)
+<div align="left"><img src="./images/image-20250731154415977.png" /></div>
 
 ### 4. Set the Relative Time Condition
 
@@ -47,7 +47,7 @@ Finally, configure the **Relative Time Condition** to define the desired range. 
 
 Once configured, selecting May 1998 in the time filter will make the line chart show data from June 1997 to May 1998. Selecting March 1998 will show data from April 1997 to March 1998.
 
-![image-20250731154424266](D:\github_projects\docs-datafor\docs\documentation\Analysis\images\image-20250731154424266.png)
+<div align="left"><img src="./images/image-20250731154424266.png" /></div>
 
 ## Summary
 
