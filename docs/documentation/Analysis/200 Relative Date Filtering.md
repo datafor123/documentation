@@ -21,7 +21,7 @@ To achieve this, you can enable **Relative Date Filtering**, which calculates a 
 
 Relative date filtering involves two main settings: defining the **Reference Time** and configuring the **Relative Time Condition**.
 
-### 1. Configure a Time Filter in the Chart’s Filter Area
+### 1. Configure a Time Filter in the Chart’s Filters Area
 
 > **Note**: The time field can either be the same as the time filter component on the dashboard or a more granular time field.
 
