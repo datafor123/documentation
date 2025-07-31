@@ -10,7 +10,7 @@ description:
 
 **Request URL**
 ```html
-/datafor/plugin/datafor-modeler/api/lineage/schema
+/plugin/datafor/api/modeler/lineage/link
 ```
 
 **Authorization**  
@@ -18,12 +18,18 @@ The current user must have read access to the specified model.
 
 ---
 
-## **Query Parameters**
+**Content Type**  
+`application/json`
 
-| Name           | Location | Type   | Required | Description |
-|---------------|----------|--------|----------|-------------|
-| `includeOthers` | query    | string | No       | Whether to include additional related objects. |
-| `schema`      | query    | string | No       | The name of the model to retrieve lineage for. |
+---
+
+### **Request Example**
+
+```json
+{
+  "schemas":["workshop-model"]
+}
+```
 
 ---
 
@@ -59,13 +65,22 @@ The current user must have read access to the specified model.
 ---
 
 ## **Response Data Schema**
-
-| Name             | Type          | Required | Description |
-|-----------------|--------------|----------|-------------|
-| `success`       | boolean      | Yes      | `true` if the request was successful, `false` otherwise. |
-| `data`          | array[object] | Yes      | List of model lineage details. |
-| `data[].schema` | string        | No       | Name of the schema (model). |
-| `data[].files`  | array[string] | No       | List of files associated with the schema. |
-| `data[].otherFiles` | array[string] | No   | Additional related files. |
-| `msg`           | string        | No       | Response message (if applicable). |
-
+| Name              | Type            | Required | Description                                                                       |
+|-------------------|-----------------|----------|-----------------------------------------------------------------------------------|
+| `success`         | boolean         | Yes      | `true` if the request was successful, `false` otherwise.                          |
+| `links`           | array[object]   | Yes      | List of link objects representing relationships between entities.                 |
+| `links[].targetLid` | string        | Yes      | The LID (Logical ID) of the target entity in the link.                            |
+| `links[].sourceLid` | string        | Yes      | The LID (Logical ID) of the source entity in the link.                            |
+| `objs`            | array[object]   | Yes      | List of objects containing detailed metadata about entities.                      |
+| `objs[].hidden`   | boolean         | Yes      | Indicates if the object is hidden (`true`) or visible (`false`).                  |
+| `objs[].canRead`  | boolean         | Yes      | Indicates if the object is readable by the current user.                          |
+| `objs[].lastModifiedDate` | integer | Yes      | The last modified timestamp of the object, in milliseconds since epoch.           |
+| `objs[].lid`      | string          | Yes      | The LID (Logical ID) of the object.                                               |
+| `objs[].type`     | string          | Yes      | The type/category of the object (e.g., connection,schema,page).                   |
+| `objs[].title`    | string          | Yes      | The display title or label of the object.                                         |
+| `objs[].pathTitle`| string          | Yes      | The path title, showing the object's hierarchical path as a user-friendly string. |
+| `objs[].path`     | string          | Yes      | The full path of the object, typically as a string.                               |
+| `objs[].createdDate` | integer      | Yes      | The creation timestamp of the object, in milliseconds since epoch.                |
+| `objs[].name`     | string          | Yes      | The name of the object.                                                           |
+| `objs[].owner`    | string          | No       | The owner of the object, if available.                                            |
+| `objs[].ownerType`| integer         | No       | The type of the owner, 0:user 1:role.                                             |

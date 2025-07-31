@@ -1,7 +1,7 @@
 ---
-title: Get connection's lineage
-permalink: /api/Lineage/Get connection's lineage/
-tags: ["api","Lineage","Connections"]
+title: Get page's lineage
+permalink: /api/Lineage/Get page's lineage/
+tags: ["api","Lineage","Models"]
 description:
 ---
 
@@ -14,7 +14,7 @@ description:
 ```
 
 **Authorization**  
-The current user must have read authority over the connection.
+The current user must have read access to the specified model.
 
 ---
 
@@ -27,7 +27,7 @@ The current user must have read authority over the connection.
 
 ```json
 {
-  "connections":["foodmart"]
+  "pathIds":["/public/test.datafor"]
 }
 ```
 
@@ -40,23 +40,9 @@ The current user must have read authority over the connection.
 {
   "data": [
     {
-      "schemas": [
-        {
-          "owner": "admin",
-          "ownerType": 0,
-          "lastModifiedDate": 1721889439130,
-          "dataSourceStr": "DataSource=\"foodmart\";EnableXmla=\"true\";Provider=\"mondrian\";",
-          "name": "workshop-model",
-          "files": [],
-          "otherFiles": [],
-          "title": "workshop-model",
-          "dataSource": {
-            "canRead": true,
-            "name": "foodmart"
-          }
-        }
-      ],
-      "name": "foodmart"
+      "schema": "workshop-model",
+      "files": [],
+      "otherFiles": []
     }
   ],
   "success": true
@@ -69,11 +55,11 @@ The current user must have read authority over the connection.
 
 | HTTP Status Code | Meaning                                                 | Description                              |
 |------------------|---------------------------------------------------------|------------------------------------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Connection lineage retrieved successfully. |
+| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Model lineage retrieved successfully.   |
 | 400              | Bad Request                                             | Invalid request format or missing parameters. |
 | 401              | Unauthorized                                            | Authentication required. |
 | 403              | Forbidden                                               | User lacks the required permissions. |
-| 404              | Not Found                                               | Specified connection does not exist. |
+| 404              | Not Found                                               | Specified model does not exist. |
 | 500              | Internal Server Error                                   | Unexpected error occurred. |
 
 ---

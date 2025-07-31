@@ -27,7 +27,7 @@ Before you start, ensure you have the following:
    - If you haven't already pulled the Datafor Docker image, you can do so by running:
 
      ```shell
-     docker pull Datafor/bi-server
+     docker pull datafor123/datafor-ee
      ```
 
    - This command downloads the Datafor Docker image to your local machine.
@@ -37,17 +37,18 @@ Before you start, ensure you have the following:
    - Use the following command to run the Datafor Docker container:
 
      ```shell
-     docker run -itd --name Datafor -p 28080:28080 -p 25432:25432 Datafor/bi-server
+     docker run -itd --name datafor-ee -p 28080:28080 -p 28081:28081 -p 25432:25432 datafor123/datafor-ee
      ```
 
    - Command explanation:
 
      - `docker run`: This command is used to create and start a new Docker container.
      - `-itd`: These flags tell Docker to run the container in interactive mode (`-i`), allocate a pseudo-TTY (`-t`), and run it in detached mode (`-d`), which means it will run in the background.
-     - `--name Datafor`: Names the container `Datafor` for easy reference.
-     - `-p 28080:28080`: Maps port 28080 on your local machine to port 28080 in the container.
-     - `-p 25432:25432`: Maps port 25432 on your local machine to port 25432 in the container.
-     - `Datafor/bi-server`: Specifies the Docker image to use.
+     - `--name datafor-ee`: Names the container `datafor-ee` for easy reference.
+     - `-p 28080:28080`: Maps port 28080 on your local machine to port 28080 in the container.This port is used for the web access.
+     - `-p 28081:28081`: Maps port 28080 on your local machine to port 28080 in the container.This port is used for the AI agent service.
+     - `-p 25432:25432`: Maps port 25432 on your local machine to port 25432 in the container.This port is used for the built-in database service.It is recommended to restrict the port to be accessible only from the local machine for security reasons.
+     - `datafor123/datafor-ee`: Specifies the Docker image to use.
 
 4. **Verify the Deployment**:
 
@@ -57,25 +58,24 @@ Before you start, ensure you have the following:
      docker ps
      ```
 
-   - This command lists all running containers. You should see `Datafor` in the list and its status.
+   - This command lists all running containers. You should see `datafor-ee` in the list and its status.
 
-5. **Access Datafor**:
+5. **Access datafor-ee**:
 
    - Open your web browser and navigate to `http://localhost:28080`.
-   - You should see the Datafor interface. If you need to connect to the database, you can use port `25432`.
 
 ## Stopping and Removing the Container
 
-- To stop the Datafor container, use:
+- To stop the container, use:
 
   ```shell
-  docker stop Datafor
+  docker stop datafor-ee
   ```
 
-- To remove the Datafor container, use:
+- To remove the container, use:
 
   ```shell
-  docker rm Datafor
+  docker rm datafor-ee
   ```
 
-By following these steps, you should be able to deploy and run Datafor on your local machine using Docker.
+By following these steps, you should be able to deploy and run datafor-ee on your local machine using Docker.

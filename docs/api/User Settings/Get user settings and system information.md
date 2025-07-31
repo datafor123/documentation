@@ -65,26 +65,27 @@ Authentication is **not required** to use this API.
 
 ### **Response Data Schema (HTTP 200)**
 
-| Name                  | Type      | Required | Restrictions | Description           |
-|-----------------------|-----------|----------|--------------|-----------------------|
-| `ver`                 | string    | **Yes**  | none         | Version of the response. |
-| `code`                | integer   | **Yes**  | none         | Status code of the response. |
-| `__LOAD_VARIABLE__`   | string    | **Yes**  | none         | A load variable for tracking. |
-| `plugins`             | [string]  | **Yes**  | none         | List of enabled plugins. |
-| `roles`               | [string]  | **Yes**  | none         | List of roles assigned to the user. |
-| `lic`                 | object    | **Yes**  | none         | License information. |
-| ├── `valid`           | boolean   | **Yes**  | none         | Whether the license is valid. |
-| ├── `licenseType`     | string    | **Yes**  | none         | Type of the license (e.g., `O`). |
-| ├── `hasLicense`      | boolean   | **Yes**  | none         | Whether the user has a license. |
-| ├── `expire`          | integer   | **Yes**  | none         | Expiration timestamp of the license. |
-| `canEdit`             | boolean   | **Yes**  | none         | Whether the user can edit settings. |
-| `serverNameFull`      | string    | **Yes**  | none         | Full server URL. |
-| `contextPath`         | string    | **Yes**  | none         | Context path of the server. |
-| `locale`              | string    | **No**   | none         | User's current locale (returned when logged). |
-| `localeList`          | [string]  | **No**   | none         | List of available locales (BCP47). |
-| `islogged`            | boolean   | **Yes**  | none         | Whether the user is logged in. |
-| `username`            | string    | **Yes**  | none         | Username of the logged-in user. |
-
+| Name                 | Type      | Required | Restrictions | Description           |
+|----------------------|-----------|----------|--------------|-----------------------|
+| `ver`                | string    | **Yes**  | none         | Version of the response. |
+| `code`               | integer   | **Yes**  | none         | Status code of the response. |
+| `__LOAD_VARIABLE__`  | string    | **Yes**  | none         | A load variable for tracking. |
+| `plugins`            | [string]  | **Yes**  | none         | List of enabled plugins. |
+| `roles`              | [string]  | **Yes**  | none         | List of roles assigned to the user. |
+| `lic`                | object    | **Yes**  | none         | License information. |
+| ├── `valid`          | boolean   | **Yes**  | none         | Whether the license is valid. |
+| ├── `licenseType`    | string    | **Yes**  | none         | Type of the license (e.g., `O`). |
+| ├── `hasLicense`     | boolean   | **Yes**  | none         | Whether the user has a license. |
+| ├── `expire`         | integer   | **Yes**  | none         | Expiration timestamp of the license. |
+| `canEdit`            | boolean   | **Yes**  | none         | Whether the user can edit settings. |
+| `serverNameFull`     | string    | **Yes**  | none         | Full server URL. |
+| `contextPath`        | string    | **Yes**  | none         | Context path of the server. |
+| `locale`             | string    | **No**   | none         | User's current locale (returned when logged). |
+| `localeList`         | [string]  | **No**   | none         | List of available locales (BCP47). |
+| `islogged`           | boolean   | **Yes**  | none         | Whether the user is logged in. |
+| `username`           | string    | **Yes**  | none         | Username of the logged-in user. |
+| `ai-enable`          | boolean   | **No**   | none         | Indicates if the AI feature is enabled.|
+| `ai-service-url`     | string    | **No**   | none         | The URL of the AI service endpoint.  |
 ---
 
 ### **Enum Values**
