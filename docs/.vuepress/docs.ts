@@ -123,6 +123,12 @@ export const documentationNote = defineNoteConfig({
 			items: "auto",
 		},
 		{
+			text: "AI Agent",
+			collapsed: true,
+			prefix: "/documentation/AI-Agent/",
+			items: "auto",
+		},		
+		{
 			text: "Embedded",
 			collapsed: true,
 			prefix: "/documentation/Embedded/",
