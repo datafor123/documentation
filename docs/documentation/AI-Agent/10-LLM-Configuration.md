@@ -58,18 +58,16 @@ Open **Add Model** or **Edit** on a listed model to see the form. Fill the field
 
 Click **OK** to save.
 
-
 ## 3) Provider quick reference
 
-| Provider                                | Typical Base URL (API Endpoint)                            | Extra Parameters                                    |
-| --------------------------------------- | ---------------------------------------------------------- | --------------------------------------------------- |
-| **OpenAI**                              | `https://api.openai.com/v1/`                               | None in most cases                                  |
-| **Google Gemini (OpenAI-compatible)**   | `https://generativelanguage.googleapis.com/v1beta/openai/` | None; ensure the key has Generative Language access |
-| **IBM watsonx**                         | `https://eu-de.ml.cloud.ibm.com`                           | `{"project_id":"<your-project-id>"}` (required)     |
-| **Alibaba Qwen (DashScope compatible)** | `https://dashscope.aliyuncs.com/compatible-mode/v1`        | Usually none                                        |
+| Provider                                | Typical Base URL (API Endpoint)                            | Model name(s) (examples)              | Extra Parameters                                    |
+| --------------------------------------- | ---------------------------------------------------------- | ------------------------------------- | --------------------------------------------------- |
+| **OpenAI**                              | `https://api.openai.com/v1/`                               | `gpt-4o`, `gpt-4.1`, `gpt-3.5-turbo`  | None in most cases                                  |
+| **Google Gemini (OpenAI-compatible)**   | `https://generativelanguage.googleapis.com/v1beta/openai/` | `gemini-1.5-pro`, `gemini-2.0-flash`  | None; ensure the key has Generative Language access |
+| **IBM watsonx**                         | `https://eu-de.ml.cloud.ibm.com`                           | `meta-llama/llama-3-3-70b-instruct`   | `{"project_id":"<your-project-id>"}` (required)     |
+| **Alibaba Qwen (DashScope compatible)** | `https://dashscope.aliyuncs.com/compatible-mode/v1`        | `qwen-max`, `qwen-plus`, `qwen-turbo` | Usually none                                        |
 
 > Tip: If a provider offers an **OpenAI-compatible** endpoint, use it to simplify setup.
-
 
 ## 4) Switch and manage models
 
