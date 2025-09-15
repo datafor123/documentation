@@ -92,7 +92,7 @@ export const documentationNote = defineNoteConfig({
 				},
 				{
 					text: "Multi-Tabbed Page",
-					link: "/documentation/Visualization/25 制作多标签页面.md",
+					link: "/documentation/Visualization/26 制作多标签页面.md",
 				},				
 				{
 					text: "Tooltips",
