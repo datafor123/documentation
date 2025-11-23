@@ -70,7 +70,7 @@ Bullet charts support binding multiple fields from the data model.
 ### Example Dataset
 
 | Store   | Revenue | Target | Min Revenue | Satisfactory Revenue | Good Revenue | Very Good Revenue |
-| - | - |  | -- | -- |  | -- |
+| ------- | ------- | ------ | ----------- | -------------------- | ------------ | ----------------- |
 | Store 1 | 119645  | 115000 | 80000       | 95000                | 110000       | 130000            |
 | Store 2 | 102769  | 105000 | 75000       | 85000                | 100000       | 120000            |
 | Store 3 | 151845  | 160000 | 100000      | 120000               | 150000       | 200000            |
