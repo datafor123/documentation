@@ -11,6 +11,8 @@ A **Bullet Chart** is a high–information-density KPI visualization designed to
 
 As a compact and efficient alternative to gauge charts, bullet charts present rich business insights in a limited space, making them widely used in operational analytics, performance management, and financial dashboards.
 
+<div align="left"><img src="./../images/image-20251208152856707.png"  width="260px" /></div>
+
 ### When to Use
 
 - Displaying actual KPI performance  
