@@ -45,7 +45,6 @@ In the model list, you can find the **Prep data for AI** action from the menu on
 
 This is the fastest way to perform on-demand vectorization.
 
----
 
 ## ## 3. Vector Jobs (Scheduled Vectorization Tasks)
 
