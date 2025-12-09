@@ -5,142 +5,170 @@ permalink: /documentation/AI-Agent/Preparing-Data-for-AI/
 
 # **Preparing Data for AI**
 
-Datafor AI Agent (Preview) provides a complete vectorization toolchain that converts analysis model metadata and text-based dimension level values into embeddings and stores them in **ChromaDB**. This enables the AI Agent to understand business semantics, improve analytical accuracy, and enhance natural-language query experiences.
-
-This document introduces the three core features in Datafor—**Prep Data for AI**, **Vector Jobs**, and **Vector Indexes**—and explains how to use them effectively.
+Datafor AI Agent (Preview) relies on vectorized metadata and level values to understand business semantics, improve natural language reasoning, and provide accurate analytical insights. This document explains how to configure embedding models, use Prep Data for AI, manage scheduled vectorization tasks, and inspect stored vector indexes.
 
 
-## ## 1. Overview: How Does AI Understand Your Business Data?
+# **0. Prerequisite: Configure Embedding Model**
 
-To answer business questions correctly, AI must understand the structure and semantics of your analysis model, including:
+Before performing any vectorization task—including **Prep Data for AI**, **Vector Jobs**, or **Vector Indexes**—you must configure an embedding model.
 
-- Dimension names and their business meaning  
-- Hierarchical levels  
-- Common text values (e.g., city names, brand names)
+**Location:**
+ **AI Agent (Preview) → Embedding Model**
 
-Datafor converts these textual elements into vectors and stores them in **ChromaDB**.  
-During natural-language processing, the AI Agent retrieves these vectors to perform semantic matching, enabling more accurate field recognition and business understanding.
+<div align="left"><img src="./images/image-20251209162306049.png" width="380px" /></div>
+
+### **Steps**
+
+1. Open the **Embedding Model** configuration panel
+2. Select an embedding provider and model:
+
+#### **OpenAI Models**
+
+- `text-embedding-3-small`
+- `text-embedding-3-large`
+
+#### **Qwen Models**
+
+- `text-embedding-v3`
+- `text-embedding-v4`
+
+1. Enter the corresponding **API Key**
+2. Click **Save**
+
+### **Why This Matters**
+
+- All semantic search, metadata understanding, and vector indexing depend on the embedding model.
+- Incorrect or missing configuration causes:
+  - Prep Data for AI to fail
+  - Vector Jobs to fail
+  - Vector Indexes to remain empty
+- Higher-quality embedding models result in more accurate natural language interpretation by the AI Agent.
+
+# **1. Prep Data for AI (Manual Refresh)**
+
+If you want to immediately refresh vectors after updating an analysis model, this is the fastest on-demand method.
+
+Prep Data for AI performs the following:
+
+- Vectorizes **model metadata** (dimensions, levels, business descriptions)
+- Vectorizes **text-based dimension values**
+- Saves results to **ChromaDB**
+
+Use this when you manually modify:
+
+- Dimension names
+- Level definitions
+- Business descriptions
+- Level values (e.g., new products, regions, brands)
 
 
-## ## 2. Prep Data for AI (Model Page Action)
+# **2. Vector Jobs (Scheduled Vectorization Tasks)**
 
-Location: **Models → Action Menu → Prep data for AI**
-
-In the model list, you can find the **Prep data for AI** action from the menu on the right side of each model.
-
-<div align="left"><img src="./images/image-20251204174102852.png" width="100%" /></div>
-
-### **Purpose**
-
-- Vectorize the model’s **metadata**
-- Vectorize **text-based dimension level values**
-- Automatically save embeddings into ChromaDB
-- Each execution performs **incremental vectorization**, processing only new or updated items
-
-### **When to Use**
-
-✔ A model has new dimensions, measures, or levels  
-✔ New level values appear (e.g., new countries, new cities, new brands)  
-✔ You want to manually refresh vectors  
-
-This is the fastest way to perform on-demand vectorization.
-
-
-## ## 3. Vector Jobs (Scheduled Vectorization Tasks)
-
-Location: **Settings → AI Agent (Preview) → Vector Jobs**
+**Location:**
+ **Settings → AI Agent (Preview) → Vector Jobs**
 
 <div align="left"><img src="./images/image-20251204173521342.png" width="100%" /></div>
 
-As business data grows—new products, new regions, new customers—manually clicking “Prep data for AI” becomes inefficient.  
-**Vector Jobs** allow you to create **automated scheduled vectorization tasks**.
-
-### ### 3.1 Creating a Vector Job
-
-Click **Create Job** to open the configuration dialog:
-
-Configuration options include:
-
-| Field                 | Description                                                         |
-| --------------------- | ------------------------------------------------------------------- |
-| **Analysis Model**    | Select the analysis model to vectorize                              |
-| **Dimension Fields**  | Select dimension fields to vectorize (usually text-based levels)    |
-| **Run Immediately**   | Whether to execute a vectorization run right away                   |
-| **Schedule**          | Define the execution frequency (once, daily, weekly, etc.)          |
-| **Description**       | Optional notes                                                      |
-
-### ### 3.2 Job Behavior
-
-- Each run vectorizes only incremental updates  
-- Results are automatically saved into ChromaDB  
-- Tasks can be enabled, disabled, edited, or deleted  
-
-### ### 3.3 When to Use
-
-✔ Level values change frequently (cities, brands, store names, etc.)  
-✔ You want AI to always stay up-to-date with business semantics  
-✔ Multiple models require continuous vector updates  
+As business data grows—new products, new regions, new customers—manual vectorization becomes inefficient.
+ Vector Jobs allow automated scheduled vectorization for continuous updates.
 
 
-## ## 4. Vector Indexes (Viewing and Managing Vector Data)
+## **2.1 Creating a Vector Job**
 
-Location: **Settings → AI Agent (Preview) → Vector Indexes**
+Click **Create Job** to open the configuration dialog.
+
+### **Configuration Options**
+
+| Field                | Description                                                  |
+| -------------------- | ------------------------------------------------------------ |
+| **Analysis Model**   | Select the analysis model to vectorize                       |
+| **Dimension Fields** | Select text-based dimension levels to vectorize              |
+| **Run Immediately**  | Execute a vectorization run right away                       |
+| **Schedule**         | Define automatic execution frequency (once, daily, weekly, etc.) |
+| **Description**      | Optional notes for job management                            |
+
+## **2.2 Job Behavior**
+
+- Each run vectorizes **incremental updates only**
+- All embeddings are stored in **ChromaDB** automatically
+- Jobs can be **enabled**, **disabled**, **edited**, or **deleted**
+
+
+## **2.3 When to Use Vector Jobs**
+
+Use this feature when:
+
+✔ Level values change frequently (e.g., cities, brands, store names)
+ ✔ You want AI to stay continuously updated
+ ✔ Multiple analysis models require ongoing semantic refinement
+ ✔ Business data is updated regularly through ETL / data warehouse loads
+
+# **3. Vector Indexes (Viewing and Managing Vector Data)**
+
+**Location:**
+ **Settings → AI Agent (Preview) → Vector Indexes**
 
 <div align="left"><img src="./images/image-20251204173702741.png" width="100%" /></div>
 
-After vector data is created, it appears in the Vector Indexes list. This section allows users to inspect and manage stored vector indexes.
+This section displays the vector indexes created by Prep Data for AI or Vector Jobs.
 
-### **Displayed Information Includes:**
+## **3.1 Information Displayed**
 
-- **Vector Index name** (usually associated with a model or job)
-- **Number of vectors**
-- **Status (completed/failed)**
-- **Updated At timestamp**
-- **Created At timestamp**
-
-### **Available Actions**
-
-| Action      | Description                                 |
-| ----------- | ------------------------------------------- |
-| **Delete**  | Permanently deletes the vector index         |
-
-After deleting an index:
-
-- The model remains available  
-- But AI semantic understanding decreases  
-- You must rerun Prep Data for AI or a Vector Job to rebuild the vectors  
+- **Vector Index Name** (usually linked to model + job)
+- **Number of vectors** stored
+- **Status** (completed / failed)
+- **Updated At** timestamp
+- **Created At** timestamp
 
 
-## ## 5. Technical Notes: Datafor Uses ChromaDB
+## **3.2 Available Actions**
 
-Datafor integrates **ChromaDB** as its vector database. All model metadata and text dimension embeddings are stored and retrieved through ChromaDB.
+| Action     | Description                          |
+| ---------- | ------------------------------------ |
+| **Delete** | Permanently deletes the vector index |
 
-Benefits include:
+**After deletion:**
 
-- Fast semantic similarity search  
-- Scalable vector storage  
-- Provides rich semantic context for AI Agent  
-- Supports incremental updates  
+- The analysis model remains usable
+- AI semantic understanding decreases
+- You must rerun **Prep Data for AI** or **Vector Jobs** to rebuild vectors
 
-## ## 6. Best Practices
+# **4. Technical Notes: ChromaDB Integration**
 
-### **1) Run Prep Data for AI after creating or updating a model**
+Datafor uses **ChromaDB** as its vector storage engine, supporting both metadata and level value vectors.
 
-Ensures AI can recognize all model structures.
+### **Benefits**
 
-### **2) Use Vector Jobs for models with frequently changing level values**
+- Fast semantic similarity search
+- Efficient large-scale embedding storage
+- Supports incremental updates
+- Enhances AI Agent natural language understanding
 
-Especially useful for geography, products, brands, or customer attributes.
+# **5. Best Practices**
 
-### **3) Check Vector Indexes regularly**
+### **1) Run Prep Data for AI after creating or modifying an analysis model**
 
-Ensures vectorization jobs are running correctly and data remains fresh.
+Ensures the AI understands the updated schema and business definitions.
 
-### **4) Clean up unused vector indexes when removing models or fields**
+### **2) Use Vector Jobs for frequently changing level values**
 
-Keeps the vector store clean and improves performance.
+Ideal for dynamic data such as geography, products, brands, or customers.
+
+### **3) Regularly check Vector Indexes**
+
+Ensures jobs are running properly and the semantic layer remains fresh.
+
+### **4) Clean unused vector indexes**
+
+Improves performance and avoids unnecessary storage consumption.
 
 # **Conclusion**
 
-Vectorization enables the Datafor AI Agent to truly *understand* your analysis model and business semantics.  
-By utilizing **Prep Data for AI**, **Vector Jobs**, and **Vector Indexes**, you can easily manage vector data and ensure the AI delivers more accurate, natural, and intelligent analytical experiences.
+Vectorization is essential for enabling Datafor AI Agent to **understand your business semantics**.
+ By combining:
+
+- **Prep Data for AI** (manual vectorization)
+- **Vector Jobs** (scheduled automation)
+- **Vector Indexes** (storage and management)
+
+You ensure that the AI Agent delivers accurate, natural, and reliable analytical experiences.
