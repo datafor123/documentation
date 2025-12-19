@@ -46,7 +46,7 @@ Before you start, ensure you have the following:
      - `-itd`: These flags tell Docker to run the container in interactive mode (`-i`), allocate a pseudo-TTY (`-t`), and run it in detached mode (`-d`), which means it will run in the background.
      - `--name datafor-ee`: Names the container `datafor-ee` for easy reference.
      - `-p 28080:28080`: Maps port 28080 on your local machine to port 28080 in the container.This port is used for the web access.
-     - `-p 28081:28081`: Maps port 28080 on your local machine to port 28080 in the container.This port is used for the AI agent service.
+     - `-p 28081:28081`: Maps port 28081 on your local machine to port 28081 in the container.This port is used for the AI agent service.
      - `-p 25432:25432`: Maps port 25432 on your local machine to port 25432 in the container.This port is used for the built-in database service.It is recommended to restrict the port to be accessible only from the local machine for security reasons.
      - `datafor123/datafor-ee`: Specifies the Docker image to use.
 
