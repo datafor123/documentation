@@ -11,7 +11,7 @@ description:
 
 **Request URL**
 ```html
-/plugin/datafor-auth/api/roles/types
+/plugin/datafor-modeler/api/roles/types
 ```
 
 **Authorization**  

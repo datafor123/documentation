@@ -16,7 +16,7 @@ Here is the fully **translated and professional** version of your API documentat
 
 **Request URL**
 ```html
-/plugin/datafor-auth/api/user/register
+/plugin/datafor-modeler/api/user/register
 ```
 
 **Authorization**  

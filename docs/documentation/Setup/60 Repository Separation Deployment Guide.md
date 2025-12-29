@@ -111,14 +111,7 @@ This guide provides instructions for migrating the Datafor repository database t
   - `username` / `password`: Update database credentials
 
 
-### 3.2 Modify Spring Security Configuration
-
-- **File Path**: `pentaho-solutions/system/datafor-auth/plugin.spring.xml`
-- **Instructions**: Locate the `<bean id="dataSource" ...>` node and update the database `url`, `username`, and `password`.
-
-------
-
-### 3.3 Modify JDBC Connection Configuration
+### 3.2 Modify JDBC Connection Configuration
 
 - **File Path**: `pentaho-solutions/system/applicationContext-spring-security-jdbc.properties`
 
@@ -133,7 +126,7 @@ This guide provides instructions for migrating the Datafor repository database t
   ```
 
 
-### 3.4 Modify Jackrabbit Repository Configuration
+### 3.3 Modify Jackrabbit Repository Configuration
 
 - **File Path**: `pentaho-solutions/system/jackrabbit/repository.xml`
 
@@ -145,7 +138,7 @@ This guide provides instructions for migrating the Datafor repository database t
   - Locate the `jcr_user` configuration and update the `password` to match the password set in **section 2.1**.
 
 
-### 3.5 Modify Hibernate Configuration
+### 3.4 Modify Hibernate Configuration
 
 - **File Path**: `pentaho-solutions/system/hibernate/postgresql.hibernate.cfg.xml`
 

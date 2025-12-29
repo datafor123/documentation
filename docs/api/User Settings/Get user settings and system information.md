@@ -28,7 +28,6 @@ Authentication is **not required** to use this API.
   "plugins": [
     "datafor-modeler",
     "datafor-backup",
-    "datafor-auth",
     "datafor"
   ],
   "roles": [

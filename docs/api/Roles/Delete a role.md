@@ -10,7 +10,7 @@ description:
 
 **Request URL**
 ```html
-/plugin/datafor-auth/api/roles/delete
+/plugin/datafor-modeler/api/roles/delete
 ```
 
 **Authorization**  

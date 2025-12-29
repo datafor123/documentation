@@ -10,7 +10,7 @@ description:
 
 **Request URL**
 ```html
-/plugin/datafor-auth/api/user/detail
+/plugin/datafor-modeler/api/user/detail
 ```
 
 **Authorization**  
