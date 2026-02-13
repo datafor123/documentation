@@ -135,6 +135,12 @@ export const documentationNote = defineNoteConfig({
 			items: "auto",
 		},
 		{
+			text: "Multi-tenancy",
+			collapsed: true,
+			prefix: "/documentation/Multi-tenancy/",
+			items: "auto",
+		},
+		{
 			text: "Tools",
 			collapsed: true,
 			prefix: "/documentation/Tools/",
