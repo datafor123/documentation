@@ -1,16 +1,17 @@
 ---
 title: Preparing Data for AI
 permalink: /documentation/AI-Agent/Preparing-Data-for-AI/
+
 ---
 
 # **Preparing Data for AI**
 
-Datafor AI Agent (Preview) relies on vectorized metadata and level values to understand business semantics, improve natural language reasoning, and provide accurate analytical insights. This document explains how to configure embedding models, use Prep Data for AI, manage scheduled vectorization tasks, and inspect stored vector indexes.
+Datafor AI Agent (Preview) relies on vectorized metadata and level values to understand business semantics, improve natural language reasoning, and provide accurate analytical insights. This document explains how to configure embedding models, run **Prep Data for AI**, set up scheduled vectorization, and inspect stored vector indexes.
 
 
 # **0. Prerequisite: Configure Embedding Model**
 
-Before performing any vectorization task—including **Prep Data for AI**, **Vector Jobs**, or **Vector Indexes**—you must configure an embedding model.
+Before performing any vectorization task—including **Prep Data for AI**, **Vector Schedules**, or **Vector Indexes**—you must configure an embedding model.
 
 **Location:**
  **AI Agent (Preview) → Embedding Model**
@@ -19,7 +20,7 @@ Before performing any vectorization task—including **Prep Data for AI**, **Vec
 
 ### **Steps**
 
-1. Open the **Embedding Model** configuration panel
+1. Open the **Embedding Model** configuration panel.
 2. Select an embedding provider and model:
 
 #### **OpenAI Models**
@@ -32,143 +33,157 @@ Before performing any vectorization task—including **Prep Data for AI**, **Vec
 - `text-embedding-v3`
 - `text-embedding-v4`
 
-1. Enter the corresponding **API Key**
-2. Click **Save**
+3. Enter the corresponding **API Key**.
+4. Click **Save**.
 
 ### **Why This Matters**
 
 - All semantic search, metadata understanding, and vector indexing depend on the embedding model.
-- Incorrect or missing configuration causes:
+- Incorrect or missing configuration may cause:
   - Prep Data for AI to fail
-  - Vector Jobs to fail
-  - Vector Indexes to remain empty
-- Higher-quality embedding models result in more accurate natural language interpretation by the AI Agent.
-
-# **1. Prep Data for AI (Manual Refresh)**
-
-If you want to immediately refresh vectors after updating an analysis model, this is the fastest on-demand method.
-
-Prep Data for AI performs the following:
-
-- Vectorizes **model metadata** (dimensions, levels, business descriptions)
-- Vectorizes **text-based dimension values**
-- Saves results to **ChromaDB**
-
-Use this when you manually modify:
-
-- Dimension names
-- Level definitions
-- Business descriptions
-- Level values (e.g., new products, regions, brands)
+  - Scheduled vectorization to fail
+  - Vector indexes to remain empty
+- Higher-quality embedding models typically improve the AI Agent’s natural language interpretation accuracy.
 
 
-# **2. Vector Jobs (Scheduled Vectorization Tasks)**
+# **1. Prep Data for AI (On-Demand Vector Index Build)**
 
-**Location:**
- **Settings → AI Agent (Preview) → Vector Jobs**
+When you update an **analysis model** and want the AI to recognize the latest business semantics immediately, use **Prep Data for AI** to build or refresh the vector index on demand.
 
-<div align="left"><img src="./images/image-20251204173521342.png" width="100%" /></div>
+**Entry point:** **Models** → (⋯) action menu on an analysis model → **Prep data for AI**
 
-As business data grows—new products, new regions, new customers—manual vectorization becomes inefficient.
- Vector Jobs allow automated scheduled vectorization for continuous updates.
+<div align="left"><img src="./images/image-20260213162630969.png" width="100%" /></div>
 
+### **What Prep Data for AI does**
 
-## **2.1 Creating a Vector Job**
+- Creates (first run) or refreshes (subsequent runs) the **vector index** for the selected **analysis model**
+- Vectorizes:
+  - **Model metadata** (dimensions, levels, captions/names, business descriptions)
+  - **Text-based level values** (e.g., product names, regions, brands—when applicable)
+- Stores embeddings in **ChromaDB** for semantic retrieval by AI Agent
 
-Click **Create Job** to open the configuration dialog.
+### **When to run it**
 
-### **Configuration Options**
+Run **Prep Data for AI** after you manually change or publish updates such as:
 
-| Field                | Description                                                  |
-| -------------------- | ------------------------------------------------------------ |
-| **Analysis Model**   | Select the analysis model to vectorize                       |
-| **Dimension Fields** | Select text-based dimension levels to vectorize              |
-| **Run Immediately**  | Execute a vectorization run right away                       |
-| **Schedule**         | Define automatic execution frequency (once, daily, weekly, etc.) |
-| **Description**      | Optional notes for job management                            |
+- Dimension / level names (captions)
+- Level definitions / hierarchies
+- Business descriptions / glossary text
+- Text-based level values the AI should understand (new products, regions, brands, customers, etc.)
 
-## **2.2 Job Behavior**
-
-- Each run vectorizes **incremental updates only**
-- All embeddings are stored in **ChromaDB** automatically
-- Jobs can be **enabled**, **disabled**, **edited**, or **deleted**
+> Tip: This is the fastest “refresh now” option. Scheduling (automation) is configured via **Vector Indexes → Set Vector Schedule**.
 
 
-## **2.3 When to Use Vector Jobs**
-
-Use this feature when:
-
-✔ Level values change frequently (e.g., cities, brands, store names)
- ✔ You want AI to stay continuously updated
- ✔ Multiple analysis models require ongoing semantic refinement
- ✔ Business data is updated regularly through ETL / data warehouse loads
-
-# **3. Vector Indexes (Viewing and Managing Vector Data)**
+# **2. Vector Indexes (View & Manage Vector Data + Scheduling)**
 
 **Location:**
  **Settings → AI Agent (Preview) → Vector Indexes**
 
-<div align="left"><img src="./images/image-20251204173702741.png" width="100%" /></div>
+<div align="left"><img src="./images/image-20260213162729031.png" width="100%" /></div>
 
-This section displays the vector indexes created by Prep Data for AI or Vector Jobs.
+This page lists the vector indexes created by **Prep Data for AI** and shows their current state and scale.
 
-## **3.1 Information Displayed**
+### **2.1 Information displayed**
 
-- **Vector Index Name** (usually linked to model + job)
-- **Number of vectors** stored
-- **Status** (completed / failed)
+- **Vector Index** name (typically mapped to model ID/name)
+- **Vectors** (number of embeddings stored)
+- **Status** (e.g., completed / failed)
 - **Updated At** timestamp
 - **Created At** timestamp
 
+> **Refresh data** only refreshes the table display—it does not trigger re-vectorization.
 
-## **3.2 Available Actions**
+### **2.2 Available actions**
 
-| Action     | Description                          |
-| ---------- | ------------------------------------ |
-| **Delete** | Permanently deletes the vector index |
+| Action                  | Description                                                  |
+| ----------------------- | ------------------------------------------------------------ |
+| **Delete**              | Permanently deletes the vector index                         |
+| **Set Vector Schedule** | Creates/updates an automated vectorization schedule for this index |
 
 **After deletion:**
 
 - The analysis model remains usable
-- AI semantic understanding decreases
-- You must rerun **Prep Data for AI** or **Vector Jobs** to rebuild vectors
+- AI semantic understanding may decrease (because vectors are removed)
+- You must rerun **Prep Data for AI** to rebuild vectors
 
-# **4. Technical Notes: ChromaDB Integration**
 
-Datafor uses **ChromaDB** as its vector storage engine, supporting both metadata and level value vectors.
+# **3. Set Vector Schedule (Automated Refresh for an Index)**
 
-### **Benefits**
+Scheduling is configured **from the vector index**, not as a separate “create job” flow.
 
-- Fast semantic similarity search
-- Efficient large-scale embedding storage
-- Supports incremental updates
-- Enhances AI Agent natural language understanding
+**How to configure:** **Vector Indexes** → **Set Vector Schedule**
 
-# **5. Best Practices**
+<div align="left"><img src="./images/image-20260213162803418.png" width="100%" /></div>
 
-### **1) Run Prep Data for AI after creating or modifying an analysis model**
+### **3.1 Schedule configuration**
 
-Ensures the AI understands the updated schema and business definitions.
+| Field                    | Description                                                  |
+| ------------------------ | ------------------------------------------------------------ |
+| **Circulate**            | Execution frequency: **Run once / Daily / Weekly / Monthly / Yearly / Cron** |
+| **Start time**           | Time of day the job should run                               |
+| **Date commenced**       | The effective start date of the schedule                     |
+| **Cron** (when selected) | Use a cron expression for advanced timing control            |
 
-### **2) Use Vector Jobs for frequently changing level values**
+**Typical usage**
 
-Ideal for dynamic data such as geography, products, brands, or customers.
+- **Daily/Weekly**: best for frequently changing master data (products, customers, stores, etc.)
+- **Run once**: schedule a single future refresh (e.g., after a planned ETL load)
+- **Cron**: precise control (e.g., run after upstream pipelines complete)
 
-### **3) Regularly check Vector Indexes**
 
-Ensures jobs are running properly and the semantic layer remains fresh.
+# **4. Vector Jobs (Monitor Scheduled Runs)**
 
-### **4) Clean unused vector indexes**
+**Location:**
+ **Settings → AI Agent (Preview) → Vector Jobs**
 
-Improves performance and avoids unnecessary storage consumption.
+<div align="left"><img src="./images/image-20260213162900162.png" width="100%" /></div>
+
+This page shows all schedules created via **Set Vector Schedule**, including runtime information and enablement status.
+
+### **4.1 Information displayed**
+
+- **Analysis Model**
+- **Next Run Time**
+- **Last Run Time**
+- **Enabled**
+- **Actions**: **Edit**, **Delete**
+
+### **4.2 Job behavior**
+
+- Scheduled runs refresh the model’s vector index automatically based on the configured frequency
+- You can **disable** a schedule temporarily without deleting it
+- Use **Edit** to change frequency/time (or cron), and **Delete** to remove the schedule
+
+
+# **5. Technical Notes: ChromaDB Integration**
+
+Datafor uses **ChromaDB** as its vector storage engine to support:
+
+- Semantic similarity search over model metadata and text values
+- Faster matching between user questions and business concepts/fields
+- Better grounding for AI Agent’s “intent → field” mapping
+
+# **6. Best Practices**
+
+1. **Run Prep Data for AI after model/schema changes**  
+   Ensures the AI recognizes updated names, hierarchies, and business descriptions immediately.
+
+2. **Use schedules for fast-changing level values**  
+   If products/brands/customers/stores change frequently, configure **Daily/Weekly/Cron**.
+
+3. **Monitor Vector Jobs regularly**  
+   Track **Next Run Time / Last Run Time** to ensure automation is working.
+
+4. **Clean unused vector indexes**  
+   Keep only what you use to reduce storage and operational clutter.
+
 
 # **Conclusion**
 
-Vectorization is essential for enabling Datafor AI Agent to **understand your business semantics**.
- By combining:
+Vectorization is essential for enabling Datafor AI Agent to **understand your business semantics**. By combining:
 
-- **Prep Data for AI** (manual vectorization)
-- **Vector Jobs** (scheduled automation)
-- **Vector Indexes** (storage and management)
+- **Prep Data for AI** (on-demand build/refresh)
+- **Vector Indexes → Set Vector Schedule** (automation)
+- **Vector Jobs** (monitoring and management)
 
-You ensure that the AI Agent delivers accurate, natural, and reliable analytical experiences.
+you ensure that the AI Agent delivers accurate, natural, and reliable analytical experiences.
