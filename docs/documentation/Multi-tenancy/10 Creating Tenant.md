@@ -69,6 +69,8 @@ Click the **“+”** button to the right of the **Multi-tenancy** page title to
 
 In the tenant list, you may see a tenant named **template0** (as shown in the screenshot). It is a built-in **Tenant Template** used to initialize new tenants.
 
+> Important: If you upgrade the system using an **upgrade package**, the tenant template (**template0**) is **not created automatically**. You must **manually create** the tenant template before creating new tenants.
+
 <div align="left"><img src="./images/image-20260218161843715.png" /></div>
 
 - **Default behavior**: When you create a new tenant, the system **copies (clones) template0** to generate the tenant’s initial content and default configuration.
