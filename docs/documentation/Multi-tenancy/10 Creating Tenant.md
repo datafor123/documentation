@@ -1,7 +1,8 @@
 ---
+
 title: Multi-tenancy
 permalink: /documentation/Multi-tenancy/Multi-tenancy/
-tags:
+
 ---
 
 # Multi-tenancy
