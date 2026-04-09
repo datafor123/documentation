@@ -1,56 +1,36 @@
 name: Deploy Docs to GitHub Pages
 
 on:
- push:
-  branches:
-   - main # 触发部署的分支
+  push:
+    branches:
+      - main
 
 jobs:
- build-deploy:
-  runs-on: ubuntu-latest
-  permissions:
-   contents: write # 允许 Git 操作（push、commit）
-   pages: write # 如果涉及 GitHub Pages 部署，需加此权限
-  steps:
-   - uses: actions/checkout@v2
-   - name: Config
-     # with:
-     #   persist-credentials: false
-     run: |
-      git config --global user.email "meishenlieshou@gmail.com"
-      git config --global user.name "meishenlieshou"
+  build-deploy:
+    runs-on: ubuntu-latest
 
-   - name: ⚡ Set up Node.js
-     uses: actions/setup-node@v4
-     with:
-      node-version: 21 # 使用 Node.js 21.x
+    permissions:
+      contents: write
 
-   - name: 📦 Install Dependencies
-     run: npm install # 或者 yarn install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-   - name: Install VuePress
-     run: npm install -g vuepress
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-   - name: Install esbuild
-     run: npm install -g esbuild
+      - name: Install dependencies
+        run: npm ci
 
-   - name: Clean install dependencies
-     run: |
-      rm -rf node_modules package-lock.json
-      npm install
+      - name: Build VuePress
+        run: npm run docs:build
 
-   - name: Grant execute permissions to esbuild
-     run: chmod +x node_modules/@vuepress/cli/node_modules/@esbuild/linux-x64/bin/esbuild
-
-   - name: Grant execute permissions
-     run: chmod +x node_modules/.bin/vuepress
-
-   - name: 🔨 Build VuePress
-     run: npm run docs:build # VuePress 默认构建命令
-
-   - name: 🚀 Deploy to GitHub Pages
-     uses: peaceiris/actions-gh-pages@v4
-     with:
-      github_token: ${{ secrets.GH_PAT }}
-      publish_dir: docs/.vuepress/dist
-      publish_branch: gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GH_PAT }}
+          publish_dir: docs/.vuepress/dist
+          publish_branch: gh-pages

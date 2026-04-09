@@ -5,6 +5,10 @@ export const releaseNote = defineNoteConfig({
 	link: "/release",
 	sidebar: [
 		{
+			text: "2026-02 Version 8.00",
+			link: "/release/v8.00.md",
+		},
+		{
 			text: "2025-12 Version 7.20",
 			link: "/release/v7.20.md",
 		},
