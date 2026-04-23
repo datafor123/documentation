@@ -5,9 +5,6 @@ permalink: /documentation/SDK-Embedding/
 
 # SDK Embedding
 
-> Embed Datafor reports into your web application.
-
-
 ## Quick Start
 
 ```html
