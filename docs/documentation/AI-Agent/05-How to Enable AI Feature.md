@@ -19,7 +19,7 @@ This guide explains how to enable the **AI feature** in the Datafor application.
 
 If you are **not using a reverse proxy** (such as Nginx), you can keep the default configuration.
 
-<div align="left"><img src="./images/default.png" /></div>  
+<div align="left"><img src="./images/proxy.png" /></div>  
 
 * The **AI Agent Server** should be set to the `Fully Qualified Server URL` (up to but not including the port) with **port 28081** appended.
 

@@ -34,8 +34,5 @@ username  /  password
 
 1. Place the update package `datafor-update.jar` in the `bi-server\update` directory.
 2. Run `stop-server.bat` to stop the service.
-3. From version 8.01 onwards:
-   - If you need to update configurations, run `update.bat`.
-   - This will create a backup folder containing a `change-list.md` file with details of script and configuration changes.
-   - If you do not need to modify the default configuration, you can skip this step and proceed directly to the next step.
-4. Run `start-server.bat` to start the service.Note: Running start-server.bat will also automatically apply the update from datafor-update.jar in the update directory.
+3. Run `start-server.bat` to start the service.
+   - Note: Running start-server.sh will automatically apply the update from datafor-update.jar in the update directory.

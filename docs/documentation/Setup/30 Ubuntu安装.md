@@ -111,9 +111,7 @@ After installation, access the Datafor web interface using:
 # Updating the System
 
 1. Place the update package `datafor-update.jar` in the `bi-server/update` directory.
-2. Run `./stop-server.sh` to stop the service.
-3. From version 8.1 onwards:
-  - If you need to update configurations, run `./update.sh`.
-  - This will create a backup folder containing a `change-list.md` file with details of script and configuration changes.
-  - If you do not need to modify the default configuration, you can skip this step and proceed directly to the next step.
-4. Run `./start-server.sh` to start the service.Note: Running start-server.sh will also automatically apply the update from datafor-update.jar in the update directory.
+2. Run `su - biadmin` to switch to the `biadmin` user.
+3. Run `./stop-server.sh` to stop the service.
+4. Run `./start-server.sh` to start the service.
+  - Note: Running start-server.sh will automatically apply the update from datafor-update.jar in the update directory.
