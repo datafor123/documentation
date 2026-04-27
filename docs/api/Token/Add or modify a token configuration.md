@@ -1,6 +1,6 @@
 ---
-title: Add or modify a token
-permalink: /api/Token/Add or modify a token/
+title: Add or modify a token configuration
+permalink: /api/Token/Add or modify a token configuration/
 tags: ["api","Authentication","Token"]
 description: 
 ---
@@ -18,7 +18,7 @@ Use of this API requires authentication. For details about the authentication me
 [Authorization](/api/index/#_5-authentication-security).
 
 **Content Type**  
-`application/x-www-form-urlencoded`
+`application/json`
 
 ---
 
@@ -49,7 +49,7 @@ Use of this API requires authentication. For details about the authentication me
 }
 ```
 
-### **Body Parameters Schema**
+### **Body Request Schema**
 
 | Name           | Type       | Required | Description                                        |
 |---------------|------------|---------:|--------------------------------------------------|

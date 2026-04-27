@@ -1,6 +1,6 @@
 ---
-title: Get token list
-permalink: /api/Token/Get token list/
+title: Get token configurations
+permalink: /api/Token/Get token configurations/
 tags: ["api","Authentication","Token"]
 description: 
 ---

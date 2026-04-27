@@ -21,32 +21,6 @@ Log in to Windows as an **Administrator**.
    stop-server.bat
    ```
 
-## Method 2: Run Datafor as a Service
-
-1. Install the service for the first time by double-clicking:
-
-   ```
-   install-service.bat
-   ```
-
-2. Start the service by double-clicking:
-
-   ```
-   start-service.bat
-   ```
-
-3. Stop the service by double-clicking:
-
-   ```
-   stop-service.bat
-   ```
-
-4. Uninstall the service by double-clicking:
-
-   ```
-   delete-service.bat
-   ```
-
 ## Login
 
 URL:  `http://<server-ip>:28080/`
@@ -56,6 +30,12 @@ username  /  password
 - `admin` / `password`
 - `demo` / `demo`
 
-## Update the System
+### Update the System
 
-Place the update package `Datafor-update.jar` in the `bi-server\update` folder and restart the system.
+1. Place the update package `datafor-update.jar` in the `bi-server\update` directory.
+2. Run `stop-server.bat` to stop the service.
+3. From version 8.01 onwards:
+   - If you need to update configurations, run `update.bat`.
+   - This will create a backup folder containing a `change-list.md` file with details of script and configuration changes.
+   - If you do not need to modify the default configuration, you can skip this step and proceed directly to the next step.
+4. Run `start-server.bat` to start the service.Note: Running start-server.bat will also automatically apply the update from datafor-update.jar in the update directory.

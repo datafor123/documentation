@@ -1,6 +1,6 @@
 ---
-title: Delete a token
-permalink: /api/Token/Delete a token/
+title: Delete a token configuration
+permalink: /api/Token/Delete a token configuration/
 tags: ["api","Authentication","Token"]
 description: 
 ---

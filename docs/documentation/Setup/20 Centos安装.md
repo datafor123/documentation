@@ -11,12 +11,20 @@ To begin the installation, switch to the root user by running:
 
 ```bash
 sudo su root
+yum install unzip procps-ng glibc-langpack-en -y
 ```
 
 **Console Output Example:**
 
 ```
 [centos@ip-172-31-33-203 ~]$ sudo su root
+[root@ip-172-31-33-203 centos]# yum install unzip procps-ng glibc-langpack-en -y
+Package unzip-6.0-48.el8_10.x86_64 is already installed.
+Package procps-ng-3.3.15-14.el8.x86_64 is already installed.
+Package glibc-langpack-en-2.28-251.el8_10.31.x86_64 is already installed.
+Dependencies resolved.
+Nothing to do.
+Complete!
 [root@ip-172-31-33-203 centos]#
 ```
 
@@ -184,5 +192,10 @@ After installation, access the Datafor web interface using:
 ------
 
 # Updating the System
-
-To update Datafor, place the update package (e.g., `Datafor-update.jar`) in the `bi-server/update` folder and restart the system.
+1. Place the update package `datafor-update.jar` in the `bi-server/update` directory.
+2. Run `./stop-server.sh` to stop the service.
+3. From version 8.1 onwards:
+  - If you need to update configurations, run `./update.sh`.
+  - This will create a backup folder containing a `change-list.md` file with details of script and configuration changes.
+  - If you do not need to modify the default configuration, you can skip this step and proceed directly to the next step.
+4. Run `./start-server.sh` to start the service.Note: Running start-server.sh will also automatically apply the update from datafor-update.jar in the update directory.
