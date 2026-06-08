@@ -1,95 +1,143 @@
 ---
 title: LLM Configuration
 permalink: /documentation/AI-Agent/LLM-Configuration/
+createTime: 2025/08/11 16:44:13
 ---
 
 # LLM Configuration
 
-This guide explains how to connect and manage Large Language Models (LLMs) in Datafor so the AI Assistant can use providers such as OpenAI, Google Gemini, IBM watsonx, and Alibaba Qwen.
+This guide is for administrators who need to configure Large Language Models (LLMs) for Datafor AI Agent. After configuration, the Agent can use LLM-backed capabilities such as question understanding, analysis planning, query model generation, result interpretation, follow-up question generation, and semantic retrieval.
 
-------
+## 1. Open the LLM Configuration Panel
 
-## 1) Open the Model Settings panel
+1. Open the Datafor console.
+2. Sign in with an administrator account.
+3. Open AI Agent.
+4. Click **LLM** in the top toolbar.
 
-1. Click **Model Settings** on the top toolbar.
+The **LLM** panel opens on the right side. It contains two tabs:
 
-   <div align="left"><img src="./images/image-20250811175634324.png"  /></div>
+- **Models**: Manage model profiles, including model name, API endpoint, API key, quota, and cost.
+- **Assignments**: Assign model profiles to the Agent roles that use them at runtime.
 
-2. In the right-side panel you can:
+<div align="left"><img src="./images/llm-config-models-panel.png" alt="LLM Models tab" width="420px" /></div>
 
-   - **Add Model** to create a new connection,
-   - **Edit** an existing model,
-   - **View usage** (chart icon),
-   - **Delete** a model (trash icon).
+## 2. Prepare the Required Information
 
-   <div align="left"><img src="./images/image-20250811175728180.png" width="30%" /></div>
+Before adding a model, prepare the following information:
 
-You can switch the **Current LLM** from the drop-down at the top of the page before starting a new conversation.
+- Model provider, such as OpenAI, Qwen, DeepSeek, Gemini, Anthropic, or a custom OpenAI-compatible service.
+- Model name, such as `gpt-5.4-mini` or `text-embedding-3-large`. Use the exact model ID required by the provider.
+- API endpoint. For OpenAI-compatible services, this is usually a base URL such as `https://api.openai.com/v1`.
+- API key.
+- Input and output token prices per 1,000,000 tokens. These values are used for Agent operations cost statistics.
+- An embedding model, if you need semantic retrieval, metadata recall, or semantic matching.
 
-## 2) Add or edit a model
+## 3. Add a Model Profile
 
-Open **Add Model** or **Edit** on a listed model to see the form. Fill the fields as below:
+On the **Models** tab, click **Add Model** and fill in the model profile form.
 
-- **Model Name** *(required)*
-   A human-friendly name (e.g., `gpt-4o-mini`, `gemini-2.0-flash`, `qwen-max-2025-01-25`).
+<div align="left"><img src="./images/llm-config-add-model-basic-panel.png" alt="Add Model basic fields" width="420px" /></div>
 
-- **Description** *(required)*
-   Short text to help teammates recognize the model (e.g., `OpenAI gpt-4o-mini`, `IBM llama-3.3-70B instruct`).
+Field reference:
 
-- **API Endpoint (Base URL)** *(required)*
-   The provider base URL (see reference in Section 3).
+| Field | Required | Description |
+| --- | --- | --- |
+| **Model Name** | Yes | The provider-specific model ID. Chat models and embedding models should be created as separate profiles. |
+| **Description** | Yes | Describes how the model should be used. It is recommended to clearly state whether the profile is for Chat or Embedding. |
+| **Display name** | No | The name shown in the UI. It does not affect model calls. |
+| **Provider** | No | Select OpenAI, Qwen, DeepSeek, Gemini, Anthropic, or Custom. |
+| **API Endpoint** | Yes | The model service endpoint. OpenAI-compatible services usually use the base `/v1` endpoint. |
+| **API Key** | No | The key used to access the model service. After saving, the key is stored on the server and shown as a masked value in the UI. |
 
-- **API Key** *(required)*
-   Your provider key with permission to call the selected model.
+The current UI does not provide a separate **Capability** selector. The system infers model capability from the model name, display name, or description. A model containing `embedding` or `embed` is usually recognized as an Embedding model; otherwise, it is treated as a Chat model by default. When configuring an embedding model, include `embedding` or `embed` in the model name or description so it appears in the **Embedding Model** assignment list.
 
-- **Extra Parameters (JSON, optional)**
-   Provider-specific fields (e.g., project/workspace ID). Must be valid JSON, for example:
+## 4. Configure Advanced Parameters, Quota, and Cost
 
-  ```json
-  {"project_id": "311f8a30-df8f-4bb4-9c30-d64b4fc2358e"}
-  ```
+Scroll down in the **Add Model** form to configure optional runtime parameters, quota, and cost.
 
-- **Input Cost / Output Cost** *(currently unused)*
-   These are placeholders for future budgeting/quotas. They **do not affect** model usage yet.
-   **Recommendation:** leave both as `0`.
+<div align="left"><img src="./images/llm-config-add-model-advanced-panel.png" alt="Add Model advanced fields" width="420px" /></div>
 
+**Extra Parameters** accepts an optional JSON object. These values are merged into the provider request. Example:
 
-<div align="left"><img src="./images/image-20250811175825662.png" width="34%" /></div>
+```json
+{
+  "temperature": 0.1,
+  "max_output_tokens": 4096,
+  "response_format": { "type": "json_object" }
+}
+```
 
-Click **OK** to save.
+Important notes:
 
-## 3) Provider quick reference
+- **Extra Parameters** must be a valid JSON object. Arrays and plain text are not allowed.
+- Do not put connection secrets or endpoint fields such as `api_key`, `Authorization`, `endpoint`, or `base_url` in **Extra Parameters**. Use the dedicated fields instead.
+- **Default Quota** supports `5`, `10`, `20`, or `50` calls per day.
+- When **Administrator quota exemption** is enabled, the default quota does not apply to administrators.
+- **Input Cost / 1M Tokens** is required. **Output Cost / 1M Tokens** is optional. Both values are used for Agent operations cost statistics.
 
-| Provider                                | Typical Base URL (API Endpoint)                            | Model name(s) (examples)              | Extra Parameters                                    |
-| --------------------------------------- | ---------------------------------------------------------- | ------------------------------------- | --------------------------------------------------- |
-| **OpenAI**                              | `https://api.openai.com/v1/`                               | `gpt-4o`, `gpt-4.1`, `gpt-3.5-turbo`  | None in most cases                                  |
-| **Google Gemini (OpenAI-compatible)**   | `https://generativelanguage.googleapis.com/v1beta/openai/` | `gemini-1.5-pro`, `gemini-2.0-flash`  | None; ensure the key has Generative Language access |
-| **IBM watsonx**                         | `https://eu-de.ml.cloud.ibm.com`                           | `meta-llama/llama-3-3-70b-instruct`   | `{"project_id":"<your-project-id>"}` (required)     |
-| **Alibaba Qwen (DashScope compatible)** | `https://dashscope.aliyuncs.com/compatible-mode/v1`        | `qwen-max`, `qwen-plus`, `qwen-turbo` | Usually none                                        |
+After filling in the form:
 
-> Tip: If a provider offers an **OpenAI-compatible** endpoint, use it to simplify setup.
+1. Click **Create** to save the model profile.
+2. To test provider connectivity after saving, click the edit icon on the model card and then click **Test connection**.
 
-## 4) Switch and manage models
+In the current UI, **Test connection** on the new-model form mainly validates required fields and JSON format. The real backend connectivity test is available from the edit page of an already saved model. If the real test fails, check the API key, endpoint, model name, and provider compatibility parameters.
 
-- **Switch default model**
-   Use the **Current LLM** drop-down at the top of the page. New chats will use this model by default.
+## 5. Assign Models to Agent Roles
 
-- **Per-model actions** (in the right list):
+After creating model profiles, open the **Assignments** tab. Every role must have one compatible model assigned before assignments can be saved.
 
-  - **Usage** (chart icon): view call counts/usage trends.
-  - **Edit** (gear/pencil): update endpoint, key, extra parameters.
-  - **Delete** (trash): remove the connection.
-  - **Quota badge** (e.g., *Default Quota: 5 times/day*): shows the default call allowance for that model (if configured by admins).
+<div align="left"><img src="./images/llm-config-assignments-panel.png" alt="LLM Assignments tab" width="420px" /></div>
 
-  <div align="left"><img src="./images/image-20250811175923560.png" width="34%" /></div>
+Roles are divided into two groups:
 
+| Group | Role | Required model type | Purpose |
+| --- | --- | --- | --- |
+| Agent Roles | Router | Chat | Classifies questions, identifies intent, and routes requests. |
+| Agent Roles | Planner | Chat | Plans complex analytical questions. |
+| Agent Roles | QueryModel Generator | Chat | Generates the governed `SimplifiedQueryModel`. |
+| Agent Roles | Query Repair | Chat | Reserved for future query repair stages. |
+| Agent Roles | Answer Writer | Chat | Explains query results, dashboard insights, visualization recommendations, and complex analysis synthesis. |
+| Agent Roles | Follow-up Generator | Chat | Generates follow-up questions and alternative analysis suggestions. |
+| Agent Roles | Reference Evaluator | Chat | Reserved for offline or manual evaluation. |
+| System Roles | Embedding Model | Embedding | Used for vector search, metadata retrieval, and semantic matching. |
 
-## 5) Validate the connection
+Recommended setup:
 
-1. Save the model and set it as **Current LLM**.
-2. Start a **New Conversation** and ask a sample question.
-3. If the call fails, check:
-   - The **API Endpoint** matches the provider format (e.g., includes `/v1` or `/openai/` where required).
-   - The **API Key** is valid, active, and has product access.
-   - Required **Extra Parameters** are present (e.g., watsonx `project_id`).
-   - Your network allows outbound HTTPS to the provider (proxy/firewall rules).
+- For an initial setup, assign all **Agent Roles** to one stable Chat model to reduce configuration complexity.
+- For quality-sensitive roles such as **Planner**, **QueryModel Generator**, and **Answer Writer**, use a stronger Chat model.
+- For cost-sensitive or latency-sensitive roles such as **Router** and **Follow-up Generator**, you may switch to a lighter Chat model after validating quality.
+- **Embedding Model** must use an Embedding model. It cannot use a regular Chat model.
+
+When every role is assigned, click **Save**.
+
+## 6. Verify That the Configuration Works
+
+After saving, run a basic validation:
+
+1. Go back to **New Chat**.
+2. Select an analysis model.
+3. Ask a simple analytical question, such as a monthly trend for a metric.
+4. Confirm that the Agent can understand the question, run the query, and return an interpreted result.
+
+If the Agent reports that the LLM is unavailable, the connection failed, authentication failed, or roles are not configured, return to the **LLM** panel and check both the model profiles and role assignments.
+
+## 7. Troubleshooting
+
+| Problem | How to fix it |
+| --- | --- |
+| Creating a model fails | Check that **Model Name**, **Description**, **API Endpoint**, and **Input Cost / 1M Tokens** are filled in, and that **Extra Parameters** is a valid JSON object. |
+| Assignments cannot be saved | Every role must have a model assigned. Agent Roles require Chat models, and **Embedding Model** requires an Embedding model. |
+| A new embedding model does not appear in the Embedding dropdown | Check whether the model name, display name, or description contains `embedding` or `embed`. The current UI uses these terms to infer model capability. |
+| The delete button is disabled | The model is currently assigned to one or more roles. Reassign those roles to another model, save the assignments, and then delete the model. |
+| The API key is not visible after saving | This is expected. The key is stored on the server and shown as a masked value. To replace it, edit the model and enter a new key. |
+| Connection test returns 401 or 403 | The API key is usually invalid, lacks permission, or the provider account is not available. |
+| Connection test returns 400 or 404 | The endpoint, model name, API mode, or provider compatibility parameter is usually incorrect. |
+| Connection test times out | Check network connectivity from the server to the model provider, including firewall and proxy settings. |
+
+## 8. Security Recommendations
+
+- Only administrators should maintain model profiles and role assignments.
+- Do not put API keys in **Extra Parameters**, screenshots, support tickets, or ordinary chat messages.
+- After changing provider, model name, or endpoint, run the connection test again and validate the Agent with a simple analytical question.
+- In production, use clear descriptions for Chat and Embedding model profiles so that auditing, troubleshooting, and cost analysis are easier.
