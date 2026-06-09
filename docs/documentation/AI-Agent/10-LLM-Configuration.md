@@ -63,8 +63,7 @@ Scroll down in the **Add Model** form to configure optional runtime parameters, 
 ```json
 {
   "temperature": 0.1,
-  "max_output_tokens": 4096,
-  "response_format": { "type": "json_object" }
+  "max_output_tokens": 4096
 }
 ```
 
@@ -72,6 +71,17 @@ Important notes:
 
 - **Extra Parameters** must be a valid JSON object. Arrays and plain text are not allowed.
 - Do not put connection secrets or endpoint fields such as `api_key`, `Authorization`, `endpoint`, or `base_url` in **Extra Parameters**. Use the dedicated fields instead.
+- For OpenAI GPT-5 family Chat models, you can use `reasoning` to tune reasoning effort. A common quality-sensitive setting is:
+
+  ```json
+  {
+    "reasoning": { "effort": "medium" },
+    "max_output_tokens": 4096
+  }
+  ```
+
+- Use `low` reasoning effort for low-risk auxiliary roles, `medium` for normal production analytical roles, and `high` for complex planning or query model generation when answer quality is more important than cost or latency.
+- The Agent requests structured JSON for structured runtime stages where required. Avoid adding provider-specific output-format parameters unless they are supported by the selected provider endpoint and have been tested.
 - **Default Quota** supports `5`, `10`, `20`, or `50` calls per day.
 - When **Administrator quota exemption** is enabled, the default quota does not apply to administrators.
 - **Input Cost / 1M Tokens** is required. **Output Cost / 1M Tokens** is optional. Both values are used for Agent operations cost statistics.
@@ -108,6 +118,33 @@ Recommended setup:
 - For quality-sensitive roles such as **Planner**, **QueryModel Generator**, and **Answer Writer**, use a stronger Chat model.
 - For cost-sensitive or latency-sensitive roles such as **Router** and **Follow-up Generator**, you may switch to a lighter Chat model after validating quality.
 - **Embedding Model** must use an Embedding model. It cannot use a regular Chat model.
+
+### OpenAI quality-first recommendation
+
+If you use OpenAI and answer quality is the primary goal, use separate model profiles by Agent role instead of assigning every role to the cheapest Chat model. The highest-risk stages are complex planning and governed query model generation; if they fail, the final answer is unlikely to be correct even if the answer-writing model is strong.
+
+Recommended OpenAI role assignment:
+
+| Role | Recommended OpenAI model | Suggested reasoning effort | Why |
+| --- | --- | --- | --- |
+| Router | `gpt-5.4-mini` | `low` or `medium` | Handles question classification and retrieval planning. It is important, but the output is small and later stages can still guard or clarify. Upgrade to `gpt-5.4` if multilingual or ambiguous routing quality is not good enough. |
+| Planner | `gpt-5.5` | `medium`, or `high` for complex tenants | Plans bounded complex analytical workflows. Use the strongest model here because planning errors affect every downstream step. |
+| QueryModel Generator | `gpt-5.5` | `medium`, or `high` for noisy metadata | Generates the governed `SimplifiedQueryModel`. This is the most quality-critical runtime role because it must preserve requested metrics, dimensions, filters, time ranges, rankings, and comparisons. |
+| Query Repair | `gpt-5.5` | `medium` | Reserved for future query repair stages. If enabled, keep it at the same quality tier as QueryModel Generator. |
+| Answer Writer | `gpt-5.4` | `medium` | Explains query results, dashboard insights, visualization recommendations, and complex synthesis. `gpt-5.4` is the recommended balance of answer quality, cost, and latency. Use `gpt-5.5` if complex final synthesis or executive-quality insight is the top priority. |
+| Follow-up Generator | `gpt-5.4-mini` | `low` | Generates follow-up questions and alternative analysis suggestions. This role is lower risk than query generation or final synthesis, so a smaller model is usually enough. |
+| Reference Evaluator | `gpt-5.5` | `high` or `xhigh` | Reserved for offline or manual evaluation. Prefer maximum evaluation quality over runtime cost. |
+| Embedding Model | OpenAI embedding model, for example `text-embedding-3-large` for quality-sensitive retrieval | Not applicable | Embedding is not a Chat role. Use a stronger embedding model when semantic recall quality is important; use a smaller embedding model only after retrieval-quality validation. |
+
+For a production setup with a good balance of quality, cost, and latency, create three Chat model profiles:
+
+| Profile | Model | Assign to |
+| --- | --- | --- |
+| OpenAI Quality | `gpt-5.5` | Planner, QueryModel Generator, Query Repair, Reference Evaluator |
+| OpenAI Balanced | `gpt-5.4` | Answer Writer |
+| OpenAI Fast | `gpt-5.4-mini` | Router, Follow-up Generator |
+
+Avoid using an ultra-small model such as `gpt-5.4-nano` for core analytical roles when answer quality is the first priority. It can be considered for very high-volume, low-risk suggestion generation only after validating that follow-up quality remains acceptable. OpenAI model availability, pricing, and recommended replacements can change over time, so verify the exact model IDs and prices in OpenAI's current model documentation before production rollout.
 
 When every role is assigned, click **Save**.
 
