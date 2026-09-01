@@ -3,12 +3,15 @@
 
 # Production
 /build
+/docs/.vuepress/dist/
 
 /.idea
 
 # Generated files
 .docusaurus
 .cache-loader
+/docs/.vuepress/.cache/
+/docs/.vuepress/.temp/
 
 # Misc
 .DS_Store
