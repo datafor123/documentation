@@ -40,6 +40,12 @@ export const documentationNote = defineNoteConfig({
 			items: "auto",
 		},
 		{
+			text: "Metrics Library",
+			collapsed: true,
+			prefix: "/documentation/Metrics Library/",
+			items: "auto",
+		},
+		{
 			text: "Visualization",
 			collapsed: true,
 			prefix: "/documentation/Visualization/",
