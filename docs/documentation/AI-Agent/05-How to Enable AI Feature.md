@@ -2,83 +2,47 @@
 title: How to Enable the AI Feature
 permalink: /documentation/AI-Agent/AI-Feature/
 ---
+
 # How to Enable the AI Feature
 
-This guide explains how to enable the **AI feature** in the Datafor application. The steps vary depending on whether you are using **Nginx as a reverse proxy** or accessing the AI service **directly**.
+Datafor uses the AI Agent service for conversational analysis, semantic search, vector indexes, and scheduled vector jobs. An administrator can enable the service and configure the public and internal endpoints from one page.
 
-## 1. Enable the AI Agent in Datafor
+## 1. Open the AI Agent settings
 
-1. In the Datafor console, go to:
-   **Settings → System → AI Agent (Preview)**
+1. Sign in to the Datafor console with an administrator account.
+2. Go to **Settings → System → AI Agent (Preview)**.
+3. Open the **AI Agent** tab.
 
-2. Switch **AI Agent Status** to **On**.
+<div align="left"><img src="./images/ai-agent-settings-current.png" alt="AI Agent service settings" width="100%" /></div>
 
-3. Click **Save**.
+## 2. Enable the service
 
-## 2. Without a Proxy
+Turn on **Enable AI Agent service**. This allows Datafor to use the AI Agent for AI-assisted analysis, vector indexes, and scheduled vector jobs.
 
-If you are **not using a reverse proxy** (such as Nginx), you can keep the default configuration.
+## 3. Configure the service endpoints
 
-<div align="left"><img src="./images/proxy.png" /></div>  
+The current settings page has two endpoint fields:
 
-* The **AI Agent Server** should be set to the `Fully Qualified Server URL` (up to but not including the port) with **port 28081** appended.
+| Field | Used by | Configuration |
+| --- | --- | --- |
+| **AI Agent Server Address** | The web console and browser clients | Enter the public URL that users' browsers can reach. |
+| **Internal Server Address of AI Agent** | The Datafor backend | Keep it aligned with the public endpoint unless the backend must use a separate private address. |
 
-<div align="left"><img src="./images/site.png" /></div>  
+In the locally verified deployment, both fields are empty and the AI Assistant uses the unified Datafor service successfully. The UI shows `http://localhost:28080/datafor/ai` as a placeholder, not as a value that must be copied to every environment.
 
-* If your configuration uses `localhost`, replace it with your actual **server IP address**.
-* Ensure that port **28081** is open and accessible from client machines. Clients must be able to connect directly to the AI Agent service on this port.
+If your deployment supplies explicit endpoints, use the addresses provided by the deployment administrator. The public address must be reachable by browser clients. Use a different internal address only when the Datafor backend has a separate server-to-server route.
 
-## 3. Using Nginx as a Reverse Proxy
+## 4. Save and verify
 
-If you are using **Nginx** as a reverse proxy, add the following block to your configuration to support AI features:
+1. Click **Save changes**.
+2. Return to **Home**.
+3. Open **AI Agent**.
+4. Confirm that the **AI Assistant** page loads and that **New Chat**, **History**, **Common Questions**, **Ops**, and **LLM** are available.
 
-```nginx
-server {
-        listen       443 ssl http2;
-        server_name  xxx.xxx.com;
-        charset utf-8;
-        ssl_certificate      /xxx/xxx.xxx.com.pem;
-        ssl_certificate_key  /xxx/xxx.xxx.com.key;
+## Troubleshooting
 
-        ssl_session_cache    shared:SSL:1m;
-        #ssl_session_timeout  5m;
-
-        ssl_ciphers  HIGH:!aNULL:!MD5;
-        ssl_prefer_server_ciphers  on;
-        location /datafor/ai/mcp_chat/start {
-            proxy_pass http://localhost:28080/datafor/ai/mcp_chat/start;
-            proxy_buffering off;
-            proxy_http_version 1.1;
-            proxy_cache off;
-            proxy_read_timeout 3600s;
-            proxy_send_timeout 3600s;
-            proxy_set_header X-Accel-Buffering no;
-            proxy_set_header Connection '';
-        }
-        location / {
-            client_max_body_size 1000m;
-            client_body_buffer_size 128k;
-            fastcgi_intercept_errors on;
-            proxy_pass http://localhost:28080/;
-            proxy_redirect http:// https://;
-            proxy_set_header Host $host:$server_port;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Real-PORT $remote_port;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
-}
-```
-
-### Notes:
-
-* `client_max_body_size 1000m;` allows large payloads required for AI operations.
-* The header settings ensure that client and protocol information is correctly forwarded.
-
-Set the **AI Agent Server Address** .
-It is recommended to leave this field blank.
-
-<div align="left"><img src="./images/proxy.png" /></div>  
-
-## 4. Completion
-
-After completing these steps, the AI feature in Datafor will be enabled successfully, whether you are accessing the service **directly** or through **Nginx**.
+| Symptom | Check |
+| --- | --- |
+| AI Assistant does not open | Confirm that **Enable AI Agent service** is on and the configured public endpoint is reachable from the browser. |
+| Backend AI requests fail but the page loads | Check **Internal Server Address of AI Agent** and server-to-server network access. |
+| **Save changes** is disabled | The form has no unsaved changes. Modify a setting only when the deployment configuration needs to change. |

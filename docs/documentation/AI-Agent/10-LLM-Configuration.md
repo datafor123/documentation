@@ -6,175 +6,105 @@ createTime: 2025/08/11 16:44:13
 
 # LLM Configuration
 
-This guide is for administrators who need to configure Large Language Models (LLMs) for Datafor AI Agent. After configuration, the Agent can use LLM-backed capabilities such as question understanding, analysis planning, query model generation, result interpretation, follow-up question generation, and semantic retrieval.
+Administrators configure reusable model profiles and assign them to the runtime stages used by Datafor AI Agent. The current interface separates these tasks into **Assignments**, **Models**, and reusable schemes.
 
-## 1. Open the LLM Configuration Panel
+## 1. Open LLM configuration
 
-1. Open the Datafor console.
-2. Sign in with an administrator account.
-3. Open AI Agent.
-4. Click **LLM** in the top toolbar.
+1. Open **Home → AI Agent**.
+2. Click **LLM** in the top toolbar.
 
-The **LLM** panel opens on the right side. It contains two tabs:
+The panel opens on **Assignments** and shows the current scheme and assignment completeness.
 
-- **Models**: Manage model profiles, including model name, API endpoint, API key, quota, and cost.
-- **Assignments**: Assign model profiles to the Agent roles that use them at runtime.
+<div align="left"><img src="./images/llm-assignments-current.png" alt="Current LLM assignments" width="100%" /></div>
 
-<div align="left"><img src="./images/llm-config-models-panel.png" alt="LLM Models tab" width="420px" /></div>
+## 2. Add a model profile
 
-## 2. Prepare the Required Information
+From **Assignments**, click **Manage models →**, then click **Add Model**.
 
-Before adding a model, prepare the following information:
+<div align="left"><img src="./images/llm-models-current.png" alt="Current LLM models" width="100%" /></div>
 
-- Model provider, such as OpenAI, Qwen, DeepSeek, Gemini, Anthropic, or a custom OpenAI-compatible service.
-- Model name, such as `gpt-5.4-mini` or `text-embedding-3-large`. Use the exact model ID required by the provider.
-- API endpoint. For OpenAI-compatible services, this is usually a base URL such as `https://api.openai.com/v1`.
-- API key.
-- Input and output token prices per 1,000,000 tokens. These values are used for Agent operations cost statistics.
-- An embedding model, if you need semantic retrieval, metadata recall, or semantic matching.
+<div align="left"><img src="./images/llm-add-model-current.png" alt="Add Model form" width="100%" /></div>
 
-## 3. Add a Model Profile
-
-On the **Models** tab, click **Add Model** and fill in the model profile form.
-
-<div align="left"><img src="./images/llm-config-add-model-basic-panel.png" alt="Add Model basic fields" width="420px" /></div>
-
-Field reference:
+Prepare the exact values required by the provider:
 
 | Field | Required | Description |
 | --- | --- | --- |
-| **Model Name** | Yes | The provider-specific model ID. Chat models and embedding models should be created as separate profiles. |
-| **Description** | Yes | Describes how the model should be used. It is recommended to clearly state whether the profile is for Chat or Embedding. |
-| **Display name** | No | The name shown in the UI. It does not affect model calls. |
-| **Provider** | No | Select OpenAI, Qwen, DeepSeek, Gemini, Anthropic, or Custom. |
-| **API Endpoint** | Yes | The model service endpoint. OpenAI-compatible services usually use the base `/v1` endpoint. |
-| **API Key** | No | The key used to access the model service. After saving, the key is stored on the server and shown as a masked value in the UI. |
+| **Model Name** | Yes | Provider model ID, for example `gpt-5.6-sol` or `text-embedding-3-large`. |
+| **Display name** | No | Friendly label shown in Datafor. |
+| **Provider** | Yes | Current choices are OpenAI, Qwen, DeepSeek, Gemini, Anthropic, and Custom. |
+| **API Endpoint** | Yes | Provider base endpoint, such as an OpenAI-compatible `/v1` URL. |
+| **API Key** | Provider dependent | Credential used by the model service. Saved keys are masked when the profile is edited. |
+| **Extra Parameters** | No | JSON object merged into the provider request. The default is `{}`. |
 
-The current UI does not provide a separate **Capability** selector. The system infers model capability from the model name, display name, or description. A model containing `embedding` or `embed` is usually recognized as an Embedding model; otherwise, it is treated as a Chat model by default. When configuring an embedding model, include `embedding` or `embed` in the model name or description so it appears in the **Embedding Model** assignment list.
+Click **Verify and enable** before **Create**. The model list marks profiles whose structured-output compatibility has not been verified as **Structured output not verified**.
 
-## 4. Configure Advanced Parameters, Quota, and Cost
+## 3. Configure Extra Parameters
 
-Scroll down in the **Add Model** form to configure optional runtime parameters, quota, and cost.
+The form accepts provider runtime settings such as `temperature`, `max_output_tokens`, `top_p`, reasoning settings, embedding `dimensions`, `encoding_format`, `seed`, and vendor-specific flags.
 
-<div align="left"><img src="./images/llm-config-add-model-advanced-panel.png" alt="Add Model advanced fields" width="420px" /></div>
+<div align="left"><img src="./images/llm-extra-parameters-current.png" alt="Extra Parameters help text" width="100%" /></div>
 
-**Extra Parameters** accepts an optional JSON object. These values are merged into the provider request. Example:
+Example for an OpenAI reasoning profile:
 
 ```json
 {
-  "temperature": 0.1,
+  "reasoning": {
+    "effort": "medium"
+  },
   "max_output_tokens": 4096
 }
 ```
 
-Important notes:
+The exact keys depend on the selected provider. Keep the value as a valid JSON object, and use the dedicated endpoint and API-key fields instead of placing credentials in this JSON.
 
-- **Extra Parameters** must be a valid JSON object. Arrays and plain text are not allowed.
-- Do not put connection secrets or endpoint fields such as `api_key`, `Authorization`, `endpoint`, or `base_url` in **Extra Parameters**. Use the dedicated fields instead.
-- For OpenAI GPT-5 family Chat models, you can use `reasoning` to tune reasoning effort. A common quality-sensitive setting is:
+## 4. Manage model profiles
 
-  ```json
-  {
-    "reasoning": { "effort": "medium" },
-    "max_output_tokens": 4096
-  }
-  ```
+Each model card provides **Edit** and **Delete** actions. A card also shows whether the profile is used by Agent stages.
 
-- Use `low` reasoning effort for low-risk auxiliary roles, `medium` for normal production analytical roles, and `high` for complex planning or query model generation when answer quality is more important than cost or latency.
-- The Agent requests structured JSON for structured runtime stages where required. Avoid adding provider-specific output-format parameters unless they are supported by the selected provider endpoint and have been tested.
-- **Default Quota** supports `5`, `10`, `20`, or `50` calls per day.
-- When **Administrator quota exemption** is enabled, the default quota does not apply to administrators.
-- **Input Cost / 1M Tokens** is required. **Output Cost / 1M Tokens** is optional. Both values are used for Agent operations cost statistics.
+The delete action is disabled while a profile is assigned. Reassign the affected stages and save the assignments before deleting that profile.
 
-After filling in the form:
+## 5. Assign models to runtime stages
 
-1. Click **Create** to save the model profile.
-2. To test provider connectivity after saving, click the edit icon on the model card and then click **Test connection**.
+Return to **Assignments**. The current runtime requires 15 assignments: 14 Agent stages and one system embedding role.
 
-In the current UI, **Test connection** on the new-model form mainly validates required fields and JSON format. The real backend connectivity test is available from the edit page of an already saved model. If the real test fails, check the API key, endpoint, model name, and provider compatibility parameters.
-
-## 5. Assign Models to Agent Roles
-
-After creating model profiles, open the **Assignments** tab. Every role must have one compatible model assigned before assignments can be saved.
-
-<div align="left"><img src="./images/llm-config-assignments-panel.png" alt="LLM Assignments tab" width="420px" /></div>
-
-Roles are divided into two groups:
-
-| Group | Role | Required model type | Purpose |
-| --- | --- | --- | --- |
-| Agent Roles | Router | Chat | Classifies questions, identifies intent, and routes requests. |
-| Agent Roles | Planner | Chat | Plans complex analytical questions. |
-| Agent Roles | QueryModel Generator | Chat | Generates the governed `SimplifiedQueryModel`. |
-| Agent Roles | Query Repair | Chat | Reserved for future query repair stages. |
-| Agent Roles | Answer Writer | Chat | Explains query results, dashboard insights, visualization recommendations, and complex analysis synthesis. |
-| Agent Roles | Follow-up Generator | Chat | Generates follow-up questions and alternative analysis suggestions. |
-| Agent Roles | Reference Evaluator | Chat | Reserved for offline or manual evaluation. |
-| System Roles | Embedding Model | Embedding | Used for vector search, metadata retrieval, and semantic matching. |
-
-Recommended setup:
-
-- For an initial setup, assign all **Agent Roles** to one stable Chat model to reduce configuration complexity.
-- For quality-sensitive roles such as **Planner**, **QueryModel Generator**, and **Answer Writer**, use a stronger Chat model.
-- For cost-sensitive or latency-sensitive roles such as **Router** and **Follow-up Generator**, you may switch to a lighter Chat model after validating quality.
-- **Embedding Model** must use an Embedding model. It cannot use a regular Chat model.
-
-### OpenAI quality-first recommendation
-
-If you use OpenAI and answer quality is the primary goal, use separate model profiles by Agent role instead of assigning every role to the cheapest Chat model. The highest-risk stages are complex planning and governed query model generation; if they fail, the final answer is unlikely to be correct even if the answer-writing model is strong.
-
-Recommended OpenAI role assignment:
-
-| Role | Recommended OpenAI model | Suggested reasoning effort | Why |
-| --- | --- | --- | --- |
-| Router | `gpt-5.4-mini` | `low` or `medium` | Handles question classification and retrieval planning. It is important, but the output is small and later stages can still guard or clarify. Upgrade to `gpt-5.4` if multilingual or ambiguous routing quality is not good enough. |
-| Planner | `gpt-5.5` | `medium`, or `high` for complex tenants | Plans bounded complex analytical workflows. Use the strongest model here because planning errors affect every downstream step. |
-| QueryModel Generator | `gpt-5.5` | `medium`, or `high` for noisy metadata | Generates the governed `SimplifiedQueryModel`. This is the most quality-critical runtime role because it must preserve requested metrics, dimensions, filters, time ranges, rankings, and comparisons. |
-| Query Repair | `gpt-5.5` | `medium` | Reserved for future query repair stages. If enabled, keep it at the same quality tier as QueryModel Generator. |
-| Answer Writer | `gpt-5.4` | `medium` | Explains query results, dashboard insights, visualization recommendations, and complex synthesis. `gpt-5.4` is the recommended balance of answer quality, cost, and latency. Use `gpt-5.5` if complex final synthesis or executive-quality insight is the top priority. |
-| Follow-up Generator | `gpt-5.4-mini` | `low` | Generates follow-up questions and alternative analysis suggestions. This role is lower risk than query generation or final synthesis, so a smaller model is usually enough. |
-| Reference Evaluator | `gpt-5.5` | `high` or `xhigh` | Reserved for offline or manual evaluation. Prefer maximum evaluation quality over runtime cost. |
-| Embedding Model | OpenAI embedding model, for example `text-embedding-3-large` for quality-sensitive retrieval | Not applicable | Embedding is not a Chat role. Use a stronger embedding model when semantic recall quality is important; use a smaller embedding model only after retrieval-quality validation. |
-
-For a production setup with a good balance of quality, cost, and latency, create three Chat model profiles:
-
-| Profile | Model | Assign to |
+| Group | Assignment | Runtime key |
 | --- | --- | --- |
-| OpenAI Quality | `gpt-5.5` | Planner, QueryModel Generator, Query Repair, Reference Evaluator |
-| OpenAI Balanced | `gpt-5.4` | Answer Writer |
-| OpenAI Fast | `gpt-5.4-mini` | Router, Follow-up Generator |
+| Agent Stages | Workflow Routing | `workflow.routing` |
+| Agent Stages | Semantic Binding | `semantic.binding` |
+| Agent Stages | Semantic Draft | `semantic.draft` |
+| Agent Stages | Analysis Strategy | `analysis.strategy` |
+| Agent Stages | Investigation Step Query | `analysis.investigation_step_query` |
+| Agent Stages | Evidence Analysis | `analysis.evidence` |
+| Agent Stages | Follow-up Suggestions | `analysis.follow_up` |
+| Agent Stages | Investigation Observation | `analysis.investigation_observation` |
+| Agent Stages | Investigation Replan | `analysis.investigation_replan` |
+| Agent Stages | Investigation Synthesis | `analysis.investigation_synthesis` |
+| Agent Stages | Model Brief | `model.brief` |
+| Agent Stages | Dashboard Review | `dashboard.review` |
+| Agent Stages | Question Suggestions | `model.question_suggestions` |
+| Agent Stages | Failure Explanation | `workflow.failure_explanation` |
+| System Roles | Embedding Model | `retrieval_embedding` |
 
-Avoid using an ultra-small model such as `gpt-5.4-nano` for core analytical roles when answer quality is the first priority. It can be considered for very high-volume, low-risk suggestion generation only after validating that follow-up quality remains acceptable. OpenAI model availability, pricing, and recommended replacements can change over time, so verify the exact model IDs and prices in OpenAI's current model documentation before production rollout.
+Every required row must have a compatible profile. The **Embedding Model** row requires an embedding profile; the Agent stages require compatible generative models. Click **Save** after changing assignments.
 
-When every role is assigned, click **Save**.
+## 6. Use schemes
 
-## 6. Verify That the Configuration Works
+The assignment header shows the active scheme and a count such as **15/15 assigned**.
 
-After saving, run a basic validation:
+- **Switch scheme** applies a built-in or saved configuration template.
+- **Save scheme** stores the current model profiles and assignments as a reusable template.
+- Imported scheme files do not include API keys. Re-enter and verify credentials after import.
 
-1. Go back to **New Chat**.
+## 7. Verify the configuration
+
+1. Open **New Chat**.
 2. Select an analysis model.
-3. Ask a simple analytical question, such as a monthly trend for a metric.
-4. Confirm that the Agent can understand the question, run the query, and return an interpreted result.
+3. Confirm that the model brief and suggested questions load.
+4. Ask a small, clearly scoped analytical question.
+5. If it fails, return to **LLM** and check model verification, the 15 required assignments, provider credentials, and endpoint reachability.
 
-If the Agent reports that the LLM is unavailable, the connection failed, authentication failed, or roles are not configured, return to the **LLM** panel and check both the model profiles and role assignments.
+## Security notes
 
-## 7. Troubleshooting
-
-| Problem | How to fix it |
-| --- | --- |
-| Creating a model fails | Check that **Model Name**, **Description**, **API Endpoint**, and **Input Cost / 1M Tokens** are filled in, and that **Extra Parameters** is a valid JSON object. |
-| Assignments cannot be saved | Every role must have a model assigned. Agent Roles require Chat models, and **Embedding Model** requires an Embedding model. |
-| A new embedding model does not appear in the Embedding dropdown | Check whether the model name, display name, or description contains `embedding` or `embed`. The current UI uses these terms to infer model capability. |
-| The delete button is disabled | The model is currently assigned to one or more roles. Reassign those roles to another model, save the assignments, and then delete the model. |
-| The API key is not visible after saving | This is expected. The key is stored on the server and shown as a masked value. To replace it, edit the model and enter a new key. |
-| Connection test returns 401 or 403 | The API key is usually invalid, lacks permission, or the provider account is not available. |
-| Connection test returns 400 or 404 | The endpoint, model name, API mode, or provider compatibility parameter is usually incorrect. |
-| Connection test times out | Check network connectivity from the server to the model provider, including firewall and proxy settings. |
-
-## 8. Security Recommendations
-
-- Only administrators should maintain model profiles and role assignments.
-- Do not put API keys in **Extra Parameters**, screenshots, support tickets, or ordinary chat messages.
-- After changing provider, model name, or endpoint, run the connection test again and validate the Agent with a simple analytical question.
-- In production, use clear descriptions for Chat and Embedding model profiles so that auditing, troubleshooting, and cost analysis are easier.
+- Restrict LLM configuration to administrators.
+- Never place API keys in **Extra Parameters**, screenshots, documentation, or chat messages.
+- Re-run **Verify and enable** after changing the provider, endpoint, model ID, credentials, or provider-specific parameters.

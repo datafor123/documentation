@@ -5,104 +5,41 @@ permalink: /documentation/AI-Agent/Insight-Component/
 
 # Insight Component
 
-## 1. Feature Overview
+The **Insight** component is an AI insight button that report authors can place on a report page. It remains available in the current report editor under **Components → Assists**.
 
-The **Insight component** is the intelligent analysis entry point in the Datafor Dashboard.  
-In dashboard design mode, you can place the Insight button (lightbulb icon) anywhere on the dashboard.
+## 1. Add the component
 
-In **Preview mode**, when a user clicks the Insight button, the system automatically collects data from all visible charts on the dashboard and sends it to the AI model. The AI then generates a structured and professional insight report.  
-All insights are strictly based on dashboard data and do not use any external information.
+1. Open a report and click **Edit**.
+2. In the right panel, open **Components**.
+3. Expand **Assists**.
+4. Select **Insight** and draw the component on the canvas.
 
-<div align="left"><img src="./images/image-20251204162435641.png"  width="100%" /></div>
+<div align="left"><img src="./images/insight-component-current.png" alt="Insight component in the Assists palette" width="100%" /></div>
 
-## 2. Adding the Insight Component to the Dashboard
+## 2. Configure its appearance
 
-In the component panel on the right side of the Dashboard:
+Select the component on the canvas. The current **Style** panel contains these sections:
 
-1. Open the **Assists** category  
-2. Locate the **Insight** component  
-3. Drag it onto the dashboard  
-4. Adjust the size and position so it fits the layout naturally
+- **Border**
+- **Description of the image**
+- **Image Options**
+- **Hover Style**
 
-<div align="left"><img src="./images/image-20251204162528667.png"  width="280px" /></div>
+<div align="left"><img src="./images/insight-properties-current.png" alt="Current Insight component style settings" width="100%" /></div>
 
+Use these settings to control the button border, image description, icon options, and hover appearance. Resize and position the component like any other report component.
 
-## 3. Configuring Insight Component Styles
+## 3. Use the component
 
-When the Insight component is selected, its property settings will appear in the panel on the right:
+1. Save the report.
+2. Click **Preview**.
+3. Click the Insight button to start the report's AI insight action.
 
-<div align="left"><img src="./images/image-20251204162558008.png"  width="280px" /></div>
+If the report has unsaved changes, Datafor asks whether to save before entering Preview. The exact generated output depends on the report and the environment's AI configuration. Treat generated text as an interpretation, not as a replacement for governed metric definitions or source-data validation.
 
-### **3.1 Border**
+## Troubleshooting
 
-- Border style  
-- Border width  
-- Shadow (enable or disable)  
-- Round edges  
-
-These settings allow you to customize the overall look of the Insight button.
-
-
-### **3.2 Description of the Image (Label Text)**
-
-You can add a text label to the Insight button, for example:
-
-> “Click to see AI Insights”
-
-Supported configurations:
-
-- Font size  
-- Bold / Italic  
-- Font color  
-- X / Y offset to control the label’s position within the button
-
-
-### **3.3 Image Options**
-
-- **Show Image**: Toggle display of the default lightbulb icon  
-- **Button Image**: Upload a custom icon (PNG/SVG)
-
-These options can be used for branding or replacing the default icon.
-
-
-### **3.4 Hover Style**
-
-- Hover Background Color  
-  Controls the background color when the mouse hovers over the Insight button, enhancing the interaction experience.
-
-
-## 4. Triggering AI Insights in Preview Mode
-
-After finishing the design, click the **“Preview”** button at the top-right corner to enter dashboard viewing mode.
-
-In Preview mode:
-
-1. The user clicks the Insight button  
-2. The system automatically collects data from all visible charts  
-3. The data is sent to the AI model for processing  
-4. The insight report is generated and displayed in a popup window
-
-
-<div align="left"><img src="./images/image-20251204163645026.png"  width="100%" /></div>
-
-The insight report usually includes:
-
-- **Key Takeaways**  
-- **Metrics Breakdown**
-- **Trend & Pattern Analysis**
-- **Anomalies & Outliers**
-- **Opportunities & Risks**
-
-All conclusions are based entirely on the dashboard’s data and reflect the current filter selections.
-
-
-## 5. Summary
-
-The Insight component enables AI-powered data interpretation within dashboards.  
-During the design phase, you can:
-
-- Place the Insight button anywhere  
-- Customize its appearance, icon, and label text  
-- Keep its visual style consistent with the dashboard
-
-During usage, users only need to click once to obtain insights based on the current view—making dashboards not only display data, but also automatically interpret and summarize it.
+| Symptom | Check |
+| --- | --- |
+| Insight is not available in the palette | Confirm that you are editing a report and have expanded **Components → Assists**. |
+| Preview asks whether to save | Choose whether to save the current report changes before continuing. |
