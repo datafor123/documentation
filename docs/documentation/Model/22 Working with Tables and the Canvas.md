@@ -82,5 +82,5 @@ If the cleanup removes bound Measures, the designer attempts to unbind their ent
 
 - [Creating an Analysis Model](/documentation/Model/Creating-an-Analysis-Model/)
 - [Establishing Table Relationships](/documentation/Model/Establishing-Table-Relationships/)
-- [Calculated Field](/documentation/Model/Calculated-Field/)
+- [Calculated Columns](/documentation/Model/Calculated-Field/)
 - [Model Diagnostics](/documentation/Model/Model-Diagnostics/)

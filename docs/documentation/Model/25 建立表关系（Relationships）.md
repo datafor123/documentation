@@ -72,4 +72,3 @@ After any relationship change, open **Model diagnostics** and check for:
 
 - [Working with Tables and the Canvas](/documentation/Model/Working-with-Tables-and-the-Canvas/)
 - [Model Diagnostics](/documentation/Model/Model-Diagnostics/)
-- [Use Aggregation Tables](/documentation/Model/Use-Aggregation-Tables/)
