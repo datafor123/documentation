@@ -1,75 +1,75 @@
 ---
 title: Establishing Table Relationships
 permalink: /documentation/Model/Establishing-Table-Relationships/
-tags:
-description: 
 ---
+
 # Establishing Table Relationships
 
-## What Are Table Relationships?
+Relationships determine how Datafor joins tables when a query uses fields from more than one table. An incorrect key or cardinality can duplicate rows, remove valid rows, or produce misleading totals.
 
-**Table relationships** connect different data tables, allowing users to perform cross-table queries, aggregations, and calculations without manually writing SQL joins.  
+## Create a relationship
 
-### **Supported Join Types**  
-When establishing table relationships, the following **four types of joins** are supported:  
+1. Open a table menu and select **Join to**.
+2. Select the other table.
+3. Choose the join type.
+4. Select the matching field on each side.
+5. For a composite key, click **Field** and add every required field pair.
+6. Enable **Key values are unique** on each side only when that side's selected key combination is unique.
+7. Confirm the relationship, then review the edge on the canvas.
 
-- **Inner Join** (default): Returns only matching data from both tables.  
+<div align="left"><img src="./images/analysis-model-relationship-editor.png" alt="Relationship editor with join type, uniqueness settings, and field pairs" width="80%" /></div>
 
-- **Left Join**: Returns all data from the left table; unmatched records from the right table are filled with NULL.  
+## Choose the join type
 
-- **Right Join**: Returns all data from the right table; unmatched records from the left table are filled with NULL.  
+The available join types depend on the current data source. When supported by the connection, the designer can offer:
 
-- **Full Join**: Returns all data from both tables, with NULL values for unmatched records.  
+| Join | Use when |
+| --- | --- |
+| **Inner join** | Only rows with matches on both sides should be returned. |
+| **Left join** | Every row from the left table must remain, even without a right-side match. |
+| **Right join** | Every row from the right table must remain, even without a left-side match. |
+| **Full join** | Rows from both sides must remain when either side has no match. |
 
-  <div align="left"><img src="./images/1739506840470(1).png"  width="60%" /></div>
+Choose the table order and join type from the required query result, not only from the physical foreign-key direction.
 
-### **Supported Relationship Types**  
-Supports **one-to-one (1:1)** and **one-to-many (1:N)** relationships, determined by the **"Key values are unique "** toggle:  
+## Set cardinality correctly
 
-- **Enabled** → The field has unique values, representing the **"1"** side.  
+The relationship edge derives its **1** and **N** labels from the two uniqueness settings:
 
-- **Disabled** → The field has non-unique values, representing the **"N"** side.  
+- **Key values are unique** enabled: the side is labeled **1**.
+- **Key values are unique** disabled: the side is labeled **N**.
 
-  <div align="left"><img src="./images/1739506758329.png"  width="60%" /></div>
+For example, a unique customer key joined to repeated customer keys in a sales table is a 1:N relationship.
 
-### **Support for Composite Keys**  
-Datafor allows multiple fields to be combined into a **composite key** to establish table relationships. This is useful when no single field uniquely identifies records. For example:  
+The designer can check whether a selected field combination is unique in the current source data. Treat a warning or inconclusive result as evidence to investigate; it does not always prevent you from confirming the relationship.
 
-- The `sales_fact` table may need to use both `customer_id` and `store_id` as a composite key to match records in the `customer` table.  
+## Composite keys
 
-- Users can click the **"➕ Field"** button to add multiple fields for matching, improving data association accuracy.  
+Use multiple field pairs when the business key is only unique as a combination. Keep the fields aligned in the same logical order on both sides. Do not omit tenant, organization, date, or version fields when they are part of the real key.
 
-  <div align="left"><img src="./images/1739506962152.png"  width="60%" /></div>
+## Edit or delete a relationship
 
-## How to Create Table Relationships?
+Select an existing relationship to edit its join type, keys, or uniqueness settings. Use the relationship context menu to delete it.
 
-### Step 1:
-Select the desired model and open the **Model Editor**.  
+Deleting a relationship takes effect immediately and does not display a confirmation dialog.
 
-<div align="left"><img src="./images/1739507155878.png"  /></div>
+After any relationship change, open **Model diagnostics** and check for:
 
-### Step 2: 
-Drag and drop fields to connect **primary keys (PKs)** and **foreign keys (FKs)** to establish relationships between tables.  
+- Missing tables or fields.
+- Disconnected Dimensions or Measure Groups.
+- Cycles or ambiguous join paths.
+- Measure Groups that no longer have a relationship path to their Dimensions.
+- Calculated measures that reference missing Measures.
 
-<div align="left"><img src="./images/w5pfw-7adbc-1739507845203-1.gif"  /></div>
+## Practical checks
 
-### Step 3：
-Define join types, primary and foreign key fields, and relationship types based on the data model.  
+- Join fields must represent the same business value and use compatible source types.
+- Validate both matched and unmatched records when using an outer join.
+- Avoid many-to-many (N:N) relationships unless the bridge-table design is intentional and tested.
+- Compare representative totals with a trusted query before publishing the model.
 
-<div align="left"><img src="./images/1739507391896.png"  /></div>
+## Related topics
 
-### Step 4: 
-- Click **OK** to close the relationship settings.  
-
-## Modifying and Deleting Table Relationships
-### Modifying Table Relationships
-
-Double-click the relationship line or right-click it and select **Edit** from the context menu.  
-<div align="left"><img src="./images/1739507811838.png"  width="50%" /></div>
-
-### Deleting Table Relationships
-
-Right-click the relationship line and select **Delete** from the context menu.  
-
-
-<div align="left"><img src="./images/1739507587596.png"  width="50%" /></div>
+- [Working with Tables and the Canvas](/documentation/Model/Working-with-Tables-and-the-Canvas/)
+- [Model Diagnostics](/documentation/Model/Model-Diagnostics/)
+- [Use Aggregation Tables](/documentation/Model/Use-Aggregation-Tables/)
