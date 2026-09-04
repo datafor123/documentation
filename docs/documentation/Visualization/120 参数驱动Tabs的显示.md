@@ -1,62 +1,80 @@
 ---
 title: Parameter-Driven Tab Switching
 permalink: /documentation/Visualization/Parameter-Driven-Tab-Switching/
-tags:
-description: 
 ---
 
-**Parameter-driven tab switching** allows dynamic control over the display of tabs based on system parameters or user-defined parameters.
+# Parameter-Driven Tab Switching
 
-## **Types of Parameters**
+Use **Dynamic tab display** to activate a tab from the current user, one of the user's roles, or a parameter value. The action switches the active tab; it does not hide individual tabs or restrict access to their content.
 
-1. **System Parameters**
+## Choose the control source
 
-   - **User and Role-Based Visibility**: Tabs can be controlled based on the user's identity or role. For example, only users with specific roles can see certain tabs.
+| Source | Match value | Use it for |
+| --- | --- | --- |
+| **User** | A user name | A user-specific landing tab. |
+| **Role** | A role assigned to the current user | A role-specific landing tab. |
+| **Custom parameters** | The current value of one Report or Global Parameter | Interactive navigation controlled from the report. |
 
-   - **Use Case**: A dashboard with different departments (e.g., Sales, Finance) where each department's tabs are visible only to users in that department.
+Use access permissions—not tab switching—when content must be protected from unauthorized users.
 
-2. **Global Parameters**
+## Switch tabs with a parameter
 
-   - **User-Defined Parameters**: These parameters are set by users or administrators and determine which tabs are shown. The display of tabs dynamically changes based on user choices or specific conditions.
-   - **Use Case**: Users can select a parameter (e.g., "Region") to control which tabs are displayed, such as tabs for different regions (e.g., APAC, North America, Europe).
-   
+This example uses a Text parameter named `Business View` with the values `Overview`, `Sales`, and `Operations`.
 
-## **Setting Up Parameter-Driven Tab Display**
+1. Create the parameter with **Suggested values** set to **List of values** and set a **Default value**.
+2. Add a **List/Dropdown** Parameter Controller to the same report page and bind its **Parameter** field to `Business View`.
+3. Add a **Tabs** component, then add and name its tabs.
+4. Select the Tabs component and open **Actions > Dynamic tab display > Settings**.
+5. Select **Custom parameters**, choose `Business View`, and assign the matching parameter value to each tab.
+6. Click **OK**, preview the report, and save it.
 
-### System Parameter-Driven:
+<div align="left"><img src="./images/parameter-driven-tab-settings.png" alt="Dynamic tab display settings mapping Business View values to Overview, Sales, and Operations tabs" width="100%" /></div>
 
-- **Define User Roles**: Define user roles in the system settings.
+Keep the controller and the Tabs component on the same page. During initial loading, when more than one compatible controller is bound to the same parameter, the first one found on the page supplies the initial value. At runtime, a matching controller can switch tabs when it publishes a new value. Use one navigation controller per parameter to avoid conflicting behavior.
 
-- **Assign Roles to Tabs**: Configure which tabs are visible to each role.
+## Switch tabs by user or role
 
-  1. Select the tab component and choose "Settings" in the "Actions" panel.
+1. Select the Tabs component and open **Actions > Dynamic tab display > Settings**.
+2. Select **System parameters**.
+3. Choose **User** or **Role**.
+4. Assign the required user names or roles to each tab.
+5. Click **OK**, preview with the intended account, and save the report.
 
-     <div align="left"><img src="./images/1721825271285.png" width="100%" /></div>
+If several roles match different tabs, the first matching tab in tab order is activated. For predictable results, do not map the same user, role, or parameter value to multiple tabs.
 
-  2. Choose the "Role" system parameter and set the corresponding role in the tab's parameter value.
+## Runtime behavior
 
-     <div align="left"><img src="./images/1721825375906.png" width="100%" /></div>
+| Situation | Result |
+| --- | --- |
+| A value matches more than one tab | The first matching tab in tab order is activated. |
+| A multi-select controller supplies several values | Only the first selected value is used for tab switching. |
+| No value matches when the report opens | The saved active tab is used; if it is unavailable, the first tab is used. |
+| The parameter changes to an unmapped value | The current tab remains active. |
+| The control source or selected custom parameter changes | Existing mappings are cleared and must be configured again. |
 
-### Global Parameter-Driven:
+Do not use an empty value or numeric `0` as a tab-navigation value. These values do not trigger a runtime switch.
 
-- **Create Parameters**: Define a global parameter called for example "Region".
+## Hide the tab header
 
-     <div align="left"><img src="./images/1721825575928.png" width="100%" /></div>
+The **Hide tab header** setting is under **Style > Tab**.
 
-- **Assign Parameter Values to Tabs**: Configure which tabs are visible based on the parameter values.
+<div align="left"><img src="./images/parameter-driven-tab-header.png" alt="Tabs style panel with the Hide tab header setting" width="100%" /></div>
 
-     <div align="left"><img src="./images/1721825763898.png" width="100%" /></div>
+Turn it on when users should navigate only through the controller. It hides the entire tab navigation header in the viewer. Before enabling it, verify that every intended viewer receives a mapped value and can reach the required tab through a visible controller or another navigation action.
 
-- **Use a Parameter Controller to Change Parameter Values**
+## Troubleshooting
 
-     <div align="left"><img src="./images/tabs.gif" width="100%" /></div>
+| Symptom | Check |
+| --- | --- |
+| Changing the controller does not switch tabs. | Confirm that the controller is on the same page, is bound to the selected parameter, and produces an exactly mapped value. |
+| The wrong tab opens for a multi-select parameter. | Use a single-select controller. Tab switching reads only the first selected value. |
+| The wrong tab opens for a user with several roles. | Remove overlapping role mappings or move the preferred tab earlier in the tab order. |
+| The mappings disappeared. | Selecting another control source or custom parameter clears the previous mappings. Configure them again. |
+| Users must not open another tab's content. | Apply access permissions to the protected content. Hiding the header and role-based tab switching are navigation settings, not authorization. |
 
-## **Hiding the Tab Header**
+## Related topics
 
-In many cases, parameter-driven tab switching may require hiding the tab component's header.
-
-   <div align="left"><img src="./images/1721820040925.png" width="30%" /></div>
-
-The tab component's header can be hidden by setting the tab's style, allowing users to switch tabs only through parameter control, not manually.
-
- <div align="left"><img src="./images/tabs_no_header.gif" width="100%" /></div>
+- [Creating Parameters](/documentation/Analysis/Creating-Parameters/)
+- [Parameter Controllers](/documentation/Analysis/Parameter-Controllers/)
+- [Multi-Tabbed Page](/documentation/Visualization/Multi-Tabbed-Page/)
+- [Access Control List](/documentation/System/Access-Control%20List/)
