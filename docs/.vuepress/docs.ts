@@ -49,6 +49,7 @@ export const documentationNote = defineNoteConfig({
 				{ text: "Time Semantics and Default Time Settings", link: "/documentation/Model/Time-Dimensions-and-Time-Intelligence/" },
 				{ text: "Calculated Columns", link: "/documentation/Model/Calculated-Field/" },
 				{ text: "Measures and Calculated Measures", link: "/documentation/Model/Measures-and-Calculated-Measures/" },
+				{ text: "Use Aggregation Tables", link: "/documentation/Model/Use-Aggregation-Tables/" },
 				{ text: "Business Semantics for AI", link: "/documentation/Model/Business-Semantics-for-AI/" },
 				{ text: "Model Diagnostics", link: "/documentation/Model/Model-Diagnostics/" },
 			],
