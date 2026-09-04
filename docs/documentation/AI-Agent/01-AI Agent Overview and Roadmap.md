@@ -1,6 +1,6 @@
 ---
 title: AI Agent Overview and Roadmap
-permalink: /documentation/Roadmap/AI-Agent-Overview-and-Roadmap/
+permalink: /documentation/AI-Agent/AI-Agent-Overview-and-Roadmap/
 description: What the Datafor AI Agent can do today, how it works, the limits it keeps, and where it is heading.
 createTime: 2026/09/04 16:10:00
 ---
