@@ -36,7 +36,7 @@ When the default value of a filter is set to **Parameter Value**, it can be modi
    `?parameter_name=value`
 
   For example, to set the default value of the region filter to "North America", the URL would look like:
-   `https://your-report-url.com?country_parameter=Mexico`
+   `https://your-report-url.com?country_parameter=North%20America`
 
 Additionally, you can use **parameter filters** to modify the parameter value and thus influence the default filter values.
 
@@ -106,7 +106,7 @@ These comparison operators can be used with specific dates or parameter values p
 Here is an example of a URL that includes parameters for default filter values and chart component filters:
  `https://your-report-url.com?country_parameter=Mexico&price_parameter=1000&order_date=2023-01-01`
 
-- The `Country` filter will have its **default value** set to "North America".
-- The `Area chat`  will display records where the price is **less than** 1000.
-- The `Area chat`  will display records where the order date is **before** January 1, 2023.
+- The `Country` filter will have its **default value** set to "Mexico".
+- The `Area chart` will display records where the price is **greater than or equal to** 1000.
+- The `Area chart` will display records where the order date is **on or after** January 1, 2023.
 

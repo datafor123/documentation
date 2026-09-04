@@ -2,92 +2,74 @@
 title: What-if Analysis
 permalink: /documentation/Analysis/What-if-Analysis/
 tags:
-description: 
+description:
 ---
 
-What-if analysis is a predictive analysis method used to evaluate the impact of changes in specific variables under different assumptions or scenarios.
+# What-if Analysis
 
-   <div align="left"><img src="./images/gnix5-j1hnn.gif"  width="76%" /></div>
+What-if analysis recalculates an existing measure under an explicit assumption. It is deterministic scenario analysis, not a forecast.
 
-Below is a detailed example demonstrating how to use What-If parameters in Datafor for sales forecast analysis:
+This example uses the **Retail Chain Operations** model and its **Net Sales** measure to test a uniform price adjustment. It assumes sales volume, product mix, returns, discounts, and all other drivers remain unchanged. If those drivers respond to price, use a model that represents that response instead of treating this result as a prediction.
 
-### Scenario: Sales Forecast Analysis
+## 1. Create the scenario input
 
-#### Background
+Create a Report Parameter with these settings:
 
-A retail company wants to forecast the impact of different pricing strategies on future sales revenue. They aim to understand how adjusting product prices will affect sales quantities and total revenue.
+| Field | Value |
+| --- | --- |
+| **Name** | `Price Adjustment Rate` |
+| **Type** | **Numeric** |
+| **Suggested values** | **Any value** |
+| **Default value** | `0` |
 
-#### Objective
+The value represents percentage points: `10` means a 10% increase and `-10` means a 10% decrease.
 
-Use Datafor's What-If parameter feature to simulate the impact of different price adjustment scenarios on sales revenue.
+<div align="left"><img src="./images/analysis-report-parameters.png" alt="Report Parameters window containing the Price Adjustment Rate scenario input" width="100%" /></div>
 
-### Steps
+For the complete parameter workflow, see [Creating Parameters](/documentation/Analysis/Creating-Parameters/).
 
-1. **Create a Parameter Controller**
+## 2. Create the scenario measure
 
-   <div align="left"><img src="./images/1722504262167.png"  width="100%" /></div>
+In the target component's Measures picker, select **Create calculated measure > New measure**. Create a report-level measure named `Scenario Net Sales` with this MDX formula:
 
+```mdx
+[Measures].[Net Sales] * (1 + ParamRef("Price Adjustment Rate") / 100)
+```
 
-2. **Create What-If Parameter**
+Use the same currency format as **Net Sales**.
 
-   - Select the parameter controller, click the "Add Data" button in the data panel, and choose "New Parameter".
+Start from a valid aggregated business measure. Do not substitute an expression such as aggregated unit price multiplied by aggregated quantity; that usually differs from summing transaction-level sales.
 
-   <div align="left"><img src="./images/1722504381269.png" /></div>
+If your parameter stores decimal rates such as `0.10` instead of percentage points such as `10`, remove `/ 100` from the formula.
 
-   - Name the parameter "Price Adjustment Percentage" with a default value of "0".
+## 3. Add the control and result
 
-   <div align="left"><img src="./images/1722504437457.png"  width="50%" /></div>
+1. Add **Numeric Slider** from **Components > Parameters**.
+2. Bind it to `Price Adjustment Rate`.
+3. Set a useful range, for example minimum `-20`, maximum `20`, and step `1`.
+4. Add a Measure or other chart component and bind `Scenario Net Sales`.
+5. Optionally set the component title to `Scenario Net Sales (${Price Adjustment Rate}%)`.
+6. Open **Preview**, test the range, and save the report.
 
-   - Select the created "Price Adjustment Percentage" parameter.
+## 4. Validate the result
 
-   <div align="left"><img src="./images/1722504494630.png"  width="100%" /></div>
+Use the base **Net Sales** value as the control case:
 
-   - Define the slider's value range in the style panel, with a minimum of -0.2, maximum of 0.2, and a step size of 0.01.
+| Parameter value | Expected result |
+| --- | --- |
+| `-20` | `0.80 × Net Sales` |
+| `0` | `1.00 × Net Sales` |
+| `20` | `1.20 × Net Sales` |
 
-   <div align="left"><img src="./images/1722504556314.png"  width="100%" /></div>
+Test at least these three points. If the result does not follow the expected multiplier, check the parameter unit, formula, and selected measure before sharing the report.
 
-3. **Create a Gauge Component**
+## Troubleshooting
 
-   Select the analysis model "**workshop-model**".
+| Symptom | Check |
+| --- | --- |
+| `Unknown parameter` appears when the component queries. | Match the parameter name exactly, including case and spaces. |
+| The parameter is absent from Numeric Slider. | It must be **Numeric** with **Any value**. |
+| The result does not change. | Confirm the slider and `ParamRef()` reference the same parameter and the component uses `Scenario Net Sales`. |
+| The formula can be saved but the component query fails. | Review the MDX and referenced measure names; some formula errors appear only when the component runs its query. |
 
-   <div align="left"><img src="./images/1722504617543.png"  width="100%" /></div>
-
-4. **Add Measures**
-
-   In the data panel, click the "Add Data" button.
-
-   <div align="left"><img src="./images/1722504680025.png"  width="30%" /></div>
-
-5. **Create Calculated Measures**
-
-   <div align="left"><img src="./images/1722504714258(1).png"  width="30%" /></div>
-
-   - Measure Name: **Adjusted Price**
-
-     Formula:
-
-     ```
-     [Measures].[sales_fact.UNIT_PRICE] * (1 + ParamRef("Price Adjustment Percentage"))
-     ```
-
-   - Measure Name: **Adjusted Sales Amount**  
-
-     Formula:
-
-     ```
-     [Measures].[sales_fact.QUANTITY] * [Measures].[Adjusted Price]
-     ```
-
-6. **Select "Adjusted Sales Revenue" as the Measure for the Gauge Component**
-
-   <div align="left"><img src="./images/1722505167138.png"  width="100%" /></div>
-
-   - Adjust the dashboard component's style by setting the **Minimum Value (0)** and **Maximum Value (3000000)**.
-
-   <div align="left"><img src="./images/1722505237854.png"  width="100%" /></div>
-
-7. **Interactive Analysis**
-
-   Adjust the "**Price Adjustment Percentage**" parameter to dynamically view changes in **Adjusted Sales Revenue** under different price adjustment scenarios.
-
-   <div align="left"><img src="./images/gnix5-j1hnn.gif"  width="100%" /></div>
+See [Using Parameters in Calculated Measures](/documentation/Analysis/Using-Parameters-in-Calculated-Measures/) for `ParamRef()` rules.
