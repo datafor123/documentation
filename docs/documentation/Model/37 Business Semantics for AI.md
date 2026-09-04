@@ -13,13 +13,13 @@ When no tree object is selected, use **Model properties** to set:
 
 - **Name**: the model name shown to users.
 - **Description**: the business domain, data coverage, and intended use.
-- **Default time dimension**: the preferred model-wide time Dimension.
+- **Default time dimension**: the model's designated time Dimension, stored as model metadata.
 
-Default time dimension is a single model-level selection. A model without a time Dimension is still valid.
+Default time dimension is a single model-level selection. It does not choose the Agent's date context and is not a fallback for a Measure's **Default time field**. A model without a time Dimension is still valid.
 
 ## Describe Dimensions and Attributes
 
-For a Dimension, configure a clear Caption, Description, Aliases, and a Type such as Business entity, Time, Geography, or Category.
+For a Dimension, configure a clear Caption, Description, Aliases, and a **Dimension category** such as Business entity, Time, Geography, or Category.
 
 For an Attribute, configure:
 
@@ -33,7 +33,7 @@ For an Attribute, configure:
 
 <div align="left"><img src="./images/analysis-model-attribute-semantics.png" alt="Attribute properties showing Caption, Semantic role, Description, Aliases, Sample values, and Advanced settings" width="100%" /></div>
 
-Advanced Attribute settings can include **Caption column**, **Date format**, **Order by**, and **Member formatter**. Make sure a date format matches the stored source value. The JavaScript Member formatter accepts executable configuration and should only be changed by trusted model authors.
+Advanced Attribute settings can include **Caption column**, **Source column format**, **Order by**, and **Member formatter**. Make sure a source format matches the stored value. The JavaScript Member formatter accepts executable configuration and should only be changed by trusted model authors.
 
 ## Describe Measures
 
@@ -79,7 +79,7 @@ Before an administrator adds a model to the AI index:
 1. Describe every user-visible Dimension, Measure, and calculated measure.
 2. Assign Semantic roles to important IDs, names, time fields, and geography fields.
 3. Define Measure units and directions.
-4. Set the model's Default time dimension when appropriate.
+4. Set each Measure's Default time field when the Agent needs a date context; set the model's Default time dimension separately when that metadata is required.
 5. Resolve semantic-completeness hints in Diagnostics.
 
 Administrators can start indexing from the model's **Add to index** action on the Models page.
@@ -88,4 +88,5 @@ Administrators can start indexing from the model's **Add to index** action on th
 
 - [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/)
 - [Measures and Calculated Measures](/documentation/Model/Measures-and-Calculated-Measures/)
+- [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/)
 - [Model Diagnostics](/documentation/Model/Model-Diagnostics/)

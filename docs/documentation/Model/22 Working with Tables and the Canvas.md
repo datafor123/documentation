@@ -49,11 +49,11 @@ Changing schema takes effect without a confirmation dialog and does not verify t
 
 Deleting a table also removes all of its relationships, Dimensions, and Measure Groups. Review calculated measures and enterprise metric bindings after deletion. Undo can restore editor state, but it does not restore changes already written to the external Metrics Library registry.
 
-## Create or edit a SQL table
+## Create or edit a SQL View
 
-Use **Create table with SQL** in the toolbar to enter a table name and SQL statement and preview the first 50 rows.
+Click **SQL** in the toolbar to enter a **View Name** and **SQL Expression**, then use **Check and preview** before adding the result to the model draft.
 
-Editing an existing SQL table rebuilds its model table. Existing relationships, Dimensions, and Measure Groups can be removed, and default semantic objects can be generated again. Review the entire affected model immediately after editing.
+Editing an existing SQL View rebuilds its model table. Existing relationships, Dimensions, and Measure Groups are removed from the draft, and default semantic objects are generated again. Review the complete workflow and safeguards in [Creating SQL Views](/documentation/Model/Creating-SQL-Views/) before confirming an edit.
 
 ## Navigate a large canvas
 
@@ -68,19 +68,24 @@ Use the minimap to move quickly between distant parts of a large model.
 
 ## Tidy semantic roles
 
-**Tidy model into a star schema** analyzes relationship cardinality and current semantic objects, then previews a cleanup:
+**Tidy model into a star schema** uses the currently configured relationship cardinalities and semantic objects to preview a cleanup:
 
 - A fact-like table can lose its Dimension.
 - A dimension-like table can lose its Measure Group.
 - Ambiguous tables remain unchanged.
 
-The operation does not create relationships, choose join fields, or rearrange the canvas. It can remove bound Measures or leave calculated measures with missing references, so review the preview and Diagnostics before saving.
+The operation does not retest key uniqueness, create relationships, choose join fields, or rearrange the canvas. It can remove bound Measures or leave calculated measures with missing references, so review every proposed removal and validate the result before saving.
 
-If the cleanup removes bound Measures, the designer attempts to unbind their enterprise metrics before applying the model change. Undo can restore the editor model, but it cannot restore external Metrics Library registry changes.
+If the cleanup removes bound Measures, the designer requests that their enterprise metrics be unbound. Verify **Metric bindings** after applying or undoing the cleanup: Undo can restore the editor model, but it cannot restore external Metrics Library registry changes.
+
+See [Tidy Model into a Star Schema](/documentation/Model/Tidy-Model-into-a-Star-Schema/) for the required pre-checks and post-apply validation.
 
 ## Related topics
 
 - [Creating an Analysis Model](/documentation/Model/Creating-an-Analysis-Model/)
+- [Creating SQL Views](/documentation/Model/Creating-SQL-Views/)
 - [Establishing Table Relationships](/documentation/Model/Establishing-Table-Relationships/)
+- [Advanced Relationship Modeling](/documentation/Model/Advanced-Relationship-Modeling/)
+- [Tidy Model into a Star Schema](/documentation/Model/Tidy-Model-into-a-Star-Schema/)
 - [Calculated Columns](/documentation/Model/Calculated-Field/)
 - [Model Diagnostics](/documentation/Model/Model-Diagnostics/)

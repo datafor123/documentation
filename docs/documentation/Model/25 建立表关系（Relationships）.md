@@ -47,6 +47,8 @@ The designer can check whether a selected field combination is unique in the cur
 
 Use multiple field pairs when the business key is only unique as a combination. Keep the fields aligned in the same logical order on both sides. Do not omit tenant, organization, date, or version fields when they are part of the real key.
 
+A pair of table aliases has one relationship record. Put all required field pairs in that relationship instead of creating separate relationships for the same alias pair. Each pair is drawn as an edge on the canvas; deleting one edge removes that field pair, and deleting the final pair removes the relationship.
+
 ## Edit or delete a relationship
 
 Select an existing relationship to edit its join type, keys, or uniqueness settings. Use the relationship context menu to delete it.
@@ -57,7 +59,7 @@ After any relationship change, open **Model diagnostics** and check for:
 
 - Missing tables or fields.
 - Disconnected Dimensions or Measure Groups.
-- Cycles or ambiguous join paths.
+- Unexpected cycles. In multi-fact models, inspect competing join paths manually even when no cycle warning is reported.
 - Measure Groups that no longer have a relationship path to their Dimensions.
 - Calculated measures that reference missing Measures.
 
@@ -65,10 +67,12 @@ After any relationship change, open **Model diagnostics** and check for:
 
 - Join fields must represent the same business value and use compatible source types.
 - Validate both matched and unmatched records when using an outer join.
-- Avoid many-to-many (N:N) relationships unless the bridge-table design is intentional and tested.
+- Avoid direct N:N relationships unless they are intentional and tested. Use a bridge when the association needs its own grain or attributes.
 - Compare representative totals with a trusted query before publishing the model.
 
 ## Related topics
 
 - [Working with Tables and the Canvas](/documentation/Model/Working-with-Tables-and-the-Canvas/)
+- [Advanced Relationship Modeling](/documentation/Model/Advanced-Relationship-Modeling/)
+- [Tidy Model into a Star Schema](/documentation/Model/Tidy-Model-into-a-Star-Schema/)
 - [Model Diagnostics](/documentation/Model/Model-Diagnostics/)

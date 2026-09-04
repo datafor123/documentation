@@ -11,7 +11,7 @@ An Analysis Model is the semantic layer between a data source and Datafor report
 
 | Object | Purpose |
 | --- | --- |
-| **Table** | A physical table, view, or custom SQL result used by the model. |
+| **Table** | A source table or database view, or a model-defined SQL View. |
 | **Relationship** | Defines how two tables are joined and the cardinality of each side. |
 | **Dimension** | Groups descriptive attributes used to filter, group, and drill into data. |
 | **Attribute** | A business-facing field such as Store, Product, Status, or Order Date. |
@@ -27,7 +27,7 @@ An Analysis Model is the semantic layer between a data source and Datafor report
 
 | Area | Use it to |
 | --- | --- |
-| **Toolbar** | Refresh connection metadata, undo or redo model edits, open settings, create a SQL table, and save the model. |
+| **Toolbar** | Refresh connection metadata, undo or redo model edits, open settings, create a SQL View, and save the model. |
 | **Data panel** | Select a datasource and schema, search tables, preview data, and add tables to the model. |
 | **Canvas** | Inspect tables, arrange the model, and create or edit relationships. |
 | **Analysis model** | Manage Dimensions, Attributes, Hierarchies, Measures, and calculated measures. |
@@ -38,9 +38,9 @@ An Analysis Model is the semantic layer between a data source and Datafor report
 
 1. Add only the tables required for the intended analysis.
 2. Define and verify every relationship.
-3. Remove semantic objects that do not match each table's role.
+3. Remove semantic objects that do not match each table's role, manually or with a reviewed Tidy preview.
 4. Build useful Dimensions, Attributes, Hierarchies, and Measures.
-5. Add business descriptions and other semantic metadata.
+5. Configure time roles and add business descriptions and other semantic metadata.
 6. Resolve model diagnostics.
 7. Save the model and validate representative queries or reports.
 
@@ -50,8 +50,12 @@ Diagnostics detect many structural and semantic problems, but they cannot prove 
 
 - [Creating an Analysis Model](/documentation/Model/Creating-an-Analysis-Model/)
 - [Working with Tables and the Canvas](/documentation/Model/Working-with-Tables-and-the-Canvas/)
+- [Creating SQL Views](/documentation/Model/Creating-SQL-Views/)
 - [Establishing Table Relationships](/documentation/Model/Establishing-Table-Relationships/)
+- [Advanced Relationship Modeling](/documentation/Model/Advanced-Relationship-Modeling/)
+- [Tidy Model into a Star Schema](/documentation/Model/Tidy-Model-into-a-Star-Schema/)
 - [Creating Hierarchies](/documentation/Model/Creating-Hierarchy/)
+- [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/)
 - [Calculated Columns](/documentation/Model/Calculated-Field/)
 - [Measures and Calculated Measures](/documentation/Model/Measures-and-Calculated-Measures/)
 - [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/)

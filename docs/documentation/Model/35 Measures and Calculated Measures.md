@@ -26,7 +26,7 @@ Select a Measure in the **Analysis model** tree and configure its properties.
 | **Aliases** | Other terms users or AI may use for the same measure. |
 | **Unit** | Currency, percentage, quantity, duration, or another business unit. |
 | **Direction** | Whether higher, lower, or neither direction is preferred. |
-| **Default time field** | Preferred time context for time-based calculations. |
+| **Default time field** | Date context the Agent should use for this Measure. |
 | **Recommended dimensions** | Dimensions normally used to analyze the measure. |
 
 Available aggregation types include Sum, Average, Min, Max, Count, Distinct Count, population or sample standard deviation, and population or sample variance. Choose the method from the business meaning: for example, a unit price usually needs Average rather than Sum.
@@ -71,7 +71,7 @@ Quick measures generate formulas for common patterns. Current template groups in
 
 <div align="left"><img src="./images/analysis-model-quick-measure-templates.png" alt="New quick measure dialog listing the available calculation groups" width="100%" /></div>
 
-After creating a quick measure, inspect the generated formula and confirm that its time field, comparison period, aggregation, and denominator match the business definition.
+After creating a quick measure, inspect the generated formula and confirm that its time hierarchy, comparison period, aggregation, and denominator match the business definition. See [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/) before using a time-intelligence template.
 
 ## Change or remove Measures safely
 
@@ -85,5 +85,6 @@ Always review [Model Diagnostics](/documentation/Model/Model-Diagnostics/) after
 ## Related topics
 
 - [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/)
+- [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/)
 - [Model Diagnostics](/documentation/Model/Model-Diagnostics/)
 - [MDX Functions](/documentation/Advanced/MDX-Functions/)

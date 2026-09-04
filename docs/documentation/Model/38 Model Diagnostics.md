@@ -34,7 +34,7 @@ Diagnostics can report:
 - Missing or invalid Measure aggregations.
 - Unknown Measure references in calculated formulas.
 - Isolated tables or disconnected Dimensions and Measure Groups.
-- Ambiguous relationship cycles. Intentional multi-fact constellations can be exempt when the modeled roles are clear.
+- Relationship cycles in single-fact components. Components with multiple Measure Group tables are exempt from this cycle warning, so inspect each fact-to-Dimension route manually.
 - Missing business descriptions or incomplete time settings.
 - Missing, stale, drifting, or duplicate enterprise metric bindings.
 
@@ -68,6 +68,9 @@ The comparison result is stored with the binding and does not modify the model. 
 ## Related topics
 
 - [Establishing Table Relationships](/documentation/Model/Establishing-Table-Relationships/)
+- [Advanced Relationship Modeling](/documentation/Model/Advanced-Relationship-Modeling/)
+- [Tidy Model into a Star Schema](/documentation/Model/Tidy-Model-into-a-Star-Schema/)
+- [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/)
 - [Measures and Calculated Measures](/documentation/Model/Measures-and-Calculated-Measures/)
 - [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/)
 - [Metrics Library](/documentation/Metrics-Library/Metrics-Library/)
