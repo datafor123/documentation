@@ -1,6 +1,7 @@
 ---
-title:  Image
+title: Image
 permalink: /documentation/Visualization/Image-chart/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Image

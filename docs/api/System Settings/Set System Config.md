@@ -1,8 +1,11 @@
 ---
 title: Set System Config
 permalink: /api/System Settings/Set System Config/
-tags: ["api","System Settings"]
-description: 
+tags:
+  - api
+  - System Settings
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

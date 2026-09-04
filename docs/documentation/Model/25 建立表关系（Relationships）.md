@@ -1,6 +1,7 @@
 ---
 title: Establishing Table Relationships
 permalink: /documentation/Model/Establishing-Table-Relationships/
+createTime: 2026/09/03 21:51:08
 ---
 
 # Establishing Table Relationships

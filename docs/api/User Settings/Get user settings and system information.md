@@ -1,8 +1,11 @@
 ---
 title: Get user settings and system information
 permalink: /api/User Settings/Get user settings and system information/
-tags: ["api","User Settings"]
-description: 
+tags:
+  - api
+  - User Settings
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

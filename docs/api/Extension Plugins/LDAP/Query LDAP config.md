@@ -1,8 +1,13 @@
 ---
 title: Query LDAP config
 permalink: /api/Extension Plugins/LDAP/Query LDAP config/
-tags: ["api","Extension Plugins","Authentication","LDAP"]
-description:
+tags:
+  - api
+  - Extension Plugins
+  - Authentication
+  - LDAP
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

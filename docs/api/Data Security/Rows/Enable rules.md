@@ -1,8 +1,11 @@
 ---
 title: Enable rules
 permalink: /api/Data Security/Rows/Enable rules/
-tags: ["api","Data Security"]
-description: 
+tags:
+  - api
+  - Data Security
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

@@ -1,8 +1,11 @@
 ---
 title: Delete folders or files
 permalink: /api/Files/Delete folders or files/
-tags: ["api","Files"]
-description:
+tags:
+  - api
+  - Files
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

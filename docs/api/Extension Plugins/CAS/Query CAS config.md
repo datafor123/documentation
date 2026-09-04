@@ -1,8 +1,13 @@
 ---
 title: Query CAS config
 permalink: /api/Extension Plugins/Cas/Query CAS config/
-tags: ["api","Extension Plugins","Authentication","Cas"]
-description:
+tags:
+  - api
+  - Extension Plugins
+  - Authentication
+  - Cas
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

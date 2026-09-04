@@ -1,8 +1,9 @@
 ---
 title: Embedding Reports Using XDM
 permalink: /documentation/Embedded/Embedding-Reports-Using-XDM/
-tags:
-description: 
+tags: null
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 

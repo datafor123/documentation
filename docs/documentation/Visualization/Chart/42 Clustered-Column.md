@@ -1,6 +1,7 @@
 ---
-title:  Clustered Column
+title: Clustered Column
 permalink: /documentation/Visualization/Clustered-Column-Chart/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Clustered Column Chart

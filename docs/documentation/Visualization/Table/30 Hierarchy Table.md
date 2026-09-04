@@ -1,6 +1,7 @@
 ---
-title:  Hierarchy Table
+title: Hierarchy Table
 permalink: /documentation/Visualization/Hierarchy-Table/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Hierarchy Table

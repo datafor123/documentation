@@ -1,8 +1,11 @@
 ---
 title: Get jobs
 permalink: /api/Schedule/Get jobs/
-tags: ["api","Schedule"]
-description: 
+tags:
+  - api
+  - Schedule
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

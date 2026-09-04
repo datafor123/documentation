@@ -1,8 +1,11 @@
 ---
 title: Test email config
 permalink: /api/Email/Test email config/
-tags: ["api","Email"]
-description: 
+tags:
+  - api
+  - Email
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 ## **POST Test email config**

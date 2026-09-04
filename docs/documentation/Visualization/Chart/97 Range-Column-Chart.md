@@ -1,6 +1,7 @@
 ---
-title:  Range Column
+title: Range Column
 permalink: /documentation/Visualization/Range-Column-Chart/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Range Column Chart

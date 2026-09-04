@@ -1,6 +1,7 @@
 ---
 title: Measures and Calculated Measures
 permalink: /documentation/Model/Measures-and-Calculated-Measures/
+createTime: 2026/09/03 21:51:09
 ---
 
 # Measures and Calculated Measures

@@ -1,6 +1,7 @@
 ---
 title: Parameter-Driven Tab Switching
 permalink: /documentation/Visualization/Parameter-Driven-Tab-Switching/
+createTime: 2026/09/04 13:35:20
 ---
 
 # Parameter-Driven Tab Switching

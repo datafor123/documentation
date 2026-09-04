@@ -1,8 +1,12 @@
 ---
 title: My Account
 permalink: /documentation/Console/My-Account/
-tags: [Account, Language, Password]
-description: "My Account"
+tags:
+  - Account
+  - Language
+  - Password
+description: My Account
+createTime: 2026/09/01 22:03:26
 ---
 
 ## **Overview**

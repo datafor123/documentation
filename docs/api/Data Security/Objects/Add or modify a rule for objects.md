@@ -1,8 +1,11 @@
 ---
 title: Add or modify a rule for objects
 permalink: /api/Data Security/Objs/Add or modify a rule for objects/
-tags: ["api","Data Security"]
-description: 
+tags:
+  - api
+  - Data Security
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

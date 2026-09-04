@@ -1,6 +1,7 @@
 ---
 title: Business Semantics for AI
 permalink: /documentation/Model/Business-Semantics-for-AI/
+createTime: 2026/09/03 21:51:10
 ---
 
 # Business Semantics for AI

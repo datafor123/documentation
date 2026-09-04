@@ -1,8 +1,11 @@
 ---
 title: Get language and theme
 permalink: /api/User Settings/Get language and theme/
-tags: ["api","User Settings"]
-description: 
+tags:
+  - api
+  - User Settings
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

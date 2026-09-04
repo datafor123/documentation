@@ -1,6 +1,7 @@
 ---
 title: Using Parameters in Calculated Measures
 permalink: /documentation/Analysis/Using-Parameters-in-Calculated-Measures/
+createTime: 2026/09/04 00:23:35
 ---
 
 # Using Parameters in Calculated Measures

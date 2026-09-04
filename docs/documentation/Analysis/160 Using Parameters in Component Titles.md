@@ -1,6 +1,7 @@
 ---
 title: Using Parameters in Component Titles
 permalink: /documentation/Analysis/Using-Parameters-in-Component-Titles/
+createTime: 2026/09/04 00:23:33
 ---
 
 # Using Parameters in Component Titles

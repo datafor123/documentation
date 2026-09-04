@@ -1,8 +1,13 @@
 ---
 title: Save SAML Configuration
 permalink: /api/Extension Plugins/SAML2/Save SAML config/
-tags: ["api","Extension Plugins","Authentication","SAML2"]
-description:
+tags:
+  - api
+  - Extension Plugins
+  - Authentication
+  - SAML2
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

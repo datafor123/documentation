@@ -1,6 +1,7 @@
 ---
 title: Aggregation Tables (Legacy)
 permalink: /documentation/Model/Use-Aggregation-Tables/
+createTime: 2026/09/03 22:49:32
 ---
 
 # Aggregation Tables (Legacy)

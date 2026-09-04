@@ -1,6 +1,7 @@
 ---
 title: Installation Guide (CentOS)
 permalink: /documentation/Setup/Installation-CentOS/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Installation Guide (CentOS)

@@ -1,8 +1,12 @@
 ---
 title: Save White Label Config
 permalink: /api/Extension Plugins/White Label/Save white label config/
-tags: ["api","Extension Plugins","White Label"]
-description:
+tags:
+  - api
+  - Extension Plugins
+  - White Label
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

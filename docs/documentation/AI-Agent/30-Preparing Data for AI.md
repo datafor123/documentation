@@ -1,6 +1,7 @@
 ---
 title: Preparing Data for AI
 permalink: /documentation/AI-Agent/Preparing-Data-for-AI/
+createTime: 2026/09/01 21:50:47
 ---
 
 # Preparing Data for AI

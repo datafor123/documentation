@@ -1,6 +1,7 @@
 ---
-title:  Stacked Area
+title: Stacked Area
 permalink: /documentation/Visualization/Stacked0-Area-Chart/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Stacked Area Chart

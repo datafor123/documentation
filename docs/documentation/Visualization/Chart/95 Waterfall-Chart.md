@@ -1,6 +1,7 @@
 ---
-title:  Waterfall
+title: Waterfall
 permalink: /documentation/Visualization/Waterfall-Chart/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Waterfall Chart

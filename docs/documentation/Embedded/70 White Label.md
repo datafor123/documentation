@@ -1,8 +1,11 @@
 ---
 title: White Label
 permalink: /documentation/Embedded/White-Label/
-tags: ["Brand","White label"]
-description: "White Label Configuration"
+tags:
+  - Brand
+  - White label
+description: White Label Configuration
+createTime: 2026/09/01 22:03:26
 ---
 
 # **White Label**

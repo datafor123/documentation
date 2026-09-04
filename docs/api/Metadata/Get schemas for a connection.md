@@ -1,8 +1,11 @@
 ---
 title: Get schemas for a connection
 permalink: /api/Metadata/Get schemas for a connection/
-tags: ["api","Metadata"]
-description: 
+tags:
+  - api
+  - Metadata
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

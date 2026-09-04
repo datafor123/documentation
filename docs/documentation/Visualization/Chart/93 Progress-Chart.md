@@ -1,6 +1,7 @@
 ---
-title:  Progress
+title: Progress
 permalink: /documentation/Visualization/Progress-Chart/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Progress Chart

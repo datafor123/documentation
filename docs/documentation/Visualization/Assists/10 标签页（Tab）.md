@@ -1,6 +1,7 @@
 ---
-title:  Tabs
+title: Tabs
 permalink: /documentation/Visualization/Tabs-Component/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Tabs Component

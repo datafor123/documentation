@@ -1,6 +1,7 @@
 ---
-title:  Dimension Value
+title: Dimension Value
 permalink: /documentation/Visualization/Dimension-Value/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Dimension Value

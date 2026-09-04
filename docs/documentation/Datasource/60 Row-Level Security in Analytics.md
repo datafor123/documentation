@@ -1,8 +1,13 @@
 ---
 title: Row-Level Security in Analytics
 permalink: /documentation/Datasource/Row-Level-Security-in-Analytics/
-tags: ["Security", "Analytics", "RLS", "Governance"]
-description: "Understand row-level security in analytics, why it matters for governance, and how Datafor combines RLS, OLS, ACL, identity integration, and APIs to enforce secure access at scale."
+tags:
+  - Security
+  - Analytics
+  - RLS
+  - Governance
+description: Understand row-level security in analytics, why it matters for governance, and how Datafor combines RLS, OLS, ACL, identity integration, and APIs to enforce secure access at scale.
+createTime: 2026/09/01 22:03:26
 ---
 
 # Row-Level Security in Analytics: What It Is and Why It Matters

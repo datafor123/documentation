@@ -1,6 +1,7 @@
 ---
 title: Parameter Controllers
 permalink: /documentation/Analysis/Parameter-Controllers/
+createTime: 2026/09/04 13:35:56
 ---
 
 # Parameter Controllers

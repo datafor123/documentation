@@ -1,8 +1,12 @@
 ---
 title: Get model's lineage
 permalink: /api/Lineage/Get model's lineage/
-tags: ["api","Lineage","Models"]
-description:
+tags:
+  - api
+  - Lineage
+  - Models
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

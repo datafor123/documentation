@@ -1,6 +1,7 @@
 ---
 title: Working with Tables and the Canvas
 permalink: /documentation/Model/Working-with-Tables-and-the-Canvas/
+createTime: 2026/09/03 21:51:06
 ---
 
 # Working with Tables and the Canvas

@@ -1,6 +1,7 @@
 ---
 title: How to Enable the AI Feature
 permalink: /documentation/AI-Agent/AI-Feature/
+createTime: 2026/09/01 21:50:44
 ---
 
 # How to Enable the AI Feature

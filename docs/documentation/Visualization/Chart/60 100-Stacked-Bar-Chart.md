@@ -1,6 +1,7 @@
 ---
-title:  100% Stacked Bar
+title: 100% Stacked Bar
 permalink: /documentation/Visualization/100-Stacked-Bar-Chart/
+createTime: 2026/09/01 22:03:26
 ---
 
 # 100% Stacked Bar Chart

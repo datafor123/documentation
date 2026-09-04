@@ -1,8 +1,9 @@
 ---
 title: Deploying Datafor Using Docker
 permalink: /documentation/Setup/Deploying-Datafor-Using-Dockers/
-tags:
-description: 
+tags: null
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 # Deploying Datafor Using Docker

@@ -1,8 +1,11 @@
 ---
 title: Delete a connection
 permalink: /api/Connections/Delete a connection/
-tags: ["api","Connections"]
-description: 
+tags:
+  - api
+  - Connections
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

@@ -1,6 +1,7 @@
 ---
-title:  Pivot Table
+title: Pivot Table
 permalink: /documentation/Visualization/Pivot-Table/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Pivot Table

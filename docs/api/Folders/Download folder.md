@@ -1,8 +1,11 @@
 ---
 title: Download folder
 permalink: /api/Folders/Download folder/
-tags: ["api","Folders"]
-description:
+tags:
+  - api
+  - Folders
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

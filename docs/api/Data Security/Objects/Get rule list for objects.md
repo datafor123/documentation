@@ -1,8 +1,11 @@
 ---
 title: Get rule list for objects
 permalink: /api/Data Security/Objs/Get rule list for objects/
-tags: ["api","Data Security"]
-description: 
+tags:
+  - api
+  - Data Security
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

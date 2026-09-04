@@ -1,6 +1,7 @@
 ---
-title:  GeoJSON marked map
+title: GeoJSON marked map
 permalink: /documentation/Visualization/GeoJSON-marked-map/
+createTime: 2026/09/01 22:03:26
 ---
 
 # GeoJSON marked map

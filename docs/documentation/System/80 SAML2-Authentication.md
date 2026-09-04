@@ -1,8 +1,11 @@
 ---
 title: SAML2 Authentication
 permalink: /documentation/System/SAML2/
-tags: [SAML, Authentication]
-description: "Guide to configuring SAML2 authentication in Datafor"
+tags:
+  - SAML
+  - Authentication
+description: Guide to configuring SAML2 authentication in Datafor
+createTime: 2026/09/01 22:03:26
 ---
 
 

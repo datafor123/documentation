@@ -1,8 +1,11 @@
 ---
 title: Get file tree
 permalink: /api/Files/Get file tree/
-tags: ["api","Files"]
-description:
+tags:
+  - api
+  - Files
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

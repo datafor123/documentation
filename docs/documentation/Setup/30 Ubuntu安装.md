@@ -1,6 +1,7 @@
 ---
 title: Installation Guide (Ubuntu)
 permalink: /documentation/Setup/Installation-Ubuntu/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Installation Guide (Ubuntu)

@@ -1,6 +1,7 @@
 ---
-title:  Measure
+title: Measure
 permalink: /documentation/Visualization/Measure/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Measure

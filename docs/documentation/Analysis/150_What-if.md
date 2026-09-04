@@ -1,8 +1,9 @@
 ---
 title: What-if Analysis
 permalink: /documentation/Analysis/What-if-Analysis/
-tags:
-description:
+tags: null
+description: null
+createTime: 2026/09/04 00:23:30
 ---
 
 # What-if Analysis

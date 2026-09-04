@@ -1,6 +1,7 @@
 ---
 title: Insight Component
 permalink: /documentation/AI-Agent/Insight-Component/
+createTime: 2026/09/01 21:50:46
 ---
 
 # Insight Component

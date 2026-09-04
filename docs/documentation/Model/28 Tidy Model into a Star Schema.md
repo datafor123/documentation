@@ -1,6 +1,7 @@
 ---
 title: Tidy Model into a Star Schema
 permalink: /documentation/Model/Tidy-Model-into-a-Star-Schema/
+createTime: 2026/09/04 09:07:12
 ---
 
 # Tidy Model into a Star Schema

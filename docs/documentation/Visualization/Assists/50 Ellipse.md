@@ -1,6 +1,7 @@
 ---
-title:  Ellipse
-permalink:  /documentation/Visualization/Ellipse/
+title: Ellipse
+permalink: /documentation/Visualization/Ellipse/
+createTime: 2026/09/01 22:03:26
 ---
 
 # **Ellipse**

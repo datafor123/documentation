@@ -1,8 +1,12 @@
 ---
 title: Download backup zip
 permalink: /api/Extension Plugins/Backup/Download backup zip/
-tags: ["api","Extension Plugins","Backup"]
-description:
+tags:
+  - api
+  - Extension Plugins
+  - Backup
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

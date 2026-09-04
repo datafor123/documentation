@@ -1,6 +1,7 @@
 ---
-title:  Clustered Bar
+title: Clustered Bar
 permalink: /documentation/Visualization/Clustered-Bar-Chart/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Clustered Bar Chart

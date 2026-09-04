@@ -1,8 +1,11 @@
 ---
 title: Get version
 permalink: /api/Version/Get version/
-tags: ["api","Version"]
-description: 
+tags:
+  - api
+  - Version
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

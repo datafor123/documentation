@@ -1,8 +1,12 @@
 ---
 title: Get register code
 permalink: /api/Register/Get register code/
-tags: ["api","Users","Register"]
-description: 
+tags:
+  - api
+  - Users
+  - Register
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

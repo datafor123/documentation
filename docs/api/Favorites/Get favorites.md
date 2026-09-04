@@ -1,8 +1,11 @@
 ---
 title: Get favorites
 permalink: /api/Favorites/Get favorites/
-tags: ["api","Favorites"]
-description:
+tags:
+  - api
+  - Favorites
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

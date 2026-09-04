@@ -1,8 +1,11 @@
 ---
 title: Restful Logout
 permalink: /api/Authentication/Restful Logout/
-tags: ["api","Authentication"]
-description: 
+tags:
+  - api
+  - Authentication
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

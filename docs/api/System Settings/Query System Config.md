@@ -1,8 +1,11 @@
 ---
 title: Query System Config
 permalink: /api/System Settings/Query System Config/
-tags: ["api","System Settings"]
-description: 
+tags:
+  - api
+  - System Settings
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

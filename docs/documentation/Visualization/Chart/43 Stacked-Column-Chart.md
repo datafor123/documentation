@@ -1,6 +1,7 @@
 ---
-title:  Stacked Column
+title: Stacked Column
 permalink: /documentation/Visualization/Stacked-Column-Chart/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Stacked Column Chart

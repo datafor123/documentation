@@ -1,8 +1,12 @@
 ---
 title: Add or modify a token configuration
 permalink: /api/Token/Add or modify a token configuration/
-tags: ["api","Authentication","Token"]
-description: 
+tags:
+  - api
+  - Authentication
+  - Token
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

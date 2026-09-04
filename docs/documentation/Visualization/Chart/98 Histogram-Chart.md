@@ -1,6 +1,7 @@
 ---
 title: Histogram
 permalink: /documentation/Visualization/Histogram-Chart/
+createTime: 2026/09/03 09:56:42
 ---
 
 # Histogram Chart

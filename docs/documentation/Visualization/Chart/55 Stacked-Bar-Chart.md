@@ -1,6 +1,7 @@
 ---
-title:  Stacked Bar
+title: Stacked Bar
 permalink: /documentation/Visualization/Stacked-Bar-Chart/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Stacked Bar Chart

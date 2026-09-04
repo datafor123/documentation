@@ -1,6 +1,7 @@
 ---
-title:  Treemap
+title: Treemap
 permalink: /documentation/Visualization/Treemap/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Treemap Chart

@@ -1,8 +1,12 @@
 ---
 title: How SSO Improves the Embedded Analytics Experience
 permalink: /documentation/Embedded/How-SSO-Improves-the-Embedded-Analytics-Experience/
-tags: ["Embedded", "SSO", "Authentication"]
-description: "How single sign-on makes embedded analytics more seamless, secure, and easier to operate in Datafor."
+tags:
+  - Embedded
+  - SSO
+  - Authentication
+description: How single sign-on makes embedded analytics more seamless, secure, and easier to operate in Datafor.
+createTime: 2026/09/01 22:03:26
 ---
 
 # How SSO Improves the Embedded Analytics Experience

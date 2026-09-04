@@ -1,8 +1,11 @@
 ---
 title: Get dictionaries
 permalink: /api/Dictionaries/Get dictionaries/
-tags: ["api","Dictionaries"]
-description: 
+tags:
+  - api
+  - Dictionaries
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

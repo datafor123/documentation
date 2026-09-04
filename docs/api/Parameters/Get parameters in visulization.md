@@ -1,8 +1,11 @@
 ---
 title: Get parameters in visulization
 permalink: /api/Parameters/Get parameters in visulization/
-tags: ["api","Parameters"]
-description: 
+tags:
+  - api
+  - Parameters
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

@@ -1,8 +1,12 @@
 ---
 title: Get connection's lineage
 permalink: /api/Lineage/Get connection's lineage/
-tags: ["api","Lineage","Connections"]
-description:
+tags:
+  - api
+  - Lineage
+  - Connections
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

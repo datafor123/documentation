@@ -1,6 +1,7 @@
 ---
 title: JSON Web Token (JWT)
 permalink: /documentation/System/JWT/
+createTime: 2026/09/01 22:03:26
 ---
 
 # JSON Web Token (JWT)

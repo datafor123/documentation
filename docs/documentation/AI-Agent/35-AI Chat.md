@@ -1,6 +1,7 @@
 ---
 title: AI Assistant
 permalink: /documentation/AI-Agent/AI-Chat/
+createTime: 2026/09/01 21:50:48
 ---
 
 # AI Assistant

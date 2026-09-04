@@ -1,8 +1,11 @@
 ---
 title: Get folder's children
 permalink: /api/Folders/Get folder's children/
-tags: ["api","Folders"]
-description:
+tags:
+  - api
+  - Folders
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

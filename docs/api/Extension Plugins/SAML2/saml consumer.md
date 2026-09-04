@@ -1,8 +1,13 @@
 ---
 title: SAML Consumer
 permalink: /api/Extension Plugins/SAML2/saml consumer/
-tags: ["api","Extension Plugins","Authentication","SAML2"]
-description:
+tags:
+  - api
+  - Extension Plugins
+  - Authentication
+  - SAML2
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

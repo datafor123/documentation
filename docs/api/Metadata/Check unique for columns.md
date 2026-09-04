@@ -1,8 +1,11 @@
 ---
 title: Check unique for columns
 permalink: /api/Metadata/Check unique for columns/
-tags: ["api","Metadata"]
-description:
+tags:
+  - api
+  - Metadata
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

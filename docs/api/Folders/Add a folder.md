@@ -1,8 +1,11 @@
 ---
 title: Add a folder
 permalink: /api/Folders/Add a folder/
-tags: ["api","Folders"]
-description:
+tags:
+  - api
+  - Folders
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

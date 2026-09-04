@@ -1,6 +1,7 @@
 ---
 title: Creating SQL Views
 permalink: /documentation/Model/Creating-SQL-Views/
+createTime: 2026/09/04 09:07:11
 ---
 
 # Creating SQL Views

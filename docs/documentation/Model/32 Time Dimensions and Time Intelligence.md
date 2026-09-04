@@ -1,6 +1,7 @@
 ---
 title: Time Semantics and Default Time Settings
 permalink: /documentation/Model/Time-Dimensions-and-Time-Intelligence/
+createTime: 2026/09/04 09:08:15
 ---
 
 # Time Semantics and Default Time Settings

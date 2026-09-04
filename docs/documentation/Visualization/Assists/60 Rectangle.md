@@ -1,6 +1,7 @@
 ---
 title: Rectangle
 permalink: /documentation/Visualization/Rectangle/
+createTime: 2026/09/01 22:03:26
 ---
 
 # **Rectangle**

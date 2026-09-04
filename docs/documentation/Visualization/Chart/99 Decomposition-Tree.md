@@ -1,6 +1,7 @@
 ---
 title: Decomposition Tree
 permalink: /documentation/Visualization/Decomposition-Tree/
+createTime: 2026/09/03 10:57:16
 ---
 
 # Decomposition Tree

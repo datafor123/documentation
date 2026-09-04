@@ -1,6 +1,7 @@
 ---
-title:  List Box
-permalink:  /documentation/Visualization/List-Box/
+title: List Box
+permalink: /documentation/Visualization/List-Box/
+createTime: 2026/09/01 22:03:26
 ---
 
 

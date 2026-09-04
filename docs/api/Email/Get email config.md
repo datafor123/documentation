@@ -1,8 +1,11 @@
 ---
 title: Get email config
 permalink: /api/Email/Get email config/
-tags: ["api","Email"]
-description: 
+tags:
+  - api
+  - Email
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 ## GET Get email config

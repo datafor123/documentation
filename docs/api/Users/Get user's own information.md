@@ -1,8 +1,11 @@
 ---
 title: Get user's own information
 permalink: /api/Users/Get user's own information/
-tags: ["api","Users"]
-description: 
+tags:
+  - api
+  - Users
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

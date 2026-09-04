@@ -1,8 +1,11 @@
 ---
 title: Set language or theme
 permalink: /api/User Settings/Set language or theme/
-tags: ["api","User Settings"]
-description: 
+tags:
+  - api
+  - User Settings
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

@@ -1,8 +1,11 @@
 ---
 title: Get tables of a schema
 permalink: /api/Metadata/Get tables of a schema/
-tags: ["api","Metadata"]
-description: 
+tags:
+  - api
+  - Metadata
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 ## **POST Get tables of a schema**

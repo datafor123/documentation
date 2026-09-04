@@ -1,6 +1,7 @@
 ---
 title: Quick Tour of the Console
 permalink: /documentation/Console/Quick-Tour-of-the-Console/
+createTime: 2026/09/01 22:03:26
 ---
 
 # **Quick Tour of the Console**

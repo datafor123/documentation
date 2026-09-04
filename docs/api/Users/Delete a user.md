@@ -1,8 +1,11 @@
 ---
 title: Delete a user
 permalink: /api/Users/Delete a user/
-tags: ["api","Users"]
-description: 
+tags:
+  - api
+  - Users
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

@@ -1,6 +1,7 @@
 ---
-title:  Line
+title: Line
 permalink: /documentation/Visualization/Line-Chart/
+createTime: 2026/09/01 22:03:26
 ---
 
 # Line Chart

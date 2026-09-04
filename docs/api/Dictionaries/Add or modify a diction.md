@@ -1,8 +1,11 @@
 ---
 title: Add or modify a dictionary
 permalink: /api/Dictionaries/Add or modify a dictionary/
-tags: ["api","Dictionaries"]
-description: 
+tags:
+  - api
+  - Dictionaries
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

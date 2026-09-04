@@ -1,8 +1,11 @@
 ---
 title: Login
 permalink: /api/Authentication/Login/
-tags: ["api","Authentication"]
-description: 
+tags:
+  - api
+  - Authentication
+description: null
+createTime: 2026/09/01 22:03:26
 ---
 
 **Method**  

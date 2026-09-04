@@ -1,8 +1,10 @@
 ---
 title: Basic Operations for Report Design
 permalink: /documentation/Start/Basic-Operations-for-Report-Design/
-tags: ["Design"]
-description: "Basic Operations for Report Design."
+tags:
+  - Design
+description: Basic Operations for Report Design.
+createTime: 2026/09/01 22:03:26
 ---
 
 # **Basic Operations for Report Design**
