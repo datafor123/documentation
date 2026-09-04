@@ -149,6 +149,12 @@ export const documentationNote = defineNoteConfig({
 			items: "auto",
 		},		
 		{
+			text: "Roadmap",
+			collapsed: true,
+			prefix: "/documentation/Roadmap/",
+			items: "auto",
+		},
+		{
 			text: "Embedded",
 			collapsed: true,
 			prefix: "/documentation/Embedded/",
