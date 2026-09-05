@@ -6,216 +6,109 @@ tags:
   - Analytics
   - RLS
   - Governance
-description: Understand row-level security in analytics, why it matters for governance, and how Datafor combines RLS, OLS, ACL, identity integration, and APIs to enforce secure access at scale.
+description: Understand Datafor row-level security defaults, policy combination, full-row exceptions, and identity boundaries, then validate access with a worked example.
 createTime: 2026/09/01 22:03:26
 ---
 
-# Row-Level Security in Analytics: What It Is and Why It Matters
+# Row-Level Security in Analytics
 
-## Overview
+Row-level security (RLS) limits which records a user can query. For example, regional managers can use the same sales report while receiving different rows according to their assigned roles.
 
-Datafor helps organizations govern analytics access as a full system, not as a collection of disconnected settings.
+This guide explains Datafor's policy rules and how to verify the resulting access. For configuration steps and UI screenshots, see [Data Security](/documentation/Datasource/Data-Security/).
 
-With Datafor, teams can combine **connection-level Row-Level Security (RLS)**, **Object-Level Security (OLS)**, **ACL-based resource governance**, **roles and user types**, **SSO and external identity integration**, and **API-based administration** into one permission model. That means access can be controlled before data reaches dashboards, reports, APIs, ad hoc exploration, or the Datafor AI Agent.
+> **No matching policy does not mean no access.** If a user is otherwise allowed to query a table but no enabled row policy matches that user and table, RLS adds no row restriction. Check policy coverage before granting access to sensitive data.
 
-This matters because analytics security rarely fails at the login page. It usually fails when a user opens the correct dashboard and sees the wrong rows.
+## Choose the right control
 
-That is where **Row-Level Security (RLS)** becomes essential. RLS filters query results so each user only sees the records they are permitted to access. Two people can open the same dashboard, use the same metrics, and interact with the same experience, yet still receive different result sets based on their identity, role, region, business unit, tenant, or other policy conditions.
+| Requirement | Control |
+| --- | --- |
+| Decide who can open or manage a report, model, or datasource | [Access Control List (ACL)](/documentation/System/Access-Control%20List/) |
+| Limit the records returned from a table or view | **Row access** (RLS) |
+| Hide a table, view, or column | **Table & column access** (OLS) |
 
-For modern BI teams, this is not a niche feature. It is part of the foundation for secure self-service analytics, multi-tenant data products, and governed embedded reporting. And it is exactly why Datafor's layered governance model matters.
+A report filter that users can change is not a security boundary. RLS does not grant permission to open a report, and permission to open a report does not establish row restrictions.
 
-## What Row-Level Security Actually Means
+RLS policies belong to a datasource connection. Each row policy targets one schema and one table or view, and applies to selected **users, roles, or user types**. A policy on one datasource does not protect a second connection to the same database. Review every datasource and object used by the analysis.
 
-Row-level security limits **which rows are returned** when a query runs.
+## Understand the rules before adding policies
 
-For example:
+### Within one policy: AND or OR
 
-- A regional manager should only see sales rows for their own territory.
-- A franchise owner should only see stores they operate.
-- A department head should see employees in their own org, but not the rest of the company.
-- A customer in a SaaS platform should only see records that belong to their tenant.
+**Return matching rows** uses conditions built from fields, operators, and values. **All (AND)** requires every condition in the group to match; **Any (OR)** requires at least one. Groups can be nested.
 
-Without RLS, organizations often duplicate datasets, create separate dashboards for each audience, or rely on manual filtering conventions that are easy to break. Those approaches might work for a while, but they do not scale well, and they create both operational overhead and security risk.
+For example, to require both a North-region record and a particular department, put both conditions in the same **All (AND)** group. Review **Effective condition** and use **Validate expression** before enabling the policy.
 
-With RLS, access control moves closer to the query itself. That changes the operating model. The same analytical asset can be reused safely across many audiences because the data is filtered automatically when users run it.
+### Across policies: OR, not AND
 
-## Why RLS Matters in Analytics
+Enabled row policies matching the same user and physical table are combined with **OR**, including matches through different roles or user types. A user matching both a North policy and a South policy can see North **or** South rows.
 
-### 1. It protects sensitive data without fragmenting content
+Adding a restrictive policy does not narrow rows already allowed by another matching policy. Review all effective roles and policies, not only the policy being edited.
 
-Analytics teams want reuse. Security teams want control. RLS is one of the few capabilities that genuinely helps deliver both at the same time.
+### Full-row exceptions and unmatched users
 
-Instead of maintaining multiple versions of the same dashboard for different audiences, organizations can maintain one governed report and let security policies determine which rows each audience can see. This reduces content sprawl while keeping access boundaries intact.
+A matching **Return all rows** policy removes RLS filtering for its selected table, even when other matching row policies are restrictive. It does not remove report filters, grant ACL access, or make objects hidden by OLS visible.
 
-### 2. It makes self-service analytics safer
+With no matching enabled row policy, RLS also leaves rows unrestricted. These are different situations: one is an explicit exception; the other can be a gap in coverage. Do not assume that creating a North policy prevents everyone outside North from seeing North data.
 
-Self-service analytics only works when users can explore confidently without exposing data they should never have access to. If every ad hoc query is a potential data leak, self-service adoption stalls before it really starts.
+### Drafts and administrator roles
 
-RLS gives organizations a way to open access to exploration while still enforcing business boundaries such as region, customer account, legal entity, or department.
+- **Save draft** keeps a new policy inactive. **Save & enable** activates it. Disabled policies do not affect access; disabling a user's only matching row policy can therefore expose more rows.
+- Built-in **SuperUser** and **Administrator** roles bypass Data Security, including RLS and OLS. Use ordinary users to validate restrictions. An administrative role is not a suitable substitute for a business role that needs full-row access but should still respect OLS.
 
-### 3. It supports multi-tenant and embedded analytics
+## Worked example: regional sales
 
-In embedded analytics, one shared reporting layer may serve many customers, partners, or internal teams. RLS is what allows the platform to deliver a shared analytics experience without mixing data between audiences.
+Use a disposable datasource and ordinary test accounts. The following is an example fixture, not a built-in Datafor dataset. Create or identify a table named `sales` in your chosen schema with these records:
 
-This is especially important for SaaS products, dealer portals, partner ecosystems, and enterprise applications where analytics is part of the operational workflow rather than a separate BI destination.
+| sale_id | region_code |
+| --- | --- |
+| 1 | NORTH |
+| 2 | NORTH |
+| 3 | SOUTH |
+| 4 | WEST |
 
-### 4. It strengthens compliance and governance
+Create the business roles `North`, `South`, and `Executive`, and assign them to the ordinary test users as shown in the expected-results table below. Give the test users ACL access to the same test report and its required resources. Enable **Apply data security** in the model settings. For this example, assume no other row policies, OLS exclusions, or report filters affect the table.
 
-Many compliance and governance programs are not only about authentication. They are about proving that data exposure is constrained according to business rules.
+You need **Full control** on the datasource to manage policies. Open **Datasource → Database sources → select the datasource → Actions → Data security → Row access**. Create the following policies with **New policy**, selecting the same schema and `sales` table each time:
 
-RLS helps organizations implement least-privilege data access in a way that is easier to explain, review, and audit than dashboard-by-dashboard workarounds.
+| Policy name | Applies to: role | Access rule | Field / operator / value |
+| --- | --- | --- | --- |
+| North sales | North | Return matching rows | `region_code` / equals / `NORTH` |
+| South sales | South | Return matching rows | `region_code` / equals / `SOUTH` |
+| Executive sales | Executive | Return all rows | No condition |
 
-## RLS Is Not the Same as Report Permissions
+Enter condition values in the editor rather than pasting a SQL statement. Validate the matching-row expressions and use **Save & enable** for all three policies.
 
-This distinction is critical.
+### Expected results
 
-- **Report, folder, model, and data source permissions** determine who can open or manage an asset.
-- **Row-level security** determines what data the user can see after the query runs.
+Use these as acceptance criteria for the fixture. Role names below are business-role assignments unless explicitly marked as a built-in role; no other assignments match a policy in this example.
 
-If a user has permission to open a dashboard but no row-level restrictions, they may still see more data than intended. On the other hand, if RLS is configured correctly, multiple audiences can safely open the same dashboard while only seeing their authorized subset.
+| Test user | Relevant roles | Expected sale_id values | Reason |
+| --- | --- | --- | --- |
+| north_reader | North | 1, 2 | North condition |
+| south_reader | South | 3 | South condition |
+| regional_reader | North, South | 1, 2, 3 | Matching policies combine with OR |
+| executive_reader | North, Executive | 1, 2, 3, 4 | Full-row exception wins over row filtering |
+| unassigned_reader | No matching business role | 1, 2, 3, 4 | No matching row policy: a coverage gap |
+| administrator_test | Built-in Administrator | 1, 2, 3, 4 | Administrator bypass |
 
-In practice, strong analytics governance usually requires both layers:
+The last two results are warnings, not evidence of successful regional isolation. Do not give unassigned users access to the production analysis until their intended access is defined and verified.
 
-- **content access control** to decide who can use the asset
-- **data-level security** to decide what data the asset can return
+In the disposable setup, also disable **North sales** and retest `north_reader`. With no other matching row policy, all four rows are unrestricted by RLS. Re-enable the policy and confirm the result returns to rows 1 and 2.
 
-## Common Mistakes Teams Make
+## Validate the effective user, then the actual workflow
 
-### Mistake 1: Treating filters as security
+1. Open **Test access**, select a user as the **Simulated subject**, and choose the schema and `sales` table. Prefer a user test over a role-only test so all of that user's roles and user type are resolved.
+2. Click **Run test**. Check **Resolved subject**, **Row access**, **Effective condition**, **Field visibility**, and **Policies in effect** against the expected results.
+3. Use **Preview data** to inspect a sample. Preview returns up to 50 rows and is not a full sign-in impersonation; a sample alone cannot prove that unwanted rows are excluded.
+4. Sign in as the corresponding ordinary user and run the actual report. Confirm both permitted and prohibited regions, including when report filters are cleared or changed.
+5. Repeat after changes to memberships, policy state, model settings, or datasource selection.
 
-User-facing filters are for analysis convenience, not for access control. A dropdown that defaults to "My Region" is not a security boundary if users can change it.
+**Test access** evaluates enabled policies only, not drafts or unsaved edits. An **All rows** result or a message that no enabled policy affects the table must be checked against the intended access; it is not confirmation that the table is protected.
 
-### Mistake 2: Copying dashboards for every audience
+## Check identity and scope for other access paths
 
-This may work early on, but it becomes expensive to maintain. Logic drifts, definitions diverge, and governance becomes harder over time.
+- **Models and the AI Agent:** Keep **Apply data security** enabled for governed models. Compare results using the same authenticated user, model, datasource, and enabled policies. A successful datasource policy test alone does not validate the model or Agent workflow. See [Data Security and the AI Agent](/documentation/Datasource/Data-Security/#data-security-and-the-ai-agent).
+- **Share links:** The [Share Link guide](/documentation/Embedded/Share-link/) describes access using the sharer's data permissions. Do not treat such a link as per-recipient RLS or assume an anonymous visitor has an individual role assignment. Verify the sharing mode and effective identity before distributing the link.
+- **Embedded applications, SSO, and APIs:** Confirm which identity the request authenticates as, which roles it resolves to, and which datasource/query path it uses. A shared technical account is not an individual viewer. Test each integration with its actual credentials and requests; do not infer coverage from a report test or from a client-supplied region or tenant filter.
 
-### Mistake 3: Enforcing security only in the front end
-
-If security only exists at the report layer, other access paths such as APIs, ad hoc exploration, or AI-assisted query experiences may expose data unexpectedly. Effective security should be enforced where the query is evaluated.
-
-### Mistake 4: Managing everything user by user
-
-Individual grants are difficult to maintain. Role-based policies are easier to review, easier to update, and much more scalable as teams change.
-
-## Why Datafor Stands Out
-
-Datafor approaches analytics governance as a layered control model rather than a single permission switch.
-
-At the platform level, Datafor provides **ACL-based resource control** for reports, folders, models, and data sources. Administrators can grant permissions to users, roles, and user types, with support for inherited permissions on folders and resources. This governs who can access content and who can manage it.
-
-At the data access level, Datafor provides **Data Security** at the **connection layer**, including:
-
-- **Row-Level Security (RLS)** to restrict returned rows
-- **Object-Level Security (OLS)** to control visibility of tables, views, and columns
-
-That matters because it means policies are enforced before data reaches downstream consumers such as reports, dashboards, ad hoc exploration, APIs, and the Datafor AI Agent.
-
-In other words, Datafor is not just helping teams decide who can open content. It helps them decide what data is visible, which structures are exposed, how permissions scale across roles, and how governance aligns with enterprise identity systems.
-
-## How Datafor Implements Row-Level Security
-
-In Datafor, RLS policies are configured **per connection** and scoped to specific schemas and tables or views. Administrators can define which **users or roles** a policy applies to, then build conditional expressions that are injected at query time.
-
-Typical examples include:
-
-- `region IN ('WA','NSW','VIC')`
-- `monthnum = 12`
-- `date BETWEEN '2025-01-01' AND '2025-03-31'`
-- more complex grouped logic using `AND` and `OR`
-
-This design is important for two reasons:
-
-1. The rule is attached to the data access layer, not buried inside a specific report.
-2. The same governed rule can protect multiple analytical experiences consistently.
-
-Datafor also supports an **Allow query all data** option within an RLS policy entry. This is useful when most users should be filtered, but a defined whitelist of users or roles should be allowed to bypass RLS for that policy while still remaining subject to other controls such as OLS.
-
-## Why Datafor's Governance Model Is Stronger Than RLS Alone
-
-RLS is necessary, but on its own it is not a complete governance model. Datafor strengthens it with adjacent controls that close common security gaps and make permission governance more operational.
-
-### ACL for content and resource governance
-
-Datafor ACL controls access to reports, folders, models, and data sources with permission levels such as **View**, **Edit**, **Delete**, and **Full Control**. This ensures organizations can decide not only what data users can see, but also which assets they can open, modify, share, or administer.
-
-### OLS for structural protection
-
-Some data should not merely be filtered. It should be hidden entirely. Datafor's Object-Level Security can restrict entire tables, views, or columns. This is especially valuable for PII, confidential attributes, or advanced schema elements that should not appear for most users.
-
-When used together, **OLS limits visibility** and **RLS filters rows**. That creates a stronger, two-layer security model.
-
-### Roles and user types for scalable administration
-
-Datafor supports different **user types** such as Reader, Creator, and Administrator, and it also supports assigning **business roles** for more granular control. In practice, this allows organizations to separate broad platform capability from fine-grained business access rules.
-
-For example:
-
-- a **Reader** can consume content without editing it
-- a **Creator** can build and modify content
-- business roles can determine which regions, departments, or tenants that user can see
-
-This combination reduces the operational burden of managing permissions one user at a time and gives teams a cleaner way to scale governance.
-
-### External identity integration
-
-Governance is easier when identity is centralized. Datafor supports authentication and SSO integrations including **OAuth2**, **SAML2**, **CAS**, **LDAP**, and **JWT**-based integration. In supported modes, organizations can automatically initialize users and assign default user types or roles on first login.
-
-This helps align analytics permissions with enterprise identity processes such as onboarding, offboarding, and role changes.
-
-### APIs for automation and auditability
-
-For teams that want to operationalize governance instead of managing it manually, Datafor also exposes APIs for:
-
-- row-level security policy management
-- object-level security policy management
-- ACL retrieval and modification
-- user and role administration
-
-That makes it easier to automate policy deployment, integrate governance with internal workflows, and review effective controls programmatically.
-
-## A Practical Example
-
-Imagine a company that serves multiple regional business units from one analytics environment.
-
-They want:
-
-- one shared sales dashboard
-- one shared semantic model
-- no cross-region data exposure
-- a small executive group that can see all regions
-
-In Datafor, that can be implemented as a layered policy:
-
-1. Grant dashboard access through ACL to the relevant users or roles.
-2. Assign business roles such as `North`, `South`, `West`, and `Executive`.
-3. Configure row-level security on the connection so each regional role only sees rows for its own region.
-4. Use **Allow query all data** for the executive whitelist where full visibility is appropriate.
-5. Hide especially sensitive columns with OLS if they should not appear even for users who can access the report.
-
-The result is a cleaner, more scalable governance model:
-
-- one analytical experience
-- reusable content
-- centralized control
-- less duplication
-- lower risk of accidental overexposure
-
-## Best Practices for Using RLS Well
-
-- Prefer **role-based policies** over individual user mappings wherever possible.
-- Define rules using stable business keys such as tenant ID, region code, or department ID.
-- Keep policy intent clear: one policy should represent one understandable access rule.
-- Test with non-admin accounts, not just administrator previews.
-- Combine **RLS**, **OLS**, and **ACL** instead of relying on a single layer.
-- Review identity-to-role mapping regularly, especially when SSO or external directories are involved.
-- Use APIs where appropriate to make policy management repeatable and auditable.
-
-## Conclusion
-
-Row-level security matters because analytics access is rarely all-or-nothing. In most organizations, the real requirement is not simply "Can this person open the dashboard?" but "Which records should this person be allowed to see once they do?"
-
-That is the problem RLS solves.
-
-What makes Datafor particularly valuable is that it does not treat RLS as an isolated feature. It combines connection-level **Row-Level Security**, **Object-Level Security**, **ACL-based resource governance**, **roles and user types**, **enterprise identity integration**, and **API-driven administration** into a broader permission governance model.
-
-For teams building governed self-service BI, embedded analytics, or multi-tenant data products, that combination is what turns security from a patchwork of filters into an operational capability.
+For detailed policy editing, OLS configuration, and troubleshooting, continue with [Data Security](/documentation/Datasource/Data-Security/).
