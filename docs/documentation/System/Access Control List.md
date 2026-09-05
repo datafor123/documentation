@@ -9,6 +9,8 @@ createTime: 2026/09/01 22:03:26
 
 **ACL (Access Control List)** is a crucial feature in Datafor that enables fine-grained control over user access to reports, data sources, models, and folders. With ACL, you can ensure resource security and restrict access based on user roles and permissions.
 
+For the complete relationship between User Types, Business Roles, ACLs, RLS, and OLS, see [Permission Evaluation Overview](/documentation/System/Permission-Evaluation-Overview/). An ACL grant does not replace data policies, and an unchecked permission is not an explicit deny that cancels another matching grant.
+
 ## 1. What is ACL?
 
 ACL is a permission control mechanism used to define access rights for resources. In Datafor, resources include data sources, models, report files, and folders. ACL allows administrators to set permissions for these resources. The available permission levels are:
@@ -64,7 +66,9 @@ Folder and report authorization in Datafor has certain restrictions:
 
 ## 4. Permission Inheritance
 
-Reports and subfolders can inherit permissions from their parent folder. This means that if permissions are assigned to a parent folder, all resources within that folder (such as reports and subfolders) will automatically inherit those permissions unless explicitly overridden.
+Reports and subfolders with **Inherit parent permissions** enabled use their parent's effective ACL. If the parent also inherits, follow the chain to the nearest non-inheriting ACL. Disabling inheritance selects the resource's own entries; it does not add a local deny on top of the parent grants. Parent changes affect descendants that continue to inherit, not descendants with their own ACLs.
+
+For grant combination, folder-operation checks, and owner/administrator exceptions, see [File and folder ACLs](/documentation/System/Permission-Evaluation-Overview/#_2-file-and-folder-acls-grants-and-inheritance).
 
 <div align="left"><img src="./images/1739528638687(1).png" width="67%" /></div>
 
