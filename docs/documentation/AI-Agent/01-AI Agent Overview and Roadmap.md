@@ -9,7 +9,7 @@ createTime: 2026/09/04 16:10:00
 
 This page is for everyone who uses the Datafor AI Agent: business users, analysts, and managers who want to know where the product is heading. It answers three questions: **what the Agent can do today, how it works, and what comes next**.
 
-Document date: 2026-09-04. It is updated with each product release; the exact features depend on the version you are running. The console currently labels the AI Agent as **Preview**.
+Document date: 2026-09-04. It is updated with each product release; the exact features depend on the version you are running. 
 
 ## 1. The Agent in one sentence
 

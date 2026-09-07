@@ -42,7 +42,7 @@ For each user-visible Measure or calculated measure, set:
 
 - A precise Caption and Description.
 - Common business Aliases.
-- Unit and Direction.
+- Unit, Display scale, and Direction. See [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/).
 - Default time field when time intelligence is expected.
 - Recommended dimensions when the measure is normally analyzed by a specific set of Dimensions.
 
@@ -89,5 +89,6 @@ Administrators can start indexing from the model's **Add to index** action on th
 
 - [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/)
 - [Measures and Calculated Measures](/documentation/Model/Measures-and-Calculated-Measures/)
+- [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/)
 - [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/)
 - [Model Diagnostics](/documentation/Model/Model-Diagnostics/)

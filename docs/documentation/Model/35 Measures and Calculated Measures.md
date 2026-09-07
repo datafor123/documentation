@@ -25,7 +25,8 @@ Select a Measure in the **Analysis model** tree and configure its properties.
 | **Data Format** | Display format for the result. |
 | **Description** | What the measure represents and how it is calculated. |
 | **Aliases** | Other terms users or AI may use for the same measure. |
-| **Unit** | Currency, percentage, quantity, duration, or another business unit. |
+| **Unit** | Currency, percentage, quantity, duration, or another business unit. Stored as a language-neutral code and shown in each user's language. |
+| **Display scale** | Default magnitude (K, M, B; 万, 亿) in which reports show the measure. See [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/). |
 | **Direction** | Whether higher, lower, or neither direction is preferred. |
 | **Default time field** | Date context the Agent should use for this Measure. |
 | **Recommended dimensions** | Dimensions normally used to analyze the measure. |
@@ -86,6 +87,7 @@ Always review [Model Diagnostics](/documentation/Model/Model-Diagnostics/) after
 ## Related topics
 
 - [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/)
+- [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/)
 - [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/)
 - [Model Diagnostics](/documentation/Model/Model-Diagnostics/)
 - [MDX Functions](/documentation/Advanced/MDX-Functions/)

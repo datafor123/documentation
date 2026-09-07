@@ -50,7 +50,7 @@ Click **New metric**, then complete:
 | **Synonyms** | Add common, unambiguous business wording. |
 | **Business definition** | State what is included, excluded, and any timing or policy conditions. |
 | **Calculation method** | Choose **Base metric**, **Ratio**, **Difference**, **Attainment rate**, or **Custom formula**. |
-| **Unit / Direction / Owner** | Set the displayed unit, whether higher or lower is better, and the accountable owner. |
+| **Unit / Direction / Owner** | Set the unit, whether higher or lower is better, and the accountable owner. Units are stored as language-neutral codes and shown in each user's language; see [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/). |
 
 A custom formula accepts metric references, numbers, arithmetic operators, and parentheses. It is a governance relationship, not SQL, MDX, or a replacement for the model measure.
 
