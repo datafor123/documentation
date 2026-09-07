@@ -63,3 +63,4 @@ The answer is governed by the selected analysis model and the current user's dat
 | Model brief or suggestions do not load | Check AI Agent connectivity, LLM assignments, and the selected model's prepared metadata. |
 | A query returns no data | Check the model, metric, time range, filters, source data, and row-level permissions. |
 | The Agent reports a model-stage error | Open **LLM** and confirm that all 15 required assignments are complete and verified. |
+| The progress title stays at **Understanding your question** until the whole answer appears at once | Datafor is running behind a reverse proxy that buffers the progress stream. Configure the proxy as described in [Deploying Datafor Behind Nginx](/documentation/Setup/Deploying-Datafor-Behind-Nginx/). |

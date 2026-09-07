@@ -49,3 +49,4 @@ To prepare for many users submitting questions together, follow [Managing High C
 | AI Assistant does not open | Confirm that **Enable AI Agent service** is on and the configured public endpoint is reachable from the browser. |
 | Backend AI requests fail but the page loads | Check **Internal Server Address of AI Agent** and server-to-server network access. |
 | **Save changes** is disabled | The form has no unsaved changes. Modify a setting only when the deployment configuration needs to change. |
+| The AI Assistant loads, but the progress title does not change until the answer appears | Datafor is behind a reverse proxy that buffers the AI Agent stream. Disable buffering for `/datafor/ai/` as described in [Deploying Datafor Behind Nginx](/documentation/Setup/Deploying-Datafor-Behind-Nginx/). |
