@@ -40,6 +40,8 @@ If your deployment supplies explicit endpoints, use the addresses provided by th
 3. Open **AI Agent**.
 4. Confirm that the **AI Assistant** page loads and that **New Chat**, **History**, **Common Questions**, **Ops**, and **LLM** are available.
 
+To prepare for many users submitting questions together, follow [Managing High Concurrency](/documentation/AI-Agent/Managing-High-Concurrency/). Worker count is configured in the installed Agent's server-side `.env` file; the endpoint settings on this page do not change analysis capacity.
+
 ## Troubleshooting
 
 | Symptom | Check |

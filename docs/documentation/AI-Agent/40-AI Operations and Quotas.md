@@ -30,6 +30,8 @@ The current summary shows:
 
 Use these values to identify usage growth, failed requests, latency changes, and token consumption. They are operational indicators; investigate request details and provider logs before assigning a cause to an anomaly.
 
+For queue monitoring, worker configuration, and a repeatable capacity test, see [Managing High Concurrency](/documentation/AI-Agent/Managing-High-Concurrency/). The Response time card uses recorded run durations; measure submission-to-answer time separately when evaluating queue waiting.
+
 ## 3. Configure daily question quotas
 
 Open **Quota**.
@@ -46,6 +48,8 @@ Available controls are:
 | **Overrides by role and user type** | Adds more specific quota rules. |
 
 When one user matches several rules, the current UI applies the largest quota. Click **Save** after changing quota settings.
+
+Daily quotas control usage over a day; they do not cap simultaneous questions or increase processing capacity. Size analysis workers separately using [Managing High Concurrency](/documentation/AI-Agent/Managing-High-Concurrency/).
 
 ## 4. Access control
 
