@@ -25,7 +25,7 @@ The page has four configuration areas:
 | **Login** | Login logo, welcome message, background, form styling, login-option visibility, and footer. |
 | **Console** | Expanded and collapsed logos, Home title and tagline, sidebar, top bar, search box, and help/resource visibility. |
 | **Sample pages** | The report cards in **Home > Report templates**: titles, images, destinations, order, and opening behavior. |
-| **Other** | Default browser title, font family, and website icon. |
+| **Other** | Default browser title, interface font, and website icon. |
 
 The screenshots below show the English editor with example values. The sidebar is collapsed to give the settings more room. Image previews and editable values are not proof that branding is active: check the main **Enabled / Disabled** switch and save your changes.
 
@@ -135,7 +135,7 @@ Turn **Visible** off to keep a card configured without showing it. The delete co
 Under **Other**:
 
 - **Browser title** sets the default tab title. When a resource is open, its own title may take precedence.
-- **Font Family** selects the console's default font family. Choose a font available to your audience and check it on their devices; do not assume it replaces every font explicitly set inside a report.
+- **Interface font** sets the font of the console and the editor, and becomes the default font of reports created afterwards. Fonts already set inside a report are not changed. See [Fonts](/documentation/Console/Fonts/).
 - **Website Icon > Icon** replaces the favicon. Use a simple symbol that remains recognizable at browser-tab size.
 
 ## Reuse or restore a configuration
