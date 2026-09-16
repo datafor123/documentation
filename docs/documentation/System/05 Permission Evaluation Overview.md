@@ -100,6 +100,8 @@ Adding a row policy for North does not protect the table from users outside Nort
 
 OLS controls whole objects or individual columns. It does not mask a value while leaving the column available. Hiding a column that an analysis depends on can make that analysis unavailable or cause its query to fail.
 
+Hiding a whole table removes its fields and its dimension from an analysis model, but keeps the join it provides, so tables reached through it remain available. See [Hidden tables in a model join path](/documentation/Datasource/Data-Security/#hidden-tables-in-a-model-join-path).
+
 ### Choose the visibility mode carefully
 
 **Only selected subjects can view** is an allow-list for the selected objects. Within that policy, an explicitly selected user or a matching selected role/User Type remains eligible to see them; subjects outside the selection are excluded. Other policies can still exclude the same object.
@@ -137,6 +139,7 @@ These results assume ordinary accounts unless a privileged role is explicitly na
 | One OLS policy allows an object; another actually excludes it | Object remains excluded. |
 | Deny-only OLS selects one of several resolved roles | Do not assume exclusion; the all-roles condition described above matters. |
 | ACL Full control or Return all rows + effective OLS exclusion | The object remains excluded. |
+| Row policy on a table that OLS hides | The table's fields stay hidden; its row condition still restricts joins made through that table. |
 | Built-in Administrator or SuperUser | Data Security bypass; unsuitable for restriction tests. |
 
 ## 6. Typical access designs
