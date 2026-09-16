@@ -50,6 +50,12 @@ A matching **Return all rows** policy removes RLS filtering for its selected tab
 
 With no matching enabled row policy, RLS also leaves rows unrestricted. These are different situations: one is an explicit exception; the other can be a gap in coverage. Do not assume that creating a North policy prevents everyone outside North from seeing North data.
 
+### One policy for many users: system variables
+
+A condition value can be a system variable that is bound to the signed-in user when the query runs. A policy on `sales` for the role `Sales` with the condition `owner_login` / equals / **Current user name** returns each sales user only their own records, and a condition `region_code` / in / **Current user's roles** matches rows whose region code equals one of the user's business role names. One policy covers the whole role, and new members are covered as soon as they receive the role.
+
+The same combination rules apply: the resolved condition is ORed with other matching policies, and a matching **Return all rows** policy still removes the filter. **Test access** shows the condition resolved for a simulated user. See [Use system variables in a condition](/documentation/Datasource/Data-Security/#use-system-variables-in-a-condition) for the available variables and their limits.
+
 ### Drafts and administrator roles
 
 - **Save draft** keeps a new policy inactive. **Save & enable** activates it. Disabled policies do not affect access; disabling a user's only matching row policy can therefore expose more rows.
