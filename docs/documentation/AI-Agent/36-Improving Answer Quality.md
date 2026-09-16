@@ -79,7 +79,7 @@ Three points:
 
 The **Model diagnostics** tab in the **Insights** panel at the bottom of the designer lists every object that "has no description for AI to read" (category **Semantic completeness**). Use it as a checklist. See [Model Diagnostics](/documentation/Model/Model-Diagnostics/).
 
-### 2.2 Aliases: register the words users actually say
+### 2.2 Aliases and Sample values: register the words users actually say
 
 The **Aliases** field in **Business semantics** (dimensions, attributes, and measures all have it), comma separated:
 
@@ -88,6 +88,13 @@ The **Aliases** field in **Business semantics** (dimensions, attributes, and mea
 - Measure: `revenue, sales, turnover`
 
 What to register? **The words users really use**: colloquial terms, abbreviations, English column names, and the different names departments use for the same thing. Any wording users tried that did not map to a field belongs here.
+
+Attributes also have a **Sample values** field (**Business semantics**, below Aliases): a few real member values, comma separated. A region field might carry `East, North, South`; a status field `Completed, Cancelled`.
+It solves a different kind of miss: the user says a **value**, not a field name. "East Region sales last month" never mentions "region", so the Agent has to know which field "East Region" belongs to.
+
+- Three to five representative real values are enough; do not list them all. For fields with few members (a few dozen) the Agent reads every member itself, so sample values matter most for fields with many members: cities, stores, products, customers.
+- Write the values as they appear in the data. The Agent uses them only to pick the field; the filter itself is still matched against the real members, so a sample value never becomes a filter on its own.
+- Takes effect within a few minutes of saving the model; no re-indexing is needed. The panel is described in [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/).
 
 ### 2.3 Attribute semantic roles: tell the Agent this is a "month" or a "city"
 
@@ -102,9 +109,11 @@ An order fact table often has an order date, a ship date, and a delivery date. W
 
 Set **Default time field** in the measure's **Business semantics** to a time attribute or hierarchy level. From then on, "sales this year" is read against that date field, and the answer's **Evidence and boundaries** section states which date was used. Each measure can differ: "Refund amount" can default to the return date while "Sales" defaults to the order date.
 
-### 2.5 Unit, Display scale, Data Format, Direction
+The model also has a model-level **Default time dimension** in **Model properties**: one time dimension for the whole model. The Agent reads it when a measure declares no Default time field of its own, and reads "this year" against a date field of that dimension. A measure's own Default time field always takes precedence, and a date the user names wins over both. For a model where most measures follow the same date, set this first and give only the exceptions a Default time field. See [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/).
 
-All four live on the measure and each controls one thing:
+### 2.5 Unit, Display scale, Data Format, Direction, Recommended dimensions
+
+All five live on the measure and each controls one thing:
 
 | Field | Location | Effect | How to fill it in |
 | --- | --- | --- | --- |
@@ -112,6 +121,7 @@ All four live on the measure and each controls one thing:
 | **Unit** | Business semantics | The Agent names the unit in the reader's language (dollars, days, orders). | Pick a standard unit or type your own; units already used in this model are listed first. See [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/). |
 | **Display scale** | Core | The Agent and reports present the number at this magnitude (K, M, B). | Only for amounts and counts read as trends; leave detail values unscaled. |
 | **Direction** | Business semantics | Higher is better / Lower is better / Neutral; helps the Agent describe whether a change is good or bad. | Remember to set "Lower is better" for costs and return rates. |
+| **Recommended dimensions** | Business semantics | Tells the Agent which dimensions this measure is normally analyzed by. When a user asks for "the breakdown of sales" without naming an axis, the Agent picks the grouping from here first; the suggested questions on the model's start page use it too. | Pick one to three dimensions users most often split this measure by. A dimension the user names always wins, and no grouping is added to a question that did not ask for one. |
 
 With several measures selected, fields such as Unit and Direction can be set in bulk. Caption, Description, Aliases, and the enterprise metric binding identify a single measure and must be set one at a time.
 
@@ -149,9 +159,10 @@ Once the model is saved, the Agent sees the new metadata immediately, but **the 
 ### 2.9 How to confirm it worked
 
 1. Ask again with the exact wording that failed before, and check that it now maps to the right field.
-2. Ask a question that names a member value ("East Region sales last month"). If the value is recognized, the index is healthy.
-3. Ask "sales this year" and check that **Evidence and boundaries** names the date field you set as the default.
+2. Ask a question that names only a value, not a field ("East Region sales last month"), and check that "East Region" landed on the right field. Fields with many members rely on sample values (§2.2); a recognized value also means the index is healthy.
+3. Ask "sales this year" and check that **Evidence and boundaries** names the date field you set as the default; for a measure without one, check that the date comes from the model's Default time dimension.
 4. Ask for a ratio ("gross margin rate by category") and check that it is shown as a percentage.
+5. Ask for a breakdown without naming the axis ("how is sales split?") and check that the grouping is one of the measure's recommended dimensions (§2.5).
 
 ---
 
@@ -231,6 +242,7 @@ One reminder: **after changing the embedding model, prepare every model again.**
 | What the user sees | Who | What to do |
 | --- | --- | --- |
 | A business term never maps to a field, or maps to the wrong one | Model author | Add the wording to the field's description or aliases, then run Prep data for AI (§2.1, §2.2, §2.8) |
+| The user names only a value ("East Region", "Completed") and the Agent asks which field it belongs to, or picks the wrong field | Model author | Add sample values to that field (§2.2) |
 | A region or product name is "not found" | Administrator / model author | Check for the **Vector index is temporarily unavailable** banner first; prepare the model if present, otherwise check the member value's spelling (§4) |
 | Two departments get different numbers for the same term | Model author + metric owner | Same name, different meaning: write both descriptions clearly; register the governed definition in Metrics Library and bind it (§2.1, §3.2, §2.6) |
 | Asked with the library name, but a raw field was computed | Metric owner | The user's wording is not among the synonyms; add it (§3.1). Then confirm the metric is bound in the current model (§2.6) |
@@ -238,10 +250,11 @@ One reminder: **after changing the embedding model, prepare every model again.**
 | The answer says "not computed through a certified binding" | Model author | Bind the measure to the metric and save the model (§2.6) |
 | The answer carries "possible drift" | Metric owner + model author | Read the comparison reason, change the definition or the formula, compare again (§2.7) |
 | The answer carries "pending re-check / definition changed" | Model author | **Compare against new definition** on the Metric bindings tab (§2.7, §3.5) |
-| "This year" keeps triggering "which date?", or the wrong date is used | Model author | Set the measure's **Default time field** (§2.4) |
+| "This year" keeps triggering "which date?", or the wrong date is used | Model author | Set the measure's **Default time field**, or the model's **Default time dimension** (§2.4) |
 | Trends by month or quarter fail, or "same period last year" is wrong | Model author | Complete the time hierarchy and assign time semantic roles (§2.3) |
 | A ratio shows as 0.41 instead of 41% | Model author | Give the measure a percentage **Data Format** (§2.5) |
 | Amounts should read in thousands or millions | Model author | Set **Display scale** (§2.5) |
+| A breakdown asked without naming the axis lands on an unhelpful grouping | Model author | Set the measure's **Recommended dimensions** (§2.5) |
 
 ---
 

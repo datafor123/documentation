@@ -16,7 +16,7 @@ When no tree object is selected, use **Model properties** to set:
 - **Description**: the business domain, data coverage, and intended use.
 - **Default time dimension**: the model's designated time Dimension, stored as model metadata.
 
-Default time dimension is a single model-level selection. It does not choose the Agent's date context and is not a fallback for a Measure's **Default time field**. A model without a time Dimension is still valid.
+Default time dimension is a single model-level selection. The Agent reads it as evidence of the model-wide date context: when a Measure declares no **Default time field** of its own, "this year" is read against a date field of this Dimension. A Measure's own Default time field always takes precedence, and a date the user names wins over both. A model without a time Dimension is still valid.
 
 ## Describe Dimensions and Attributes
 
@@ -80,7 +80,7 @@ Before an administrator adds a model to the AI index:
 1. Describe every user-visible Dimension, Measure, and calculated measure.
 2. Assign Semantic roles to important IDs, names, time fields, and geography fields.
 3. Define Measure units and directions.
-4. Set each Measure's Default time field when the Agent needs a date context; set the model's Default time dimension separately when that metadata is required.
+4. Set the model's Default time dimension when most Measures follow the same date, and give each Measure that follows a different date its own Default time field; the Agent reads the Measure's field first and the model's Dimension when the Measure declares none.
 5. Resolve semantic-completeness hints in Diagnostics.
 
 Administrators can start indexing from the model's **Add to index** action on the Models page.
