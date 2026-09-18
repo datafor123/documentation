@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="752" viewBox="0 0 700 752" font-family="'Segoe UI','Helvetica Neue',Arial,'Microsoft YaHei','PingFang SC','Noto Sans',sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">How a metric, a measure, and a binding fit together</title>
+  <desc id="desc">Metrics Library holds the definition of Gross Margin Rate. Bindings connect it to the measure that calculates it in each Analysis Model. Reports and AI answers get their numbers from the models, and the AI Agent also reads the definition from Metrics Library.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7A6BB0"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="752" fill="#FFFFFF"/>
+
+  <!-- Lane 1: Metrics Library -->
+  <rect x="10" y="10" width="640" height="206" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <text x="30" y="42" font-size="19" font-weight="700" fill="#5B3FBF">Metrics Library</text>
+  <text x="30" y="65" font-size="14" fill="#7A6BB0">Defines what a number means. Calculates nothing.</text>
+
+  <rect x="30" y="80" width="600" height="122" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <text x="50" y="110" font-size="17" font-weight="700" fill="#2B2B3A">Gross Margin Rate</text>
+  <rect x="226" y="94" width="80" height="22" rx="11" fill="#EAF6EC" stroke="#9CCFA4"/>
+  <text x="266" y="109.5" text-anchor="middle" font-size="13" fill="#2E7D32">Certified</text>
+  <text x="50" y="140" font-size="15" fill="#5B6472">Definition</text>
+  <text x="150" y="140" font-size="15" fill="#2B2B3A">Gross margin amount as a share of net sales</text>
+  <text x="50" y="164" font-size="15" fill="#5B6472">Synonyms</text>
+  <text x="150" y="164" font-size="15" fill="#2B2B3A">GM%</text>
+  <text x="50" y="188" font-size="15" fill="#5B6472">Unit</text>
+  <text x="150" y="188" font-size="15" fill="#2B2B3A">%, higher is better</text>
+
+  <!-- Lane 2: Analysis Models -->
+  <rect x="10" y="264" width="640" height="190" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="30" y="296" font-size="19" font-weight="700" fill="#1F4FD8">Analysis Models</text>
+  <text x="30" y="317" font-size="14" fill="#5B6FB0">Calculate the numbers</text>
+
+  <rect x="30" y="328" width="290" height="110" rx="8" fill="#FFFFFF" stroke="#B9CCFF"/>
+  <text x="48" y="354" font-size="16" font-weight="700" fill="#2B2B3A">Retail Chain Operations</text>
+  <text x="48" y="377" font-size="14" fill="#5B6472">Calculated measure</text>
+  <text x="48" y="400" font-size="15" font-weight="700" fill="#2B2B3A">Gross Margin Rate</text>
+  <text x="48" y="422" font-size="15" fill="#2B2B3A">= gross margin ÷ net sales</text>
+
+  <rect x="340" y="328" width="290" height="110" rx="8" fill="#FFFFFF" stroke="#B9CCFF"/>
+  <text x="358" y="354" font-size="16" font-weight="700" fill="#2B2B3A">Another model</text>
+  <text x="358" y="377" font-size="14" fill="#5B6472">Its own measure or calculated</text>
+  <text x="358" y="399" font-size="14" fill="#5B6472">measure for the same metric</text>
+
+  <!-- Lane 3: Where it's used -->
+  <rect x="10" y="502" width="640" height="186" rx="12" fill="#E8F7F4" stroke="#A9DED6" stroke-width="1.5"/>
+  <text x="30" y="534" font-size="19" font-weight="700" fill="#0B7A6E">Where it's used</text>
+  <text x="30" y="555" font-size="14" fill="#3F8C82">Numbers come from models</text>
+
+  <rect x="30" y="568" width="290" height="104" rx="8" fill="#FFFFFF" stroke="#A9DED6"/>
+  <text x="48" y="594" font-size="16" font-weight="700" fill="#2B2B3A">Reports and dashboards</text>
+  <text x="48" y="617" font-size="14" fill="#5B6472">Use the model's measures and</text>
+  <text x="48" y="638" font-size="14" fill="#5B6472">calculated measures</text>
+
+  <rect x="340" y="568" width="290" height="104" rx="8" fill="#FFFFFF" stroke="#A9DED6"/>
+  <text x="358" y="594" font-size="16" font-weight="700" fill="#2B2B3A">AI Agent answers</text>
+  <text x="358" y="617" font-size="14" fill="#5B6472">Recognizes "GM%" through the</text>
+  <text x="358" y="638" font-size="14" fill="#5B6472">library, then calculates with</text>
+  <text x="358" y="659" font-size="14" fill="#5B6472">the bound measure</text>
+
+  <!-- Arrows are drawn after the lanes so the lane backgrounds do not cover them -->
+  <!-- Bindings -->
+  <line x1="240" y1="203" x2="240" y2="325" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="250" y="245" font-size="14" font-weight="700" fill="#3B4252">binding</text>
+  <line x1="550" y1="203" x2="550" y2="325" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="560" y="245" font-size="14" font-weight="700" fill="#3B4252">binding</text>
+
+  <!-- Numbers flow from the models to both places they are used -->
+  <path d="M330,455 V478 H240 V565" fill="none" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M330,478 H550 V565" fill="none" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="340" y="471" font-size="14" fill="#5B6472">numbers</text>
+
+  <!-- The AI Agent also reads the definition -->
+  <polyline points="631,140 675,140 675,620 633,620" fill="none" stroke="#7A6BB0" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#arrowPurple)"/>
+
+  <!-- Legend -->
+  <text x="10" y="718" font-size="13" fill="#7A8390">Solid arrows: bindings, and the numbers the models supply.</text>
+  <text x="10" y="738" font-size="13" fill="#7A8390">Dashed arrow: the AI Agent also reads the definition, synonyms, and status.</text>
+</svg>
