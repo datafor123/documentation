@@ -8,6 +8,8 @@ createTime: 2026/09/01 18:36:42
 
 Metrics Library stores the governed business definition of each enterprise metric. It does not calculate data by itself. A measure or calculated measure in an Analysis Model supplies the executable implementation.
 
+New to Metrics Library? Start with [Understanding Metrics Library](/documentation/Metrics-Library/Understanding-Metrics-Library/), which explains what it is, when you need it, and how metrics relate to measures and calculated measures.
+
 | Object | Responsibility |
 | --- | --- |
 | **Enterprise metric** | Stable ID, business name, synonyms, definition, calculation relationship, unit, direction, owner, and governance status. |
