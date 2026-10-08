@@ -6,27 +6,28 @@ createTime: 2026/09/01 22:03:26
 
 # Dynamic image
 
-Display images supplied by data.
+Display images whose references come from the analysis model—for example, a product image that changes with the selected product. For a fixed logo or illustration, use **Assists → Image**.
 
-## Set up the data
+## Bind image and name
 
-1. Choose **Components → Charts → Dynamic image** and place it on the canvas.
-2. Select the chart and choose an **Analysis model** in **Data**.
-3. Use **+** beside each field slot to select the following fields, then click **Back**.
+1. Add **Components → Charts → Dynamic image** and choose an **Analysis model** in **Data**.
+2. Put the field containing the image reference in **Image field**.
+3. Put the identifying text, such as Product Name, in **Name**.
+4. Set **Filters** to the intended result, or configure a report filter to control the component.
+5. Check that the returned image corresponds to the returned name before styling.
 
-| Data slot | Choose |
-| --- | --- |
-| **Image field** | Field containing the image reference. |
-| **Name** | Field identifying or naming the image. |
+Use references accessible to the people viewing the report. A path that works only on the author's machine is not a reliable report image source. Test the actual viewer environment rather than assuming that an image visible in the designer will load everywhere.
 
-Use **Filters** to restrict this component’s data. Check the result before styling it.
+## Configure presentation
 
-## Make it readable
+Use **Style → Settings** to control image presentation, then resize the component to suit the image proportions. Avoid stretching product images in a way that changes their apparent shape. Use **Empty data** for a clear no-result state.
 
-Use **Settings** for the image presentation and **Empty data** for missing results.
+If the component receives several members, inspect how the result is presented before designing it as a single selected-product image. Filter to one member when that is the intended interaction.
 
-For a fixed logo or illustration, use **Assists → Image** instead. Verify image references are reachable by report viewers.
+## Test the report interaction
 
-Save the report and use **Preview** to check labels, hover details, and the filtered result.
+Save and open **Preview**. Select at least two products and confirm that both image and name update. Test a product with no image reference and a selection with no matching data.
 
-See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).
+If the image is missing, check the returned field value, browser access to the reference, expired links and the report's filters. A broken image request is different from an empty query result. If the image is correct but the name is wrong, inspect the model relationship and field grain.
+
+For interactive selection, see [linked components](/documentation/Visualization/Filter-Subscriptions/). Keep a visible name or caption so users can identify the item even when its image cannot load.

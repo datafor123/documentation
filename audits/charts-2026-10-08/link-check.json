@@ -1,0 +1,1689 @@
+{
+  "scope": "Visualizer, Analysis, two report-design walkthroughs, and Console entry points",
+  "limitations": [
+    "Checks file and permalink existence, not current product behavior or screenshot content.",
+    "External URLs, fragment anchors, CSS assets, and reference-style Markdown links are not validated.",
+    "Live UI evidence and screenshot review are tracked separately in audits/live-visualizer/README.md."
+  ],
+  "summary": {
+    "pages": 90,
+    "imageReferences": 78,
+    "missingReferences": 0
+  },
+  "pages": [
+    {
+      "file": "docs/documentation/Analysis/10 Exploratory Analysis.md",
+      "title": "\"Exploratory Analysis\"",
+      "permalink": "/documentation/Analysis/Exploratory Analysis/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Component-Level-Filtering/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Filters/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Cross-Filtering/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Tooltips-for-Chart-Components/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Drill-down/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Drill-through/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Sorting/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Top-Bottom-N/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Chart-Reference-Lines/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Creating-Parameters/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/100_参数.md",
+      "title": "Creating Parameters",
+      "permalink": "/documentation/Analysis/Creating-Parameters/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/parameter-editor.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/parameter-editor.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Using-Parameters-in-Component-Titles/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/report-parameters.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/report-parameters.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Parameter-Controllers/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/105 Parameter Controllers.md",
+      "title": "Parameter Controllers",
+      "permalink": "/documentation/Analysis/Parameter-Controllers/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/scenario-slider-settings.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/scenario-slider-settings.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/What-if-Analysis/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Number-Range-Filter/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/110_度量聚合.md",
+      "title": "\"Aggregation for Measures\"",
+      "permalink": "/documentation/Analysis/Aggregation-for-Measures/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/measure-aggregation.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/measure-aggregation.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Model/Measures-and-Calculated-Measures/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/120_快速度量功能.md",
+      "title": "\"Quick Calculated Measures\"",
+      "permalink": "/documentation/Analysis/Quick-Calculated-Measures/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/quick-measure.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/quick-measure.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Model/Measures-and-Calculated-Measures/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/130_图表参考线.md",
+      "title": "Chart Reference Lines",
+      "permalink": "/documentation/Analysis/Chart-Reference-Lines/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/analytics-line.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/analytics-line.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/150_What-if.md",
+      "title": "What-if Analysis",
+      "permalink": "/documentation/Analysis/What-if-Analysis/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Start/Create-Your-First-Analysis-Report/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/parameter-editor.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/parameter-editor.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Creating-Parameters/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/scenario-measure.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/scenario-measure.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/scenario-slider-settings.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/scenario-slider-settings.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/scenario-data-preview.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/scenario-data-preview.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/scenario-result.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/scenario-result.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Using-Parameters-in-Calculated-Measures/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/160 Using Parameters in Component Titles.md",
+      "title": "Using Parameters in Component Titles",
+      "permalink": "/documentation/Analysis/Using-Parameters-in-Component-Titles/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/parameter-title.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/parameter-title.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Creating-Parameters/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/170 Using Parameters in Calculated Measures.md",
+      "title": "Using Parameters in Calculated Measures",
+      "permalink": "/documentation/Analysis/Using-Parameters-in-Calculated-Measures/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/scenario-measure.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/scenario-measure.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Creating-Parameters/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/What-if-Analysis/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Calculated-Measures/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/180 Show Items with No Data.md",
+      "title": "\"Show Items with No Data\"",
+      "permalink": "/documentation/Analysis/Show-Items-with-No-Data/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Analysis/190 血缘分析.md",
+      "title": "\"Lineage Analysis\"",
+      "permalink": "/documentation/Analysis/Lineage-Analysis/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/lineage.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/lineage.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/200 Relative Date Filtering.md",
+      "title": "Relative Date Filtering",
+      "permalink": "/documentation/Analysis/Relative-Date-Filtering/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/relative-date.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/relative-date.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/22_组件级筛选.md",
+      "title": "Component-Level Filtering",
+      "permalink": "/documentation/Analysis/Component-Level-Filtering/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/year-filter.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/year-filter.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Filters/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/30_交叉筛选.md",
+      "title": "Cross-Filtering",
+      "permalink": "/documentation/Analysis/Cross-Filtering/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/linked-components.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/linked-components.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Filter-Subscriptions/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/50_数据下钻.md",
+      "title": "Drill Down",
+      "permalink": "/documentation/Analysis/Drill-down/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Model/Creating-Hierarchy/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/60_钻取.md",
+      "title": "\"Drill through\"",
+      "permalink": "/documentation/Analysis/Drill-through/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/drill-through.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/drill-through.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Drill-down/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/70_排序.md",
+      "title": "\"Sorting\"",
+      "permalink": "/documentation/Analysis/Sorting/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/sort.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/sort.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Top-Bottom-N/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/71_跨模型和跨数据源分析.md",
+      "title": "\"Cross-Model Analysis\"",
+      "permalink": "/documentation/Analysis/Cross-Model/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Filter-Subscriptions/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/80_计算度量.md",
+      "title": "\"Calculated Measures\"",
+      "permalink": "/documentation/Analysis/Calculated-Measures/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/calculated-measure.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/calculated-measure.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Model/Measures-and-Calculated-Measures/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Quick-Calculated-Measures/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Using-Parameters-in-Calculated-Measures/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/90_TopBottom N 筛选.md",
+      "title": "\"Row Limit: Top and Bottom N\"",
+      "permalink": "/documentation/Analysis/Top-Bottom-N/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/row-limit.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/row-limit.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Console/10 Quick tour of the User Console.md",
+      "title": "\"Quick Tour of the Console\"",
+      "permalink": "/documentation/Console/Quick-Tour-of-the-Console/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/console-home.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/console-home.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Start/Create-Your-First-Analysis-Report/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Start/10 Basic Operations for Page Design.md",
+      "title": "Basic Operations for Report Design",
+      "permalink": "/documentation/Start/Basic-Operations-for-Report-Design/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/workspace.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/workspace.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/switch-chart.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/switch-chart.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Start/Create-Your-First-Analysis-Report/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Start/20 第一个页面.md",
+      "title": "Create Your First Analysis Report",
+      "permalink": "/documentation/Start/Create-Your-First-Analysis-Report/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/workspace.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/workspace.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/model-picker.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/model-picker.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/column-data.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/column-data.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/year-filter.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/year-filter.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/save-report.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/save-report.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/08 报表页的大小和显示方式.md",
+      "title": "\"Report Page Size and Display Settings\"",
+      "permalink": "/documentation/Visualization/Size-Display/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/current/page-size.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/page-size.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/current/display-mode.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/display-mode.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Mobile-Layout-View/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/10 添加图表.md",
+      "title": "Adding Charts",
+      "permalink": "/documentation/Visualization/Adding-Charts/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/current/column-data.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/column-data.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/110 条件颜色设置.md",
+      "title": "\"Conditional Colors\"",
+      "permalink": "/documentation/Visualization/Conditional-Colors/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/current/conditional-gradient.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/conditional-gradient.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/current/conditional-rules.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/conditional-rules.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Table/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/12 手机布局视图.md",
+      "title": "\"Mobile Layout View\"",
+      "permalink": "/documentation/Visualization/Mobile-Layout-View/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/current/mobile-layout.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/mobile-layout.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/120 参数驱动Tabs的显示.md",
+      "title": "\"Default Tab Rules\"",
+      "permalink": "/documentation/Visualization/Parameter-Driven-Tab-Switching/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/current/default-tab-rules.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/default-tab-rules.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Creating-Parameters/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Parameter-Controllers/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Multi-Tabbed-Page/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/130 导出.md",
+      "title": "\"Export\"",
+      "permalink": "/documentation/Visualization/Export/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/current/export-menu.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/export-menu.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/20 筛选器订阅.md",
+      "title": "Link Filters and Charts",
+      "permalink": "/documentation/Visualization/Filter-Subscriptions/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/current/filter-interactions.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/filter-interactions.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/current/filter-result.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/filter-result.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Cross-Model/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/26 制作多标签页面.md",
+      "title": "Tabs (Multi-Tabbed Page)",
+      "permalink": "/documentation/Visualization/Multi-Tabbed-Page/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/current/tabs-data.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/tabs-data.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/current/tabs-style.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/tabs-style.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/40_图表组件的工具提示.md",
+      "title": "\"Tooltips for Chart Components\"",
+      "permalink": "/documentation/Visualization/Tooltips-for-Chart-Components/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/81 X 轴类型设置：连续和类别.md",
+      "title": "\"X Axis Type Settings\"",
+      "permalink": "/documentation/Visualization/X-Axis-Type-Settings/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/10 标签页（Tab）.md",
+      "title": "Tabs",
+      "permalink": "/documentation/Visualization/Tabs-Component/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Multi-Tabbed-Page/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/20 image.md",
+      "title": "Image",
+      "permalink": "/documentation/Visualization/Image/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/image-source.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/image-source.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/25 Shapes.md",
+      "title": "Shapes",
+      "permalink": "/documentation/Visualization/Shapes/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/shape-types.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/shape-types.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/assist-actions.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/assist-actions.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/30 Line.md",
+      "title": "Lines and arrows",
+      "permalink": "/documentation/Visualization/Line/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/shape-types.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/shape-types.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/40 Text.md",
+      "title": "Text",
+      "permalink": "/documentation/Visualization/Text/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/text-content.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/text-content.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/45 文本框组件.md",
+      "title": "Text Box",
+      "permalink": "/documentation/Visualization/TextBox/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/rich-text.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/rich-text.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Text/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/50 Ellipse.md",
+      "title": "Ellipse",
+      "permalink": "/documentation/Visualization/Ellipse/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Shapes/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/60 Rectangle.md",
+      "title": "Rectangle",
+      "permalink": "/documentation/Visualization/Rectangle/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Shapes/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/70 Action button.md",
+      "title": "Action button",
+      "permalink": "/documentation/Visualization/Action-Button/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/action-button-style.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/action-button-style.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/80 Web page.md",
+      "title": "Web page",
+      "permalink": "/documentation/Visualization/Web-Page/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/web-page.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/web-page.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/00 Choose a chart.md",
+      "title": "Choose and build a chart",
+      "permalink": "/documentation/Visualization/Choose-a-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Measure/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/KPI-Trend-Card/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Clustered-Column-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Clustered-Bar-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Stacked-Column-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Stacked-Bar-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/100-Stacked-Column-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/100-Stacked-Bar-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Pie-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Grouped-Donut-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Line-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Area/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Stacked0-Area-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Stacked-Ratio-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Combo%20Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Scatter-Plot/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Gauge/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Bullet-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Progress-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Histogram-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Box-Plot/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Range-Column-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Heat-Matrix/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Calendar-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Radar-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Treemap/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Sunburst/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Decomposition-Tree/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Funnel/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Sankey-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Waterfall-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Dimension-Value/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Word-Cloud-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Image-chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/chart-comparison-concept.svg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/chart-comparison-concept.svg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Filter-Subscriptions/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Component-Level-Filtering/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/10 Measure.md",
+      "title": "Measure card",
+      "permalink": "/documentation/Visualization/Measure/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/11 KPI trend card.md",
+      "title": "KPI trend card",
+      "permalink": "/documentation/Visualization/KPI-Trend-Card/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/kpi-trend-data.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/kpi-trend-data.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/kpi-trend-status.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/kpi-trend-status.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/20 Dimension-Value.md",
+      "title": "Dimension field",
+      "permalink": "/documentation/Visualization/Dimension-Value/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Filter-Subscriptions/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/21 Gauge.md",
+      "title": "Gauge",
+      "permalink": "/documentation/Visualization/Gauge/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/42 Clustered-Column.md",
+      "title": "Clustered column",
+      "permalink": "/documentation/Visualization/Clustered-Column-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Combo%20Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/chart-comparison-concept.svg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/chart-comparison-concept.svg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Component-Level-Filtering/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/43 Stacked-Column-Chart.md",
+      "title": "Stacked column",
+      "permalink": "/documentation/Visualization/Stacked-Column-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/chart-comparison-concept.svg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/chart-comparison-concept.svg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Component-Level-Filtering/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/45 100-Stacked-Column-Chart.md",
+      "title": "100% stacked column",
+      "permalink": "/documentation/Visualization/100-Stacked-Column-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/chart-comparison-concept.svg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/chart-comparison-concept.svg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Component-Level-Filtering/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/50 Clustered-Bar-Chart.md",
+      "title": "Clustered bar",
+      "permalink": "/documentation/Visualization/Clustered-Bar-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Combo%20Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/chart-comparison-concept.svg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/chart-comparison-concept.svg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Component-Level-Filtering/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/55 Stacked-Bar-Chart.md",
+      "title": "Stacked bar",
+      "permalink": "/documentation/Visualization/Stacked-Bar-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/chart-comparison-concept.svg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/chart-comparison-concept.svg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Component-Level-Filtering/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/60 100-Stacked-Bar-Chart.md",
+      "title": "100% stacked bar",
+      "permalink": "/documentation/Visualization/100-Stacked-Bar-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/chart-comparison-concept.svg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/chart-comparison-concept.svg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Component-Level-Filtering/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/61 Line Chart.md",
+      "title": "Line",
+      "permalink": "/documentation/Visualization/Line-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Combo%20Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Area/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/62 Combo-Chart.md",
+      "title": "Combo",
+      "permalink": "/documentation/Visualization/Combo Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Line-Chart/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/combo-data.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/combo-data.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/combo-axes.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/combo-axes.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Component-Level-Filtering/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/65 Stacked Ratio Chart.md",
+      "title": "100% stacked area",
+      "permalink": "/documentation/Visualization/Stacked-Ratio-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/66 Area.md",
+      "title": "Area",
+      "permalink": "/documentation/Visualization/Area/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/68 Stacked Area Chart.md",
+      "title": "Stacked area",
+      "permalink": "/documentation/Visualization/Stacked0-Area-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/69 Pie Chart.md",
+      "title": "Pie",
+      "permalink": "/documentation/Visualization/Pie-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/pie-data.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/pie-data.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/pie-type.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/pie-type.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/70 Grouped Donut Chart.md",
+      "title": "Grouped donuts",
+      "permalink": "/documentation/Visualization/Grouped-Donut-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/72 Scatter Plot.md",
+      "title": "Scatter",
+      "permalink": "/documentation/Visualization/Scatter-Plot/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/observation-grain-concept.svg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/observation-grain-concept.svg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/73 Heat matrix.md",
+      "title": "Heat matrix",
+      "permalink": "/documentation/Visualization/Heat-Matrix/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/heat-matrix-data.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/heat-matrix-data.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/heat-matrix-normalize.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/heat-matrix-normalize.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/74 Box plot.md",
+      "title": "Box plot",
+      "permalink": "/documentation/Visualization/Box-Plot/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/observation-grain-concept.svg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/observation-grain-concept.svg"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/box-plot-data.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/box-plot-data.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/box-plot-whiskers.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/box-plot-whiskers.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/box-plot-preview.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/box-plot-preview.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/75 Word Cloud Chart.md",
+      "title": "Word cloud",
+      "permalink": "/documentation/Visualization/Word-Cloud-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/76 Funnel.md",
+      "title": "Funnel",
+      "permalink": "/documentation/Visualization/Funnel/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/funnel-arrangement.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/funnel-arrangement.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/89 Radar Chart.md",
+      "title": "Radar",
+      "permalink": "/documentation/Visualization/Radar-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/90 Sankey-Chart.md",
+      "title": "Sankey",
+      "permalink": "/documentation/Visualization/Sankey-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/91 Calendar-Chart.md",
+      "title": "Calendar chart",
+      "permalink": "/documentation/Visualization/Calendar-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/92 Sunburst.md",
+      "title": "Sunburst",
+      "permalink": "/documentation/Visualization/Sunburst/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/92 Treemap-Chart.md",
+      "title": "Treemap",
+      "permalink": "/documentation/Visualization/Treemap/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/93 Progress-Chart.md",
+      "title": "Ring progress",
+      "permalink": "/documentation/Visualization/Progress-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/94 Bullet Chart.md",
+      "title": "Bullet",
+      "permalink": "/documentation/Visualization/Bullet-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/95 Waterfall-Chart.md",
+      "title": "Waterfall",
+      "permalink": "/documentation/Visualization/Waterfall-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/waterfall-concept.svg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/waterfall-concept.svg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/96 Image.md",
+      "title": "Dynamic image",
+      "permalink": "/documentation/Visualization/Image-chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Filter-Subscriptions/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/97 Range-Column-Chart.md",
+      "title": "Range column",
+      "permalink": "/documentation/Visualization/Range-Column-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/98 Histogram-Chart.md",
+      "title": "Histogram",
+      "permalink": "/documentation/Visualization/Histogram-Chart/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/observation-grain-concept.svg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/observation-grain-concept.svg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/99 Decomposition-Tree.md",
+      "title": "Decomposition tree",
+      "permalink": "/documentation/Visualization/Decomposition-Tree/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/20 Filter Components.md",
+      "title": "Filters",
+      "permalink": "/documentation/Visualization/Filters/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/filters-catalog.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/filters-catalog.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Parameter-Controllers/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/30 List Box.md",
+      "title": "List box",
+      "permalink": "/documentation/Visualization/List-Box/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Filters/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Parameter-Controllers/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/40 数字范围筛选器.md",
+      "title": "Numeric slider",
+      "permalink": "/documentation/Visualization/Number-Range-Filter/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/numeric-slider-field.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/numeric-slider-field.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/scenario-slider-settings.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/scenario-slider-settings.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Parameter-Controllers/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/What-if-Analysis/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/50 Datepicker.md",
+      "title": "Datepicker and Datepicker Range",
+      "permalink": "/documentation/Visualization/Datepicker/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/date-filter.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/date-filter.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Relative-Date-Filtering/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/10 配置地图引擎.md",
+      "title": "\"GIS Map Settings\"",
+      "permalink": "/documentation/Visualization/GIS-Map-Settings/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/20 Marker Map.md",
+      "title": "GIS marker map",
+      "permalink": "/documentation/Visualization/Marker-Map/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/GIS-Map-Settings/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/30 GeoJSON标记地图.md",
+      "title": "Marker map",
+      "permalink": "/documentation/Visualization/GeoJSON-marked-map/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/40 GeoJSON填充地图.md",
+      "title": "Filled map",
+      "permalink": "/documentation/Visualization/GeoJSON-Filled-Map/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/50 _图片地图.md",
+      "title": "Image map",
+      "permalink": "/documentation/Visualization/Image-Map/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Table/10 Table.md",
+      "title": "Table",
+      "permalink": "/documentation/Visualization/Table/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/table-style.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/table-style.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/table-data-bars-dialog.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/table-data-bars-dialog.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Table/20 Pivot Table.md",
+      "title": "Pivot table",
+      "permalink": "/documentation/Visualization/Pivot-Table/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Table/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Table/30 Hierarchy Table.md",
+      "title": "Tree table",
+      "permalink": "/documentation/Visualization/Hierarchy-Table/",
+      "productVerification": "not-assessed-by-static-check; see audits/live-visualizer/README.md",
+      "references": []
+    }
+  ]
+}

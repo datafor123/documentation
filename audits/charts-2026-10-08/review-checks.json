@@ -1,0 +1,218 @@
+{
+  "chartPages": 35,
+  "existingRoutesPreserved": 34,
+  "englishTextCheck": "passed",
+  "build": "not run, per user instruction",
+  "pages": [
+    {
+      "file": "docs/documentation/Visualization/Chart/00 Choose a chart.md",
+      "permalink": "/documentation/Visualization/Choose-a-Chart/",
+      "existingRoutePreserved": null,
+      "words": 553
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/10 Measure.md",
+      "permalink": "/documentation/Visualization/Measure/",
+      "existingRoutePreserved": true,
+      "words": 417
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/11 KPI trend card.md",
+      "permalink": "/documentation/Visualization/KPI-Trend-Card/",
+      "existingRoutePreserved": true,
+      "words": 570
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/20 Dimension-Value.md",
+      "permalink": "/documentation/Visualization/Dimension-Value/",
+      "existingRoutePreserved": true,
+      "words": 327
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/21 Gauge.md",
+      "permalink": "/documentation/Visualization/Gauge/",
+      "existingRoutePreserved": true,
+      "words": 389
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/42 Clustered-Column.md",
+      "permalink": "/documentation/Visualization/Clustered-Column-Chart/",
+      "existingRoutePreserved": true,
+      "words": 437
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/43 Stacked-Column-Chart.md",
+      "permalink": "/documentation/Visualization/Stacked-Column-Chart/",
+      "existingRoutePreserved": true,
+      "words": 446
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/45 100-Stacked-Column-Chart.md",
+      "permalink": "/documentation/Visualization/100-Stacked-Column-Chart/",
+      "existingRoutePreserved": true,
+      "words": 451
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/50 Clustered-Bar-Chart.md",
+      "permalink": "/documentation/Visualization/Clustered-Bar-Chart/",
+      "existingRoutePreserved": true,
+      "words": 431
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/55 Stacked-Bar-Chart.md",
+      "permalink": "/documentation/Visualization/Stacked-Bar-Chart/",
+      "existingRoutePreserved": true,
+      "words": 441
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/60 100-Stacked-Bar-Chart.md",
+      "permalink": "/documentation/Visualization/100-Stacked-Bar-Chart/",
+      "existingRoutePreserved": true,
+      "words": 439
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/61 Line Chart.md",
+      "permalink": "/documentation/Visualization/Line-Chart/",
+      "existingRoutePreserved": true,
+      "words": 425
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/62 Combo-Chart.md",
+      "permalink": "/documentation/Visualization/Combo Chart/",
+      "existingRoutePreserved": true,
+      "words": 695
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/65 Stacked Ratio Chart.md",
+      "permalink": "/documentation/Visualization/Stacked-Ratio-Chart/",
+      "existingRoutePreserved": true,
+      "words": 364
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/66 Area.md",
+      "permalink": "/documentation/Visualization/Area/",
+      "existingRoutePreserved": true,
+      "words": 339
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/68 Stacked Area Chart.md",
+      "permalink": "/documentation/Visualization/Stacked0-Area-Chart/",
+      "existingRoutePreserved": true,
+      "words": 360
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/69 Pie Chart.md",
+      "permalink": "/documentation/Visualization/Pie-Chart/",
+      "existingRoutePreserved": true,
+      "words": 489
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/70 Grouped Donut Chart.md",
+      "permalink": "/documentation/Visualization/Grouped-Donut-Chart/",
+      "existingRoutePreserved": true,
+      "words": 427
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/72 Scatter Plot.md",
+      "permalink": "/documentation/Visualization/Scatter-Plot/",
+      "existingRoutePreserved": true,
+      "words": 399
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/73 Heat matrix.md",
+      "permalink": "/documentation/Visualization/Heat-Matrix/",
+      "existingRoutePreserved": true,
+      "words": 470
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/74 Box plot.md",
+      "permalink": "/documentation/Visualization/Box-Plot/",
+      "existingRoutePreserved": true,
+      "words": 499
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/75 Word Cloud Chart.md",
+      "permalink": "/documentation/Visualization/Word-Cloud-Chart/",
+      "existingRoutePreserved": true,
+      "words": 312
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/76 Funnel.md",
+      "permalink": "/documentation/Visualization/Funnel/",
+      "existingRoutePreserved": true,
+      "words": 502
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/89 Radar Chart.md",
+      "permalink": "/documentation/Visualization/Radar-Chart/",
+      "existingRoutePreserved": true,
+      "words": 319
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/90 Sankey-Chart.md",
+      "permalink": "/documentation/Visualization/Sankey-Chart/",
+      "existingRoutePreserved": true,
+      "words": 361
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/91 Calendar-Chart.md",
+      "permalink": "/documentation/Visualization/Calendar-Chart/",
+      "existingRoutePreserved": true,
+      "words": 377
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/92 Sunburst.md",
+      "permalink": "/documentation/Visualization/Sunburst/",
+      "existingRoutePreserved": true,
+      "words": 357
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/92 Treemap-Chart.md",
+      "permalink": "/documentation/Visualization/Treemap/",
+      "existingRoutePreserved": true,
+      "words": 380
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/93 Progress-Chart.md",
+      "permalink": "/documentation/Visualization/Progress-Chart/",
+      "existingRoutePreserved": true,
+      "words": 353
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/94 Bullet Chart.md",
+      "permalink": "/documentation/Visualization/Bullet-Chart/",
+      "existingRoutePreserved": true,
+      "words": 387
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/95 Waterfall-Chart.md",
+      "permalink": "/documentation/Visualization/Waterfall-Chart/",
+      "existingRoutePreserved": true,
+      "words": 385
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/96 Image.md",
+      "permalink": "/documentation/Visualization/Image-chart/",
+      "existingRoutePreserved": true,
+      "words": 335
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/97 Range-Column-Chart.md",
+      "permalink": "/documentation/Visualization/Range-Column-Chart/",
+      "existingRoutePreserved": true,
+      "words": 350
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/98 Histogram-Chart.md",
+      "permalink": "/documentation/Visualization/Histogram-Chart/",
+      "existingRoutePreserved": true,
+      "words": 429
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/99 Decomposition-Tree.md",
+      "permalink": "/documentation/Visualization/Decomposition-Tree/",
+      "existingRoutePreserved": true,
+      "words": 503
+    }
+  ]
+}

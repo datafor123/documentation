@@ -6,26 +6,25 @@ createTime: 2026/09/01 22:03:26
 
 # Dimension field
 
-Display a descriptive field, such as a region or store name.
+Display a dimension value as text, such as the selected region, store or product. Use it to make report context visible. This component displays data; it is not an input control for selecting a filter.
 
-## Set up the data
+## Show the selected region
 
-1. Choose **Components → Charts → Dimension field** and place it on the canvas.
-2. Select the chart and choose an **Analysis model** in **Data**.
-3. Use **+** beside each field slot to select the following fields, then click **Back**.
+1. Add **Components → Charts → Dimension field** to the canvas.
+2. Select an **Analysis model** in **Data** and put Region in **Field**.
+3. Set **Filters** to a single region for a fixed context label, or configure the report's filter interaction so the component receives the intended selection.
+4. Inspect the result with one, several and no matching members before styling.
 
-| Data slot | Choose |
-| --- | --- |
-| **Field** | The dimension value to display. |
+For a dynamically selected label, use the same business field as the controlling filter. Matching captions are not enough if they belong to different hierarchies or models. See [linked components](/documentation/Visualization/Filter-Subscriptions/).
 
-Use **Filters** to restrict this component’s data. Check the result before styling it.
+## Format for the available space
 
-## Make it readable
+Use **Style → Main value** to set text appearance and **Text wrap** when names may occupy multiple lines. Give long product or store names enough width. The component can summarize multiple returned values; do not design the report as though a single value is guaranteed unless the filters enforce that.
 
-Use **Main value** to format the text and **Empty data** to explain an empty selection.
+Use **Title** for a fixed caption such as Selected region, and **Empty data** for a meaningful missing-result display. Avoid showing a specific region name as a fallback, because it could imply that a filter is active when no data matches.
 
-Apply a filter when the card should identify one entity. Use a table when readers need a list.
+## Verify the context
 
-Save the report and use **Preview** to check labels, hover details, and the filtered result.
+Save and use **Preview**. Change the controlling filter and check that both the text and the related charts update. A label that changes while the charts remain unchanged can mislead readers; verify the interactions for every target component.
 
-See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).
+If the component shows several values, narrow its data filters or support the multi-selection layout. If it shows an unexpected value, check the model, exact field and filter subscriptions. For a fixed heading or a sentence assembled with dynamic values, use **Assists → Text** instead.

@@ -6,38 +6,50 @@ createTime: 2026/09/03 10:57:16
 
 # Decomposition tree
 
-Break one metric down by explanatory dimensions.
+Explore one measure by splitting it across dimensions. Use it to investigate where a result is concentrated, such as which regions, stores or product categories contribute to sales. A split shows a breakdown, not a causal explanation.
 
-## Set up the data
+## Configure the analysis
 
-1. Choose **Components → Charts → Decomposition tree** and place it on the canvas.
-2. Select the chart and choose an **Analysis model** in **Data**.
-3. Use **+** beside each field slot to select the following fields, then click **Back**.
+1. Add **Components → Charts → Decomposition tree** and choose an **Analysis model** in **Data**.
+2. Put Net Sales in **Analyze**.
+3. Add Region, Store and Product Category to **Explain by**. These are the dimensions users can choose when expanding nodes.
+4. Set **Filters** to the population and period to investigate. Add **Color**, **Tooltips**, or **Icon** only when useful for node context.
+5. Check the root value against a table with the same measure and filters.
 
-| Data slot | Choose |
+Start with a small, useful set of dimensions. Very high-cardinality fields can create more branches than users can inspect.
+
+## Follow a path
+
+1. Click the root node's **+** and choose Region.
+2. Choose a region, then add a Store split beneath that branch.
+3. Add another available dimension to investigate the selected subset.
+4. Remove a later level to choose a different path. Use **Drill Reset** to return to the saved default path.
+
+Every level inherits the selections above it. A Store value under East China is not a store total for all regions. Recheck the path after changing a report filter.
+
+## Use Smart split deliberately
+
+Under **Style → Analysis settings**, **Smart split** offers **High value** and **Low value** recommendations from unused dimensions.
+
+| Mode | How it compares candidates |
 | --- | --- |
-| **Analyze** | Measure to investigate. |
-| **Explain by** | Dimensions available for splitting the result. |
-| **Color / Tooltips / Icon** | Optional context and node presentation. |
+| **Absolute** | Compares member values directly. Useful for finding the largest or smallest result. |
+| **Relative** | Compares a member value with the absolute average of its candidate dimension. Useful for finding a value that stands out within that dimension. |
 
-Use **Filters** to restrict this component’s data. Check the result before styling it.
+A relative recommendation need not have the largest absolute sales. A high/low recommendation also does not mean good/bad performance. Use a manual split when the business question specifies a dimension or a candidate is unavailable under the current filters.
 
-## Explore a path
+## Set a meaningful bar scale
 
-1. Start with the root total, click its **+** control, and choose an **Explain by** field.
-2. Select a member and add another split to investigate its contribution.
-3. Remove a later level to choose a different path. Use **Drill Reset** to return to the saved default path.
+In **Style → Data bars → Scale to**:
 
-Under **Style → Analysis settings**, **Smart split** offers **High value** and **Low value** recommendations from unused dimensions. **Absolute** compares member values directly; **Relative** compares a value with the absolute average for its candidate dimension. Use a manual split if a candidate is unavailable under the current filters.
+- **Level maximum** compares peers within a level.
+- **Parent value** compares children with their parent.
+- **Visible tree maximum** uses a common reference across the visible tree.
 
-Choose **Data bars → Scale to** deliberately: **Level maximum** compares peers, **Parent value** compares children with their parent, and **Visible tree maximum** uses a common reference for the visible tree.
+These choices change bar lengths, not the measure values. For ratios, averages and distinct counts, child values may not add to their parent; do not read every bar as an additive contribution.
 
-## Format the tree
+Use **Tree layout**, **Nodes**, **Connectors**, **Category labels**, **Values**, and **Level headers** to keep the path readable. Leave enough width for category names.
 
-Use **Analysis settings**, **Tree layout**, **Nodes**, **Connectors**, **Data bars**, **Category labels**, **Values**, and **Level headers**.
+## Verify interaction
 
-Example: analyze Net Sales by Region, Store, and Product Category. A breakdown shows association; it does not establish a cause.
-
-Save the report and use **Preview** to check labels, hover details, and the filtered result.
-
-See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).
+Save and open **Preview**. Expand a manual path, try a Smart split, change a filter and reset the drill. Confirm the root and selected branch values against the same filtered table. If a dimension is missing from the split menu, check **Explain by**, dimensions already used in the path, and the current data result.

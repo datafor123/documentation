@@ -6,29 +6,43 @@ createTime: 2026/09/01 22:03:26
 
 # 100% stacked bar
 
-Compare each category’s percentage breakdown with horizontal bars.
+Use horizontal bars to compare percentage composition across named categories. Every non-empty category is normalized to a whole. Equal bar lengths do not mean equal sales.
 
-## Set up the data
+## Build a sales-mix chart
 
-1. Choose **Components → Charts → 100% stacked bar** and place it on the canvas.
-2. Select the chart and choose an **Analysis model** in **Data**.
-3. Use **+** beside each field slot to select the following fields, then click **Back**.
+1. Add **Components → Charts → 100% stacked bar**, select it, and choose an **Analysis model** in **Data**.
+2. Use **+** to choose the fields below. Click **Back** after each selection.
 
-| Data slot | Choose |
-| --- | --- |
-| **Y-axis** | Category or time field. |
-| **Legend** | Optional field that splits the measure into series. |
-| **Measures** | Numeric measure to compare. |
-| **Color / Tooltips** | Optional color encoding and extra hover detail. |
+| Slot | Example | Purpose |
+| --- | --- | --- |
+| **Y-axis** | Region | One row per category. |
+| **Measures** | Net Sales | Value used to calculate each contribution. |
+| **Legend** | Product Category | Segments within each bar. |
+| **Tooltips** | Optional order count or quantity | Context without adding another plotted measure. |
 
-Use **Filters** to restrict this component’s data. Check the result before styling it.
+3. Set **Filters** to a defined period, such as Year = 2025. Start with a manageable number of categories.
+4. Check the category and series values before opening **Style**.
 
-## Make it readable
+Use either one measure split by a **Legend** dimension, or multiple compatible measures representing separate parts. Do not stack an overall total together with its own components: that counts the same value twice. The **Legend** and **Color** slots can disappear when several measures are assigned; the measure names then identify the series.
 
-Use **X axis**, **Y axis**, **Gridlines**, **Legend**, and **Data labels** to keep the chart readable. Use **Tooltip** for details that do not need a permanent label.
+![Clustered, stacked and 100% stacked views of the same illustrative values](../images/current/chart-comparison-concept.svg)
 
-Use meaningful parts of the same whole. The bar length does not communicate the original total.
+## Read and format the chart
 
-Save the report and use **Preview** to check labels, hover details, and the filtered result.
+Read each segment as a share of its category total. For example, 30 sales out of a total of 100 and 300 out of 1,000 both occupy 30%. Keep a raw-value tooltip or a separate total chart when volume matters.
 
-See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).
+- **Bar** controls the mark presentation and spacing. Increase the chart size before squeezing many categories into it.
+- **Data labels** are useful for a small number of values; use **Tooltip** for a dense chart.
+- **X axis** is the value axis. Keep its percentage meaning clear.
+- **Y axis** contains category labels. Leave room for long names.
+- Keep the **Legend** visible for multiple series. Use the same series colors across related charts.
+
+## Validate and troubleshoot
+
+Save and open **Preview**. Hover at least one category and compare its values with the source or a table using the same filters.
+
+- If every category looks equally important, inspect raw totals: normalization deliberately removes volume differences.
+- If a share is unexpected, check the included series, nulls and filters. Prefer non-negative, additive values for a part-to-whole comparison.
+- If series disappear after a chart-type change, recheck the data slots.
+
+Choose a stacked chart when absolute totals matter. See [component filters](/documentation/Analysis/Component-Level-Filtering/).

@@ -6,27 +6,27 @@ createTime: 2026/09/01 22:03:26
 
 # Word cloud
 
-Show words with visual emphasis based on a numeric measure.
+Use word size to give a quick impression of category weight, such as frequently mentioned topics or high-volume product names. Use a bar chart when readers need an exact ranking.
 
-## Set up the data
+## Map words and weights
 
-1. Choose **Components → Charts → Word cloud** and place it on the canvas.
-2. Select the chart and choose an **Analysis model** in **Data**.
-3. Use **+** beside each field slot to select the following fields, then click **Back**.
+1. Add **Components → Charts → Word cloud** and choose an **Analysis model** in **Data**.
+2. Put a short text category in **Word** and a non-negative weight in **Measure**. For example, use Topic and Mention Count.
+3. Apply **Filters** to the relevant period or population.
+4. Check a few word values in the tooltip or a companion table before styling.
 
-| Data slot | Choose |
-| --- | --- |
-| **Word** | Text or category field. |
-| **Measure** | Value controlling word emphasis. |
+The Word field should already contain the categories you want to display. Do not assume that binding a paragraph automatically extracts topics or counts individual words. Prepare that grouping in your source or model.
 
-Use **Filters** to restrict this component’s data. Check the result before styling it.
+## Fit the cloud
 
-## Make it readable
+In **Style → Words**, set **Min. font** and **Max. font** so small words remain readable and large words fit the component. Words that do not fit can shrink toward the minimum font size.
 
-Use **Words** to adjust the presentation.
+Choose **Text orientation → Horizontal** for easier reading, or **Horizontal and vertical** for a denser arrangement. **Shape** controls the outline, with options including Circle, Diamond, Triangle and Star. It changes the layout, not the measure values.
 
-Use a bar chart when exact ranking or numerical comparison is important. Remove empty and irrelevant words with filters.
+Long names consume more space than short names. Keep labels concise and give the component enough room; visual area is not a precise numeric scale.
 
-Save the report and use **Preview** to check labels, hover details, and the filtered result.
+## Check missing words
 
-See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).
+Words with no value, zero or negative values are not shown. If an expected word is absent, check its weight and the component filters first, then check available space and font limits.
+
+Save and open **Preview** at the report's intended size. If important words cannot be read, increase space or reduce the number of categories. Keep a table or ranked bar chart available when users need exact values.
