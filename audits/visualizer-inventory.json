@@ -1,0 +1,1845 @@
+{
+  "scope": "Visualizer, Analysis, two report-design walkthroughs, and Console entry points",
+  "limitations": [
+    "Checks file and permalink existence, not current product behavior or screenshot content.",
+    "External URLs, fragment anchors, CSS assets, and reference-style Markdown links are not validated.",
+    "All existing screenshots require fresh review against the running English UI."
+  ],
+  "summary": {
+    "pages": 79,
+    "imageReferences": 163,
+    "missingReferences": 1
+  },
+  "pages": [
+    {
+      "file": "docs/documentation/Analysis/10 Exploratory Analysis.md",
+      "title": "Exploratory Analysis",
+      "permalink": "/documentation/Analysis/Exploratory Analysis/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Filters/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Component-Level-Filtering/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Cross-Filtering/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Tooltips-for-Chart-Components/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Drill-through/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Drill-down/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Sorting/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Calculated-Measures/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/100_参数.md",
+      "title": "Creating Parameters",
+      "permalink": "/documentation/Analysis/Creating-Parameters/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/parameter-editor.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/parameter-editor.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/report-parameters.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/report-parameters.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Parameter-Controllers/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/105 Parameter Controllers.md",
+      "title": "Parameter Controllers",
+      "permalink": "/documentation/Analysis/Parameter-Controllers/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/parameter-slider.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/parameter-slider.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/110_度量聚合.md",
+      "title": "Aggregation for Measures",
+      "permalink": "/documentation/Analysis/Aggregation-for-Measures/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Model/Measures-and-Calculated-Measures/#configure-a-measure",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "../Model/images/analysis-model-measure-properties.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Model/images/analysis-model-measure-properties.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/120_快速度量功能.md",
+      "title": "Quick Calculated Measures",
+      "permalink": "/documentation/Analysis/Quick-Calculated-Measures/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Model/Measures-and-Calculated-Measures/#use-a-quick-measure",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Model/Time-Dimensions-and-Time-Intelligence/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "../Model/images/analysis-model-create-calculated-measure.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Model/images/analysis-model-create-calculated-measure.png"
+        },
+        {
+          "type": "image",
+          "target": "../Model/images/analysis-model-quick-measure-templates.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Model/images/analysis-model-quick-measure-templates.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/130_图表参考线.md",
+      "title": "Chart Reference Lines",
+      "permalink": "/documentation/Analysis/Chart-Reference-Lines/",
+      "productVerification": "pending-live-ui-access",
+      "references": []
+    },
+    {
+      "file": "docs/documentation/Analysis/150_What-if.md",
+      "title": "What-if Analysis",
+      "permalink": "/documentation/Analysis/What-if-Analysis/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Creating-Parameters/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Using-Parameters-in-Calculated-Measures/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "./images/analysis-report-parameters.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/analysis-report-parameters.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/160 Using Parameters in Component Titles.md",
+      "title": "Using Parameters in Component Titles",
+      "permalink": "/documentation/Analysis/Using-Parameters-in-Component-Titles/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Creating-Parameters/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/170 Using Parameters in Calculated Measures.md",
+      "title": "Using Parameters in Calculated Measures",
+      "permalink": "/documentation/Analysis/Using-Parameters-in-Calculated-Measures/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Creating-Parameters/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/What-if-Analysis/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Calculated-Measures/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/180 Show Items with No Data.md",
+      "title": "Show Items with No Data",
+      "permalink": "/documentation/Analysis/Show-Items-with-No-Data/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/image-20250317155546756.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/image-20250317155546756.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20250317160153152.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/image-20250317160153152.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20250317160725504.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/image-20250317160725504.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/190 血缘分析.md",
+      "title": "Lineage Analysis",
+      "permalink": "/documentation/Analysis/Lineage-Analysis/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/image-20250720203938094.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/image-20250720203938094.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20250720203902044.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/image-20250720203902044.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20250720204147773.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/image-20250720204147773.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20250720204339825.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/image-20250720204339825.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20250720205007581.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/image-20250720205007581.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20250720204916332.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/image-20250720204916332.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/200 Relative Date Filtering.md",
+      "title": "Relative Date Filtering",
+      "permalink": "/documentation/Analysis/Relative-Date-Filtering/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/relative-date.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/relative-date.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/22_组件级筛选.md",
+      "title": "Component-Level Filtering",
+      "permalink": "/documentation/Analysis/Component-Level-Filtering/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/year-filter.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/year-filter.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Filters/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/30_交叉筛选.md",
+      "title": "Cross-Filtering",
+      "permalink": "/documentation/Analysis/Cross-Filtering/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/linked-components.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/linked-components.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Filter-Subscriptions/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/50_数据下钻.md",
+      "title": "Drill Down",
+      "permalink": "/documentation/Analysis/Drill-down/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Model/Creating-Hierarchy/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/60_钻取.md",
+      "title": "Drill through",
+      "permalink": "/documentation/Analysis/Drill-through/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/1721634249199.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1721634249199.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1721634556059.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1721634556059.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1721639171867.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1721639171867.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1721639025110.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1721639025110.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/70_排序.md",
+      "title": "Sorting",
+      "permalink": "/documentation/Analysis/Sorting/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/image-20250312152643869.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/image-20250312152643869.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20250312152854816.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/image-20250312152854816.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1681911083494-1741764674290-1.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1681911083494-1741764674290-1.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1681913087646-1741764674290-2.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1681913087646-1741764674290-2.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1681913234484-1741764674290-3.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1681913234484-1741764674290-3.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/71_跨模型和跨数据源分析.md",
+      "title": "Cross-Model and Cross-Data Source Analysis",
+      "permalink": "/documentation/Analysis/Cross-Model/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/1731233238801-1731234548377-7.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1731233238801-1731234548377-7.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1731233049272-1731234548377-8.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1731233049272-1731234548377-8.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1731233589755-1731234548377-9.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1731233589755-1731234548377-9.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1731233692962-1731234548378-10.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1731233692962-1731234548378-10.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/f0exf-2cwap-1731234548378-11.gif",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/f0exf-2cwap-1731234548378-11.gif"
+        },
+        {
+          "type": "image",
+          "target": "./images/1731238805833.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1731238805833.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/80_计算度量.md",
+      "title": "Calculated Measures",
+      "permalink": "/documentation/Analysis/Calculated-Measures/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Model/Measures-and-Calculated-Measures/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Advanced/MDX-Functions/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/90_TopBottom N 筛选.md",
+      "title": "Top/Bottom N",
+      "permalink": "/documentation/Analysis/Top-Bottom-N/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/1681897791217.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1681897791217.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1681897843208.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1681897843208.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1681897945409.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Analysis/images/1681897945409.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Console/10 Quick tour of the User Console.md",
+      "title": "Quick Tour of the Console",
+      "permalink": "/documentation/Console/Quick-Tour-of-the-Console/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Model/Analysis-Model-Overview/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Metrics-Library/Metrics-Library/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Tools/Data-Dictionary/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Tools/GeoJSON/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/System/UserTypes/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Console/My-Account/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/System/Access-Control%20List/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Datasource/Data-Security/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Start/Create-Your-First-Analysis-Report/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/AI-Agent/AI-Chat/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "./images/console-home-en.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Console/images/console-home-en.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/console-content-actions-en.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Console/images/console-content-actions-en.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/console-search-en.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Console/images/console-search-en.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Start/10 Basic Operations for Page Design.md",
+      "title": "Basic Operations for Report Design",
+      "permalink": "/documentation/Start/Basic-Operations-for-Report-Design/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/workspace.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/workspace.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/switch-chart.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/switch-chart.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Start/Create-Your-First-Analysis-Report/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Start/20 第一个页面.md",
+      "title": "Create Your First Analysis Report",
+      "permalink": "/documentation/Start/Create-Your-First-Analysis-Report/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/workspace.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/workspace.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/model-picker.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/model-picker.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/column-data.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/column-data.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/year-filter.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/year-filter.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../Visualization/images/current/save-report.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/save-report.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/08 报表页的大小和显示方式.md",
+      "title": "Report Page Size and Display Settings",
+      "permalink": "/documentation/Visualization/Size-Display/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/image-20230113143938541.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20230113143938541.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20230113144904375.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20230113144904375.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/10 添加图表.md",
+      "title": "Adding Charts",
+      "permalink": "/documentation/Visualization/Adding-Charts/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/current/column-data.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/column-data.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/110 条件颜色设置.md",
+      "title": "Conditional Colors",
+      "permalink": "/documentation/Visualization/Conditional-Colors/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/image-20230113130143301.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20230113130143301.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20230113130827348.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20230113130827348.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20230113131505280.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20230113131505280.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20230113131619710.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20230113131619710.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20230113132434829.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20230113132434829.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/image-20230113132458420.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20230113132458420.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/12 手机布局视图.md",
+      "title": "Mobile Layout View",
+      "permalink": "/documentation/Visualization/Mobile-Layout-View/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/1739710021486.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1739710021486.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1739710062216.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1739710062216.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1739710309420.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1739710309420.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/o82ue-p6rs6.gif",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/o82ue-p6rs6.gif"
+        },
+        {
+          "type": "image",
+          "target": "./images/1739710535269.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1739710535269.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1739710579221.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1739710579221.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/120 参数驱动Tabs的显示.md",
+      "title": "Parameter-Driven Tab Switching",
+      "permalink": "/documentation/Visualization/Parameter-Driven-Tab-Switching/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Creating-Parameters/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Parameter-Controllers/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Multi-Tabbed-Page/",
+          "status": "route-exists"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/System/Access-Control%20List/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "./images/parameter-driven-tab-settings.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/parameter-driven-tab-settings.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/parameter-driven-tab-header.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/parameter-driven-tab-header.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/130 导出.md",
+      "title": "Export",
+      "permalink": "/documentation/Visualization/Export/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/1682045060034.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1682045060034.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1682045104111.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1682045104111.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/20 筛选器订阅.md",
+      "title": "Filter Subscriptions for Charts",
+      "permalink": "/documentation/Visualization/Filter-Subscriptions/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/current/filter-interactions.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/filter-interactions.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Cross-Model-and-Cross-Data-Source-Analysis/",
+          "status": "missing",
+          "resolved": "docs/.vuepress/public/documentation/Analysis/Cross-Model-and-Cross-Data-Source-Analysis"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/26 制作多标签页面.md",
+      "title": "Tabs (Multi-Tabbed Page)",
+      "permalink": "/documentation/Visualization/Multi-Tabbed-Page/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/current/tabs-data.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/tabs-data.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/current/tabs-style.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/tabs-style.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/40_图表组件的工具提示.md",
+      "title": "Tooltips",
+      "permalink": "/documentation/Visualization/Tooltips-for-Chart-Components/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/image-20240730151629410.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20240730151629410.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1722323977713.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1722323977713.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1722323948050.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1722323948050.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/81 X 轴类型设置：连续和类别.md",
+      "title": "X Axis Type Settings",
+      "permalink": "/documentation/Visualization/X-Axis-Type-Settings/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/1721656115313.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1721656115313.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1721656242843.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1721656242843.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/1721656319461.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1721656319461.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/10 标签页（Tab）.md",
+      "title": "Tabs",
+      "permalink": "/documentation/Visualization/Tabs-Component/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Multi-Tabbed-Page/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/20 image.md",
+      "title": "Image",
+      "permalink": "/documentation/Visualization/Image/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/image-source.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/image-source.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/30 Line.md",
+      "title": "Line",
+      "permalink": "/documentation/Visualization/Line/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250316180227509.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250316180227509.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/40 Text.md",
+      "title": "Text",
+      "permalink": "/documentation/Visualization/Text/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/text-content.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/text-content.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/45 文本框组件.md",
+      "title": "Text Box",
+      "permalink": "/documentation/Visualization/TextBox/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/rich-text.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/rich-text.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/Text/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/50 Ellipse.md",
+      "title": "Ellipse",
+      "permalink": "/documentation/Visualization/Ellipse/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250319132445050.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250319132445050.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/60 Rectangle.md",
+      "title": "Rectangle",
+      "permalink": "/documentation/Visualization/Rectangle/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250319133038889.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250319133038889.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/10 Measure.md",
+      "title": "Measure",
+      "permalink": "/documentation/Visualization/Measure/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250327213957313.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327213957313.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/20 Dimension-Value.md",
+      "title": "Dimension Value",
+      "permalink": "/documentation/Visualization/Dimension-Value/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250327214552579.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327214552579.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/42 Clustered-Column.md",
+      "title": "Clustered Column",
+      "permalink": "/documentation/Visualization/Clustered-Column-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250327211250415.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327211250415.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20250327211259080.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327211259080.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/43 Stacked-Column-Chart.md",
+      "title": "Stacked Column",
+      "permalink": "/documentation/Visualization/Stacked-Column-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250327201947329.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327201947329.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20250327201749817.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327201749817.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/45 100-Stacked-Column-Chart.md",
+      "title": "100% Stacked Column",
+      "permalink": "/documentation/Visualization/100-Stacked-Column-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250327180750721.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327180750721.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20250327181037595.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327181037595.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/50 Clustered-Bar-Chart.md",
+      "title": "Clustered Bar",
+      "permalink": "/documentation/Visualization/Clustered-Bar-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250312214849741.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250312214849741.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20250312214911336.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250312214911336.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/55 Stacked-Bar-Chart.md",
+      "title": "Stacked Bar",
+      "permalink": "/documentation/Visualization/Stacked-Bar-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250327202538865.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327202538865.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/\\image-20250327202558078.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327202558078.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/60 100-Stacked-Bar-Chart.md",
+      "title": "100% Stacked Bar",
+      "permalink": "/documentation/Visualization/100-Stacked-Bar-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250327170330881.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327170330881.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20250327170257047.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327170257047.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/61 Line Chart.md",
+      "title": "Line",
+      "permalink": "/documentation/Visualization/Line-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250312222325472.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250312222325472.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20250312222512254.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250312222512254.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/62 Combo-Chart.md",
+      "title": "Combo",
+      "permalink": "/documentation/Visualization/Combo Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250312224607027.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250312224607027.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/65 Stacked Ratio Chart.md",
+      "title": "Stacked Ratio",
+      "permalink": "/documentation/Visualization/Stacked-Ratio-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250313145221967.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250313145221967.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20250313145251454.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250313145251454.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/68 Stacked Area Chart.md",
+      "title": "Stacked Area",
+      "permalink": "/documentation/Visualization/Stacked0-Area-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250312201251797.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250312201251797.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/69 Pie Chart.md",
+      "title": "Pie",
+      "permalink": "/documentation/Visualization/Pie-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250313133223219.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250313133223219.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20250312202258533-1741782769889-2-1741785560252-2.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250312202258533-1741782769889-2-1741785560252-2.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/70 Grouped Donut Chart.md",
+      "title": "Grouped Donut",
+      "permalink": "/documentation/Visualization/Grouped-Donut-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250313141512471.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250313141512471.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/72 Scatter Plot.md",
+      "title": "Scatter Plot",
+      "permalink": "/documentation/Visualization/Scatter-Plot/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250312213701748.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250312213701748.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/75 Word Cloud Chart.md",
+      "title": "Word Cloud",
+      "permalink": "/documentation/Visualization/Word-Cloud-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250312212605747.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250312212605747.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/89 Radar Chart.md",
+      "title": "Radar",
+      "permalink": "/documentation/Visualization/Radar-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250312215543200.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250312215543200.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/90 Sankey-Chart.md",
+      "title": "Sankey",
+      "permalink": "/documentation/Visualization/Sankey-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250312223412639.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250312223412639.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/91 Calendar-Chart.md",
+      "title": "Calendar",
+      "permalink": "/documentation/Visualization/Calendar-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250313130307817.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250313130307817.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/92 Treemap-Chart.md",
+      "title": "Treemap",
+      "permalink": "/documentation/Visualization/Treemap/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250313140811232.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250313140811232.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/93 Progress-Chart.md",
+      "title": "Progress",
+      "permalink": "/documentation/Visualization/Progress-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250327101734658.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327101734658.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/94 Bullet Chart.md",
+      "title": "Bullet",
+      "permalink": "/documentation/Visualization/Bullet-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20251208152856707.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20251208152856707.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20251123165022192.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20251123165022192.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20251123163909696-1763887740308-2.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20251123163909696-1763887740308-2.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/95 Waterfall-Chart.md",
+      "title": "Waterfall",
+      "permalink": "/documentation/Visualization/Waterfall-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250327104159662.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327104159662.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/96 Image.md",
+      "title": "Image",
+      "permalink": "/documentation/Visualization/Image-chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250327113338946.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327113338946.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/97 Range-Column-Chart.md",
+      "title": "Range Column",
+      "permalink": "/documentation/Visualization/Range-Column-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250327111158328.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250327111158328.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/98 Histogram-Chart.md",
+      "title": "Histogram",
+      "permalink": "/documentation/Visualization/Histogram-Chart/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/histogram-tooltip.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/histogram-tooltip.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/histogram-component-picker.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/histogram-component-picker.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/histogram-data-configuration.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/histogram-data-configuration.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/histogram-distribution-settings.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/histogram-distribution-settings.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/histogram-percentage-mode.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/histogram-percentage-mode.png"
+        },
+        {
+          "type": "image",
+          "target": "./images/histogram-bin-count-settings.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/histogram-bin-count-settings.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/99 Decomposition-Tree.md",
+      "title": "Decomposition Tree",
+      "permalink": "/documentation/Visualization/Decomposition-Tree/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./images/decomposition-tree-overview.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/decomposition-tree-overview.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/decomposition-tree-component-picker.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/decomposition-tree-component-picker.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/decomposition-tree-data-configuration.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/decomposition-tree-data-configuration.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/decomposition-tree-add-split.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/decomposition-tree-add-split.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/decomposition-tree-analysis-layout-settings.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/decomposition-tree-analysis-layout-settings.jpg"
+        },
+        {
+          "type": "image",
+          "target": "./images/decomposition-tree-style-sections.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/Chart/images/decomposition-tree-style-sections.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/20 Filter Components.md",
+      "title": "Filters",
+      "permalink": "/documentation/Visualization/Filters/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/filters-catalog.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/filters-catalog.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Parameter-Controllers/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/30 List Box.md",
+      "title": "List Box",
+      "permalink": "/documentation/Visualization/List-Box/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/1739862837983(1).png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1739862837983(1).png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1739863051381.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1739863051381.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1739863085353.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1739863085353.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1739863138010.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1739863138010.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1739863262398.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1739863262398.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1739863292862.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1739863292862.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/40 数字范围筛选器.md",
+      "title": "Number Range Filter",
+      "permalink": "/documentation/Visualization/Number-Range-Filter/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/1723127406337.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723127406337.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1723127508505.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723127508505.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1723127584243.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723127584243.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/50 Datepicker.md",
+      "title": "Datepicker and Datepicker Range",
+      "permalink": "/documentation/Visualization/Datepicker/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/date-filter.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/date-filter.jpg"
+        },
+        {
+          "type": "link",
+          "target": "/documentation/Analysis/Relative-Date-Filtering/",
+          "status": "route-exists"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/10 配置地图引擎.md",
+      "title": "GIS Map Settings",
+      "permalink": "/documentation/Visualization/GIS-Map-Settings/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/1681888717961.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1681888717961.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/20 Marker Map.md",
+      "title": "Marker Map",
+      "permalink": "/documentation/Visualization/Marker-Map/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "link",
+          "target": "/documentation/Visualization/GIS-Map-Settings/",
+          "status": "route-exists"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20250316160416558.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250316160416558.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/30 GeoJSON标记地图.md",
+      "title": "GeoJSON marked map",
+      "permalink": "/documentation/Visualization/GeoJSON-marked-map/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/1681887783802.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1681887783802.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20230419151149418.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20230419151149418.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1681888030553.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1681888030553.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/image-20230419151212963.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20230419151212963.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/40 GeoJSON填充地图.md",
+      "title": "GeoJSON Filled Map",
+      "permalink": "/documentation/Visualization/GeoJSON-Filled-Map/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/1681888117077.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1681888117077.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1681887949391.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1681887949391.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1681887896864.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1681887896864.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1681888063762.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1681888063762.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/50 _图片地图.md",
+      "title": "Image Map",
+      "permalink": "/documentation/Visualization/Image-Map/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/1723971392008.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723971392008.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1723969910547.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723969910547.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1723973388996.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723973388996.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1723973428195.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723973428195.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1723973464960.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723973464960.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1723973491066.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723973491066.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1723973522976.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723973522976.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1723973570151.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723973570151.png"
+        },
+        {
+          "type": "image",
+          "target": "./../images/1723973632029.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/1723973632029.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Table/10 Table.md",
+      "title": "Table",
+      "permalink": "/documentation/Visualization/Table/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "../images/current/table-style.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/table-style.jpg"
+        },
+        {
+          "type": "image",
+          "target": "../images/current/table-data-bars-dialog.jpg",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/current/table-data-bars-dialog.jpg"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Table/20 Pivot Table.md",
+      "title": "Pivot Table",
+      "permalink": "/documentation/Visualization/Pivot-Table/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250317214909632.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250317214909632.png"
+        }
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Table/30 Hierarchy Table.md",
+      "title": "Hierarchy Table",
+      "permalink": "/documentation/Visualization/Hierarchy-Table/",
+      "productVerification": "pending-live-ui-access",
+      "references": [
+        {
+          "type": "image",
+          "target": "./../images/image-20250317221123405.png",
+          "status": "file-exists",
+          "resolved": "docs/documentation/Visualization/images/image-20250317221123405.png"
+        }
+      ]
+    }
+  ]
+}

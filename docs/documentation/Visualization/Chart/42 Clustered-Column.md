@@ -1,87 +1,36 @@
 ---
-title: Clustered Column
+title: Clustered column
 permalink: /documentation/Visualization/Clustered-Column-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Clustered Column Chart
+# Clustered column
 
-## Overview
+Compare values across categories.
 
-A **Clustered Column Chart** displays values for different sub-categories grouped (clustered) side-by-side within each main category along the X-axis. This type of chart is useful for comparing multiple series **within** and **across** categories.
+## Set up the data
 
-Unlike stacked charts, clustered charts do not aggregate values into a single bar — instead, each series retains its own bar for direct comparison.
+1. Choose **Components → Charts → Clustered column** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-### When to Use
+| Data slot | Choose |
+| --- | --- |
+| **X-axis** | Category or time field. |
+| **Legend** | Optional field that splits the measure into series. |
+| **Measures** | Numeric measure to compare. |
+| **Color / Tooltips** | Optional color encoding and extra hover detail. |
 
-- To **compare multiple series** across a shared category.
-- To highlight **relative performance** of sub-categories.
-- To avoid stacking when **aggregated values are not meaningful**.
-- When the goal is to **preserve series independence** visually.
+![Clustered column configured with Region and Net Sales](../images/current/column-data.jpg)
 
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-## Data Structure
+## Make it readable
 
-Clustered Column Charts support two data formats:
+Use **X axis**, **Y axis**, **Gridlines**, **Legend**, and **Data labels** to keep the chart readable. Use **Tooltip** for details that do not need a permanent label.
 
+Example: Region on X-axis and Net Sales in Measures. Add a legend only when comparing a second grouping.
 
-### **Method 1: Wide Table Format (Multiple Measures)**
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-Each sub-category (e.g., Type A, Type B...) is stored in its own column. Each row represents one main category (e.g., Q1, Q2...).
-
-**Component Configuration**:
-- **X-Axis**: Category
-- **Measures**: Type A, Type B, Type C, Type D
-
-**Example Data**:
-
-| Category | Type A | Type B | Type C | Type D |
-| -------- | ------ | ------ | ------ | ------ |
-| Q1       | 30     | 70     | 20     | 65     |
-| Q2       | 40     | 30     | 20     | 10     |
-| Q3       | 60     | 60     | 30     | 10     |
-| Q4       | 25     | 35     | 85     | 15     |
-
-**Chart Example**:
-
-
-<div align="left"><img src="./../images/image-20250327211250415.png" width="100%" /></div>
-
-
-### **Method 2: Long Table Format (Dimension + Measure)**
-
-Each row represents a unique combination of main category and sub-category, with the corresponding measure value.
-
-**Component Configuration**:
-- **X-Axis**: Category
-- **Legend**: Type
-- **Measure**: Sales
-
-**Example Data**:
-
-| Category | Type   | Sales |
-| -------- | ------ | ----- |
-| Q1       | Type A | 40    |
-| Q1       | Type B | 55    |
-| Q1       | Type C | 25    |
-| Q2       | Type A | 50    |
-| Q2       | Type B | 30    |
-| Q2       | Type C | 15    |
-| Q3       | Type A | 30    |
-| Q3       | Type B | 40    |
-| Q3       | Type C | 70    |
-| Q4       | Type A | 35    |
-| Q4       | Type B | 45    |
-| Q4       | Type C | 30    |
-
-**Chart Example**:
-
-<div align="left"><img src="./../images/image-20250327211259080.png" width="100%" /></div>
-
-
-## Notes
-
-- Bars for each sub-category are rendered **side-by-side** within each main category group.
-- Colors are used to differentiate sub-categories.
-- Enables **direct comparison** between sub-categories without stacking.
-- Supports tooltips, filters, and style customizations.
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

@@ -1,49 +1,34 @@
 ---
-title: Clustered Bar
+title: Clustered bar
 permalink: /documentation/Visualization/Clustered-Bar-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Clustered Bar Chart
+# Clustered bar
 
-## Overview
+Compare categories with horizontal bars.
 
-A **Clustered Bar Chart** is used to compare multiple categories side by side. Each category is divided into sub-groups, represented by separate bars, making it easy to analyze patterns and differences across multiple dimensions.
+## Set up the data
 
-### When to Use
+1. Choose **Components → Charts → Clustered bar** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-- To **compare different groups** within a category (e.g., sales performance by gender for each product category).
-- To **visualize multiple measures** within the same category (e.g., sales vs. cost per product category).
-- To **identify trends and differences** between sub-groups.
+| Data slot | Choose |
+| --- | --- |
+| **Y-axis** | Category or time field. |
+| **Legend** | Optional field that splits the measure into series. |
+| **Measures** | Numeric measure to compare. |
+| **Color / Tooltips** | Optional color encoding and extra hover detail. |
 
-## Data Structure
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-A **Clustered Bar Chart** requires:
+## Make it readable
 
-- **Y-Axis**: A categorical field representing the primary category (e.g., `product_category`).
-- **Legend (Optional)**: A categorical field that defines the sub-grouping within each category (e.g., `gender`).
-- **Measures**: One or more numerical fields that represent the values for comparison (e.g., `store_sales`, `store_cost`).
-- **Color(Optional):** Used to set the color of the chart based on categories or numerical values (intensity-based coloring, or using a categorical field for distinct colors).
-- **Tooltips(Optional)**: Show additional details when hovering over bars.
-- **Filters (Optional)**: Used to refine the data displayed (e.g., filtering by time, region, or product type).
+Use **X axis**, **Y axis**, **Gridlines**, **Legend**, and **Data labels** to keep the chart readable. Use **Tooltip** for details that do not need a permanent label.
 
-### Example Data Structure
+Use this layout for long category names. Sort by the measure to make rankings readable.
 
-| product_category | gender | store_sales | store_cost |
-| ---------------- | ------ | ----------- | ---------- |
-| Vegetables       | F      | 104060.10   | 82467.98   |
-| Vegetables       | M      | 102010.34   | 0          |
-| Snack Foods      | F      | 99367.33    | 79223.05   |
-| Snack Foods      | M      | 98473.52    | 0          |
-| Dairy            | F      | 55434.58    | 43552.48   |
-| Dairy            | M      | 53199.71    | 0          |
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-## How to Configure
-
-### Comparing a Single Measure
-
-<div align="left"><img src="./../images/image-20250312214849741.png"  width="100%" /></div>
-
-### Comparing Multiple Measures
-
-<div align="left"><img src="./../images/image-20250312214911336.png"  width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

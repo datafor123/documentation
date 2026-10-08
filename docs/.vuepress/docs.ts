@@ -109,7 +109,7 @@ export const documentationNote = defineNoteConfig({
 					link: "/documentation/Visualization/12 手机布局视图.md",
 				},
 				{
-					text: "Filter Subscriptions for Charts",
+					text: "Link Filters and Charts",
 					link: "/documentation/Visualization/20 筛选器订阅.md",
 				},
 				{
@@ -129,7 +129,7 @@ export const documentationNote = defineNoteConfig({
 					link: "/documentation/Visualization/110 条件颜色设置.md",
 				},
 				{
-					text: "Parameter-Driven Tab Switching",
+					text: "Default Tab Rules",
 					link: "/documentation/Visualization/120 参数驱动Tabs的显示.md",
 				},
 				{

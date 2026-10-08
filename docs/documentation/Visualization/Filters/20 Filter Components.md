@@ -5,39 +5,35 @@ tags: null
 description: null
 createTime: 2026/09/01 22:03:26
 ---
-# Filters
 
-Datafor offers a variety of filter components to help users analyze data more flexibly.
+# Filter Components
 
-**Filter components include:**
+Add a filter to let readers choose which data a report displays. Add a component-level filter when the condition should be fixed on one chart instead.
 
-- Dropdown
-- List box
-- Button
-- Radio/Checkbox
-- Hierarchical filter
-- Date
-- Date range
-- TimeAxis
-- TimeAxis range
-- Numeric range filter
-- Pager
-- Search
+## Choose a control
 
-## The Role of Filter Components in Exploratory Analysis
+Open **Components → Filters**.
 
-- Enhancing Data Accessibility
+| Component | Use it for |
+| --- | --- |
+| Dropdown | A compact selection list |
+| List box | Choices that should remain visible |
+| Radio/Checkbox | Explicit single or multiple choices |
+| Hierarchy table filter | Selection through a hierarchy |
+| Date | A single time period or a range |
+| Search | Text-based selection |
+| Numeric slider | A numeric model-field range or a numeric parameter value |
+| Paginate | Paging controls |
+| Filter button | A button-based filter interface |
 
-  Filter components allow users to easily access and select specific subsets of data without writing complex queries. With simple operations, users can quickly filter data.
+![The current filter catalog](../images/current/filters-catalog.jpg)
 
-- Increasing Data Interactivity
+## Bind a field and targets
 
-  Filter components make data analysis more interactive. Users can dynamically adjust data views by selecting different filter conditions and observe data changes in real time.
+1. Add the control and select it.
+2. In **Data**, choose its analysis model and field. For Numeric slider, choose **Data source → Model field** or **Parameter** first. Other parameter-backed controls offer compatible parameters in their picker.
+3. Set the selection mode and default value offered by that control.
+4. Open **Actions → Interactions → Linked components**, where available, and check the intended targets.
+5. Preview the report. Test a selection, an empty result, and the way readers return to the full data set.
 
-- Supporting Complex Analytical Needs
-
-  By combining multiple filter components, users can apply multidimensional filter conditions for more detailed and in-depth analysis. For example, in sales data analysis, users can simultaneously filter data by specific time periods, regions, and product categories.
-
-- Providing Personalized Analytical Experience
-
-  Different users have different needs and focuses on data. Filter components allow users to customize data views based on their specific analytical requirements.
+A parameter control changes a value used by report logic; it does not become a dimension filter simply because it is on the canvas. See [Parameter Controllers](/documentation/Analysis/Parameter-Controllers/).

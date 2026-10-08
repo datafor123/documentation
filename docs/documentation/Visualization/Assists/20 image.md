@@ -4,59 +4,20 @@ permalink: /documentation/Visualization/Image/
 createTime: 2026/09/01 22:03:26
 ---
 
-# **Image**
+# Image
 
-## **Overview**
+Use **Components → Assists → Image** for a logo, photograph, or other static report artwork. Use **Dynamic image** from Charts when the image comes from query data.
 
-The **Image** component allows users to display images in reports or dashboards. It supports uploading local image files and provides styling customization options such as borders, shadows, and rounded edges.
+## Add an image
 
-<div align="left"><img src="./../images/image-20250319130311401.png"  width="66%" /></div>
+1. Choose **Image** and click the canvas.
+2. In **Data → Image file**, choose **Image source**.
+3. Use **Upload → Select file** for a local image, or **URL** for an image address.
+4. Open **Style**, resize the component, and check how the image fits its frame.
+5. Preview the report to confirm that the image loads for its intended readers.
 
-## **1. How to Add an Image**
+![Image source choices in the current designer](../images/current/image-source.jpg)
 
-1. Select the **Image** component.
-2. In the right panel, click the **"Select file"** button.
-3. Choose an image file from your computer.
-4. Once uploaded, the image will appear in the component, filling the designated area by default.
+Keep text and logos readable at the final report size. If a URL works only for you, check whether readers have access to that resource.
 
-
-## **2. Data Settings**
-
-In the **“Data”** tab, you can configure the following settings:
-
-- **Image file**: Upload or replace the image file.
-
-- Display mode:
-
-  - **Full** (default): The image fully fills the component area.
-  - **Fit**: Maintains the original aspect ratio while fitting within the component.
-  
-- **Opacity**: Adjust the image transparency using a slider.
-
-## **3. Style Settings**
-
-In the **“Style”** tab, you can customize the image’s appearance:
-
-### **3.1 Border Settings**
-
-- **Border style**: Modify the border width, color, and style (solid, dashed, etc.).
-- **Shadow**: Enable or disable shadow effects around the image.
-- **Round edges**: Adjust the border radius to make the corners rounded.
-
-### **3.2 Image Description**
-
-- **Content**: Add a text description for the image.
-- **Font**: Customize the text font, size, color, bold, and italic styles.
-- **Y offset**: Adjust the vertical position of the description text.
-
-
-## **4. Actions**
-
-- **Click actions**: Set an action when the image is clicked, such as navigating to a URL.
-
-
-## **5. Important Notes**
-
-- Ensure the image size is optimized for clarity in reports.
-- Large image files may impact loading speed; consider compressing them if necessary.
-- When using PNG images with transparency, adjust **Opacity** to achieve the desired visual effect.
+To make the image interactive, use **Actions → Click action**. The available actions include opening a link, going to a report, and switching a tab. Test the configured action in Preview.

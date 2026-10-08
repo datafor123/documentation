@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-06",
+  "status": "blocked-before-live-product-audit",
+  "requestedProduct": "http://localhost:28080/datafor/console/",
+  "repositoryBaseline": "fc677f3cc",
+  "initialWorkingTree": "clean",
+  "repositoryInstructions": "No AGENTS.md, .agents directory, or .codex directory found in this repository.",
+  "coverage": {
+    "visualizationPages": 56,
+    "analysisPages": 20,
+    "reportDesignWalkthroughs": 2,
+    "consoleEntryPointPages": 1,
+    "inventory": "audits/visualizer-inventory.json"
+  },
+  "checks": [
+    {
+      "command": "node --check scripts/audit-visualizer-docs.mjs",
+      "result": "passed"
+    },
+    {
+      "command": "node scripts/audit-visualizer-docs.mjs --output audits/visualizer-inventory.json",
+      "result": "passed",
+      "pages": 79,
+      "imageReferences": 199,
+      "missingLocalReferences": 0
+    },
+    {
+      "command": "npm run docs:build",
+      "result": "passed",
+      "renderedPages": 294,
+      "note": "Sandboxed attempt could not spawn esbuild (EPERM). Approved escalation of the existing build succeeded. No dependencies were installed or updated.",
+      "warnings": [
+        "Shiki languages are not explicitly configured.",
+        "Browserslist caniuse-lite data is 20 months old."
+      ]
+    },
+    {
+      "check": "Built scoped permalink pages and local HTML img src targets",
+      "result": "passed",
+      "pagesChecked": 79,
+      "missingPages": 0,
+      "renderedImageReferencesCheckedIncludingThemeAssets": 357,
+      "missingImages": 0
+    }
+  ],
+  "blocker": {
+    "type": "supported-browser-connection-unavailable",
+    "evidence": [
+      "The in-app browser reports that it is unavailable.",
+      "Chrome is advertised, but inventory/session calls repeatedly fail with nodeRepl.fetch request failed."
+    ],
+    "requiredAction": "Follow the source-backed checks in audits/browser-access-recovery.json. Recovery has not been locally verified. If sign-in is subsequently required, use a secure user handoff.",
+    "foregroundControlUsed": false,
+    "credentialsAccessed": false
+  },
+  "notCompleted": [
+    "Inspect current Visualizer UI and verify English labels and behavior.",
+    "Create separate documentation demo reports with safe sample data.",
+    "Capture new genuine English UI screenshots and review their content/readability.",
+    "Rewrite affected user-facing pages and navigation from verified product evidence.",
+    "Visually review the rendered documentation in a browser."
+  ],
+  "newScreenshots": [],
+  "productChanges": [],
+  "userFacingDocumentationChanges": [],
+  "preview": {
+    "command": "npm run docs:dev -- --host 127.0.0.1 --port 8080",
+    "examplePage": "http://127.0.0.1:8080/documentation/Start/Basic-Operations-for-Report-Design/",
+    "note": "Preview server was not started. Build output is available in docs/.vuepress/dist."
+  }
+}

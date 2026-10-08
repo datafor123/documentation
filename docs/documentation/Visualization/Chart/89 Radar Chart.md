@@ -4,45 +4,31 @@ permalink: /documentation/Visualization/Radar-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Radar Chart
+# Radar
 
-## Overview
+Compare profiles across several radial categories.
 
-A **Radar Chart** (also known as a Spider Chart) is used to visualize multi-dimensional data across multiple categories. Each axis represents a different category, and data points are connected to form a polygon, making it easy to compare different groups across various criteria.
+## Set up the data
 
-### When to Use
+1. Choose **Components → Charts → Radar** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-- To **compare multiple categories** across different dimensions (e.g., store sales by store type over multiple years).
-- To **identify strengths and weaknesses** across various attributes.
-- To **analyze performance** of different groups on multiple metrics.
+| Data slot | Choose |
+| --- | --- |
+| **Radial axes** | Categories around the chart. |
+| **Legend** | Optional grouping to compare. |
+| **Measures** | Values along each radial axis. |
+| **Color / Tooltips** | Optional encoding and context. |
 
-## Data Structure
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-A **Radar Chart** requires:
+## Make it readable
 
-- **Radial Axes**: A categorical field representing different attributes or categories (e.g., `store_type`).
-- **Legend (Optional)**: A categorical field that differentiates different groups (e.g., `the_date(Year)`).
-- **Measures**: A numerical field that defines the values plotted on the radar chart (e.g., `store_sales`).
-- **Color(Optional):** Used to set the color of the chart based on categories or numerical values (intensity-based coloring, or using a categorical field for distinct colors).
-- **Filters (Optional)**: Used to refine the displayed data (e.g., filtering by region, product category).
+Use **Position**, **Plot area**, **Axis labels**, and **Legend** to format the chart.
 
-### Example Data Structure
+Compare measures on compatible scales. A larger polygon is not automatically a better result.
 
-| store_type          | the_date(Year) | store_sales |
-| ------------------- | -------------- | ----------- |
-| Supermarket         | 1997           | 50000       |
-| Deluxe Supermarket  | 1997           | 25000       |
-| Small Grocery       | 1997           | 12000       |
-| Mid-Size Grocery    | 1997           | 10000       |
-| Gourmet Supermarket | 1997           | 8000        |
-| Supermarket         | 1998           | 70000       |
-| Deluxe Supermarket  | 1998           | 40000       |
-| Small Grocery       | 1998           | 15000       |
-| Mid-Size Grocery    | 1998           | 12000       |
-| Gourmet Supermarket | 1998           | 10000       |
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-## Example
-
-The following example shows a comparison of store sales across different store types for the years **1997** and **1998**.
-
-<div align="left"><img src="./../images/image-20250312215543200.png"  width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

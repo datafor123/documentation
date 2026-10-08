@@ -1,42 +1,19 @@
 ---
-title: GeoJSON marked map
+title: Marker map
 permalink: /documentation/Visualization/GeoJSON-marked-map/
 createTime: 2026/09/01 22:03:26
 ---
 
-# GeoJSON marked map
+# Marker map
 
-A GeoJSON marked map is a map that encodes geographical location information as data in the GeoJSON format and marks it on the map. The GeoJSON marked map can help users display geographical location information more intuitively on the map, such as marking different locations, paths, and regions.
+Show a measure as markers on a selected boundary map. The current catalog calls this component **Marker map**.
 
-## Creating a Map
+1. Add **Charts → Marker map** and select an **Analysis model**.
+2. Bind **Geographic field** and **Measure**.
+3. Choose the required **Map** in Data. The initial selection is **World**.
+4. Add **Tooltips** and **Filters** as needed.
+5. Use **Style → Marker Setting**, **Region**, **Data colors**, **Data labels**, and **Pan and roam** to format it.
 
-1. Create a new report in Datafor and add a GeoJSON marked map component in the report's design mode. This will add a blank map to the canvas area of the report designer.
+The geographic field must match the locations in the chosen map. Test a known location first. If locations do not appear, check spelling, geographic level, and map coverage before changing colors or sizes.
 
-   <div align="left"><img src="./../images/1681887783802.png"  width="100%" /></div>
-
-2. Select Map Data
-
-   Select the required map JSON data from the data panel.
-
-   <div align="left"><img src="./../images/image-20230419151149418.png"  width="100%" /></div>
-
-3. Add Geographic Data Fields
-
-   <div align="left"><img src="./../images/1681888030553.png"  width="100%" /></div>
-
-4. Customize Map Style
-   You can customize the style of the map according to your preferences, including background color, border lines, labels, etc.
-
-## FAQ
-
-1. How do I match the names of my regions with the names of the regions in the GeoJSON file?
-
-   You can maintain the mapping between the names of the regions in your map and the data in the "key-value mapping table".
-
-   <div align="left"><img src="./../images/image-20230419151212963.png"  width="100%" /></div>
-
-2. Can I customize my own GeoJSON map?
-
-   Yes, you can contact Datafor to customize a GeoJSON map for you.
-
-
+Use **GIS marker map** when your task needs a geographic basemap or longitude and latitude fields.

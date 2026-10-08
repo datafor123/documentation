@@ -1,91 +1,34 @@
 ---
-title: 100% Stacked Column
+title: 100% stacked column
 permalink: /documentation/Visualization/100-Stacked-Column-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# 100% Stacked Column Chart
+# 100% stacked column
 
-## Overview
+Compare the percentage composition of each category.
 
-A **100% Stacked Column Chart** visualizes the percentage distribution of multiple data series in vertical bars. Each bar represents a category, and its height is always 100%, divided by segments that show the relative contribution of each series.
+## Set up the data
 
-This chart is ideal for highlighting **compositional differences** across groups, such as regional market share, category-based breakdowns, or survey responses.
+1. Choose **Components → Charts → 100% stacked column** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-### When to Use
+| Data slot | Choose |
+| --- | --- |
+| **X-axis** | Category or time field. |
+| **Legend** | Optional field that splits the measure into series. |
+| **Measures** | Numeric measure to compare. |
+| **Color / Tooltips** | Optional color encoding and extra hover detail. |
 
-- To compare **percentage composition** between categories.
-- To visualize **distribution trends** without concern for absolute values.
-- To normalize different categories and compare their **internal structure**.
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
----
+## Make it readable
 
-## Data Structure
+Use **X axis**, **Y axis**, **Gridlines**, **Legend**, and **Data labels** to keep the chart readable. Use **Tooltip** for details that do not need a permanent label.
 
-100% Stacked Column Charts support two primary data formats:
+Every column represents a whole. Use a regular stacked column when the absolute total matters.
 
----
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-### **Method 1: Wide Table Format (Multiple Measures)**
-
-Each column represents a separate category value, and each row corresponds to one bar in the chart. Each measure (e.g., Type A, Type B) contributes to the height of the column, which totals to 100%.
-
-**Component Configuration**:
-- **X-Axis**: Category
-- **Measures**: Type A, Type B, Type C, Type D
-
-**Example Data**:
-
-| Category | Type A | Type B | Type C | Type D |
-| -------- | ------ | ------ | ------ | ------ |
-| Q1       | 30     | 50     | 20     | 10     |
-| Q2       | 40     | 30     | 20     | 10     |
-| Q3       | 20     | 40     | 30     | 10     |
-| Q4       | 25     | 35     | 25     | 15     |
-
-**Chart Example**:
-
-
-<div align="left"><img src="./../images/image-20250327180750721.png" width="100%" /></div>
-
----
-
-### **Method 2: Long Table Format (Dimension + Measure)**
-
-Each row includes one category-type pair with a value, allowing for more flexible and scalable datasets. Useful when data is in normalized or transactional format.
-
-**Component Configuration**:
-- **X-Axis**: Category
-- **Legend**: Type
-- **Measures**: Sales
-
-**Example Data**:
-
-| Category | Type   | Sales |
-| -------- | ------ | ----- |
-| Q1       | Type A | 40    |
-| Q1       | Type B | 35    |
-| Q1       | Type C | 25    |
-| Q2       | Type A | 50    |
-| Q2       | Type B | 30    |
-| Q2       | Type C | 20    |
-| Q3       | Type A | 30    |
-| Q3       | Type B | 40    |
-| Q3       | Type C | 30    |
-| Q4       | Type A | 35    |
-| Q4       | Type B | 35    |
-| Q4       | Type C | 30    |
-
-**Chart Example**:
-
-
-<div align="left"><img src="./../images/image-20250327181037595.png" width="100%" /></div>
-
----
-
-## Notes
-
-- Each column totals to **100%**, regardless of the raw values.
-- **Colors** represent different data series (e.g., Type A, B, C...).
-- Use **tooltips** to display both raw values and percentages.
-- Supports **filters**, **color mapping**, and **time axis** for dynamic exploration.
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

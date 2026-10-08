@@ -1,42 +1,32 @@
 ---
-title: Word Cloud
+title: Word cloud
 permalink: /documentation/Visualization/Word-Cloud-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
+# Word cloud
 
-# Word Cloud Chart
+Show words with visual emphasis based on a numeric measure.
 
-## Overview
+## Set up the data
 
-A **Word Cloud Chart** (also known as Word Art) is a visualization technique used to display text data, where the size of each word represents its importance or frequency within the dataset. This type of visualization helps quickly identify the most significant terms in a dataset.
+1. Choose **Components → Charts → Word cloud** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-### When to Use
+| Data slot | Choose |
+| --- | --- |
+| **Word** | Text or category field. |
+| **Measure** | Value controlling word emphasis. |
 
-- To **highlight key terms** or categories that appear frequently in a dataset.
-- To **visualize categorical data** based on a numerical measure.
-- To **quickly identify trends** in textual or categorized data.
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-## Data Structure
+## Make it readable
 
-A **Word Cloud Chart** requires:
+Use **Words** to adjust the presentation.
 
-- **Word**: A categorical field that defines each unique word or term (e.g., `product_subcategory`).
-- **Measure**: A numerical field that determines the size of each word (e.g., `store_sales`).
-- **Filters (Optional)**: Used to refine the data displayed (e.g., filtering by time, category, or region).
+Use a bar chart when exact ranking or numerical comparison is important. Remove empty and irrelevant words with filters.
 
-### Example Data Structure
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-| product_subcategory | store_sales |
-| ------------------- | ----------- |
-| Fresh Vegetables    | 50000       |
-| Frozen Chicken      | 25000       |
-| Cheese              | 15000       |
-| Chocolate Candy     | 12000       |
-| Potato Chips        | 9000        |
-
-## Example
-
-The following example visualizes store sales by product subcategory, with more significant sales values represented by larger words.
-
-<div align="left"><img src="./../images/image-20250312212605747.png"  width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

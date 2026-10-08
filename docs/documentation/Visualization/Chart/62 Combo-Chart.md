@@ -4,43 +4,31 @@ permalink: /documentation/Visualization/Combo Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Combo Chart
+# Combo
 
-## Overview
+Compare column and line measures against the same categories.
 
-A **Combo Chart** is a combination of a bar chart and a line chart. It is useful for comparing multiple measures, where some are represented as columns and others as lines.
+## Set up the data
 
-### When to Use
+1. Choose **Components → Charts → Combo** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-- To **compare two different measures** with different scales (e.g., store sales vs. margin percentage).
-- To **analyze trends and distributions** in the same visualization.
-- To **highlight relationships** between two numerical variables.
+| Data slot | Choose |
+| --- | --- |
+| **X-axis** | Shared category or time field. |
+| **Column measures** | Measures drawn as columns. |
+| **Line measures** | Measures drawn as lines. |
+| **Color / Tooltips** | Optional visual encoding and hover detail. |
 
-## Data Structure
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-A **Combo Chart** requires:
+## Make it readable
 
-- **X-Axis**: A time-based or categorical field (e.g., `the_date(Day)`).
-- **Column Measures**: One or more numerical fields representing the bar values (e.g., `store_sales`, `store_invoice`).
-- **Line Measures**: One or more numerical fields representing the trend lines (e.g., `Margin`, `store_cost`).
-- **Color(Optional)**: Assign different colors for better distinction.
-- **Tooltips(Optional)**: Show additional details when hovering over data points.
-- **Filters (Optional)**: Used to refine the displayed data (e.g., filtering by month, category, or region).
+Use **Column type** and **Line** to choose the presentation. Review **Y axis** settings and label each measure’s unit.
 
-### Example Data Structure
+Example: monthly revenue as columns and margin rate as a line. Different units require clear axis labels.
 
-| the_date(Day) | store_sales | store_invoice | Margin |
-| ------------- | ----------- | ------------- | ------ |
-| 1997-08-01    | 1200        | 900           | 155%   |
-| 1997-08-02    | 1100        | 870           | 150%   |
-| 1997-08-03    | 1000        | 850           | 145%   |
-| 1997-08-04    | 950         | 820           | 140%   |
-| 1997-08-05    | 1300        | 1000          | 160%   |
-| 1997-08-06    | 500         | 400           | 135%   |
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-## Example
-
-The following example visualizes **store sales, store_cost as columns and margin as a line** over a period of time.
-
-
-<div align="left"><img src="./../images/image-20250312224607027.png"  width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

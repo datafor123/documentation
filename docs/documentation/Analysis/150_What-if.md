@@ -10,47 +10,52 @@ createTime: 2026/09/04 00:23:30
 
 What-if analysis recalculates an existing measure under an explicit assumption. It is deterministic scenario analysis, not a forecast.
 
-This example uses the **Retail Chain Operations** model and its **Net Sales** measure to test a uniform price adjustment. It assumes sales volume, product mix, returns, discounts, and all other drivers remain unchanged. If those drivers respond to price, use a model that represents that response instead of treating this result as a prediction.
+This example compares **Net Sales** with a scenario that applies the same growth rate to each region. Use the **Retail Chain Operations** model, **Region**, and **Net Sales**, with a component filter of **Year = 2025**. The scenario scales the existing result; it does not model changes in demand, costs, or product mix.
+
+Start with a **Clustered column** chart: put **Region** in **X-axis** and **Net Sales** in **Measures**. If you are new to the editor, follow [Create Your First Report](/documentation/Start/Create-Your-First-Analysis-Report/) first.
 
 ## 1. Create the scenario input
 
-Create a Report Parameter with these settings:
+Open **Manage parameters** in the report toolbar, click **New**, and use these settings:
 
 | Field | Value |
 | --- | --- |
-| **Name** | `Price Adjustment Rate` |
+| **Name** | `GrowthRate` |
 | **Type** | **Numeric** |
 | **Suggested values** | **Any value** |
-| **Default value** | `0` |
+| **Default value** | `0.1` |
 
-The value represents percentage points: `10` means a 10% increase and `-10` means a 10% decrease.
+The value is a decimal rate: `0.1` means a 10% increase; `-0.2` means a 20% decrease. Save the parameter and close the manager.
 
-<div align="left"><img src="./images/analysis-report-parameters.png" alt="Report Parameters window containing the Price Adjustment Rate scenario input" width="100%" /></div>
+![Report parameter configuration](../Visualization/images/current/parameter-editor.jpg)
 
 For the complete parameter workflow, see [Creating Parameters](/documentation/Analysis/Creating-Parameters/).
 
 ## 2. Create the scenario measure
 
-In the target component's Measures picker, select **Create calculated measure > New measure**. Create a report-level measure named `Scenario Net Sales` with this MDX formula:
+In the target component's Measures picker, select **New measure → New measure**. Create a report-level measure named `Scenario Net Sales` with this MDX formula:
 
 ```mdx
-[Measures].[Net Sales] * (1 + ParamRef("Price Adjustment Rate") / 100)
+[Measures].[Net Sales] * (1 + ParamRef("GrowthRate"))
 ```
 
-Use the same currency format as **Net Sales**.
+Use **Format → #,##0.00** and click **Add**. Keep both **Net Sales** and **Scenario Net Sales** in the chart's **Measures** slot so readers can compare them.
+
+![Scenario measure formula using GrowthRate](../Visualization/images/current/scenario-measure.jpg)
 
 Start from a valid aggregated business measure. Do not substitute an expression such as aggregated unit price multiplied by aggregated quantity; that usually differs from summing transaction-level sales.
 
-If your parameter stores decimal rates such as `0.10` instead of percentage points such as `10`, remove `/ 100` from the formula.
+If you choose to store percentage points such as `10` instead, divide the parameter value by `100` in the formula.
 
 ## 3. Add the control and result
 
-1. Add **Numeric Slider** from **Components > Parameters**.
-2. Bind it to `Price Adjustment Rate`.
-3. Set a useful range, for example minimum `-20`, maximum `20`, and step `1`.
-4. Add a Measure or other chart component and bind `Scenario Net Sales`.
-5. Optionally set the component title to `Scenario Net Sales (${Price Adjustment Rate}%)`.
-6. Open **Preview**, test the range, and save the report.
+1. Add **Numeric slider** from **Components → Filters**.
+2. In **Data**, set **Data source → Parameter** and select **GrowthRate**.
+3. In the same panel, set **Minimum Value → -0.2**, **Maximum Value → 0.2**, and **Step → 0.01**.
+4. In the chart's **Style → Title**, enter `Sales Scenario (rate: ${GrowthRate})`.
+5. Save and open **Preview**. Move the slider or type a value in its input and press **Enter**.
+
+![GrowthRate binding and decimal slider range](../Visualization/images/current/scenario-slider-settings.jpg)
 
 ## 4. Validate the result
 
@@ -58,18 +63,24 @@ Use the base **Net Sales** value as the control case:
 
 | Parameter value | Expected result |
 | --- | --- |
-| `-20` | `0.80 × Net Sales` |
+| `-0.2` | `0.80 × Net Sales` |
 | `0` | `1.00 × Net Sales` |
-| `20` | `1.20 × Net Sales` |
+| `0.2` | `1.20 × Net Sales` |
 
-Test at least these three points. If the result does not follow the expected multiplier, check the parameter unit, formula, and selected measure before sharing the report.
+Use the chart's **More → Data preview** to compare exact values. For example, with Central China's base Net Sales of **372,226.37**, the three results are **297,781.10**, **372,226.37**, and **446,671.64**. Your values may differ if the source data or filters change.
+
+![Scenario values at a growth rate of 0.2](../Visualization/images/current/scenario-data-preview.jpg)
+
+Return to `0.1` and check that the title reads **Sales Scenario (rate: 0.1)**. Reopen the saved report to check its initial state.
+
+![Saved sales scenario at a growth rate of 0.1](../Visualization/images/current/scenario-result.jpg)
 
 ## Troubleshooting
 
 | Symptom | Check |
 | --- | --- |
 | `Unknown parameter` appears when the component queries. | Match the parameter name exactly, including case and spaces. |
-| The parameter is absent from Numeric Slider. | It must be **Numeric** with **Any value**. |
+| The parameter is absent from Numeric slider. | Choose **Data source → Parameter** and check the parameter type; this example uses **Numeric / Any value**. |
 | The result does not change. | Confirm the slider and `ParamRef()` reference the same parameter and the component uses `Scenario Net Sales`. |
 | The formula can be saved but the component query fails. | Review the MDX and referenced measure names; some formula errors appear only when the component runs its query. |
 

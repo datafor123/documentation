@@ -1,72 +1,34 @@
 ---
-title: Stacked Ratio
+title: 100% stacked area
 permalink: /documentation/Visualization/Stacked-Ratio-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
+# 100% stacked area
 
-# Stacked Ratio Chart
+Show how percentage composition changes over time.
 
-## Overview
+## Set up the data
 
-A **Stacked Ratio Chart** is used to represent the proportion of different categories over time or across a dimension. Unlike a traditional stacked area chart that shows absolute values, the stacked ratio chart normalizes data to 100%, making it easier to compare category distributions at different points.
+1. Choose **Components → Charts → 100% stacked area** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-### When to Use
+| Data slot | Choose |
+| --- | --- |
+| **X-axis** | Category or time field. |
+| **Legend** | Optional field that splits the measure into series. |
+| **Measures** | Numeric measure to compare. |
+| **Color / Tooltips** | Optional color encoding and extra hover detail. |
 
-- To **visualize proportional changes** over time.
-- To **compare category contributions** within a total measure.
-- To **highlight trends in data composition** rather than absolute values.
-- To **analyze a single measure or compare multiple measures**, similar to a pie chart.
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-## Data Structure
+## Make it readable
 
-A **Stacked Ratio Chart** requires:
+Use **X axis**, **Y axis**, **Gridlines**, **Legend**, and **Data labels** to keep the chart readable. Use **Tooltip** for details that do not need a permanent label.
 
-- **X-Axis**: A date-type or categorical field representing the dimension (e.g., `the_date (Day)`).
-- **Legend**: A categorical field that differentiates the stacked segments (e.g., `product_family`).
-- **Measures**: One or more numerical fields representing the total value to be divided into proportions (e.g., `store_sales`, `store_cost`).
-- **Color (Optional)**: Used to assign colors to different categories based on a categorical or numerical field.
-- **Tooltips (Optional)**: Displays additional information when hovering over the chart.
-- **Filters (Optional)**: Allows refining the displayed data (e.g., filtering by time, region, or product type).
+Pair with a total metric if readers also need to understand changes in volume.
 
-### Example Data Structure
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-| the_date   | product_family | store_sales | store_cost |
-| ---------- | -------------- | ----------- | ---------- |
-| 1997-12-01 | Drink          | 500         | 200        |
-| 1997-12-01 | Food           | 4000        | 1500       |
-| 1997-12-01 | Non-Consumable | 1000        | 700        |
-| 1997-12-02 | Drink          | 450         | 180        |
-| 1997-12-02 | Food           | 4100        | 1600       |
-| 1997-12-02 | Non-Consumable | 950         | 720        |
-
-## How to Configure
-
-### Analyzing a Single Measure
-
-1. **Select the Analysis Model**: Choose the dataset containing the required fields.
-2. **Set the X-Axis**: Select a date-type or categorical field (e.g., `the_date (Day)`).
-3. **Set the Measure**: Choose a single numerical field representing the total values (e.g., `store_sales`).
-4. **Set the Legend**: Select a categorical field to define the stacked categories (e.g., `product_family`).
-
-### Comparing Multiple Measures
-
-1. **Select Multiple Measures**: Instead of a single measure, choose multiple numerical fields (e.g., `store_sales` and `store_cost`).
-2. **Stack Different Measures**: Each measure will be represented as a separate stacked ratio within the chart.
-
-### Optional Customization
-
-- **Set Color**: Assign colors based on a category or numerical intensity.
-- **Enable Tooltips**: Display additional insights when hovering over data points.
-- **Apply Filters**: Refine data display using time-based or categorical filters.
-
-## Example
-
-### Stacked Ratio Chart with a Single Measure
-
-<div align="left"><img src="./../images/image-20250313145221967.png"  width="100%" /></div>
-
-### Stacked Ratio Chart with Multiple Measures
-
-<div align="left"><img src="./../images/image-20250313145251454.png"  width="100%" /></div>
-
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

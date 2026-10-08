@@ -1,63 +1,25 @@
 ---
-title: Exploratory Analysis
+title: "Exploratory Analysis"
 permalink: /documentation/Analysis/Exploratory Analysis/
 tags: null
 description: null
 createTime: 2026/09/01 22:03:26
 ---
 
-## Overview
+# Exploratory Analysis
 
-Datafor offers powerful exploratory analysis capabilities that allow users to explore data in reports and dashboards in real-time.
+Choose the operation that answers your next question.
 
-## 1. Slicers
+| Task | Use |
+| --- | --- |
+| Restrict one chart to a period or group | [Component filters](/documentation/Analysis/Component-Level-Filtering/) |
+| Let readers choose values | [Filter components](/documentation/Visualization/Filters/) |
+| Select a chart mark to update other charts | [Cross-filtering](/documentation/Analysis/Cross-Filtering/) |
+| Read exact values without adding permanent labels | [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/) |
+| Move from a hierarchy level to its detail | [Drill down](/documentation/Analysis/Drill-down/) |
+| Open another report with the selected context | [Drill through](/documentation/Analysis/Drill-through/) |
+| Rank categories or keep a short list | [Sorting](/documentation/Analysis/Sorting/) and [Row limit](/documentation/Analysis/Top-Bottom-N/) |
+| Compare results with a target | [Reference lines](/documentation/Analysis/Chart-Reference-Lines/) |
+| Change an assumption in a calculation | [Parameters](/documentation/Analysis/Creating-Parameters/) |
 
-Slicers are visual filtering tools that allow you to dynamically filter data by selecting different slicer options.
-
-[Reference Documentation](/documentation/Visualization/Filters/)
-
-## 2. Component Filtering
-
-Component filtering allows you to filter data based on specific criteria to display the most relevant information.
-
-[Filtering and Data Selection](/documentation/Analysis/Component-Level-Filtering/)
-
-## 3. Cross-Filtering
-
-Cross-filtering and cross-highlighting enable automatic updates of related charts when a data point is selected in one chart, reflecting the related data.
-
-[Reference Documentation](/documentation/Analysis/Cross-Filtering/)
-
-## 4. Tooltips
-
-Tooltips are detailed information boxes that appear when you hover over data points in charts.
-
-[Reference Documentation](/documentation/Visualization/Tooltips-for-Chart-Components/)
-
-## 5. Drillthrough
-
-Drillthrough allows you to click on a data point in a report page and navigate to another page to see detailed information about that data point.
-
-[Reference Documentation](/documentation/Analysis/Drill-through/)
-
-## 6. Drill Down
-
-Drill down enables you to view data at different levels of granularity in a chart, such as drilling down from yearly data to quarterly data.
-
-[Reference Documentation](/documentation/Analysis/Drill-down/)
-
-## 7. Sorting
-
-Sorting allows you to arrange data in ascending or descending order based on a specific field.
-
-[Reference Documentation](/documentation/Analysis/Sorting/)
-
-## 8. Calculations
-
-Calculations involve creating custom formulas and measures to compute complex data analysis results.
-
-[Reference Documentation](/documentation/Analysis/Calculated-Measures/)
-
-## Conclusion
-
-Datafor's exploratory analysis capabilities enable users to interact with data in real-time, offering flexible and efficient data analysis methods. By utilizing slicers, component filtering, cross-filtering, tooltips, drillthrough, drill down, sorting, and calculations, users can deeply explore data and uncover hidden trends and insights.
+Start in Preview. Check the component’s conditions indicator before interpreting a result: saved filters and interactive selections can both affect the data shown.

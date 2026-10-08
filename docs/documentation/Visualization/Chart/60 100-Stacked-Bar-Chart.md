@@ -1,87 +1,34 @@
 ---
-title: 100% Stacked Bar
+title: 100% stacked bar
 permalink: /documentation/Visualization/100-Stacked-Bar-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# 100% Stacked Bar Chart
+# 100% stacked bar
 
-## Overview
+Compare each category’s percentage breakdown with horizontal bars.
 
-A **100% Stacked Bar Chart** displays the relative percentage of multiple data series stacked in a single bar, with the total always equaling 100%. It allows you to compare the proportion of categories across different groups, regardless of the total values.
+## Set up the data
 
-This chart is useful when the focus is on **percentage contribution** rather than actual values, such as analyzing product mix, sales channel contribution, or regional share.
+1. Choose **Components → Charts → 100% stacked bar** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-### When to Use
+| Data slot | Choose |
+| --- | --- |
+| **Y-axis** | Category or time field. |
+| **Legend** | Optional field that splits the measure into series. |
+| **Measures** | Numeric measure to compare. |
+| **Color / Tooltips** | Optional color encoding and extra hover detail. |
 
-- To compare **proportions** of components within categories.
-- To normalize data where total values differ but **percentage distribution matters**.
-- To show **trends in composition** across multiple groups (e.g., quarters, regions).
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
+## Make it readable
 
-## Data Structure
+Use **X axis**, **Y axis**, **Gridlines**, **Legend**, and **Data labels** to keep the chart readable. Use **Tooltip** for details that do not need a permanent label.
 
-100% Stacked Bar Charts support two ways of defining data:
+Use meaningful parts of the same whole. The bar length does not communicate the original total.
 
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-### **Method 1: Wide Table Format (Multiple Measures)**
-
-Each category (e.g., Q1, Q2...) has separate columns for each series to be stacked (e.g., Type A, Type B...). The chart aggregates values from each column and normalizes them to percentages.
-
-**Component Configuration**:
-- **X-Axis**: Category
-- **Measures**: Type A, Type B, Type C, Type D
-
-**Example Data**:
-
-| Category | Type A | Type B | Type C | Type D |
-| -------- | ------ | ------ | ------ | ------ |
-| Q1       | 30     | 50     | 20     | 10     |
-| Q2       | 40     | 30     | 20     | 10     |
-| Q3       | 20     | 40     | 30     | 10     |
-| Q4       | 25     | 35     | 25     | 15     |
-
-**Chart Example**:
-
-
-<div align="left"><img src="./../images/image-20250327170330881.png" width="100%" /></div>
-
-
-### **Method 2: Long Table Format (Dimension + Measure)**
-
-Each row represents a category–type pair with its value. This format is more normalized and scalable, especially for large or dynamic datasets.
-
-**Component Configuration**:
-- **X-Axis**: Category
-- **Legend**: Type
-- **Measures**: Sales
-
-**Example Data**:
-
-| Category | Type   | Sales |
-| -------- | ------ | ----- |
-| Q1       | Type A | 40    |
-| Q1       | Type B | 35    |
-| Q1       | Type C | 25    |
-| Q2       | Type A | 50    |
-| Q2       | Type B | 30    |
-| Q2       | Type C | 20    |
-| Q3       | Type A | 30    |
-| Q3       | Type B | 40    |
-| Q3       | Type C | 30    |
-| Q4       | Type A | 35    |
-| Q4       | Type B | 35    |
-| Q4       | Type C | 30    |
-
-**Chart Example**:
-
-
-<div align="left"><img src="./../images/image-20250327170257047.png" width="100%" /></div>
-
-
-## Notes
-
-- The **total value of each bar equals 100%**, regardless of actual numeric totals.
-- **Tooltips** typically show both percentage and raw value.
-- Ideal for showing **composition** where absolute differences are less important than **proportional contribution**.
-- You can use **Color** settings to control the color scheme for each segment.
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

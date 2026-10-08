@@ -1,46 +1,35 @@
 ---
-title: Scatter Plot
+title: Scatter
 permalink: /documentation/Visualization/Scatter-Plot/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Scatter Plot
+# Scatter
 
-## Overview
+Compare two numeric measures and identify clusters or outliers.
 
-A **Scatter Plot** is a visualization technique that represents relationships between two numerical variables. Each point on the chart corresponds to an observation, helping to identify patterns, trends, and correlations between the variables.
+## Set up the data
 
-### When to Use
+1. Choose **Components → Charts → Scatter** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-- To **analyze relationships** between two numerical variables.
-- To **detect clusters, trends, and outliers** in data.
-- To **visualize correlations** between different measures (e.g., unit sales vs. store sales).
-- To **represent multiple categories** with colors and different marker sizes.
+| Data slot | Choose |
+| --- | --- |
+| **Marker** | Field identifying the individual points. |
+| **Legend** | Optional grouping for the points. |
+| **X Axis / Y Axis** | The two measures to compare. |
+| **Size** | Optional measure controlling bubble size. |
+| **Color / Tooltips** | Optional encoding and extra context. |
 
-## Data Structure
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-A **Scatter Plot** requires:
+## Make it readable
 
-- **X-Axis**: A numerical field (e.g., `unit_sales`).
-- **Y-Axis**: A numerical field (e.g., `store_sales`).
-- **Marker**: A categorical field representing distinct groups (e.g., `product_subcategory`).
-- **Legend**: A categorical field to differentiate data points by color (e.g., `product_family`).
-- **Size (Optional)**: A numerical field to adjust the marker size based on values (e.g., `Margin`).
-- **Color(Optional)**:Customize colors to represent different groups.
-- **Filters (Optional)**: Used to refine the displayed data (e.g., by date, product type, or region).
+Use **Bubble**, **X axis**, **Y axis**, and **Zoom slider** to improve readability. **Analytics** provides reference lines and a diagonal.
 
-### Example Data Structure
+Choose Marker deliberately: it sets the level at which points are compared. Include its label in hover details.
 
-| product_subcategory | product_family | unit_sales | store_sales | Margin |
-| ------------------- | -------------- | ---------- | ----------- | ------ |
-| Fresh Vegetables    | Food           | 3.05       | 12000       | 200    |
-| Frozen Chicken      | Food           | 3.12       | 35000       | 500    |
-| Chocolate Candy     | Non-Consumable | 3.08       | 15000       | 300    |
-| Soft Drinks         | Drink          | 3.10       | 18000       | 250    |
-| Potato Chips        | Non-Consumable | 3.06       | 9000        | 150    |
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-## Example
-
-The following example visualizes the relationship between **unit sales** and **store sales** across different product subcategories, with marker size representing the **Margin**.
-
-<div align="left"><img src="./../images/image-20250312213701748.png"  width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

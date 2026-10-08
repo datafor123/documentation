@@ -1,48 +1,32 @@
 ---
-title: Image
+title: Dynamic image
 permalink: /documentation/Visualization/Image-chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Image
+# Dynamic image
 
-## Overview
+Display images supplied by data.
 
-The **Image** component is used to display pictures dynamically within dashboards or reports. It supports both static image URLs and dynamically generated images using Base64 encoding or URL fields from the data model. This component is useful for personalized visualizations, profile photos, product images, QR codes, or any data-driven imagery.
+## Set up the data
 
-### When to Use
+1. Choose **Components → Charts → Dynamic image** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-- To display **profile images**, **product visuals**, or **icons** dynamically based on data.
-- To embed **Base64-encoded images** or **image URLs** stored in the dataset.
+| Data slot | Choose |
+| --- | --- |
+| **Image field** | Field containing the image reference. |
+| **Name** | Field identifying or naming the image. |
 
-## Data Structure
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-The **Image** component requires the following fields:
+## Make it readable
 
-- **Analysis model**: The dataset containing the image information.
-- **Image field**: A field that contains either:
-  - A URL string pointing to the image location, or
-  - A Base64-encoded image string (e.g., `data:image/png;base64,...`).
-- **Name (Optional)**: A field used to label or identify the image.
-- **Time axis (Optional)**: If image changes are related to time, this can be used to display the latest or trend-related images.
-- **Filters (Optional)**: Restrict which images are shown based on selected conditions.
+Use **Settings** for the image presentation and **Empty data** for missing results.
 
-### Notes:
+For a fixed logo or illustration, use **Assists → Image** instead. Verify image references are reachable by report viewers.
 
-- If using a **Base64-encoded field**, ensure the string is properly prefixed with the MIME type (e.g., `data:image/png;base64,`).
-- The **Image field** must be mapped to a valid URL or Base64 string for the component to render properly.
-- Images will automatically scale to fit the component's size unless style settings are adjusted.
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-### Example Data Structure
-
-| name  | image                                               |
-| ----- | --------------------------------------------------- |
-| Alice | `https://example.com/images/alice.jpg`              |
-| Bob   | `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...` |
-
-## Example
-
-The example below shows an image rendered from a Base64 or URL field in the dataset. This image can change based on filters, user profiles, or dynamic records:
-
-
-<div align="left"><img src="./../images/image-20250327113338946.png" width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

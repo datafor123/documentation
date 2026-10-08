@@ -1,45 +1,34 @@
 ---
-title: Stacked Area
+title: Stacked area
 permalink: /documentation/Visualization/Stacked0-Area-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Stacked Area Chart
+# Stacked area
 
-## Overview
+Show how a total and its components change over time.
 
-A **Stacked Area Chart** is used to visualize trends over time, where multiple categories are stacked on top of one another. This helps in understanding both the total value and the contribution of individual components. It is particularly useful when comparing trends among multiple groups while also showing their cumulative effect.
+## Set up the data
 
-### When to Use
+1. Choose **Components → Charts → Stacked area** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-- To **analyze trends** in data over time while maintaining visibility into category contributions.
-- To **compare multiple categories** that collectively contribute to a total.
-- To **identify seasonal patterns** or fluctuations in grouped data.
+| Data slot | Choose |
+| --- | --- |
+| **X-axis** | Category or time field. |
+| **Legend** | Optional field that splits the measure into series. |
+| **Measures** | Numeric measure to compare. |
+| **Color / Tooltips** | Optional color encoding and extra hover detail. |
 
-## Data Structure
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-A **Stacked Area Chart** requires:
+## Make it readable
 
-- **X-Axis**: A time-based dimension (e.g., Date, Month, Year) to track trends over time.
-- **Legend**: A categorical field to represent different groups contributing to the total (e.g., Product Family, Department).
-- **Measures**: A numerical value representing the metric to be analyzed (e.g., Sales, Revenue, Quantity Sold).
-- **Color(Optional):** Used to set the color of the chart based on categories or numerical values (intensity-based coloring, or using a categorical field for distinct colors).
-- **Tooltips(Optional)**: Show additional details when hovering over plot area.
-- **Filters (Optional)**: Used to restrict the data displayed, such as filtering by month, region, or category.
+Use **X axis**, **Y axis**, **Gridlines**, **Legend**, and **Data labels** to keep the chart readable. Use **Tooltip** for details that do not need a permanent label.
 
-### Example Data Structure
+Keep series order stable. The bottom series has the clearest baseline for comparison.
 
-| the_date   | product_family | store_sales |
-| ---------- | -------------- | ----------- |
-| 1997-12-01 | Drink          | 200         |
-| 1997-12-01 | Food           | 500         |
-| 1997-12-01 | Non-Consumable | 300         |
-| 1997-12-02 | Drink          | 250         |
-| 1997-12-02 | Food           | 700         |
-| 1997-12-02 | Non-Consumable | 400         |
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-## Example
-
-The following example visualizes daily store sales across three product families (Drink, Food, Non-Consumable) for December 1997.
-
-<div align="left"><img src="./../images/image-20250312201251797.png"  width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

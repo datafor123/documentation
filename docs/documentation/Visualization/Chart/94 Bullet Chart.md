@@ -4,163 +4,35 @@ permalink: /documentation/Visualization/Bullet-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Bullet Chart
+# Bullet
 
-## Overview
+Compare an actual value with a target and performance ranges.
 
-A **Bullet Chart** is a high–information-density KPI visualization designed to compare the **Actual** value against a **Target**, while displaying multiple performance thresholds (such as *Satisfactory*, *Good*, *Very Good*, etc.) using segmented background ranges.
+## Set up the data
 
-As a compact and efficient alternative to gauge charts, bullet charts present rich business insights in a limited space, making them widely used in operational analytics, performance management, and financial dashboards.
+1. Choose **Components → Charts → Bullet** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-<div align="left"><img src="./../images/image-20251208152856707.png"  width="260px" /></div>
+| Data slot | Choose |
+| --- | --- |
+| **Category** | Item being measured. |
+| **Value** | Actual result. |
+| **Target value** | Comparison target. |
+| **Minimum / Normal / Satisfactory / Good / Excellent / Maximum** | Measures defining range boundaries. |
 
-### When to Use
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-- Displaying actual KPI performance  
-- Comparing actual vs. target  
-- Using ranges to show performance levels (satisfactory / good / excellent)  
-- Displaying multiple KPIs simultaneously (e.g., by store, department, product)  
-- Replacing bulky gauge charts  
+## Make it readable
 
+Use **Direction**, **Colors**, **Data values**, **Percentage settings**, **Scale**, and **Category labels**.
 
-<div align="left"><img src="./../images/image-20251123165022192.png"  width="100%" /></div>
+Define ordered range boundaries in the same unit as the actual value. Do not assume a higher value always means better performance.
 
-## Components of a Bullet Chart
+If the **Target value** measure is missing or empty, use the fixed target under **Style → Data values**. **Percentage settings** defines thresholds relative to that target: enter **80** for 80% of the target. A populated threshold measure takes precedence over its percentage setting. Percentages need a target value to have meaning.
 
-A bullet chart contains the following elements:
+For example, a target of 100 with Normal 60%, Satisfactory 80%, and Good 100% creates thresholds at 60, 80, and 100. Use **Tooltip labels** to give these ranges the business names readers recognize.
 
-1. **Background Ranges**  
-   Represent performance levels from low to high. Typically configured as:
-   - Minimum  
-   - Normal  
-   - Satisfactory  
-   - Good  
-   - Very Good  
-   - Maximum  
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-2. **Actual Bar**  
-   A dark bar that represents the current value of the KPI.
-
-3. **Target Marker**  
-   A vertical line indicating the desired target.
-
-4. **Category Label**  
-   Used to generate multiple bullet charts (e.g., Store 1, Store 2).
-
-## Data Structure
-
-Bullet charts support binding multiple fields from the data model.
-
-### Required Fields
-
-| Field          | Description                                             |
-| -- | - |
-| **Actual**     | KPI actual value (e.g., Revenue, Sales)                 |
-| **Target**     | Target value; also used as the base for range percent   |
-
-### Optional Fields
-
-| Field                         | Description                                           |
-| -- | -- |
-| **Category**                  | Dimension for grouping (Store, Department, etc.)      |
-| **Min Value**                 | Start of the performance range                        |
-| **Normal**                    | End of the first performance range                    |
-| **Satisfactory**              | End of the second performance range                   |
-| **Good Value**                | End of the third performance range                    |
-| **Very Good Value**           | End of the fourth performance range                   |
-| **Max Value**                 | End of the overall performance range                  |
-
-### Example Dataset
-
-| Store   | Revenue | Target | Min Revenue | Satisfactory Revenue | Good Revenue | Very Good Revenue |
-| ------- | ------- | ------ | ----------- | -------------------- | ------------ | ----------------- |
-| Store 1 | 119645  | 115000 | 80000       | 95000                | 110000       | 130000            |
-| Store 2 | 102769  | 105000 | 75000       | 85000                | 100000       | 120000            |
-| Store 3 | 151845  | 160000 | 100000      | 120000               | 150000       | 200000            |
-
-# Configuring a Bullet Chart
-
-Bullet chart configuration in Datafor includes **Data**, **Style**, and **Behavior** sections.
-
-
-# 1. Data
-
-Below is the Data binding panel for the bullet chart:
-
-<div align="left"><img src="./../images/image-20251123163909696-1763887740308-2.png"  width="270px" /></div>
-
-### **Category**
-Used to group the chart and generate multiple bullet charts (e.g., per Store).
-
-### **Actual**
-Defines the bar representing the actual KPI value.
-
-### **Target**
-Defines the target marker and acts as the base value for percentage-based ranges.
-
-### **Ranges**
-
-If range fields are provided, they determine the boundaries of each performance segment.
-
-| Field            | Description         |
-| - | - |
-| **Min Value**    | Range starting point |
-| **Normal**       | End of the first range |
-| **Satisfactory** | End of the second range |
-| **Good**         | End of the third range |
-| **Very Good**    | End of the fourth range |
-| **Max Value**    | Range ending point |
-
-📌 If range fields are not provided, percentage-based ranges can be generated automatically.
-
-
-# 2. Style
-
-### Orientation
-- Horizontal (default)  
-- Vertical  
-
-### Color Settings
-
-You can configure colors for:
-
-- Actual value  
-- Target marker  
-- Minimum range  
-- Normal  range
-- Satisfactory range
-- Good  range
-- Very Good  range
-
-## Range Values (Percentage Mode)
-
-When no range fields are bound, the chart can calculate segment boundaries using percentages based on the **Target** value.
-
-For example, with a target of **100,000**:
-
-- Needs Improvement (70%) → 70,000  
-- Normal (85%) → 85,000  
-- Good (100%) → 100,000  
-- Very Good (110%) → 110,000  
-
-### Tooltip Labels
-
-When using percentage mode, you can configure labels for:
-
-| Option                | Description           |
-| --------------------- | --------------------- |
-| **Target Label**      | Label for the target  |
-| **Normal Label**      | Label for the Normal range |
-| **Satisfactory Label**| Label for Satisfactory |
-| **Good Label**        | Label for Good        |
-| **Excellent Label**   | Label for Very Good   |
-
-# Best Practices
-
-- Use **3–4 ranges** for clear performance interpretation  
-- Use **color gradients** from lighter → darker to represent improvement  
-- Keep the **target marker visually distinct**  
-- Hide axis ticks when displaying many categories to reduce clutter  
-- If each category has a different target, bind the target as a field  
-- If the target is constant, set it directly in the Style → **Values**
-
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

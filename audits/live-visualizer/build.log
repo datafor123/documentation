@@ -1,0 +1,25 @@
+
+> optimibi-docs@1.0.0 docs:build
+> vuepress build docs --clean-cache --clean-temp
+
+- Cleaning temp
+√ Cleaning temp - done in 499ms
+- Cleaning cache
+√ Cleaning cache - done in 7ms
+- Initializing and preparing data
+@vuepress-plume/plugin-shikiji:  ‼ You have not configured `plugins.shiki.languages`. It has been detected that you are using `["http","html","json","yaml","dotenv","powershell","bash","mdx","js","vue","jsx","sql","shell","properties","nginx","xml"]`. Please add it to the `plugins.shiki.languages` configuration.
+√ Initializing and preparing data - done in 11.92s
+- Compiling with vite
+x Build failed in 2.42s
+× Compiling with vite - failed in 3.05s
+error [commonjs--resolver] EPERM: operation not permitted, realpath 'D:\github_projects\docs-datafor\node_modules\@vuepress\client\dist\chunk-LVRERRCW.js'
+    at node:fs:2848:18
+    at getRealPath (file:///D:/github_projects/docs-datafor/node_modules/vite/dist/node/chunks/dep-M1IYMR16.js:16645:16)
+    at tryResolveRealFileOrType (file:///D:/github_projects/docs-datafor/node_modules/vite/dist/node/chunks/dep-M1IYMR16.js:16636:20)
+    at tryCleanFsResolve (file:///D:/github_projects/docs-datafor/node_modules/vite/dist/node/chunks/dep-M1IYMR16.js:16237:22)
+    at tryFsResolve (file:///D:/github_projects/docs-datafor/node_modules/vite/dist/node/chunks/dep-M1IYMR16.js:16230:15)
+    at Object.resolveId (file:///D:/github_projects/docs-datafor/node_modules/vite/dist/node/chunks/dep-M1IYMR16.js:16068:19)
+    at Object.handler (file:///D:/github_projects/docs-datafor/node_modules/vite/dist/node/chunks/dep-M1IYMR16.js:51298:15)
+    at file:///D:/github_projects/docs-datafor/node_modules/rollup/dist/es/shared/node-entry.js:21844:40
+    at async PluginDriver.hookFirstAndGetPlugin (file:///D:/github_projects/docs-datafor/node_modules/rollup/dist/es/shared/node-entry.js:21744:28)
+    at async resolveId (file:///D:/github_projects/docs-datafor/node_modules/rollup/dist/es/shared/node-entry.js:20344:26)

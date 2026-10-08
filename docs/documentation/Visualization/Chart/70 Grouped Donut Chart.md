@@ -1,41 +1,34 @@
 ---
-title: Grouped Donut
+title: Grouped donuts
 permalink: /documentation/Visualization/Grouped-Donut-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Grouped Donut Chart
+# Grouped donuts
 
-## Overview
+Compare composition across several groups.
 
-A **Grouped Donut Chart** is used to compare proportions across multiple categories. It displays multiple donut charts side by side, where each donut represents a different group while maintaining the same categorical slices within each.
+## Set up the data
 
-### When to Use
+1. Choose **Components → Charts → Grouped donuts** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-- To **compare proportions** within different groups (e.g., sales distribution by product family across multiple years).
+| Data slot | Choose |
+| --- | --- |
+| **Details (Slices)** | Categories within each donut. |
+| **Grouping (Donuts)** | Field that creates separate donuts. |
+| **Measures** | Measure controlling slice size. |
+| **Color / Tooltips** | Optional color and hover detail. |
 
-## Data Structure
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-A **Grouped Donut Chart** requires:
+## Make it readable
 
-- **Details (Slices)**: A categorical field defining the segments within each donut (e.g., `product_family`).
-- **Grouping (Donuts)**: A categorical field used to create separate donut charts (e.g., `the_date(Year)`).
-- **Measures**: A numerical field representing the values for each slice (e.g., `store_sales`).
-- **Color (Optional)**: Used to set the color of the chart based on categories or numerical values.
-- **Tooltips (Optional)**: Additional information displayed when hovering over slices.
-- **Time Axis (Optional)**: Allows for time-based filtering.
-- **Filters (Optional)**: Used to refine the displayed data (e.g., filtering by region or product type).
+Use **Grouping labels** to identify each donut and **Plot area** to control its presentation.
 
-### Example Data Structure
+Example: Product Category in Details, Region in Grouping, and Sales in Measures. Use the same slice colors across groups.
 
-| the_date (Year) | product_family | store_sales |
-| --------------- | -------------- | ----------- |
-| 1997            | Food           | 40,9035.59  |
-| 1997            | Non-Consumable | 10,7355.48  |
-| 1997            | Drink          | 4,8836.21   |
-| 1998            | Food           | 77,8135.80  |
-| 1998            | Non-Consumable | 20,7269.51  |
-| 1998            | Drink          | 9,3742.16   |
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-## Example
-<div align="left"><img src="./../images/image-20250313141512471.png"  width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

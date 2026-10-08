@@ -1,0 +1,637 @@
+[
+  {
+    "name": "Text Content",
+    "text": [
+      "Drag a component here, or pick one and click here to add it",
+      "EffectsContentAlignmentVertical alignmentTopFontDefault (System default) DecorationNoneLine heightLetter spacingWrap textOverflowScroll barInsert dynamic valueChoose a value to insert"
+    ]
+  },
+  {
+    "name": "Rich text",
+    "text": [
+      "Drag a component here, or pick one and click here to add it",
+      "Default textEffects"
+    ]
+  },
+  {
+    "name": "Rich text Default text",
+    "text": [
+      "Drag a component here, or pick one and click here to add it",
+      "Default textDefault fontDefault (System default) Line heightVertical alignmentTopOverflowShow outsideEffects"
+    ]
+  },
+  {
+    "name": "Action button",
+    "text": [
+      "Drag a component here, or pick one and click here to add it",
+      "Data bindingAnalysis modelFieldFilters"
+    ]
+  },
+  {
+    "name": "Action button Style",
+    "text": [
+      "Drag a component here, or pick one and click here to add it",
+      "TitleContentStyle type & statesStyle typeFillButton ImageEffectsLegacy state text"
+    ]
+  },
+  {
+    "name": "Action button Content",
+    "text": [
+      "Drag a component here, or pick one and click here to add it",
+      "TitleContentShow Button TextButton TextButton FontDefault (System default)Show iconIconIcon positionLeftIcon sizeText Offset XText Offset YStyle type & statesStyle typeFillButton ImageEffectsLegacy state text"
+    ]
+  },
+  {
+    "name": "Action button states",
+    "text": [
+      "Drag a component here, or pick one and click here to add it",
+      "TitleContentShow Button TextButton TextButton FontDefault (System default)Show iconIconIcon positionLeftIcon sizeText Offset XText Offset YStyle type & statesStyle typeFillFollow primary colorStateDefaultBackground Text color Border0 SolidBackground Text color Border0 SolidBackground Text color Border0 SolidBackground Text color Border0 SolidButton ImageEffectsLegacy state text"
+    ]
+  },
+  {
+    "name": "Web page",
+    "text": [
+      "Drag a component here, or pick one and click here to add it",
+      "Analysis modelURL fieldCustom HyperlinkFrom repositoryInsert dynamic valueChoose a value to insertAppend filter values"
+    ]
+  },
+  {
+    "name": "Dropdown Data",
+    "text": [
+      "Drag a component here, or pick one and click here to add it",
+      "Analysis modelURL fieldCustom HyperlinkFrom repositoryInsert dynamic valueChoose a value to insertAppend filter values"
+    ]
+  },
+  {
+    "name": "Dropdown actual Data",
+    "text": [
+      "Drag a component here, or pick one and click here to add it",
+      "Analysis modelFieldDefault valueFixedRelativePlease selectParameter namePlease selectMultiple selectionShow 'All'Filters"
+    ]
+  },
+  {
+    "name": "Dropdown Actions",
+    "text": [
+      "Drag a component here, or pick one and click here to add it",
+      "Image fileImage sourceUploadSelect fileSelect fileImage URL"
+    ]
+  },
+  {
+    "name": "Measure card Data",
+    "text": [
+      "Analysis modelMeasureComparison #1Comparison #2Time axisFilters"
+    ]
+  },
+  {
+    "name": "Measure card Style",
+    "text": [
+      "TitleEffectsData colorsMain valueDisplay unitsAutoComparison #1 settingsDisplay unitsFollow measure formatComparison #2 settingsDisplay unitsFollow measure formatComparison colorLayoutEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Dimension field Data",
+    "text": [
+      "Analysis modelFieldTime axisFilters"
+    ]
+  },
+  {
+    "name": "Dimension field Style",
+    "text": [
+      "TitleEffectsMain valueEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Gauge actual panel",
+    "text": [
+      "\n\t\t\t\t\tCharts\n\t\t\t\t\t\n\t\t\t\tTablesPivot tableTableTree tableParent-child tableCards & KPIMeasure cardKPI trend cardDimension fieldGaugeBulletRing progressColumn & barClustered columnStacked column100% stacked columnClustered barStacked bar100% stacked barRange columnWaterfallLine & areaLineComboAreaStacked area100% stacked areaProportionPieGrouped donutsTreemapSunburstDistribution & correlationScatterBox plotHistogramHeat matrixCalendar chartFlow & breakdownFunnelSankeyDecomposition treeMapsFilled mapMarker mapImage mapGIS marker mapGIS heat mapMapbox/​AmapOtherRadarWord cloudDynamic image\n\t\t\t\t\tAssists\n\t\t\t\t\t\n\t\t\t\tTextRich textImageIconShapeAction buttonWeb pageAI insightTabs\n\t\t\t\t\tFilters\n\t\t\t\t\t\n\t\t\t\tDropdownList boxNumeric sliderButton groupRadio/​CheckboxHierarchy table filterDateRange filterPaginateSearchFilter button"
+    ]
+  },
+  {
+    "name": "Gauge Data",
+    "text": [
+      "Analysis modelSeriesMeasureMinimum valueMaximum ValueTargetTime axisFilters"
+    ]
+  },
+  {
+    "name": "Gauge Style",
+    "text": [
+      "TitleEffectsThemePositionSeriesMeasure valueDisplay unitsAutoTarget valueDisplay unitsAutoScale axisDisplay unitsAutoEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Bullet Data",
+    "text": [
+      "Analysis modelCategoryValueTarget valueMinimumNormalSatisfactoryGoodExcellentMaximumFilters"
+    ]
+  },
+  {
+    "name": "Bullet Style",
+    "text": [
+      "TitleEffectsPaddingDirectionColorsData valuesPercentage settings (Based on target value)Tooltip labelsScaleCategory labelsTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Ring progress Data",
+    "text": [
+      "Analysis modelMeasureComparison #1Comparison #2Time axisFilters"
+    ]
+  },
+  {
+    "name": "Ring progress Style",
+    "text": [
+      "TitleEffectsData colorsMain valueDisplay unitsAutoComparison #1 settingsDisplay unitsFollow measure formatComparison #2 settingsDisplay unitsFollow measure formatComparison colorLayoutEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Range column Data",
+    "text": [
+      "Analysis modelCategory fieldMinimum valueMaximum valueColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Range column Style",
+    "text": [
+      "TitleEffectsPaddingBarData labelsX axisY axisGridlinesZoom sliderTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Ring progress Data",
+    "text": [
+      "Analysis modelProgress MeasureTarget MeasureTime axisFilters"
+    ]
+  },
+  {
+    "name": "Ring progress Style",
+    "text": [
+      "TitleEffectsPlot AreaData colorsData labelsEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Clustered bar Data",
+    "text": [
+      "Analysis modelY-axisLegendMeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Clustered bar Style",
+    "text": [
+      "TitleEffectsPaddingBarData labelsDisplay unitsAutoX axisY axisGridlinesLegendTooltipZoom sliderEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Stacked column Data",
+    "text": [
+      "Analysis modelX-axisLegendMeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Stacked column Style",
+    "text": [
+      "TitleEffectsPaddingBarData labelsDisplay unitsAutoX axisY axisGridlinesLegendTooltipZoom sliderEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "100% stacked column Data",
+    "text": [
+      "Analysis modelX-axisLegendMeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "100% stacked column Style",
+    "text": [
+      "TitleEffectsPaddingBarData labelsX axisY axisGridlinesLegendZoom sliderTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Stacked bar Data",
+    "text": [
+      "Analysis modelY-axisLegendMeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Stacked bar Style",
+    "text": [
+      "TitleEffectsPaddingBarData labelsDisplay unitsAutoX axisY axisGridlinesLegendTooltipZoom sliderEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "100% stacked bar Data",
+    "text": [
+      "Analysis modelY-axisLegendMeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "100% stacked bar Style",
+    "text": [
+      "TitleEffectsPaddingBarData labelsX axisY axisGridlinesLegendZoom sliderTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Line Data",
+    "text": [
+      "Analysis modelX-axisLegendMeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Line Style",
+    "text": [
+      "TitleEffectsPaddingData labelsDisplay unitsAutoLineX axisY axisGridlinesLegendTooltipZoom sliderEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Combo Data",
+    "text": [
+      "Analysis modelX-axisColumn measuresLine measuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Combo Style",
+    "text": [
+      "TitleEffectsPaddingData labelsDisplay unitsAutoLineColumn typeX axisY axisGridlinesLegendZoom sliderTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Stacked area Data",
+    "text": [
+      "Analysis modelX-axisLegendMeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Stacked area Style",
+    "text": [
+      "TitleEffectsPaddingData labelsDisplay unitsAutoPlot areaX axisY axisGridlinesLegendTooltipZoom sliderEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "100% stacked area Data",
+    "text": [
+      "Analysis modelX-axisLegendMeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "100% stacked area Style",
+    "text": [
+      "TitleEffectsPaddingData labelsPlot areaX axisY axisGridlinesLegendZoom sliderTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Pie Data",
+    "text": [
+      "Analysis modelLegendMeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Pie Style",
+    "text": [
+      "TitleEffectsPlot areaTypeData labelsDisplay unitsAutoLegendTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Grouped donuts Data",
+    "text": [
+      "Analysis modelDetails (Slices)Grouping (Donuts)MeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Grouped donuts Style",
+    "text": [
+      "TitleEffectsPaddingPlot areaLegendGrouping labelsData labelsDisplay unitsFollow measure formatTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Scatter Data",
+    "text": [
+      "Analysis modelMarkerLegendX AxisY AxisSizeColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Scatter Style",
+    "text": [
+      "TitleEffectsPaddingData labelsBubbleX axisY axisGridlinesLegendZoom sliderTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Word cloud Data",
+    "text": [
+      "Analysis modelWordMeasureTime axisFilters"
+    ]
+  },
+  {
+    "name": "Word cloud Style",
+    "text": [
+      "TitleEffectsWordsEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Radar Data",
+    "text": [
+      "Analysis modelRadial axesLegendMeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Radar Style",
+    "text": [
+      "TitleEffectsPositionPlot areaAxis labelsLegendTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Sankey Data",
+    "text": [
+      "Analysis modelSourceTargetMeasureTime axisFilters"
+    ]
+  },
+  {
+    "name": "Sankey Style",
+    "text": [
+      "TitleEffectsData labelsDisplay unitsAutoTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Calendar chart Data",
+    "text": [
+      "Analysis modelDateMeasureColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Calendar chart Style",
+    "text": [
+      "TitleEffectsYearMonthWeekdayPlot areaTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Treemap Data",
+    "text": [
+      "Analysis modelSeriesDetailMeasureColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Treemap Style",
+    "text": [
+      "TitleEffectsSeriesData labelsDisplay unitsAutoTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Waterfall Data",
+    "text": [
+      "Analysis modelFieldMeasureTime axisFilters"
+    ]
+  },
+  {
+    "name": "Waterfall Style",
+    "text": [
+      "TitleEffectsPaddingBarAccumulated valueData colorsLegendData labelsX axisY axisGridlinesTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Dynamic image Data",
+    "text": [
+      "Analysis modelImage fieldNameTime axisFilters"
+    ]
+  },
+  {
+    "name": "Dynamic image Style",
+    "text": [
+      "TitleEffectsSettingsEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Histogram Data",
+    "text": [
+      "Analysis modelValueFilters"
+    ]
+  },
+  {
+    "name": "Histogram Style",
+    "text": [
+      "TitleEffectsPaddingDistributionBarsData labelsX axisY axisGridlinesTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Decomposition tree Data",
+    "text": [
+      "Analysis modelAnalyzeExplain byColorTooltipsIconTime axisFilters"
+    ]
+  },
+  {
+    "name": "Decomposition tree Style",
+    "text": [
+      "TitleEffectsAnalysis settingsTree layoutNodesConnectorsData barsCategory labelsValuesLevel headersEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Pivot table Data",
+    "text": [
+      "Analysis modelRowsColumnsMeasuresTime axisFilters"
+    ]
+  },
+  {
+    "name": "Pivot table Style",
+    "text": [
+      "Table styleTitleEffectsGridHeaderContentSub totalGrand totalEmpty dataToolbarTooltipSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Tree table Data",
+    "text": [
+      "Analysis modelHierarchy fieldsFieldsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Tree table Style",
+    "text": [
+      "Table styleTitleEffectsGridHeaderContentGrand totalEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Parent-child table Data",
+    "text": [
+      "Analysis modelParentChildCaptionFieldsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Parent-child table Style",
+    "text": [
+      "Table styleTitleEffectsGridHeaderContentGrand totalEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Filled map Data",
+    "text": [
+      "Analysis modelGeographic fieldMeasureMapWorldTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Filled map Style",
+    "text": [
+      "TitleEffectsData pickerDisplay unitsAutoData colorsData labelsRegionRoamTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Marker map Data",
+    "text": [
+      "Analysis modelGeographic fieldMeasureMapWorldTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Marker map Style",
+    "text": [
+      "TitleEffectsData colorsData labelsMarker SettingRegionPan and roamTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Image map Data",
+    "text": [
+      "Analysis modelX coordinateY coordinateMarker sizeColorTooltipsIconTime axisFilters"
+    ]
+  },
+  {
+    "name": "Image map Style",
+    "text": [
+      "TitleEffectsMap settingsMarker settingsData labelsTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "GIS marker map Data",
+    "text": [
+      "Analysis modelGeographic fieldLongitudeLatitudeMeasureTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "GIS marker map Style",
+    "text": [
+      "TitleEffectsData colorsData labelsMap markersMap StylesControlsTooltipToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "GIS heat map Data",
+    "text": [
+      "Analysis modelGeographic fieldLongitudeLatitudeMeasureTime axisFilters"
+    ]
+  },
+  {
+    "name": "GIS heat map Style",
+    "text": [
+      "TitleEffectsMap StylesHeat plotGradientControlsToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Mapbox/Amap Data",
+    "text": [
+      "Analysis modelGeographic fieldLongitudeLatitudeCategoryMarker SizeTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Mapbox/Amap Style",
+    "text": [
+      "TitleEffectsData labelsMarkersMap OptionsTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "KPI trend card Data",
+    "text": [
+      "Analysis modelTrend dimensionActual valueTarget valueStatic targetFilters"
+    ]
+  },
+  {
+    "name": "KPI trend card Style",
+    "text": [
+      "TitleEffectsPaddingKPIMarker valueTarget labelDateTooltipEmpty dataSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Sunburst Data",
+    "text": [
+      "Analysis modelAxisMeasureTime axisFilters"
+    ]
+  },
+  {
+    "name": "Sunburst Style",
+    "text": [
+      "TitleEffectsPositionPlot areaData labelsTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Heat matrix Data",
+    "text": [
+      "Analysis modelX axisY axisMeasureTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Heat matrix Style",
+    "text": [
+      "TitleEffectsPaddingColor scaleCellsData labelsDisplay unitsAutoX axisY axisColor legendTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Area Data",
+    "text": [
+      "Analysis modelX-axisLegendMeasuresColorTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Area Style",
+    "text": [
+      "TitleEffectsPaddingData labelsDisplay unitsAutoPlot areaX axisY axisGridlinesLegendTooltipZoom sliderEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Box plot Data",
+    "text": [
+      "Analysis modelSampleGroupMeasureTooltipsTime axisFilters"
+    ]
+  },
+  {
+    "name": "Box plot Style",
+    "text": [
+      "TitleEffectsPaddingBoxOutliersDisplay unitsAutoX axisY axisGridlinesTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Funnel Data",
+    "text": [
+      "Analysis modelFieldMeasuresStage orderAdjustTime axisFilters"
+    ]
+  },
+  {
+    "name": "Funnel Style",
+    "text": [
+      "TitleEffectsPlot areaData labelsDisplay unitsAutoTooltipEmpty dataToolbarSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "List box Data",
+    "text": [
+      "Analysis modelFieldDefault valueFixedRelativePlease selectParameter namePlease selectMultiple selectionShow 'All'Filters"
+    ]
+  },
+  {
+    "name": "List box Style",
+    "text": [
+      "TitleEffectsList boxSearchEmpty dataSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Range filter Data",
+    "text": [
+      "Analysis modelNumeric field"
+    ]
+  },
+  {
+    "name": "Range filter Style",
+    "text": [
+      "TitleEffectsLayoutOptionsInput boxSliderEmpty dataSettings for style are not available, please add data in the data panel."
+    ]
+  },
+  {
+    "name": "Filter button Data",
+    "text": [
+      "Button"
+    ]
+  },
+  {
+    "name": "Filter button Style",
+    "text": [
+      "Button"
+    ]
+  }
+]

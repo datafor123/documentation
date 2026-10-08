@@ -1,28 +1,21 @@
 ---
-title: Top/Bottom N
+title: "Row Limit: Top and Bottom N"
 permalink: /documentation/Analysis/Top-Bottom-N/
 tags: null
 description: null
 createTime: 2026/09/01 22:03:26
 ---
-# Top/Bottom N
 
-Limit refers to sorting data by a metric and then selecting the top N or bottom N records.
+# Row Limit: Top and Bottom N
 
-## Setting
+Return the highest or lowest categories according to a measure. The current field-menu entry is **Row limit**.
 
-![1681897791217](./images/1681897791217.png)
+1. Select the component and open its measure’s **More** menu in **Data**.
+2. Choose **Row limit** and enable **Enable row limit**.
+3. Select **Type**: Top N or Bottom N.
+4. Choose **Sort measure** and enter a positive **Row limit**, such as 10.
+5. Click **OK**, then verify the returned categories and values.
 
+![Row limit settings for Net Sales](../Visualization/images/current/row-limit.jpg)
 
-Select the "Top/Bottom N" menu item in the metrics menu, and toggle the "Top/Bottom N" switch.
-
-![1681897843208](./images/1681897843208.png)
-
-
-- Limit Type: Select "Top N" to return the top N records or "Bottom N" to return the bottom N records.
-- Sort Metric: Select the metric to sort the data by.
-- Limit Count: Enter the number of records to limit the result set to.
-
-After completing the settings, click the "OK" button.
-
-![1681897945409](./images/1681897945409.png)
+For example, Top N with Net Sales and a limit of 10 gives a short sales ranking. Apply the intended period and business filters before interpreting the result. Recheck the ranking after changing those filters.

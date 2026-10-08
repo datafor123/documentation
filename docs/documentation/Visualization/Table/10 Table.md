@@ -6,109 +6,42 @@ createTime: 2026/09/01 22:03:26
 
 # Table
 
-## Overview
+Use **Table** for a flat list of categories and measures. Use a **Pivot table** when a dimension must also run across columns.
 
-The Table  component is designed to display structured data in a tabular format. Each row represents a data entry, and each column corresponds to a specific field. It is particularly useful for displaying detailed records, structured lists, and data comparisons.
+## Build a table
 
-<div align="left"><img src="./../images/image-20250317204844782.png"  width="100%" /></div>
+1. Add **Components → Charts → Tables → Table**.
+2. Select an **Analysis model** in **Data**.
+3. Add the required dimensions and measures to **Fields**. For example, use **Region** and **Net Sales**.
+4. Arrange the fields in the order readers should see them. Add conditions under **Filters** if needed.
 
-## Key Features
+The example groups Net Sales by Region. A table does not automatically mean raw source rows: its dimensions and measure aggregation determine the query result.
 
-- **Sorting**: Click on a column header to sort data in ascending or descending order.
-- **Filtering**: Apply filters via the filter pane or interactive slicers.
-- Formatting:
-  - Adjust column width
-  - Change background color
-  - Modify text alignment
-  - Configure borders and gridlines
-- **Conditional Formatting**: Highlight key data points using color mapping, data bars, or icon sets.
-- **Interactivity**: Supports interaction with other visual components, including cross-filtering and highlighting.
+## Apply a complete style
 
-## Configuring the Table Component
+Open **Style → Table style**. Choose a preset, then an **Accent** and **Density**. Presets include Minimal, Banded rows, Bold header, Grid, Three-line, and dark variants.
 
-### 1. **Field Configuration**
+![Bold header, banded preset and table appearance controls](../images/current/table-style.jpg)
 
-- Add the desired fields into the visualization.
-- Adjust field order by dragging and repositioning them.
+**Page default** follows the page's table style. Appearance settings changed individually can override a preset. **Reset to template style** clears those appearance overrides; its help text states that conditional formatting, column widths, and alignment are retained.
 
-### 2. **Style Settings**
+Use **Header**, **Content**, **Grid**, and **Grand total** for more specific changes.
 
-#### Title
+## Format a field
 
-- **Display**: Toggle visibility of the table title.
-- **Content**: Enter the title text.
-- **Alignment**: Set left, center, or right alignment.
-- Font Settings:
-  - **Font Family**: Select the font type.
-  - **Font Size**: Customize the font size.
-  - **Font Style**: Bold (B), Italic (I), Underline (U).
-- **Background**: Set the title bar background color.
+In **Data → Fields**, hover a field and open **More function**. For a measure, the menu includes **Format**, **Font color**, **Background color**, **Data bars**, and **Icons**.
 
-#### Effects
+To add data bars:
 
-- **Background Color**: Customize the overall background color of the table.
-- Borders:
-  - **Border Width**: Adjust border thickness.
-  - **Border Style**: Choose from solid, dashed, etc.
-- **Rounded Corners**: Set the radius of the table corners.
-- **Shadow**: Apply outer shadow effects to the table.
+1. Open the measure's **Data bars** dialog and turn on **Enable**.
+2. Choose the **Based on** field and how to handle empty values.
+3. Set the minimum and maximum, positive and negative colors, and bar direction.
+4. Click **Apply** to inspect the result or **OK** to apply and close.
 
-#### Grid
+![Data bar settings for Net Sales](../images/current/table-data-bars-dialog.jpg)
 
-- **Grid Lines**: Toggle grid visibility and color.
-- Alternating Row Colors:
-  - **Odd Row Background**: Set background color for odd-numbered rows.
-  - **Even Row Background**: Set background color for even-numbered rows.
-- Hover Effects:
-  - **Enable Hover**: Highlight rows on hover.
-  - **Hover Background Color**: Define the background color when hovering over a row.
-- **Row Height**: Specify row height in pixels.
+Keep numeric text visible when readers need exact values; use **Show bar only** only when the bar itself is sufficient.
 
-#### Header
+## Check the result
 
-- **Header Alignment**: Set column header alignment (left, center, right).
-- **Background Color**: Customize the header background color.
-- Font Settings:
-  - **Font Family, Size, and Style** (bold, italic, underline).
-- **Word Wrap**: Enable text wrapping for long headers.
-
-#### Content
-
-- **Font Settings**: Configure font type, size, and style for data values.
-- **Word Wrap**: Enable automatic text wrapping within cells.
-- **Column Alignment**: Individually set column alignment.
-- **Row Numbering**: Toggle row number visibility.
-- **Frozen Columns**: Lock specific columns to remain visible when scrolling horizontally.
-
-#### Grand Total
-
-- **Show Grand Total**: Toggle the display of the total row.
-- **Title**: Customize the total row’s title text.
-- **Background Color**: Set the background color for the total row.
-- **Font Settings**: Customize font style for total values.
-
-#### Toolbar
-
-- Display Mode:
-  - **Always Visible**
-  - **Show on Hover**
-  - **Hidden**
-- **Toolbar Color**: Customize toolbar color.
-- **Extended Background**: Expand toolbar background settings.
-
-## Table vs.  Pivot 
-
-| Feature                | Table           | Pivot       |
-| ---------------------- | --------------- | ----------- |
-| Data Hierarchy         | ❌ Not Supported | ✅ Supported |
-| Cross Aggregation | ❌ Not Supported | ✅ Supported |
-| Subtotals | ❌ Not Supported | ✅ Supported |
-| Grand Totals |  ✅ Supported | ✅ Supported |
-| Conditional Formatting | ✅ Supported     | ✅ Supported |
-
-## Use Cases
-
-- Displaying detailed datasets, such as sales orders or user lists.
-- Serving as a base for data exports, allowing CSV export of detailed records.
-- Providing a simple and structured way to present tabular data.
-- Enabling interactive filtering, data analysis, and data comparison in reports.
+Confirm sorting, number formats, and totals. A ratio or distinct count can have a valid total that differs from the sum of visible rows. Check the measure definition rather than forcing a sum.

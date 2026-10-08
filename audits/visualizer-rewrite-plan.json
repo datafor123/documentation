@@ -1,0 +1,2118 @@
+{
+  "status": "planning-only-not-product-documentation",
+  "basis": "Repository content inspection. No live UI was accessible; none of the listed controls, defaults, features, or existing screenshots is verified as current.",
+  "preserve": [
+    "Existing permalinks and unrelated content",
+    "Existing business reports",
+    "Product code"
+  ],
+  "pageTemplate": [
+    "One-sentence purpose",
+    "Prerequisites only when needed",
+    "Exact verified steps",
+    "Small English example and expected result",
+    "One useful screenshot per distinct decision",
+    "Common failure and next step"
+  ],
+  "screenshotRules": [
+    "Genuine current English UI only",
+    "Separate clearly named documentation reports with synthetic/public sample data",
+    "No private unrelated reports, account details, credentials or secrets",
+    "Capture context plus legible controls; do not recreate UI as an illustration",
+    "Record product version if visible, capture date, report, workflow, and image path"
+  ],
+  "demoPlan": [
+    {
+      "name": "Documentation - Visualizer Basics",
+      "purpose": "Category sales, a KPI, a table and a filter; validate layout and interaction."
+    },
+    {
+      "name": "Documentation - Chart Gallery",
+      "purpose": "Distinct supported chart types using controlled synthetic values."
+    },
+    {
+      "name": "Documentation - Parameters and Analytics",
+      "purpose": "Scenario parameter, titles/tabs, reference line and band."
+    },
+    {
+      "name": "Documentation - Detail",
+      "purpose": "A safe drillthrough target for the basics report."
+    }
+  ],
+  "findings": [
+    {
+      "id": "panel-tabs",
+      "evidence": [
+        "Create Your First Analysis Report lists Data, Style, Actions.",
+        "Chart Reference Lines describes Data, Style, Analytics, Actions for supported charts."
+      ],
+      "action": "Verify the current tabs for each chart; align introductory workspace guidance.",
+      "status": "repository-inconsistency-observed; current-ui-unverified"
+    },
+    {
+      "id": "component-filter-entry",
+      "evidence": [
+        "Component-Level Filtering instructs users to click Add data.",
+        "Create Your First Analysis Report instructs users to click + in Filters."
+      ],
+      "action": "Verify current control labels and use one consistent instruction.",
+      "status": "repository-wording-difference-observed; current-ui-unverified"
+    },
+    {
+      "id": "chart-addition",
+      "evidence": [
+        "Adding Charts documents click-then-click or drag-and-drop.",
+        "The walkthrough documents click-then-click and explicit placement."
+      ],
+      "action": "Test supported placement gestures and field slots; replace the long image-per-click sequence with a short task.",
+      "status": "repository-wording-difference-observed; current-ui-unverified"
+    },
+    {
+      "id": "cross-filter-setup",
+      "evidence": [
+        "Cross-Filtering describes charts automatically updating after clicking a point but provides no target configuration steps.",
+        "Filter Subscriptions separately documents an Action tab and Subscriber selection."
+      ],
+      "action": "Test defaults, target configuration and clearing selection; explain component filters, filter controls and cross-filter scope together.",
+      "status": "documentation-gap-observed; current-ui-unverified"
+    },
+    {
+      "id": "tabs-duplication",
+      "evidence": [
+        "Tabs (Multi-Tabbed Page) and Tabs both explain creation, ordering and entering/exiting component editing.",
+        "Parameter-Driven Tab Switching adds a third related workflow."
+      ],
+      "action": "Choose one primary container guide, preserve existing permalinks, and cross-link the parameter workflow.",
+      "status": "duplication-observed; current-ui-unverified"
+    },
+    {
+      "id": "filter-overview",
+      "evidence": [
+        "Filters lists control types followed by generic benefits, without a worked binding/target workflow."
+      ],
+      "action": "Replace benefits with a control-choice table and one verified filtering example.",
+      "status": "editorial-gap-observed; control-catalog-unverified"
+    },
+    {
+      "id": "table-options",
+      "evidence": [
+        "Table, Pivot Table and Hierarchy Table repeat long style option lists and comparison tables."
+      ],
+      "action": "Verify capabilities using one shared dataset; focus each page on its distinctive grouping/totals behavior.",
+      "status": "repetition-observed; options-unverified"
+    },
+    {
+      "id": "image-provenance",
+      "evidence": [
+        "79 scoped pages reference 199 existing images; many assets use numeric/date-like filenames."
+      ],
+      "action": "Do not infer screenshot age, language, or currency from filenames. Replace or retain only after visual comparison and record capture provenance.",
+      "status": "asset-inventory-verified; image-content-unverified"
+    }
+  ],
+  "groups": [
+    {
+      "id": "start",
+      "priority": 1,
+      "goal": "Create, configure, save, and reopen a first report; understand selection and component editing.",
+      "outline": [
+        "Prerequisites and example result",
+        "Open the designer",
+        "Select the page or a component",
+        "Choose a model and assign fields",
+        "Arrange and format components",
+        "Preview, save, and reopen"
+      ],
+      "checks": [
+        "Current report creation and edit entry points",
+        "Actual panel tabs for page and each component",
+        "Model and field picker interactions",
+        "Placement, selection, alignment, distribution, layer order, undo and chart conversion",
+        "Save destination and reopen behavior"
+      ],
+      "screenshots": [
+        "Empty English workspace",
+        "Configured category/measure chart",
+        "Model picker",
+        "Selection and arrangement controls",
+        "Save dialog",
+        "Saved report preview"
+      ],
+      "pageCount": 3
+    },
+    {
+      "id": "charts",
+      "priority": 2,
+      "goal": "Choose the appropriate chart and configure its required fields with one concrete example.",
+      "outline": [
+        "Question this chart answers",
+        "Required and optional field slots",
+        "Build one example",
+        "Chart-specific options",
+        "Read and validate the result",
+        "Common mistakes"
+      ],
+      "checks": [
+        "Available chart catalog and exact names",
+        "Required field slots, cardinality, and aggregation",
+        "Legend versus multiple measures",
+        "Special options: histogram bins, decomposition splits, bullet targets, range bounds and image fields",
+        "Selection, filters, tooltips and supported Analytics options"
+      ],
+      "screenshots": [
+        "Each distinct chart with safe sample data",
+        "Data panel showing required fields",
+        "Specialized settings only where necessary"
+      ],
+      "pageCount": 27
+    },
+    {
+      "id": "tables",
+      "priority": 2,
+      "goal": "Build detail, pivot, and hierarchy views and understand their grouping and totals.",
+      "outline": [
+        "Choose a table type",
+        "Assign fields",
+        "Configure totals and grouping",
+        "Format cells",
+        "Sort and interact",
+        "Check totals"
+      ],
+      "checks": [
+        "Actual row, column, measure and time slots",
+        "Table versus pivot versus hierarchy capabilities",
+        "Subtotals, grand totals, expansion and paging",
+        "Conditional colors, bars, icons, wrapping and toolbar options"
+      ],
+      "screenshots": [
+        "Each table with the same small dataset",
+        "Grouping and totals options",
+        "Conditional formatting result"
+      ],
+      "pageCount": 3
+    },
+    {
+      "id": "maps",
+      "priority": 3,
+      "goal": "Match locations or keys to a map and explain required resources.",
+      "outline": [
+        "Choose a map type",
+        "Prerequisites",
+        "Assign geographic fields",
+        "Configure appearance",
+        "Check unmatched locations"
+      ],
+      "checks": [
+        "Available map engines without changing global configuration",
+        "Coordinates versus location keys",
+        "GeoJSON key matching",
+        "Image map coordinate system",
+        "Resource and provider prerequisites"
+      ],
+      "screenshots": [
+        "Map configured with public or synthetic locations",
+        "Field mapping panel",
+        "Image map only if a supported safe resource is available"
+      ],
+      "pageCount": 5
+    },
+    {
+      "id": "filter-controls",
+      "priority": 1,
+      "goal": "Add a reader-facing filter and make its effect explicit.",
+      "outline": [
+        "Choose a filter control",
+        "Bind a field",
+        "Set selection and defaults",
+        "Connect target components",
+        "Test and clear a selection"
+      ],
+      "checks": [
+        "Current filter catalog",
+        "List, date, date range and numeric control configuration",
+        "Single versus multiple selection and All",
+        "Default values, empty values and no-data options",
+        "Whether targets are automatic or explicit"
+      ],
+      "screenshots": [
+        "Filter control and two affected charts",
+        "Default-selection settings",
+        "Date/range settings"
+      ],
+      "pageCount": 4
+    },
+    {
+      "id": "assists",
+      "priority": 2,
+      "goal": "Add text, images, shapes, and tab containers without duplicating general layout instructions.",
+      "outline": [
+        "Purpose",
+        "Add and configure",
+        "Format and arrange",
+        "Specific behavior and limitations"
+      ],
+      "checks": [
+        "Text versus Text Box behavior",
+        "Static image versus data-driven Image chart",
+        "Image loading/upload workflow",
+        "Shape styling and actions",
+        "Tabs entry/exit, rename, reorder and deletion recovery"
+      ],
+      "screenshots": [
+        "Annotated report containing text/image/shapes",
+        "Tab container editing state"
+      ],
+      "pageCount": 7
+    },
+    {
+      "id": "parameter-workflows",
+      "priority": 2,
+      "goal": "Create a parameter, bind a controller, and verify its effect on a measure, title, or tab.",
+      "outline": [
+        "Parameter purpose and scope",
+        "Create definition",
+        "Bind controller",
+        "Use the value",
+        "Test defaults and runtime values",
+        "Troubleshooting"
+      ],
+      "checks": [
+        "Global versus report scope",
+        "Supported types and controller compatibility",
+        "Default/current value behavior",
+        "Expression and title syntax",
+        "Parameter-driven tabs and user/role conditions"
+      ],
+      "screenshots": [
+        "Report parameter definition",
+        "Controller binding",
+        "Scenario result before/after",
+        "Parameter-driven tab settings"
+      ],
+      "pageCount": 6
+    },
+    {
+      "id": "filtering-and-navigation",
+      "priority": 1,
+      "goal": "Explain filter scope and configure chart-to-chart or report-to-report interaction.",
+      "outline": [
+        "Choose the interaction",
+        "Configure source and targets",
+        "Run a small example",
+        "Clear or return",
+        "Verify scope and totals",
+        "Troubleshoot mismatched fields"
+      ],
+      "checks": [
+        "Component filter UI and apply behavior",
+        "Subscription/action labels and target selection",
+        "Cross-filter activation and reset behavior",
+        "Hierarchy drilldown and drillthrough destination/filter mapping",
+        "Relative dates and reference time",
+        "Top/Bottom N sorting, ties and Others behavior",
+        "Cross-model matching precedence"
+      ],
+      "screenshots": [
+        "Component filter dialog",
+        "Source-to-target subscription configuration",
+        "Cross-filter before/after",
+        "Drillthrough configuration and result",
+        "Relative-date settings",
+        "Top N settings"
+      ],
+      "pageCount": 10
+    },
+    {
+      "id": "calculations-and-analytics",
+      "priority": 2,
+      "goal": "Choose an aggregation or calculation and add reference lines/bands with validated semantics.",
+      "outline": [
+        "Purpose and prerequisites",
+        "Configure one example",
+        "Read the result",
+        "Scope and supported chart types",
+        "Validation checks"
+      ],
+      "checks": [
+        "Model versus report measure creation",
+        "Aggregation overrides and available quick calculations",
+        "Analytics tab presence by chart type",
+        "Fixed/statistical lines, bands and diagonal",
+        "Calculation scope after filters and chart conversion"
+      ],
+      "screenshots": [
+        "Measure menu and aggregation override",
+        "Calculated/quick measure dialog",
+        "Analytics line and band editor with result"
+      ],
+      "pageCount": 4
+    },
+    {
+      "id": "report-presentation",
+      "priority": 2,
+      "goal": "Configure report layout, tooltips, axes, colors, tabs, and export using shared workflow guidance.",
+      "outline": [
+        "What the setting changes",
+        "Where to configure it",
+        "One practical example",
+        "Preview and check",
+        "Related component topics"
+      ],
+      "checks": [
+        "Page versus component dimensions",
+        "Display modes and mobile layout behavior",
+        "Tooltip configuration and field display",
+        "Continuous/categorical axis availability and defaults",
+        "Conditional color rules and scale behavior",
+        "Tab container behavior",
+        "Report/component export formats and output"
+      ],
+      "screenshots": [
+        "Page/display settings",
+        "Mobile layout",
+        "Tooltip and axis settings",
+        "Conditional colors",
+        "Tabs",
+        "Export menu/output"
+      ],
+      "pageCount": 8
+    },
+    {
+      "id": "analysis-overview-and-lineage",
+      "priority": 3,
+      "goal": "Provide a short workflow index and explain report dependencies.",
+      "outline": [
+        "Choose the next task",
+        "Open the relevant workflow",
+        "Inspect report dependencies"
+      ],
+      "checks": [
+        "Available reader interactions",
+        "Report lineage entry point and displayed dependency types"
+      ],
+      "screenshots": [
+        "Lineage for a documentation demo only, if useful"
+      ],
+      "pageCount": 2
+    }
+  ],
+  "pages": [
+    {
+      "file": "docs/documentation/Analysis/10 Exploratory Analysis.md",
+      "title": "Exploratory Analysis",
+      "permalink": "/documentation/Analysis/Exploratory Analysis/",
+      "group": "analysis-overview-and-lineage",
+      "priority": 3,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "## Overview",
+        "## 1. Slicers",
+        "## 2. Component Filtering",
+        "## 3. Cross-Filtering",
+        "## 4. Tooltips",
+        "## 5. Drillthrough",
+        "## 6. Drill Down",
+        "## 7. Sorting",
+        "## 8. Calculations",
+        "## Conclusion"
+      ],
+      "existingImageReferences": []
+    },
+    {
+      "file": "docs/documentation/Analysis/100_参数.md",
+      "title": "Creating Parameters",
+      "permalink": "/documentation/Analysis/Creating-Parameters/",
+      "group": "parameter-workflows",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Creating Parameters",
+        "## Choose the scope",
+        "## Create a Global Parameter",
+        "## Create a Report Parameter",
+        "## Configure the definition",
+        "## Add a Parameter Controller",
+        "## Use a parameter",
+        "## Common issues"
+      ],
+      "existingImageReferences": [
+        "./images/analysis-global-parameters.png",
+        "./images/analysis-global-parameter-editor.png",
+        "./images/analysis-report-parameters.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/105 Parameter Controllers.md",
+      "title": "Parameter Controllers",
+      "permalink": "/documentation/Analysis/Parameter-Controllers/",
+      "group": "parameter-workflows",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Parameter Controllers",
+        "## Choose a compatible controller",
+        "## Add and bind a controller",
+        "## List/Dropdown",
+        "## Numeric Slider",
+        "## Button",
+        "## Default value and current value",
+        "## Common issues",
+        "## Related topics"
+      ],
+      "existingImageReferences": [
+        "./images/parameter-controllers-gallery.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/110_度量聚合.md",
+      "title": "Aggregation for Measures",
+      "permalink": "/documentation/Analysis/Aggregation-for-Measures/",
+      "group": "calculations-and-analytics",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Aggregation for Measures",
+        "## Set the model default",
+        "## Override aggregation in a report",
+        "## Validate the result"
+      ],
+      "existingImageReferences": [
+        "../Model/images/analysis-model-measure-properties.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/120_快速度量功能.md",
+      "title": "Quick Calculated Measures",
+      "permalink": "/documentation/Analysis/Quick-Calculated-Measures/",
+      "group": "calculations-and-analytics",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Quick Calculated Measures",
+        "## Choose where to create it",
+        "## Available templates",
+        "## Before using a time calculation",
+        "## Create a quick measure",
+        "## Check the generated measure"
+      ],
+      "existingImageReferences": [
+        "../Model/images/analysis-model-create-calculated-measure.png",
+        "../Model/images/analysis-model-quick-measure-templates.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/130_图表参考线.md",
+      "title": "Chart Reference Lines",
+      "permalink": "/documentation/Analysis/Chart-Reference-Lines/",
+      "group": "calculations-and-analytics",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Chart Reference Lines",
+        "## Where to Find It",
+        "## Reference Lines",
+        "## Bands",
+        "## Style and Labels",
+        "## Supported Charts"
+      ],
+      "existingImageReferences": []
+    },
+    {
+      "file": "docs/documentation/Analysis/150_What-if.md",
+      "title": "What-if Analysis",
+      "permalink": "/documentation/Analysis/What-if-Analysis/",
+      "group": "parameter-workflows",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# What-if Analysis",
+        "## 1. Create the scenario input",
+        "## 2. Create the scenario measure",
+        "## 3. Add the control and result",
+        "## 4. Validate the result",
+        "## Troubleshooting"
+      ],
+      "existingImageReferences": [
+        "./images/analysis-report-parameters.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/160 Using Parameters in Component Titles.md",
+      "title": "Using Parameters in Component Titles",
+      "permalink": "/documentation/Analysis/Using-Parameters-in-Component-Titles/",
+      "group": "parameter-workflows",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Using Parameters in Component Titles",
+        "## Configure the title",
+        "## Rules"
+      ],
+      "existingImageReferences": []
+    },
+    {
+      "file": "docs/documentation/Analysis/170 Using Parameters in Calculated Measures.md",
+      "title": "Using Parameters in Calculated Measures",
+      "permalink": "/documentation/Analysis/Using-Parameters-in-Calculated-Measures/",
+      "group": "parameter-workflows",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Using Parameters in Calculated Measures",
+        "## Example",
+        "## Create the report-level measure",
+        "## Common issues"
+      ],
+      "existingImageReferences": []
+    },
+    {
+      "file": "docs/documentation/Analysis/180 Show Items with No Data.md",
+      "title": "Show Items with No Data",
+      "permalink": "/documentation/Analysis/Show-Items-with-No-Data/",
+      "group": "filtering-and-navigation",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# **Show Items with No Data**",
+        "## **1. Use Cases**",
+        "## **2. How to Enable \"Show Items with No Data\"**",
+        "## **3. Example Scenarios**",
+        "### **Example Data**",
+        "### **Example 1: Time Series Sales Data**",
+        "### **Example 2: Product Sales Analysis**"
+      ],
+      "existingImageReferences": [
+        "./images/image-20250317155546756.png",
+        "./images/image-20250317160153152.png",
+        "./images/image-20250317160725504.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/190 血缘分析.md",
+      "title": "Lineage Analysis",
+      "permalink": "/documentation/Analysis/Lineage-Analysis/",
+      "group": "analysis-overview-and-lineage",
+      "priority": 3,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# 🔗 Lineage Analysis",
+        "## 1️⃣ View Report Lineage",
+        "## 2️⃣ View Analytical Model Lineage",
+        "## 3️⃣ View Data Source Lineage"
+      ],
+      "existingImageReferences": [
+        "./images/image-20250720203938094.png",
+        "./images/image-20250720203902044.png",
+        "./images/image-20250720204147773.png",
+        "./images/image-20250720204339825.png",
+        "./images/image-20250720205007581.png",
+        "./images/image-20250720204916332.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/200 Relative Date Filtering.md",
+      "title": "Relative Date Filtering",
+      "permalink": "/documentation/Analysis/Relative-Date-Filtering/",
+      "group": "filtering-and-navigation",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Relative Date Filtering",
+        "## Scenario Overview",
+        "## Configuration Steps",
+        "### 1. Configure a Time Filter in the Chart’s Filters Area",
+        "### 2. Set the Filter Type to “Relative”",
+        "### 3. Choose a Reference Time",
+        "### 4. Set the Relative Time Condition",
+        "## Summary"
+      ],
+      "existingImageReferences": [
+        "./images/image-20250731154352593.png",
+        "./images/image-20250731154400673.png",
+        "./images/image-20250731154408785.png",
+        "./images/image-20250731154415977.png",
+        "./images/image-20250731154424266.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/22_组件级筛选.md",
+      "title": "Component-Level Filtering",
+      "permalink": "/documentation/Analysis/Component-Level-Filtering/",
+      "group": "filtering-and-navigation",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Component-Level Filtering",
+        "## What is Component-Level Filtering?",
+        "## Why Use Component-Level Filtering?",
+        "## How to Use Component-Level Filtering",
+        "## Conclusion"
+      ],
+      "existingImageReferences": [
+        "./images/1722415337401.png",
+        "./images/1722415423200.png",
+        "./images/1722415471812.png",
+        "./images/1722415547670.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/30_交叉筛选.md",
+      "title": "Cross-Filtering",
+      "permalink": "/documentation/Analysis/Cross-Filtering/",
+      "group": "filtering-and-navigation",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "## Overview",
+        "## What is Cross-Filtering?",
+        "## Benefits of Cross-Filtering",
+        "## How to Use Cross-Filtering",
+        "## Example",
+        "## Conclusion"
+      ],
+      "existingImageReferences": [
+        "./images/20230112_223238.gif"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/50_数据下钻.md",
+      "title": "Drill Down",
+      "permalink": "/documentation/Analysis/Drill-down/",
+      "group": "filtering-and-navigation",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Drill Down",
+        "## Before you begin",
+        "## Drill into a data point",
+        "## If drill down is unavailable"
+      ],
+      "existingImageReferences": []
+    },
+    {
+      "file": "docs/documentation/Analysis/60_钻取.md",
+      "title": "Drill through",
+      "permalink": "/documentation/Analysis/Drill-through/",
+      "group": "filtering-and-navigation",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "## What is \"Drill through\"",
+        "## How to Set Up \"Drill-through\"",
+        "## How to Use \"Drill-through\"",
+        "## Summary"
+      ],
+      "existingImageReferences": [
+        "./images/1721634249199.png",
+        "./images/1721634556059.png",
+        "./images/1721639171867.png",
+        "./images/1721639025110.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/70_排序.md",
+      "title": "Sorting",
+      "permalink": "/documentation/Analysis/Sorting/",
+      "group": "filtering-and-navigation",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Sorting",
+        "## Setting Sorting on the Analysis Model",
+        "## Sorting during Design of Analytical Reports",
+        "### Sorting Dimension Fields",
+        "### Sorting Measures"
+      ],
+      "existingImageReferences": [
+        "./images/image-20250312152643869.png",
+        "./images/image-20250312152854816.png",
+        "./images/1681911083494-1741764674290-1.png",
+        "./images/1681913087646-1741764674290-2.png",
+        "./images/1681913234484-1741764674290-3.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/71_跨模型和跨数据源分析.md",
+      "title": "Cross-Model and Cross-Data Source Analysis",
+      "permalink": "/documentation/Analysis/Cross-Model/",
+      "group": "filtering-and-navigation",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Cross-Model and Cross-Data Source Analysis",
+        "## Features",
+        "## Use Case",
+        "## Sample Data",
+        "### ERP System: Financial Data Table (FinanceData)",
+        "### CRM System: Sales Data Table (SalesData)",
+        "## Creating Analysis Models",
+        "### Financial Analysis Model: finance_data",
+        "### Sales Analysis Model: sales_data",
+        "## Creating Analysis Reports",
+        "## Cross-Analysis",
+        "## Frequently Asked Questions"
+      ],
+      "existingImageReferences": [
+        "./images/1731233238801-1731234548377-7.png",
+        "./images/1731233049272-1731234548377-8.png",
+        "./images/1731233589755-1731234548377-9.png",
+        "./images/1731233692962-1731234548378-10.png",
+        "./images/f0exf-2cwap-1731234548378-11.gif",
+        "./images/1731238805833.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Analysis/80_计算度量.md",
+      "title": "Calculated Measures",
+      "permalink": "/documentation/Analysis/Calculated-Measures/",
+      "group": "calculations-and-analytics",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Calculated Measures"
+      ],
+      "existingImageReferences": []
+    },
+    {
+      "file": "docs/documentation/Analysis/90_TopBottom N 筛选.md",
+      "title": "Top/Bottom N",
+      "permalink": "/documentation/Analysis/Top-Bottom-N/",
+      "group": "filtering-and-navigation",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Top/Bottom N",
+        "## Setting"
+      ],
+      "existingImageReferences": [
+        "./images/1681897791217.png",
+        "./images/1681897843208.png",
+        "./images/1681897945409.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Console/10 Quick tour of the User Console.md",
+      "title": "Quick Tour of the Console",
+      "permalink": "/documentation/Console/Quick-Tour-of-the-Console/",
+      "group": "start",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Quick Tour of the Console",
+        "## Start from Home",
+        "## Find and organize reports",
+        "### Choose the right content view",
+        "### Work inside a folder",
+        "## Search across the console",
+        "## Understand the Data section",
+        "## Know which System area you need",
+        "### Tools",
+        "### Users and Settings",
+        "### Trash",
+        "## Help and personal preferences",
+        "## Why your screen may look different",
+        "## Try your next task"
+      ],
+      "existingImageReferences": [
+        "./images/console-home-en.jpg",
+        "./images/console-content-actions-en.jpg",
+        "./images/console-search-en.jpg"
+      ]
+    },
+    {
+      "file": "docs/documentation/Start/10 Basic Operations for Page Design.md",
+      "title": "Basic Operations for Report Design",
+      "permalink": "/documentation/Start/Basic-Operations-for-Report-Design/",
+      "group": "start",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Basic Operations for Report Design",
+        "## Open the designer and understand selection",
+        "## Add a chart and give it data",
+        "## Move and resize components",
+        "## Copy a component and adapt it",
+        "## Align a row and make its spacing even",
+        "## Control which component appears in front",
+        "## Switch a chart to another type",
+        "## Delete, recover, preview, and save"
+      ],
+      "existingImageReferences": [
+        "./images/report-design-workspace.png",
+        "./images/report-design-data-panel.png",
+        "./images/report-design-align.png",
+        "./images/report-design-distribute.png",
+        "./images/report-design-layers.png",
+        "./images/report-design-switch-type.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Start/20 第一个页面.md",
+      "title": "Create Your First Analysis Report",
+      "permalink": "/documentation/Start/Create-Your-First-Analysis-Report/",
+      "group": "start",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Create Your First Analysis Report",
+        "## Before you start",
+        "## 1. Open the designer and place a chart",
+        "## 2. Choose the analysis model",
+        "## 3. Assign a dimension and a measure",
+        "## 4. Limit the chart to one year",
+        "## 5. Make the result readable",
+        "## 6. Save, preview, and reopen",
+        "### Check your result",
+        "## If something does not work",
+        "## Next steps"
+      ],
+      "existingImageReferences": [
+        "./images/first-report-select-model-en.jpg",
+        "./images/first-report-chart-fields-en.jpg",
+        "./images/first-report-year-filter-en.jpg",
+        "./images/first-report-save-en.jpg",
+        "./images/first-report-preview-en.jpg"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/08 报表页的大小和显示方式.md",
+      "title": "Report Page Size and Display Settings",
+      "permalink": "/documentation/Visualization/Size-Display/",
+      "group": "report-presentation",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# **Report Page Size and Display Settings**",
+        "## **Report Page Size Settings**",
+        "## **Report Page View Settings**"
+      ],
+      "existingImageReferences": [
+        "./images/image-20230113143938541.png",
+        "./images/image-20230113144904375.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/10 添加图表.md",
+      "title": "Adding Charts",
+      "permalink": "/documentation/Visualization/Adding-Charts/",
+      "group": "report-presentation",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Adding Charts",
+        "## Detailed Steps to Add a Chart",
+        "### Open the Visualization Pane",
+        "### Select and Add a Chart",
+        "### Configure Chart Fields",
+        "### Customize Chart Style and Formatting",
+        "### Adjust Chart Layout"
+      ],
+      "existingImageReferences": [
+        "./images/1740319051343.png",
+        "./images/1740319174189.png",
+        "./images/1740319867430.png",
+        "./images/1740320007326.png",
+        "./images/1740320089076.png",
+        "./images/1740320187969.png",
+        "./images/1740320236795.png",
+        "./images/1740320339115.png",
+        "./images/1740320410735.png",
+        "./images/1740320467024.png",
+        "./images/1740320613364.png",
+        "./images/1740320657286.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/110 条件颜色设置.md",
+      "title": "Conditional Colors",
+      "permalink": "/documentation/Visualization/Conditional-Colors/",
+      "group": "report-presentation",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "## What are Conditional Colors?",
+        "## Use Cases for Conditional Colors",
+        "## Setting Background or Font Colors",
+        "## Types of Conditional Colors",
+        "### Color Scale Mode",
+        "### Rule-Based Mode",
+        "## Summary"
+      ],
+      "existingImageReferences": [
+        "./images/image-20230113130143301.png",
+        "./images/image-20230113130827348.png",
+        "./images/image-20230113131505280.png",
+        "./images/image-20230113131619710.png",
+        "./images/image-20230113132434829.png",
+        "./images/image-20230113132458420.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/12 手机布局视图.md",
+      "title": "Mobile Layout View",
+      "permalink": "/documentation/Visualization/Mobile-Layout-View/",
+      "group": "report-presentation",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Mobile Layout View",
+        "## How to open Mobile Layout View",
+        "## Mobile Layout View Settings",
+        "### Add components",
+        "### Adjust position and size",
+        "### Delete components",
+        "## Switching between Mobile Layout View and Desktop Layout View",
+        "## Features of Mobile Layout View"
+      ],
+      "existingImageReferences": [
+        "./images/1739710021486.png",
+        "./images/1739710062216.png",
+        "./images/1739710309420.png",
+        "./images/o82ue-p6rs6.gif",
+        "./images/1739710535269.png",
+        "./images/1739710579221.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/120 参数驱动Tabs的显示.md",
+      "title": "Parameter-Driven Tab Switching",
+      "permalink": "/documentation/Visualization/Parameter-Driven-Tab-Switching/",
+      "group": "parameter-workflows",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Parameter-Driven Tab Switching",
+        "## Choose the control source",
+        "## Switch tabs with a parameter",
+        "## Switch tabs by user or role",
+        "## Runtime behavior",
+        "## Hide the tab header",
+        "## Troubleshooting",
+        "## Related topics"
+      ],
+      "existingImageReferences": [
+        "./images/parameter-driven-tab-settings.png",
+        "./images/parameter-driven-tab-header.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/130 导出.md",
+      "title": "Export",
+      "permalink": "/documentation/Visualization/Export/",
+      "group": "report-presentation",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Export",
+        "## Report Export",
+        "## Component Export"
+      ],
+      "existingImageReferences": [
+        "./images/1682045060034.png",
+        "./images/1682045104111.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/20 筛选器订阅.md",
+      "title": "Filter Subscriptions for Charts",
+      "permalink": "/documentation/Visualization/Filter-Subscriptions/",
+      "group": "filtering-and-navigation",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Filter Subscriptions for Charts",
+        "## Rationale Behind Using Subscriptions",
+        "## Establishing a Subscription",
+        "## Frequently Asked Questions"
+      ],
+      "existingImageReferences": [
+        "./images/1740366829268.png",
+        "./images/1740366919778.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/26 制作多标签页面.md",
+      "title": "Tabs (Multi-Tabbed Page)",
+      "permalink": "/documentation/Visualization/Multi-Tabbed-Page/",
+      "group": "report-presentation",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Tabs (Multi-Tabbed Page)",
+        "## Overview",
+        "## Add the Tabs component",
+        "## Configure tabs & change their order",
+        "## Add content to a tab",
+        "## Style & layout",
+        "## Troubleshooting"
+      ],
+      "existingImageReferences": [
+        "./images/1680522085585.png",
+        "./images/tab_move.gif",
+        "./images/tab_add_charts.gif",
+        "./images/image-20250316174711925.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/40_图表组件的工具提示.md",
+      "title": "Tooltips",
+      "permalink": "/documentation/Visualization/Tooltips-for-Chart-Components/",
+      "group": "report-presentation",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "## Overview",
+        "## Conclusion"
+      ],
+      "existingImageReferences": [
+        "./images/image-20240730151629410.png",
+        "./images/1722323977713.png",
+        "./images/1722323948050.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/81 X 轴类型设置：连续和类别.md",
+      "title": "X Axis Type Settings",
+      "permalink": "/documentation/Visualization/X-Axis-Type-Settings/",
+      "group": "report-presentation",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "## 1. Continuous",
+        "### Definition",
+        "### Features",
+        "### Advantages",
+        "### Example",
+        "## 2. Categorical",
+        "### Definition",
+        "### Features",
+        "### Advantages",
+        "### Example",
+        "## How to Set X Axis Type in Datafor",
+        "## Default X Axis Type",
+        "### Numerical Fields",
+        "### Textual Fields",
+        "## Summary"
+      ],
+      "existingImageReferences": [
+        "./images/1721656115313.png",
+        "./images/1721656242843.png",
+        "./images/1721656319461.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/10 标签页（Tab）.md",
+      "title": "Tabs",
+      "permalink": "/documentation/Visualization/Tabs-Component/",
+      "group": "assists",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Tabs Component",
+        "## Overview",
+        "### Benefits of Using Tabs",
+        "## Creating and Managing Tabs",
+        "### 1. Selecting the Tabs Component",
+        "### 2. Adding a New Tab",
+        "### 3. Adjusting Tab Order",
+        "### 4. Adding Components to a Tab",
+        "### 5. Exiting Component Editing Mode"
+      ],
+      "existingImageReferences": [
+        "./../images/20230419_165134_ev.gif",
+        "./../images/1681891183084.png",
+        "./../images/1681892994716.png",
+        "./../images/20230419_163934_ev.gif",
+        "./../images/1681894115533.png",
+        "./../images/20230419_164922_ev.gif"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/20 image.md",
+      "title": "Image",
+      "permalink": "/documentation/Visualization/Image/",
+      "group": "assists",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# **Image**",
+        "## **Overview**",
+        "## **1. How to Add an Image**",
+        "## **2. Data Settings**",
+        "## **3. Style Settings**",
+        "### **3.1 Border Settings**",
+        "### **3.2 Image Description**",
+        "## **4. Actions**",
+        "## **5. Important Notes**"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250319130311401.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/30 Line.md",
+      "title": "Line",
+      "permalink": "/documentation/Visualization/Line/",
+      "group": "assists",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# **Line Component**",
+        "## **Overview**",
+        "### **Use Cases**",
+        "## **Configuration Parameters**",
+        "## **Usage Guide**",
+        "### **1. Adding the Line Component**",
+        "### **2. Configuring the Border Style**",
+        "### **3. Rotating the Line**"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250316180227509.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/40 Text.md",
+      "title": "Text",
+      "permalink": "/documentation/Visualization/Text/",
+      "group": "assists",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# **Text Component**",
+        "## **Overview**",
+        "### **Use Cases**",
+        "## **Configuration Parameters**",
+        "### **1. Effects**",
+        "### **2. Content Formatting**",
+        "## **Usage Guide**",
+        "### **1. Adding a Text Component**",
+        "### **2. Formatting Text**",
+        "### **3. Adjusting Background and Borders**"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250316180756807.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/45 文本框组件.md",
+      "title": "Text Box",
+      "permalink": "/documentation/Visualization/TextBox/",
+      "group": "assists",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# **Text Box Component**",
+        "## **Overview**",
+        "# **1. Adding a Text Box Component**",
+        "# **2. Inserting a “Custom Block” into the Text Box**",
+        "### **Step 1: Place the cursor inside the Text Box**",
+        "### **Step 2: Click “+ Insert Custom Block” in the toolbar**",
+        "### **Step 3: Select the following in the Data Card panel on the right:**",
+        "# **3. Custom Block Settings**",
+        "## **3.1 Data Settings**",
+        "### **Analysis Model**",
+        "### **Field (Dimension or Measure)**",
+        "## **3.2 Style Settings**",
+        "### **Conditional Color Formatting**",
+        "## **3.3 Behavior Settings: Drill-through**",
+        "# **4. Rich Text Editing Features**",
+        "# **5. Example: Creating a Dynamic Data Narrative**"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20251208152620322.png",
+        "./../images/image-20251203171842101.png",
+        "./../images/image-20251203171908568.png",
+        "./../images/image-20251203172129035.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/50 Ellipse.md",
+      "title": "Ellipse",
+      "permalink": "/documentation/Visualization/Ellipse/",
+      "group": "assists",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# **Ellipse**",
+        "## **Overview**",
+        "## **1. Style Settings**",
+        "### **1.1 Border Settings**",
+        "### **1.2 Fill Settings**",
+        "### **1.3 Rotation**",
+        "## **2. Actions Settings**",
+        "### **2.1 Click Event**",
+        "## **3. Usage Examples**",
+        "## **4. Notes**"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250319132445050.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Assists/60 Rectangle.md",
+      "title": "Rectangle",
+      "permalink": "/documentation/Visualization/Rectangle/",
+      "group": "assists",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# **Rectangle**",
+        "## **Overview**",
+        "## **1. Style Settings**",
+        "### **1.1 Border Settings**",
+        "### **1.2 Background Settings**",
+        "### **1.3 Shadow Effect**",
+        "### **1.4 Corner Rounding**",
+        "## **2. Usage Examples**",
+        "## **3. Notes**"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250319133038889.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/10 Measure.md",
+      "title": "Measure",
+      "permalink": "/documentation/Visualization/Measure/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Measure",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "## Value Type (Comparison)",
+        "## Example",
+        "## Style Configuration",
+        "### 🔹 Title",
+        "### 🔹 Effects",
+        "### 🔹 Data Colors",
+        "### 🔹 Measure",
+        "### 🔹 Comparison #1 / #2",
+        "### 🔹 Comparison Color",
+        "### 🔹 Layout",
+        "### 🔹 Toolbar"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250327213957313.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/20 Dimension-Value.md",
+      "title": "Dimension Value",
+      "permalink": "/documentation/Visualization/Dimension-Value/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Dimension Value",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250327214552579.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/42 Clustered-Column.md",
+      "title": "Clustered Column",
+      "permalink": "/documentation/Visualization/Clustered-Column-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Clustered Column Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### **Method 1: Wide Table Format (Multiple Measures)**",
+        "### **Method 2: Long Table Format (Dimension + Measure)**",
+        "## Notes"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250327211250415.png",
+        "./../images/image-20250327211259080.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/43 Stacked-Column-Chart.md",
+      "title": "Stacked Column",
+      "permalink": "/documentation/Visualization/Stacked-Column-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Stacked Column Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### **Method 1: Wide Table Format (Multiple Measures)**",
+        "### **Method 2: Long Table Format (Dimension + Measure)**",
+        "## Notes"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250327201947329.png",
+        "./../images/image-20250327201749817.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/45 100-Stacked-Column-Chart.md",
+      "title": "100% Stacked Column",
+      "permalink": "/documentation/Visualization/100-Stacked-Column-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# 100% Stacked Column Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### **Method 1: Wide Table Format (Multiple Measures)**",
+        "### **Method 2: Long Table Format (Dimension + Measure)**",
+        "## Notes"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250327180750721.png",
+        "./../images/image-20250327181037595.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/50 Clustered-Bar-Chart.md",
+      "title": "Clustered Bar",
+      "permalink": "/documentation/Visualization/Clustered-Bar-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Clustered Bar Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "## How to Configure",
+        "### Comparing a Single Measure",
+        "### Comparing Multiple Measures"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250312214849741.png",
+        "./../images/image-20250312214911336.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/55 Stacked-Bar-Chart.md",
+      "title": "Stacked Bar",
+      "permalink": "/documentation/Visualization/Stacked-Bar-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Stacked Bar Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### **Method 1: Wide Table Format (Multiple Measures)**",
+        "### **Method 2: Long Table Format (Dimension + Measure)**",
+        "## Notes"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250327202538865.png",
+        "./../images/\\image-20250327202558078.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/60 100-Stacked-Bar-Chart.md",
+      "title": "100% Stacked Bar",
+      "permalink": "/documentation/Visualization/100-Stacked-Bar-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# 100% Stacked Bar Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### **Method 1: Wide Table Format (Multiple Measures)**",
+        "### **Method 2: Long Table Format (Dimension + Measure)**",
+        "## Notes"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250327170330881.png",
+        "./../images/image-20250327170257047.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/61 Line Chart.md",
+      "title": "Line",
+      "permalink": "/documentation/Visualization/Line-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Line Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "## How to Configure",
+        "### Single Measure Line Chart",
+        "### Multiple Measure Line Chart"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250312222325472.png",
+        "./../images/image-20250312222512254.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/62 Combo-Chart.md",
+      "title": "Combo",
+      "permalink": "/documentation/Visualization/Combo Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Combo Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250312224607027.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/65 Stacked Ratio Chart.md",
+      "title": "Stacked Ratio",
+      "permalink": "/documentation/Visualization/Stacked-Ratio-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Stacked Ratio Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "## How to Configure",
+        "### Analyzing a Single Measure",
+        "### Comparing Multiple Measures",
+        "### Optional Customization",
+        "## Example",
+        "### Stacked Ratio Chart with a Single Measure",
+        "### Stacked Ratio Chart with Multiple Measures"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250313145221967.png",
+        "./../images/image-20250313145251454.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/68 Stacked Area Chart.md",
+      "title": "Stacked Area",
+      "permalink": "/documentation/Visualization/Stacked0-Area-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Stacked Area Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250312201251797.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/69 Pie Chart.md",
+      "title": "Pie",
+      "permalink": "/documentation/Visualization/Pie-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Pie Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "### Comparing a Single Measure",
+        "### Comparing Multiple Measures"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250313133223219.png",
+        "./../images/image-20250312202258533-1741782769889-2-1741785560252-2.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/70 Grouped Donut Chart.md",
+      "title": "Grouped Donut",
+      "permalink": "/documentation/Visualization/Grouped-Donut-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Grouped Donut Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250313141512471.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/72 Scatter Plot.md",
+      "title": "Scatter Plot",
+      "permalink": "/documentation/Visualization/Scatter-Plot/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Scatter Plot",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250312213701748.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/75 Word Cloud Chart.md",
+      "title": "Word Cloud",
+      "permalink": "/documentation/Visualization/Word-Cloud-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Word Cloud Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250312212605747.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/89 Radar Chart.md",
+      "title": "Radar",
+      "permalink": "/documentation/Visualization/Radar-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Radar Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250312215543200.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/90 Sankey-Chart.md",
+      "title": "Sankey",
+      "permalink": "/documentation/Visualization/Sankey-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Sankey Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250312223412639.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/91 Calendar-Chart.md",
+      "title": "Calendar",
+      "permalink": "/documentation/Visualization/Calendar-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Calendar Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250313130307817.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/92 Treemap-Chart.md",
+      "title": "Treemap",
+      "permalink": "/documentation/Visualization/Treemap/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Treemap Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "## Example",
+        "###  Data Structure",
+        "###  Treemap Chart"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250313140811232.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/93 Progress-Chart.md",
+      "title": "Progress",
+      "permalink": "/documentation/Visualization/Progress-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Progress Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data Structure",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250327101734658.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/94 Bullet Chart.md",
+      "title": "Bullet",
+      "permalink": "/documentation/Visualization/Bullet-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Bullet Chart",
+        "## Overview",
+        "### When to Use",
+        "## Components of a Bullet Chart",
+        "## Data Structure",
+        "### Required Fields",
+        "### Optional Fields",
+        "### Example Dataset",
+        "# Configuring a Bullet Chart",
+        "# 1. Data",
+        "### **Category**",
+        "### **Actual**",
+        "### **Target**",
+        "### **Ranges**",
+        "# 2. Style",
+        "### Orientation",
+        "### Color Settings",
+        "## Range Values (Percentage Mode)",
+        "### Tooltip Labels",
+        "# Best Practices"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20251208152856707.png",
+        "./../images/image-20251123165022192.png",
+        "./../images/image-20251123163909696-1763887740308-2.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/95 Waterfall-Chart.md",
+      "title": "Waterfall",
+      "permalink": "/documentation/Visualization/Waterfall-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Waterfall Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250327104159662.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/96 Image.md",
+      "title": "Image",
+      "permalink": "/documentation/Visualization/Image-chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Image",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Notes:",
+        "### Example Data Structure",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250327113338946.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/97 Range-Column-Chart.md",
+      "title": "Range Column",
+      "permalink": "/documentation/Visualization/Range-Column-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Range Column Chart",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "### Example Data",
+        "## Example"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250327111158328.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/98 Histogram-Chart.md",
+      "title": "Histogram",
+      "permalink": "/documentation/Visualization/Histogram-Chart/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Histogram Chart",
+        "## Overview",
+        "### When to use a histogram",
+        "## 1. Add a Histogram component",
+        "## 2. Configure the data",
+        "### Value field requirements",
+        "## 3. Configure the distribution",
+        "### Frequency",
+        "### Bins",
+        "### How bin boundaries work",
+        "## 4. Format the chart",
+        "## 5. Read and interact with the Histogram",
+        "### Read a bin",
+        "### Filter linked components",
+        "## 6. Preview and save",
+        "## 7. Troubleshooting",
+        "## Best practices"
+      ],
+      "existingImageReferences": [
+        "./images/histogram-tooltip.png",
+        "./images/histogram-component-picker.png",
+        "./images/histogram-data-configuration.png",
+        "./images/histogram-distribution-settings.png",
+        "./images/histogram-percentage-mode.png",
+        "./images/histogram-bin-count-settings.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Chart/99 Decomposition-Tree.md",
+      "title": "Decomposition Tree",
+      "permalink": "/documentation/Visualization/Decomposition-Tree/",
+      "group": "charts",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Decomposition Tree",
+        "## Overview",
+        "### When to use a Decomposition Tree",
+        "## 1. Add a Decomposition Tree component",
+        "## 2. Configure the data",
+        "### Explain by fields",
+        "## 3. Build and explore the tree",
+        "### Read the tree",
+        "### Change or remove a level",
+        "## 4. Use Smart split",
+        "## 5. Format the component",
+        "### Layout settings",
+        "### Data bar scale",
+        "## 6. Link the tree to other components",
+        "## 7. Preview and save",
+        "## 8. Troubleshooting",
+        "## Best practices"
+      ],
+      "existingImageReferences": [
+        "./images/decomposition-tree-overview.jpg",
+        "./images/decomposition-tree-component-picker.jpg",
+        "./images/decomposition-tree-data-configuration.jpg",
+        "./images/decomposition-tree-add-split.jpg",
+        "./images/decomposition-tree-analysis-layout-settings.jpg",
+        "./images/decomposition-tree-style-sections.jpg"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/20 Filter Components.md",
+      "title": "Filters",
+      "permalink": "/documentation/Visualization/Filters/",
+      "group": "filter-controls",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Filters",
+        "## The Role of Filter Components in Exploratory Analysis"
+      ],
+      "existingImageReferences": []
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/30 List Box.md",
+      "title": "List Box",
+      "permalink": "/documentation/Visualization/List-Box/",
+      "group": "filter-controls",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# List Box",
+        "## 1. Overview",
+        "## 2. List Box Configuration Options",
+        "### 2.1 Multiple Selection Switch",
+        "### 2.2 Show 'All' Switch",
+        "### 2.3 Default Value Setting",
+        "### 2.4 Sorting Options",
+        "### 2.5 Show Items with No Data"
+      ],
+      "existingImageReferences": [
+        "./../images/1739862837983(1).png",
+        "./../images/1739863051381.png",
+        "./../images/1739863085353.png",
+        "./../images/1739863138010.png",
+        "./../images/1739863262398.png",
+        "./../images/1739863292862.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/40 数字范围筛选器.md",
+      "title": "Number Range Filter",
+      "permalink": "/documentation/Visualization/Number-Range-Filter/",
+      "group": "filter-controls",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Number Range Filter",
+        "## Numerical Dimension Fields",
+        "### **Datafor Analysis Model**",
+        "## How to Add a Number Range Filter?",
+        "## Using the Number Slicer",
+        "### Adjusting the Range",
+        "### Entering Specific Values",
+        "## Summary"
+      ],
+      "existingImageReferences": [
+        "./../images/1723127406337.png",
+        "./../images/1723127508505.png",
+        "./../images/1723127584243.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Filters/50 Datepicker.md",
+      "title": "Datepicker and Datepicker Range",
+      "permalink": "/documentation/Visualization/Datepicker/",
+      "group": "filter-controls",
+      "priority": 1,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Datepicker and Datepicker Range",
+        "## 1. Overview",
+        "## 2. Datepicker (Single Date)",
+        "### 2.1 Configuring the Datepicker Filter",
+        "## 3. Datepicker Range (Date Range)",
+        "### 3.1 Configuring the Datepicker Range Filter"
+      ],
+      "existingImageReferences": [
+        "./../images/1739880388523.png",
+        "./../images/1739880445449.png",
+        "./../images/1739880487412.png",
+        "./../images/1739880544160.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/10 配置地图引擎.md",
+      "title": "GIS Map Settings",
+      "permalink": "/documentation/Visualization/GIS-Map-Settings/",
+      "group": "maps",
+      "priority": 3,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# GIS Map Settings",
+        "## Settings",
+        "## Settings"
+      ],
+      "existingImageReferences": [
+        "./../images/1681888717961.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/20 Marker Map.md",
+      "title": "Marker Map",
+      "permalink": "/documentation/Visualization/Marker-Map/",
+      "group": "maps",
+      "priority": 3,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Marker Map",
+        "## Overview",
+        "### When to Use",
+        "## Data Structure",
+        "## Location Parsing",
+        "## Configuration Guide",
+        "### Plot Data Points Using Longitude & Latitude or Location",
+        "## Customization Options"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250316160416558.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/30 GeoJSON标记地图.md",
+      "title": "GeoJSON marked map",
+      "permalink": "/documentation/Visualization/GeoJSON-marked-map/",
+      "group": "maps",
+      "priority": 3,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# GeoJSON marked map",
+        "## Creating a Map",
+        "## FAQ"
+      ],
+      "existingImageReferences": [
+        "./../images/1681887783802.png",
+        "./../images/image-20230419151149418.png",
+        "./../images/1681888030553.png",
+        "./../images/image-20230419151212963.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/40 GeoJSON填充地图.md",
+      "title": "GeoJSON Filled Map",
+      "permalink": "/documentation/Visualization/GeoJSON-Filled-Map/",
+      "group": "maps",
+      "priority": 3,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# GeoJSON Filled Map",
+        "## Creating a Map",
+        "## FAQ"
+      ],
+      "existingImageReferences": [
+        "./../images/1681888117077.png",
+        "./../images/1681887949391.png",
+        "./../images/1681887896864.png",
+        "./../images/1681888063762.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Map/50 _图片地图.md",
+      "title": "Image Map",
+      "permalink": "/documentation/Visualization/Image-Map/",
+      "group": "maps",
+      "priority": 3,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Image Map",
+        "## What is an Image Map?",
+        "## How to Determine the X and Y Coordinates for Markers?",
+        "## Example",
+        "### Example Data",
+        "### Steps"
+      ],
+      "existingImageReferences": [
+        "./../images/1723971392008.png",
+        "./../images/1723969910547.png",
+        "./../images/1723973388996.png",
+        "./../images/1723973428195.png",
+        "./../images/1723973464960.png",
+        "./../images/1723973491066.png",
+        "./../images/1723973522976.png",
+        "./../images/1723973570151.png",
+        "./../images/1723973632029.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Table/10 Table.md",
+      "title": "Table",
+      "permalink": "/documentation/Visualization/Table/",
+      "group": "tables",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Table",
+        "## Overview",
+        "## Key Features",
+        "## Configuring the Table Component",
+        "### 1. **Field Configuration**",
+        "### 2. **Style Settings**",
+        "## Table vs.  Pivot ",
+        "## Use Cases"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250317204844782.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Table/20 Pivot Table.md",
+      "title": "Pivot Table",
+      "permalink": "/documentation/Visualization/Pivot-Table/",
+      "group": "tables",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Pivot Table",
+        "## Overview",
+        "## Key Features",
+        "## Configuring the Pivot Table Component",
+        "### 1. **Field Configuration**",
+        "### 2. **Style Settings**",
+        "## Pivot Table vs. Standard Table",
+        "## Use Cases"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250317214909632.png"
+      ]
+    },
+    {
+      "file": "docs/documentation/Visualization/Table/30 Hierarchy Table.md",
+      "title": "Hierarchy Table",
+      "permalink": "/documentation/Visualization/Hierarchy-Table/",
+      "group": "tables",
+      "priority": 2,
+      "status": "unverified-against-current-ui",
+      "currentHeadings": [
+        "# Hierarchy Table",
+        "## Overview",
+        "## Key Features",
+        "## Configuring the Hierarchy Table Component",
+        "### 1. **Field Configuration**",
+        "### 2. **Style Settings**",
+        "## Hierarchy Table vs. Standard Table",
+        "## Use Cases"
+      ],
+      "existingImageReferences": [
+        "./../images/image-20250317221123405.png"
+      ]
+    }
+  ]
+}

@@ -1,42 +1,32 @@
 ---
-title: Progress
+title: Ring progress
 permalink: /documentation/Visualization/Progress-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Progress Chart
+# Ring progress
 
-## Overview
+Show progress toward a target.
 
-A **Progress Chart** visually represents the completion rate of a given metric relative to a target. It displays a circular indicator showing the percentage of progress made, allowing users to quickly evaluate performance against a goal.
+## Set up the data
 
-This chart is especially useful in dashboards for showcasing key performance indicators (KPIs), such as sales achievement, task completion, or budget usage.
+1. Choose **Components → Charts → Ring progress** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-### When to Use
+| Data slot | Choose |
+| --- | --- |
+| **Progress Measure** | Current achieved value. |
+| **Target Measure** | Value representing completion. |
 
-- To track **progress toward a target** (e.g., sales vs. sales target).
-- To highlight **KPI performance** with a quick, intuitive visual.
-- To display **goal achievement** in a compact and visually appealing way.
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-## Data Structure
+## Make it readable
 
-A **Progress Chart** requires the following fields:
+Use **Plot Area**, **Data colors**, and **Data labels** to format the ring.
 
-- **Analysis model**: A data model containing the metric and target fields.
-- **Progress**: The actual value to be evaluated (e.g., Sales).
-- **Target**: The expected or target value (e.g., Sales target).
-- **Time axis (Optional)**: A time-based dimension (e.g., date or month), which can be used to evaluate progress over a specific time range.
+Use matching units for progress and target. Check zero targets and over-target values with your data.
 
-### Example Data Structure
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-| date       | store_sales | sales_target |
-| ---------- | ----------- | ------------ |
-| 2024-01-01 | 12000       | 30000        |
-| 2024-01-02 | 15000       | 30000        |
-
-## Example
-
-The following example visualizes sales performance. The actual sales have reached 40.03% of the target:
-
-
-<div align="left"><img src="./../images/image-20250327101734658.png" width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

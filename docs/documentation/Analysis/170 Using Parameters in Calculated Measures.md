@@ -16,16 +16,16 @@ The parameter name must be a quoted string constant and must match the definitio
 
 ## Example
 
-For a Numeric parameter named `Price Adjustment Rate` that stores percentage points:
+For a Numeric parameter named `GrowthRate` that stores a decimal rate (`0.1` means 10%):
 
 ```mdx
-[Measures].[Net Sales] * (1 + ParamRef("Price Adjustment Rate") / 100)
+[Measures].[Net Sales] * (1 + ParamRef("GrowthRate"))
 ```
 
-If the parameter stores a decimal rate such as `0.10`, use:
+If you instead store percentage points (`10` means 10%), divide by `100`:
 
 ```mdx
-[Measures].[Net Sales] * (1 + ParamRef("Price Adjustment Rate"))
+[Measures].[Net Sales] * (1 + ParamRef("GrowthRate") / 100)
 ```
 
 ## Create the report-level measure
@@ -34,12 +34,14 @@ For an interactive Report Parameter, keep the dependent measure on the report pa
 
 1. Create the Report Parameter and set its **Type**, value source, and **Default value**.
 2. Open the target component's Measures picker.
-3. Select **Create calculated measure > New measure**.
-4. Enter a unique name, the MDX formula, and the correct result format.
+3. Select **New measure → New measure**.
+4. Enter a unique **Caption**, the MDX **Formula**, and the result **Format**. **Insert parameter** inserts a `ParamRef()` reference for the selected parameter.
 5. Add the measure to the component and bind a compatible Parameter Controller.
 6. Test the component in **Preview** and save the report.
 
 A report-level calculated measure is stored on that page and can be used by page components that use the same analysis model. Use a model-level calculated measure for governed logic that does not depend on a report-local definition.
+
+![A report measure that reads GrowthRate](../Visualization/images/current/scenario-measure.jpg)
 
 ## Common issues
 

@@ -4,44 +4,29 @@ permalink: /documentation/Visualization/Waterfall-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Waterfall Chart
+# Waterfall
 
-## Overview
+Show how successive increases and decreases contribute to a result.
 
-A **Waterfall Chart** is used to visualize how an initial value is affected by a series of intermediate positive or negative changes. It helps in understanding the cumulative effect of sequential changes in a value over time or across categories.
+## Set up the data
 
-This chart is particularly useful in financial analysis, operational performance, and variance analysis to explain how a value evolves step-by-step.
+1. Choose **Components → Charts → Waterfall** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-### When to Use
+| Data slot | Choose |
+| --- | --- |
+| **Field** | Ordered steps or categories. |
+| **Measure** | Value of each step. |
 
-- To analyze **incremental changes** contributing to a total.
-- To display **positive and negative contributions** to a metric.
-- To explain **variance** between starting and ending values.
-- To visualize **cumulative growth** over time or across groups.
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-## Data Structure
+## Make it readable
 
-A **Waterfall Chart** requires the following fields:
+Use **Accumulated value**, **Data colors**, **Bar**, and **Data labels** to explain contributions.
 
-- **Analysis model**: The data source containing relevant fields.
-- **Field**: A categorical or time-based dimension (e.g., Month, Department).
-- **Measure**: A numeric field representing the change values (e.g., Profit delta, Monthly growth).
-- **Time axis (Optional)**: A time-based field to sort the data chronologically.
-- **Filters (Optional)**: Used to narrow down the scope of data shown in the chart.
+Review category sort order before interpreting the accumulated result. Positive and negative values need distinguishable colors.
 
-### Example Data
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-| month | change_value |
-| ----- | ------------ |
-| Jan   | 500          |
-| Feb   | 200          |
-| Mar   | -300         |
-| Apr   | 100          |
-| May   | -200         |
-
-## Example
-
-The example below shows monthly changes and the resulting total. Each bar represents the increase or decrease in value, with the final green bar showing the cumulative result:
-
-
-<div align="left"><img src="./../images/image-20250327104159662.png" width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

@@ -1,44 +1,33 @@
 ---
-title: Calendar
+title: Calendar chart
 permalink: /documentation/Visualization/Calendar-Chart/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Calendar Chart
+# Calendar chart
 
-## Overview
+Show daily values in a calendar layout.
 
-A **Calendar Chart** is used to visualize data over a time period in a heatmap format. It represents values for each day of the year, with different intensities of color indicating higher or lower values. This type of chart is useful for identifying trends, seasonality, and anomalies within time-based data.
+## Set up the data
 
-### When to Use
+1. Choose **Components → Charts → Calendar chart** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-- To **analyze daily trends** over a year or longer periods.
-- To **detect patterns** of high or low activity across different days.
-- To **compare performance across different years or categories**.
+| Data slot | Choose |
+| --- | --- |
+| **Date** | Date field identifying each day. |
+| **Measure** | Daily value. |
+| **Color / Tooltips** | Optional encoding and hover details. |
 
-## Data Structure
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-A **Calendar Chart** requires:
+## Make it readable
 
-- **Date**: A date-type field that represents the timeline (e.g., `the_date`).
-- **Measure**: A numerical field representing the values mapped to the heatmap (e.g., `store_sales`).
-- **Color (Optional)**: A numerical field to define the color intensity (e.g., `store_sales` to visualize sales volume by day).
-- **Tooltips (Optional)**: Additional information to be displayed when hovering over data points.
-- **Filters (Optional)**: Used to refine the displayed data (e.g., filtering by region, category, or year).
+Use **Year**, **Month**, **Weekday**, and **Plot area** to format the calendar.
 
-### Example Data Structure
+Confirm the date granularity and aggregation. A missing day is not necessarily a zero.
 
-| the_date   | store_sales | 
-| ---------- | ----------- | 
-| 2023-01-01 | 1200        |
-| 2023-01-02 | 950         |
-| 2023-01-03 | 1800        | 
-| 2023-01-04 | 2000        |
-| 2023-01-05 | 1700        | 
-| 2023-01-06 | 1400        | 
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-## Example
-
-The following example visualizes **store sales distributed across the calendar year**.
-
-<div align="left"><img src="./../images/image-20250313130307817.png"  width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).

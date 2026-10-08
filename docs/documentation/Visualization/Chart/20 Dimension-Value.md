@@ -1,37 +1,31 @@
 ---
-title: Dimension Value
+title: Dimension field
 permalink: /documentation/Visualization/Dimension-Value/
 createTime: 2026/09/01 22:03:26
 ---
 
-# Dimension Value
+# Dimension field
 
-## Overview
+Display a descriptive field, such as a region or store name.
 
-The **Dimension Value** component is used to display a single **dimension-level value**, such as the name of a region, category, or user group. It simply outputs the first value in the current filter context and is typically used to **label a selection**, **highlight a filter**, or **add context to metrics** on a dashboard.
+## Set up the data
 
-### When to Use
+1. Choose **Components → Charts → Dimension field** and place it on the canvas.
+2. Select the chart and choose an **Analysis model** in **Data**.
+3. Use **+** beside each field slot to select the following fields, then click **Back**.
 
-- To show the **currently selected dimension value**, such as country, store, or department.
-- To create **dynamic titles or labels** based on filter context.
-- To add **descriptive context** to KPIs, charts, or tables.
+| Data slot | Choose |
+| --- | --- |
+| **Field** | The dimension value to display. |
 
+Use **Filters** to restrict this component’s data. Check the result before styling it.
 
-## Data Structure
+## Make it readable
 
-The component uses the **first value** of the selected dimension field within the current filter scope.
+Use **Main value** to format the text and **Empty data** to explain an empty selection.
 
-| Field          | Description                                                  |
-| -------------- | ------------------------------------------------------------ |
-| Analysis model | The data model to query.                                     |
-| Level          | The dimension field to display (e.g., `country`, `category`). |
-| Time axis      | (Optional) Time context for future extension or dynamic behavior. |
+Apply a filter when the card should identify one entity. Use a table when readers need a list.
 
-> ℹ️ **Note**: Only the **first value** is returned based on current filter context. If multiple values exist, only the first one will be shown.
+Save the report and use **Preview** to check labels, hover details, and the filtered result.
 
-
-## Example
-
-If the field `country` is selected and the filter context limits the data to `Canada`, then the component will simply display:
-
-<div align="left"><img src="./../images/image-20250327214552579.png"  width="100%" /></div>
+See [component filters](/documentation/Analysis/Component-Level-Filtering/) and [linked components](/documentation/Visualization/Filter-Subscriptions/).
