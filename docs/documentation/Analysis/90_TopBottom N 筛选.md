@@ -1,21 +1,40 @@
 ---
 title: "Row Limit: Top and Bottom N"
 permalink: /documentation/Analysis/Top-Bottom-N/
-tags: null
-description: null
+description: Keep the top or bottom N members by a measure, and group the remaining members into one "Others" item.
 createTime: 2026/09/01 22:03:26
 ---
 
 # Row Limit: Top and Bottom N
 
-Return the highest or lowest categories according to a measure. The current field-menu entry is **Row limit**.
+**Row limit** keeps the members with the highest or lowest values of a measure, for example the top 5 provinces by Net Sales. On a dimension it can also add one **Others** item for everything else, so totals and shares stay complete.
 
-1. Select the component and open its measure’s **More** menu in **Data**.
-2. Choose **Row limit** and enable **Enable row limit**.
-3. Select **Type**: Top N or Bottom N.
-4. Choose **Sort measure** and enter a positive **Row limit**, such as 10.
-5. Click **OK**, then verify the returned categories and values.
+## Set a row limit
 
-![Row limit settings for Net Sales](../Visualization/images/current/row-limit.jpg)
+1. Select the component and open **Data**.
+2. Hover the dimension (for example *Province*) and choose **⋮ → Row limit**. You can also set it on a measure.
+3. Turn on **Enable row limit**.
+4. Choose **Type** (**Top N** or **Bottom N**), the **Sort measure** and the **Row limit**, for example 5.
+5. To keep the rest, turn on **Group the rest as "Others"** and, if you like, change **Name for "Others"** (up to 50 characters).
+6. Click **OK**.
 
-For example, Top N with Net Sales and a limit of 10 gives a short sales ranking. Apply the intended period and business filters before interpreting the result. Recheck the ranking after changing those filters.
+![Row limit on Province: top 5 by Net Sales, rest grouped as Others](./images/row-limit-others-dialog.png)
+
+A field with a row limit shows a check mark next to **Row limit** in its menu, and a sliders icon on the field chip.
+
+## How "Others" behaves
+
+- It is one extra item, always shown last and in grey, whatever the sort.
+- Its value is re-aggregated with the measure's own aggregation, so an average or a ratio is correct for the group, not a sum of averages.
+- Totals and percentage shares include it, so shares add up to 100%.
+- With several fields on the axis, the limited field must be the last one; each outer group then gets its own Others. Otherwise no Others item is added.
+- It cannot filter other charts, drill or jump; right-click offers only **Copy value**. Reference-line statistics leave it out.
+- It is not available on Funnel, Sankey, maps, Calendar chart, filter components, or on a measure's row limit.
+
+"Others" needs the 9.04.6 query engine on the server; with an older server the option is ignored and only the top N appear.
+
+## Check the result
+
+The ranking follows the current filters, links and drill level, so it can change when readers filter. For a table that must show the whole list but highlight the top items, use [conditional formatting](/documentation/Visualization/Conditional-Colors/) instead.
+
+Related: [Sorting](/documentation/Analysis/Sorting/) · [Quick Calculated Measures](/documentation/Analysis/Quick-Calculated-Measures/)

@@ -1,25 +1,63 @@
 ---
-title: "Exploratory Analysis"
+title: Exploratory Analysis
 permalink: /documentation/Analysis/Exploratory Analysis/
-tags: null
-description: null
+description: "What readers can do with a chart: filter other charts, drill, open details, see the conditions behind a number and jump to other reports."
 createTime: 2026/09/01 22:03:26
 ---
 
 # Exploratory Analysis
 
-Choose the operation that answers your next question.
+Readers explore a report through the components themselves: clicking, right-clicking and the component toolbar.
 
-| Task | Use |
+## Right-click a data point
+
+![The data point menu](./images/data-point-menu.png)
+
+| Item | Shown when | Does |
+| --- | --- | --- |
+| **Filter other charts** | The chart has linked components | Filters them by this point, like a click. See [Cross-Filtering](/documentation/Analysis/Cross-Filtering/). |
+| **Drill down to “{level}”** | The field has a lower hierarchy level | Drills to that level. See [Drill Down](/documentation/Analysis/Drill-down/). |
+| **Drill up one level** | The chart is drilled | Goes back one level. |
+| **View details** | The author turned it on | Opens the detail rows of this point. |
+| **Jump** | A drill-through is set up | Opens the target report or URL. See [Drill through](/documentation/Analysis/Drill-through/). |
+| **Copy value** | Always | Copies the value as displayed. |
+
+The menu is available on charts in the report and in the editor, not on tables, GIS maps or phones. The *Others* item of a row limit offers only **Copy value**.
+
+### View details
+
+**View details** shows a table of the clicked point broken down to the most detailed level of every hierarchy on the chart, under the same filters and links.
+
+![Details of South China down to store level](./images/view-details-dialog.png)
+
+To offer it, select the chart and turn on **Actions → Interactions → View details** (off by default). The rows are aggregated at the most detailed model level, not raw fact rows; data permissions apply; the table stops at the page's **Max query records**.
+
+## The component toolbar
+
+Point to a component (tap on a touch screen) to show its toolbar:
+
+| Button | Does |
 | --- | --- |
-| Restrict one chart to a period or group | [Component filters](/documentation/Analysis/Component-Level-Filtering/) |
-| Let readers choose values | [Filter components](/documentation/Visualization/Filters/) |
-| Select a chart mark to update other charts | [Cross-filtering](/documentation/Analysis/Cross-Filtering/) |
-| Read exact values without adding permanent labels | [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/) |
-| Move from a hierarchy level to its detail | [Drill down](/documentation/Analysis/Drill-down/) |
-| Open another report with the selected context | [Drill through](/documentation/Analysis/Drill-through/) |
-| Rank categories or keep a short list | [Sorting](/documentation/Analysis/Sorting/) and [Row limit](/documentation/Analysis/Top-Bottom-N/) |
-| Compare results with a target | [Reference lines](/documentation/Analysis/Chart-Reference-Lines/) |
-| Change an assumption in a calculation | [Parameters](/documentation/Analysis/Creating-Parameters/) |
+| **Drill up**, drill-down, drill-through | Drill buttons, on charts that can drill. Only one of drill-down and drill-through is on at a time; with both off, a click filters other charts. |
+| **Conditions** (funnel with a count) | Lists every condition behind the numbers: **Link**, **Filter**, **Passed in**, **Own**. Blue when a click on another chart filters this one. |
+| **Zoom in** | Opens the component large. |
+| **⋮** | **Export**, **Data preview**, **Execution cost**. |
 
-Start in Preview. Check the component’s conditions indicator before interpreting a result: saved filters and interactive selections can both affect the data shown.
+![Conditions applied to a component](./images/conditions-filter.png)
+
+Authors set when the toolbar appears in **Style → Toolbar → Display mode**: **Show on hover** (default), **Always visible** or **Hidden**.
+
+## Choose the right tool
+
+| Question | Use |
+| --- | --- |
+| Limit one chart permanently | [Component filters](/documentation/Analysis/Component-Level-Filtering/) |
+| Let readers pick values | [Filter components](/documentation/Visualization/Filters/) |
+| Focus other charts on a clicked member | [Cross-filtering](/documentation/Analysis/Cross-Filtering/) |
+| See the next level of detail | [Drill down](/documentation/Analysis/Drill-down/) |
+| Open another report for the clicked member | [Drill through](/documentation/Analysis/Drill-through/) |
+| Keep the top or bottom N | [Row limit](/documentation/Analysis/Top-Bottom-N/) |
+| Compare with a target | [Reference lines](/documentation/Analysis/Chart-Reference-Lines/) |
+| Test an assumption | [What-if Analysis](/documentation/Analysis/What-if-Analysis/) |
+
+Before interpreting an unexpected number, open **Conditions**: saved filters, filter components, clicks and URL values all narrow the data.

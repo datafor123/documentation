@@ -54,6 +54,14 @@ const pages = markdown.map(file => {
 const routes = new Map();
 const problems = [];
 const warnings = [];
+// Unquoted frontmatter values containing ": " break the YAML parser and the whole build.
+for (const page of pages) {
+  const front = page.text.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
+  for (const line of front.split('\n')) {
+    const m = line.match(/^(\w+):\s+([^"'\s[{|>].*)$/);
+    if (m && /:\s/.test(m[2])) problems.push(`${slash(path.relative(root, page.file))}: frontmatter "${m[1]}" contains ": " and must be quoted`);
+  }
+}
 for (const page of pages) {
   if (!page.permalink) continue;
   const route = normalizeRoute(page.permalink);

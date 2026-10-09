@@ -15,4 +15,11 @@ Keep dimension members visible when they have no measure result in the current q
 
 This is useful for checking inactive products or dates without transactions. It does not create missing dimension members, repair source data, or mean that an empty measure should be interpreted as zero.
 
-Filters still define the intended analysis population. Check the model’s dimension coverage and relationships if an expected member is absent. In tables, **Empty values as** is a separate display choice on supported measure fields.
+Filters still define the intended analysis population. Check the model’s dimension coverage and relationships if an expected member is absent.
+
+| Setting | Applies to |
+| --- | --- |
+| **Show items with no data** (dimension) | Members without results stay in the chart or table. |
+| **Empty values as** (measure, Table, Pivot table and Measure card) | Empty cells show a placeholder such as `-`. |
+| **Empty data message** (Style → Empty data) | The whole result is empty. See [Empty Data and Error Messages](/documentation/Visualization/Empty-Data-and-Errors/). |
+| **Show blank main value as** (Measure card) | The card has no value. |
