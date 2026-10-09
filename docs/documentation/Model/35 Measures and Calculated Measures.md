@@ -12,7 +12,7 @@ A Measure aggregates a source field. A calculated measure is evaluated at query 
 
 When a table is added, eligible numeric fields are initially created as Sum measures. The generated Measure Group also contains **Fact Count**.
 
-To add or remove a source field as a Measure, open the field menu and toggle **Set as measure**. If the table has no Measure Group, the designer creates one when you add the Measure. A nonnumeric field is initially assigned Count rather than Sum.
+To add or remove a source field as a Measure, open the field menu and toggle **Set as measure**. If the table has no Measure Group, the designer creates one when you add the Measure. A nonnumeric field is initially assigned Count rather than Sum. There is no setting for the default aggregation: new measures always start with Sum for numeric fields and Count for other fields.
 
 Select a Measure in the **Analysis model** tree and configure its properties.
 
@@ -32,6 +32,17 @@ Select a Measure in the **Analysis model** tree and configure its properties.
 | **Recommended dimensions** | Dimensions normally used to analyze the measure. |
 
 Available aggregation types include Sum, Average, Min, Max, Count, Distinct Count, population or sample standard deviation, and population or sample variance. Choose the method from the business meaning: for example, a unit price usually needs Average rather than Sum.
+
+### Default format of new measures
+
+New measures start with the **Number** format of **Settings › General › System configuration › Default measure format**, which is `#,##0.00` unless an administrator changed it (choices `#,##0`, `#,##0.0`, `#,##0.00`). The same applies to a calculated measure created with **New measure**. **Fact Count** always starts with `#,##0`.
+
+The setting also has a **Percentage** format (`#,##0.00%` by default; choices `0%`, `0.0%`, `#,##0.00%`) for measures whose unit is %.
+
+- The modeler reads these defaults when it opens. After an administrator changes them, reopen the modeler.
+- Existing measures keep their format. Change it per measure under **Data Format**.
+
+See [System Configuration](/documentation/System/System-Configuration/).
 
 ## Create a calculated measure
 

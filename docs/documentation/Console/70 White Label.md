@@ -1,22 +1,22 @@
 ---
-title: White Label
+title: Branding (White Label)
 permalink: /documentation/Embedded/White-Label/
 tags:
   - Brand
   - White label
-description: Customize the login experience, console branding, home-page report cards, and browser defaults, with guidance on saving, applying, importing, and restoring settings.
+description: Customize the login page, console branding, Home report cards and browser defaults, and save, import and restore the configuration.
 createTime: 2026/09/01 22:03:26
 ---
 
-# White Label
+# Branding (White Label)
 
-White Label lets you give the Datafor login page and console a consistent identity: your logos, product copy, colors, navigation styling, and selected reports on Home. Use it for the application around your reports; it is not a replacement for designing individual report pages or configuring embedded authentication.
+**Branding** (called *White Label* before 9.04.6) lets you give the Datafor login page and console a consistent identity: your logos, product copy, colors, navigation styling, and selected reports on Home. Use it for the application around your reports; it is not a replacement for designing individual report pages or configuring embedded authentication.
 
 These are administrative settings, not personal preferences. Plan changes for the users of the deployment, and test them with the accounts and screen sizes your audience uses.
 
 ## Open the configuration
 
-Sign in with an administrator account and go to **Settings > Appearance > White Label**. If the entry is unavailable, ask your administrator to check your access and the features available in your deployment.
+Sign in with an administrator account and go to **Settings › General › Branding**. If the entry is unavailable, ask your administrator to check your access and the features available in your deployment.
 
 The page has four configuration areas:
 
@@ -27,37 +27,36 @@ The page has four configuration areas:
 | **Sample pages** | The report cards in **Home > Report templates**: titles, images, destinations, order, and opening behavior. |
 | **Other** | Default browser title, interface font, and website icon. |
 
-The screenshots below show the English editor with example values. The sidebar is collapsed to give the settings more room. Image previews and editable values are not proof that branding is active: check the main **Enabled / Disabled** switch and save your changes.
+The screenshots below show the English editor with example values. Image previews and editable values are not proof that branding is active: check the main **Enabled / Disabled** switch and save your changes.
 
-## Enable, save, and apply
+## Enable and save
 
 Before editing an existing configuration, use **Export** to keep a copy of the saved settings. Export does not capture unsaved form edits.
 
 1. Make your changes in the relevant configuration areas. Selecting an image displays a preview; it is saved with the configuration.
 2. Turn the main switch on when you want to use the custom branding.
-3. Choose **Save** or **Apply**, and wait for the success message.
+3. Click **Save**. The console applies the branding at once, without reloading.
 4. Check Home and the login page, not just the settings editor.
 
 | Control | Effect |
 | --- | --- |
-| Main **Enabled / Disabled** switch | Chooses whether Datafor uses the custom white-label configuration. Changing the switch alone is an unsaved edit. |
-| **Save** | Saves the whole form, including changes in other configuration areas, and updates the current console's branding state without a full page reload. |
-| **Apply** | Saves the whole form and reloads the current console so you can check the applied appearance. It is disabled until the form has changes. |
+| Main **Enabled / Disabled** switch | Chooses whether Datafor uses the custom branding. Changing the switch alone is an unsaved edit. |
+| **Save** | Saves the whole form, including changes in other configuration areas, and applies it to the console. |
 
-**Save is not a private draft or a staging step before publishing.** If white labeling is enabled, saved changes can affect the user-facing interface. Use a test deployment when preparing a new design.
+Leaving the page with unsaved changes asks whether to save or discard them. **Save is not a private draft:** with branding enabled, saved changes affect every user. Use a test deployment when preparing a new design.
 
-To stop using custom branding without clearing its values, turn the main switch off and select **Apply**. The editor retains the configuration while the interface uses its default branding.
+To stop using custom branding without clearing its values, turn the main switch off and click **Save**.
 
 ## Customize the login experience
 
-<img src="./images/white-label-login-en.jpg" alt="White Label Login settings with the main enable switch, export and import controls, logo preview, welcome message, and save actions" />
+<img src="./images/white-label-login-en.jpg" alt="Branding, Login area: Background and Card layout groups, the main switch, Export, Import and Save" />
 
 Start with **Branding**: upload the login logo, set **Logo max height**, and decide whether to show a welcome message. Use **Welcome text** for a short greeting such as “Welcome to Northstar Analytics”; it is separate from the console's product name.
 
 The remaining groups control different parts of the page:
 
 - **Background** sets the page's image and background color. A background image fills the page and may be cropped to fit the screen, so keep essential text out of the image.
-- **Card Layout** controls the login card's width, corner radius, shadow, background, and border.
+- **Card layout** controls the login card's width, corner radius, shadow, background, and border.
 - **Inputs** controls field corners, borders, focus-ring color, and font size. Keep the focused field easy to identify.
 - **Buttons** controls the primary login button's normal and hover colors, text, corners, and font size.
 - **Google Button** controls the Google login button's appearance and visibility. It does not configure the OAuth provider.
@@ -82,7 +81,7 @@ Choose logo colors to contrast with the background you actually configure. A lig
 
 ## Brand the console
 
-<img src="./images/white-label-console-en.jpg" alt="Console branding settings with separate expanded and collapsed logos, Product name, and Product tagline" />
+<img src="./images/white-label-console-en.jpg" alt="Console area: Names and Features groups" />
 
 ### Logos and product copy
 
@@ -101,18 +100,15 @@ Use **Sidebar**, **Top Bar**, and **Search Box** to coordinate backgrounds, text
 
 For manual color entry, the field already supplies `#`. Enter hexadecimal digits, for example `1677ffff`: the final `ff` makes the color fully opaque. Click outside the field to finish editing it.
 
-The two **Feature Toggles** have specific scopes:
-
-- **Show Start Using Module** controls the **Learn & resources** section on Home. It does not hide the Create Report shortcut or the report-template cards.
-- **Show Help Menu** controls the top-bar help menu. If you hide it, provide another route to documentation and support for your users.
+**Features** has one switch: **Show help menu** controls the top-bar help menu. If you hide it, provide another route to documentation and support for your users. (*Show Start Using Module* was removed together with the Learn & resources section of Home.)
 
 Hiding a visual entry point is not an access-control rule. Manage report permissions separately through [Access Control List](/documentation/System/Access-Control%20List/).
 
 ## Choose the report cards shown on Home
 
-**Sample pages** configures the cards under **Home > Report templates**. It is separate from the learning-resource section controlled by **Show Start Using Module**.
+**Sample pages** configures the cards under **Home > Report templates**.
 
-<img src="./images/white-label-sample-pages-en.jpg" alt="Sample pages editor showing a report card's title, visibility, image, Page link, opening behavior, and reorder controls" />
+<img src="./images/white-label-sample-pages-en.jpg" alt="Sample pages: cards with title, page link, visibility, image and reorder controls" />
 
 To add a useful starting point for your audience:
 
@@ -122,7 +118,7 @@ To add a useful starting point for your audience:
 4. Choose its **Page link** from the resource picker. The picker browses accessible resources under Public; this is not a free-text external website URL field.
 5. Upload a **Card image (local upload)**. This is a thumbnail, not a live report preview; replace it when the report's appearance changes.
 6. Turn **Visible** on, and choose whether to **Open in new tab**. Use the up/down arrows to arrange the cards.
-7. Select **Apply**, open Home, and test the card with a representative reader account.
+7. Click **Save**, open Home, and test the card with a representative reader account.
 
 A card links to a resource; it does not grant permission to open the report or query its data. An administrator's successful test is not sufficient evidence that readers can use it.
 
@@ -130,13 +126,13 @@ Turn **Visible** off to keep a card configured without showing it. The delete co
 
 ## Set browser defaults
 
-<img src="./images/white-label-other-en.jpg" alt="Other settings with Browser title, Font Family, and Website Icon" />
+<img src="./images/white-label-other-en.jpg" alt="Other area: Browser title, Interface font and Favicon" />
 
 Under **Other**:
 
 - **Browser title** sets the default tab title. When a resource is open, its own title may take precedence.
-- **Interface font** sets the font of the console and the editor, and becomes the default font of reports created afterwards. Fonts already set inside a report are not changed. See [Fonts](/documentation/Console/Fonts/).
-- **Website Icon > Icon** replaces the favicon. Use a simple symbol that remains recognizable at browser-tab size.
+- **Interface font** sets the font of the console and the editor, chosen from a list. It does not affect report fonts; the default font of new reports is set in [System Configuration](/documentation/System/System-Configuration/). See [Fonts](/documentation/Console/Fonts/).
+- **Favicon → Icon** replaces the browser-tab icon. Use a simple symbol that remains recognizable at browser-tab size.
 
 ## Reuse or restore a configuration
 
@@ -150,15 +146,15 @@ After a successful import, check the main enable switch, reload the console, and
 
 ### Reset to default
 
-Each **Reset to default** button resets its own group of settings. For example, resetting Login **Branding** does not reset its **Background** or the Console settings. The reset changes the form first; select **Save** or **Apply** to persist it.
+Each **Reset to default** button resets its own group of settings. For example, resetting Login **Branding** does not reset its **Background** or the Console settings. The reset changes the form first; click **Save** to keep it.
 
-Reset means “use product defaults,” not “restore my previously saved custom values.” To discard unsaved edits, reload the page and reopen White Label. To recover a previous custom design after saving changes, use your exported configuration.
+Reset means “use product defaults,” not “restore my previously saved custom values.” To discard unsaved edits, leave the page and choose to discard them. To recover a previous custom design after saving changes, use your exported configuration.
 
 ## Check before rollout
 
 - Open the login page in a separate signed-out browser session. Check the logo, background, footer link, field focus, and button hover states.
 - Check Home, then expand and collapse the sidebar. Confirm that the logos and active-menu text remain readable.
-- Verify the Home heading, browser title, help menu, learning resources, and report cards independently.
+- Verify the Home heading, browser title, help menu and report cards independently.
 - Open each visible card as an intended reader, including any required report filters or data-access restrictions.
 - Test a narrower window and a second browser or device for clipping, font fallback, and unreadable text.
 

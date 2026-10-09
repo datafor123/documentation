@@ -61,6 +61,16 @@ The same combination rules apply: the resolved condition is ORed with other matc
 - **Save draft** keeps a new policy inactive. **Save & enable** activates it. Disabled policies do not affect access; disabling a user's only matching row policy can therefore expose more rows.
 - Built-in **SuperUser** and **Administrator** roles bypass Data Security, including RLS and OLS. Use ordinary users to validate restrictions. An administrative role is not a suitable substitute for a business role that needs full-row access but should still respect OLS.
 
+### Models with several fact tables
+
+A row policy restricts a measure group only through the tables that this measure group's query joins. In an analysis model with several fact tables, a dimension table that a measure group reaches only through another fact table is not attached to that measure group, so a policy on that table does not restrict it.
+
+For example, inventory and sales fact tables share `product`, and only `sales_fact` joins `customer`. A row policy on `customer` restricts sales measures but not inventory measures, because `customer` is reachable from inventory only through `sales_fact` (one product has many sales rows). Before 9.04.6 the engine followed that path, which applied the customer filter to inventory but also repeated each inventory row once per matching sales row.
+
+- To restrict such a measure group, add a row policy on a table that it joins itself, such as its fact table or a dimension related directly to it.
+- Check measures from each fact table in the actual report as the restricted user. **Test access** evaluates tables, not measure groups, and a correct result for one fact table does not prove the other.
+- For how measure groups are linked to dimensions, see [Share Dimensions across fact tables](/documentation/Model/Advanced-Relationship-Modeling/#share-dimensions-across-fact-tables).
+
 ## Worked example: regional sales
 
 Use a disposable datasource and ordinary test accounts. The following is an example fixture, not a built-in Datafor dataset. Create or identify a table named `sales` in your chosen schema with these records:
@@ -113,7 +123,7 @@ In the disposable setup, also disable **North sales** and retest `north_reader`.
 
 ## Check identity and scope for other access paths
 
-- **Models and the AI Agent:** Keep **Apply data security** enabled for governed models. Compare results using the same authenticated user, model, datasource, and enabled policies. A successful datasource policy test alone does not validate the model or Agent workflow. See [Data Security and the AI Agent](/documentation/Datasource/Data-Security/#data-security-and-the-ai-agent). When an object policy hides a table that the model joins through, the join is kept and a row policy on that table still restricts it, but the table's own fields are unavailable; see [Hidden tables in a model join path](/documentation/Datasource/Data-Security/#hidden-tables-in-a-model-join-path).
+- **Models and the AI Agent:** Keep **Apply data security** enabled for governed models. Compare results using the same authenticated user, model, datasource, and enabled policies. A successful datasource policy test alone does not validate the model or Agent workflow. See [Data Security and the AI Agent](/documentation/Datasource/Data-Security/#data-security-and-the-ai-agent). When an object policy hides a table that the model joins, the join is kept and a row policy on that table still restricts it, but the table's own fields are unavailable; see [Hidden tables in a model join path](/documentation/Datasource/Data-Security/#hidden-tables-in-a-model-join-path). In models with several fact tables, also see [Models with several fact tables](#models-with-several-fact-tables).
 - **Share links:** The [Share Link guide](/documentation/Embedded/Share-link/) describes access using the sharer's data permissions. Do not treat such a link as per-recipient RLS or assume an anonymous visitor has an individual role assignment. Verify the sharing mode and effective identity before distributing the link.
 - **Embedded applications, SSO, and APIs:** Confirm which identity the request authenticates as, which roles it resolves to, and which datasource/query path it uses. A shared technical account is not an individual viewer. Test each integration with its actual credentials and requests; do not infer coverage from a report test or from a client-supplied region or tenant filter.
 

@@ -2,116 +2,46 @@
 title: LDAP
 permalink: /documentation/System/LDAP/
 tags: null
-description: null
+description: Let users sign in to Datafor with their LDAP directory account, configured on the Single sign-on settings page.
 createTime: 2026/09/01 22:03:26
 ---
 
-## **Overview**
+## Single sign-on page
 
-LDAP (Lightweight Directory Access Protocol) integration in Datafor allows administrators to authenticate users using an external LDAP server. This guide provides step-by-step instructions to configure and enable LDAP authentication within Datafor.
+LDAP, OAuth 2.0, SAML 2.0 and CAS are configured on one page: **Settings › Access & Integration › Single sign-on**. A card per method at the top shows its status: **On** (enabled), **Off** (configured but not enabled), or **Not set up** (the method's address field is empty: **LDAP URL**, **Authorization endpoint**, **IdP SSO URL** or **CAS server URL**); **Unknown** means the status could not be read. Select a card to show that method's settings below it; if the current method has unsaved changes, Datafor asks you to save or discard them first. The cards refresh after each save. Each method has an **Enable** switch; while it is off, the fields are locked and the page shows "Turn on to edit." The **New users** group sets up accounts for first-time users: **Create users on first sign-in**, **Default user type** and **Default role**.
 
-------
+<div align="left"><img src="./images/settings-sso.png" width="80%" /></div>
 
-## **1. Accessing LDAP Settings**
+## 1. LDAP settings
 
-1. **Log in** to the Datafor **admin panel**.
+Select the **LDAP** card ("Sign in with a directory account and password"). Fields marked * are required while **Enable** is on.
 
-2. Navigate to **Settings** in the left-side menu.
+| Section | Field | What to enter | Notes |
+| --- | --- | --- | --- |
+| Server | **Enable** | Turn on to use LDAP sign-in. | Turn on before editing the other fields. |
+| Server | **LDAP URL** * | Directory server address with protocol and port, e.g. `ldap://127.0.0.1:389` or an `ldaps://` address. | While empty, the card shows **Not set up**. |
+| Server | **Context factory (JNDI)** * | `com.sun.jndi.ldap.LdapCtxFactory` | The only option, selected by default. |
+| Authentication | **Authentication method** * | **Simple authentication** or **Anonymous authentication**. | |
+| Authentication | **Bind DN** | DN of the account Datafor uses to connect to the directory, e.g. `cn=admin,dc=example,dc=com`. | |
+| Authentication | **Bind password** | Password of the **Bind DN** account. | |
+| New users | **User DN pattern** * | Template that builds a user's DN from the name typed at sign-in, e.g. `cn=${username},dc=example,dc=com`. | `${username}` is replaced by the sign-in name. |
+| New users | **Create users on first sign-in** | Select to create the Datafor user automatically the first time a directory user signs in. | |
+| New users | **Default user type** | User type given to users created this way, e.g. `Reader`. | Available only when **Create users on first sign-in** is selected. |
+| New users | **Default role** | One or more roles given to users created this way. | Same as above. |
 
-3. Click on **LDAP** under the **System Settings** section.
+## 2. Test and save
 
-<div align="left"><img src="./images/1739675500391.png" width="48%" /></div>
+1. Click **Test connection** to check the connection to the LDAP server with the values currently in the form; you don't have to save first. The button is available only while **Enable** is on. A successful check shows **Validation successful**; otherwise the error is shown.
+2. Click **Save**. The button is available once something has changed.
 
-------
+- To switch LDAP off, turn off **Enable** and click **Save**. With **Enable** off, Datafor saves without checking the required fields.
+- If **Create users on first sign-in** is cleared when you save, **Default user type** and **Default role** are cleared as well.
 
-## **2. LDAP Configuration Parameters**
+## 3. Troubleshooting
 
-The following fields must be properly configured to ensure successful LDAP authentication:
-
-### **2.1 General Settings**
-
-| Parameter                 | Description                                                  |
-| ------------------------- | ------------------------------------------------------------ |
-| **Enabled**               | Toggle to enable or disable LDAP authentication.             |
-| **LDAP Server Address**   | The URL of the LDAP server, including the protocol (`ldap://` or `ldaps://`) and port (e.g., `ldap://127.0.0.1:389`). |
-| **Authentication Method** | Select the authentication type: `Simple Authentication` or `Anonymous Authentication`. |
-
-------
-
-### **2.2 Connection Settings**
-
-| Parameter                         | Description                                                  |
-| --------------------------------- | ------------------------------------------------------------ |
-| **Initial Context Factory**       | The fully qualified Java class for LDAP context initialization. Default: `com.sun.jndi.ldap.LdapCtxFactory`. |
-| **Username Suffix Template**      | Template for generating user Distinguished Names (DN). Example: `cn=${username},dc=example,dc=com`. |
-| **Admin Distinguished Name (DN)** | The DN of the administrator account used for LDAP authentication. Example: `cn=admin,dc=example,dc=com`. |
-| **Admin Password**                | The password for the admin account to authenticate with the LDAP server. |
-
-------
-
-### **2.3 User Management Settings**
-
-| Parameter             | Description                                                  |
-| --------------------- | ------------------------------------------------------------ |
-| **Auto-create User**  | If enabled, users will be automatically created in Datafor if they do not exist in LDAP. |
-| **Default User Type** | The default type assigned to new users (e.g., `Reader`).     |
-| **Default Role**      | Default roles assigned to new users created through LDAP. Multiple roles can be assigned (e.g., `role2`, `role4`, `role5`). |
-
-------
-
-## **3. Configuring LDAP Authentication**
-
-### **Step 1: Enable LDAP Authentication**
-
-- Toggle **Enabled** to activate LDAP authentication.
-
-### **Step 2: Configure Server and Authentication Settings**
-
-- Enter the **LDAP Server Address** (e.g., `ldap://127.0.0.1:389`).
-- Choose the **Authentication Method** (`Simple` or `Anonymous`).
-- Specify the **Initial Context Factory** (`com.sun.jndi.ldap.LdapCtxFactory`).
-
-### **Step 3: Set Up Admin Credentials**
-
-- Define the **Admin DN** (`cn=admin,dc=example,dc=com`).
-- Provide the **Admin Password**.
-
-### **Step 4: Configure User Mapping**
-
-- Define the **Username Suffix Template** (`cn=${username},dc=example,dc=com`).
-- Enable **Auto-create User** if users should be automatically created in Datafor.
-- Select the **Default User Type** (`Reader`, `Editor`, etc.).
-- Assign **Default Roles** (`role2`, `role4`, `role5`).
-
-------
-
-## **4. Saving and Validating Configuration**
-
-1. Click **Save** to apply the LDAP settings.
-
-2. Click 
-
-   Validate
-
-    to test the connection.
-
-   - If successful: *Validation Successful* message appears.
-   - If failed: Check LDAP credentials, server accessibility, or firewall settings.
-
-------
-
-## **5. Common Issues and Solutions**
-
-| Issue                                | Possible Cause                       | Solution                                                     |
-| ------------------------------------ | ------------------------------------ | ------------------------------------------------------------ |
-| **Failed to connect to LDAP server** | Incorrect server address or port     | Verify the **LDAP Server Address** and ensure the server is reachable. |
-| **Authentication failed**            | Incorrect admin credentials          | Check **Admin DN** and **Admin Password**.                   |
-| **User login fails**                 | Username mapping is incorrect        | Review **Username Suffix Template** and adjust accordingly.  |
-| **Auto-create user does not work**   | Auto-create feature is disabled      | Ensure **Auto-create User** is enabled.                      |
-| **Roles are not assigned properly**  | Incorrect default role configuration | Verify **Default Role** settings and ensure correct role names are used. |
-
-------
-
-## **Conclusion**
-
-By correctly configuring LDAP integration, Datafor can securely authenticate users from an external directory, reducing the need for manual user management. Ensure all parameters are set correctly, and use the validation feature to test the connection before applying changes.
+| Problem | Likely cause | What to do |
+| --- | --- | --- |
+| **Test connection** fails to reach the server | Wrong **LDAP URL**, port or protocol, or a firewall in between | Check the address and that the Datafor server can reach the directory port. |
+| **Test connection** reports an authentication error | Wrong **Bind DN** or **Bind password**, or the wrong **Authentication method** | Check the bind account, or use **Anonymous authentication** if the directory allows it. |
+| Users cannot sign in | **User DN pattern** does not match the directory structure | Compare the pattern with a real user DN in the directory. |
+| No Datafor user is created on first sign-in | **Create users on first sign-in** is off | Select it, set **Default user type** and **Default role**, then save. |

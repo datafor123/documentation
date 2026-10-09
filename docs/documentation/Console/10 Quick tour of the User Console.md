@@ -1,34 +1,44 @@
 ---
 title: "Quick Tour of the Console"
 permalink: /documentation/Console/Quick-Tour-of-the-Console/
+description: What is on Home and in each area of the left navigation, from reports and models to the AI Agent and Settings.
 createTime: 2026/09/01 22:03:26
 ---
 
 # Quick Tour of the Console
 
-Use the console to find reports and manage the data and models behind them. Menus and actions depend on your permissions.
+The console is where you find reports, ask the AI Agent, and manage data, models and the server. What you see depends on your permissions.
 
-![Current English console home](../Visualization/images/current/console-home.jpg)
+![Console Home](./images/console-home.jpg)
 
-## Start a task
+## Home
 
-Home provides **Create Report**, **Connect Data**, and **Create Model** shortcuts. An **AI Agent** entry is also available in this deployment. Available entries depend on your account and deployment. **Recent work** helps you resume a resource; **Report templates** provides starting examples.
+- Shortcuts: **Create Report**, **Connect Data**, **Create Model**, and **AI Agent** when AI is enabled for you.
+- **Recent work**: the last 8 reports and analysis models you opened, with their path; **View all** lists more.
+- **Report templates**: sample reports to start from. Administrators choose them in **Settings › General › Branding → Sample pages**.
 
-To build a report from an existing model, choose **Create Report** and follow [your first report](/documentation/Start/Create-Your-First-Analysis-Report/).
+A report created from Home is saved in **Personal** unless you choose another folder. See [Create Your First Analysis Report](/documentation/Start/Create-Your-First-Analysis-Report/).
+
+## Left navigation
+
+| Item | Use it to |
+| --- | --- |
+| **Home** | Start a task or resume recent work |
+| **AI Agent** | Ask questions about your data in plain language. Shown when AI is enabled; users without AI permission see *Please contact your administrator to enable AI for this user*. See [AI Assistant](/documentation/AI-Agent/AI-Chat/). |
+| **Personal**, **Public** | Your own folders and the shared folders you may open |
+| **Favorites**, **Recent** | Items you starred, items you opened recently |
+| **Datasource** | Database connections and uploaded files |
+| **Models** | Analysis models: fields, relationships, measures |
+| **Metrics Library** | Agreed definitions of business metrics. See [Metrics Library](/documentation/Metrics-Library/Metrics-Library/). |
+| **Tools** | Parameters, data dictionary, GeoJSON maps and other tools |
+| **Users** | Users, roles and their permissions |
+| **Settings** | Server administration. See [Settings Overview](/documentation/System/Settings-Overview/). |
+| **Trash** | Deleted items you can restore |
+
+The ☰ button at the top left collapses the navigation to icons. **?** at the top right opens help, and the avatar opens [My Account](/documentation/Console/My-Account/).
 
 ## Find a report
 
-| Area | Purpose |
-| --- | --- |
-| **Personal** | Your working folders and reports. |
-| **Public** | Shared resources available to your account. |
-| **Favorites** | Resources you have marked for quick access. |
-| **Recent** | Recently opened resources. |
+Open a folder and click a report to view it; click **Edit** in the report to change it. Use the breadcrumb to go up and the search box at the top to find a report or model by name. When several items share a name, check the path.
 
-Open a folder, then click a report name. Use **Edit** in the report to change its design. Use the breadcrumb to return to a parent folder and the search box to find a resource. Check the path when several resources have the same name.
-
-## Understand the data areas
-
-**Datasource** manages connections and data sources. **Models** organizes the fields, relationships, and measures used by reports. **Metrics Library** holds business definitions of metrics. Reuse an existing model when it already provides the fields you need.
-
-**Tools**, **Users**, and **Settings** contain additional management functions for authorized users. For example, map-service configuration is under **Settings → Data → Maps**. **Trash** contains recoverable deleted resources.
+Deleting a report needs the **Delete** or **Full control** permission on it; **Edit** alone is not enough. See [Permission Evaluation Overview](/documentation/System/Permission-Evaluation-Overview/).

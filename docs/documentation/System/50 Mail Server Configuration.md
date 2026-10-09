@@ -2,63 +2,52 @@
 title: Mail Server Configuration
 permalink: /documentation/System/Mail-Server-Configuration/
 tags: null
-description: null
+description: Configure the SMTP server, sender and encryption that Datafor uses to send email, and test the connection before saving.
 createTime: 2026/09/01 22:03:26
 ---
 # Mail Server Configuration
 
-Datafor allows administrators to configure the mail server, enabling the system to send automated notification emails, such as **alert notifications** and **forgotten password emails**.
+Datafor sends notification emails, such as **alert notifications** and **forgotten password emails**, through the SMTP server configured on the **Email** page. Only administrators can open it.
 
-## 1. Accessing Mail Server Settings
+## 1. Open the Email page
 
-1. **Log in to the Datafor admin panel**.
-2. In the left-hand menu navigation, click **“Settings”**.
-3. Under **“Settings”**, select **“Mail Server”**.
+Go to **Settings › General › Email**.
 
-<div align="left"><img src="./images/1739629578601.png" width="67%" /></div>
+<div align="left"><img src="./images/settings-email.png" width="80%" /></div>
 
-## 2. Configuring the Mail Server
+## 2. Fill in the settings
 
-On the **Mail Server** configuration page, fill in the following SMTP server details:
+All fields in **Server** and **Sender** are required.
 
-### **Required Fields**
+| Section | Field | What to enter | Notes |
+| --- | --- | --- | --- |
+| Server | **SMTP server** | Host name of the SMTP server, e.g. `smtp.163.com`. | |
+| Server | **Port** | SMTP port. Common values: `25` (unencrypted), `465` (SSL), `587` (STARTTLS). | The form starts with `25`. |
+| Server | **Protocol** | **SMTP** or **SMTPS**. | Use the one your mail provider requires. |
+| Server | **Username** | Account used to sign in to the SMTP server. | |
+| Server | **Password** | Password of that account. | Some providers require an authorization code instead of the mailbox password. |
+| Sender | **Sender address** | Address that appears as the sender, usually the same mailbox as **Username**. | Must be a valid email address ("Enter a valid email address"). |
+| Sender | **Sender name** | Display name of the sender. | |
+| Encryption | **Use STARTTLS** | Select to upgrade the connection with STARTTLS. | Optional. |
+| Encryption | **Use SSL/TLS** | Select to connect over SSL/TLS. | Optional. |
 
-| Setting                  | Description                                                  |
-| ------------------------ | ------------------------------------------------------------ |
-| **Host Name (SMTP)**     | The SMTP server address, e.g., `smtp.163.com`.               |
-| **Port**                 | The server port number. Common ports include: <br> - `25` (Unencrypted) <br> - `465` (SSL) <br> - `587` (TLS) |
-| **Email Account**        | The email address used to send messages.                     |
-| **Password**             | The SMTP login password for the email account (some providers may require an authorization code instead). |
-| **Server Type**          | The type of mail server. Select `SMTP`.                      |
-| **Email “From” Address** | The sender email address, usually the same as **Email Account**. |
-| **Email “From” Name**    | The display name of the sender                               |
+## 3. Test the connection
 
-### **Optional Fields**
+Click **Test connection** at the bottom of the page.
 
-| Setting                    | Description                        |
-|----------------------------|------------------------------------|
-| **make use of Start TLS**  | Enables **TLS encryption** (recommended). |
-| **make use of SSL**        | Enables **SSL encryption** (recommended). |
+- The test uses the values **currently in the form**, including changes you have not saved, so you can try settings before saving them.
+- All required fields must be filled in before the test runs.
+- The server sends a test message with those values to the **Sender address**. The result appears as **Test passed**, or as **Test failed** with the reason returned by the mail server.
 
-## 3. Testing the Mail Server Connection
+## 4. Save
 
-After configuration, it is recommended to test the mail server connection to ensure emails can be sent successfully.
+Click **Save**. The button is available once you have changed something. If you leave the page with unsaved changes, Datafor asks you to keep editing, discard the changes, or save and leave.
 
-1. Click the **“Test Email Server”** button.
-2. The system will attempt to send a test email to the address specified in **Email Account**.
-3. If the test is successful, the mail server configuration is correct.
-4. If the test fails, check whether the **SMTP server address, port, account, and password** are correct, and ensure the server is not blocked by a firewall.
+## 5. Troubleshooting
 
-## 4. Saving the Configuration
-
-Once the configuration is verified, click the **“Save”** button to apply the mail server settings.
-
-## 5. Common Issues and Solutions
-
-| Issue                      | Possible Cause                  | Solution |
-|----------------------------|---------------------------------|----------|
-| **Test email failed to send** | Incorrect server information   | Verify that the **SMTP address, port, account, and password** are correct. |
-| **Emails are blocked or not received** | Email provider security policies | Ensure the **SMTP account** allows third-party application access and try using an authorization code instead of a password. |
-| **Incorrect port number**   | Some email providers restrict ports | Try using **25 / 465 / 587** or check the email provider’s documentation. |
-| **SSL/TLS-related errors**  | Incompatible server security policies | Enable or disable **TLS/SSL** as required by the email provider. |
-
+| Problem | Likely cause | What to do |
+| --- | --- | --- |
+| **Test failed** with an authentication error | Wrong **Username** or **Password**, or the provider requires an authorization code | Check the account, and generate an authorization code if the provider uses them. |
+| **Test failed** with a connection or timeout error | Wrong **SMTP server** or **Port**, or a firewall blocks the port | Check the host and port with your provider, and allow outbound traffic to that port. |
+| SSL/TLS errors | Encryption options do not match the port | Match **Use SSL/TLS** or **Use STARTTLS** and **Protocol** to what the provider requires for that port. |
+| Emails are blocked or never arrive | Provider security policy | Allow SMTP or third-party access for the account, and check the recipient's spam folder. |

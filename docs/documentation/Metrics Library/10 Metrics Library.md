@@ -1,6 +1,7 @@
 ---
 title: Metrics Library
 permalink: /documentation/Metrics-Library/Metrics-Library/
+description: Find, create, certify and bind enterprise metrics, generate them in bulk from an analysis model, and review how models implement them.
 createTime: 2026/09/01 18:36:42
 ---
 
@@ -24,7 +25,7 @@ Open **Data > Metrics Library**.
 
 <div align="left"><img src="./images/enterprise-metrics-overview.jpg" alt="Metrics Library with enterprise metrics and governance filters" width="100%" /></div>
 
-Search by business name, Metric ID, or synonym. Use **Certified**, **Draft**, **No model references**, and the owner filter to narrow the table.
+Search by business name, Metric ID, or synonym. Use **Certified**, **Draft**, **No model references**, **From model** (shown when metrics were generated from a model), and the owner filter to narrow the table. The whole library is listed on one page.
 
 The indicators answer different questions:
 
@@ -52,15 +53,41 @@ Click **New metric**, then complete:
 | **Synonyms** | Add common, unambiguous business wording. |
 | **Business definition** | State what is included, excluded, and any timing or policy conditions. |
 | **Calculation method** | Choose **Base metric**, **Ratio**, **Difference**, **Attainment rate**, or **Custom formula**. |
-| **Unit / Direction / Owner** | Set the unit, whether higher or lower is better, and the accountable owner. Units are stored as language-neutral codes and shown in each user's language; see [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/). |
+| **Unit / Direction / Owner** | Set the unit, whether higher or lower is better (or **Not specified**), and the accountable owner. Units are stored as language-neutral codes and shown in each user's language; see [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/). |
 
 A custom formula accepts metric references, numbers, arithmetic operators, and parentheses. It is a governance relationship, not SQL, MDX, or a replacement for the model measure.
 
 Click **Save changes**. New records are Draft.
 
-Use **Mark as certified** only after the definition, synonyms, calculation relationship, unit, direction, owner, and intended model implementation have been reviewed. Missing synonyms or model bindings produce warnings but do not block certification. The current interface does not provide a return-to-Draft action.
+Certification requires a **Business definition** and a **Unit**; without them Datafor asks you to fill them in first. Use **Mark as certified** only after the definition, synonyms, calculation relationship, unit, direction, owner, and intended model implementation have been reviewed. Missing synonyms or model bindings produce warnings but do not block certification. The current interface does not provide a return-to-Draft action.
 
-## 3. Bind a metric in Retail Chain Operations
+## 3. Generate metrics from an analysis model
+
+When a model already has the measures, generate their metrics in one step instead of typing each one. Everything is copied from the model; nothing is written by AI.
+
+1. Open the dialog in either way:
+   - **Data › Metrics Library → Generate from a model**, select the analysis model and click **Open in the modeler**;
+   - or in the modeler, open the **Metric bindings** tab at the bottom and click **Generate metrics from this model** (shown while the model has measures that are not bound).
+2. In **Generate metrics from this model**, select the measures to register. Calculated measures and the measures their formulas use are selected by default; measures already bound are listed as *Already bound*.
+3. For each row check the **Action** (**Create a metric**, or **Bind to existing** when a library metric has exactly the same name or synonym), the **Metric name and ID**, the **Calculation** read from the formula (**Base**, **Ratio**, **Difference**, **Custom formula**), the **Business definition** and **Unit · direction**. Empty fields show *To be filled in*.
+4. Set the **Owner** and click **Generate (n)**.
+5. **Save the model**: the bindings take effect only when the model is saved.
+
+<div align="left"><img src="./images/metrics-generate-dialog.png" alt="Generate metrics from this model, with three measures selected" width="100%" /></div>
+
+| Pre-filled from the model | Source |
+| --- | --- |
+| Name, synonyms, definition | Measure caption, aliases, description |
+| Unit | Measure unit, or % when the format is a percentage |
+| Direction | Measure direction (empty when neutral or unset) |
+| Calculation | The calculated measure's formula: A/B is a ratio, A−B a difference, other arithmetic a custom formula. If an operand measure is not selected, the metric is registered without the relation. |
+| Metric ID | Internal name or caption; non-Latin names get a short generated ID, duplicates get _2, _3 |
+
+Generated metrics are **Draft**, version v1, tagged **From model**. Drafts may stay without definition and unit; certify them once those are filled in. Editing a generated metric's definition, calculation or notes turns it into an ordinary metric (the tag disappears). An untouched generated draft does not trigger draft warnings in AI answers, because its definition is only the model description.
+
+The batch is all or nothing: if one metric cannot be saved, none is created.
+
+## 4. Bind a metric in Retail Chain Operations
 
 1. Open **Models > Retail Chain Operations**.
 2. Select the measure or calculated measure that implements the metric. For example, open **Calculated measures > Gross Margin Rate**.
@@ -75,7 +102,7 @@ Saving the model writes the binding back to Metrics Library. The current Modeler
 
 Binding one enterprise metric to multiple measures in the same model is allowed but produces an ambiguity warning. Avoid duplicate bindings unless the measures are intentionally equivalent.
 
-## 4. Review definition consistency
+## 5. Review definition consistency
 
 Open **Metric bindings** at the bottom of the Modeler. The panel lists the model measure, enterprise metric, comparison status, effective grain, and last comparison time.
 
@@ -95,9 +122,9 @@ Use **Compare definition** for one binding or **Compare all** for the model. Dat
 
 Resolve comparison warnings before treating a metric as production-ready.
 
-## 5. Ask AI Agent about an enterprise metric
+## 6. Ask AI Agent about an enterprise metric
 
-1. Open **Home > AI Agent**.
+1. Open **AI Agent** in the left navigation.
 2. Select **Retail Chain Operations**.
 3. Ask with the official metric name or an unambiguous synonym, and include the required time period and breakdown.
 
@@ -113,7 +140,7 @@ Synonyms must remain unambiguous. In the sample data, **GM%** resolves to **Gros
 
 Draft, stale, drift, or inconclusive bindings can produce governance warnings in an Agent answer. Treat the warning as a review requirement.
 
-## 6. Common questions
+## 7. Common questions
 
 | Question | Answer |
 | --- | --- |
@@ -126,9 +153,9 @@ Draft, stale, drift, or inconclusive bindings can produce governance warnings in
 | **Can I change a Metric ID?** | No. Create a replacement metric and rebind affected model measures. |
 | **What does Metric missing mean in Modeler?** | The referenced library record no longer exists. Use **Rebind**, or clear **Enterprise metric** and save the model. |
 
-## 7. Bulk maintenance and access
+## 8. Bulk maintenance and access
 
 - **Import:** Accepts exported JSON or CSV files up to 2 MB. Resolve each conflict as Skip or Overwrite. New records default to Draft unless certification status is explicitly retained. Model bindings are never imported; overwriting a metric preserves its existing bindings.
 - **Export:** If rows are selected, Datafor exports the selection. With no selection, it exports the complete library. Search and filters do not define the export scope.
 - **Delete:** Deletion is permanent. Existing model bindings and derived-metric references produce warnings but do not block deletion or repair dependent objects. Rebind or update dependencies first.
-- **Access:** Metrics Library requires a signed-in, non-share session with administrator or metric-creation permission.
+- **Access:** The Metrics Library page requires administrator or metric-creation permission. Metric definitions themselves are readable by every signed-in user (not share links), so the AI Agent can use them when anyone asks.

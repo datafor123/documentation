@@ -1,67 +1,73 @@
 ---
 title: JSON Web Token (JWT)
 permalink: /documentation/System/JWT/
+description: Create and manage embed tokens (JWT) that let external systems such as ERP or CRM sign users in to Datafor.
 createTime: 2026/09/01 22:03:26
 ---
 
 # JSON Web Token (JWT)
 
-## Overview
+Embed tokens let an external system, such as an ERP or CRM, pass a signed JSON Web Token to Datafor so that its users are signed in without entering a Datafor password. Each embed token configuration defines how Datafor reads and verifies the token and which Datafor user it maps to.
 
-Datafor supports JSON Web Token (JWT) authentication, allowing external systems to integrate securely using JWT-based authentication mechanisms. This document provides details on configuring and managing JWT settings within Datafor.
+## 1. Open the embed token list
 
-## Accessing JWT Settings
+Go to **Settings › Access & Integration › Embed tokens (JWT)**. The list shows:
 
-1. Navigate to **Settings**.
-2. Click on **JWT** from the left panel.
-3. The JWT configuration list displays existing configurations, including:
-   - **Name**: The unique identifier for the configuration.
-   - **Enabled**: Indicates if the configuration is active.
-   - **Last Modified Date**: The most recent update timestamp.
-   - **Creator**: The user who created the configuration.
-4. Click on a configuration to edit or click the **+** icon to create a new JWT configuration.
+| Column | Meaning |
+| --- | --- |
+| **Name** | Name of the configuration. Click it to edit the configuration. |
+| **Enabled** | **Yes** or **No**. |
+| **Last modified date** | Time of the last save. |
+| **Creator** | User who created the configuration. |
 
-<div align="left"><img src="./images/image-20250312150518212.png"  /></div>
+Use the search box above the list to filter it.
 
-## Creating or Editing a JWT Configuration
+## 2. Create or edit an embed token
 
-To create or modify a JWT configuration:
+1. Click **New embed token** at the left of the table toolbar, or click a configuration's **Name** to edit it (the dialog title is then **Edit** followed by the name).
+2. Fill in the fields below. Fields marked * are required.
+3. Click **Save**. A name that is already used shows "Name already exists".
 
-<div align="left"><img src="./images/image-20250312150559667.png" width="48%" /></div>
+**Basic**
 
-1. **Enable**: Toggle this setting to enable or disable JWT authentication for this configuration.
-2. **Name** (*Required*): Define a unique name for the JWT configuration (e.g., "ERP").
-3. **Token Name** (*Required*): Specify the name of the token field (e.g., "token").
-4. **Secret Key** (*Required*): Enter the secret key used for signing the JWT. This should be kept secure.
-5. **Expiration Time** (*Required*): Define the validity period of the JWT in seconds (e.g., "86400" for 24 hours).
-6. **Username Field** (*Required*): Specify the field in the JWT payload that maps to the user's username (e.g., "loginname").
-7. **Name Field**: Define the field in the JWT that maps to the user’s full name (e.g., "name").
-8. **Email Field**: Specify the field in the JWT that maps to the user’s email (e.g., "email").
-9. **Signature Algorithm** (*Required*): Select the algorithm used to generate and verify the JWT signature (e.g., "HS256").
-10. **User Type**: Choose the default user type assigned to users authenticating via JWT (e.g., "Reader").
-11. **Initialization Role**: Select one or more roles assigned to users upon their first login via JWT authentication.
-12. Click **Submit** to save changes or **Cancel** to discard modifications.
+| Field | What to enter | Notes |
+| --- | --- | --- |
+| **Enable** | Turn on to accept tokens for this configuration. | While it is off, the dialog shows "Token access is disabled. Enable token authentication before configuring this setting." |
+| **Name** * | Unique name of the configuration, e.g. `ERP`. | |
+| **Token name** * | Name of the field that carries the JWT in requests, such as an HTTP header or URL parameter, e.g. `token`. | |
+| **Expiration time** * | Validity period of the token, in **seconds**, e.g. `86400` (24 hours). | |
+| **Signature algorithm** * | Algorithm used to sign and verify the token: **HS256**, **HS384**, **HS512**, **RS256**, **RS384**, **RS512**, **ES256**, **ES384** or **ES512**. | Must match the external system. |
+| **Secret key** * | Key used to sign and verify the token. | Keep it secret. |
 
-## Deleting a JWT Configuration
+**User info**
 
-1. Select the configuration from the JWT list.
-2. Click the **Delete** button.
-3. Confirm the deletion when prompted.
+| Field | What to enter | Notes |
+| --- | --- | --- |
+| **Username field** * | Token field that holds the Datafor username, e.g. `loginname`. | |
+| **Name field** | Token field that holds the user's full name, e.g. `name`. | |
+| **Email field** | Token field that holds the email address, e.g. `email`. | |
 
-<div align="left"><img src="./images/image-20250312150643595.png" /></div>
+**Role**
 
-## Notes
+| Field | What to enter | Notes |
+| --- | --- | --- |
+| **Initialize user** | Select to create user accounts automatically from the token. | **User type** and **Initialization role** appear only while this is selected. |
+| **User type** | User type given to users created this way, e.g. `Reader`. | |
+| **Initialization role** | One or more roles given to users created this way. | |
 
-- The **Secret Key** should be kept confidential and should not be shared publicly.
-- JWT authentication enables seamless integration with external applications such as CRM and ERP systems.
-- Ensure the expiration time is set appropriately to balance security and usability.
-- If a username field is incorrectly mapped, authentication may fail.
+When you edit an existing configuration and **Enable** is off, **Save** stores it without checking the required fields.
 
-## Troubleshooting
+![New embed token dialog](./images/jwt-new-token.png)
 
-| Issue                      | Possible Cause                   | Solution                                                   |
-| -------------------------- | -------------------------------- | ---------------------------------------------------------- |
-| JWT authentication fails   | Incorrect secret key             | Verify the secret key used for signing JWT.                |
-| User cannot log in via JWT | Incorrect username field mapping | Ensure the **Username Field** is correctly set.            |
-| Token expires too quickly  | Expiration time is too short     | Increase the **Expiration Time** value.                    |
-| Unauthorized access        | Signature algorithm mismatch     | Ensure the algorithm matches the external system settings. |
+## 3. Delete an embed token
+
+Select one or more configurations and click **Delete** in the toolbar, or choose **Delete** in a row's action menu. Confirm the deletion; it cannot be undone.
+
+## 4. Troubleshooting
+
+| Problem | Likely cause | What to do |
+| --- | --- | --- |
+| Tokens are rejected | **Secret key** or **Signature algorithm** differs from the external system, or **Enable** is off | Use the same key and algorithm on both sides and turn on **Enable**. |
+| The user is not recognized | **Username field** does not match the field in the token payload | Set **Username field** to the payload field that holds the username. |
+| Tokens expire too soon | **Expiration time** is too short | Increase the value (in seconds). |
+| Users are not created on first access | **Initialize user** is off | Select it and set **User type** and **Initialization role**. |

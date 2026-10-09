@@ -4,142 +4,52 @@ permalink: /documentation/System/SAML2/
 tags:
   - SAML
   - Authentication
-description: Guide to configuring SAML2 authentication in Datafor
+description: Let users sign in to Datafor through a SAML 2.0 identity provider, configured on the Single sign-on settings page.
 createTime: 2026/09/01 22:03:26
 ---
 
+## Single sign-on page
 
-## **Overview**
+LDAP, OAuth 2.0, SAML 2.0 and CAS are configured on one page: **Settings › Access & Integration › Single sign-on**. A card per method at the top shows its status: **On** (enabled), **Off** (configured but not enabled), or **Not set up** (the method's address field is empty: **LDAP URL**, **Authorization endpoint**, **IdP SSO URL** or **CAS server URL**); **Unknown** means the status could not be read. Select a card to show that method's settings below it; if the current method has unsaved changes, Datafor asks you to save or discard them first. The cards refresh after each save. Each method has an **Enable** switch; while it is off, the fields are locked and the page shows "Turn on to edit." The **New users** group sets up accounts for first-time users: **Create users on first sign-in**, **Default user type** and **Default role**.
 
-SAML2 (Security Assertion Markup Language 2.0) enables **single sign-on (SSO)** authentication, allowing users to log into **Datafor** using an **Identity Provider (IdP)** such as **Microsoft Azure AD, Okta, or other SAML2-supported providers**.
+See [LDAP](/documentation/System/LDAP/) for a screenshot of the page.
 
-This guide provides step-by-step instructions to configure SAML2 authentication within Datafor.
+## 1. SAML 2.0 settings
 
-## **1. Accessing SAML2 Configuration**
+Select the **SAML 2.0** card ("Sign in through a SAML identity provider"). Fields marked * are required while **Enable** is on. Take the IdP values from your identity provider (for example Microsoft Entra ID / Azure AD or Okta).
 
-1. **Log in** to the **Datafor** admin panel.
-2. Navigate to **Settings** from the left-side menu.
-3. Click on **SAML2** under **System Settings**.
+| Section | Field | What to enter | Notes |
+| --- | --- | --- | --- |
+| Identity provider (IdP) | **Enable** | Turn on to use SAML 2.0 sign-in. | Turn on before editing the other fields. |
+| Identity provider (IdP) | **IdP SSO URL** * | Single sign-on URL of the IdP, e.g. `https://login.microsoftonline.com/9fdff6f1-4338...`. | While empty, the card shows **Not set up**. |
+| Identity provider (IdP) | **IdP entity ID** * | Entity ID of the IdP, e.g. `https://sts.windows.net/9fdff6f1-4338...`. | |
+| Identity provider (IdP) | **IdP signing certificate** * | X.509 certificate the IdP signs its responses with. | Paste it including `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`. |
+| Service provider (SP) | **SP entity ID** * | Entity ID of Datafor as registered at the IdP, e.g. `bi`. | Must match the IdP configuration. |
+| Service provider (SP) | **Allowed clock skew** * | Tolerated time difference between Datafor and the IdP, in minutes, e.g. `2`. | |
+| Service provider (SP) | **Message lifetime** * | How long a SAML message is accepted, in seconds, e.g. `300`. | Protects against replayed messages. |
+| User attribute mapping | **Username attribute** * | Assertion attribute that holds the username, e.g. `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`. | |
+| User attribute mapping | **Email attribute** | Attribute that holds the email address, e.g. `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`. | |
+| User attribute mapping | **Name attribute** | Attribute that holds the full name, e.g. `http://schemas.microsoft.com/identity/claims/displayname`. | |
+| URL management | **Paths that skip single sign-on** | Paths that never go through single sign-on. | One path per line, or separated by commas. |
+| URL management | **Paths that require single sign-on** | Paths that always go through single sign-on. | One path per line, or separated by commas. |
+| New users | **Create users on first sign-in** | Select to create the Datafor user automatically the first time an IdP user signs in. | |
+| New users | **Default user type** | User type given to users created this way, e.g. `Reader`. | Available only when **Create users on first sign-in** is selected. |
+| New users | **Default role** | One or more roles given to users created this way. | Same as above. |
 
+## 2. Save and test
 
-<div align="left"><img src="./images/saml2.png" width="48%" /></div>
+1. Click **Save**. The button is available once something has changed.
+2. Sign in through the IdP in a separate browser session to check the setup. There is no **Test connection** button for SAML 2.0.
 
-------
+- To switch SAML 2.0 off, turn off **Enable** and click **Save**. With **Enable** off, Datafor saves without checking the required fields.
+- If **Create users on first sign-in** is cleared when you save, **Default user type** and **Default role** are cleared as well.
 
-## **2. SAML2 Configuration Parameters**
+## 3. Troubleshooting
 
-The following fields must be configured to enable SAML2 authentication:
-
-### **2.1 General Settings**
-
-| Parameter   | Description                                                  |
-| ----------- | ------------------------------------------------------------ |
-| **Enabled** | Toggle this option to enable or disable SAML2 authentication in Datafor. |
-
-------
-
-### **2.2 Identity Provider (IdP) Settings**
-
-| Parameter           | Description                                                  |
-| ------------------- | ------------------------------------------------------------ |
-| **IdP SSO URL**     | The Single Sign-On (SSO) URL provided by the IdP. Example: `https://login.microsoftonline.com/9fdff6f1-4338...` |
-| **IdP Entity ID**   | The unique identifier (Entity ID) of the IdP. Example: `https://sts.windows.net/9fdff6f1-4338...` |
-| **IdP Certificate** | The X.509 certificate issued by the IdP to verify SAML responses. Ensure it includes `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`. |
-
-------
-
-### **2.3 Service Provider (SP) Settings**
-
-| Parameter        | Description                                                  |
-| ---------------- | ------------------------------------------------------------ |
-| **SP Entity ID** | The unique identifier (Entity ID) of the Service Provider (SP). Example: `bi`. |
-
-------
-
-### **2.4 Authentication Handling**
-
-| Parameter              | Description                                                  |
-| ---------------------- | ------------------------------------------------------------ |
-| **Allowed Clock Skew** | Defines the allowable time difference (in minutes) between the SP and IdP to account for clock drift. Example: `2`. |
-| **Username Attribute** | The attribute in the SAML2 assertion that provides the username. Example: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`. |
-| **Email Attribute**    | The attribute in the SAML2 assertion that provides the user's email address. Example: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`. |
-| **Name Attribute**     | The attribute in the SAML2 assertion that provides the user's full name. Example: `http://schemas.microsoft.com/identity/claims/displayname`. |
-
-------
-
-### **2.5 Access Control**
-
-| Parameter        | Description                                                  |
-| ---------------- | ------------------------------------------------------------ |
-| **Ignore List**  | A list of URLs that do not require SAML2 authentication. Multiple URLs should be separated by commas. |
-| **Include List** | A list of URLs that require SAML2 authentication. Multiple URLs should be separated by commas. |
-
-------
-
-### **2.6 User Initialization Settings**
-
-| Parameter                    | Description                                                  |
-| ---------------------------- | ------------------------------------------------------------ |
-| **Initialize User**          | If enabled, new users will be automatically created in Datafor upon first login. |
-| **Initialization User Type** | Defines the default user type assigned to new users. Example: `Reader`. |
-| **Initialization Role**      | Specifies the default roles assigned to new users.           |
-
-------
-
-## **3. Configuring SAML2 Authentication**
-
-### **Step 1: Enable SAML2 Authentication**
-
-- Toggle **Enabled** to activate SAML2 authentication.
-
-### **Step 2: Configure IdP Settings**
-
-- Enter the **IdP SSO URL** (e.g., `https://login.microsoftonline.com/...`).
-- Enter the **IdP Entity ID** (e.g., `https://sts.windows.net/...`).
-- Copy and paste the **IdP Certificate** (Ensure it includes `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`).
-
-### **Step 3: Configure SP Settings**
-
-- Enter the **SP Entity ID** (e.g., `bi`).
-
-### **Step 4: Set Authentication Handling Rules**
-
-- Define the **Allowed Clock Skew** (e.g., `2` minutes).
-- Specify the **Username Attribute**, **Email Attribute**, and **Name Attribute** based on IdP metadata.
-
-### **Step 5: Configure Access Control**
-
-- Add URLs to the **Ignore List** (URLs that bypass SAML2 authentication).
-- Add URLs to the **Include List** (URLs that enforce SAML2 authentication).
-
-### **Step 6: Set User Initialization Preferences**
-
-- Enable **Initialize User** for automatic user creation.
-- Define the **Initialization User Type** (e.g., `Reader`).
-- Assign **Initialization Roles** to newly created users.
-
-------
-
-## **4. Saving and Testing Configuration**
-
-1. Click **Save** to apply the SAML2 settings.
-2. Perform a test login using SAML2.
-   - If successful: The authentication flow should redirect to the Datafor dashboard.
-   - If failed: Check the **IdP settings, SP Entity ID, and attribute mappings**.
-
-------
-
-## **5. Common Issues and Solutions**
-
-| Issue                              | Possible Cause                      | Solution                                                     |
-| ---------------------------------- | ----------------------------------- | ------------------------------------------------------------ |
-| **SAML2 authentication fails**     | Incorrect IdP settings              | Verify **IdP SSO URL**, **IdP Entity ID**, and **IdP Certificate**. |
-| **User attribute mismatch**        | Incorrect attribute mapping         | Ensure the correct **Username, Email, and Name Attributes** are configured. |
-| **Clock skew issues**              | Time differences between SP and IdP | Increase the **Allowed Clock Skew** value.                   |
-| **User not created automatically** | Auto-create user disabled           | Enable **Initialize User** in settings.                      |
-
-------
-
-## **Conclusion**
-
-By correctly configuring SAML2 authentication, **Datafor** can integrate with external identity providers, allowing seamless **SSO login** for users. Ensure all parameters are correctly set and perform test logins before deploying SAML2 authentication to end users.
+| Problem | Likely cause | What to do |
+| --- | --- | --- |
+| The SAML response is rejected | Wrong **IdP SSO URL**, **IdP entity ID** or **IdP signing certificate** | Copy the values again from the IdP metadata; paste the full certificate with its BEGIN and END lines. |
+| The IdP does not recognize Datafor | **SP entity ID** differs from the value registered at the IdP | Use the same entity ID on both sides. |
+| Sign-in fails with time-related errors | Clocks of Datafor and the IdP differ | Synchronize the server clocks, or increase **Allowed clock skew**. |
+| Username, email or name are missing | Attribute names do not match the assertion | Compare **Username attribute**, **Email attribute** and **Name attribute** with the claims the IdP sends. |
+| No Datafor user is created on first sign-in | **Create users on first sign-in** is off | Select it, set **Default user type** and **Default role**, then save. |

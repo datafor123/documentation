@@ -2,143 +2,55 @@
 title: OAuth2 Authentication
 permalink: /documentation/System/OAuth2-Authentication/
 tags: null
-description: null
+description: Let users sign in to Datafor through an OAuth 2.0 identity provider, configured on the Single sign-on settings page.
 createTime: 2026/09/01 22:03:26
 ---
 
-## **Overview**
+## Single sign-on page
 
-OAuth2 authentication allows users to securely log in to Datafor using third-party identity providers (e.g., **Google, Microsoft, GitHub**). This guide explains how to configure OAuth2 authentication in Datafor, enabling **single sign-on (SSO)** functionality.
+LDAP, OAuth 2.0, SAML 2.0 and CAS are configured on one page: **Settings › Access & Integration › Single sign-on**. A card per method at the top shows its status: **On** (enabled), **Off** (configured but not enabled), or **Not set up** (the method's address field is empty: **LDAP URL**, **Authorization endpoint**, **IdP SSO URL** or **CAS server URL**); **Unknown** means the status could not be read. Select a card to show that method's settings below it; if the current method has unsaved changes, Datafor asks you to save or discard them first. The cards refresh after each save. Each method has an **Enable** switch; while it is off, the fields are locked and the page shows "Turn on to edit." The **New users** group sets up accounts for first-time users: **Create users on first sign-in**, **Default user type** and **Default role**.
 
-------
+See [LDAP](/documentation/System/LDAP/) for a screenshot of the page.
 
-## **1. Accessing OAuth2 Configuration**
+## 1. OAuth 2.0 settings
 
-1. **Log in** to the **Datafor** admin panel.
+Select the **OAuth 2.0** card ("Sign in at the identity provider, then return"). Fields marked * are required while **Enable** is on. Take the endpoint URLs, client ID and client secret from your identity provider's application registration.
 
-2. Navigate to **Settings** from the left-side menu.
+| Section | Field | What to enter | Notes |
+| --- | --- | --- | --- |
+| Authentication | **Enable** | Turn on to use OAuth 2.0 sign-in. | Turn on before editing the other fields. |
+| Endpoint configuration | **Authorization endpoint** * | URL that starts the sign-in at the provider, e.g. `https://accounts.google.com/o/oauth2/v2/auth`. | While empty, the card shows **Not set up**. |
+| Endpoint configuration | **Token endpoint** * | URL that exchanges the authorization code for an access token, e.g. `https://oauth2.googleapis.com/token`. | |
+| Endpoint configuration | **UserInfo endpoint** * | URL that returns the signed-in user's details, e.g. `https://www.googleapis.com/oauth2/v2/userinfo`. | |
+| Client credentials | **Client ID** * | Client ID of the application registered at the provider. | |
+| Client credentials | **Client secret** * | Client secret of that application. | After saving, the secret is shown masked; click **Replace** to enter a new one. |
+| Authorization settings | **Authorization code parameter** * | Name of the parameter that carries the authorization code, usually `code`. | |
+| Authorization settings | **Grant type** * | Usually `authorization_code`. | |
+| Authorization settings | **Scope** * | Scopes to request, separated by spaces, e.g. `openid profile email`. | |
+| User attribute mapping | **User info request method** * | **GET** or **POST**, as the UserInfo endpoint expects. | |
+| User attribute mapping | **Username JSONPath** * | JSONPath of the username in the UserInfo response, e.g. `$.preferred_username` or `$.email`. | |
+| User attribute mapping | **Display name JSONPath** | JSONPath of the user's full name, e.g. `$.name`. | |
+| User attribute mapping | **Email JSONPath** | JSONPath of the email address, e.g. `$.email`. | |
+| Path rules | **Paths that skip single sign-on** | Paths that never go through single sign-on. | One path per line, or separated by commas. |
+| Path rules | **Paths that require single sign-on** | Paths that always go through single sign-on. | One path per line, or separated by commas. |
+| New users | **Create users on first sign-in** | Select to create the Datafor user automatically the first time a provider user signs in. | |
+| New users | **Default user type** | User type given to users created this way, e.g. `Reader`. | Available only when **Create users on first sign-in** is selected. |
+| New users | **Default role** | One or more roles given to users created this way. | Same as above. |
 
-3. Click on **OAuth2** under **System Settings**.
+## 2. Save and test
 
+1. Click **Save**. The button is available once something has changed.
+2. Sign in through the provider in a separate browser session to check the setup. There is no **Test connection** button for OAuth 2.0.
 
-<div align="left"><img src="./images/1739676074547.png" width="48%" /></div>
+- To switch OAuth 2.0 off, turn off **Enable** and click **Save**. With **Enable** off, Datafor saves without checking the required fields.
+- If **Create users on first sign-in** is cleared when you save, **Default user type** and **Default role** are cleared as well.
 
-------
+## 3. Troubleshooting
 
-## **2. OAuth2 Configuration Parameters**
-
-The following fields must be configured to enable OAuth2 authentication:
-
-### **2.1 General Settings**
-
-| Parameter                        | Description                                                  |
-| -------------------------------- | ------------------------------------------------------------ |
-| **Enable OAuth2 Authentication** | Toggle this option to enable or disable OAuth2 authentication in Datafor. |
-
-------
-
-### **2.2 OAuth2 Endpoints**
-
-| Parameter                         | Description                                                  |
-| --------------------------------- | ------------------------------------------------------------ |
-| **Authorization Endpoint URL**    | The OAuth2 authorization endpoint URL, used to initiate the authentication process. Example: `https://accounts.google.com/o/oauth2/v2/auth`. |
-| **Token Endpoint URL**            | The URL used to exchange the authorization code for an access token. Example: `https://oauth2.googleapis.com/token`. |
-| **User Information Endpoint URL** | The URL used to fetch user details after authentication. Example: `https://www.googleapis.com/oauth2/v2/userinfo`. |
-
-------
-
-### **2.3 Client Credentials**
-
-| Parameter         | Description                                                  |
-| ----------------- | ------------------------------------------------------------ |
-| **Client ID**     | The unique identifier assigned to your application by the OAuth2 provider. |
-| **Client Secret** | A confidential key paired with the Client ID, used for secure authentication. |
-
-------
-
-### **2.4 Authorization & Token Exchange**
-
-| Parameter                  | Description                                                  |
-| -------------------------- | ------------------------------------------------------------ |
-| **Authorization Code Key** | The parameter name for the authorization code returned by the OAuth2 provider. Default: `code`. |
-| **Grant Type**             | The OAuth2 authorization grant type. Example: `authorization_code`. |
-
-------
-
-### **2.5 User Information Retrieval**
-
-| Parameter                    | Description                                                  |
-| ---------------------------- | ------------------------------------------------------------ |
-| **Access Scope**             | The OAuth2 scopes specifying which user data should be accessed. Example: `email profile`. |
-| **User Info Request Method** | The HTTP method used to request user information (`GET` or `POST`). |
-
-------
-
-### **2.6 User Account Initialization**
-
-| Parameter             | Description                                                  |
-| --------------------- | ------------------------------------------------------------ |
-| **Auto-create User**  | If enabled, Datafor will automatically create user accounts upon first login. |
-| **Default User Type** | The default type assigned to newly created users (e.g., `Reader`). |
-| **Default Role**      | The default roles assigned to new users created via OAuth2 authentication. |
-
-------
-
-## **3. Configuring OAuth2 Authentication**
-
-### **Step 1: Enable OAuth2 Authentication**
-
-- Toggle **Enable OAuth2 Authentication** to activate the feature.
-
-### **Step 2: Configure OAuth2 Endpoints**
-
-- Enter the **Authorization Endpoint URL** (e.g., `https://accounts.google.com/o/oauth2/v2/auth`).
-- Enter the **Token Endpoint URL** (e.g., `https://oauth2.googleapis.com/token`).
-- Enter the **User Information Endpoint URL** (e.g., `https://www.googleapis.com/oauth2/v2/userinfo`).
-
-### **Step 3: Provide Client Credentials**
-
-- Enter the **Client ID** and **Client Secret** provided by your OAuth2 provider.
-
-### **Step 4: Configure Authentication and Token Handling**
-
-- Set **Authorization Code Key** to `code`.
-- Set **Grant Type** to `authorization_code`.
-
-### **Step 5: Configure User Information Handling**
-
-- Define **Access Scope** (e.g., `email profile`).
-- Select **User Info Request Method** (`GET` or `POST`).
-
-### **Step 6: Configure User Account Management**
-
-- Enable **Auto-create User** if you want accounts to be created automatically.
-- Assign **Default User Type** (`Reader`, `Editor`, etc.).
-- Define **Default Roles** (e.g., `role2`, `role4`, `role5`).
-
-------
-
-## **4. Saving and Testing Configuration**
-
-1. Click **Save** to apply the OAuth2 settings.
-2. Perform a test login using OAuth2.
-   - If successful: The authentication flow should redirect to the Datafor dashboard.
-   - If failed: Check the **OAuth2 endpoint URLs, Client ID, Client Secret, and grant type**.
-
-------
-
-## **5. Common Issues and Solutions**
-
-| Issue                              | Possible Cause                  | Solution                                                     |
-| ---------------------------------- | ------------------------------- | ------------------------------------------------------------ |
-| **Authentication fails**           | Incorrect OAuth2 credentials    | Verify **Client ID** and **Client Secret**.                  |
-| **Redirect URI mismatch**          | Misconfigured redirect settings | Ensure the redirect URI is correctly set in the OAuth2 provider settings. |
-| **Invalid authorization code**     | Expired or incorrect code       | Ensure the **Authorization Code Key** is set correctly.      |
-| **User not created automatically** | Auto-create user disabled       | Enable **Auto-create User** in settings.                     |
-| **Access denied**                  | Insufficient permissions        | Check the **Access Scope** settings.                         |
-
-------
-
-## **Conclusion**
-
-By properly configuring OAuth2 authentication, Datafor allows users to sign in securely using external identity providers. Ensure all parameters are correctly set and perform test logins before deploying OAuth2 authentication to end users.
+| Problem | Likely cause | What to do |
+| --- | --- | --- |
+| The provider rejects the sign-in | Wrong **Client ID** or **Client secret** | Copy both again from the provider; use **Replace** to enter a new secret. |
+| The provider reports a redirect URI mismatch | The redirect URI registered at the provider does not match the Datafor address | Correct the redirect URI in the provider's application settings. |
+| The code exchange fails | Wrong **Token endpoint**, **Grant type** or **Authorization code parameter** | Check the values against the provider's documentation. |
+| Sign-in succeeds at the provider but Datafor finds no user | **Username JSONPath** does not match the UserInfo response, or the **Scope** does not include the needed claims | Inspect the UserInfo response and adjust the JSONPath or the scopes. |
+| No Datafor user is created on first sign-in | **Create users on first sign-in** is off | Select it, set **Default user type** and **Default role**, then save. |

@@ -2,7 +2,7 @@
 title: Access Control List
 permalink: /documentation/System/Access-Control List/
 tags: null
-description: null
+description: Grant Read, Edit, Delete, or Full control on data sources, models, reports, and folders to users, roles, and user types, and check what grantees still need.
 createTime: 2026/09/01 22:03:26
 ---
 # Access Control List
@@ -15,10 +15,12 @@ For the complete relationship between User Types, Business Roles, ACLs, RLS, and
 
 ACL is a permission control mechanism used to define access rights for resources. In Datafor, resources include data sources, models, report files, and folders. ACL allows administrators to set permissions for these resources. The available permission levels are:
 
-- **View**: The user can view the resource content.
-- **Edit**: The user can modify the resource.
-- **Delete**: The user can delete the resource.
-- **Full Control**: Grants the user complete control over the resource, including the ability to manage permissions for other users or roles.
+- **Read**: The user can view the resource content.
+- **Edit**: The user can modify the resource. Edit does not allow deleting it.
+- **Delete**: The user can delete the resource (move it to the Trash), in addition to Read and Edit.
+- **Full control**: Grants the user complete control over the resource, including the ability to manage permissions for other users or roles.
+
+Deleting a report, folder, or analysis model requires **Delete** or **Full control**, granted to the user, one of their roles, their user type, or Authenticated, directly or inherited from the folder. **Edit** on a folder does not let a user delete the reports in it. When several reports or folders are deleted at once and one of them lacks Delete, none of them is deleted. See [Deleting requires Delete or Full control](/documentation/System/Permission-Evaluation-Overview/#deleting-requires-delete-or-full-control).
 
 ## 2. User and Role Authorization
 
@@ -39,11 +41,13 @@ Permissions must be explicitly granted to users, roles, or user types for each r
 
    <div align="left"><img src="./images/1739528225650.png" /></div>
 
-3. Select the user, role, or user type to grant permissions, and assign **View**, **Edit**, **Delete**, or **Full Control** rights.
+3. Select the user, role, or user type to grant permissions, and assign **Read**, **Edit**, **Delete**, or **Full control** rights.
 
    <div align="left"><img src="./images/1739528375825.png" width="67%" /></div>
 
 4. Save the changes.
+
+5. If the notice **Permissions saved** appears, some of the users or roles you granted lack **Read** on what the content depends on: the data source of a granted model, or the models and data sources used by a granted report or folder. Grant that access in the **Models** and **Datasource** lists, then click **Got it**. The notice does not change any permissions. The same check runs after **Model permissions** and **File permissions** on the **Users** and **Roles** pages. See [Check what grantees still need](/documentation/System/Permission-Evaluation-Overview/#check-what-grantees-still-need).
 
 ### 2.2 User-Type-Based Authorization
 
@@ -66,7 +70,7 @@ Folder and report authorization in Datafor has certain restrictions:
 
 ## 4. Permission Inheritance
 
-Reports and subfolders with **Inherit parent permissions** enabled use their parent's effective ACL. If the parent also inherits, follow the chain to the nearest non-inheriting ACL. Disabling inheritance selects the resource's own entries; it does not add a local deny on top of the parent grants. Parent changes affect descendants that continue to inherit, not descendants with their own ACLs.
+Reports and subfolders with **Inherit parent** enabled use their parent's effective ACL. If the parent also inherits, follow the chain to the nearest non-inheriting ACL. Disabling inheritance selects the resource's own entries; it does not add a local deny on top of the parent grants. Parent changes affect descendants that continue to inherit, not descendants with their own ACLs.
 
 For grant combination, folder-operation checks, and owner/administrator exceptions, see [File and folder ACLs](/documentation/System/Permission-Evaluation-Overview/#_2-file-and-folder-acls-grants-and-inheritance).
 
@@ -78,7 +82,7 @@ In the **User and Role Management** interface, you can click **"Details"** to vi
 
 <div align="left"><img src="./images/1739528756307(1).png"   width="90%" /></div>
 
-On the **"Details"** page, you can see which resources the user or role has access to and their specific permissions (View, Edit, Delete, etc.).
+On the **"Details"** page, you can see which resources the user or role has access to and their specific permissions (Read, Edit, Delete, etc.).
 
 <div align="left"><img src="./images/1739528902335.png"  width="80%"  /></div>
 

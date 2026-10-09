@@ -4,46 +4,51 @@ permalink: /documentation/Console/Fonts/
 tags:
   - White label
   - Report design
-description: Set the interface font, the default font of a report, and the font of individual chart elements, and see how Datafor falls back when a font is not installed.
+description: Set the interface font, the default font of new reports and of one report, and the font of chart elements, and how Datafor falls back when a font is not installed.
 createTime: 2026/09/11 21:20:00
 ---
 
 # Fonts
 
-Fonts are set at three levels. Each level overrides the one above it.
+Fonts are set at four places. The interface font and report fonts are independent.
 
-| Level | Where | Applies to |
+| Font | Where | Applies to |
 | --- | --- | --- |
-| Interface font | **Settings > Appearance > White Label > Other** | Console and editor text, and the initial default font of reports created afterwards. |
-| Report default font | Editor, **Page** panel, **Style > Report default font** | Every element of that report that has no font of its own. |
-| Element font | Component **Style** panel, any **Font** control | One title, label, legend, axis, or cell style. |
+| Interface font | **Settings › General › Branding → Other → Interface font** | Console and editor text only |
+| Default for new reports | **Settings › General › System configuration → Report default font** | Reports created afterwards, stored on their first save |
+| Report default font | Report editor → **Page → Style → Report default font** | Every element of that report without a font of its own, including tooltips |
+| Element font | A component's **Style** → any **Font** control | One title, label, legend, axis or cell style |
 
-Datafor does not ship font files. A font is used only when it is installed on the viewer's computer; otherwise the next font in the built-in fallback list is used, ending with the system sans-serif and system Chinese fonts. The same report can look slightly different on Windows and macOS.
+Datafor does not ship font files. A font is used only when it is installed on the viewer's computer; otherwise the next font of the built-in fallback list is used, ending with the system sans-serif and Chinese fonts. The same report can look slightly different on Windows and macOS.
 
 ## Interface font
 
-1. Go to **Settings > Appearance > White Label** and open **Other**.
-2. Choose a font from **Interface font**. Fonts built into Windows or macOS are tagged; fonts marked **Needs installing** must be present on every viewer's computer. Chinese fonts are listed only when the interface language is Chinese.
-3. For a font that is not listed, choose **Other local font** and type its name exactly as installed, for example `Alibaba PuHuiTi`.
-4. Turn the main switch on and choose **Save** or **Apply**.
+1. Open **Settings › General › Branding** and the **Other** tab.
+2. Choose a font from **Interface font** and click **Save**. The change applies without reloading.
 
-When white labeling is disabled, the interface uses **System default**: Segoe UI with Microsoft YaHei on Windows, PingFang on macOS.
+The list depends on the interface language: Simplified Chinese, Traditional Chinese and Japanese fonts are listed only in those languages. A font typed by hand in earlier versions is kept until you choose another one; typing new names is no longer possible.
 
-Changing the interface font does not change existing reports. It becomes the default font of reports created after the change.
+## Default font of new reports
+
+In **Settings › General › System configuration → Reports → Report default font**, choose a font or **System default**. New reports store it on their first save; changing it later does not affect existing reports. See [System Configuration](/documentation/System/System-Configuration/).
 
 ## Report default font
 
-1. Open the report in the editor and click an empty area of the canvas to show the **Page** panel.
-2. On **Style**, expand **Report default font**.
-3. Choose a font, **System default**, or **Follow interface font**. Elements without their own font update immediately. For an unlisted font, type its name in **Other local font**; it takes precedence over the selection.
-4. Save the report. The setting is stored in the report and travels with it when the report is copied, saved as, exported, or imported.
+1. Open the report in the editor and click an empty part of the canvas.
+2. On **Style**, expand **Report default font** and choose **System default** or a font from the list. Elements without their own font update immediately.
+3. Save the report. The font travels with the report when it is copied, exported or imported.
 
-A new report starts with the interface font in effect when it was first saved. A report created before this feature has no stored default and follows the interface font until you set one.
+In the English interface the list offers Segoe UI, Arial, Calibri, Tahoma, Verdana, Trebuchet MS, Helvetica Neue and Roboto; Chinese and Japanese interfaces add their own fonts.
+
+::: warning Reports from earlier versions
+*Follow interface font* and *Other local font* were removed. Reports that had no stored font, or followed the interface font, now use **System default**. A font typed by hand is still applied and shown as an extra entry.
+:::
 
 ## Element font
 
-In a component's **Style** panel, every font control starts as **Default (font name)**, which shows the report default font currently in effect. Pick a font to override it for that element only, or pick **Default** again to inherit. Serif fonts such as SimSun and Times New Roman and monospace fonts such as Consolas are offered here but not for the interface.
+Every font control in a component's **Style** starts as **Default (font name)**, the report default font in effect. Pick a font to override it for that element, or **Default** to inherit again. Serif fonts such as SimSun and Times New Roman and monospace fonts such as Consolas are offered only here.
 
 ## Related topics
 
 - [White Label](/documentation/Embedded/White-Label/)
+- [Page Settings](/documentation/Visualization/Size-Display/)

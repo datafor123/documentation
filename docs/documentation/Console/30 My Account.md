@@ -57,7 +57,9 @@ All three password fields are required. The **Save** button on the profile form 
 2. Select a language, such as **English**. Choose **Follow browser settings** if you want Datafor to use the browser's language preference.
 3. Click **Apply**. The console reloads to apply the preference.
 
-This setting controls interface labels. Report names and other user-entered content can still appear in the language in which they were created.
+Nine interface languages are available: English, Chinese (Simplified), Chinese (Traditional), Japanese, French, German, Spanish, Italian and Portuguese (Brazil). With **Follow browser settings**, browsers set to Hong Kong, Macau or Traditional Chinese get Chinese (Traditional).
+
+This setting controls interface labels. Report names and other user-entered content can still appear in the language in which they were created. The language also decides which fonts the font lists offer and which units, such as `万` and `亿`, Display units offer.
 
 <img src="./images/my-account-language-en.png" alt="Language settings with English selected and the Apply button" width="1054" />
 

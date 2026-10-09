@@ -34,7 +34,14 @@ For an Attribute, configure:
 
 <div align="left"><img src="./images/analysis-model-attribute-semantics.png" alt="Attribute properties showing Caption, Semantic role, Description, Aliases, Sample values, and Advanced settings" width="100%" /></div>
 
-Advanced Attribute settings can include **Caption column**, **Source column format**, **Order by**, and **Member formatter**. Make sure a source format matches the stored value. The JavaScript Member formatter accepts executable configuration and should only be changed by trusted model authors.
+Advanced Attribute settings can include **Caption column**, **Source column format**, **Order by**, and **Member formatter**. Make sure a source format matches the stored value.
+
+**Member formatter** offers **No member formatter** and **Dictionary**. **JavaScript** is offered only when model scripting was enabled by the administrator when the server started; a script runs on the server, so leave it to trusted model authors. On a server without scripting:
+
+- A model that already uses a JavaScript member formatter shows **No member formatter**.
+- A model that contains any script cannot be saved or published; the save fails with `SCHEMA_SCRIPT_FORBIDDEN: model scripting is disabled on this server`.
+
+Custom formatter classes are never accepted (`SCHEMA_SCRIPT_FORBIDDEN: custom formatter classes are not allowed`); the built-in **Dictionary** formatter is the exception.
 
 ## Describe Measures
 

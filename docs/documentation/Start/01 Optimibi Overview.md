@@ -62,11 +62,11 @@ Begin with [Basic Operations for Report Design](/documentation/Start/Basic-Opera
 
 Datafor supports both a standalone analytics workspace and analytics embedded in another application. Use the **embedding SDK** to integrate a report viewer or designer, pass application context through parameters, and respond to navigation events.
 
-For customer portals and software products, this lets you add an analytical experience alongside existing workflows. **White Label** settings provide branding controls such as logos and product titles; authentication integration connects the experience to an identified user.
+For customer portals and software products, this lets you add an analytical experience alongside existing workflows. **Branding** settings (formerly White Label) provide branding controls such as logos and product titles; authentication integration connects the experience to an identified user.
 
 Embedding is also an access-design task. A parameter that selects a customer or region is a filter, not a security boundary. Choose the intended user identity and configure server-side permissions before sharing the experience.
 
-See [SDK Embedding](/documentation/SDK-Embedding/) and [White Label](/documentation/Embedded/White-Label/).
+See [SDK Embedding](/documentation/SDK-Embedding/) and [Branding](/documentation/Embedded/White-Label/).
 
 ## Share insight with deliberate access controls
 

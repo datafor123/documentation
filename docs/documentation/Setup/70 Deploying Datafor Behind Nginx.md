@@ -173,16 +173,16 @@ Then verify each part of the deployment:
    curl -sS -o /dev/null -D - https://bi.example.com/datafor/console/
    ```
 
-3. **Real-time AI progress.** Open **Home → AI Agent**, select a model, and ask a question. The progress title must move through several stages within seconds of submitting the question. If it stays at **Understanding your question** until the answer appears, the `/datafor/ai/` location is not taking effect. To see the stream itself, open the browser developer tools before asking, select the **Network** tab, click the request whose name contains `events/stream`, and open its **EventStream** tab: events must appear one by one while the analysis runs.
+3. **Real-time AI progress.** Open **AI Agent** in the left navigation, select a model, and ask a question. The progress title must move through several stages within seconds of submitting the question. If it stays at **Understanding your question** until the answer appears, the `/datafor/ai/` location is not taking effect. To see the stream itself, open the browser developer tools before asking, select the **Network** tab, click the request whose name contains `events/stream`, and open its **EventStream** tab: events must appear one by one while the analysis runs.
 4. **Uploads and long reports.** Upload a file dataset and open a report that runs a slow query to confirm that the size and timeout settings are sufficient.
 
 ## 5. Check the AI Agent endpoint settings
 
-Go to **Settings → System → AI Agent** (see [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/)).
+Go to **Settings › AI Agent › AI service** (see [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/)).
 
-- If **AI Agent Server Address** is empty, browsers use the same address as the console, and nothing needs to change.
+- If **Public URL** is empty, browsers use the same address as the console, and nothing needs to change.
 - If it is set explicitly, it must be the public HTTPS address, for example `https://bi.example.com/datafor/ai`. Browsers block an `http://` address on an HTTPS page as mixed content, and the AI Assistant will not load.
-- **Internal Server Address of AI Agent** is used by the Datafor backend only and does not go through Nginx. Leave it as configured.
+- **Internal URL** is used by the Datafor backend only and does not go through Nginx. Leave it as configured.
 
 ## 6. Restrict direct access to the internal ports
 

@@ -37,11 +37,11 @@ Metrics Library is worth setting up when any of these sound familiar:
 
 - **Reports disagree on the same metric.** Agree on one definition, name an owner, and certify it.
 - **Several models calculate the same metric.** Define it once and bind it in each model, so every model is checked against the same definition.
-- **People ask the AI Agent in their own words**, such as "GM%" or "AOV". Synonyms lead the Agent to the official metric and the measure bound to it, not a similarly named field. If the metric is a draft or not bound in that model, the answer says so.
+- **People ask the AI Agent in their own words**, such as "GM%" or "AOV". Synonyms lead the Agent to the official metric and the measure bound to it, not a similarly named field. If the metric is a draft or not bound in that model, the answer says so (drafts generated from a model and not yet edited are answered without the draft notice).
 - **Formulas or definitions change.** The binding is marked **Needs comparison**, and **Compare definition** asks AI whether the two still agree.
 - **People keep asking how a figure is defined.** The AI Agent answers "How is Net Sales defined?" from the library, without running a query.
 
-You may not need it yet if you have one model, a small team, and measures whose meaning nobody disputes. Clear captions, descriptions, and aliases on the measures may be enough for now. When you start, register the 5 to 15 metrics that are reported to management or often disputed, not every measure.
+You may not need it yet if you have one model, a small team, and measures whose meaning nobody disputes. Clear captions, descriptions, and aliases on the measures may be enough for now. When you start, register the 5 to 15 metrics that are reported to management or often disputed, not every measure. If your models already define them, **Generate from a model** creates the metrics and bindings in one step; see [Generate metrics from an analysis model](/documentation/Metrics-Library/Metrics-Library/#_3-generate-metrics-from-an-analysis-model).
 
 ## Metrics, measures, and calculated measures
 

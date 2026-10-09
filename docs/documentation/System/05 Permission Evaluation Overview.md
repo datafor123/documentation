@@ -46,29 +46,29 @@ A failure at one required layer cannot be repaired by granting permission at a d
 
 Use Business Roles for audiences and responsibilities. A user can belong to several roles, and all relevant memberships participate in evaluation. There is no “primary business role” whose permissions automatically replace the others.
 
-Granting access to a **User Type** targets a broad class of accounts. For example, a View grant to Reader may reach people outside the business role you intended to authorize. Review User Type grants alongside user and Business Role grants.
+Granting access to a **User Type** targets a broad class of accounts. For example, a Read grant to Reader may reach people outside the business role you intended to authorize. Review User Type grants alongside user and Business Role grants.
 
 ## 2. File and folder ACLs: grants and inheritance
 
 ### Grants add access; unchecked boxes do not deny it
 
-The Console ACL editor provides **View**, **Edit**, **Delete**, and **Full control**. Its permission levels are cumulative: higher levels include the lower levels shown in the editor. Full control includes permission management; reserve it for resource custodians.
+The Console ACL editor provides **Read**, **Edit**, **Delete**, and **Full control**. Its permission levels are cumulative: higher levels include the lower levels shown in the editor. Full control includes permission management; reserve it for resource custodians.
 
 For an ordinary non-owner, matching grants from the user, Business Roles, and User Type contribute access. A lower grant does not cap a higher grant from another matching subject.
 
 For example, suppose Alice is a Creator:
 
-- Alice has a direct **View** grant on a report.
+- Alice has a direct **Read** grant on a report.
 - Her `Report Authors` role has **Edit** on that report.
-- Alice can edit it. The direct View grant is not a denial of Edit.
+- Alice can edit it. The direct Read grant is not a denial of Edit.
 
 Removing Alice's direct entry still leaves the role grant. To revoke access, inspect every matching grant in the effective ACL. An unchecked permission means that entry does not grant it; the Console does not create an explicit deny entry to cancel other grants.
 
 ### Inheritance selects the ACL to use
 
-When **Inherit parent permissions** is enabled, the resource follows its parent's effective ACL. If that parent also inherits, continue upward to the nearest non-inheriting ACL.
+When **Inherit parent** is enabled, the resource follows its parent's effective ACL. If that parent also inherits, continue upward to the nearest non-inheriting ACL.
 
-When inheritance is disabled, configure the resource's own entries. Do not think of this as adding a local deny on top of the parent's View/Edit grants. Re-enabling inheritance clears its existing local authorization entries and returns the resource to parent authorization; record those entries and review the confirmation before saving.
+When inheritance is disabled, configure the resource's own entries. Do not think of this as adding a local deny on top of the parent's Read/Edit grants. Re-enabling inheritance clears its existing local authorization entries and returns the resource to parent authorization; record those entries and review the confirmation before saving.
 
 This has two operational consequences:
 
@@ -79,9 +79,39 @@ Use **Public** for reports and folders that need shared ACL authorization. **Pub
 
 ### Owner and administrator exceptions
 
-The resource owner receives owner access, and administrators have privileged repository access. Removing an ordinary ACL entry is not a way to deny the owner or an administrator. Use an ordinary **non-owner** account for ACL acceptance tests.
+The resource owner receives owner access, and administrators have privileged repository access. Removing an ordinary ACL entry is not a way to deny the owner or an administrator. For deletion, however, ownership alone is not enough: the check looks for a Delete or Full control entry (see below). Use an ordinary **non-owner** account for ACL acceptance tests.
 
 Owner access or datasource Full control is not, by itself, the Data Security bypass. The built-in **Administrator** and **SuperUser** roles bypass RLS and OLS. Do not assign an administrator role merely to give a manager unrestricted rows.
+
+### Deleting requires Delete or Full control
+
+Deleting a report, file, or folder (moving it to the Trash) or an analysis model requires **Delete** or **Full control** in the item's effective ACL. The grant can be made to the user, one of their roles, their User Type, or Authenticated, and it can be inherited from the folder. **Edit** does not allow deleting, including Edit on the parent folder. Before 9.04.6, Edit on a folder let a user delete other users' reports in it.
+
+- **Batch delete of files and folders is all-or-nothing.** If one selected item lacks Delete, nothing is deleted and the error names that item (`no delete permission: <path>`).
+- **Models:** a model the user may not delete stays in place and the deletion is reported as failed (`Delete Denied: <model>`), also in a batch. A model that no longer exists counts as deleted.
+- **Authors:** reports created in the report editor, or saved with **Save as**, give their creator **Full control**, so the author can delete them. The check reads ACL entries only; for older content that only inherits a folder ACL, grant Delete explicitly to the people who must remove it.
+- Administrators are not affected.
+
+### Analysis models: default ACL and data source Read
+
+- A model created through the API without an ACL is available only to its creator (**Full control**, not inherited). Before 9.04.6 it inherited Full control for all signed-in users. Models created, saved with **Save as**, cloned, or uploaded in the Console carry their own ACL as before.
+- Publishing a new model, or changing the data source of an existing one, requires **Read** on that data source. Otherwise the save fails with `Connection READ permission is required: <data source>`. Re-saving or renaming a model that keeps its data source is not checked. Administrators are exempt.
+- A user without the **Create content** capability who creates a model gets `Create Denied`.
+
+### Check what grantees still need
+
+A grant on a model is not usable without Read on its data source, and a report grant is not usable without Read on the models and data sources the report uses. After you save a grant, Datafor checks these dependencies for the users and roles you just granted. If any of them lack Read, the notice **Permissions saved** lists them.
+
+| Where you granted | The notice lists grantees without Read on |
+| --- | --- |
+| A model's **Access setting** in the **Models** list, or **Users** / **Roles** → **Model permissions** | The model's data source |
+| A report's or folder's **Permissions** in the content list, or **Users** / **Roles** → **File permissions** | The models and data sources those reports use |
+
+Each entry is headed **Model** or **Data source** with the item's name and lists the users and roles concerned. Grant their Read in the **Models** and **Datasource** lists, then click **Got it**. The notice is a hint only; it changes no permissions.
+
+- For a folder, only reports that inherit this grant are checked, and at most 200 ("The folder contains many reports; only the first 200 were checked.").
+- A user counts as having Read when a grant to the user, one of their roles, their User Type, or Authenticated provides it. Roles and User Types you grant are checked for their direct grants only; if their members have access through another role, ignore the entry.
+- Reports saved before Datafor recorded which models they use, and resources you cannot read, are listed as not checked. Saving such a report again fixes this.
 
 ## 3. RLS: matching policies form a union
 
@@ -100,7 +130,7 @@ Adding a row policy for North does not protect the table from users outside Nort
 
 OLS controls whole objects or individual columns. It does not mask a value while leaving the column available. Hiding a column that an analysis depends on can make that analysis unavailable or cause its query to fail.
 
-Hiding a whole table removes its fields and its dimension from an analysis model, but keeps the join it provides, so tables reached through it remain available. See [Hidden tables in a model join path](/documentation/Datasource/Data-Security/#hidden-tables-in-a-model-join-path).
+Hiding a whole table removes its fields and its dimension from an analysis model, but keeps the join it provides, so tables reached through it remain available. A hidden table on which the user has a row policy is kept as well, so its row condition still applies. See [Hidden tables in a model join path](/documentation/Datasource/Data-Security/#hidden-tables-in-a-model-join-path).
 
 ### Choose the visibility mode carefully
 
@@ -129,8 +159,11 @@ These results assume ordinary accounts unless a privileged role is explicitly na
 | Configuration | Effective result |
 | --- | --- |
 | Reader + a role's Edit ACL grant | No Creator capability; the ACL grant does not upgrade the User Type. |
-| Creator + direct View + role Edit on the same resource | Edit is granted; direct View is not an Edit denial. |
-| A user's ACL entry is removed, but a matching role or User Type still grants View | Access remains through that grant. |
+| Creator + direct Read + role Edit on the same resource | Edit is granted; direct Read is not an Edit denial. |
+| A user's ACL entry is removed, but a matching role or User Type still grants Read | Access remains through that grant. |
+| Edit on a folder or report, no Delete or Full control | The user cannot delete the report, including other users' reports in that folder. |
+| Batch delete where one selected file lacks Delete | Nothing is deleted. |
+| Model granted, but no Read on its data source | The grant is saved; **Permissions saved** lists the grantee, who cannot use the model until Read on the data source is granted. |
 | Child has inheritance enabled | Use the parent's effective ACL, not independent local entries. |
 | Child has inheritance disabled | Use its own ACL; also check folder rights for structural operations. |
 | North RLS + South RLS on the same table | North **OR** South rows. |
@@ -139,7 +172,7 @@ These results assume ordinary accounts unless a privileged role is explicitly na
 | One OLS policy allows an object; another actually excludes it | Object remains excluded. |
 | Deny-only OLS selects one of several resolved roles | Do not assume exclusion; the all-roles condition described above matters. |
 | ACL Full control or Return all rows + effective OLS exclusion | The object remains excluded. |
-| Row policy on a table that OLS hides | The table's fields stay hidden; its row condition still restricts joins made through that table. |
+| Row policy on a table that OLS hides | The table's fields stay hidden; the table stays in the query as a hidden join, so its row condition still restricts the data. Older-format models refuse the query with `DATA_POLICY_CONFLICT`. |
 | Built-in Administrator or SuperUser | Data Security bypass; unsuitable for restriction tests. |
 
 ## 6. Typical access designs
@@ -149,7 +182,7 @@ The names below are illustrative, not built-in roles. Treat the expected results
 ### Regional readers sharing one report
 
 1. Assign Reader and a regional Business Role, such as `North Sales`.
-2. Grant the intended audience View on the shared report and the resource access required by its workflow. Check for broader User Type grants.
+2. Grant the intended audience Read on the shared report and the resource access required by its workflow. If **Permissions saved** lists missing model or data source access, grant it. Check for broader User Type grants.
 3. Enable a North row policy on each relevant physical table. Keep **Apply data security** enabled in the analysis model.
 4. If some fields are sensitive, use an OLS allow-list for their permitted audience.
 5. Test a North user, a South user, a user in both regions, and a user with no regional role. The dual-region user receives the union; the unassigned user must not accidentally receive access with unrestricted rows.
@@ -172,7 +205,7 @@ Share links can use the sharer's data permissions; do not assume they enforce pe
 
 1. **Capture the failing action.** Record the account, timestamp, report path, model, datasource, expected result, and actual result. Distinguish “cannot open,” “cannot edit,” “missing field,” and “wrong rows.”
 2. **Resolve identity.** Check the User Type and all Business Roles under **Users**. Check for Administrator/SuperUser, resource ownership, and a different identity used by sharing or embedding. After membership or User Type changes, sign out and back in before retesting; do not rely on an old session.
-3. **Check capabilities and ACLs.** Inspect the resource's **Permissions**, inheritance source, direct entries, role grants, and User Type grants. For create/move/delete failures, inspect the relevant folders. A role's details page alone is not a complete calculation for a multi-role user.
+3. **Check capabilities and ACLs.** Inspect the resource's **Permissions**, inheritance source, direct entries, role grants, and User Type grants. For create/move failures, inspect the relevant folders. For a delete failure, look for an entry that grants Delete or Full control; Edit is not enough. A role's details page alone is not a complete calculation for a multi-role user.
 4. **Check the data path.** Identify the actual datasource, schema, physical tables/views, and model's **Apply data security** setting. A policy on one datasource does not protect another connection to the same database.
 5. **Run Data Security → Test access.** Select the actual user as **Simulated subject**, then the schema and tables. Check **Resolved subject**, **Row access**, **Effective condition**, **Field visibility**, and **Policies in effect**. Saved drafts and unsaved edits do not participate.
 6. **Explain unexpected access using all policies.** For excess rows, look for missing coverage, additional matching roles, or Return all rows. For a visible sensitive field, check the OLS visibility mode and full resolved role list. For a missing field, inspect every policy that actually excludes it.
@@ -181,18 +214,33 @@ Share links can use the sharer's data permissions; do not assume they enforce pe
 
 ## 8. Audit permission changes
 
-### Know what Audit Logs provides
+### Know what the Audit log provides
 
-Open **Settings → System → Audit Logs** as an administrator. This page configures audit collection, selected **Logged operations**, and **Retention cleanup**. It is not a complete permission-history or before/after ACL comparison screen.
+Open **Settings › Operations › Audit log** as an administrator. The page configures which operations are recorded and how long records are kept. It is not a complete permission-history or before/after ACL comparison screen.
 
-Data Security operations have these audit event names:
+<div align="left"><img src="./images/settings-audit.png" alt="Audit log page with the Record audit logs switch, Recorded operations groups, and the Summary panel" width="100%" /></div>
 
-| Change | Logged operation names |
+| Area | What to set |
 | --- | --- |
-| RLS policy creation, editing/state changes, deletion | `Row security add`, `Row security edit`, `Row security delete` |
-| OLS policy creation, editing/state changes, deletion | `Object security add`, `Object security edit`, `Object security delete` |
+| **Status** › **Record audit logs** | Turn on to record anything. While it is off, the operations cannot be chosen ("Turn on to choose the operations to record."). |
+| **Recorded operations** | Tick the operations to record, grouped as **Authentication**, **Reports**, **Sharing**, **Folders**, **Models**, **Datasources**, **Security**, **Dictionaries**, and **Other operations**. **Select all** ticks every operation; the counter shows how many are enabled. |
+| **Retention** › **Keep records for** | Number of days to keep records. |
+| **Retention** › **Clear records** | Opens **Clear audit logs**: enter **Keep logs from the last** *n* days. Older records are removed immediately. |
+| **Summary** | Shows the status, the number of recorded operations, and the retention. |
 
-Collection requires **Audit logging** and the relevant operation to be enabled when the event occurs. Turning collection on later does not reconstruct earlier changes. Event records can identify the actor, operation, target, and operation lifecycle, but do not constitute a complete snapshot of the rules before and after the change.
+Click **Save** to apply the switch, the operation selection, and the retention.
+
+Operations relevant to permission and configuration changes:
+
+| Change | Recorded operation (group) |
+| --- | --- |
+| RLS policy creation, editing/state changes, deletion | **Create row security**, **Edit row security**, **Delete row security** (Security) |
+| OLS policy creation, editing/state changes, deletion | **Create object security**, **Edit object security**, **Delete object security** (Security) |
+| Saved changes on **Settings › General › System configuration** | **System settings changes** (Other operations) |
+
+Recording requires **Record audit logs** and the relevant operation to be enabled when the event occurs. Turning recording on later does not reconstruct earlier changes. Data Security records identify the actor, operation, target, and operation lifecycle, but do not constitute a complete snapshot of the rules before and after the change.
+
+A **System settings changes** record lists each changed setting with its value before and after the save. If the audit entry cannot be written, the settings are still saved and the page shows "Settings were saved, but the audit entry failed. Check the audit service." See [System Configuration](/documentation/System/System-Configuration/).
 
 Do not assume that file/folder ACL edits, role membership changes, User Type changes, ownership changes, and model security-setting changes all have equivalent entries in this operation log. Keep a separate change record for them. Also retain identity-provider audit evidence when memberships are supplied by an external system.
 
@@ -237,6 +285,14 @@ permission test report):
 - Audit coverage: AuthConfigRowResource and AuthConfigObjResource operation
   hooks; datasource/utils/PentahoAuditHelper.java collection gating and event
   fields; Frontend packages/webconsole/src/pages/setting_content/audit/Audit.tsx
-  and packages/common/src/locales/en.json for configuration controls.
+  (groups via getAuditGroupKey) and packages/common/src/locales/en.json for
+  configuration controls. System settings audit: settings/SystemConfigService
+  AUDIT_OPERATION "System settings edit" with before/after per key (3add315).
+- 9.04.6 delete rule: FileResource.assertCanDelete (04d9cda, batch checks all
+  first), FileService.doGetCanAccessList + aclGrants and AclPermissionEvaluator
+  (add1b15, 178aedd). Model publish/delete: AnalysisService ownerOnlyAcl,
+  bindsNewDataSource/canReadConnection, canDeleteCatalog (f7ae8b4).
+- Grant dependency notice: Frontend common GrantDependencyNotice and
+  services/grantDependencyService.js (2883b32f), max 200 reports per folder.
 Recheck these behaviors when the permission evaluator or audit coverage changes.
 -->

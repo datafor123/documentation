@@ -23,13 +23,13 @@ This document is intended for **Super Admin** users. It explains how to use Data
 
 ### 2.1 Permission Requirements
 
-Only users logged in with a **superAdmin account** can see the **Multi-tenancy** menu in system settings.
+Only users logged in with a **superAdmin account** can see the **Multi-tenancy** page under **Settings › Operations**.
 
 > Important: If you upgrade the system using an **upgrade package**, you must **manually create** the **`superAdmin`** account. The upgrade process does not automatically create this account.
 
 ### 2.2 Navigation Path
 
-**Settings → System → Multi-tenancy**
+**Settings › Operations › Multi-tenancy**
 
 
 ## 3. Tenant List Page

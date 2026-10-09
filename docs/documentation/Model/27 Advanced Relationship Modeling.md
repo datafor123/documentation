@@ -40,8 +40,21 @@ Check these points before publishing:
 - The same member key means the same thing in every fact table.
 - Join types preserve the records required by each business process.
 - A Dimension that does not apply to a Measure Group is not presented as though it does.
+- No Measure Group depends on reaching a Dimension through another fact table (see below).
 
 If two fact tables use the same source Dimension in different roles or at different grains, create separate aliases instead of forcing both paths through one alias.
+
+### Dimensions reached only through another fact table
+
+Datafor attaches a Dimension to a Measure Group only when the Dimension is reachable from that Measure Group's fact table without a one-to-many step. Direct foreign keys from the fact table, many-to-one chains such as `product` → `product_class`, and many-to-many bridges work as before. A Dimension that the Measure Group reaches only through another fact table is not attached to it.
+
+For example, `inventory_fact` and `sales_fact` both join `product`, and only `sales_fact` joins `customer`. The path from inventory to `customer` runs `product` → `sales_fact` → `customer`, and `product` → `sales_fact` is one-to-many. Since 9.04.6, `customer` is therefore not attached to the inventory Measure Group:
+
+- `customer` is unrelated to the inventory measures: a chart that combines them does not distribute inventory by customer, and a row policy on `customer` does not restrict inventory. See [Models with several fact tables](/documentation/Datasource/Row-Level-Security-in-Analytics/#models-with-several-fact-tables).
+- Earlier versions followed this path and repeated each inventory row once per matching sales row; in one test, a warehouse sales total was about 9.4 times the true value.
+- Aggregate tables are linked the same way.
+
+If a Dimension applies to several Measure Groups, relate it directly to each fact table. If it does not apply to a Measure Group, leave it unattached rather than routing through another fact table.
 
 ## Keep composite keys in one relationship
 
@@ -84,3 +97,4 @@ An intentional multi-fact constellation can contain several relationship branche
 - [Establishing Table Relationships](/documentation/Model/Establishing-Table-Relationships/)
 - [Model Diagnostics](/documentation/Model/Model-Diagnostics/)
 - [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/)
+- [Row-Level Security in Analytics](/documentation/Datasource/Row-Level-Security-in-Analytics/)

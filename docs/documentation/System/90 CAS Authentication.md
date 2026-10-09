@@ -2,114 +2,46 @@
 title: CAS Authentication
 permalink: /documentation/System/CAS-Authentication/
 tags: null
-description: null
+description: Let users sign in to Datafor through a CAS server, configured on the Single sign-on settings page.
 createTime: 2026/09/01 22:03:26
 ---
 
-## **Overview**
+## Single sign-on page
 
-CAS (Central Authentication Service) enables **single sign-on (SSO)** authentication, allowing users to log into **Datafor** using a central authentication system. This guide provides step-by-step instructions for configuring CAS authentication in Datafor.
+LDAP, OAuth 2.0, SAML 2.0 and CAS are configured on one page: **Settings › Access & Integration › Single sign-on**. A card per method at the top shows its status: **On** (enabled), **Off** (configured but not enabled), or **Not set up** (the method's address field is empty: **LDAP URL**, **Authorization endpoint**, **IdP SSO URL** or **CAS server URL**); **Unknown** means the status could not be read. Select a card to show that method's settings below it; if the current method has unsaved changes, Datafor asks you to save or discard them first. The cards refresh after each save. Each method has an **Enable** switch; while it is off, the fields are locked and the page shows "Turn on to edit." The **New users** group sets up accounts for first-time users: **Create users on first sign-in**, **Default user type** and **Default role**.
 
-------
+See [LDAP](/documentation/System/LDAP/) for a screenshot of the page.
 
-## **1. Accessing CAS Configuration**
+## 1. CAS settings
 
-1. **Log in** to the **Datafor** admin panel.
-2. Navigate to **Settings** from the left-side menu.
-3. Click on **CAS** under **System Settings**.
+Select the **CAS** card ("Sign in through a CAS server"). Fields marked * are required while **Enable** is on.
 
-<div align="left"><img src="./images/CAS.jpg" width="48%" /></div>
+| Section | Field | What to enter | Notes |
+| --- | --- | --- | --- |
+| Server | **Enable** | Turn on to use CAS sign-in. | Turn on before editing the other fields. |
+| Server | **CAS server type** | CAS implementation of your server, e.g. `jasig`. | The list comes from the Datafor server. |
+| Addresses | **CAS server URL** * | Main entry point of the CAS server, e.g. `http://127.0.0.1:8080/cas`. | While empty, the card shows **Not set up**. |
+| Addresses | **Logout URL** * | CAS logout address, e.g. `http://127.0.0.1:8080/cas/logout`. | |
+| Addresses | **Login URL** * | CAS login address that unauthenticated users are sent to, e.g. `http://127.0.0.1:8080/cas/login`. | |
+| Path rules | **Paths that skip single sign-on** | Paths that never go through single sign-on. | One path per line, or separated by commas. |
+| Path rules | **Paths that require single sign-on** | Paths that always go through single sign-on. | One path per line, or separated by commas. |
+| New users | **Create users on first sign-in** | Select to create the Datafor user automatically the first time a CAS user signs in. | |
+| New users | **Default user type** | User type given to users created this way, e.g. `Creator`. | Available only when **Create users on first sign-in** is selected. |
+| New users | **Default role** | One or more roles given to users created this way. | Same as above. |
 
+## 2. Save and test
 
-------
+1. Click **Save**. The button is available once something has changed.
+2. Sign in through CAS in a separate browser session to check the setup. There is no **Test connection** button for CAS.
 
-## **2. CAS Configuration Parameters**
+- To switch CAS off, turn off **Enable** and click **Save**. With **Enable** off, Datafor saves without checking the required fields.
+- If **Create users on first sign-in** is cleared when you save, **Default user type** and **Default role** are cleared as well.
 
-The following fields must be configured to enable CAS authentication:
+## 3. Troubleshooting
 
-### **2.1 General Settings**
-
-| Parameter   | Description                                                  |
-| ----------- | ------------------------------------------------------------ |
-| **Enabled** | Toggle this option to enable or disable CAS authentication in Datafor. |
-
-------
-
-### **2.2 CAS Server Configuration**
-
-| Parameter                   | Description                                                  |
-| --------------------------- | ------------------------------------------------------------ |
-| **Center URL**              | The main entry point of the CAS server. Example: `http://127.0.0.1:8080/cas`. |
-| **Login URL**               | The CAS login service URL, used to redirect unauthenticated users. Example: `http://127.0.0.1:8080/cas/login`. |
-| **Logout URL**              | The CAS logout service URL, used to sign out users. Example: `http://127.0.0.1:8080/cas/logout`. |
-| **CAS Implementation Type** | Defines the CAS implementation type, such as `jasig` or another CAS-compatible protocol. |
-
-------
-
-### **2.3 Access Control**
-
-| Parameter        | Description                                                  |
-| ---------------- | ------------------------------------------------------------ |
-| **Ignore List**  | A list of URLs that do not require CAS authentication. Multiple URLs should be separated by commas or new lines. |
-| **Include List** | A list of URLs that require CAS authentication. Multiple URLs should be separated by commas or new lines. |
-
-------
-
-### **2.4 User Initialization Settings**
-
-| Parameter                    | Description                                                  |
-| ---------------------------- | ------------------------------------------------------------ |
-| **Initialize User**          | If enabled, new users will be automatically created in Datafor upon first login. |
-| **Initialization User Type** | Defines the default user type assigned to new users. Example: `Creator`. |
-| **Initialization Role**      | Specifies the default roles assigned to new users.           |
-
-------
-
-## **3. Configuring CAS Authentication**
-
-### **Step 1: Enable CAS Authentication**
-
-- Toggle **Enabled** to activate CAS authentication.
-
-### **Step 2: Configure CAS Server Settings**
-
-- Enter the **Center URL** (e.g., `http://127.0.0.1:8080/cas`).
-- Enter the **Login URL** (e.g., `http://127.0.0.1:8080/cas/login`).
-- Enter the **Logout URL** (e.g., `http://127.0.0.1:8080/cas/logout`).
-- Select **CAS Implementation Type** (e.g., `jasig`).
-
-### **Step 3: Set Access Control Rules**
-
-- Add URLs to the **Ignore List** (URLs that bypass CAS authentication).
-- Add URLs to the **Include List** (URLs that enforce CAS authentication).
-
-### **Step 4: Configure User Initialization Preferences**
-
-- Enable **Initialize User** for automatic user creation.
-- Define the **Initialization User Type** (e.g., `Creator`).
-- Assign **Initialization Roles** to newly created users.
-
-------
-
-## **4. Saving and Testing Configuration**
-
-1. Click **Save** to apply the CAS settings.
-2. Perform a test login using CAS.
-   - If successful: The authentication flow should redirect to the Datafor dashboard.
-   - If failed: Check the **CAS server settings, login URL, and CAS implementation type**.
-
-------
-
-## **5. Common Issues and Solutions**
-
-| Issue                              | Possible Cause               | Solution                                                     |
-| ---------------------------------- | ---------------------------- | ------------------------------------------------------------ |
-| **CAS authentication fails**       | Incorrect CAS settings       | Verify **Center URL**, **Login URL**, and **Logout URL**.    |
-| **User not created automatically** | Auto-create user disabled    | Enable **Initialize User** in settings.                      |
-| **CAS login loop**                 | CAS session misconfiguration | Ensure the CAS session settings are correctly configured in the CAS server. |
-
-------
-
-## **Conclusion**
-
-By correctly configuring CAS authentication, **Datafor** can integrate with a central authentication system, allowing seamless **SSO login** for users. Ensure all parameters are correctly set and perform test logins before deploying CAS authentication to end users.
+| Problem | Likely cause | What to do |
+| --- | --- | --- |
+| Sign-in through CAS fails | Wrong **CAS server URL**, **Login URL** or **Logout URL**, or the wrong **CAS server type** | Check the addresses and the implementation type of your CAS server. |
+| Users loop between Datafor and the CAS login page | CAS session configuration | Check the session settings on the CAS server. |
+| A page that should be public asks for sign-in, or the reverse | Path rules | Adjust **Paths that skip single sign-on** and **Paths that require single sign-on**. |
+| No Datafor user is created on first sign-in | **Create users on first sign-in** is off | Select it, set **Default user type** and **Default role**, then save. |

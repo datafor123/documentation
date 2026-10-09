@@ -2,55 +2,51 @@
 title: JDBC Driver Management
 permalink: /documentation/Datasource/JDBC-Driver-Management/
 tags: null
-description: null
+description: Add, update and delete the JDBC driver JAR files Datafor uses to connect to databases, under Settings › Data › Database drivers.
 createTime: 2026/09/01 22:03:26
 ---
 
 # JDBC Driver Management
 
-Datafor supports managing and configuring different versions of JDBC drivers to support various versions of databases. This feature ensures that your database connections are compatible with the corresponding database versions, preventing connection issues due to driver version mismatches.
+Datafor keeps a list of JDBC drivers so that each database connection can use a driver version that matches its database server. Add a driver when a database needs a different driver version than the ones listed.
 
-## Instructions
+## 1. Open the driver list
 
-### Accessing the Driver Management Interface
+Go to **Settings › Data › Database drivers**. The list shows:
 
-1. Log in to the Datafor platform.
+| Column | Meaning |
+| --- | --- |
+| **Name** | Name of the driver entry, e.g. `mysql8`. Click it to edit the driver. |
+| **Database type** | Database the driver is for, shown by its official name, e.g. **MySQL**, **PostgreSQL**, **SAP HANA**. |
+| **Driver class name** | Java class of the JDBC driver, e.g. `com.mysql.cj.jdbc.Driver`. |
+| **Version** | Driver version, read from the uploaded driver. |
+| **JAR files** | JAR files of the driver. |
+| **Actions** | **Edit** and **Delete**. |
 
-2. Navigate to the settings page and select "JDBC Driver".
+Use the search box above the list to filter by name, database type, driver class, version or file name. Columns can be sorted.
 
-   <div align="left"><img src="./images/1739437741794.png"  width="25%" /></div>
+![Database drivers list](./images/settings-drivers.png)
 
-### Adding a New JDBC Driver
+## 2. Add a driver
 
-1. Click the "New" button.
+1. Click **New Driver**.
+2. Fill in the dialog:
 
-   <div align="left"><img src="./images/1739437780416.png"  width="100%" /></div>
+   | Field | What to enter | Notes |
+   | --- | --- | --- |
+   | **Name** | Unique name for the driver entry. | "The driver name already exists" if it is taken. |
+   | **Database type** | Database the driver is for. | Choosing a type fills in its default **Driver class name**. |
+   | **Driver class name** | Java class of the driver. | Change it if your JAR uses a different class. |
+   | **JAR files** | Click **choose** and select a `.jar` file. | Repeat for each JAR the driver needs. |
 
-2. In the pop-up window:
+3. Click **OK**. "Saved" appears and the driver is added to the list.
 
-   Enter the **Driver Name**.
+## 3. Update a driver
 
-   - Select the **Database Type** (e.g., MySQL, PostgreSQL, etc.).
+1. Click the driver's **Name**, or choose **Edit** in its **Actions** menu.
+2. Change the fields, remove JAR files you no longer need, or choose new ones.
+3. Click **OK**.
 
-   - Fill in the **Driver Class** information.
+## 4. Delete a driver
 
-   - Upload the appropriate version of the JDBC driver file (.jar file).
-
-   - Click the "OK" button to complete the driver addition.
-
-   <div align="left"><img src="./images/1739437816109.png"  width="55%" /></div>
-
-### Updating an Existing JDBC Driver
-
-1. In the driver management interface, find the driver that needs updating. Click the "Edit" menu.
-
-
-<div align="left"><img src="./images/1739437852015.png"  width="100%" /></div>
-
-2. Upload the new driver file and update other information. Click the "OK" button to complete the driver update.
-
-### Deleting a JDBC Driver
-
-In the driver list's action menu, select the "Delete" menu.
-
-<div align="left"><img src="./images/1739437912116.png"  width="100%" /></div>
+Choose **Delete** in the driver's **Actions** menu and confirm. The deletion cannot be undone.
