@@ -1,7 +1,7 @@
 ---
 title: AI Agent Overview and Roadmap
 permalink: /documentation/AI-Agent/AI-Agent-Overview-and-Roadmap/
-description: What the Datafor AI Agent can do today, how it works, the limits it keeps, and where it is heading.
+description: What the Datafor AI Agent can do in 9.04.6, how it works, the limits it keeps, and where it is heading.
 createTime: 2026/09/04 16:10:00
 ---
 
@@ -9,7 +9,7 @@ createTime: 2026/09/04 16:10:00
 
 This page is for everyone who uses the Datafor AI Agent: business users, analysts, and managers who want to know where the product is heading. It answers three questions: **what the Agent can do today, how it works, and what comes next**.
 
-Document date: 2026-09-04. It is updated with each product release; the exact features depend on the version you are running. 
+Document date: 2026-10-09, Datafor 9.04.6. It is updated with each product release; the exact features depend on the version you are running.
 
 ## 1. The Agent in one sentence
 
@@ -37,69 +37,89 @@ Today the Agent is not an automatic monitoring or report-writing robot (those ar
 | Filter / threshold | Products with a gross margin below 10% |
 | Count | How many distinct customers placed an order last month? |
 | Ratios and averages | Cost ratio by month compared with last year; average spend per customer |
+| Explain a change | Why did net sales fall this quarter? Which stores caused the drop? |
 | Ask about a definition | "How is net sales calculated?" explains the definition without running a query |
 
 While you ask, you will notice:
 
-- **Answers come in the language of the question.** The interface itself is available in eight languages: Chinese, English, Japanese, German, French, Spanish, Italian and Portuguese.
+- **You do not have to choose a data model first.** With **Auto-select model** (the default), the Agent picks the analysis model from the metrics your question names and the Metrics Library models they are bound to, from what the models contain, and from your recent use. The answer names the model it used and why, and offers the other models you can use. If the choice is unclear, the Agent asks you to pick.
+- **Answers come in the language of the question.** The interface itself is available in nine languages: Simplified Chinese, Traditional Chinese, English, Japanese, German, French, Spanish, Italian and Portuguese.
 - **Vague time phrases still work.** "Recently" is read as the last 30 days and "the last few days" as the last 7 days. The answer states the date range it used, and one sentence is enough to correct it. A phrase that gives no usable range at all, such as "a while ago", makes the Agent ask.
 - **The analysis is visible while it runs:** understanding the question, matching it to your data, querying, concluding. Every step shows on screen, and you can cancel at any time.
 - **When something essential is missing, the Agent asks (a clarification).** It offers a few options; you can also answer in your own words, and the analysis continues without re-asking the question.
 
 ### 2.2 Complex questions: bounded multi-step analysis
 
-A question that no single query can answer, such as "where did the sales decline come from?" or "which stores have both high sales and a high return rate?", is handled as a plan. The Agent breaks it into a few steps, runs them, shows the result and the evidence of each step, and then combines them into a conclusion.
+A question that no single query can answer, such as "which stores have both high sales and a high return rate?", is handled as a plan. The Agent breaks it into a few steps, runs independent steps in parallel, shows the result and the evidence of each step, and then combines them into a conclusion.
 
-"Bounded" is deliberate: a limited number of steps, a plan set before execution, and no open-ended automatic exploration. This keeps results checkable and waiting times predictable. If one step cannot be completed, the answer is marked **partial** and says what is missing; everything shown has been verified.
+"Bounded" is deliberate: a limited number of steps, a plan set before execution, no open-ended automatic exploration, and a time limit. The query steps of one analysis may run for 180 seconds in the AI Assistant and in embedded applications (120 seconds for MCP clients that request the full analysis). At the limit, the steps that finished are combined into a **partial** answer that names what did not finish. If one step cannot be completed, the answer is also marked **partial** and says what is missing; everything shown has been verified.
 
-### 2.3 Keep asking
+### 2.3 "Why did it change?": bounded change decomposition
+
+Questions such as "why did net sales fall?", "where did the increase come from?" or "which members caused it?" are answered with a breakdown of the change:
+
+- The Agent compares the two periods and splits the difference by **up to three dimensions**: the ones you name, otherwise ones taken from the measure's recommended dimensions, the Metrics Library, and the model's hierarchies.
+- For each member it gives the **contribution** (its change) and the **share of the total change**. The answer first says where the change is concentrated, how much the three largest contributors explain, and whether positive and negative contributions offset each other; then it names the dimensions it checked and the ones it did not.
+- **Ratio metrics** whose numerator and denominator are declared (in the model formula or the Metrics Library calculation method) get a second split: the part of each member's contribution that comes from its share of the denominator changing, and the part from its own ratio changing. The answer says which effect dominates.
+- **"Is it A or B?"** When the metric is declared as a quotient or difference of other metrics, for example net sales = paid orders × average order value, and the question names them, each factor gets a contribution in the metric's unit and a share. The contributions add up to the total change.
+- A deeper level the Agent would add by itself is offered as the first follow-up suggestion; one click runs it. Levels you name in the question are broken down directly.
+
+Contributions show where a change sits in the data. They are not causes, and the Agent does not claim causes that lie outside the data.
+
+### 2.4 Keep asking
 
 - **Follow-up suggestions**: a few next questions appear under each answer, drawn from the specific objects and findings in that result. One click asks the next question.
-- **Build on the previous turn**: "only East China", "break it down by month", "exclude returned orders". There is no need to restate the question.
+- **Build on the previous turn**: "only East China", "break it down by month", "exclude returned orders". There is no need to restate the question. Follow-ups stay on the conversation's data model; to ask about another model, change the model selector or start **New Chat**.
 - **Change the chart without a new query**: "switch to a bar chart", "show it as a pie chart". The chart switches in seconds; nothing is re-analysed.
 - **History**: conversations can be reopened. The data model used at the time is restored automatically, and cancelled questions are labelled as cancelled.
 - **One failed question does not break the conversation.** Rephrase and ask again.
 
-### 2.4 Working with results
+### 2.5 Working with results
 
 - **Charts, tables and KPI cards** are chosen automatically and can be switched.
 - **Insights**: conclusions cite their evidence; hover over or click a citation to reach the exact figure. Each answer also states its **Evidence and boundaries**: how the time window was read, what data was covered, and what limits apply. Read it before quoting a number.
+- **Special values**: infinite and undefined results (division by zero, for example) are kept and shown as ∞, −∞ or NaN instead of failing the whole result; the answer says that NaN was left out of calculations and rankings.
 - **Export**: charts as images (**Export image**) and tables as Excel (**Export Excel**). The screen shows only the first rows by default; an export takes the complete result.
 - **Add to page**: in the dashboard editor, the Agent's result can be added to the page as a component. The component runs the very query the answer ran.
 
-### 2.5 Dashboard Insights
+### 2.6 Dashboard Insights
 
 Click the AI insight button on a dashboard and the Agent explains the data already loaded in the page's charts; **Generate business brief** produces a management brief from the same context. It only analyses what is on the page and never runs extra queries behind the scenes. If the page data is truncated or missing, it says so instead of pretending to have seen everything.
 
-### 2.6 Getting to know a data model
+### 2.7 Getting to know a data model
 
-- After you choose a data model, the welcome screen immediately shows an overview of the model (its metrics and dimensions) and **Common Questions**. Common questions can be configured by an administrator or generated by the Agent; neither makes you wait.
+- Choose a data model on the welcome screen or in the model selector and the Agent immediately shows an overview of the model (its metrics and dimensions) and **Common Questions**. Common questions can be configured by an administrator or generated by the Agent; neither makes you wait.
 - Pick a metric on the welcome screen and use **Quick Actions** to start an analysis directly: **Metric change check**, **Generate metric report**, **View trends**, **Breakdown analysis**, **Compare and rank**, with a time range of your choice.
 - Ask "how is metric X defined?" and you get an explanation based on the model's declared definition, without any query being run.
 
-### 2.7 Enterprise metric definitions
+### 2.8 Enterprise metric definitions
 
 If your organisation has registered and certified enterprise metrics in the Datafor Metrics Library (for example "net sales" or "average order value"), the Agent calculates by the certified definition rather than by a similarly named raw field in the model. When a definition is not certified, not bound to the model, ambiguous, or out of step with its actual implementation, the answer says so. The definition-drift check in the Metrics Library is also provided by the Agent.
 
+Metrics Library also shapes how the Agent works:
+
+- **Model choice**: the model a metric is bound to is the first evidence for automatic model selection.
+- **Ratios and differences**: for a metric whose calculation method is ratio, difference or attainment rate, the Agent queries the numerator and denominator separately, so year-over-year comparisons of a ratio are exact and its changes can be decomposed. Ratio calculated measures in the model are treated the same way when their formula has the form numerator / denominator.
+
 The chain from a Metrics Library definition, to its binding in the model, to the figure in an answer has been verified end to end: raw fields with deliberately different values sit next to the governed definitions, and which side an answer lands on shows whether the governed definition was applied.
 
-### 2.8 Where you can use it
+### 2.9 Where you can use it
 
 | Entry point | Notes |
 | --- | --- |
-| AI Assistant in the portal | The main entry: **Home → AI Agent** |
-| Dashboard AI insight | The insight button on a dashboard |
+| AI Assistant in the portal | The main entry: **AI Agent** in the left navigation, directly below **Home**. The **AI Agent** card on Home opens the same page. |
+| Dashboard AI insight | The AI insight button on a dashboard |
 | Embedded in your own applications | Delivered through Datafor's embedding options |
-| AI clients (MCP) | Ask Datafor directly from Claude Desktop, Claude Code and other clients that support the MCP protocol |
+| AI clients (MCP) | Ask Datafor from Claude Desktop, Claude Code, Codex and other clients that support MCP. The connection details are under **Connect AI** in the AI Assistant; see [Connect AI Clients](/documentation/AI-Agent/Connect-AI-Clients/). |
 
-All four entry points share one analysis logic, the same permissions and the same rules. The same question gets the same answer wherever it is asked.
+All entry points use the same permissions, the same governed queries and the same rules. In the portal, on dashboards and in embedded applications the Agent writes the answer. Through MCP, Datafor by default returns the governed result rows with their disclosures, and the AI client writes the answer from them; a question that needs several dependent queries comes back as `needs_split`, and the client asks the parts one at a time. A client that requests `detail: "insight"` gets the full analysis written by Datafor.
 
-### 2.9 What administrators see
+### 2.10 What administrators see
 
-- **LLM configuration**: set up models from a template or by hand; a model must pass verification before it can be used; each internal stage of the Agent can be assigned a different model; complete schemes can be exported, imported and switched, and API keys are never included.
+- **LLM configuration**: set up models from a template or by hand; a model must pass verification before it can be used; each of the 15 internal stages of the Agent, plus the embedding model, can be assigned a different model; complete schemes can be exported, imported and switched, and API keys are never included.
 - **Quotas**: a daily call limit per model and per person, and a daily question quota that can be set by role and user type. Failed and cancelled questions are not counted.
 - **Usage**: number of questions, response time, success rate and total tokens, by time range.
-- **Vector indexes**: build or rebuild the index of a data model. The console shows the index status, the embedding model used, and the build progress: which stage it is in, how far along it is, whether it is still running, and the reason if it failed. When an index is missing, the chat page shows a notice at the top.
+- **Knowledge indexes** (called vector indexes before 9.04.6): what the Agent has learned from each data model. An index is built or updated in the background whenever a model is saved, copied or imported as a new model (**Auto-build knowledge index**, on by default), and can be rebuilt or refreshed on a schedule. The console shows the status, the embedding model used, and the build progress: which stage it is in, how far along it is, whether it is still running, and the reason if it failed. While an index is being updated, the Agent keeps answering from the last completed build. When an index is missing, the chat page shows a notice at the top.
 - **Common Questions**: maintain the welcome-screen questions for each model.
 
 ## 3. How the Agent works
@@ -109,7 +129,7 @@ All four entry points share one analysis logic, the same permissions and the sam
 From top to bottom, these are the layers a question passes through:
 
 1. **Entry points**: the AI Assistant in the portal, dashboard AI insight, embedded applications, and AI clients. The four entry points are only doors; behind them is one and the same Agent.
-2. **AI Agent (understand, plan, explain)**: this is the layer where the large language model works. It understands your question, matches the words in it to the metrics, dimensions and member values of your data model, decides whether one query or a few steps are needed, and, once the results are back, writes the insights, marks the evidence and the limits, and suggests follow-up questions. Session memory, clarification, live progress, cancellation, history, quotas and usage statistics also live in this layer. The LLM service is external: your administrator configures it and can swap it. It receives only the metadata and aggregated results needed to answer the question, and nothing is used for training.
+2. **AI Agent (understand, plan, explain)**: this is the layer where the large language model works. It understands your question, picks the data model when you have not chosen one, matches the words in the question to the metrics, dimensions and member values of the model, decides whether one query or a few steps are needed, and, once the results are back, writes the insights, marks the evidence and the limits, and suggests follow-up questions. Session memory, clarification, live progress, cancellation, history, quotas and usage statistics also live in this layer. The LLM service is external: your administrator configures it and can swap it. It receives only the metadata and aggregated results needed to answer the question, and nothing is used for training.
 3. **Governed boundary**: a clear line between the Agent and Datafor. The AI only proposes a structured "query intent"; it never writes SQL or MDX. The metadata it can see is already filtered by your permissions, and the actual query is compiled, validated and executed by Datafor. This boundary is the root of the Agent's trustworthiness: however capable the AI is, it cannot step over your permissions or change how the data is calculated.
 4. **Datafor BI platform**: the semantic model and its metadata, permissions, the query engine, the Metrics Library, dashboards and reports. These are native platform capabilities; the Agent works on top of them.
 5. **Enterprise data**: databases, data warehouses and business systems. The Agent never connects to them; all data access goes through Datafor.
@@ -120,12 +140,12 @@ The journey of one question in a sentence: **you ask → the Agent understands t
 
 | Commitment | How it is kept |
 | --- | --- |
-| Your permissions, exactly | The metadata and query results the Agent receives are already filtered by your Datafor permissions. There is no side door. |
+| Your permissions, exactly | The metadata and query results the Agent receives are already filtered by your Datafor permissions. There is no side door. Automatic model selection only considers models you can see, and never names the others. |
 | Nothing invented | Only metrics, dimensions and member values that really exist in the model can be used. When a phrase cannot be matched, the Agent says so rather than picking something similar. |
 | Traceable | Every number corresponds to a query that actually ran, and the citations in an insight point to the exact cell. |
 | No unauthorised execution | The AI never writes SQL or MDX. Datafor compiles, validates and executes every query within the platform's complexity policy. |
 | Data is used only to answer | The LLM receives only the metadata and aggregated results needed for the question, and nothing is used for training. Which model service is used is your administrator's decision. |
-| Careful wording | Correlation is never presented as causation, and the Agent does not forecast the future unless plan or budget data already exists in the model. |
+| Careful wording | Correlation is never presented as causation: a change decomposition reports contributions, not causes. The Agent does not forecast the future unless plan or budget data already exists in the model. |
 | Limits stated | How the time window was read, what data was covered, and what was left incomplete are all written in the answer's Evidence and boundaries. |
 
 ## 5. Current limits
@@ -138,8 +158,10 @@ To save you from trying the same thing repeatedly, here is what the Agent cannot
 | Value distributions and histograms (for example, orders by weight band) | Not supported | On the roadmap |
 | A complete report from a single request | Not supported; use the **Generate metric report** quick action or ask step by step | On the roadmap |
 | Forecasting | The Agent does not forecast | Compare against plan or budget data that already exists in the model |
-| Attribution and causation | The Agent does not claim causes; it presents evidence and leads | Use multi-step analysis to see the breakdown |
-| Several data models at once | One conversation works on one data model | Switch the model and ask again |
+| Attribution and causation | Change questions get a contribution breakdown across up to three dimensions, plus factor splits for declared ratio and difference metrics. Contributions are not causes, and causes outside the data are not claimed. | Name the dimensions or the factors you want in the question |
+| Ratios without a declared numerator and denominator (for example a formula with `*100` or a function) | Period comparisons and decompositions of such a ratio may be partial | Ask the model author to write the ratio as numerator / denominator; see [Improving AI Agent Answers](/documentation/AI-Agent/Improving-Answer-Quality/) |
+| Several data models at once | One conversation works on one data model; the model can be picked automatically from the question | Change the model in the selector or start **New Chat** |
+| Long multi-step analyses | Query steps stop at the time limit (180 seconds in the AI Assistant); finished steps are returned as a partial answer | Ask a narrower question, or one dimension at a time |
 | Problems in the data itself | The Agent does not correct, fill in or redefine data | Follow your data governance process |
 | Very complex combined questions | The Agent may suggest splitting the question in two | Doing so usually gets the answer |
 
@@ -152,10 +174,10 @@ The ordering principle: **make existing capabilities solid first (the share of q
 ### Next
 
 - **Map display**: regional results, such as provinces and cities, drawn directly on a map.
-- **More calculation definitions**: value bands and histograms ("orders by weight band"), year-over-year and month-over-month for calculated metrics inside the model, filtering and ranking by calculated definitions, and share within a group. These need the Datafor platform to provide the underlying capabilities first; the Agent then connects to them.
+- **More calculation definitions**: value bands and histograms ("orders by weight band"), filtering and ranking by calculated definitions, and share within a group. These need the Datafor platform to provide the underlying capabilities first; the Agent then connects to them.
 - **Analysis reports**: confirm an outline → analyse section by section → revise → save and share, so the Agent can produce a deliverable report rather than a single answer.
 - **AI-drafted metric definitions**: when a new metric is created in the Metrics Library, the AI drafts the definition text for a person to review and certify.
-- **More forms of multi-step analysis**: premise checks, breakdowns from several angles, and trade-off analysis.
+- **More forms of multi-step analysis**: premise checks and trade-off analysis.
 
 ### Further out (depends on the enterprise semantic layer)
 
@@ -184,6 +206,8 @@ When an answer is wrong, missing, or the experience feels off, give your adminis
 - [LLM Configuration](/documentation/AI-Agent/LLM-Configuration/)
 - [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/)
 - [AI Assistant](/documentation/AI-Agent/AI-Chat/)
+- [Connect AI Clients](/documentation/AI-Agent/Connect-AI-Clients/)
+- [Improving AI Agent Answers](/documentation/AI-Agent/Improving-Answer-Quality/)
 - [Common Questions](/documentation/AI-Agent/Common-Questions/)
 - [AI Operations and Quotas](/documentation/AI-Agent/LLM-Permission-Management/)
 - [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/)

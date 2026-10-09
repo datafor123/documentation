@@ -1,52 +1,65 @@
 ---
 title: How to Enable the AI Feature
 permalink: /documentation/AI-Agent/AI-Feature/
+description: Turn on the AI Agent service under Settings › AI Agent › AI service, set its public and internal URLs, and check that the AI Assistant opens.
 createTime: 2026/09/01 21:50:44
 ---
 
 # How to Enable the AI Feature
 
-Datafor uses the AI Agent service for conversational analysis, semantic search, vector indexes, and scheduled vector jobs. An administrator can enable the service and configure the public and internal endpoints from one page.
+Datafor uses the AI Agent service for conversational analysis in the AI Assistant, dashboard AI insight, AI clients connected through MCP, and the knowledge indexes of analysis models. An administrator turns the service on and sets its addresses on one page.
 
-## 1. Open the AI Agent settings
+## 1. Open the AI service settings
 
-1. Sign in to the Datafor console with an administrator account.
-2. Go to **Settings → System → AI Agent (Preview)**.
-3. Open the **AI Agent** tab.
+1. Sign in to Datafor with an administrator account.
+2. Go to **Settings › AI Agent › AI service**.
 
-<div align="left"><img src="./images/ai-agent-settings-current.png" alt="AI Agent service settings" width="100%" /></div>
+The page has one section, **Service connection**, with a **Save** button at the bottom.
 
 ## 2. Enable the service
 
-Turn on **Enable AI Agent service**. This allows Datafor to use the AI Agent for AI-assisted analysis, vector indexes, and scheduled vector jobs.
+Turn on **Enable AI Agent**. While it is off, Datafor does not show **AI Agent** in the left navigation or the **AI Agent** card on **Home**.
 
-## 3. Configure the service endpoints
+Each user also needs AI access: in **Users**, the **AI Agent** switch in the user list (**Enable AI Agent** in the user form). A user without it who clicks **AI Agent** sees "Please contact your administrator to enable AI for this user" and stays on the current page.
 
-The current settings page has two endpoint fields:
+## 3. Set the service addresses
 
-| Field | Used by | Configuration |
+| Field | Help text on the page | Configuration |
 | --- | --- | --- |
-| **AI Agent Server Address** | The web console and browser clients | Enter the public URL that users' browsers can reach. |
-| **Internal Server Address of AI Agent** | The Datafor backend | Keep it aligned with the public endpoint unless the backend must use a separate private address. |
+| **Public URL** | "The address browsers use to reach the AI Agent." | Enter the URL that users' browsers can reach. |
+| **Internal URL** | "The address the Datafor server uses to call the AI Agent; usually the same as the public URL." | Keep it aligned with the public URL unless the Datafor server must use a separate private route. |
 
-In the locally verified deployment, both fields are empty and the AI Assistant uses the unified Datafor service successfully. The UI shows `http://localhost:28080/datafor/ai` as a placeholder, not as a value that must be copied to every environment.
+In the packaged installation, where the AI Agent runs on the Datafor server, both fields can stay empty and the AI Assistant uses the unified Datafor service. The fields show `http://localhost:28080/datafor/ai` as a placeholder, not as a value that must be copied to every environment.
 
-If your deployment supplies explicit endpoints, use the addresses provided by the deployment administrator. The public address must be reachable by browser clients. Use a different internal address only when the Datafor backend has a separate server-to-server route.
+If your deployment supplies explicit endpoints, use the addresses provided by the deployment administrator. The public URL must be reachable by browser clients.
 
 ## 4. Save and verify
 
-1. Click **Save changes**.
-2. Return to **Home**.
-3. Open **AI Agent**.
-4. Confirm that the **AI Assistant** page loads and that **New Chat**, **History**, **Common Questions**, **Ops**, and **LLM** are available.
+1. Click **Save**. The button is enabled only after you change a value.
+2. Click **AI Agent** in the left navigation, directly below **Home**.
+3. Confirm that the **AI Assistant** page loads and that its toolbar shows **New Chat**, **History**, **Connect AI**, **Common Questions**, **Ops**, and **LLM**. **Common Questions**, **Ops**, and **LLM** are shown to administrators only.
 
-To prepare for many users submitting questions together, follow [Managing High Concurrency](/documentation/AI-Agent/Managing-High-Concurrency/). Worker count is configured in the installed Agent's server-side `.env` file; the endpoint settings on this page do not change analysis capacity.
+Then:
+
+- Assign the LLM stages and the embedding model: [LLM Configuration](/documentation/AI-Agent/LLM-Configuration/).
+- Check the knowledge indexes of your analysis models: [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
+- To prepare for many users submitting questions together, follow [Managing High Concurrency](/documentation/AI-Agent/Managing-High-Concurrency/). Worker count is configured in the installed Agent's server-side `.env` file; the settings on this page do not change analysis capacity.
+
+## 5. AI Agent on a separate server
+
+When the AI Agent runs on another server, or anywhere that is not the packaged `ai-agent` directory beside Datafor's `pentaho-solutions` folder, also:
+
+1. Enter that server's addresses in **Public URL** and **Internal URL**.
+2. Give the AI Agent and the Datafor server the same shared secret, so that users who are not administrators can use models configured in Datafor. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/).
 
 ## Troubleshooting
 
 | Symptom | Check |
 | --- | --- |
-| AI Assistant does not open | Confirm that **Enable AI Agent service** is on and the configured public endpoint is reachable from the browser. |
-| Backend AI requests fail but the page loads | Check **Internal Server Address of AI Agent** and server-to-server network access. |
-| **Save changes** is disabled | The form has no unsaved changes. Modify a setting only when the deployment configuration needs to change. |
+| **AI Agent** is missing from the left navigation | Confirm that **Enable AI Agent** is on and saved. |
+| A user gets "Please contact your administrator to enable AI for this user" | Turn on AI access for that user in **Users**. |
+| AI Assistant does not open | Confirm that the configured **Public URL** is reachable from the browser. |
+| Backend AI requests fail but the page loads | Check **Internal URL** and server-to-server network access. |
+| **Save** is disabled | The form has no unsaved changes. Modify a setting only when the deployment configuration needs to change. |
+| Administrators can use AI features, other users get model errors | The shared secret is missing or differs between the AI Agent and Datafor. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/). |
 | The AI Assistant loads, but the progress title does not change until the answer appears | Datafor is behind a reverse proxy that buffers the AI Agent stream. Disable buffering for `/datafor/ai/` as described in [Deploying Datafor Behind Nginx](/documentation/Setup/Deploying-Datafor-Behind-Nginx/). |

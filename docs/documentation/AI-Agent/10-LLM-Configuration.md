@@ -1,6 +1,7 @@
 ---
 title: LLM Configuration
 permalink: /documentation/AI-Agent/LLM-Configuration/
+description: Set up LLM model profiles, assign the 15 Agent stages and the embedding model, and switch or export schemes.
 createTime: 2025/08/11 16:44:13
 ---
 
@@ -16,14 +17,18 @@ LLM configuration has three layers:
 
 ## 1. Open LLM configuration
 
-1. Open **Home → AI Agent**.
+1. Click **AI Agent** in the left navigation, directly below **Home**.
 2. Click **LLM** in the top toolbar.
 
 The LLM panel is available to administrators in the full AI Agent view. It opens on **Assignments** and shows the current scheme and assignment status.
 
-<div align="left"><img src="./images/llm-assignments-current.png" alt="Current LLM assignments" width="100%" /></div>
+Datafor 9.04.6 has 15 Agent stages and one **Embedding Model** role: 16 assignments. **16/16 assigned** means that every role has a compatible profile and every chat profile has current structured-output verification. It is not a continuous provider-health check.
 
-The current configuration has 14 Agent stages and one **Embedding Model** role. **15/15 assigned** means that every role has a compatible profile and every chat profile has current structured-output verification. It is not a continuous provider-health check.
+::: warning After an upgrade to 9.04.6
+The new stage **Model Resolution** has no assignment in an upgraded installation, nor in a custom scheme saved before 9.04.6. The badge then reads **15/16 assigned**, and the Assignments **Save** button stays disabled until you assign it. Until then, automatic model selection uses the **Workflow Routing** assignment at runtime. The built-in **OpenAI** template includes the stage.
+
+<div align="left"><img src="./images/llm-assignments-upgrade.png" alt="Assignments after an upgrade: 15/16 assigned, Model Resolution required, Save disabled" width="420" /></div>
+:::
 
 ## 2. Create and enable a model profile
 
@@ -79,11 +84,12 @@ Saved keys are masked in the UI and API. Leaving the API Key field blank while e
 
 ## 5. Assign models to runtime stages
 
-Return to **Assignments**. All 15 rows are currently required.
+Return to **Assignments**. All 16 rows must be assigned before **Save** is enabled.
 
 | Assignment | Runtime key | Used for |
 | --- | --- | --- |
 | Workflow Routing | `workflow.routing` | Choosing the governed workflow for the request. |
+| Model Resolution | `model.resolution` | Choosing the analysis model for a request that names none, from the user's visible models and the Metrics Library bindings (**Auto-select model** in the AI Assistant, and MCP calls without a model). |
 | Semantic Binding | `semantic.binding` | Checking business meaning against model implementation. |
 | Semantic Draft | `semantic.draft` | Producing the semantic query draft. |
 | Analysis Strategy | `analysis.strategy` | Planning a bounded multi-step investigation. |
@@ -101,7 +107,11 @@ Return to **Assignments**. All 15 rows are currently required.
 
 Agent-stage selectors list verified chat profiles. The **Embedding Model** selector lists embedding profiles. A profile can be reused across multiple stages.
 
-Click the **Save** button at the top of **Assignments** after any change. Assignment changes are not saved automatically. Saved assignments are read for each subsequent stage call and do not require a service restart. A required stage does not fall back to an old model ID or an unassigned spare profile.
+Click the **Save** button at the top of **Assignments** after any change. Assignment changes are not saved automatically. Saved assignments are read for each subsequent stage call and do not require a service restart. A required stage does not fall back to an old model ID or an unassigned spare profile. The one exception is **Model Resolution**: while it has no assignment of its own (see the upgrade note in section 1), it uses the **Workflow Routing** assignment.
+
+::: tip Models configured in Datafor
+Questions in the AI Assistant use only the assignments on this page. A few features fall back to a model configured in Datafor when their stage has no assignment, for example dashboard insight, the model brief and sample questions. For users who are not administrators, that fallback works only when the AI Agent and the Datafor server share the same secret. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/).
+:::
 
 ## 6. Use schemes
 
@@ -118,24 +128,27 @@ Use the controls as follows:
 
 Save live assignments before saving a scheme. Schemes and exports never contain API keys.
 
-When applying a scheme, review the stage changes, enter the provider API key, and change the shared endpoint only if the deployment uses a gateway or proxy. Datafor creates or overwrites profiles referenced by the scheme, verifies them, and writes assignments last; unrelated profiles are untouched. If verification is incomplete, assignments can remain pending. Return to **Assignments**, resolve any warnings, confirm **15/15 assigned**, and click **Save**.
+When applying a scheme, review the stage changes, enter the provider API key, and change the shared endpoint only if the deployment uses a gateway or proxy. Datafor creates or overwrites profiles referenced by the scheme, verifies them, and writes assignments last; unrelated profiles are untouched. If verification is incomplete, assignments can remain pending. Return to **Assignments**, resolve any warnings, confirm **16/16 assigned**, and click **Save**.
 
-After importing, add the missing API keys and run **Verify and enable** on the saved profiles before saving assignments.
+After importing, add the missing API keys and run **Verify and enable** on the saved profiles before saving assignments. A scheme saved or exported before 9.04.6 has no **Model Resolution** assignment; assign it by hand after applying the scheme.
 
-If a scheme changes the **Embedding Model**, rebuild the vector index for every data model immediately. An index built with the previous embedding model is not compatible with the new one.
+If a scheme changes the **Embedding Model**, rebuild the knowledge index of every data model immediately: click **Rebuild index** for each index on **Settings › AI Agent › Knowledge indexes**. An index built with the previous embedding model is not compatible with the new one.
 
 ## 7. Verify the configuration
 
-1. Confirm **15/15 assigned** with no verification warning.
+1. Confirm **16/16 assigned** with no verification warning.
 2. Click the top **Save** button.
 3. Open **New Chat**, select an analysis model, and confirm that its brief and suggested questions load.
 4. Run a representative analytical question that exercises routing, query generation, and answer synthesis.
+5. Click **New Chat**, leave **Auto-select model** selected, and ask a question that names a metric. The answer card should name the model it was answered from.
 
 | Symptom | Action |
 | --- | --- |
 | A model is absent from an Agent-stage selector | Confirm it is a chat profile, save it, and run **Verify and enable**. |
 | **Structured output not verified** | Check provider access, endpoint, API key, model ID, and parameters; then verify the saved profile again. |
-| The Assignments **Save** button is disabled | Complete all 15 rows and resolve every compatibility or verification warning. |
+| The Assignments **Save** button is disabled | Complete all 16 rows and resolve every compatibility or verification warning. |
+| The badge reads **15/16 assigned** after an upgrade | Assign a verified chat profile to **Model Resolution**, for example the one used by **Workflow Routing**, then click **Save**. |
 | A previously assigned stage becomes unavailable after a profile edit | Save the profile and rerun **Verify and enable**; verification is tied to the effective runtime configuration. |
 | Imported assignments remain pending | Add API keys, verify imported chat profiles, review all roles, then click **Save**. |
-| Retrieval fails after changing the Embedding Model | Rebuild every model's vector index with the new embedding profile. |
+| Retrieval fails after changing the Embedding Model | Click **Rebuild index** for every knowledge index, so that each is rebuilt with the new embedding profile. |
+| Non-administrators get model errors in dashboard insight or sample questions, administrators do not | Assign the stage in question here, or set up the shared secret: [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/). |

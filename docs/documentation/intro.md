@@ -1,43 +1,41 @@
 ---
-title: Welcome to Datafor 
+title: Welcome to Datafor
 createTime: 2025/02/10 17:14:56
 permalink: /documentation/welcome/
 author: Datafor
+description: Where to start in the Datafor documentation, by task.
 ---
 
+# Welcome to Datafor
 
-# **Welcome to Datafor**
+Datafor is a business intelligence platform: connect databases, describe them once in an analysis model, build interactive reports on the model, and ask questions about the data in plain language with the AI Agent. These pages describe Datafor **9.04.6**; see the [release notes](/release/9.04.6/) for what changed.
 
-## **Discover the Power of Datafor**
-Welcome to **Datafor**, the ultimate business intelligence platform designed to empower organizations with seamless data analytics, real-time insights, and powerful visualization capabilities. Whether you're a business analyst, data engineer, or executive, Datafor helps you turn raw data into actionable intelligence.
+## Start here
 
+| I want to | Read |
+| --- | --- |
+| Understand what Datafor does | [Datafor Overview](/documentation/Start/Datafor-Overview/) |
+| Find my way around the console | [Quick Tour of the Console](/documentation/Console/Quick-Tour-of-the-Console/) |
+| Build a first report in ten minutes | [Create Your First Analysis Report](/documentation/Start/Create-Your-First-Analysis-Report/) |
+| Learn the report editor | [Report Editor Basics](/documentation/Start/Basic-Operations-for-Report-Design/) |
 
-## **Why Choose Datafor?**
-Datafor is built to simplify data-driven decision-making through:
+## By task
 
-- **Intuitive User Interface**: Navigate easily with a clean and modern dashboard.
-- **Seamless Data Integration**: Connect with various databases, cloud storage, and file-based sources effortlessly.
-- **Advanced Data Modeling**: Create relationships, define metrics, and manage large datasets efficiently.
-- **Interactive Reports & Dashboards**: Build visually appealing and dynamic reports to uncover key insights.
-- **Embedded Analytics**: Integrate Datafor into your applications for a seamless analytical experience.
-- **Enterprise-Grade Security**: Role-based access control, encrypted connections, and compliance-ready security measures.
+| Task | Start with |
+| --- | --- |
+| Install or upgrade the server | [Installation (Windows)](/documentation/Setup/Installation-windows/), [Docker](/documentation/Setup/Deploying-Datafor-Using-Dockers/) |
+| Connect a database | [Supported Databases](/documentation/Datasource/Supported-Databases/), [Configuring a MySQL Data Source](/documentation/Datasource/Configuring-MySQL-Data-Source/) |
+| Model the data | [Analysis Model Overview](/documentation/Model/Analysis-Model-Overview/), [Creating an Analysis Model](/documentation/Model/Creating-an-Analysis-Model/) |
+| Agree on metric definitions | [Understanding Metrics Library](/documentation/Metrics-Library/Understanding-Metrics-Library/) |
+| Choose and build charts and tables | [Choose and build a chart](/documentation/Visualization/Choose-a-Chart/), [Table](/documentation/Visualization/Table/) |
+| Let readers filter | [Filters](/documentation/Visualization/Filters/) |
+| Format numbers, colours and tooltips | [Display Units](/documentation/Visualization/Display-Units/), [Colors](/documentation/Visualization/Colors/), [Conditional Formatting](/documentation/Visualization/Conditional-Colors/) |
+| Explore: drill, cross-filter, view details | [Exploratory Analysis](/documentation/Analysis/Exploratory%20Analysis/) |
+| Ask questions in plain language | [AI Assistant](/documentation/AI-Agent/AI-Chat/) |
+| Export or share | [Export](/documentation/Visualization/Export/), [Share Link](/documentation/Embedded/Share-link/) |
+| Embed reports in another application | [SDK Embedding](/documentation/SDK-Embedding/) |
+| Administer users, security and settings | [Settings Overview](/documentation/System/Settings-Overview/), [Permission Evaluation Overview](/documentation/System/Permission-Evaluation-Overview/) |
 
+## Find answers
 
-## **Get Started with Datafor**
-If you're new to Datafor, here’s how you can quickly get up to speed:
-
-1. [**Datafor Overview**](https://help.datafor.com.cn/documentation/Start/Datafor-Overview/) – Learn how Datafor transforms data analytics.
-2. [**Connecting Your Data**](https://help.datafor.com.cn/documentation/Datasource/Configuring-MySQL-Data-Source/) – Step-by-step guide to integrating databases and data sources.
-3. [**Creating an Analysis Model**](https://help.datafor.com.cn/documentation/Model/Creating-an-Analysis-Model/) - Building a model for analysis by defining dimensions, relationships, calculated fields, etc.
-4. [**Creating Your First Report**](https://help.datafor.com.cn/documentation/Start/Create-Your-First-Analysis-Report/)** – Learn how to build and share insightful reports.
-
-
-## **Support & Community**
-Have questions? Need assistance? Datafor provides multiple support channels:
-- Browse our **documentation** using the search bar.
-- Visit the **FAQs** for common troubleshooting tips.
-- Connect with our **support team** for personalized assistance.
-
-At Datafor, we are dedicated to enabling smarter decisions through data. Start exploring today and transform your business with analytics-driven insights!
-
-**Empower Your Data with Datafor! 🚀**
+Use the search box at the top of every page; it searches all titles and text. The [FAQs](/documentation/FAQs/Time-Axis/) cover common questions. Field names in examples come from the sample model **Retail Chain Operations**; use the equivalent fields of your own model.

@@ -125,7 +125,7 @@ Resolve comparison warnings before treating a metric as production-ready.
 ## 6. Ask AI Agent about an enterprise metric
 
 1. Open **AI Agent** in the left navigation.
-2. Select **Retail Chain Operations**.
+2. Leave **Auto-select model** in the model selector, or select **Retail Chain Operations**. Selecting the model is optional: a metric bound to a model selects that model, and the answer card states "Basis: the governed metric … is bound to this model." When the metric is bound in several models you can use, the card lists the others, or the Agent asks which model to use.
 3. Ask with the official metric name or an unambiguous synonym, and include the required time period and breakdown.
 
 Example:
@@ -134,11 +134,13 @@ Example:
 
 <div align="left"><img src="./images/gross-margin-rate-agent-result.jpg" alt="AI Agent chart for monthly Gross Margin Rate in Retail Chain Operations" width="100%" /></div>
 
-Metrics Library supplies the governed meaning and synonyms. The selected model binding supplies the measure that can be queried. A library record without a usable binding does not provide an executable value by itself.
+Metrics Library supplies the governed meaning and synonyms. The model binding supplies the measure that is queried. A library record without a usable binding does not provide an executable value by itself.
+
+The **Calculation method** also affects how the value is computed. For a **Ratio**, **Difference**, or **Attainment rate** metric, the Agent resolves the numerator and denominator (or the two operands) through their own bindings in the same model, queries them, and computes the result itself, unless the model's formula already declares them. Year-over-year comparisons of the ratio are then exact, and "why did it change?" questions can split the change into the effect of each member's share and of its own ratio, or into the contributions of the operand metrics. Bind the operand metrics in the model for this to work. A **Custom formula** relation is used only for the definition comparison.
 
 Synonyms must remain unambiguous. In the sample data, **GM%** resolves to **Gross Margin Rate** and **AOV** resolves to **Average Order Value**, while **Profit Rate** matches both **Gross Margin Rate** and **Contribution Margin Rate**. Use the official name or Metric ID when a term can identify more than one metric.
 
-Draft, stale, drift, or inconclusive bindings can produce governance warnings in an Agent answer. Treat the warning as a review requirement.
+Draft, stale, drift, or inconclusive bindings can produce governance warnings in an Agent answer. Treat the warning as a review requirement. A draft generated from the model and never edited carries no draft warning. AI clients connected through MCP do not receive these warnings in the default data mode.
 
 ## 7. Common questions
 

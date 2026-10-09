@@ -58,6 +58,8 @@ Run the command for your operating system **from the installed `ai-agent` direct
 
 The `agent` target restarts the Agent API, routing worker, and configured dispatch workers. It leaves the separately managed MCP process running; Agent requests through MCP still depend on the restarting backend.
 
+The MCP process keeps the values it read from `instance-secrets.env` when it started. After a change there, for example to the shared secret (see [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/)), run `restart` without a target (`.\app-console.bat restart` or `./app-console.sh restart`). It restarts the Agent first and then MCP, so both load the new values.
+
 If your installation is managed by an external service supervisor, use its approved restart procedure and ensure that it invokes the supplied launcher with the intended environment. Do not start a second, separately managed copy of the deployment.
 
 ::: tip Applying increases and decreases
@@ -93,6 +95,14 @@ For example, many users reading previous answers can place less analysis load on
 
 Increasing `LIMIT_CONCURRENCY` does not add analysis workers: it controls HTTP concurrency. Changing an LLM profile parameter also does not change the number of dispatch processes.
 
+**Time limit of multi-step analyses.** The query steps of one multi-step analysis have a time limit per channel: 180 seconds for the AI Assistant and embedded applications, 120 seconds for MCP clients that request the full analysis. At the limit, finished steps are returned as a partial answer. The defaults rarely need changing. To change them, add this line to the same `.env` file and run `restart agent`:
+
+```dotenv
+AGENT_VNEXT_INVESTIGATION_EVIDENCE_DEADLINE_SECONDS=ui=180,embed=180,mcp=120
+```
+
+Each value is 1 to 3600 seconds, or `0` for no limit. Once the variable is set, a channel it does not list has no limit. A longer limit lets more steps finish, and users wait longer for those answers.
+
 ## 3. Choose a count by measuring
 
 There is no universal “users per worker” or CPU/RAM specification for every analysis model and LLM provider. Treat **8** as the startup script's supported maximum, not a recommended default or a guarantee that every server can run eight workers effectively.
@@ -123,13 +133,13 @@ Use a record like this for each comparison:
 | Agent host | Memory use, CPU, and process restarts. Additional processes consume additional resources even while waiting for remote services. |
 | Agent PostgreSQL database | Active connections, connection errors, and slow database operations. Worker processes maintain their own connection pools. |
 
-If reports and AI share infrastructure, include normal report traffic in your capacity test. Where your operations schedule permits, move heavy vector-index rebuilds or other batch work away from peak interactive use.
+If reports and AI share infrastructure, include normal report traffic in your capacity test. Where your operations schedule permits, move heavy knowledge-index rebuilds or other batch work away from peak interactive use.
 
 ## 4. Monitor response quality and queue health
 
 ### Review Usage in the console
 
-1. Sign in as an administrator and open **Home → AI Agent**.
+1. Sign in as an administrator and click **AI Agent** in the left navigation.
 2. Click **Ops**, then **Usage**.
 3. Select **Today**, **Last 7 days**, **This month**, or **Custom**, then click **Refresh**.
 
@@ -179,7 +189,7 @@ The response reports database reachability and separate `queues.routing` and `qu
 
 ## 5. Use quotas to manage daily demand
 
-Open **Home → AI Agent → Ops → Quota**.
+Click **AI Agent** in the left navigation, then **Ops → Quota**.
 
 <div align="left"><img src="./images/ai-concurrency-quota.jpg" alt="English Ops Quota panel with daily question quota disabled, default quota, administrator exemption, and role or user type overrides" width="100%" /></div>
 

@@ -10,8 +10,8 @@ createTime: 2026/09/01 21:50:52
 
 ## 1. Open Common Questions
 
-1. Open **Home → AI Agent**.
-2. Click **Common Questions** in the top toolbar.
+1. Click **AI Agent** in the left navigation, directly below **Home**.
+2. Click **Common Questions** in the top toolbar. **Common Questions** is shown to administrators only.
 3. Select an **Analysis Model**.
 
 The list is scoped to the selected model and can be searched by question content.

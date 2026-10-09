@@ -51,7 +51,7 @@ For each user-visible Measure or calculated measure, set:
 - Common business Aliases.
 - Unit, Display scale, and Direction. See [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/).
 - Default time field when time intelligence is expected.
-- Recommended dimensions when the measure is normally analyzed by a specific set of Dimensions.
+- Recommended dimensions when the measure is normally analyzed by a specific set of Dimensions. The Agent also takes from them the Dimensions it uses to break down a change ("why did sales fall?") when the question names none.
 
 <div align="left"><img src="./images/analysis-model-business-semantics.png" alt="Measure Business semantics showing description, aliases, unit, direction, default time field, and recommended dimensions" width="100%" /></div>
 
@@ -61,6 +61,12 @@ Good descriptions answer the questions that the column name cannot:
 - Is the value gross, net, booked, paid, estimated, or recognized?
 - Which time field defines the reporting period?
 - Which unit and scale apply?
+
+### Write ratios as numerator and denominator
+
+The Agent computes a ratio from its numerator and denominator when the calculated measure's formula has one of these shapes: `N / D`, `(N) / (D)`, or `IIf(D = 0, NULL, N / D)`; a difference has the shape `N - D`. N and D must each be a visible Measure, or a parenthesized expression that equals another visible calculated measure. Year-over-year comparisons of the ratio are then exact, and the Agent can break a change of the ratio down by member.
+
+A formula with `*100`, any other function, or three or more operands is treated as an opaque value. Show a percentage with a percentage format instead of multiplying by 100. When the formula cannot take one of these shapes, bind the measure to a Metrics Library metric whose **Calculation method** is **Ratio**, **Difference**, or **Attainment rate**. See [Improving AI Agent Answers](/documentation/AI-Agent/Improving-Answer-Quality/).
 
 ## Bind a governed enterprise metric
 
@@ -82,7 +88,7 @@ For the complete governance workflow, see [Metrics Library](/documentation/Metri
 
 ## Minimum semantic checklist
 
-Before an administrator adds a model to the AI index:
+Before users start asking the AI Agent about a model:
 
 1. Describe every user-visible Dimension, Measure, and calculated measure.
 2. Assign Semantic roles to important IDs, names, time fields, and geography fields.
@@ -90,7 +96,7 @@ Before an administrator adds a model to the AI index:
 4. Set the model's Default time dimension when most Measures follow the same date, and give each Measure that follows a different date its own Default time field; the Agent reads the Measure's field first and the model's Dimension when the Measure declares none.
 5. Resolve semantic-completeness hints in Diagnostics.
 
-Administrators can start indexing from the model's **Add to index** action on the Models page.
+Saving the model builds or updates its AI knowledge index in the background while **Auto-build knowledge index** is on (the default, under **Settings › General › System configuration**). Administrators can also start it from the model's **Prep data for AI** action on the Models page, and follow its progress under **Settings › AI Agent › Knowledge indexes**.
 
 ## Related topics
 

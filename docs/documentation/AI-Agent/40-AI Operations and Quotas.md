@@ -10,8 +10,8 @@ The current AI Assistant provides operational usage and question-quota controls 
 
 ## 1. Open Ops
 
-1. Open **Home → AI Agent**.
-2. Click **Ops** in the top toolbar.
+1. Click **AI Agent** in the left navigation, directly below **Home**.
+2. Click **Ops** in the top toolbar. **Ops** is shown to administrators only.
 
 The panel contains **Usage** and **Quota** tabs.
 
