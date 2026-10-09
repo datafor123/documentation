@@ -24,7 +24,7 @@ Choose fields that form a meaningful hierarchy in your model. Two unrelated dime
 | --- | --- | --- |
 | **Position → Horizontal**, **Vertical** | Position of the center in the component, in percent. | 50%, 50% |
 | **Plot area → Diameter** | Size of the chart, 50–100%. Leave space around the perimeter for labels. | 95% |
-| **Plot area → Ring width** | Despite its name, the size of the hollow in the center, 0–30%. 0 means no hole. | 0% |
+| **Plot area → Hole diameter** | Size of the hollow in the center, 0–30%. 0 means no hole. | 0% |
 | **Data labels → Show labels** | Segment labels. | On |
 | **Data labels → Font** | Font of the labels. | |
 | **Data labels → Color by parent** | Child segments use shades of their parent's color, from darker to lighter, so each branch reads as one group. Off: each segment takes the next palette color. | On for new sunbursts; off in reports from earlier versions |

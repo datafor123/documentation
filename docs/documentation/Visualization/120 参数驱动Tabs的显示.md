@@ -21,6 +21,6 @@ For parameter navigation, create a Text parameter with a list such as Overview a
 
 When the report opens, a matching rule wins; otherwise **Data → Default tab** (a named tab or **Same as when saved**) applies, then the tab that was showing when the report was saved, then the first visible tab. Hidden tabs are never opened.
 
-Under **Style → Tab**, **Hide tab header** hides the tab bar in the report. Turn it on only when another control can reach every tab, for example a button with the click action **Switch tab page**. Rules and hidden headers control navigation; use resource permissions to control access.
+Under **Style → Tab**, **Hide tab header** hides the tab bar in the report. Turn it on only when another control can reach every tab, for example a button with the click action **Switch tab**. Rules and hidden headers control navigation; use resource permissions to control access.
 
 See [Creating Parameters](/documentation/Analysis/Creating-Parameters/), [Bind Filters to Parameters](/documentation/Analysis/Parameter-Controllers/), and [Tabs](/documentation/Visualization/Multi-Tabbed-Page/).

@@ -72,7 +72,7 @@ Reports from earlier versions: the old horizontal and vertical position settings
 
 | Group | Option | Effect | Default |
 | --- | --- | --- | --- |
-| **Region** | **Show Region name** | Draws region names. | Off |
+| **Region** | **Show region name** | Draws region names. | Off |
 | | **Font** | Font of the region names. | — |
 | | **Default fill color** | Fill of regions without data. | — |
 | | **Border** | Region border. | 1 px, white, solid |

@@ -36,7 +36,7 @@ Type a **Text** to show inside the shape; it wraps inside the shape. Set **Font*
 
 ## Actions
 
-- **Click action** turns the shape into a button: **Go to report**, **Open link**, **Switch tab**, **Reset filters**, **Clear filters**, **Refresh page**, **Export PDF**, **Full screen**, **Open AI insight**.
+- **Click action** turns the shape into a button: **Go to report**, **Open link**, **Switch tab**, **Reset filters**, **Clear filters**, **Refresh data**, **Export PDF**, **Full screen**, **Open AI insight**.
 - **Visibility** and a **Click script** under **Events**.
 - A shape with no action and no script lets clicks through to the components below, so a background panel does not block the charts on it.
 

@@ -32,7 +32,7 @@ Buttons from earlier versions show the style type **Legacy style** and keep thei
 
 | Group | Settings |
 | --- | --- |
-| **Action** | **Click action**: None, Open report page, Open link, Switch tab page, Reset filters, Clear filters, Refresh data, Export PDF, Full screen, Open AI insight |
+| **Action** | **Click action**: None, Go to report, Open link, Switch tab, Reset filters, Clear filters, Refresh data, Export PDF, Full screen, Open AI insight |
 | **Disable condition** | **Never**, **When there is no data**, **By report parameter** |
 | **Visibility** | Always, Hidden in preview, by report parameter, user or role |
 | **Custom script** | Runs on click; return `false` to cancel the action |

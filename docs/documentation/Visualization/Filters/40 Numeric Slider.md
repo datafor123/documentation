@@ -32,7 +32,7 @@ The step is derived from the data range, and the input boxes show thousands sepa
 1. Create a **Numeric** parameter with **Suggested values → Any value**, for example `GrowthRate` with default `0.1` (see [Creating Parameters](/documentation/Analysis/Creating-Parameters/)).
 2. Add a Numeric slider and choose **Data source → Parameter**.
 3. Select the parameter in the list. Parameters that are not Numeric with Any value are greyed out; hover for the reason.
-4. Set **Minimum Value**, **Maximum Value** and **Step**, for example `-0.2`, `0.2` and `0.01`.
+4. Set **Minimum value**, **Maximum value** and **Step**, for example `-0.2`, `0.2` and `0.01`.
 
 ![Numeric slider bound to GrowthRate with an explicit range](./images/numeric-slider-parameter.png)
 

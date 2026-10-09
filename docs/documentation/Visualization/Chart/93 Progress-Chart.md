@@ -12,30 +12,30 @@ Show one measure's progress toward a target as a ring. Use it for a completion o
 ## Set actual and target
 
 1. Add **Components → Charts → Cards & KPI → Ring progress** (a new ring is 260 × 240 px, one ring and a name line) and choose an **Analysis model** in **Data**.
-2. Put the actual amount in **Progress Measure** and the target in **Target Measure**.
-3. If you use a fixed target instead of a target measure, enter it in **Style → Plot Area → Target Value**.
+2. Put the actual amount in **Progress measure** and the target in **Target measure**.
+3. If you use a fixed target instead of a target measure, enter it in **Style → Plot area → Target value**.
 4. Set **Filters** so actual and target cover the same period and population.
 
 For example, 75 completed items against a target of 100 represents 75% achievement. A decimal rate of 0.75 must be compared with a target of 1, not 100. Avoid a zero target: a meaningful progress percentage needs a valid denominator.
 
-The automatic title names only the Progress Measure, not the target.
+The automatic title names only the Progress measure, not the target.
 
 ## Make the meaning visible
 
 | Option (Style) | Effect | Default |
 | --- | --- | --- |
-| **Plot Area → Diameter** | Size of the ring, 10–100%. | 95% |
-| **Plot Area → Ring Thickness** | Thickness of the ring, 1–30%. | 10% |
-| **Plot Area → Inner Padding** | Inner padding of the ring, as a percentage of the ring width (−50 to 100%). | 0% |
-| **Plot Area → Corner Radius** | Rounded ends of the progress ring. | Off |
-| **Plot Area → Ring Background** | Color of the unfinished part of the ring. | #E0E0E0 |
-| **Plot Area → Target Value** | Fixed target, used when no Target Measure is bound. | Empty |
-| **Plot Area → Progress Direction** | **Clockwise** or **Counterclockwise**. | Clockwise |
+| **Plot area → Diameter** | Size of the ring, 10–100%. | 95% |
+| **Plot area → Ring thickness** | Thickness of the ring, 1–30%. | 10% |
+| **Plot area → Inner padding** | Inner padding of the ring, as a percentage of the ring width (−50 to 100%). | 0% |
+| **Plot area → Corner radius** | Rounded ends of the progress ring. | Off |
+| **Plot area → Ring Background** | Color of the unfinished part of the ring. | #E0E0E0 |
+| **Plot area → Target value** | Fixed target, used when no Target measure is bound. | Empty |
+| **Plot area → Progress Direction** | **Clockwise** or **Counterclockwise**. | Clockwise |
 | **Data colors → Conditional Color** | Ring color by condition; see below. | |
 | **Data labels → Label contents** | **Hidden**, **Value** or **Percentage** in the center. | Percentage |
 | **Data labels → Percentage Precision** | Decimals of the percentage. | 2 |
-| **Data labels → Show Name**, **Name**, **Name Font** | A name line under the value. If **Name** is empty, the Progress Measure's name is shown. | Show Name on for new rings; off in reports from earlier versions |
-| **Data labels → Sub-label**, **Sub-label Font** | Adds the Progress Measure and/or the Target Measure value, so readers can see the amounts behind the percentage. | None |
+| **Data labels → Show name**, **Name**, **Name font** | A name line under the value. If **Name** is empty, the Progress measure's name is shown. | Show name on for new rings; off in reports from earlier versions |
+| **Data labels → Sub-label**, **Sub-label font** | Adds the Progress measure and/or the Target measure value, so readers can see the amounts behind the percentage. | None |
 
 Use a concise name such as Order completion. The ring has no **Show Tooltip** switch.
 
@@ -54,6 +54,6 @@ Clicking the ring does not filter, drill or highlight anything, but a script und
 ## Reports from earlier versions
 
 - **Ring Background** is now applied. Earlier versions drew the unfinished part in the palette's second color (often red), so such rings look different.
-- **Show Name** stays off unless you turn it on.
+- **Show name** stays off unless you turn it on.
 - A ring without an actual value shows the empty-data message instead of 0.00%.
 - The automatic title no longer includes the target measure.

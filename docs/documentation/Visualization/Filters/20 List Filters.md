@@ -46,7 +46,7 @@ The relative choices follow the field's level:
 | Year | This Year, Last Year, The Year Before Last |
 | Quarter | This Quarter, Last Quarter, Same Quarter Last Year |
 | Month | This Month, Last Month, Same Month Last Year, Same Month Last Quarter |
-| Week | This Week, Last 1 Week |
+| Week | This Week, Last Week |
 | Day | Today, Yesterday |
 
 Every list ends with **Custom…**, where you set **Current** / **Back** / **Ahead**, a number and a unit, for example *12 months back* for the same month last year.

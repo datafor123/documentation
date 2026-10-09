@@ -33,11 +33,11 @@ Region values are matched exactly as for the Filled map: first the region name, 
 | --- | --- | --- | --- |
 | **Data colors** | **Ripple color** | Marker colour. | — |
 | **Data labels** | | Labels on the markers. | — |
-| **Marker Setting** | **Marker image(SVG)** | Uses the path of an SVG file as the marker shape. Hides **Enable Animation**. | Default marker |
-| | **Enable Animation** | Ripple effect around the markers. | Off |
+| **Marker settings** | **Marker image(SVG)** | Uses the path of an SVG file as the marker shape. Hides **Enable animation**. | Default marker |
+| | **Enable animation** | Ripple effect around the markers. | Off |
 | | **Size type** | **Linear**, **Square** or **Logarithmic** scaling by the measure. | Linear |
 | | **Size** | Overall marker size, 2–90 %. | 10 % |
-| **Region** | **Show Region name** | Draws region names. | Off |
+| **Region** | **Show region name** | Draws region names. | Off |
 | | **Font** | Font of the region names. | — |
 | | **Region color** | Fill colour of the regions. | — |
 | | **Border** | Region border. | — |

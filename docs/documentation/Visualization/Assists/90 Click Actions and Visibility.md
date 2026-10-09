@@ -9,19 +9,19 @@ createTime: 2026/10/09 16:00:00
 
 ## Click actions
 
-Text, Rich text, Image, Icon and Shape have **Actions → Click action → On click**. The Action button has the same actions under **Actions → Action → Click action**, with slightly different names.
+Text, Rich text, Image, Icon and Shape have **Actions → Click action → On click**. The Action button has the same actions, with the same names, under **Actions → Action → Click action**.
 
-| Action | Action button name | What it does | Settings |
-| --- | --- | --- | --- |
-| **Go to report** | **Open report page** | Opens another report or a URL | **Jump settings** (button: **Drill-through settings**): target, how it opens, parameters |
-| **Open link** | **Open link** | Opens a web address | **Link URL**, **Open in**: Current window, New window (default), Tooltip, Pop-up (button: Current tab, New tab, Tip dialog, Modal dialog) |
-| **Switch tab** | **Switch tab page** | Shows a tab of a Tabs component | **Tabs component**, **Switch to** (button: **Tab page**) |
-| **Reset filters** | **Reset filters** | Returns all filters to their opening values | – |
-| **Clear filters** | **Clear filters** | Sets clearable filters to All | – |
-| **Refresh page** | **Refresh data** | Re-queries all data components; the page is not reloaded | – |
-| **Export PDF** | **Export PDF** | Exports the page | – |
-| **Full screen** | **Full screen** | Shows the page full screen; click again to leave | – |
-| **Open AI insight** | **Open AI insight** | Opens an AI reading of the data | **Analysis scope**: Whole page, Current tab page, Selected components |
+| Action | What it does | Settings |
+| --- | --- | --- |
+| **Go to report** | Opens another report or a URL | **Drill-through settings**: target, how it opens, parameters |
+| **Open link** | Opens a web address | **Link URL**, **Open in**: Current tab, New tab (default), Tooltip, Pop-up |
+| **Switch tab** | Shows a tab of a Tabs component | **Tabs component**, **Switch to** |
+| **Reset filters** | Returns all filters to their opening values | – |
+| **Clear filters** | Sets clearable filters to All | – |
+| **Refresh data** | Re-queries all data components; the page is not reloaded | – |
+| **Export PDF** | Exports the page | – |
+| **Full screen** | Shows the page full screen; click again to leave | – |
+| **Open AI insight** | Opens an AI reading of the data | **Analysis scope**: Whole page, Current tab page, Selected components |
 
 ![Click actions of an Action button](./images/button-click-actions.png)
 

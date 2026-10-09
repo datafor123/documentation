@@ -25,7 +25,7 @@ Do not put currency, headcount and percentage values on a shared profile without
 | --- | --- | --- |
 | **Position → Horizontal**, **Vertical** | Position of the radar's center in the component, in percent. | 50%, 50% |
 | **Plot area → Diameter** | Diameter as a percentage (10–100) of the component's shorter side. Leave room for the axis labels. | 75% for new radars; 60% in reports from earlier versions |
-| **Plot area → Fill Color** | Fills the polygons. | Off |
+| **Plot area → Fill color** | Fills the polygons. | Off |
 | **Axis labels → Show** | Shows the category names at the end of each spoke. | On |
 | **Axis labels → Value scale** | Shows value ticks on the top axis. | On for new radars; off in reports from earlier versions |
 | **Axis labels → Font** | Font of the category names. | 12 px |

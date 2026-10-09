@@ -24,7 +24,7 @@ Each preset name means one exact range:
 | Group | Presets (range selection) |
 | --- | --- |
 | Current period | Today, Week to Date, Month to Date, Quarter to Date, Year to Date, This Year to Last Month |
-| Recent | Yesterday, Last 7 Days, Last 15 Days, Last 30 Days, Last 1 Month, Last 2 Months, Last 6 Months, Last 365 Days |
+| Recent | Yesterday, Last 7 Days, Last 15 Days, Last 30 Days, Last Month, Last 2 Months, Last 6 Months, Last 365 Days |
 | Calendar months and years | This Month, This Quarter, This Year to This Month, Last 2/3/6/12/24/36 Calendar Months, This Year, Last Year, Last 2/3/10 Years |
 
 - **Last N days, months or years** include today: on 9 October 2026, *Last 7 Days* is 3–9 October and *Last 365 Days* is 10 October 2025 – 9 October 2026.

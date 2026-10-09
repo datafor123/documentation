@@ -21,7 +21,7 @@ Show a value against a scale and an optional target. A gauge is useful when the 
 | --- | --- |
 | **Series** | Optional dimension: one gauge per member. |
 | **Measure** | The actual value (pointer and centre value). |
-| **Minimum value**, **Maximum Value**, **Target** | Optional measures for the scale ends and the target, for example a capacity measure. The automatic title leaves them out. |
+| **Minimum value**, **Maximum value**, **Target** | Optional measures for the scale ends and the target, for example a capacity measure. The automatic title leaves them out. |
 | **Time axis** | Optional date field for a page **Date** filter that filters by time axis. |
 | **Filters** | Component filters. |
 
@@ -29,7 +29,7 @@ A target and a scale maximum are different concepts: a target can be 80 while th
 
 ## Set the scale and target
 
-Fixed numbers go in the **Style** tab: **Scale axis → Minimum value** and **Maximum Value**, and **Target value → Target**. Each value is taken from the first available source:
+Fixed numbers go in the **Style** tab: **Scale axis → Minimum value** and **Maximum value**, and **Target value → Target**. Each value is taken from the first available source:
 
 | Value | 1st | 2nd | 3rd |
 | --- | --- | --- | --- |
@@ -51,7 +51,7 @@ An end you do not set is calculated once for all gauges in the component:
 | Negative values | Minimum = −(2 × the absolute smallest value), rounded; maximum as above, or 0 if no value is positive. |
 | All values 0, or no numbers | 0–1 |
 
-Because targets are included, the target always lands on the arc. Without a target and without a maximum, the pointer usually sits near the middle of the arc. Set **Maximum Value** when the scale has a business meaning, and give several gauges the same range when readers compare them.
+Because targets are included, the target always lands on the arc. Without a target and without a maximum, the pointer usually sits near the middle of the arc. Set **Maximum value** when the scale has a business meaning, and give several gauges the same range when readers compare them.
 
 ## How the target is drawn
 
@@ -70,7 +70,7 @@ Because targets are included, the target always lands on the arc. Without a targ
 | **Series** | **Show** the series name, **Font**. | – |
 | **Measure value** | **Show**, **Pointer color**, **Font**, **Display units**, **Decimal places**. | – |
 | **Target value** | **Target** (fixed number), **Target value color** (font and marker colour), **Display units**, **Decimal places**. | – |
-| **Scale axis** | **Minimum value**, **Maximum Value**, **Axis color**, **Tick marks**, **Minor tick marks**, **Tick mark label**, **Font**, **Display units**, **Decimal places**. | **Tick marks** and **Minor tick marks** off; **Tick mark label** on for new gauges, off in older reports |
+| **Scale axis** | **Minimum value**, **Maximum value**, **Axis color**, **Tick marks**, **Minor tick marks**, **Tick mark label**, **Font**, **Display units**, **Decimal places**. | **Tick marks** and **Minor tick marks** off; **Tick mark label** on for new gauges, off in older reports |
 
 **Display units** and **Decimal places** in the three groups format the centre value, the target (label and tooltip) and the tick labels. New gauges start with **Display units = Auto** in all three; gauges in older reports keep **Follow measure format**. **Decimal places** is **Auto** or 0–4. With **Auto**, a unit already set in the measure format is kept; otherwise all gauges in the component share one unit chosen from the largest value, and the target and ticks share one unit chosen from the range. Percentages are never scaled. See [Display units and decimal places](/documentation/Visualization/Display-Units/).
 
@@ -86,7 +86,7 @@ Hovering a gauge shows the measure, then:
 | **Achievement** | Actual ÷ target, as a percentage with one decimal. Omitted when the target is 0. |
 | **Difference** | Actual − target with a + or − sign, formatted like the target. |
 
-Bound **Minimum value** and **Maximum Value** measures also appear. See [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/).
+Bound **Minimum value** and **Maximum value** measures also appear. See [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/).
 
 ## Empty data
 
@@ -102,4 +102,4 @@ When no gauge has a number, for example because the filters exclude everything, 
 
 Read the actual value together with its bounds and target. Two gauges using different scales cannot be compared by pointer angle alone.
 
-Save and open **Preview**. Inspect an ordinary result, a value near a boundary and a filtered result. An out-of-range value is a signal to check the data and the chosen scale, not automatically a reason to extend the maximum. If the gauge shows the invalid-range message, check the numbers or measures for **Minimum value** and **Maximum Value**.
+Save and open **Preview**. Inspect an ordinary result, a value near a boundary and a filtered result. An out-of-range value is a signal to check the data and the chosen scale, not automatically a reason to extend the maximum. If the gauge shows the invalid-range message, check the numbers or measures for **Minimum value** and **Maximum value**.
