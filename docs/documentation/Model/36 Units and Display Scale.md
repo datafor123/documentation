@@ -102,6 +102,18 @@ For bar, line, area, and scatter charts, the model scaling default is applied on
 
 Use separate components for measures with different meanings, or configure their report formats deliberately. Tables and measure cards apply defaults to each measure independently.
 
+### Component display units
+
+Charts, measure cards and gauges also have **Display units** in their Style tab. They work on top of the model scale:
+
+| Component Display units | Result with model scale **M** |
+| --- | --- |
+| **Follow measure format** | Shows the model-scaled text, such as *5.09M*. |
+| **Auto** | Keeps the model's **M**. Without a model scale, Auto picks K, M or B from the size of the values. |
+| **Thousands (K)**, **Millions (M)**, **Billions (B)**, **None** | Replaces the model scale on this component. |
+
+See [Display Units and Decimal Places](/documentation/Visualization/Display-Units/).
+
 ## Format percentages correctly
 
 Use **Unit = %** to identify a ratio and a percentage **Data Format** to display it. For example, a margin value of **0.185** with format `0.0%` displays as **18.5%**.

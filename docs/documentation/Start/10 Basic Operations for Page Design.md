@@ -1,49 +1,60 @@
 ---
-title: Basic Operations for Report Design
+title: Report Editor Basics
 permalink: /documentation/Start/Basic-Operations-for-Report-Design/
 tags:
   - Design
-description: Learn how to select, size, arrange, copy, and change report components, then preview and save your work.
+description: The parts of the report editor and how to select, place, size, arrange, undo, preview and save.
 createTime: 2026/09/01 22:03:26
 ---
 
-# Basic Operations for Report Design
+# Report Editor Basics
 
-Select an item before editing it. The heading above the right panel tells you whether you are changing the **Page** or a component.
+![The report editor: toolbar, canvas and the Page panel with the component palette](../Visualization/images/current/workspace.jpg)
 
-![Report canvas, toolbar, and component catalog](../Visualization/images/current/workspace.jpg)
+| Area | What it is for |
+| --- | --- |
+| **Toolbar** (top) | Undo, display mode, size, arrange, chart switch, share, mobile layout, parameters, lineage, AI Agent, **Save as**, **Save**, **Preview** |
+| **Canvas** (centre) | The report page. Components are placed and arranged here. |
+| **Panel** (right) | Settings of the selected item. Its title says what is selected: **Page** or the component type. |
 
-## Select and configure
+## The panel
 
-- Click empty canvas space to edit the page or add a component.
-- Choose a component in **Components**, then click the canvas to place it.
-- Click a component to show its settings. Charts provide **Data**, **Style**, and **Actions**; supported charts also provide **Analytics**.
-- Hold **Ctrl** while clicking to select several components.
+| Selected | Tabs |
+| --- | --- |
+| Nothing (click empty canvas) | **Components** (the palette), **Style** and **Settings** of the page. See [Page Settings](/documentation/Visualization/Size-Display/). |
+| A chart or table | **Data** (model, fields, component filters), **Style**, **Analytics** (reference lines, where supported), **Actions** (interactions, click actions) |
+| A filter or an assist component | **Data** or content, **Style**, **Actions** |
 
-Use **Data** to select the model, fields, and component filters. Use **Style** for appearance, **Analytics** for reference lines and bands, and **Actions** for interactions.
+Hover a setting's name to see what it does. Collapse the panel with **>|** in its top-right corner to see more of the canvas.
 
-## Move, resize, and arrange
+## Select, place and size
 
-Drag a selected component to move it; drag a handle to resize it. For precise dimensions, enter **W(px)** and **H(px)** in the toolbar and press **Enter**. With the page selected, these fields change the page dimensions instead.
+- Click a component to select it; **Ctrl**+click adds more components to the selection.
+- To add a component, click its tile in **Components** and click the canvas, drag a rectangle, or double-click the tile. See [Adding Components](/documentation/Visualization/Adding-Charts/).
+- Drag a selected component to move it and drag a handle to resize it. For exact values type **W(px)** and **H(px)** in the toolbar and press **Enter**; with nothing selected, these fields change the page size.
+- **Grid** in the toolbar shows a grid to align to.
 
-The toolbar also provides copy, layer order, alignment, and distribution. Align selected components to share an edge or center. Use distribution for even spacing across three or more components. Put background shapes behind charts with **Send to back**.
+## Arrange
 
-Hover an icon to identify its command. A disabled command usually requires a different selection.
+| Toolbar button | Use |
+| --- | --- |
+| **Delete**, **Create copy** | Remove or duplicate the selection. A copy keeps model, fields, filters and style. |
+| Layer | **Bring to front**, **Send to back**, for example to put a shape behind charts. |
+| Align | Align the selected components on an edge or centre. |
+| Distribute | Space three or more components evenly. |
+| **Chart switch** | Change the chart type of the selected chart. |
 
-## Reuse or change a chart
+When the window is narrow, buttons that do not fit move into **…**, listed with their names.
 
-Use the copy icon to duplicate a component, then review the copy's model, fields, filters, and title.
+## Component toolbar
 
-To change type, select one chart and open the toolbar's chart-type menu (circle, triangle, and square). Choose the target, then review its **Data** panel. For example, a column chart's category and measure become **Fields** when converted to **Table**.
+Point to a component to show its own toolbar in the top-right corner: **Lock** (in the editor), drill buttons where the chart supports drilling, **Conditions** when filters apply, **Zoom in**, and **⋮** for **Export**, **Data preview**, **Execution cost** and **Delete**.
 
-![Chart conversion menu](../Visualization/images/current/switch-chart.jpg)
+## Undo, preview and save
 
-Conversion can change which settings and field slots apply. Check the result before saving.
+- **Undo** and **Redo** keep the last 100 steps. The history is cleared when you save or leave the editor.
+- **Preview** shows the report as readers see it, with all interactions; **Edit** returns to the editor. Clicking a chart in the editor also cross-filters the other charts, so you can test interactions without previewing.
+- **Save** stores the report; the first save asks for a folder and a name. **Save as** stores a separate copy.
+- The last save wins: if two people, or two browser tabs, edit the same report, the later save replaces the earlier one.
 
-## Preview and save
-
-Use **Preview** to test readability and interactions; use **Edit** to return. **Save** persists the report. **Save as** creates a separate report.
-
-Undo and redo are editing-session tools. Save a separate copy before making extensive changes to a report you need to keep.
-
-For a complete worked example, follow [Create Your First Analysis Report](/documentation/Start/Create-Your-First-Analysis-Report/).
+For a worked example, follow [Create Your First Analysis Report](/documentation/Start/Create-Your-First-Analysis-Report/).

@@ -67,6 +67,14 @@ export const documentationNote = defineNoteConfig({
 			prefix: "/documentation/Visualization/",
 			items: [
 				{
+					text: "Page Settings",
+					link: "/documentation/Visualization/08 报表页的大小和显示方式.md",
+				},
+				{
+					text: "Adding Components",
+					link: "/documentation/Visualization/10 添加图表.md",
+				},
+				{
 					text: "Charts",
 					collapsed: true,
 					prefix: "/documentation/Visualization/Chart/",
@@ -83,13 +91,13 @@ export const documentationNote = defineNoteConfig({
 					collapsed: true,
 					prefix: "/documentation/Visualization/Map/",
 					items: "auto",
-				},				
+				},
 				{
 					text: "Filters",
 					collapsed: true,
 					prefix: "/documentation/Visualization/Filters/",
 					items: "auto",
-				},	
+				},
 				{
 					text: "Assists",
 					collapsed: true,
@@ -97,36 +105,29 @@ export const documentationNote = defineNoteConfig({
 					items: "auto",
 				},
 				{
-					text: "Report Page Size and Display Settings",
-					link: "/documentation/Visualization/08 报表页的大小和显示方式.md",
-				},				
-				{
-					text: "Add Charts",
-					link: "/documentation/Visualization/10 添加图表.md",
-				},				
-				{
-					text: "Mobile Layout View",
-					link: "/documentation/Visualization/12 手机布局视图.md",
-				},
-				{
-					text: "Multi-Tabbed Page",
+					text: "Tabs",
 					link: "/documentation/Visualization/26 制作多标签页面.md",
-				},				
-				{
-					text: "Tooltips",
-					link: "/documentation/Visualization/40_图表组件的工具提示.md",
-				},
-				{
-					text: "X Axis Type Settings - Continuous and Categorical",
-					link: "/documentation/Visualization/81 X 轴类型设置：连续和类别.md",
-				},
-				{
-					text: "Conditional Formatting",
-					link: "/documentation/Visualization/110 条件颜色设置.md",
 				},
 				{
 					text: "Default Tab Rules",
 					link: "/documentation/Visualization/120 参数驱动Tabs的显示.md",
+				},
+				{
+					text: "Formatting",
+					collapsed: true,
+					items: [
+						{ text: "Display Units and Decimal Places", link: "/documentation/Visualization/30 Display Units and Decimal Places.md" },
+						{ text: "Colors and Color Schemes", link: "/documentation/Visualization/32 Colors and Color Schemes.md" },
+						{ text: "Conditional Formatting", link: "/documentation/Visualization/110 条件颜色设置.md" },
+						{ text: "Tooltips", link: "/documentation/Visualization/40_图表组件的工具提示.md" },
+						{ text: "Legends", link: "/documentation/Visualization/42 Legends.md" },
+						{ text: "X Axis Type", link: "/documentation/Visualization/81 X 轴类型设置：连续和类别.md" },
+						{ text: "Empty Data and Error Messages", link: "/documentation/Visualization/44 Empty Data and Error Messages.md" },
+					],
+				},
+				{
+					text: "Mobile Layout View",
+					link: "/documentation/Visualization/12 手机布局视图.md",
 				},
 				{
 					text: "Export",
