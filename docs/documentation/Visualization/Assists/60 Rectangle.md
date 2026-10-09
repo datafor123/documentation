@@ -1,16 +1,17 @@
 ---
 title: Rectangle
 permalink: /documentation/Visualization/Rectangle/
+description: Draw panels, cards and title blocks with the Shape component.
 createTime: 2026/09/01 22:03:26
 ---
 
 # Rectangle
 
-1. Add **Components → Assists → Shape**.
-2. Choose **Rectangle** or **Rounded rectangle** in **Style → Shape → Type**.
-3. Configure **Fill and line**, then add a label under **Text** if needed.
-4. Resize and position the shape using the canvas and toolbar.
+1. In **Components → Assists**, click **Shape**, then click the canvas.
+2. In **Style → Shape → Type**, choose **Rectangle** or **Rounded rectangle**, or pick the **Card background** or **Title block** style preset.
+3. Set **Fill and line**, and add a title under **Text** if needed.
+4. Send it behind the charts with the toolbar's **Send to back**.
 
-Use rectangles as section backgrounds or labeled blocks. If the shape is a button, configure its **Actions → Click action** and give it an action label readers can understand.
+A rectangle without a click action lets clicks pass through to the charts on top of it. To make it a button, set **Actions → Click action**.
 
-See [Shapes](/documentation/Visualization/Shapes/) for all current types.
+Rectangle components from earlier versions keep working; **Style → Shape → Convert to shape** turns one into a Shape. See [Shapes](/documentation/Visualization/Shapes/).

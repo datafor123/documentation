@@ -8,6 +8,6 @@ createTime: 2026/09/01 22:03:26
 
 Add **Components → Assists → Tabs** to organize several views within one report page.
 
-The current editor manages tab names, order, default selection, icons, and visibility in **Data**. **Style** controls the navigation and content area.
+Tabs is the last tile in **Assists**. Tab names, order, icons, tooltips, hidden tabs and the default tab are set on **Data**; the tab bar style, colours and content area on **Style**; default tab rules on **Actions**.
 
-Follow [Tabs: create, fill, and style a container](/documentation/Visualization/Multi-Tabbed-Page/) for the complete workflow and current screenshots.
+See [Tabs](/documentation/Visualization/Multi-Tabbed-Page/) for the full guide and [Default Tab Rules](/documentation/Visualization/Parameter-Driven-Tab-Switching/) for opening a tab by user, role or parameter.

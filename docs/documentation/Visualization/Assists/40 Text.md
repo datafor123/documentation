@@ -1,26 +1,42 @@
 ---
 title: Text
 permalink: /documentation/Visualization/Text/
+description: Add headings and short text with one style, insert live values such as the selected region or today's date, and make text clickable.
 createTime: 2026/09/01 22:03:26
 ---
 
 # Text
 
-Use **Text** for a short title, label, or note with consistent formatting. Use **Rich text** for paragraphs with mixed formatting.
+**Text** shows a heading, label or note in one style. For mixed formatting, lists or measure values inside the text, use [Rich text](/documentation/Visualization/TextBox/).
 
-## Add and format text
+## Add and edit
 
-1. Add **Components → Assists → Text**.
-2. Edit the text on the canvas.
-3. In **Style → Content**, set alignment, vertical alignment, font, line height, and letter spacing.
-4. Choose whether to **Wrap text** and how to handle **Overflow**.
+1. In **Components → Assists**, click **Text**, then click the canvas.
+2. Select the component, then double-click it to type. An empty Text shows *Type text here* in the editor.
+3. Click outside to finish.
 
-![Text content settings](../images/current/text-content.jpg)
+## Style → Content
 
-Resize the component and preview the report to check wrapping and clipping. A label that looks correct in the editor can still be too small at the report's viewing scale.
+| Setting | Options |
+| --- | --- |
+| **Alignment**, **Vertical alignment** | Left / centre / right; Top / Middle / Bottom |
+| **Font**, **Decoration** | Font, size, colour, bold, italic; None / Underline / Strikethrough |
+| **Line height**, **Letter spacing** | 1–3 (default 1.4); 0–10 px |
+| **Wrap text** | On for new Text components; text in older reports does not wrap |
+| **Overflow** | **Scroll bar** (default), **Cut off**, **Ellipsis** |
+| **Insert dynamic value** | Today's date, Current user, Report name, a report parameter value or a filter selection |
 
-## Insert a dynamic value
+![Insert dynamic value](./images/text-dynamic-values.png)
 
-Use **Insert dynamic value** to choose a supported value. Parameters in text use the form `{{param.name}}`; for example, `{{param.GrowthRate}}` refers to the GrowthRate parameter.
+The inserted value goes where the cursor was, as a placeholder such as `{{filter.Region}}` or `{{date:YYYY-MM-DD}}`. Readers see the current value, updated when filters or parameters change. See [Dynamic Values](/documentation/Visualization/Dynamic-Values/).
 
-Change the parameter during preview and check the displayed text. A placeholder displays a value; it does not by itself calculate or format a percentage.
+**Style → Effects** sets the background (solid or gradient), border, padding (default 5 px), opacity and hover effect.
+
+## Actions
+
+- **Click action**: go to a report, open a link, switch a tab, reset filters and more.
+- **Visibility**: show the text only for some parameter values, users or roles.
+
+See [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
+
+Text is shown as written: HTML in the text is not run.

@@ -1,46 +1,46 @@
 ---
-title: Insight Component
+title: AI Insight Component
 permalink: /documentation/AI-Agent/Insight-Component/
+description: Add an AI insight button to a report, choose which components it reads, and open the same insight from any button or shape.
 createTime: 2026/09/01 21:50:46
 ---
 
-# Insight Component
+# AI Insight Component
 
-The **Insight** component is an AI insight button that report authors can place on a report page. It remains available in the current report editor under **Components → Assists**.
+**AI insight** (called *Insight* before 9.04.6) is a button on the report page. A click sends the data of the page, a tab or selected components to the AI Agent, which returns an overview and key insights.
 
-## 1. Add the component
+## Add it
 
-1. Open a report and click **Edit**.
-2. In the right panel, open **Components**.
-3. Expand **Assists**.
-4. Select **Insight** and draw the component on the canvas.
+1. In the report editor, open **Components → Assists** and click **AI insight**, then click the canvas (default 400 × 240 px).
+2. On **Actions → Analysis scope**, choose what it reads:
 
-<div align="left"><img src="./images/insight-component-current.png" alt="Insight component in the Assists palette" width="100%" /></div>
+| Analysis scope | Reads |
+| --- | --- |
+| **Whole page** (default) | All data components on the page |
+| **Current tab page** | The components on the same tab of the same Tabs component; the whole page if the button is not on a tab |
+| **Selected components** | The components you pick in **Components**; the whole page if none are picked |
 
-## 2. Configure its appearance
+![Analysis scope set to Selected components](../Visualization/Assists/images/ai-insight-scope.png)
 
-Select the component on the canvas. The current **Style** panel contains these sections:
+3. Style the button under **Style**: **Border** (with background and effects), **Description of the image**, **Image Options** and **Hover Style**.
+4. Optionally set **Actions → Visibility** to show it only to some users, roles or parameter values.
 
-- **Border**
-- **Description of the image**
-- **Image Options**
-- **Hover Style**
+Clicking the component opens the insight, also in the editor; you do not need to preview first. The insight leaves out the AI insight component itself, empty components and Rich text value blocks, and says which components it skipped.
 
-<div align="left"><img src="./images/insight-properties-current.png" alt="Current Insight component style settings" width="100%" /></div>
+## Open insight from other components
 
-Use these settings to control the button border, image description, icon options, and hover appearance. Resize and position the component like any other report component.
+Any Text, Rich text, Image, Icon, Shape or Action button can open the same insight: set its click action to **Open AI insight** and choose an **Analysis scope**. See [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
 
-## 3. Use the component
+## Requirements
 
-1. Save the report.
-2. Click **Preview**.
-3. Click the Insight button to start the report's AI insight action.
-
-If the report has unsaved changes, Datafor asks whether to save before entering Preview. The exact generated output depends on the report and the environment's AI configuration. Treat generated text as an interpretation, not as a replacement for governed metric definitions or source-data validation.
+- The AI Agent must be configured and the reader must be allowed to use it. See [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/) and [AI Operations and Quotas](/documentation/AI-Agent/LLM-Permission-Management/).
+- The insight reads the data the reader is allowed to see, under the current filters.
+- Treat the text as an interpretation of the numbers on the page, not as a replacement for governed metric definitions.
 
 ## Troubleshooting
 
 | Symptom | Check |
 | --- | --- |
-| Insight is not available in the palette | Confirm that you are editing a report and have expanded **Components → Assists**. |
-| Preview asks whether to save | Choose whether to save the current report changes before continuing. |
+| *The AI insight component is not loaded, so insight cannot be opened* | A button uses **Open AI insight** on a page where the insight extension could not load. Reload the report; check that the AI insight component is installed. |
+| The insight ignores a chart | The chart was empty, or it is outside the chosen **Analysis scope**. |
+| Nothing happens on click | Check that the AI Agent service is running and configured. |

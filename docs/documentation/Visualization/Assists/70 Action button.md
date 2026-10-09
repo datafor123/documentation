@@ -1,21 +1,48 @@
 ---
 title: Action button
 permalink: /documentation/Visualization/Action-Button/
+description: Add a button that opens a report, switches a tab, resets filters or runs another action, with states, icons, disable and visibility rules.
 createTime: 2026/10/06 20:53:56
 ---
 
 # Action button
 
-Provide an explicit control for navigation or a report action.
+An **Action button** (called *Image Button* before 9.04.6) is a button that does one thing when clicked: open a report, switch a tab, reset filters, export the page and more.
 
-1. Add **Components → Assists → Action button**.
-2. Under **Style → Content**, set the button text and optional icon. Use a specific label such as **Reset filters** or **Open details**.
-3. Configure **Style type & states** so the button remains readable in each state.
-4. Open **Actions → Click action**, choose **On click**, and complete the selected action’s settings.
-5. Test the button in Preview.
+## Add a button
 
-The Data panel also offers **Data binding**, **Analysis model**, **Field**, and **Filters** for buttons whose content depends on data. Start with a fixed label unless data-driven content is needed.
+1. In **Components → Assists**, click **Action button**, then click the canvas. A new button is 120 × 36 px with the text *Button*.
+2. On **Style → Content**, set the **Button Text**, font and an optional icon.
+3. On **Actions → Action**, choose the **Click action** and fill its settings.
+4. Test the button in **Preview**: in the editor a click only selects it.
 
-![Action button content and style settings](../images/current/action-button-style.jpg)
+![Style → Content of an Action button](./images/button-content.png)
 
-Keep action labels distinct. Readers should know whether a button opens another report, changes the current tab, or resets a selection.
+## Style
+
+| Group | Settings |
+| --- | --- |
+| **Content** | **Show Button Text**, **Button Text**, **Button Font**, **Show icon**, **Icon** (from the icon library), **Icon position** (Left, Right, Top, Bottom), **Icon size**, **Text Offset X/Y** |
+| **Style type & states** | **Style type**: **Fill**, **Outline**, **Text** or **Image**. With **Follow primary color** on, the hover, pressed and disabled colours are derived from one colour. Turn it off to set **Background**, **Text color** and **Border** for each **State**: Default, Hover, Pressed, Disabled. |
+| **Effects** | Border, corner radius, shadow |
+
+Buttons from earlier versions show the style type **Legacy style** and keep their look.
+
+## Actions
+
+| Group | Settings |
+| --- | --- |
+| **Action** | **Click action**: None, Open report page, Open link, Switch tab page, Reset filters, Clear filters, Refresh data, Export PDF, Full screen, Open AI insight |
+| **Disable condition** | **Never**, **When there is no data**, **By report parameter** |
+| **Visibility** | Always, Hidden in preview, by report parameter, user or role |
+| **Custom script** | Runs on click; return `false` to cancel the action |
+
+![Click actions](./images/button-click-actions.png)
+
+Details of each action and rule: [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
+
+## Bind the button to data
+
+New buttons need no data. Turn on **Data → Data binding** to show a value from the model on the button: choose **Analysis model**, **Field** and **Filters**. The first member of the field becomes the button text, can be mapped to an image, and is passed as a parameter when the button opens a report. **Disable condition → When there is no data** then greys the button out when the query returns nothing.
+
+Use labels that say what happens, such as *Reset filters* or *Open store details*.

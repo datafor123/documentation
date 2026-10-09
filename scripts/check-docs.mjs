@@ -112,8 +112,10 @@ for (const page of pages) {
     const resolved = pathname.startsWith('/') ? path.join(docs, '.vuepress/public', pathname) : path.resolve(path.dirname(page.file), pathname);
     if (!existsExact(resolved)) problems.push(`${rel}: missing ${ref.type} ${ref.target}`);
   }
+  // VuePress compiles pages as Vue templates: "{{" outside code is parsed as an expression and breaks the build.
+  const prose = body.replace(/<!--[\s\S]*?-->/g, '');
+  if (/\{\{/.test(prose) && !/v-pre/.test(page.text)) problems.push(`${rel}: "{{" outside code; wrap it in backticks`);
   if (/\/docs\/(documentation|release)\//.test(slash(page.file))) {
-    const prose = body.replace(/<!--[\s\S]*?-->/g, '');
     const cjk = prose.match(/[㐀-鿿豈-﫿]+/g);
     if (cjk) warnings.push(`${rel}: CJK text ${[...new Set(cjk)].slice(0, 5).join(' ')}`);
   }

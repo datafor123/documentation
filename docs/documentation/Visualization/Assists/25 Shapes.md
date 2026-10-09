@@ -1,22 +1,49 @@
 ---
 title: Shapes
 permalink: /documentation/Visualization/Shapes/
+description: Draw rectangles, lines, arrows, stars and callouts with fill, outline and text, use them as panels or buttons, and convert old shapes.
 createTime: 2026/10/06 20:53:56
 ---
 
 # Shapes
 
-Add labeled blocks, dividers, arrows, and callouts from one component.
+**Shape** draws background panels, title blocks, dividers, arrows and callouts. It replaces the separate Rectangle, Line and Ellipse components.
 
-1. Choose **Components → Assists → Shape**, then place it on the canvas.
-2. Under **Style → Shape**, choose a **Type** and optional **Style preset** or **Rotate** value.
-3. Set the appearance under **Fill and line** and the content under **Text**.
-4. If the shape should perform an action, open **Actions → Click action → On click**.
+![Shape style settings](./images/shape-style.png)
 
-Types include Rectangle, Rounded rectangle, Ellipse, Line, Arrow, Double arrow, Triangle, Right triangle, Diamond, Pentagon, Hexagon, Star, and Callout.
+## Style → Shape
 
-![Current Shape type selector](../images/current/shape-types.jpg)
+| Setting | Options |
+| --- | --- |
+| **Type** | Rectangle (default), Rounded rectangle, Ellipse, Line, Arrow, Double arrow, Triangle, Right triangle, Diamond, Pentagon, Hexagon, Star, Callout |
+| **Style preset** | **Card background**, **Divider**, **Title block**, **Accent bar**: sets type, fill and line in one step |
+| **Direction** | Lines and arrows: Horizontal, Vertical, Top left to bottom right, Bottom left to top right |
+| **Pointer** | Callouts: Top, Bottom (default), Left, Right |
+| **Corner radius** | Rounded rectangle and callout, 0–100 px |
+| **Rotate** | 0–360° |
 
-Click actions include Go to report, Open link, Switch tab, Reset filters, Clear filters, Refresh page, Export PDF, Full screen, and Open AI insight. Select the action, complete its settings, then test it in Preview.
+![Style presets](./images/shape-presets.png)
 
-![Click actions available to an assist component](../images/current/assist-actions.jpg)
+## Style → Fill and line
+
+**Fill**: None, Solid (default) or Gradient, with **Fill color** and **End color**. **Line width** (0 = no outline), **Line color**, **Line style** (Solid, Dashed, Dotted), **Line ends** for lines (Flat, Round, Square) and **Shadow**.
+
+## Style → Text
+
+Type a **Text** to show inside the shape; it wraps inside the shape. Set **Font**, **Align**, **Vertical alignment** and **Padding**. **Insert dynamic value** adds a value such as `{{filter.Region}}` at the end of the text. See [Dynamic Values](/documentation/Visualization/Dynamic-Values/).
+
+**Style → Effects** has **Opacity** and **Hover effect**.
+
+## Actions
+
+- **Click action** turns the shape into a button: **Go to report**, **Open link**, **Switch tab**, **Reset filters**, **Clear filters**, **Refresh page**, **Export PDF**, **Full screen**, **Open AI insight**.
+- **Visibility** and a **Click script** under **Events**.
+- A shape with no action and no script lets clicks through to the components below, so a background panel does not block the charts on it.
+
+See [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
+
+## Convert old shapes
+
+Rectangle, Line and Ellipse components from earlier versions still work. Select one and click **Style → Shape → Convert to shape → Convert** to replace it with a Shape that keeps its position, size, style, click action and visibility.
+
+Related: [Lines and arrows](/documentation/Visualization/Line/) · [Assist Components](/documentation/Visualization/Assist-Components/)
