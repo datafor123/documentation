@@ -23,9 +23,9 @@ This document is intended for **Super Admin** users. It explains how to use Data
 
 ### 2.1 Permission Requirements
 
-Only users logged in with a **superAdmin account** can see the **Multi-tenancy** page under **Settings › Operations**.
+Only users signed in with the **superadmin** account can see the **Multi-tenancy** page under **Settings › Operations**.
 
-> Important: If you upgrade the system using an **upgrade package**, you must **manually create** the **`superAdmin`** account. The upgrade process does not automatically create this account.
+> Important: If you upgrade the system using an **upgrade package**, you must **manually create** the **`superadmin`** account. The upgrade process does not automatically create this account.
 
 ### 2.2 Navigation Path
 
@@ -40,7 +40,7 @@ After entering Multi-tenancy, the system displays the tenant list by default. Th
 
 ### 3.1 Column Descriptions
 
-The list typically includes the following columns:
+The list includes the following columns:
 
 - **Tenant ID**: The unique identifier of the tenant. Use the copy icon next to the Tenant ID to copy the tenant URL (see Section 11).
 - **Tenant Name**: The tenant name (click to open tenant details)
@@ -68,23 +68,28 @@ Click the **“+”** button to the right of the **Multi-tenancy** page title to
 
 In the tenant list, you may see a tenant named **template0** (as shown in the screenshot). It is a built-in **Tenant Template** used to initialize new tenants.
 
-> Important: If you upgrade the system using an **upgrade package**, the tenant template (**template0**) is **not created automatically**. You must **manually create** the tenant template before creating new tenants.
+> Important: If you upgrade the system using an **upgrade package**, the tenant template (**template0**) is **not created automatically**. Until it exists, creating any other tenant fails with "Tenant template0 does not exist,create it first". To create it, click **+** and create a tenant with **Tenant ID** `template0` (see Section 4); it is the only tenant that can be created without a template.
 
 <div align="left"><img src="./images/image-20260218161843715.png" /></div>
 
 - **Default behavior**: When you create a new tenant, the system **copies (clones) template0** to generate the tenant’s initial content and default configuration.
-- **Copy scope**: The system typically copies a “ready-to-use initial tenant baseline”, which may include (but is not limited to):
+- **Copy scope**: the tenant's initial content and configuration, including:
   - **White-label configuration**: brand name, logo, theme color/appearance, etc.
   - **Data sources**: configured connections and related settings
   - **Analytic models**: published/available models and semantic configurations
   - **Sample pages / sample content**: sample reports, dashboards/pages, demo assets and folder structure
-- **Impact**: Changes to **template0** typically affect **new tenants created after the change**. Existing tenants usually do not automatically inherit these changes.
+- **Impact**: Changes to **template0** apply to tenants created after the change. Existing tenants are not updated.
+- **template0** cannot be deleted: its row menu has no **Delete**.
 
 > Recommendation: Treat **template0** as a system template tenant. Avoid using it as a real customer tenant. If you need to change the “default content/configuration for new tenants”, update template0 carefully, assess impact, and verify the initialization result by creating a new tenant.
 
 ### 3.5 Copy Tenant URL (from Tenant ID)
 
-On the tenant list page, the **copy** button next to a **Tenant ID** is used to copy the tenant’s URL. 
+On the tenant list page, the **copy** button next to a **Tenant ID** is used to copy the tenant’s URL.
+
+### 3.6 Row Menu
+
+Each row's menu offers **Details** (opens the tenant details page), **Enabled** (shown when the tenant is disabled), **Disabled** (shown when the tenant is enabled), and **Delete** (not shown for **template0**).
 
 ## 4. Create Tenant
 
@@ -103,14 +108,14 @@ On the tenant list page, click **“+”** to open the **Create Tenant** dialog.
 
 | Field                  | Required                       | Description                                                  |
 | ---------------------- | ------------------------------ | ------------------------------------------------------------ |
-| **Tenant ID**          | Yes                            | The tenant’s unique identifier. Use a short, readable format such as letters/numbers/underscores (e.g., `tenant16`, `t_abc`). |
+| **Tenant ID**          | Yes                            | The tenant’s unique identifier, used in the tenant URL. It must start with a letter or underscore (the field hint reads "Start with a letter or underscore") and contain only letters, digits, and underscores (e.g., `tenant16`, `t_abc`). |
 | **Tenant Name**        | Yes                            | The tenant display name (e.g., “ABC SaaS”).                  |
 | **Plan**               | Yes                            | Subscription plan (dropdown). After creation, you can adjust it via **Change Plan** on the tenant details page. |
 | **Admin Email**        | Yes                            | Email address of the tenant’s **admin account**. After creation, you can update this email on the **Admin** tab via **Change Admin**. |
 | **Creator Seat Limit** | Yes                            | Maximum number of Creator seats for the tenant.              |
 | **Reader Seat Limit**  | Yes                            | Maximum number of Reader seats for the tenant.               |
-| **Enable Trial**       | No                             | Whether to enable trial mode (toggle).                       |
-| **Trial End Date**     | Required when trial is enabled | The trial end date (date picker).                            |
+| **Enable Trial**       | No                             | On by default. Turn it off to create the tenant without a trial end date. |
+| **Trial End Date**     | Required when trial is enabled | Defaults to one month from today.                            |
 
 ### 4.3 Recommendations and Notes
 
@@ -121,7 +126,7 @@ On the tenant list page, click **“+”** to open the **Create Tenant** dialog.
 - **New-tenant baseline**: New tenants are initialized by copying the tenant template **template0** (see 3.4).
 
 ## 5. Tenant Details Page
-Click **Tenant Name** or **Tenant ID** on the list page to open the tenant details page. The details page typically includes three tabs:
+Click **Tenant Name** or **Tenant ID** on the list page to open the tenant details page. The details page has three tabs:
 
 - **Details**: Plan, seats, and expiration date
 - **Admin**: Administrator maintenance
@@ -158,7 +163,7 @@ The Seats section shows **used/total** (e.g., Creators 1/5, Readers 0/5).
 
 > Notes:
 >
-> - The **sum of seat quotas across all tenants** (Creators / Readers) must not exceed the system license seat count. If it exceeds the license, the system may block saving, prevent further allocation, or display a “license invalid/expired” warning depending on your enforcement settings.
+> - Saving a quota does not check the total across tenants; keep the sum of all tenants' quotas within the license seat count yourself. Each tenant is limited to the lower of its own quota and the license seat count.
 
 ### 6.3 Change Expiration Date (Expiration / Trial End)
 
@@ -207,10 +212,7 @@ On the tenant details page (top-right):
 - Click **Disabled** to disable the tenant (suspend access)
 - After disabling, the button may change to **Enabled** to re-enable the tenant
 
-**Recommended practice:**
-
-- Use **Disabled** for expired, suspended, or temporarily inactive tenants.
-- Before deleting a tenant, disable it first and observe for a period to confirm there is no retention or recovery requirement.
+Before deleting a tenant, consider disabling it first: a disabled tenant can be re-enabled, a deleted one cannot be restored.
 
 ## 10. Delete Tenant (Irreversible)
 
@@ -227,20 +229,13 @@ Deleting a tenant is a high-risk operation: it **cannot be undone** and will rem
 5. Click **Delete** to confirm
    - To cancel: click **Cancel**
 
-### 10.2 Pre-deletion Checklist (Recommended)
-
-- Confirm whether you need to back up/export data (based on your deployment and ops policy)
-- Ensure internal approval or ticket records are completed
-- Notify the customer/admin if required
-- Consider using **Disable** instead of **Delete** (often safer)
-
 ## 11. Tenant URL and Default Admin Credentials
 
 ### 11.1 Tenant URL
 
 - Tenant URL format:
-  - `http://<IP>:48480/datafor/t/<TENANT_ID>`
-  - Example: `http://<IP>:48480/datafor/t/tenant16`
+  - `http://your-server:28080/datafor/t/<tenant-id>`
+  - Example: `http://your-server:28080/datafor/t/tenant16`
 - You can click the **copy** icon next to **Tenant ID** on the tenant list page to copy the full tenant URL.
 
 ### 11.2 Default Tenant Admin Account
@@ -260,7 +255,7 @@ Only **superadmin** users can see this menu. Confirm you are logged in with the 
 
 ### Q2: What happens when Trial End Date / Expiration Date is reached?
 
-The UI indicates the tenant will not be able to use system features after expiration. The exact scope of restrictions depends on how the system enforces expiration.
+From the day after the date (one day of grace for time zones), the tenant's license check fails with "License has expired." and the tenant can no longer use system features. To restore access, set a later date with **Change Expiration Date**.
 
 ### Q3: How do I quickly find a tenant?
 

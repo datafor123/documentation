@@ -48,7 +48,7 @@ When the window is narrow, buttons that do not fit move into **…**, listed wit
 
 ## Component toolbar
 
-Point to a component to show its own toolbar in the top-right corner: **Lock** (in the editor), drill buttons where the chart supports drilling, **Conditions** when filters apply, **Zoom in**, and **⋮** for **Export**, **Data preview**, **Execution cost** and **Delete**.
+Point to a component to show its own toolbar in the top-right corner: **Lock** (in the editor), drill buttons where the chart supports drilling, **Conditions** when filters apply, **Zoom in**, and **⋮** for **Export**, **Execution cost** and **Delete**, plus **Data preview** on charts, cards, Tree table and Parent-child table (not on Table or Pivot table).
 
 ## Undo, preview and save
 

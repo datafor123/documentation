@@ -34,7 +34,7 @@ Use of this API requires authentication. For details about the authentication me
     "locale-country": "",
     "cors-requests-allowed": "true",
     "cors-requests-exposed-headers": "",
-    "cors-requests-allowed-domains": "http://test.com, http://localhost:28080, http://localhost:63342, https://aws.datafor.com.cn:448, http://117.144.48.146:48480, https://login.microsoftonline.com, null",
+    "cors-requests-allowed-domains": "https://portal.example.com, http://localhost:28080",
     "cors-requests-allowed-methods": "GET,HEAD,POST",
     "cors-requests-allow-credentials": "true",
     "fully-qualified-server-url": "http://localhost:28080/datafor/",

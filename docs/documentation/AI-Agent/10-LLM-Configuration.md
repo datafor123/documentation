@@ -24,10 +24,8 @@ The LLM panel is available to administrators in the full AI Agent view. It opens
 
 Datafor 10.00 has 15 Agent stages and one **Embedding Model** role: 16 assignments. **16/16 assigned** means that every role has a compatible profile and every chat profile has current structured-output verification. It is not a continuous provider-health check.
 
-::: warning After an upgrade to 10.00
-The new stage **Model Resolution** has no assignment in an upgraded installation, nor in a custom scheme saved before 10.00. The badge then reads **15/16 assigned**, and the Assignments **Save** button stays disabled until you assign it. Until then, automatic model selection uses the **Workflow Routing** assignment at runtime. The built-in **OpenAI** template includes the stage.
-
-<div align="left"><img src="./images/llm-assignments-upgrade.png" alt="Assignments after an upgrade: 15/16 assigned, Model Resolution required, Save disabled" width="420" /></div>
+::: tip After an upgrade to 10.00
+The stage **Model Resolution** is new in 10.00. While it has no assignment of its own, it runs on the **Workflow Routing** profile, and **Assignments** shows that profile in its row, so an upgraded installation still reads **16/16 assigned**. Clicking **Save** records it as the stage's own assignment; choose a different profile first if you want one. You only have to assign it by hand when **Workflow Routing** is unassigned as well.
 :::
 
 ## 2. Create and enable a model profile
@@ -49,7 +47,7 @@ From **Assignments**, click **Manage models →**, then click **Add Model**.
 
 For Agent stages, use an OpenAI Responses or OpenAI-compatible Chat endpoint. A provider appearing in the menu does not guarantee that its native API is compatible; **Verify and enable** is the acceptance check.
 
-The form has no capability selector. A new profile is classified as an embedding profile when its name or display name contains `embed` or `embedding`; otherwise it is classified as chat. Prefer a supplied scheme or import file when you need an explicitly defined capability.
+The form has no capability selector. A new profile is classified as an embedding profile when its model ID, display name, or description contains `embed` or `embedding`; otherwise it is classified as chat. Prefer a supplied scheme or import file when you need an explicitly defined capability.
 
 ### Correct activation order
 
@@ -107,7 +105,7 @@ Return to **Assignments**. All 16 rows must be assigned before **Save** is enabl
 
 Agent-stage selectors list verified chat profiles. The **Embedding Model** selector lists embedding profiles. A profile can be reused across multiple stages.
 
-Click the **Save** button at the top of **Assignments** after any change. Assignment changes are not saved automatically. Saved assignments are read for each subsequent stage call and do not require a service restart. A required stage does not fall back to an old model ID or an unassigned spare profile. The one exception is **Model Resolution**: while it has no assignment of its own (see the upgrade note in section 1), it uses the **Workflow Routing** assignment.
+Click the **Save** button at the top of **Assignments** after any change. Assignment changes are not saved automatically. Saved assignments are read for each subsequent stage call and do not require a service restart. A required stage does not fall back to an old model ID or an unassigned spare profile. The one exception is **Model Resolution**: while it has no assignment of its own (see the note in section 1), it uses the **Workflow Routing** assignment.
 
 ::: tip Models configured in Datafor
 Questions in the AI Assistant use only the assignments on this page. A few features fall back to a model configured in Datafor when their stage has no assignment, for example dashboard insight, the model brief and sample questions. For users who are not administrators, that fallback works only when the AI Agent and the Datafor server share the same secret. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/).
@@ -130,7 +128,7 @@ Save live assignments before saving a scheme. Schemes and exports never contain 
 
 When applying a scheme, review the stage changes, enter the provider API key, and change the shared endpoint only if the deployment uses a gateway or proxy. Datafor creates or overwrites profiles referenced by the scheme, verifies them, and writes assignments last; unrelated profiles are untouched. If verification is incomplete, assignments can remain pending. Return to **Assignments**, resolve any warnings, confirm **16/16 assigned**, and click **Save**.
 
-After importing, add the missing API keys and run **Verify and enable** on the saved profiles before saving assignments. A scheme saved or exported before 10.00 has no **Model Resolution** assignment; assign it by hand after applying the scheme.
+After importing, add the missing API keys and run **Verify and enable** on the saved profiles before saving assignments. A scheme saved or exported before 10.00 has no **Model Resolution** assignment, so applying it leaves that row on the profile it had before. Check the row after applying such a scheme, and assign it by hand if it is empty.
 
 If a scheme changes the **Embedding Model**, rebuild the knowledge index of every data model immediately: click **Rebuild index** for each index on **Settings › AI Agent › Knowledge indexes**. An index built with the previous embedding model is not compatible with the new one.
 
@@ -147,7 +145,7 @@ If a scheme changes the **Embedding Model**, rebuild the knowledge index of ever
 | A model is absent from an Agent-stage selector | Confirm it is a chat profile, save it, and run **Verify and enable**. |
 | **Structured output not verified** | Check provider access, endpoint, API key, model ID, and parameters; then verify the saved profile again. |
 | The Assignments **Save** button is disabled | Complete all 16 rows and resolve every compatibility or verification warning. |
-| The badge reads **15/16 assigned** after an upgrade | Assign a verified chat profile to **Model Resolution**, for example the one used by **Workflow Routing**, then click **Save**. |
+| **Model Resolution** is empty | **Workflow Routing** is unassigned too. Assign a verified chat profile to both, then click **Save**. |
 | A previously assigned stage becomes unavailable after a profile edit | Save the profile and rerun **Verify and enable**; verification is tied to the effective runtime configuration. |
 | Imported assignments remain pending | Add API keys, verify imported chat profiles, review all roles, then click **Save**. |
 | Retrieval fails after changing the Embedding Model | Click **Rebuild index** for every knowledge index, so that each is rebuilt with the new embedding profile. |

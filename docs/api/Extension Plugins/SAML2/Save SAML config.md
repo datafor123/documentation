@@ -46,9 +46,9 @@ Use of this API requires authentication. For details about the authentication me
 
 ```json
 {
-  "idp_sso_url": "https://login.microsoftonline.com/1fdff6f1-4338-4212-bdc7-4544f8c9b2f6/saml2",
-  "idp_entity_id": "https://sts.windows.net/1fdff6f1-4338-4212-bdc7-4544f8c9b2f6/",
-  "idp_certificate": "-----BEGIN CERTIFICATE-----\nMIIC1DCXXXXXXnCyii\n-----END CERTIFICATE-----\n",
+  "idp_sso_url": "https://login.microsoftonline.com/<tenant-id>/saml2",
+  "idp_entity_id": "https://sts.windows.net/<tenant-id>/",
+  "idp_certificate": "-----BEGIN CERTIFICATE-----\n<base64-encoded certificate>\n-----END CERTIFICATE-----\n",
   "sp_entity_id": "bi",
   "allowed_clock_skew": 2,
   "message_lifetime": "2",

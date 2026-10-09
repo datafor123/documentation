@@ -27,11 +27,13 @@ Select a Measure in the **Analysis model** tree and configure its properties.
 | **Aliases** | Other terms users or AI may use for the same measure. |
 | **Unit** | Currency, percentage, quantity, duration, or another business unit. Stored as a language-neutral code and shown in each user's language. |
 | **Display scale** | Default magnitude (K, M, B; 万, 亿) in which reports show the measure. See [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/). |
-| **Direction** | Whether higher, lower, or neither direction is preferred. |
+| **Direction** | **Higher is better**, **Lower is better**, or **Neutral**. Besides guiding the Agent, it colours comparisons on **Measure card** and **KPI trend card** when the card's **Comparison direction** is **Follow measure**: with **Lower is better** a decrease uses the favorable colour, with **Neutral** changes are grey. |
 | **Default time field** | Date context the Agent should use for this Measure. |
 | **Recommended dimensions** | Dimensions normally used to analyze the measure. |
 
 Available aggregation types include Sum, Average, Min, Max, Count, Distinct Count, population or sample standard deviation, and population or sample variance. Choose the method from the business meaning: for example, a unit price usually needs Average rather than Sum.
+
+Median is not offered in the modeler, because several databases cannot compute it. Report authors can still choose it for one component field with **More → Aggregation → Median** in the report designer; see [Aggregation for Measures](/documentation/Analysis/Aggregation-for-Measures/).
 
 ### Default format of new measures
 

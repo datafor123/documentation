@@ -23,6 +23,23 @@ For example, a sales fact table can be summarized by customer and day with preco
 
 ## Before you begin
 
+### Enable aggregation tables on the server
+
+The query engine ships with aggregation tables turned off. While either property below is `false`, the engine ignores every aggregation mapping and always queries the detail tables. **Settings › Data › Query engine** does not show these properties, so an administrator must edit the files on the server:
+
+1. In both `bi-server/pentaho-solutions/system/datafor/mondrian.properties` and `bi-server/pentaho-solutions/system/mondrian/mondrian.properties`, set:
+
+   ```properties
+   mondrian.rolap.aggregates.Use=true
+   mondrian.rolap.aggregates.Read=true
+   ```
+
+2. Restart the Datafor server. Both files are read only at startup.
+
+The setting applies to every Analysis Model on the server.
+
+### Prepare the aggregation table
+
 Prepare the physical aggregation table in the datasource, then confirm:
 
 - Its grain is clear. Each row must represent one unique combination of the grouping columns.
@@ -89,15 +106,15 @@ The aggregation table does not expose its own Dimensions or Measure Group after 
 
 Always validate both query routing and business results before relying on an aggregation table.
 
-1. Create a report and add a **Pivot**.
+1. Create a report and add a **Pivot table**.
 2. Select the Analysis Model that contains the aggregation mapping.
 3. Add only Dimensions represented by the mapped **Group by** columns.
 4. Add one or more mapped Measures.
 5. Confirm that the result matches an expected total or a query against the detail data.
 
-<div align="left"><img src="./images/analysis-model-aggregation-query-results.png" alt="Pivot using a customer grouping with mapped sales, count, cost, and unit Measures" width="100%" /></div>
+<div align="left"><img src="./images/analysis-model-aggregation-query-results.png" alt="Pivot table using a customer grouping with mapped sales, count, cost, and unit Measures" width="100%" /></div>
 
-To inspect the generated SQL, select the Pivot in edit mode, open **More (…)**, and select **Execution cost**. If the SQL references the physical aggregation table, that query used the mapping. The menu is not available in read-only preview mode.
+To confirm that the query used the aggregation table, select the Pivot table in edit mode, open **More (…)**, and select **Execution cost**. If the SQL references the physical aggregation table, that query used the mapping. The menu is not available in read-only preview mode.
 
 ## Understand query matching and fallback
 
@@ -109,11 +126,7 @@ Do not assume that every query against the Analysis Model will use the aggregati
 
 ## Maintain aggregation tables
 
-- Refresh the physical aggregation whenever its detail data changes.
-- Use the same business definitions, null handling, and filters as the detail Measures.
-- Compare representative totals after every load or definition change.
-- Update the mapping when a source column or table alias changes.
-- Retest reports that use new Dimensions, filters, or Measures.
+Datafor does not refresh the physical table. Reload it whenever the detail data changes, and update the mapping when a source column or table alias changes.
 
 ## Troubleshooting
 
@@ -134,7 +147,7 @@ Check that:
 - Report filters do not require a column outside the aggregation grain.
 - The model was saved after the mapping changed.
 
-If the mapping appears correct, ask an administrator to confirm that aggregation-table use is enabled on the server.
+If the mapping appears correct, ask an administrator to confirm that `mondrian.rolap.aggregates.Use` and `mondrian.rolap.aggregates.Read` are both `true` and that the server was restarted afterwards (see [Before you begin](#enable-aggregation-tables-on-the-server)).
 
 ### Aggregated results differ from detail results
 

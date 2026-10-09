@@ -1,12 +1,13 @@
 ---
 title: AI Operations and Quotas
 permalink: /documentation/AI-Agent/LLM-Permission-Management/
+description: Review AI Agent usage and set the optional daily question quota per user, with overrides by role and user type.
 createTime: 2026/09/01 21:50:50
 ---
 
 # AI Operations and Quotas
 
-The current AI Assistant provides operational usage and question-quota controls under **Ops**. The previous per-LLM **Authorized Object** permission action is not present in the current **LLM → Models** view. Current model cards show **Edit**/**Delete**, assignment usage, and structured-output verification status.
+The **Ops** panel of the AI Assistant shows usage statistics and holds the daily question quota.
 
 ## 1. Open Ops
 
@@ -42,15 +43,23 @@ Available controls are:
 
 | Control | Purpose |
 | --- | --- |
-| **Enable daily question quota** | Turns per-user daily question limits on or off. |
+| **Enable daily question quota** | Turns per-user daily question limits on or off. Off by default. |
 | **Default quota** | Sets the default questions per day per user. |
-| **Exempt administrators** | Excludes administrators from the daily limit when enabled. |
+| **Exempt administrators** | Excludes administrators from the daily limit when enabled. On by default. |
 | **Overrides by role and user type** | Adds more specific quota rules. |
 
-When one user matches several rules, the current UI applies the largest quota. Click **Save** after changing quota settings.
+When one user matches several rules, the largest quota wins. Click **Save** after changing quota settings.
+
+How questions are counted:
+
+- **The day follows the server's time zone.** The count restarts at midnight on the AI Agent server, not at midnight for each user.
+- **Failed and cancelled questions are not counted.** A question counts on the day it was asked, even if it finishes after midnight.
+- **Questions asked at the same moment** can each pass the check, so a user can exceed the limit by the number of questions still being submitted.
+
+A user who has reached the limit sees:
+
+> You have used up the question allowance for today (_quota_ per day). You can ask again after _time_. Contact your administrator if you need a higher limit.
+
+_quota_ is the user's daily quota, and _time_ is the next midnight of the server, shown in the user's local time. The question is not started.
 
 Daily quotas control usage over a day; they do not cap simultaneous questions or increase processing capacity. Size analysis workers separately using [Managing High Concurrency](/documentation/AI-Agent/Managing-High-Concurrency/).
-
-## 4. Access control
-
-LLM profiles no longer expose a separate permission-management action in the current **LLM → Models** view. Continue to use Datafor's user, role, model, folder, report, datasource, and row-level permissions to govern access to analytical data. Quotas control request volume; they do not grant access to data that the user cannot otherwise read.

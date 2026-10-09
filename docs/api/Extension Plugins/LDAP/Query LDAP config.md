@@ -62,8 +62,8 @@ This API does not require any body parameters.
     "initroles": [
       "SYS_Reader"
     ],
-    "user_base": "cn=${username},dc=imysh,dc=com",
-    "administrator": "cn=admin,dc=imysh,dc=com",
+    "user_base": "cn=${username},dc=example,dc=com",
+    "administrator": "cn=admin,dc=example,dc=com",
     "inituser": "1",
     "initial": "com.sun.jndi.ldap.LdapCtxFactory",
     "enable": "0",

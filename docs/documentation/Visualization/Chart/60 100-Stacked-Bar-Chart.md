@@ -31,7 +31,7 @@ Use either one measure split by a **Legend** field, or several measures that are
 | Group → option | Effect | Default |
 | --- | --- | --- |
 | **Data labels → Show** | Labels on the segments. | Off |
-| **Data labels → Label content type** | **Show percentage** (share of the bar) or **Show value** (the measure value). | **Show percentage** |
+| **Data labels → Content** | **Percent** (share of the bar) or **Value** (the measure value). | **Percent** |
 | **Data labels → Position** | **Inside left**, **Center**, **Inside right**. | **Inside left** |
 | **Bar → Space (%)**, **Round corners** | Gap between bars; rounding of the outer end of each stack. | 20, **None** |
 | **Bar → Right margin** | Space in px to the right of the plot. Empty = automatic; **0** = no margin. | Empty (**Auto**) |
@@ -39,7 +39,7 @@ Use either one measure split by a **Legend** field, or several measures that are
 | **Y axis → Label width** | Width of the category labels (40–800 px). | 50 px |
 | **Tooltip → Show Tooltip** | Turns the data tooltip on or off. | On |
 
-- The label option names differ from the [100% stacked column](/documentation/Visualization/100-Stacked-Column-Chart/) (**Content** → **Value** / **Percent**) but work the same way.
+- **Content** has the same choices as in the [100% stacked column](/documentation/Visualization/100-Stacked-Column-Chart/).
 - There is no **Display units**, **Decimal places**, **Show total** or **Hide labels below (%)**, and the X axis has no minimum or maximum inputs.
 - The tooltip shows the share followed by the value, for example *34.5% (334,626.13)*. Right-click → **Copy value** copies what the label shows.
 

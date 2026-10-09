@@ -24,16 +24,16 @@ An Analysis Model is the semantic layer between a data source and Datafor report
 
 ## Designer workspace
 
-<div align="left"><img src="./images/analysis-model-designer-overview.png" alt="Analysis Model designer showing the Data panel, model canvas, Analysis model tree, Attributes panel, and Insights panel" width="100%" /></div>
+<div align="left"><img src="./images/analysis-model-designer-overview.png" alt="Analysis Model designer showing the Data panel, model canvas, Analysis model tree, Attributes panel, and the diagnostics bar" width="100%" /></div>
 
 | Area | Use it to |
 | --- | --- |
-| **Toolbar** | Refresh connection metadata, undo or redo model edits, open settings, create a SQL View, and save the model. |
+| **Toolbar** | Refresh connection metadata, undo or redo model edits, open **Data security setting** (gear), create a SQL View, and save the model. |
 | **Data panel** | Select a datasource and schema, search tables, preview data, and add tables to the model. |
 | **Canvas** | Inspect tables, arrange the model, and create or edit relationships. |
 | **Analysis model** | Manage Dimensions, Attributes, Hierarchies, Measures, and calculated measures. |
 | **Attributes** | Edit the selected object's core properties, business semantics, advanced settings, and metric governance. |
-| **Insights** | Review model diagnostics and enterprise metric bindings. |
+| Bottom bar of the canvas | **Model diagnostics** and **Metric bindings** tabs: review diagnostics and enterprise metric bindings. |
 
 ## Recommended modeling sequence
 

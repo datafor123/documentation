@@ -2,116 +2,57 @@
 title: Performance Tuning
 permalink: /documentation/Best/Performance-Tuning/
 tags: null
+description: Find where a slow report spends its time, and the Datafor, Tomcat and JVM settings that change it.
 createTime: 2026/09/01 22:03:26
 ---
 
 
 # Performance Tuning
 
-When deploying Datafor, it is important to ensure that the system has sufficient available resources (CPU, memory, disk space, etc.) to ensure its optimal performance. However, even with sufficient resources, performance issues may arise due to incorrect configurations. This document provides some common Datafor performance tuning tips to help you optimize the performance of your Datafor deployment.
+Most slow reports spend their time in the database. Find out where the time goes before you change server settings.
 
-## Database Tuning
+## Find the slow query
 
-The query performance of Datafor analytics reports relies on the query performance of the database. Therefore, tuning the database appropriately can improve Datafor performance. Here are some common database tuning recommendations:
+In edit mode, point to the component, open **⋮** and select **Execution cost**. It lists the SQL statements the engine sent for that component. Run them in your database tool: if they are slow there too, tune the database (indexes, partitions, statistics) or the model, not Datafor. See [Report Editor Basics](/documentation/Start/Basic-Operations-for-Report-Design/).
 
-### Use the right database
+## Datafor settings
 
-It is recommended to use a scalable and performant database.
+| Lever | Where | Effect |
+| --- | --- | --- |
+| Engine limits | **Settings › Data › Query engine**: **Max concurrent queries**, **Max result rows**, **Query timeout (seconds)** | Caps the load one server puts on the databases and stops runaway queries. See [Query Engine](/documentation/System/Query-Engine/). |
+| SQL threads | `mondrian.rolap.maxSqlThreads` (default 100) and `mondrian.rolap.maxSqlThreadsPerQuery` in `bi-server/pentaho-solutions/system/datafor/mondrian.properties` | How many SQL statements run at once in total and per query. See [Query Engine](/documentation/System/Query-Engine/). |
+| Rows per component | **Page › Settings › Performance › Max query records**; the default (5,000) is **Default chart query row limit** in **Settings › General › System configuration** | Fewer rows load and render faster. See [Page Settings](/documentation/Visualization/Size-Display/) and [System Configuration](/documentation/System/System-Configuration/). |
+| Model cache | **Cache expire** in the model; the default for new models is **Default model cache expiration** in **System configuration** (0 = never expires) | Repeated queries are answered from the cache instead of the database. Use an expiration that matches how often the data is loaded. See [Creating an Analysis Model](/documentation/Model/Creating-an-Analysis-Model/). |
+| Connection pool | **Pooling** in the datasource; server defaults in `dbcp-defaults` in `pentaho-solutions/system/pentaho.xml` (`maxActive` 20) | A busy datasource may need a larger pool. A larger pool does not make a slow query faster. See [Configuring MySQL Data Source](/documentation/Datasource/Configuring-MySQL-Data-Source/). |
+| Aggregation tables | Model | Large fact tables are answered from pre-aggregated tables. See [Use Aggregation Tables](/documentation/Model/Use-Aggregation-Tables/). |
+| AI Agent workers | `AI_AGENT_DISPATCH_WORKERS` in `bi-server/ai-agent/.env` (1–8, default 1) | Questions to the AI Agent stop queuing behind each other. See [Managing High Concurrency](/documentation/AI-Agent/Managing-High-Concurrency/). |
 
-### Configure connection pool
+## Memory
 
-A connection pool is a component that manages connections between the application and the database. Using a connection pool can reduce network traffic between the application and the database, and improve performance.
+The server starts with `-Xms2048m -Xmx6144m`. If the logs show `java.lang.OutOfMemoryError` or the server pauses under load, raise `-Xmx` as described in [Increasing Memory Limit for Datafor Server](/documentation/Tools/Increasing-Memory-Limit/).
 
-Here is an example configuration using the c3p0 connection pool:
+## Tomcat
 
-### Configure caching
+The web connector is in `bi-server/tomcat/conf/server.xml`. It listens on port 28080 and already compresses responses (`compression="on"`, `compressionMinSize="2048"` for HTML, JavaScript, CSS, JSON and text), so there is nothing to enable.
 
-Caching is a component that caches data between the application and the database. Using caching can reduce the number of times data is retrieved from the database, and improve performance.
+It sets no `maxThreads`, so Tomcat handles at most 200 requests at the same time. Raise it only if many users work at once and requests wait while CPU and memory are still free. Add the attribute to the existing `<Connector … port="28080" …>` element, keep its other attributes, and restart Datafor:
 
-## Tomcat Tuning
-
-Tomcat is the web container that runs Datafor. Here are some common Tomcat tuning recommendations:
-
-### Choose the right connector
-
-The default Tomcat connector used in Datafor is the HTTP/1.1 NIO protocol connector. This connector uses NIO technology to improve performance and throughput, and supports long connections. In Datafor, you can find the following connector configuration in the server.xml file:
-
-```
-<Connector port="8080" protocol="org.apache.coyote.http11.Http11NioProtocol"
+```xml
+<Connector URIEncoding="UTF-8" ... port="28080" protocol="HTTP/1.1"
            connectionTimeout="20000"
-           redirectPort="8443" />
+           redirectPort="28443"
+           maxThreads="400"
+           ... />
 ```
 
-### Set the right thread pool size
+For HTTPS, caching of static files and long-running requests, put Nginx in front of Datafor. See [Deploying Datafor Behind Nginx](/documentation/Setup/Deploying-Datafor-Behind-Nginx/).
 
-Each connector can have a thread pool configured to handle its incoming requests. The thread pool should be configured based on the expected concurrent connections. Datafor uses the default Tomcat thread pool configuration, which has a default value of 200.
+## Garbage collection log
 
-You can add the maxThreads and minSpareThreads properties to the connector in the server.xml file. Here is an example configuration with a minimum thread count of 300 and a maximum thread count of 500:
-
-```
-<Connector port="8080" protocol="HTTP/1.1"
-           connectionTimeout="20000"
-           redirectPort="8443"
-           maxThreads="500"
-           minSpareThreads="300"
-           prestartminSpareThreads="true"
-           maxIdleTime="60000" />
-```
-
-### Consider enabling compression
-
-Tomcat can compress content sent to browsers and other applications. This can improve performance by reducing network traffic, but requires compression and decompression. It is recommended to enable compression.
-
-Here is an example configuration:
+To see whether pauses come from garbage collection, add these options to the `CATALINA_OPTS` line of the start script (see [Increasing Memory Limit for Datafor Server](/documentation/Tools/Increasing-Memory-Limit/)) and restart:
 
 ```
-<Connector port="8080" protocol="HTTP/1.1"
-           connectionTimeout="20000"
-           redirectPort="8443"
-           compression="on" />
+-Xloggc:/opt/bi-server/tomcat/logs/gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=20M
 ```
 
-### Host static content on a web server
-
-Tomcat is designed to provide dynamic web content. Therefore, it is recommended to use a web server such as Apache HTTP Server as a front-end to Tomcat to allow the web server to serve static content. In the Datafor documentation, it is recommended to store any static content referenced by report images or dashboards on a web server, rather than within the Tomcat that hosts Datafor.
-
-## JVM Tuning
-
-Tomcat runs on the JVM, so adjusting JVM parameters can improve performance. Here are some common JVM tuning recommendations:
-
-### Increase memory
-
-The minimum and maximum heap sizes can be set using the -Xms and -Xmx parameters. It is recommended to set them to the same value, and adjust the maximum heap size based on your application's needs.
-
-For example:
-
-```
-java -Xms512m -Xmx1024m -jar app.jar
-```
-
-### Enable garbage collection logging
-
-The JVM provides some parameters that can enable garbage collection logging to better understand the behavior of garbage collectors in the JVM. Here are some common options:
-
-```
--XX:+PrintGC
--XX:+PrintGCTimeStamps
--XX:+PrintHeapAtGC
--XX:+PrintTenuringDistribution
--XX:+PrintGCApplicationStoppedTime
-```
-
-### Enable compiler optimizations
-
-The JVM includes a JIT that compiles Java bytecode into native code. The following parameters can enable JIT optimizations:
-
-```
--XX:+AggressiveOpts
--XX:+TieredCompilation
--XX:+OptimizeStringConcat
--XX:+UseCompressedOops
-```
-
-## Considerations
-
-Adjusting Datafor, Tomcat, and JVM parameters can have unexpected impacts on the system. Before making any changes, be sure to back up your system and test and evaluate in a production environment to ensure that the changes you make do not cause system crashes or declines in performance.
+Use your own installation path. These options are for the bundled Java 8. If the server runs on Java 9 or later, use `-Xlog:gc*:file=/opt/bi-server/tomcat/logs/gc.log` instead: Java 9 and later do not start with some of the Java 8 options (for example `-XX:+PrintGCDateStamps`), and Java 8 does not start with `-Xlog`. No JIT options are needed; Java 8 already enables tiered compilation and compressed object pointers.

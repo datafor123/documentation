@@ -80,7 +80,7 @@ payload:
 {
   "success": true,
   "expire": 86400,
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFUlAiOiJhZG1pbiIsImV4cCI6MTcyMzAxNTkxNn0.uEmUwBfNAd5FtzjPPrldU9bierng7fd8rCVlZtVPY2k"
+  "token": "<signed-jwt>"
 }
 ```
 

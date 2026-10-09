@@ -8,23 +8,6 @@ description: null
 createTime: 2026/09/01 22:03:26
 ---
 
-## GET Get email config
-
-GET /api/emailconfig/getEmailConfig
-
-Preconditions:The current user's user type must be Administrator
-
-> Response Examples
-
-```json
-{
-  "authenticate": "true",---
-title: Get email config
-permalink: /api/Email/Get email config/
-tags: ["api","Email"]
-description: 
----
-
 ## **GET Get email config**
 
 **Endpoint**  

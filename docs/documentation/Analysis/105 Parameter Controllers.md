@@ -46,7 +46,7 @@ Switching back to **Data source → Model field** restores the field box and kee
 
 1. Create a report parameter **GrowthRate**: **Type → Numeric**, **Suggested values → Any value**, **Default value → 0.1**.
 2. Add a **Numeric slider**, choose **Data source → Parameter** and select **GrowthRate**.
-3. Set **Minimum Value** `-0.2`, **Maximum Value** `0.2` and **Step** `0.01`.
+3. Set **Minimum value** `-0.2`, **Maximum value** `0.2` and **Step** `0.01`.
 4. Use the parameter in a measure such as `[Measures].[Net Sales] * (1 + ParamRef("GrowthRate"))`.
 
 ![Numeric slider bound to GrowthRate](../Visualization/Filters/images/numeric-slider-parameter.png)

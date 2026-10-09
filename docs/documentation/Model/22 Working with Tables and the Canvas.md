@@ -36,7 +36,7 @@ Depending on the selected table, the menu can include:
 
 | Action | Result |
 | --- | --- |
-| **Add as Dimension** | Generates a Dimension from the table when one does not exist. |
+| **Add as dimension** | Generates a Dimension from the table when one does not exist. |
 | **Add as measure group** | Generates Measures from eligible numeric fields and adds Fact Count. |
 | **Preview data** | Opens a sample of the source rows. |
 | **New column** | Creates a row-level calculated column with a datasource SQL expression. |
@@ -48,7 +48,7 @@ Depending on the selected table, the menu can include:
 
 Changing schema takes effect without a confirmation dialog and does not verify table or field compatibility.
 
-Deleting a table also removes all of its relationships, Dimensions, and Measure Groups. Review calculated measures and enterprise metric bindings after deletion. Undo can restore editor state, but it does not restore changes already written to the external Metrics Library registry.
+Deleting a table, from its menu or with the Delete key on the canvas, opens a **Delete table?** confirmation that lists what will be removed: the table and the number of relationships, Dimensions, and Measure Groups built on it. Press Ctrl+Z to undo the deletion. Review calculated measures and enterprise metric bindings after deletion: Undo restores the editor state, but it does not restore changes already written to the external Metrics Library registry.
 
 ## Create or edit a SQL View
 

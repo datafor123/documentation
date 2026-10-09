@@ -7,7 +7,7 @@ createTime: 2026/09/01 22:03:26
 ---
 # Access Control List
 
-**ACL (Access Control List)** is a crucial feature in Datafor that enables fine-grained control over user access to reports, data sources, models, and folders. With ACL, you can ensure resource security and restrict access based on user roles and permissions.
+An **ACL (Access Control List)** controls which users, roles and user types can read, edit or delete reports, data sources, models and folders.
 
 For the complete relationship between User Types, Business Roles, ACLs, RLS, and OLS, see [Permission Evaluation Overview](/documentation/System/Permission-Evaluation-Overview/). An ACL grant does not replace data policies, and an unchecked permission is not an explicit deny that cancels another matching grant.
 
@@ -24,10 +24,7 @@ Deleting a report, folder, or analysis model requires **Delete** or **Full contr
 
 ## 2. User and Role Authorization
 
-ACL allows you to grant specific resource access to **users** and **roles**.
-
-- **Users**: Individual users who can be assigned different roles and permissions.
-- **Roles**: A collection of permissions assigned to a group of users. Managing permissions through roles simplifies access control.
+You can grant access to individual users, to business roles (every member receives the grant), and to user types.
 
 ### 2.1 Assigning Permissions
 
@@ -45,19 +42,19 @@ Permissions must be explicitly granted to users, roles, or user types for each r
 
    <div align="left"><img src="./images/1739528375825.png" width="67%" /></div>
 
-4. Save the changes.
+4. Click **Save**.
 
 5. If the notice **Permissions saved** appears, some of the users or roles you granted lack **Read** on what the content depends on: the data source of a granted model, or the models and data sources used by a granted report or folder. Grant that access in the **Models** and **Datasource** lists, then click **Got it**. The notice does not change any permissions. The same check runs after **Model permissions** and **File permissions** on the **Users** and **Roles** pages. See [Check what grantees still need](/documentation/System/Permission-Evaluation-Overview/#check-what-grantees-still-need).
 
 ### 2.2 User-Type-Based Authorization
 
-Datafor provides three user types:
+Datafor provides three user types (see [User Creation and User Types](/documentation/System/UserTypes/)):
 
-- **Read-Only Users**: Can only view resources but cannot modify or delete them.
-- **Creator Users**: Can edit and create reports, data models, and other resources.
-- **Administrators**: Have full control over all resources, including permission management.
+- **Reader**: Can view granted content but cannot create or modify it.
+- **Creator**: Can create reports, models and other content, and edit content they own or are granted.
+- **Administrator**: Has full control over all resources, including permission management.
 
-ACL can also grant access based on user types. For example, administrators may have full control over all resources, while read-only users can only view them.
+A grant to a user type applies to every user of that type. For example, granting **Read** on a folder to **Reader** lets all Reader users open it. For the **Reader** user type and for Reader users, only **Read** can be granted.
 
 <div align="left"><img src="./images/1739528547452(1).png" width="67%" /></div>
 
@@ -72,20 +69,19 @@ Folder and report authorization in Datafor has certain restrictions:
 
 Reports and subfolders with **Inherit parent** enabled use their parent's effective ACL. If the parent also inherits, follow the chain to the nearest non-inheriting ACL. Disabling inheritance selects the resource's own entries; it does not add a local deny on top of the parent grants. Parent changes affect descendants that continue to inherit, not descendants with their own ACLs.
 
+Turning **Inherit parent** on clears the item's own entries. Datafor asks for confirmation first, in the **Inherit parent permissions** dialog: "Existing authorization objects on this node will be cleared." Click **Continue inheritance**, then **Save**; the item is saved with no entries of its own. To give it its own permissions again later, turn **Inherit parent** off and add the entries again.
+
 For grant combination, folder-operation checks, and owner/administrator exceptions, see [File and folder ACLs](/documentation/System/Permission-Evaluation-Overview/#_2-file-and-folder-acls-grants-and-inheritance).
 
 <div align="left"><img src="./images/1739528638687(1).png" width="67%" /></div>
 
 ## 5. Viewing Permissions
 
-In the **User and Role Management** interface, you can click **"Details"** to view all resources assigned to a specific user or role. These resources may include data sources, models, reports, and folders.
+On the **Users** page (**Users**, **Roles** or **User Type** tab), open a row's menu and click **Details** to view all resources granted to that user, role or user type: data sources, models, reports, and folders.
 
 <div align="left"><img src="./images/1739528756307(1).png"   width="90%" /></div>
 
-On the **"Details"** page, you can see which resources the user or role has access to and their specific permissions (Read, Edit, Delete, etc.).
+In **Details**, you can see which resources the user or role has access to and their specific permissions (Read, Edit, Delete, etc.).
 
 <div align="left"><img src="./images/1739528902335.png"  width="80%"  /></div>
 
-## 6 Modifying Permissions
-
-You can update permissions anytime through the **Permissions** management interface. This allows you to add, remove, or adjust permissions for users and roles as business requirements evolve.

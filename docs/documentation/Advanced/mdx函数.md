@@ -1,115 +1,76 @@
 ---
 title: MDX Functions
 permalink: /documentation/Advanced/MDX-Functions/
+description: Where MDX is written in Datafor, a quick reference of supported MDX functions, and the functions Datafor adds for row calculations, period comparisons and parameters.
 createTime: 2026/09/01 22:03:26
 ---
 
 # MDX Functions
 
-MDX (Multidimensional Expressions) is a powerful query language designed for multidimensional data analysis, commonly utilized in OLAP (Online Analytical Processing) systems. Datafor leverages MDX to define calculated metrics and perform multidimensional data operations such as querying, aggregating, filtering, and computing.
+Datafor's query engine is based on Mondrian and evaluates MDX. You write MDX expressions in two places:
 
-This guide provides an overview of essential MDX functions grouped by their common use cases:
+- **Model calculated measures**, shared by every report on the model: see [Measures and Calculated Measures](/documentation/Model/Measures-and-Calculated-Measures/).
+- **Report calculated measures**, defined in one report: see [Calculated Measures](/documentation/Analysis/Calculated-Measures/). [Quick calculated measures](/documentation/Analysis/Quick-Calculated-Measures/) generate the formula from a template.
 
-## Function Categories
+This page is a short reference of standard functions that the engine supports, followed by the functions Datafor adds. Function names are not case-sensitive; member and Measure names are. Examples use FoodMart-style names; replace them with the Dimensions, hierarchies and Measures of your model.
 
-- **Aggregation Functions:** Calculate summaries such as totals, averages, and counts.
-- **Set Functions:** Operate on sets to combine, intersect, filter, or sort data.
-- **Member Functions:** Access and manipulate hierarchical dimension members.
-- **Time Functions:** Perform calculations and conversions related to dates and time.
-- **Logical Functions:** Apply logical conditions to data.
-- **String Functions:** Manipulate and format textual data.
-- **Mathematical Functions:** Execute numeric calculations.
-- **Type Conversion Functions:** Convert data from one type to another.
+## Quick reference
 
----
+### Sets and aggregation
 
-## Aggregation Functions
+| Function | Syntax | Example |
+| --- | --- | --- |
+| Sum, Avg, Min, Max | `Sum(<Set>[, <Numeric>])` | `Sum({[Time].[1997].[Q1], [Time].[1997].[Q2]}, [Measures].[Store Sales])` |
+| Aggregate | `Aggregate(<Set>[, <Numeric>])` (uses each Measure's own aggregation) | `Aggregate({[Time].[1997].[Q1], [Time].[1997].[Q2]})` |
+| Count | `Count(<Set>[, EXCLUDEEMPTY \| INCLUDEEMPTY])` | `Count([Customers].[Name].Members, EXCLUDEEMPTY)` |
+| Filter | `Filter(<Set>, <Condition>)` | `Filter([Store].[Store City].Members, [Measures].[Store Sales] > 1000)` |
+| Order | `Order(<Set>, <Value>[, ASC \| DESC \| BASC \| BDESC])` | `Order([Product].[Brand Name].Members, [Measures].[Store Sales], BDESC)` |
+| TopCount, BottomCount | `TopCount(<Set>, <Count>[, <Numeric>])` | `TopCount([Store].[Store City].Members, 5, [Measures].[Store Sales])` |
+| Union, Intersect, Except | `Union(<Set1>, <Set2>)` | `Except([Store].[Store State].Members, {[Store].[USA].[WA]})` |
+| Distinct | `Distinct(<Set>)` | `Distinct({[Store].[USA].[CA], [Store].[USA].[CA]})` |
+| Crossjoin | `Crossjoin(<Set1>, <Set2>)` or `<Set1> * <Set2>` | `[Store].[Store State].Members * [Time].[Quarter].Members` |
 
-| Function      | Description                                    | Syntax                             | Example                                |
-|---------------|------------------------------------------------|------------------------------------|----------------------------------------|
-| COUNT         | Counts members or elements in a set            | `COUNT(Set)`                       | `COUNT({[Measures].[Sales]})`          |
-| SUM           | Calculates the sum of set elements             | `SUM(Set)`                         | `SUM({[Measures].[Sales]})`            |
-| AVG           | Calculates the average of set elements         | `AVG(Set)`                         | `AVG({[Measures].[Sales]})`            |
-| MIN           | Finds the minimum value within a set           | `MIN(Set)`                         | `MIN({[Measures].[Sales]})`            |
-| MAX           | Finds the maximum value within a set           | `MAX(Set)`                         | `MAX({[Measures].[Sales]})`            |
-| DISTINCTCOUNT | Counts distinct members within a set           | `DISTINCTCOUNT(Set)`               | `DISTINCTCOUNT({[Customers].Members})` |
-| AGGREGATE     | Aggregates values based on set members         | `AGGREGATE(Set)`                   | `AGGREGATE({[Time].[Q1], [Time].[Q2]})`|
+There is no `DistinctCount()` function: count distinct values with a Measure whose aggregation is **Distinct Count**. Non-empty sets are written with `Filter(<Set>, NOT IsEmpty(<Numeric>))` or `NonEmptyCrossJoin(<Set1>, <Set2>)`.
 
----
+### Members and navigation
 
-## Set Functions
+Member navigation uses properties written after the member, not functions:
 
-| Function   | Description                                          | Syntax                            | Example                                               |
-|------------|------------------------------------------------------|-----------------------------------|-------------------------------------------------------|
-| FILTER     | Filters set based on a condition                     | `FILTER(Set, Condition)`          | `FILTER({[Customers].Members}, [Sales]>1000)`         |
-| NONEMPTY   | Retrieves non-empty intersections                    | `NONEMPTY(Set)`                   | `NONEMPTY({[Customers]} * {[Time].[Q1]})`             |
-| ORDER      | Orders members by a criterion                        | `ORDER(Set, Expression, ASC \| DESC)`| `ORDER({[Customers]}, [Sales], DESC)`                 |
-| UNION      | Combines two sets into one                           | `UNION(Set1, Set2)`               | `UNION({[USA].[CA]}, {[USA].[WA]})`                   |
-| INTERSECT  | Intersection of two sets                             | `INTERSECT(Set1, Set2)`           | `INTERSECT({[USA]}, {[USA].[WA]})`                    |
-| EXCEPT     | Difference between two sets                          | `EXCEPT(Set1, Set2)`              | `EXCEPT({[USA]}, {[USA].[WA]})`                       |
-| DISTINCT   | Removes duplicate members from a set                 | `DISTINCT(Set)`                   | `DISTINCT({[Customers].Members})`                     |
-| CROSSJOIN  | Cartesian product of sets                            | `CROSSJOIN(Set1, Set2)`           | `CROSSJOIN({[USA]}, {[Products]})`                    |
+| Property or function | Returns | Example |
+| --- | --- | --- |
+| `.CurrentMember` | The member of the hierarchy in the current cell | `[Store].CurrentMember` |
+| `.Parent`, `.Children`, `.Siblings` | Parent, children, siblings | `[Store].CurrentMember.Parent` |
+| `.PrevMember`, `.NextMember`, `.Lag(<n>)` | Neighbouring members on the same level | `[Time].CurrentMember.PrevMember` |
+| `.Name`, `.Caption` | Member name or caption as a string | `[Store].CurrentMember.Name` |
+| `Ancestor(<Member>, <Level>)` | Ancestor at a level | `Ancestor([Time].CurrentMember, [Time].[Year])` |
+| `Descendants(<Member>, <Level>)` | Descendants at a level | `Descendants([Time].[1997], [Time].[Month])` |
 
----
+### Time
 
-## Member Functions
+| Function | Use | Example |
+| --- | --- | --- |
+| `ParallelPeriod(<Level>, <n>, <Member>)` | Same period `<n>` periods earlier | `([Measures].[Store Sales], ParallelPeriod([Time].[Year], 1, [Time].CurrentMember))` |
+| `PeriodsToDate(<Level>, <Member>)` | Periods from the start of the level to the member | `Sum(PeriodsToDate([Time].[Year], [Time].CurrentMember), [Measures].[Store Sales])` |
+| `Ytd()`, `Qtd()`, `Mtd()` | Year, quarter, month to date | `Sum(Ytd(), [Measures].[Store Sales])` |
+| `LastPeriods(<n>, <Member>)` | The last `<n>` periods up to the member | `Avg(LastPeriods(3, [Time].CurrentMember), [Measures].[Store Sales])` |
 
-| Function      | Description                                    | Syntax                       | Example                            |
-|---------------|------------------------------------------------|------------------------------|------------------------------------|
-| CURRENTMEMBER | Current context member                         | `CURRENTMEMBER`              | `[Customers].[USA].[CA].CURRENTMEMBER` |
-| PARENT        | Parent of a member                             | `PARENT(Member)`             | `PARENT([Customers].[USA].[CA])`   |
-| CHILDREN      | Children members                               | `CHILDREN(Member)`           | `CHILDREN([Time].[Q1])`            |
-| SIBLINGS      | Sibling members                                | `SIBLINGS(Member)`           | `SIBLINGS([Customers].[CA])`       |
+For period comparisons in reports, prefer Datafor's `FilteredParallelPeriod` and `FilteredLoopPeriod` (below), which follow the report's date filter.
 
----
+### Conditions, strings and numbers
 
-## Time Functions
+| Item | Syntax | Example |
+| --- | --- | --- |
+| IIf | `IIf(<Condition>, <Value1>, <Value2>)` | `IIf([Measures].[Store Sales] > 5000, "High", "Low")` |
+| AND, OR, NOT | Infix operators | `[Measures].[Store Sales] > 5000 AND [Measures].[Unit Sales] > 100` |
+| IsEmpty, CoalesceEmpty | `IsEmpty(<Value>)`, `CoalesceEmpty(<Value>, <Default>)` | `CoalesceEmpty([Measures].[Store Sales], 0)` |
+| String concatenation | `<String> \|\| <String>` | `[Store].CurrentMember.Name \|\| " store"` |
+| Replace, Left, Right, Len, InStr, UCase, LCase | VBA string functions | `Replace([Store].CurrentMember.Name, "Store", "Shop")` |
+| Abs, Round, Int | VBA math functions | `Round([Measures].[Store Sales] / 1000, 1)` |
+| Format | `Format(<Value>, <Format String>)` | `Format([Measures].[Store Sales], "#,##0.00")` |
+| CInt, CDbl, CDate, Cast | Type conversion | `CDbl([Measures].[Unit Sales])`, `Cast([Measures].[Unit Sales] AS String)` |
+| Now, DateAdd, DateDiff | VBA date functions; the interval is `"yyyy"`, `"q"`, `"m"`, `"ww"`, `"d"` and similar | `DateDiff("d", CDate("2026-01-01"), Now())` |
 
-| Function     | Description                                       | Syntax                     | Example                             |
-|--------------|---------------------------------------------------|----------------------------|-------------------------------------|
-| NOW          | Current timestamp                                 | `NOW`                      | `NOW`                               |
-| DATEADD      | Adds intervals to a date                          | `DATEADD(Interval, Date)`  | `DATEADD("YY",1,[Time].[Q1])`     |
-| DATEDIFF     | Calculates difference between dates               | `DATEDIFF(Interval, Date1, Date2)` | `DATEDIFF("YY",[1997],[1998])`    |
-
----
-
-## Logical Functions
-
-| Function | Description                                       | Syntax                            | Example                                   |
-|----------|---------------------------------------------------|-----------------------------------|-------------------------------------------|
-| IIF      | Conditional expression                            | `IIF(Condition,TrueValue,FalseValue)`| `IIF([Sales]>5000,"High","Low")`|
-| AND      | Logical AND operation                             | `AND(Condition1,Condition2)`      | `AND([Sales]>5000,[Time].[Q1])`           |
-| OR       | Logical OR operation                              | `OR(Condition1,Condition2)`       | `OR([Sales]>5000,[Time].[Q1])`            |
-
----
-
-## String Functions
-
-| Function | Description                                       | Syntax                               | Example                               |
-|----------|---------------------------------------------------|--------------------------------------|---------------------------------------|
-| CONCAT   | Joins two strings                                 | `CONCAT(String1,String2)`            | `CONCAT("Hello"," World")`         |
-| REPLACE  | Replaces substring                                | `REPLACE(String,Old,New)`            | `REPLACE("Hello World","World","MDX")` |
-
----
-
-## Mathematical Functions
-
-| Function | Description                                       | Syntax                 | Example     |
-|----------|---------------------------------------------------|------------------------|-------------|
-| ABS      | Absolute value                                    | `ABS(Number)`          | `ABS(-10)`  |
-| ROUND    | Rounds number                                     | `ROUND(Number,Digits)` | `ROUND(3.14159,2)`|
-
----
-
-## Type Conversion
-
-| Function | Description                                       | Syntax           | Example                |
-|----------|---------------------------------------------------|------------------|------------------------|
-| CSTR     | Converts to string                                | `CSTR(Value)`    | `CSTR(123)`            |
-| CINT     | Converts to integer                               | `CINT(Value)`    | `CINT("123")`          |
-| CDATE    | Converts to date                                  | `CDATE(Value)`   | `CDATE("01/01/2020")` |
-
----
+`DateAdd` and `DateDiff` work on date values, not on members of a time hierarchy; use `ParallelPeriod`, `Lag` or `FilteredParallelPeriod` to move between members.
 
 ## Datafor Functions
 
@@ -191,6 +152,3 @@ IIf([Store].CurrentMember.Name = "${region}", 1, 0)
 
 See [Using Parameters in Calculated Measures](/documentation/Analysis/Using-Parameters-in-Calculated-Measures/).
 
----
-
-MDX functions are essential for effective data analysis in Datafor, providing flexibility and powerful tools to interact with multidimensional data. Use this guide as a quick reference when building advanced analytical models and reports.

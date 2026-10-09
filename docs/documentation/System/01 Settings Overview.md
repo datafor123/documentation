@@ -12,10 +12,10 @@ Administrators open **Settings** (gear icon) in the left navigation. Pages are g
 | Group | Page | Use it to | Guide |
 | --- | --- | --- | --- |
 | **General** | **License** | View and update the license | |
-| | **Email** | Set the SMTP server for subscriptions and notifications | [Mail Server Configuration](/documentation/System/Mail-Server-Configuration/) |
+| | **Email** | Set the SMTP server for alerts, password-reset and registration codes, and upload approval results | [Mail Server Configuration](/documentation/System/Mail-Server-Configuration/) |
 | | **System configuration** | Defaults for new reports and models, query limits, first day of the week | [System Configuration](/documentation/System/System-Configuration/) |
 | | **Branding** | Logo, colours, login page, interface font | [White Label](/documentation/Embedded/White-Label/) |
-| **Access & Integration** | **Single sign-on** | LDAP, OAuth 2.0, SAML 2.0 and CAS | [LDAP](/documentation/System/LDAP/) |
+| **Access & Integration** | **Single sign-on** | LDAP, OAuth 2.0, SAML 2.0 and CAS | [LDAP](/documentation/System/LDAP/), [OAuth2](/documentation/System/OAuth2-Authentication/), [SAML2](/documentation/System/SAML2/), [CAS](/documentation/System/CAS-Authentication/) |
 | | **Site address** | The public address of the server | |
 | | **Embed tokens (JWT)** | Sign-in for embedded reports | [JSON Web Token (JWT)](/documentation/System/JWT/) |
 | | **Cross-origin access (CORS)** | Allow other sites to call the server | |

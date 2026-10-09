@@ -1,15 +1,11 @@
 ---
-title: AI Agent Overview and Roadmap
+title: AI Agent Overview
 permalink: /documentation/AI-Agent/AI-Agent-Overview-and-Roadmap/
-description: What the Datafor AI Agent can do in 10.00, how it works, the limits it keeps, and where it is heading.
+description: What the Datafor AI Agent can do in 10.00, how it works, and the limits it keeps.
 createTime: 2026/09/04 16:10:00
 ---
 
-# AI Agent Overview and Roadmap
-
-This page is for everyone who uses the Datafor AI Agent: business users, analysts, and managers who want to know where the product is heading. It answers three questions: **what the Agent can do today, how it works, and what comes next**.
-
-Document date: 2026-10-09, Datafor 10.00. It is updated with each product release; the exact features depend on the version you are running.
+# AI Agent Overview
 
 ## 1. The Agent in one sentence
 
@@ -21,7 +17,7 @@ What separates it from a general-purpose chatbot are three commitments:
 - **It never invents.** Metrics and definitions that do not exist in the data model are not made up; when something cannot be done, the Agent says so.
 - **Every number has a source.** Each figure in an answer traces back to a query that actually ran.
 
-Today the Agent is not an automatic monitoring or report-writing robot (those are directions on the roadmap, see section 6), and it is not a tool for bypassing BI permissions to reach the database directly.
+The Agent is not an automatic monitoring or report-writing tool, and it is not a way to bypass BI permissions and reach the database directly.
 
 ## 2. What it can do today
 
@@ -101,8 +97,6 @@ Metrics Library also shapes how the Agent works:
 - **Model choice**: the model a metric is bound to is the first evidence for automatic model selection.
 - **Ratios and differences**: for a metric whose calculation method is ratio, difference or attainment rate, the Agent queries the numerator and denominator separately, so year-over-year comparisons of a ratio are exact and its changes can be decomposed. Ratio calculated measures in the model are treated the same way when their formula has the form numerator / denominator.
 
-The chain from a Metrics Library definition, to its binding in the model, to the figure in an answer has been verified end to end: raw fields with deliberately different values sit next to the governed definitions, and which side an answer lands on shows whether the governed definition was applied.
-
 ### 2.9 Where you can use it
 
 | Entry point | Notes |
@@ -117,7 +111,7 @@ All entry points use the same permissions, the same governed queries and the sam
 ### 2.10 What administrators see
 
 - **LLM configuration**: set up models from a template or by hand; a model must pass verification before it can be used; each of the 15 internal stages of the Agent, plus the embedding model, can be assigned a different model; complete schemes can be exported, imported and switched, and API keys are never included.
-- **Quotas**: a daily call limit per model and per person, and a daily question quota that can be set by role and user type. Failed and cancelled questions are not counted.
+- **Quotas**: an optional daily question quota per person, off by default, with overrides by role and user type. Failed and cancelled questions are not counted.
 - **Usage**: number of questions, response time, success rate and total tokens, by time range.
 - **Knowledge indexes** (called vector indexes before 10.00): what the Agent has learned from each data model. An index is built or updated in the background whenever a model is saved, copied or imported as a new model (**Auto-build knowledge index**, on by default), and can be rebuilt or refreshed on a schedule. The console shows the status, the embedding model used, and the build progress: which stage it is in, how far along it is, whether it is still running, and the reason if it failed. While an index is being updated, the Agent keeps answering from the last completed build. When an index is missing, the chat page shows a notice at the top.
 - **Common Questions**: maintain the welcome-screen questions for each model.
@@ -154,9 +148,9 @@ To save you from trying the same thing repeatedly, here is what the Agent cannot
 
 | Scenario | Today | Suggestion |
 | --- | --- | --- |
-| Map display | Not supported; regional results are shown as tables or charts | On the roadmap |
-| Value distributions and histograms (for example, orders by weight band) | Not supported | On the roadmap |
-| A complete report from a single request | Not supported; use the **Generate metric report** quick action or ask step by step | On the roadmap |
+| Map display | Not supported; regional results are shown as tables or charts | Use a map chart in a dashboard |
+| Value distributions and histograms (for example, orders by weight band) | Not supported | Use a histogram chart in a dashboard |
+| A complete report from a single request | Not supported | Use the **Generate metric report** quick action, or ask step by step |
 | Forecasting | The Agent does not forecast | Compare against plan or budget data that already exists in the model |
 | Attribution and causation | Change questions get a contribution breakdown across up to three dimensions, plus factor splits for declared ratio and difference metrics. Contributions are not causes, and causes outside the data are not claimed. | Name the dimensions or the factors you want in the question |
 | Ratios without a declared numerator and denominator (for example a formula with `*100` or a function) | Period comparisons and decompositions of such a ratio may be partial | Ask the model author to write the ratio as numerator / denominator; see [Improving AI Agent Answers](/documentation/AI-Agent/Improving-Answer-Quality/) |
@@ -167,38 +161,9 @@ To save you from trying the same thing repeatedly, here is what the Agent cannot
 
 The quality of the data model sets the ceiling for answer quality. Readable field names, synonyms in descriptions, complete time hierarchies and well-formed member values are what make the Agent accurate. That work happens on the Datafor semantic-model side; the Agent does not replace modelling. See [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/).
 
-## 6. Roadmap
+## 6. Feedback
 
-The ordering principle: **make existing capabilities solid first (the share of questions answered correctly at the first attempt, waiting time, and smoothness across turns), then extend**. No dates are promised below; the release notes of each version are the authority.
-
-### Next
-
-- **Map display**: regional results, such as provinces and cities, drawn directly on a map.
-- **More calculation definitions**: value bands and histograms ("orders by weight band"), filtering and ranking by calculated definitions, and share within a group. These need the Datafor platform to provide the underlying capabilities first; the Agent then connects to them.
-- **Analysis reports**: confirm an outline → analyse section by section → revise → save and share, so the Agent can produce a deliverable report rather than a single answer.
-- **AI-drafted metric definitions**: when a new metric is created in the Metrics Library, the AI drafts the definition text for a person to review and certify.
-- **More forms of multi-step analysis**: premise checks and trade-off analysis.
-
-### Further out (depends on the enterprise semantic layer)
-
-The capabilities below require the Agent to know "what matters": metric targets and baselines, reporting calendars, default analysis dimensions, and priority rules. These belong to the enterprise semantic layer and have to be built on the Datafor platform side first. Until then the Agent will not substitute guesses.
-
-- **Insight briefs and prioritised insight cards**: proactively spot changes worth attention and deliver them ranked by importance.
-- **Scheduled analysis and metric change monitoring**: run analyses on a schedule and detect metric anomalies.
-- **Subscriptions and delivery**: send conclusions to the channels you already use, with de-duplication, approval and delivery confirmation.
-- **Semantic improvement suggestions**: the Agent identifies naming, alias and definition improvements from everyday questions; they take effect after governance review.
-- **Triggering external actions**: connect analysis conclusions to business processes, subject to approval and audit.
-
-### Continuous improvement
-
-- **Multi-turn conversation**: a test set that measures whether the Agent "gets smoother with use" is in place; longer follow-up chains and fewer, more precise clarifications improve release by release.
-- **First-attempt success rate and response time**: a fixed question bank is run continuously so that a new version is never worse than the previous one.
-- **Better models, immediately**: the Agent's analysis logic is not tied to any single model. When a stronger model is connected, capability improves without rework.
-- **More languages in documentation and interface details.**
-
-## 7. Feedback
-
-When an answer is wrong, missing, or the experience feels off, give your administrator three things: **the question in your own words, the approximate time, and a screenshot of the answer** including the Evidence and boundaries section at the bottom. That is enough to locate the problem, and it is the most important input for how the roadmap is ordered.
+When an answer is wrong, missing, or the experience feels off, give your administrator three things: **the question in your own words, the approximate time, and a screenshot of the answer** including the Evidence and boundaries section at the bottom. That is enough to locate the problem.
 
 ## Related documents
 

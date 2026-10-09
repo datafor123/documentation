@@ -56,7 +56,7 @@ All rights not expressly granted are **reserved**.
 
 **Third-Party Open-Source Software:**  
 - Open-source software (“Open-Source Software”) provided with the Software is subject to the applicable third-party license terms, viewable at:  
-  [www.Datafor.com/thirdpartylicenses](www.Datafor.com/thirdpartylicenses).
+  [www.datafor.com.cn](https://www.datafor.com.cn/).
 - Datafor ensures that Open-Source Software, when used as delivered and unmodified, does not require disclosure or licensing of the Subscriber’s proprietary source code.
 
 

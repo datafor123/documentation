@@ -34,10 +34,10 @@ Use the search box above the list to filter it.
 | --- | --- | --- |
 | **Enable** | Turn on to accept tokens for this configuration. | While it is off, the dialog shows "Token access is disabled. Enable token authentication before configuring this setting." |
 | **Name** * | Unique name of the configuration, e.g. `ERP`. | |
-| **Token name** * | Name of the field that carries the JWT in requests, such as an HTTP header or URL parameter, e.g. `token`. | |
-| **Expiration time** * | Validity period of the token, in **seconds**, e.g. `86400` (24 hours). | |
+| **Token name** * | Name of the URL parameter that carries the JWT, e.g. `token`. | Defaults to `token`. See [Send a token](#_3-send-a-token). |
+| **Expiration time** * | Validity period, in **seconds**, of tokens that Datafor itself issues for this configuration, e.g. `86400` (24 hours). | Has no effect on tokens issued by the external system: their own `exp` claim decides when they expire. |
 | **Signature algorithm** * | Algorithm used to sign and verify the token: **HS256**, **HS384**, **HS512**, **RS256**, **RS384**, **RS512**, **ES256**, **ES384** or **ES512**. | Must match the external system. |
-| **Secret key** * | Key used to sign and verify the token. | Keep it secret. |
+| **Secret key** * | For **HS256**/**HS384**/**HS512**: the shared secret used to sign and verify tokens. For **RS*** and **ES*** algorithms: the external system's **public key**, Base64-encoded (the body of a PEM `PUBLIC KEY` without the `-----BEGIN`/`-----END` lines). | Keep an HS secret confidential. With RS*/ES*, the private key stays with the issuer and is never entered here. |
 
 **User info**
 
@@ -53,21 +53,46 @@ Use the search box above the list to filter it.
 | --- | --- | --- |
 | **Initialize user** | Select to create user accounts automatically from the token. | **User type** and **Initialization role** appear only while this is selected. |
 | **User type** | User type given to users created this way, e.g. `Reader`. | |
-| **Initialization role** | One or more roles given to users created this way. | |
+| **Initialization role** | One or more roles given to users created this way. | Applies only when a user is created. A user who already exists signs in with the user type and roles they have in Datafor. |
 
 When you edit an existing configuration and **Enable** is off, **Save** stores it without checking the required fields.
 
 ![New embed token dialog](./images/jwt-new-token.png)
 
-## 3. Delete an embed token
+## 3. Send a token
+
+The external system signs a JWT whose payload contains at least the claim named in **Username field**, with the Datafor login name as its value. Datafor verifies the signature with each enabled configuration's **Secret key** and **Signature algorithm**. If the token has an `exp` claim, an expired token is rejected, so give every token an `exp`.
+
+Send the token in either form:
+
+- HTTP header: `Authorization: Bearer your-jwt-token`
+- URL parameter named by **Token name**, appended to the Datafor URL being opened, e.g. `?token=your-jwt-token`
+
+Datafor reads the header first and uses the URL parameter only when there is no header.
+
+Example payload, with **Username field** `loginname`, **Name field** `name` and **Email field** `email`:
+
+```json
+{
+  "loginname": "analyst1",
+  "name": "Analyst One",
+  "email": "analyst1@example.com",
+  "exp": 1767225600
+}
+```
+
+To let signed-in users generate personal tokens for AI clients from a configuration, see [Connect AI Clients](/documentation/AI-Agent/Connect-AI-Clients/#_8-1-turn-on-personal-tokens).
+
+## 4. Delete an embed token
 
 Select one or more configurations and click **Delete** in the toolbar, or choose **Delete** in a row's action menu. Confirm the deletion; it cannot be undone.
 
-## 4. Troubleshooting
+## 5. Troubleshooting
 
 | Problem | Likely cause | What to do |
 | --- | --- | --- |
 | Tokens are rejected | **Secret key** or **Signature algorithm** differs from the external system, or **Enable** is off | Use the same key and algorithm on both sides and turn on **Enable**. |
 | The user is not recognized | **Username field** does not match the field in the token payload | Set **Username field** to the payload field that holds the username. |
-| Tokens expire too soon | **Expiration time** is too short | Increase the value (in seconds). |
+| Tokens expire too soon | For tokens Datafor issues, **Expiration time** is too short; for external tokens, the issuer sets a short `exp` | Increase **Expiration time** (in seconds), or the `exp` the external system sets. |
 | Users are not created on first access | **Initialize user** is off | Select it and set **User type** and **Initialization role**. |
+| An existing user did not get the **Initialization role** | Initialization roles apply only to newly created users | Assign roles to existing users on the **Users** page. |

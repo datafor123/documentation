@@ -2,7 +2,7 @@
 title: Embedding Reports Using XDM
 permalink: /documentation/Embedded/Embedding-Reports-Using-XDM/
 tags: null
-description: null
+description: Filter a report embedded in an iframe from the host page with postMessage, at load time or later without reloading.
 createTime: 2026/09/01 22:03:26
 ---
 
@@ -10,28 +10,25 @@ createTime: 2026/09/01 22:03:26
 > **Note:**
 > The term "**report**" in this document refers to the visual reports created using Datafor or the Visualizer plugin.
 
-Reports support XDM (Cross-Document Messaging) for filtering report data without refreshing the report page. XDM allows control over the report's data filtering, styles, and behavior; however, this document focuses solely on data filtering scenarios.
+A report opened in an `iframe` (or in a window opened with `window.open`) accepts filter messages from the host page through XDM (cross-document messaging, the browser's `postMessage` API). The report applies the filters to its charts, which re-query their data without reloading the page.
 
-## What is XDM (Cross-Document Messaging)?
+Typical uses:
 
-XDM (Cross-Document Messaging) is a technology that allows secure communication between different web pages or applications from different origins (such as different domains or subdomains). Typically, browsers restrict different-origin pages from accessing each other's content to protect user privacy and security. However, in some cases, such as when embedding external content, different-origin pages need to communicate, and XDM can be used for this purpose.
+1. Passing filters when the report opens, so the first data shown is already filtered.
+2. Changing filters in the host application later and passing them to the report (without reloading it).
 
-Web applications use the `postMessage` API to communicate with the report, sending parameter values to the report. The report then distributes these parameter values as filters to the individual chart components, which re-query data to achieve the filtering effect.
+## How it works
 
-XDM enables cross-origin communication between web pages without compromising browser security.
+- XDM works only in read-only views: the open and embed URLs and share links. A report opened in edit mode ignores XDM messages.
+- When the report has loaded, it posts `{"event":"visualizerReportFileLoaded","id":"<id>"}` to its parent window (or opener). Every message the host sends must carry that `id` as `trustMark`; messages with another or no `trustMark` are dropped.
+- The report waits for an initial filter message (`init: true`) before it queries data. By default it waits only **50 ms**; add `__xdmTimeout=<milliseconds>` to the report URL to wait longer. After the wait it loads unfiltered, and a late `init` message no longer re-queries the charts. Messages without `init` are applied at any time.
+- XDM filters only narrow the data the signed-in user may see. They are not a security control: anyone who can open the report can send other messages from the browser console. Use [row-level security](/documentation/Datasource/Row-Level-Security-in-Analytics/) to restrict data per user.
 
-## Application Scenarios:
+## Steps
 
-When embedding a report within a web application using an iframe, the following scenarios may arise:
+### Add the `XDMWorker` class to the host page
 
-1. Passing parameters to the report during initial loading to filter report data.
-2. Changing parameter values in the web application after the report has loaded and passing these values to the report to filter data (without reloading the report).
-
-## Steps:
-
-### **Importing the `XDMWorker` Class in the Main Program:**
-
-In the main program that calls the report, add the following `XDMWorker` class to facilitate the forwarding of `XDM` messages. The main program can use the `send` method of this class to pass filter parameters to the report.
+Add the following `XDMWorker` class to the page that embeds the report. It records the report's `id` and sends filter messages with its `send` method.
 
 ```js
 class XDMWorker {
@@ -66,124 +63,92 @@ class XDMWorker {
 }
 ```
 
-### Scenario 1: Passing Parameters to the Report During Initial Loading to Filter Data
+### Scenario 1: Filter the report when it opens
 
-1. **Initialize an XDMWorker Object Before Calling the Report:**
+1. **Create an XDMWorker before the report loads**
 
-   Before calling the report, initialize an `XDMWorker` object. To filter report data during the initial load, call the `send` method within the `onPageInitEvent` event, setting the third parameter to `true`.
+   To filter the first load, call `send` inside `onPageInitEvent`, with the third argument set to `true`.
 
    **Example:**
 
-   ```
+   ```js
    const xdm = new XDMWorker({
        onPageInitEvent: () => {
           iframeRef?.current && xdm.send(
                   [
                      {
                        value: [
-                         'product_family_1', 
-                         'product_family_2' 
-                       ],  
-                       name: '[product_class].[hierarchy_product_family].[product_family]',  
-                       type: 'name',  
-                       datatype: 'string'  
+                         'product_family_1',
+                         'product_family_2'
+                       ],
+                       name: '[product_class].[hierarchy_product_family].[product_family]',
+                       type: 'name',
+                       datatype: 'string'
                      }
-                  ], 
-                  iframeRef.current?.contentWindow, 
-                  true  
+                  ],
+                  iframeRef.current?.contentWindow,
+                  true
               );
        }
    });
    ```
 
-   **Parameter Description:**
+   **Filter format:** an array of filter objects. Several objects filter together (AND).
 
    ```
    [{
-       value: [
-           [
-               {i: 0|1, v: string},  
-               {i: 0|1, v: string}
-           ], 
-           string,  
-       ],  
-       name: string,  
-       type: 'name'|'caption',  
-       datatype: 'string'|'numeric'|'timestamp'  
+       name: string,                                  // uniqueName of the field's level
+       value: [ string | [from, to] , ... ],          // values and ranges
+       type: 'name' | 'caption' | 'uniqueName',       // default 'name'
+       datatype: 'string' | 'numeric' | 'timestamp',  // default 'string'
+       exclude: boolean                               // default false
    }]
    ```
 
-   - **value:** Parameter values from the web application.
+   - **name:** the `uniqueName` of the field's level in the report's analysis model, see [below](#find-a-field-s-uniquename).
+   - **type:** what the values are compared with: `name` (member name, default), `caption` (displayed name), or `uniqueName` (each value is a full member unique name, such as `[product_class].[product_family].[Drink]`).
+   - **datatype:** how values and range bounds are compared.
+   - **exclude:** `true` keeps everything except the given values or ranges.
+   - **value:** single values and ranges can be mixed; the conditions are combined with OR (with AND when `exclude` is `true`). A range is an inner array `[from, to]`. Each bound is a value, or an object `{"i": "1" | "0", "v": value}` where `i` is `"1"` to include the bound (default) or `"0"` to exclude it.
 
-   | Value Type                                                   | Example                                                      |
-   | ------------------------------------------------------------ | ------------------------------------------------------------ |
-   | x in ('a', 'b', 'c')                                         | {'value':['a', 'b', 'c'],'datatype':'string'}                |
-   | x >= 1 and x < 3                                             | {'value':[{'i':'1','v':'1'},{'i':'0','v':'3'}],'datatype':'numeric'} |
-   | x between (2, 5) or x between (4, 6)                         | {'value':[['2', '5'], ['4', '6']],'datatype':'numeric'}      |
-   | x between (2, 5) or x between (4, 6) or x in (7, 8)          | {'value':[['2', '5'], ['4', '6'], '7', '8'],'datatype':'numeric'} |
-   | x >= '2024-01-01 00:00:00+8' and x < '2025-01-01 00:00:00+8' | {'value':[{'i':'1','v':'1704038400'},{'i':'0','v':'1735660800'}],'datatype':'timestamp'} |
+   | Condition | Filter |
+   | --- | --- |
+   | x in ('a', 'b', 'c') | `{"value":["a","b","c"],"datatype":"string"}` |
+   | x not in ('a', 'b') | `{"value":["a","b"],"datatype":"string","exclude":true}` |
+   | x >= 1 and x < 3 | `{"value":[[{"i":"1","v":"1"},{"i":"0","v":"3"}]],"datatype":"numeric"}` |
+   | x between 2 and 5, or between 4 and 6 | `{"value":[["2","5"],["4","6"]],"datatype":"numeric"}` |
+   | x between 2 and 5, or between 4 and 6, or x in (7, 8) | `{"value":[["2","5"],["4","6"],"7","8"],"datatype":"numeric"}` |
+   | x >= '2024-01-01 00:00:00+8' and x < '2025-01-01 00:00:00+8' | `{"value":[[{"i":"1","v":"1704038400"},{"i":"0","v":"1735660800"}]],"datatype":"timestamp"}` |
 
-   - **name:** The unique name of the field in the report’s analytical model.
-   - **type:** Specifies whether the parameter value is applied to the field’s name or caption.
-   - **datatype:** The data type of the filter value.
+   Each row also needs `name` (and `type` when it is not `name`). The field does not have to be used by the charts: a filter on a field that a chart does not show still filters that chart's data.
 
-2. **Call the Report**
+2. **Open the report in the iframe**
 
-   - Obtain the report's embedding mode URL.
+   - Use the report's embed URL, see [Report URLs](/documentation/Embedded/Reports-REST-API/).
+   - Add `__xdmTimeout` so the report waits long enough for your first message, for example `http://your-server:28080/datafor/plugin/datafor/api/integrate/L2hvbWUvYWRtaW4vZXhhbXBsZTEuZGF0YWZvcg==?__xdmTimeout=150`. Set it to how fast your page answers `visualizerReportFileLoaded`. It is not needed if you don't filter the first load.
 
-     [Reference Document](https://help.Datafor.com share/jcyfx-report-api)
+### Scenario 2: Change filters after the report has loaded
 
-   - Add a "delay time parameter" to the report URL:
+Call `send` without the third argument whenever the host's filters change. The report applies the filters and re-queries its charts immediately.
 
-     Add the **delay time parameter** `__xdmTimeout=150` to the report link, e.g., `http://localhost:28080/datafor/plugin/datafor/api/integrate/L2hvbWUvYWRtaW4vZXhhbXBsZTEuZGF0YWZvcg==?__xdmTimeout=150`.
+```
+send(message, target)
+```
 
-     > **Note:**
-     > **What is the "delay time parameter"?** After the report is opened, it will broadcast a report initialization message and wait for 150ms. If a valid response is received within the wait time, the parameters in the response are used as the initial data filter values. You can adjust this delay time based on the main program’s response speed. If data filtering is not required during the initial report load, this parameter can be omitted.
+- **message:** filters in the format above.
+- **target:** the `contentWindow` of the iframe that shows the report.
 
-### Scenario 2: Changing Parameter Values in the Web Application After the Report Has Loaded to Filter Data (Without Reloading the Report)
+## Find a field's `uniqueName`
 
-1. **Call the send Method**
+In the report designer, hover over a field in the field list: the tooltip shows its `uniqueName`.
 
-   After the report page is opened, if you need to pass parameter values from the web application to the report, you can call the send method in the main program. The report will immediately respond and re-query the data.
-
-2. **send Method Call Format:**
-
-   ```
-   send(message, target)
-   ```
-
-   **Parameter Description:**
-
-   - **message:** The filter parameters in the following format:
-
-     ```
-     [{
-         value: [
-             [
-                 {i: 0|1, v: string},  
-                 {i: 0|1, v: string}
-             ], 
-             string,  
-         ],  
-         name: string,  
-         type: 'name'|'caption',  
-         datatype: 'string'|'numeric'|'timestamp'  
-     }]
-     ```
-
-   - **target:** The window object of the iframe where the report is opened.
-
-## How to Obtain the `uniqueName` of Analytical Model Fields?
-
-In the report designer, when selecting analytical model fields, you can view the `uniqueName` through the tooltip.
-
-The `uniqueName` of the `product_department` field in the image below is `[product_class].[product_department].[product_department]`.
+The `uniqueName` of the `product_family` field in the image below is `[product_class].[product_family].[product_family]`.
 
 
 <div align="left"><img src="./images/1723711770233.png" width="63%"/></div>
 
-## Sample Project
+## Example
 
-Please refer to the sample project: https://github.com/Datafor/xdm-demo
+A host page with its own filters (top) driving an embedded report:
 
 <div align="left"><img src="./images/1721293514716.png" width="100%" /></div>

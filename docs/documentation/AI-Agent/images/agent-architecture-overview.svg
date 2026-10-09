@@ -17,7 +17,7 @@
   <!-- 1. Entry points -->
   <rect x="40" y="90" width="860" height="98" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
   <text x="56" y="116" font-size="16" font-weight="700" fill="#5B3FBF">1. Entry points</text>
-  <text x="884" y="116" text-anchor="end" font-size="12" fill="#7A6BB0">All four share one analysis logic: the same question gets the same answer everywhere</text>
+  <text x="884" y="116" text-anchor="end" font-size="12" fill="#7A6BB0">All four use the same Agent under your Datafor permissions</text>
   <rect x="56" y="128" width="198" height="44" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
   <text x="155" y="156" text-anchor="middle" font-size="14" fill="#2B2B3A">Portal AI Assistant</text>
   <rect x="266" y="128" width="198" height="44" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
@@ -85,14 +85,14 @@
 
   <!-- Governed boundary -->
   <rect x="40" y="420" width="860" height="64" rx="10" fill="#FFF4DC" stroke="#F0C36D" stroke-width="1.5"/>
-  <text x="56" y="457" font-size="15" font-weight="700" fill="#8A5A00">Governed boundary</text>
+  <text x="56" y="457" font-size="15" font-weight="700" fill="#8A5A00">3. Governed boundary</text>
   <text x="547" y="439" text-anchor="middle" font-size="12" fill="#6B4A00">The AI proposes structured query intent only; it never writes SQL or MDX</text>
   <text x="547" y="456" text-anchor="middle" font-size="12" fill="#6B4A00">It sees only metadata you may see; Datafor compiles, validates and runs every query</text>
   <text x="547" y="473" text-anchor="middle" font-size="12" fill="#6B4A00">Every number in an answer traces back to an actual query result</text>
 
   <!-- 3. Datafor BI platform -->
   <rect x="40" y="500" width="860" height="120" rx="12" fill="#E8F7F4" stroke="#A9DED6" stroke-width="1.5"/>
-  <text x="56" y="526" font-size="16" font-weight="700" fill="#0B7A6E">3. Datafor BI platform: data truth and execution</text>
+  <text x="56" y="526" font-size="16" font-weight="700" fill="#0B7A6E">4. Datafor BI platform: data truth and execution</text>
 
   <rect x="56" y="540" width="198" height="60" rx="8" fill="#FFFFFF" stroke="#A9DED6"/>
   <text x="155" y="564" text-anchor="middle" font-size="13" font-weight="700" fill="#2B2B3A">Semantic model</text>
@@ -116,7 +116,7 @@
 
   <!-- 4. Enterprise data sources -->
   <rect x="40" y="648" width="860" height="56" rx="12" fill="#F2F4F7" stroke="#CBD2DC" stroke-width="1.5"/>
-  <text x="56" y="682" font-size="16" font-weight="700" fill="#3B4252">4. Enterprise data</text>
+  <text x="56" y="682" font-size="16" font-weight="700" fill="#3B4252">5. Enterprise data</text>
   <text x="230" y="682" font-size="13" fill="#5B6472">databases · data warehouses · business systems (never accessed directly by the Agent)</text>
 
   <!-- Legend -->

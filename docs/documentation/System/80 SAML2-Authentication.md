@@ -12,17 +12,26 @@ createTime: 2026/09/01 22:03:26
 
 LDAP, OAuth 2.0, SAML 2.0 and CAS are configured on one page: **Settings › Access & Integration › Single sign-on**. A card per method at the top shows its status: **On** (enabled), **Off** (configured but not enabled), or **Not set up** (the method's address field is empty: **LDAP URL**, **Authorization endpoint**, **IdP SSO URL** or **CAS server URL**); **Unknown** means the status could not be read. Select a card to show that method's settings below it; if the current method has unsaved changes, Datafor asks you to save or discard them first. The cards refresh after each save. Each method has an **Enable** switch; while it is off, the fields are locked and the page shows "Turn on to edit." The **New users** group sets up accounts for first-time users: **Create users on first sign-in**, **Default user type** and **Default role**.
 
-See [LDAP](/documentation/System/LDAP/) for a screenshot of the page.
+## 1. Register Datafor at the identity provider
 
-## 1. SAML 2.0 settings
+Create an application (service provider) for Datafor at your IdP with these values:
+
+| IdP setting | Value |
+| --- | --- |
+| Assertion Consumer Service (ACS) / reply URL | `https://your-server/datafor/saml/consumer` (HTTP POST binding) |
+| Entity ID / identifier | The same value you enter in **SP entity ID**, e.g. `bi` |
+
+Use the address users open Datafor with, including the port if it is not the default, e.g. `http://your-server:28080/datafor/saml/consumer`. After a successful sign-in, Datafor returns the user to the page they originally requested.
+
+## 2. SAML 2.0 settings
 
 Select the **SAML 2.0** card ("Sign in through a SAML identity provider"). Fields marked * are required while **Enable** is on. Take the IdP values from your identity provider (for example Microsoft Entra ID / Azure AD or Okta).
 
 | Section | Field | What to enter | Notes |
 | --- | --- | --- | --- |
 | Identity provider (IdP) | **Enable** | Turn on to use SAML 2.0 sign-in. | Turn on before editing the other fields. |
-| Identity provider (IdP) | **IdP SSO URL** * | Single sign-on URL of the IdP, e.g. `https://login.microsoftonline.com/9fdff6f1-4338...`. | While empty, the card shows **Not set up**. |
-| Identity provider (IdP) | **IdP entity ID** * | Entity ID of the IdP, e.g. `https://sts.windows.net/9fdff6f1-4338...`. | |
+| Identity provider (IdP) | **IdP SSO URL** * | Single sign-on URL of the IdP, e.g. `https://login.microsoftonline.com/<tenant-id>/saml2`. | While empty, the card shows **Not set up**. |
+| Identity provider (IdP) | **IdP entity ID** * | Entity ID of the IdP, e.g. `https://sts.windows.net/<tenant-id>/`. | |
 | Identity provider (IdP) | **IdP signing certificate** * | X.509 certificate the IdP signs its responses with. | Paste it including `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`. |
 | Service provider (SP) | **SP entity ID** * | Entity ID of Datafor as registered at the IdP, e.g. `bi`. | Must match the IdP configuration. |
 | Service provider (SP) | **Allowed clock skew** * | Tolerated time difference between Datafor and the IdP, in minutes, e.g. `2`. | |
@@ -36,7 +45,7 @@ Select the **SAML 2.0** card ("Sign in through a SAML identity provider"). Field
 | New users | **Default user type** | User type given to users created this way, e.g. `Reader`. | Available only when **Create users on first sign-in** is selected. |
 | New users | **Default role** | One or more roles given to users created this way. | Same as above. |
 
-## 2. Save and test
+## 3. Save and test
 
 1. Click **Save**. The button is available once something has changed.
 2. Sign in through the IdP in a separate browser session to check the setup. There is no **Test connection** button for SAML 2.0.
@@ -44,12 +53,13 @@ Select the **SAML 2.0** card ("Sign in through a SAML identity provider"). Field
 - To switch SAML 2.0 off, turn off **Enable** and click **Save**. With **Enable** off, Datafor saves without checking the required fields.
 - If **Create users on first sign-in** is cleared when you save, **Default user type** and **Default role** are cleared as well.
 
-## 3. Troubleshooting
+## 4. Troubleshooting
 
 | Problem | Likely cause | What to do |
 | --- | --- | --- |
 | The SAML response is rejected | Wrong **IdP SSO URL**, **IdP entity ID** or **IdP signing certificate** | Copy the values again from the IdP metadata; paste the full certificate with its BEGIN and END lines. |
 | The IdP does not recognize Datafor | **SP entity ID** differs from the value registered at the IdP | Use the same entity ID on both sides. |
+| The IdP reports an invalid reply URL | The ACS URL registered at the IdP is not Datafor's | Register `https://your-server/datafor/saml/consumer` with the address users actually use. |
 | Sign-in fails with time-related errors | Clocks of Datafor and the IdP differ | Synchronize the server clocks, or increase **Allowed clock skew**. |
 | Username, email or name are missing | Attribute names do not match the assertion | Compare **Username attribute**, **Email attribute** and **Name attribute** with the claims the IdP sends. |
 | No Datafor user is created on first sign-in | **Create users on first sign-in** is off | Select it, set **Default user type** and **Default role**, then save. |

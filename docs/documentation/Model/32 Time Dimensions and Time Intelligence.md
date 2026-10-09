@@ -35,7 +35,28 @@ For each time Attribute, select the matching **Semantic role**:
 
 <div align="left"><img src="./images/analysis-model-time-semantic-roles.png" alt="Year Attribute configured with the Time: Year Semantic role" width="60%" /></div>
 
-If a source date is stored as formatted text or a numeric code, set its **Source column format** under the Attribute's advanced settings to match the stored value. A caption such as “Year” does not make an Attribute time-aware; assign the Semantic role.
+A caption such as “Year” does not make an Attribute time-aware; assign the Semantic role.
+
+You can also set the time level from the model tree: open the Attribute's **Actions** menu and choose **Convert type → Date → Year**, **Quarter**, **Month**, **Week**, **Day**, or **Datetime**. **Convert type → String** or **Number** turns a time Attribute back into a non-time Attribute.
+
+### Source column format
+
+Every time Attribute needs a **Source column format** (in the Attribute's **Advanced** settings) that matches how the value is stored in the source column. The list offers the formats for the Attribute's time level; you can also type a pattern. Examples:
+
+| Stored value | Time level | Source column format |
+| --- | --- | --- |
+| `2005` | Year | `yyyy` |
+| `20051` | Quarter | `yyyyq` |
+| `Q1` | Quarter | `'Q'q` |
+| `200506` | Month | `yyyyMM` |
+| `2005-06` | Month | `yyyy-MM` |
+| `2005-27` (week 27) | Week | `yyyy-ww` |
+| `20050615` | Day | `yyyyMMdd` |
+| `2005-06-15` | Day | `yyyy-MM-dd` |
+
+If a time Attribute has no format when you save, the model shows “The … in dimension … has no date format”. You can still choose **Continue to save**, but set the format so that time functions and relative dates resolve correctly.
+
+Week levels must use the same first day of the week as **Settings › General › System configuration › First day of the week**; otherwise “this week” can resolve to the wrong member.
 
 ## Set the model's Default time dimension
 
@@ -43,7 +64,7 @@ With no model-tree object selected, use **Model properties > Default time dimens
 
 <div align="left"><img src="./images/analysis-model-default-time-dimension.png" alt="Model properties with Date selected as the Default time dimension" width="60%" /></div>
 
-This setting does not control the Agent's date selection, and it is not a fallback for a Measure's **Default time field**. If the selected Dimension is later removed, the value can appear as **no longer exists**; clear or reselect it and review **Model diagnostics**.
+The Agent uses this Dimension as the date context for Measures that have no **Default time field** of their own: a question such as “sales this year” is read against a date field of this Dimension. If the selected Dimension is later removed, the value can appear as **no longer exists**; clear or reselect it and review **Model diagnostics**.
 
 If the intended Dimension is not available in the list, confirm that it is visible and contains at least one Attribute, then set **Dimension category** to **Time**. Assign the time Semantic roles as a separate step so its Attributes work correctly in time-aware queries.
 

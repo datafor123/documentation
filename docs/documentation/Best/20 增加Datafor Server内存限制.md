@@ -2,57 +2,65 @@
 title: Increasing Memory Limit for Datafor Server
 permalink: /documentation/Tools/Increasing-Memory-Limit/
 tags: null
+description: Change the Java heap of the Datafor server in the start script, in the Windows service or in Docker.
 createTime: 2026/09/01 22:03:26
 ---
 
-
 # Increasing Memory Limit for Datafor Server
 
-Datafor Server runs on Java Virtual Machine (JVM) which uses Java heap as a memory storage pool. Heap space is allocated when a process starts. Although JVM is good at dynamic memory management, using too much memory may cause JVM to perform poorly or even crash. On Datafor Server, using too little memory may result in performance degradation. If you use Datafor Server to process large datasets or high concurrency, you can improve its performance by setting the maximum memory usage of JVM.
+The Datafor server runs in a Java virtual machine (Java is bundled). Its heap is set with two options:
 
-This article explains how to increase the memory limit of JVM by editing the startup script file of Datafor Server. Following the steps in this article, you can change the memory settings of Datafor Server to meet your specific needs.
+- `-Xms`: heap size at start. Default `2048m`.
+- `-Xmx`: maximum heap size. Default `6144m` (6 GB).
 
-Important Note: Changing the memory usage of JVM may affect the stability of Datafor Server. If you are not sure what you are doing, do not change this setting.
+Raise `-Xmx` when the server logs `java.lang.OutOfMemoryError: Java heap space`, or when many users open large reports at the same time. Size it so that the heap, the built-in PostgreSQL database, the AI Agent and the operating system together fit in physical memory: a heap larger than the free RAM makes the server swap and slows it down. For example, on a 16 GB server that also runs the built-in database and the AI Agent, `-Xmx10240m` leaves about 6 GB for the rest.
 
-**Prerequisites**
+## Linux and Windows (start script)
 
-- Datafor Server is installed.
-- You have administrator privileges.
+1. Stop Datafor.
+2. Open the start script in the `bi-server` folder:
+   - Linux: `start-server.sh`
+   - Windows: `start-server.bat`
+3. Find the line that sets `CATALINA_OPTS` and change the two values:
 
-**Increasing Memory Limit for Datafor Server**
+   ```bash
+   # start-server.sh
+   CATALINA_OPTS="-Xms2048m -Xmx10240m -Dsun.rmi.dgc.client.gcInterval=3600000 ..."
+   ```
 
-Follow these steps to increase the memory limit of Datafor Server.
+   ```bat
+   rem start-server.bat
+   set CATALINA_OPTS=-Xms2048m -Xmx10240m -Dsun.rmi.dgc.client.gcInterval=3600000 ...
+   ```
 
-1. Log in to the server where Datafor Server is installed with administrator privileges.
+   Change only the numbers and leave the other options on the line as they are.
+4. Start Datafor. The Linux script prints the options it used (`Using CATALINA_OPTS: …`).
 
-2. Navigate to the installation directory of Datafor Server.
+An update package can replace the start scripts; the replaced files are kept in `bi-server/update/backup<time stamp>/`. Check the `CATALINA_OPTS` line again after every update.
 
-3. Open the startup.sh or startup.bat file in Datafor/bin, which is the startup script file of Datafor Server.
+## Windows service
 
-4. Find the following lines:
+If Datafor runs as the Windows service `DataforSolutionServer`, the start script is not used. The service takes its heap from the values that `tomcat\bin\service.bat` passes when the service is installed (`JvmMs` 2048 and `JvmMx` 6144, in MB). To change them on an installed service, run as administrator:
 
-   `set Datafor_JAVA_HOME=/usr/local/java set CATALINA_OPTS=-Xms512m -Xmx1024m`
+```bat
+bi-server\tomcat\bin\tomcat9w.exe //ES//DataforSolutionServer
+```
 
-   If you are using Windows, change the path to the installation path of Java. If you are using Linux, change the path to the installation path of Java.
+On the **Java** tab, set **Initial memory pool** and **Maximum memory pool** (in MB), click **OK**, and restart the service. Alternatively, change `JvmMs` and `JvmMx` in `service.bat`, then remove and reinstall the service.
 
-5. Change the values of Xms and Xmx to increase the memory limit of Datafor Server.
+## Docker
 
-   -Xms sets the initial heap size of Java Virtual Machine. The minimum value is 64 MB. You can set it to 20% of the available memory of Datafor Server.
+The container runs the same `/opt/bi-server/start-server.sh`, which sets `CATALINA_OPTS` itself, so passing `CATALINA_OPTS` or `JAVA_OPTS` with `docker run -e` has no effect. Edit the script in the container and restart it:
 
-   -Xmx sets the maximum heap size of Java Virtual Machine. The maximum value is 2048 MB. You can set it to 80% of the available memory.
+```shell
+docker cp datafor-ee:/opt/bi-server/start-server.sh .
+# edit -Xmx in start-server.sh
+docker cp start-server.sh datafor-ee:/opt/bi-server/start-server.sh
+docker exec -u root datafor-ee chown biadmin:biadmin /opt/bi-server/start-server.sh
+docker exec datafor-ee /opt/bi-server/stop-server.sh
+docker restart datafor-ee
+```
 
-   For example:
+Edit the file with an editor that keeps Linux line endings. The change survives a new container only if `/opt/bi-server` is on a volume (see [Deploying Datafor Using Docker](/documentation/Setup/Deploying-Datafor-Using-Dockers/)). If you limit the container's memory with `--memory`, keep the limit well above `-Xmx`, because PostgreSQL runs in the same container.
 
-   `set CATALINA_OPTS=-Xms1024m -Xmx2048m`
-
-   The above example sets Xms to 1024 MB and Xmx to 2048 MB.
-
-6. Save and close the startup script file.
-
-7. Restart Datafor Server.
-
-You have successfully increased the memory limit of Datafor Server.
-
-## Summary
-
-This article explains how to increase the memory limit of JVM by editing the startup script file of Datafor Server. By adjusting the memory limit of JVM, you can improve the performance of Datafor Server. However, please note that changing the memory usage of JVM may affect the stability of Datafor Server. So, be careful while making changes.
+Related: [Performance Tuning](/documentation/Best/Performance-Tuning/)

@@ -8,7 +8,9 @@ createTime: 2026/09/04 13:45:56
 
 Append named values to initialize Report or Global Parameters when an Open or Embed URL loads.
 
-This guide covers Report and Global Parameters in the form `?<ParameterName>=<value>`. It does not cover the separate `default_`, `param_`, or `sch_` URL mechanisms.
+This guide covers Report and Global Parameters in the form `?<ParameterName>=<value>`. To set the opening selection of a filter component directly, use `default_<component title or id>=value1;value2` (see [Filters](/documentation/Visualization/Filters/)); the SDK's `initialFilterValues` option does the same (see [SDK Embedding](/documentation/SDK-Embedding/)).
+
+URL values only narrow the data within what the signed-in user may see. Anyone can change a URL, so do not rely on URL values to restrict data; use [row-level security](/documentation/Datasource/Row-Level-Security-in-Analytics/).
 
 ## Prerequisite: bind a filter default to a parameter
 
@@ -93,5 +95,5 @@ https://analytics.example.com/datafor/plugin/datafor/api/integrate/<pageId>?__co
 
 - [Creating Parameters](/documentation/Analysis/Creating-Parameters/)
 - [Parameter Controllers](/documentation/Analysis/Parameter-Controllers/)
-- [Reports REST API](/documentation/Embedded/Reports-REST-API/)
+- [Report URLs (open, edit, embed)](/documentation/Embedded/Reports-REST-API/)
 - [SDK Embedding](/documentation/SDK-Embedding/)

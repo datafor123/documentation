@@ -152,6 +152,8 @@ Ask these three questions in order. When all three return results, the connectio
 - **Disclosures are relayed.** Assumptions, member mappings, omitted parts and truncation come back as disclosures, and the client must tell you each one.
 - **Forecasts and causes go to Datafor first.** The client relays what Datafor answers and computes beyond it only if you ask, labelled as its own work.
 - **Data or insight.** The default (`detail: "data"`) returns rows, the query and disclosures, and Datafor writes no analysis or follow-ups. With `detail: "insight"`, Datafor also writes its own analysis, may run several queries for a complex question and can take about three minutes. Ask for it explicitly.
+- **Row limit.** A result returns up to 200 rows by default. Ask for more and the client passes `max_rows`, up to 1000.
+- **Long analyses come back later.** If the answer is not ready within the wait time (200 seconds by default), the call returns `pending` with a `run_id`, and the client collects the answer by calling again with that `run_id` alone. The analysis keeps running in the meantime.
 - Metrics Library notes such as "draft" or "definition drift" are not returned in the default data mode.
 
 ### What a response can say
@@ -163,6 +165,7 @@ Ask these three questions in order. When all three return results, the connectio
 | `clarification_needed` | Datafor needs a choice from you, such as the model or a member. | Show the message and the options, then reply with your choice. |
 | `needs_split` | The question needs several dependent queries. This is not a failure. | Split it and ask the parts one at a time. |
 | `unsupported` | The question is outside what the model can answer. | Relay Datafor's message; do not answer from general knowledge. |
+| `pending` | The answer was not ready within the wait time (`MCP_ASK_TIMEOUT_SECONDS`, 200 seconds by default). The analysis is still running. | Call `ask_datafor` again with only the `run_id` from the response, not the question. |
 | `error` | The call failed. | Retry once only if the response says it is retryable; otherwise report the failure. |
 
 ## 6. Troubleshooting
@@ -185,10 +188,8 @@ The Claude Desktop extension writes its log to `%LOCALAPPDATA%\Claude\logs\mcp-s
 
 ## 7. Security
 
-- A personal token or a password in a client configuration stands for you and all your permissions. Keep it only in your own AI client's configuration. Do not paste it into a chat, commit it to a repository or forward it.
-- Generate a new token when the old one expires or may have leaked. On a shared computer, remove the configuration when you are done.
-- Single tokens cannot be revoked. An administrator who changes the secret of the token configuration invalidates every token issued from it.
-- Publishing the MCP server to the network exposes a governed data interface. Use HTTPS and restrict where it can be reached from.
+- A personal token or a password in a client configuration stands for you and all your permissions. Keep it only in your own AI client's configuration; do not paste it into a chat, commit it to a repository or forward it. On a shared computer, remove the configuration when you are done.
+- A new token does not invalidate the old one. If a token may have leaked, generate a new one and tell your administrator, who can revoke all tokens at once (section 8.1).
 
 ## 8. For administrators
 
@@ -209,11 +210,9 @@ POST /datafor/plugin/datafor-modeler/api/token/update
 | `enable` | `"1"`. |
 | `algorithm` | An HMAC algorithm such as `HS256`, with a `secret`. |
 | `expire` | Validity in seconds; `7776000` is 90 days. The panel shows it in days. |
-| `inituser` | `"0"`: a token cannot create users. |
+| `inituser` | Not required for personal tokens. |
 
-::: warning
-Saving this configuration again on **Settings › Access & Integration › Embed tokens (JWT)** turns personal tokens off: the console does not send `self_service`, so it is dropped. Use a configuration dedicated to AI clients, do not edit it in the console, and send the API call again if someone does. See [JSON Web Token (JWT)](/documentation/System/JWT/) for the other fields.
-:::
+Editing the configuration later on **Settings › Access & Integration › Embed tokens (JWT)** keeps `self_service`. See [JSON Web Token (JWT)](/documentation/System/JWT/) for the other fields.
 
 Changing the `secret` of the configuration invalidates every token issued from it at once. It is the only way to revoke tokens.
 
@@ -242,13 +241,22 @@ Behind a reverse proxy, forward `/mcp` to the MCP server, use HTTPS, list the pu
 
 Restart with `app-console.bat restart` or `./app-console.sh restart` after a change.
 
-### 8.4 Prepare the models and the server
+### 8.4 Wait time and time zone
+
+| Key | Default | Effect |
+| --- | --- | --- |
+| `MCP_ASK_TIMEOUT_SECONDS` | `200` | Seconds one `ask_datafor` call waits for the answer before it returns `pending` with the `run_id`. Keep it below the AI client's own tool-call limit (Codex: 60 seconds unless `tool_timeout_sec` is raised). |
+| `MCP_DEFAULT_TIMEZONE` | empty | IANA time zone, for example `Europe/Berlin`, in which relative dates such as "last month" resolve when the AI client sends none. Empty: the current UTC offset of the server, or UTC if that offset is not a whole number of hours. |
+
+Set them in `ai-agent/.env` and restart with `app-console.bat restart` or `./app-console.sh restart`.
+
+### 8.5 Prepare the models and the server
 
 - Build the knowledge index of each model users will ask about (older versions called it the vector index). Without it, questions that name specific members can lose their filter. See [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
-- When the **Question Suggestions** stage has no assignment on the **LLM** page, `generate_sample_questions` falls back to an LLM configured in Datafor. For users who are not administrators, that needs the [shared secret](/documentation/AI-Agent/Agent-Shared-Secret/).
+- Assign the **Question Suggestions** stage on the **LLM** page. Without it, `generate_sample_questions` can only use the LLM configured in Datafor whose ID is set as `AGENT_DEFAULT_LLM_ID` in `ai-agent/.env`, and for users who are not administrators only with the [shared secret](/documentation/AI-Agent/Agent-Shared-Secret/). With neither, it returns no questions.
 - Distribute `datafor.mcpb` to users of Claude Desktop.
 
-### 8.5 After upgrading to 10.00
+### 8.6 After upgrading to 10.00
 
 - Claude Desktop users reinstall the extension: uninstall the old version first, then install the new one. The new version passes the token header correctly on Windows and waits for Datafor to start.
 - Nothing to do for Claude Code, Codex or JSON clients. Clients that were connected before the upgrade keep working.

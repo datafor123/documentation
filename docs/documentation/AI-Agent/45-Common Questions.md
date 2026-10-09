@@ -6,7 +6,7 @@ createTime: 2026/09/01 21:50:52
 
 # Common Questions
 
-**Common Questions** lets authorized users maintain reusable, user-facing questions for each analysis model. The questions provide a controlled starting point for common analytical tasks without replacing the model's metrics, metadata, or permissions.
+**Common Questions** lets administrators maintain reusable, user-facing questions for each analysis model. The questions provide a controlled starting point for common analytical tasks without replacing the model's metrics, metadata, or permissions.
 
 ## 1. Open Common Questions
 
@@ -20,7 +20,7 @@ The list is scoped to the selected model and can be searched by question content
 
 ## 2. Add a question
 
-Click **New Question**. Select the target analysis model and enter the user-facing question, then click **Save**.
+Click **New Question**. Select the target analysis model and enter the user-facing question (up to 500 characters), then click **Save**.
 
 <div align="left"><img src="./images/ai-common-question-form.png" alt="New Common Question form" width="100%" /></div>
 
@@ -47,8 +47,5 @@ For an existing item, use the row actions to edit or delete the question. Use th
 
 ## Writing guidance
 
-- Use business language that users recognize.
-- Keep one analytical intent per question.
-- Avoid credentials, personal data, or confidential values.
 - Do not hard-code a time period that will quickly become stale unless that fixed period is intentional.
-- Validate the question in **New Chat** with the same analysis model before publishing it for broad use.
+- Test the question in **New Chat** with the same analysis model before saving it.

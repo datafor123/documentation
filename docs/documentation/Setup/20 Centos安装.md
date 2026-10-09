@@ -1,51 +1,46 @@
 ---
-title: Installation Guide (CentOS)
+title: Installation Guide (RHEL-compatible Linux)
 permalink: /documentation/Setup/Installation-CentOS/
+description: Install, start, stop and update Datafor and its AI Agent on RHEL-compatible Linux 8 or 9.
 createTime: 2026/09/01 22:03:26
 ---
 
-# Installation Guide (CentOS)
+# Installation Guide (RHEL-compatible Linux)
 
-## Step 1: Switch to the Root User
+These steps apply to RHEL-compatible distributions, version 8 or 9 (for example Rocky Linux, AlmaLinux or Red Hat Enterprise Linux). CentOS 7 and CentOS 8 are end of life. The package `glibc-langpack-en` used below exists from version 8 on.
 
-To begin the installation, switch to the root user by running:
+**Requirements**
+
+- **Memory:** the Datafor server starts with a Java heap of 2 GB that can grow to 6 GB (`-Xms2048m -Xmx6144m`). The built-in PostgreSQL database and the AI Agent run beside it, so plan at least **8 GB RAM**. To change the heap, see [Increasing Memory Limit for Datafor Server](/documentation/Tools/Increasing-Memory-Limit/).
+- **Java:** bundled in `bi-server/java`. You do not need to install Java.
+- **Ports:** `28080` (web server), `25432` (built-in PostgreSQL), `28081` (AI Agent API) and `38081` (AI Agent MCP server). Open only `28080` in the firewall, or only the Nginx ports when Datafor runs [behind Nginx](/documentation/Setup/Deploying-Datafor-Behind-Nginx/). Keep `25432`, `28081` and `38081` closed to the network.
+
+## Step 1: Switch to the root user and install the required packages
 
 ```bash
 sudo su root
 yum install unzip procps-ng glibc-langpack-en -y
 ```
 
-**Console Output Example:**
+**Console output example:**
 
 ```
-[centos@ip-172-31-33-203 ~]$ sudo su root
-[root@ip-172-31-33-203 centos]# yum install unzip procps-ng glibc-langpack-en -y
+[root@your-server ~]# yum install unzip procps-ng glibc-langpack-en -y
 Package unzip-6.0-48.el8_10.x86_64 is already installed.
 Package procps-ng-3.3.15-14.el8.x86_64 is already installed.
 Package glibc-langpack-en-2.28-251.el8_10.31.x86_64 is already installed.
 Dependencies resolved.
 Nothing to do.
 Complete!
-[root@ip-172-31-33-203 centos]#
 ```
 
-## Step 2: Create the `biadmin` User Group
-
-Create a user group named `biadmin`:
+## Step 2: Create the `biadmin` user group
 
 ```bash
 groupadd biadmin
 ```
 
-**Console Output Example:**
-
-```
-[root@52d0bef30d9c /]# groupadd biadmin
-[root@52d0bef30d9c /]#
-```
-
-
-## Step 3: Create the `biadmin` User
+## Step 3: Create the `biadmin` user
 
 Create a user named `biadmin`, add it to the `biadmin` group, and set its password:
 
@@ -54,51 +49,22 @@ adduser biadmin -g biadmin
 passwd biadmin
 ```
 
-**Console Output Example:**
+## Step 4: Extract the installation package
 
-```
-[root@52d0bef30d9c /]# adduser biadmin -g biadmin
-[root@52d0bef30d9c /]# passwd biadmin
-Changing password for user biadmin.
-New password:
-BAD PASSWORD: The password is shorter than 8 characters
-Retype new password:
-passwd: all authentication tokens updated successfully.
-```
-
-## Step 4: Extract the Installation Package
-
-Navigate to the directory where the installation package is located and extract it into the `/opt` directory:
+Go to the directory that holds the installation package and extract it into `/opt`. Use the file name of the package you received, for example `datafor-server-linux-<version>.zip`:
 
 ```bash
-unzip -o Datafor-linux-7.02.zip -d /opt/
+unzip -o datafor-server-linux-<version>.zip -d /opt/
 ```
 
-**Console Output Example:**
+The package creates `/opt/bi-server`.
 
-```
-inflating: /opt/bi-server/tomcat/lib/jasper.jar
-inflating: /opt/bi-server/tomcat/lib/postgresql-42.5.1.jar
-inflating: /opt/bi-server/tomcat/lib/servlet-api.jar
-...
-```
-
-## Step 5: Set Directory Permissions
-
-Move to the `/opt/` directory and modify the permissions:
+## Step 5: Set directory permissions
 
 ```bash
 cd /opt/
 chmod -R 700 bi-server
 chown -R biadmin:biadmin bi-server
-```
-
-**Console Output Example:**
-
-```
-[root@52d0bef30d9c opt]# cd /opt/
-[root@52d0bef30d9c opt]# chmod -R 700 bi-server
-[root@52d0bef30d9c opt]# chown -R biadmin:biadmin bi-server
 ```
 
 **Installation is now complete.**
@@ -107,7 +73,7 @@ chown -R biadmin:biadmin bi-server
 
 # Starting Datafor
 
-**Ensure that you perform the following steps as the `biadmin` user.**
+**Perform the following steps as the `biadmin` user.**
 
 ## Step 1: Switch to `biadmin`
 
@@ -115,86 +81,96 @@ chown -R biadmin:biadmin bi-server
 su - biadmin
 ```
 
-## Step 2: Start the Service
-
-Navigate to the Datafor directory and start the server:
+## Step 2: Start Datafor
 
 ```bash
 cd /opt/bi-server/
 ./start-server.sh
 ```
 
-**Console Output Example:**
+The script starts the built-in PostgreSQL database and then the Datafor web server (Tomcat).
+
+**Console output example:**
 
 ```
-biadmin@gg:/opt/bi-server$ ./start-server.sh
+[biadmin@your-server bi-server]$ ./start-server.sh
 DEBUG: Found JAVA at the current folder
 DEBUG: _PENTAHO_JAVA_HOME=/opt/bi-server/java
 DEBUG: _PENTAHO_JAVA=/opt/bi-server/java/bin/java
 waiting for server to start...
-2025-03-18 06:29:15.279 UTC [131263] LOG: listening on IPv4 address "0.0.0.0", port 25432
-2025-03-18 06:29:15.289 UTC [131263] LOG: listening on IPv6 address "::", port 25432
-2025-03-18 06:29:15.300 UTC [131263] LOG: Listening on Unix socket "/tmp/.s.PGSQL.25432"
-2025-03-18 06:29:16.011 UTC [131263] LOG: database system is ready to accept connections
+LOG: listening on IPv4 address "0.0.0.0", port 25432
+LOG: database system is ready to accept connections
 server started
 Using CATALINA_BASE: /opt/bi-server/tomcat
 Using CATALINA_HOME: /opt/bi-server/tomcat
-Using CATALINA_TMPDIR: /opt/bi-server/tomcat/temp
 Using JRE_HOME: /opt/bi-server/java
-Using CLASSPATH: /opt/bi-server/tomcat/bin/bootstrap.jar:/opt/bi-server/tomcat/bin/tomcat-juli.jar
-Using CATALINA_OPTS: -Xms2048m -Xmx6144m -Dsun.rmi.dgc.client.gcInterval=360000 -Dsun.rmi.dgc.server.gcInterval=360000 -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Djava.locale.providers=COMPAT,SPI -DDI_HOME="/opt/bi-server/pentaho-solutions/system/kettle" -Djava.awt.headless=true -Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2
+Using CATALINA_OPTS: -Xms2048m -Xmx6144m ...
 Tomcat started.
 ```
 
-## Step 3: Stop the Service
+## Step 3: Start the AI Agent
 
-To stop the service, use:
+The AI Agent is in `/opt/bi-server/ai-agent` and consists of four processes (API on port 28081, two workers, and the MCP server on port 38081). Start it with its launcher:
 
 ```bash
+cd /opt/bi-server/ai-agent
+./app-console.sh start
+```
+
+`start` starts only the components that are not running, so it is safe to run it again. On the first start the launcher creates `instance-secrets.env` and writes the shared secret into Datafor's settings. If it prints `Set <agent-secret> in …`, restart Datafor once (Step 4, then Step 2) so that Datafor reads the value. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/).
+
+Check that the AI Agent is ready:
+
+```bash
+curl -i http://127.0.0.1:28081/ai/health
+```
+
+`HTTP/1.1 200` means it is ready. `503` means it cannot work yet; the response body says whether the database, the schema migration or the worker queues are the cause. To set up the AI features, see [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/).
+
+## Step 4: Stop Datafor
+
+```bash
+cd /opt/bi-server/ai-agent
+./app-console.sh stop
+cd /opt/bi-server/
 ./stop-server.sh
 ```
 
-**Console Output Example:**
+**Console output example:**
 
 ```
-2025-03-18 06:29:45.604 UTC [131268] LOG: shutting down
-2025-03-18 06:29:45.646 UTC [131263] LOG: database system is shut down
+LOG: shutting down
+LOG: database system is shut down
 server stopped
 ```
 
-## Step 4: Check Service Status
-
-To verify whether the service is running, check the `Tomcat` process:
+## Step 5: Check whether Datafor is running
 
 ```bash
-ps -ef | grep tomcat
+ps -ef | grep [t]omcat
 ```
 
-**Console Output Example:**
-
-```
-biadmin@gg:/opt/bi-server$ ps -ef | grep tomcat
-biadmin  131965  130565  0 14:30 pts/5  00:00:00 grep --color=auto tomcat
-```
-
-If the command output shows Tomcat processes running, the service is active.
+If the command prints a Java process whose arguments contain `/opt/bi-server/tomcat`, Datafor is running. No output means it is stopped.
 
 ------
 
-# Logging into Datafor
+# Signing in to Datafor
 
-After installation, access the Datafor web interface using:
+Open `http://<server-ip>:28080/` in a browser. The installation comes with two accounts:
 
-- **URL:** http://server-ip:28080/
-- Default Login Credentials:
-  - **Admin:** `admin / password`
-  - **Demo User:** `demo / demo`
+- **Administrator:** `admin` / `password`
+- **Demo user:** `demo` / `demo`
+
+Change the `admin` password right after the first sign-in (see [Modify Password](/documentation/System/Modify-Password/)), and change the `demo` password or delete that user if you do not need it.
 
 ------
 
 # Updating the System
-1. Place the update package `datafor-update.jar` in the `bi-server/update` directory.
-2. Run `su - biadmin` to switch to the `biadmin` user.
-3. Run `./stop-server.sh` to stop the service.
-4. Run `./start-server.sh` to start the service.
-   - Note: Running start-server.sh will automatically apply the update from datafor-update.jar in the update directory.
+
+1. **Back up first.** Create a backup (see [Backup and Restore](/documentation/System/backup/)) and copy `bi-server/ai-agent/instance-secrets.env` and `bi-server/ai-agent/.env` to a safe place. The LLM API keys saved in Datafor are encrypted with a key from `instance-secrets.env`; without that file a restored system cannot read them.
+2. Read the upgrade notes of the release, for example [10.00 Upgrade notes](/release/10.00/#upgrade-notes).
+3. **Install all components of the update package together.** Several features need matching browser and server parts, so do not install parts of an update package on their own.
+4. Copy the update package (a `.jar` file, for example `datafor-updater.jar`) into `/opt/bi-server/update`.
+5. Switch to `biadmin` with `su - biadmin`, then stop Datafor as in Step 4 above.
+6. Start Datafor with `./start-server.sh`. Before it starts the server, the script applies every `.jar` file in `update` and renames it with a time stamp, so it is not applied twice.
+7. Start the AI Agent as in Step 3 above and check `/ai/health`.

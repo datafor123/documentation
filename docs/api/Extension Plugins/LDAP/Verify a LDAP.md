@@ -47,10 +47,10 @@ Use of this API requires authentication. For details about the authentication me
 ```json
 {
   "initial": "com.sun.jndi.ldap.LdapCtxFactory",
-  "dn": "cn=admin,dc=imysh,dc=com",
+  "dn": "cn=admin,dc=example,dc=com",
   "url": "ldap://127.0.0.1:389",
   "authtype": "simple",
-  "secret": "123456"
+  "secret": "<bind-password>"
 }
 ```
 
@@ -61,7 +61,7 @@ Use of this API requires authentication. For details about the authentication me
 | Name        | Location | Type    | Required | Description |
 |------------|----------|---------|----------|-------------|
 | `initial`  | body     | string  | Yes      | Initial LDAP context factory class name. Example: `com.sun.jndi.ldap.LdapCtxFactory` |
-| `dn`       | body     | string  | Yes      | Distinguished Name (DN) used for authentication. Example: `cn=admin,dc=imysh,dc=com` |
+| `dn`       | body     | string  | Yes      | Distinguished Name (DN) used for authentication. Example: `cn=admin,dc=example,dc=com` |
 | `url`      | body     | string  | Yes      | LDAP server URL. Example: `ldap://127.0.0.1:389` |
 | `authtype` | body     | string  | Yes      | LDAP authentication type. Example: `simple` or `none` |
 | `secret`   | body     | string  | Yes      | LDAP administrator password. |

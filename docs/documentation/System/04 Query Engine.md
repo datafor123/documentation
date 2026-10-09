@@ -11,13 +11,13 @@ createTime: 2026/10/09 17:30:00
 
 ![Query engine settings](./images/settings-query-engine.png)
 
-| Setting | Meaning |
-| --- | --- |
-| **Show infinity as** | Text shown for a division by zero or another infinite result, for example `Infinity` or `-` |
-| **Show empty members as** | Text shown for members without a name |
-| **Max concurrent queries** | Queries that may run at the same time; further queries wait |
-| **Max result rows** | The most rows one query may return; 0 = no limit |
-| **Query timeout (seconds)** | A query running longer is stopped; 0 = no timeout. Reports wait this long plus 10 seconds before showing *The query timed out*. |
+| Setting | Meaning | Default |
+| --- | --- | --- |
+| **Show infinity as** | Text shown for a division by zero or another infinite result, for example `Infinity` or `-` | `Infinity` |
+| **Show empty members as** | Text shown for members without a name | (empty) |
+| **Max concurrent queries** | Queries that may run at the same time; further queries wait | `200` |
+| **Max result rows** | The most rows one query may return; 0 = no limit | `500000` |
+| **Query timeout (seconds)** | A query running longer is stopped; 0 = no timeout. Reports wait this long plus 10 seconds before showing *The query timed out*. | `300` |
 
 **Reset to default** returns every engine setting to its factory value, including settings this page does not show. **Save** applies the changes.
 

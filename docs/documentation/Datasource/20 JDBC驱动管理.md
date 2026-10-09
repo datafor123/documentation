@@ -10,6 +10,8 @@ createTime: 2026/09/01 22:03:26
 
 Datafor keeps a list of JDBC drivers so that each database connection can use a driver version that matches its database server. Add a driver when a database needs a different driver version than the ones listed.
 
+Only administrators can add, update or delete drivers. Other users choose from the listed drivers in the **Driver** field of a connection.
+
 ## 1. Open the driver list
 
 Go to **Settings › Data › Database drivers**. The list shows:
@@ -29,7 +31,7 @@ Use the search box above the list to filter by name, database type, driver class
 
 ## 2. Add a driver
 
-1. Click **New Driver**.
+1. Click **New driver**.
 2. Fill in the dialog:
 
    | Field | What to enter | Notes |
@@ -49,4 +51,6 @@ Use the search box above the list to filter by name, database type, driver class
 
 ## 4. Delete a driver
 
-Choose **Delete** in the driver's **Actions** menu and confirm. The deletion cannot be undone.
+Datafor does not check whether a connection still uses the driver. Before deleting, open each connection of that database type and check its **Driver**; switch connections that use it to another driver.
+
+Then choose **Delete** in the driver's **Actions** menu and confirm. The driver entry and its JAR files are removed; this cannot be undone.

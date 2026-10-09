@@ -47,11 +47,11 @@ Use of this API requires authentication. For details about the authentication me
 ```json
 {
   "initial": "com.sun.jndi.ldap.LdapCtxFactory",
-  "administrator": "cn=admin,dc=imysh,dc=com",
-  "secret": "123456",
+  "administrator": "cn=admin,dc=example,dc=com",
+  "secret": "<bind-password>",
   "url": "ldap://127.0.0.1:389",
   "authtype": "simple",
-  "user_base": "cn=${username},dc=imysh,dc=com",
+  "user_base": "cn=${username},dc=example,dc=com",
   "enable": "1",
   "inituser": "1",
   "initroles": [
@@ -70,11 +70,11 @@ Use of this API requires authentication. For details about the authentication me
 | `initial`      | body     | string    | Yes      | Initial LDAP context factory class name. Example: `com.sun.jndi.ldap.LdapCtxFactory` |
 | `url`          | body     | string    | Yes      | LDAP server URL. Example: `ldap://127.0.0.1:389` |
 | `authtype`     | body     | string    | Yes      | LDAP authentication type. Example: `simple` or `none` |
-| `user_base`    | body     | string    | Yes      | LDAP user base distinguished name (DN). Example: `cn=${username},dc=imysh,dc=com` |
+| `user_base`    | body     | string    | Yes      | LDAP user base distinguished name (DN). Example: `cn=${username},dc=example,dc=com` |
 | `enable`       | body     | string    | Yes      | Enable LDAP authentication (`1` = true, `0` = false) |
 | `inituser`     | body     | string    | Yes      | Enable initial user creation (`1` = true, `0` = false) |
 | `initroles`    | body     | [string]  | Yes      | List of initial roles assigned to users. |
-| `administrator` | body    | string    | No       | LDAP administrator distinguished name (DN). Example: `cn=admin,dc=imysh,dc=com` |
+| `administrator` | body    | string    | No       | LDAP administrator distinguished name (DN). Example: `cn=admin,dc=example,dc=com` |
 | `secret`      | body     | string    | No       | LDAP administrator password. This is used for authentication testing only. |
 | `desc`        | body     | string    | No       | Description of the LDAP configuration. |
 

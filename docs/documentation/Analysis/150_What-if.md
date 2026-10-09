@@ -1,8 +1,10 @@
 ---
 title: What-if Analysis
 permalink: /documentation/Analysis/What-if-Analysis/
-tags: null
-description: null
+tags:
+  - Analytics
+  - Parameters
+description: Build a growth-rate scenario with a report parameter, a calculated measure that uses ParamRef, and a Numeric slider, then check the values.
 createTime: 2026/09/04 00:23:30
 ---
 
@@ -16,7 +18,7 @@ Start with a **Clustered column** chart: put **Region** in **X-axis** and **Net 
 
 ## 1. Create the scenario input
 
-Open **Manage parameters** in the report toolbar, click **New**, and use these settings:
+Open **Manage parameters** in the report toolbar, click **+**, and use these settings:
 
 | Field | Value |
 | --- | --- |
@@ -51,7 +53,7 @@ If you choose to store percentage points such as `10` instead, divide the parame
 
 1. Add **Numeric slider** from **Components → Filters**.
 2. In **Data**, set **Data source → Parameter** and select **GrowthRate**.
-3. In the same panel, set **Minimum Value → -0.2**, **Maximum Value → 0.2**, and **Step → 0.01**.
+3. In the same panel, set **Minimum value → -0.2**, **Maximum value → 0.2**, and **Step → 0.01**.
 4. In the chart's **Style → Title**, enter `Sales Scenario (rate: ${GrowthRate})`.
 5. Save and open **Preview**. Move the slider or type a value in its input and press **Enter**.
 
@@ -67,7 +69,7 @@ Use the base **Net Sales** value as the control case:
 | `0` | `1.00 × Net Sales` |
 | `0.2` | `1.20 × Net Sales` |
 
-Use the chart's **More → Data preview** to compare exact values. For example, with Central China's base Net Sales of **372,226.37**, the three results are **297,781.10**, **372,226.37**, and **446,671.64**. Your values may differ if the source data or filters change.
+Use the chart's **⋮ → Data preview** to compare exact values. For example, with Central China's base Net Sales of **372,226.37**, the three results are **297,781.10**, **372,226.37**, and **446,671.64**. Your values may differ if the source data or filters change.
 
 ![Scenario values at a growth rate of 0.2](../Visualization/images/current/scenario-data-preview.jpg)
 
@@ -82,6 +84,5 @@ Return to `0.1` and check that the title reads **Sales Scenario (rate: 0.1)**. R
 | `Unknown parameter` appears when the component queries. | Match the parameter name exactly, including case and spaces. |
 | The parameter is absent from Numeric slider. | Choose **Data source → Parameter** and check the parameter type; this example uses **Numeric / Any value**. |
 | The result does not change. | Confirm the slider and `ParamRef()` reference the same parameter and the component uses `Scenario Net Sales`. |
-| The formula can be saved but the component query fails. | Review the MDX and referenced measure names; some formula errors appear only when the component runs its query. |
 
 See [Using Parameters in Calculated Measures](/documentation/Analysis/Using-Parameters-in-Calculated-Measures/) for `ParamRef()` rules.

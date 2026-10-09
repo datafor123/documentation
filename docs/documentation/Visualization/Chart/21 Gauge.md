@@ -82,7 +82,7 @@ Hovering a gauge shows the measure, then:
 
 | Row | Content |
 | --- | --- |
-| **Target** | The typed or bound target, with "（out of range）" when it lies outside the scale. |
+| **Target** | The typed or bound target, with "(out of range)" when it lies outside the scale. |
 | **Achievement** | Actual ÷ target, as a percentage with one decimal. Omitted when the target is 0. |
 | **Difference** | Actual − target with a + or − sign, formatted like the target. |
 

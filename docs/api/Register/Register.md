@@ -9,10 +9,6 @@ description: null
 createTime: 2026/09/01 22:03:26
 ---
 
-Here is the fully **translated and professional** version of your API documentation in **English** while maintaining completeness and clarity:
-
----
-
 ## **User Registration API**
 
 **Method**  
@@ -104,7 +100,3 @@ This API registers a new user account by providing user details and a verificati
 | `msg`     | string  | No       | Response message (only present when the request fails). |
 | `code`    | integer | No       | HTTP status code indicating the failure reason. |
 | `success` | boolean | **Yes**  | Indicates whether the request was successful. |
-
----
-
-This version ensures clarity, professionalism, and consistency with industry-standard API documentation. Let me know if you need further adjustments! 🚀

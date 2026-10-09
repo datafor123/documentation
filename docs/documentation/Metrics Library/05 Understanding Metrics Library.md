@@ -39,6 +39,7 @@ Metrics Library is worth setting up when any of these sound familiar:
 - **Several models calculate the same metric.** Define it once and bind it in each model, so every model is checked against the same definition.
 - **People ask the AI Agent in their own words**, such as "GM%" or "AOV". Synonyms lead the Agent to the official metric and the measure bound to it, not a similarly named field. If the metric is a draft or not bound in that model, the answer says so (drafts generated from a model and not yet edited are answered without the draft notice).
 - **Formulas or definitions change.** The binding is marked **Needs comparison**, and **Compare definition** asks AI whether the two still agree.
+- **People ask without choosing a model.** With **Auto-select model**, the AI Agent picks the model that the metrics named in the question are bound to.
 - **People keep asking how a figure is defined.** The AI Agent answers "How is Net Sales defined?" from the library, without running a query.
 
 You may not need it yet if you have one model, a small team, and measures whose meaning nobody disputes. Clear captions, descriptions, and aliases on the measures may be enough for now. When you start, register the 5 to 15 metrics that are reported to management or often disputed, not every measure. If your models already define them, **Generate from a model** creates the metrics and bindings in one step; see [Generate metrics from an analysis model](/documentation/Metrics-Library/Metrics-Library/#_3-generate-metrics-from-an-analysis-model).
@@ -89,7 +90,7 @@ No. It stores definitions only. Reports and AI answers get their numbers from An
 No. Binding does not change the measure's formula, aggregation, or filters, and it does not copy the library's text into the measure. If the unit, direction, or synonyms differ, the designer shows the difference so you can decide.
 
 **The library shows a calculation such as "Gross Margin Amount ÷ Net Sales". Is that the formula Datafor runs?**\
-No. It describes how the metric relates to other metrics and is used only when comparing definitions. The formula that runs is the calculated measure in the model.
+Not as written. It describes how the metric relates to other metrics, and the numbers always come from measures in the model. How the relation is used depends on the **Calculation method**: for **Ratio**, **Difference** and **Attainment rate**, the AI Agent finds each operand metric through its own binding in the model, queries those measures and computes the result itself, unless the model formula already declares the parts. A **Custom formula** relation is used only when comparing definitions.
 
 **A measure is called "Sales" but is bound to "Gross Sales". Is that a mistake?**\
 No. The binding, not the name, decides which metric a measure calculates.

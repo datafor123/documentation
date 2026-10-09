@@ -17,8 +17,6 @@ New to Metrics Library? Start with [Understanding Metrics Library](/documentatio
 | **Model measure** | Formula, aggregation, filters, and data source used to calculate a value. |
 | **Metric binding** | Connects a model measure to an enterprise metric and can declare an effective grain. |
 
-For reliable analysis, use a Certified metric whose model binding has been reviewed.
-
 ## 1. Find and assess a metric
 
 Open **Data > Metrics Library**.
@@ -38,7 +36,7 @@ The indicators answer different questions:
 
 A metric can be Certified and still have no model reference. It can also be Certified and bound while its implementation comparison needs attention.
 
-The example below shows **Net Sales** as Certified and bound to the **Retail Chain Operations** model, with a comparison result that needs review.
+The example below shows **Net Sales** as Certified and bound to the **Retail Chain Operations** model, with the comparison result **Not enough evidence**.
 
 <div align="left"><img src="./images/net-sales-metric-detail.jpg" alt="Certified Net Sales metric with a Retail Chain Operations binding that needs review" width="100%" /></div>
 
@@ -91,7 +89,7 @@ The batch is all or nothing: if one metric cannot be saved, none is created.
 
 1. Open **Models > Retail Chain Operations**.
 2. Select the measure or calculated measure that implements the metric. For example, open **Calculated measures > Gross Margin Rate**.
-3. In **Attributes**, expand **Business semantics > Metric governance**.
+3. In **Attributes**, expand **Metric governance**. It is a separate group below **Business semantics** and is collapsed by default; its header shows whether the measure is bound.
 4. Under **Enterprise metric**, select the matching library record by name, Metric ID, or synonym.
 5. Set **Effective grain** only when the value is valid at a specific analytical grain; otherwise leave it empty.
 6. Click **Save** for the model.
@@ -108,8 +106,6 @@ Open **Metric bindings** at the bottom of the Modeler. The panel lists the model
 
 <div align="left"><img src="./images/retail-chain-metric-bindings.jpg" alt="Metric bindings review panel in Retail Chain Operations" width="100%" /></div>
 
-The sample model currently shows 13 bound measures, with four requiring attention.
-
 Use **Compare definition** for one binding or **Compare all** for the model. Datafor sends the model implementation and business definition to AI and stores the verdict in Metrics Library. It does not change the formula, aggregation, filters, or model.
 
 The comparison judges only what the model shows: which measures a formula combines, how they are aggregated, what it divides by, what it excludes, empty values and grain. A bound measure, and every measure its formula uses, is assumed to hold what its name and description say, or what the definition says when it has no description. Exclusions count only when the definition or its notes state them. A verdict stored before 10.00 was made under stricter rules; run **Compare all** again.
@@ -123,8 +119,6 @@ A successful comparison also moves the binding to the metric's current version, 
 | **Possible drift** | Review a likely conflict between the implementation and definition. |
 | **Needs comparison** | Re-run the comparison because the definition or implementation changed. |
 | **Not enough evidence** | Part of the implementation could not be read, for example a referenced member of unknown kind or a cut-off formula. Inspect the measure manually; the result is not proof that the implementation is wrong. |
-
-Resolve comparison warnings before treating a metric as production-ready.
 
 ## 6. Ask AI Agent about an enterprise metric
 

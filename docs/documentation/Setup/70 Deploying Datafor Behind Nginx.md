@@ -14,7 +14,7 @@ The examples use the host name `bi.example.com`, a Datafor server on the same ma
 
 ## 1. Before you begin
 
-- Install Datafor and confirm that `http://<server-ip>:28080/datafor/` opens in a browser. See [Installation Guide (CentOS)](/documentation/Setup/Installation-CentOS/), [Installation Guide (Ubuntu)](/documentation/Setup/Installation-Ubuntu/), [Installation (Windows)](/documentation/Setup/Installation-windows/), or [Deploying Datafor Using Docker](/documentation/Setup/Deploying-Datafor-Using-Dockers/).
+- Install Datafor and confirm that `http://<server-ip>:28080/datafor/` opens in a browser. See [Installation Guide (RHEL-compatible Linux)](/documentation/Setup/Installation-CentOS/), [Installation Guide (Ubuntu)](/documentation/Setup/Installation-Ubuntu/), [Installation (Windows)](/documentation/Setup/Installation-windows/), or [Deploying Datafor Using Docker](/documentation/Setup/Deploying-Datafor-Using-Dockers/).
 - Install Nginx on the Datafor server, or on a host that can reach port 28080 of the Datafor server.
 - Prepare a DNS name for the site and a TLS certificate and private key for that name.
 - Obtain administrator access to the server, because the procedure edits Nginx and Tomcat configuration files and restarts services.
@@ -25,6 +25,7 @@ Datafor listens on these ports:
 | --- | --- | --- |
 | 28080 | Datafor web server (Tomcat): console, reports, REST APIs, and the AI Agent API under `/datafor/ai/` | **Yes.** This is the only upstream Nginx needs. |
 | 28081 | AI Agent service | **No.** Browsers reach the AI Agent through Datafor at `/datafor/ai/`; Datafor forwards the requests internally. |
+| 38081 | AI Agent MCP server, for AI clients such as Claude Desktop | **Only if AI clients on other computers connect**, through `location /mcp` (section 2). It listens on `127.0.0.1` by default. |
 | 25432 | Built-in PostgreSQL database | **No.** Never expose it. |
 
 ## 2. Add the Nginx site configuration
@@ -86,6 +87,15 @@ server {
         proxy_send_timeout 3600s;
     }
 
+    # AI Agent MCP server (optional): only for AI clients on other computers
+    location /mcp {
+        proxy_pass         http://127.0.0.1:38081;
+        proxy_buffering    off;
+        proxy_cache        off;
+        gzip               off;
+        proxy_read_timeout 600s;
+    }
+
     # Everything else: console, reports, APIs, static resources
     location / {
         proxy_pass http://datafor_backend;
@@ -106,6 +116,7 @@ If you cannot use HTTPS yet, keep a single `server { listen 80; ... }` block wit
 | `client_max_body_size` | Sets the upload limit for [file datasets](/documentation/Datasource/File-Dataset/) and other uploads. Datafor itself does not limit the request size. |
 | `proxy_read_timeout` in `location /` | Long-running reports and exports keep the connection open while the query executes. Raise it if users see `504 Gateway Time-out`. |
 | `location ^~ /datafor/ai/` | Disables response buffering, caching, and compression for the AI Agent API and allows analyses to run for up to an hour. See the next section. |
+| `location /mcp` | Forwards AI clients to the MCP server on port 38081 and lets one call run for several minutes. Omit it if no AI client outside the server connects. See [Publish the MCP server](#publish-the-mcp-server). |
 
 ### Why the AI Agent location is special
 
@@ -121,6 +132,17 @@ The `location ^~ /datafor/ai/` block fixes this:
 - `proxy_read_timeout 3600s` keeps the connection open while a long analysis runs.
 
 Datafor's own Tomcat server never buffers this stream, which is why the problem appears only after a reverse proxy is added. If another reverse proxy, WAF, CDN, or cloud load balancer sits in front of Datafor, apply the equivalent settings there: response buffering and compression must be off for `/datafor/ai/`, and the idle timeout must allow several minutes.
+
+### Publish the MCP server
+
+AI clients such as Claude Desktop connect to the AI Agent's MCP server at `/mcp` (see [Connect AI Clients](/documentation/AI-Agent/Connect-AI-Clients/)). The MCP server rejects requests whose `Host` header it does not know, so with the `location /mcp` block also set these keys in `bi-server/ai-agent/.env`:
+
+```properties
+MCP_ALLOWED_HOSTS=bi.example.com,bi.example.com:*
+MCP_PUBLIC_URL=https://bi.example.com/mcp
+```
+
+Keep `MCP_HTTP_HOST` at its default `127.0.0.1` when Nginx runs on the same machine. Then restart the AI Agent from its folder with `./app-console.sh restart` (Linux) or `app-console.bat restart` (Windows). Without `MCP_ALLOWED_HOSTS`, clients get `421 Invalid Host header`. `MCP_PUBLIC_URL` is the address shown to users in **Connect AI**.
 
 ## 3. Tell Tomcat about the proxy
 
@@ -149,7 +171,9 @@ Open `bi-server/pentaho-solutions/system/server.properties` and set the fully qu
 fully-qualified-server-url=https://bi.example.com/datafor/
 ```
 
-Datafor uses this value whenever it needs an absolute address, for example in links generated on the server side.
+The platform uses this value when it needs an absolute address on the server side.
+
+Then set the same address in the console. Sign in as an administrator, open **Settings › Access & Integration › Site address**, enter it in **Site URL** (for example `https://bi.example.com/datafor/`) and save. Datafor builds the links it hands out, such as share links and tenant addresses, from **Site URL**; when the field is empty it falls back to `server.properties`. The setting is saved in the repository and needs no restart.
 
 ### 3.3 Restart Datafor
 
@@ -186,7 +210,7 @@ Go to **Settings › AI Agent › AI service** (see [How to Enable the AI Featur
 
 ## 6. Restrict direct access to the internal ports
 
-Once Nginx is in place, allow port 28080 only from the Nginx host, or only on the loopback interface when both run on the same machine, using your firewall or cloud security group. Otherwise users can bypass HTTPS and the proxy rules by opening `http://<server-ip>:28080/` directly. Keep 28081 and 25432 closed to the network as well.
+Once Nginx is in place, allow port 28080 only from the Nginx host, or only on the loopback interface when both run on the same machine, using your firewall or cloud security group. Otherwise users can bypass HTTPS and the proxy rules by opening `http://<server-ip>:28080/` directly. Keep 28081, 38081 and 25432 closed to the network as well; the AI Agent API on 28081 listens on all network interfaces by default.
 
 ## 7. Troubleshooting
 
@@ -198,12 +222,13 @@ Once Nginx is in place, allow port 28080 only from the Nginx host, or only on th
 | `400 Request Header Or Cookie Too Large`. | The request headers exceed the client header buffers. | Set `large_client_header_buffers 4 64k`. |
 | `413 Request Entity Too Large` when uploading a file dataset. | `client_max_body_size` is too small. | Increase `client_max_body_size`. |
 | After signing in, the browser goes to `http://bi.example.com:28080/...`, or the page shows mixed-content warnings. | Tomcat does not know that the request arrived over HTTPS. | Complete section 3: forwarded headers, `RemoteIpValve`, and `fully-qualified-server-url`. If you cannot edit `server.xml` immediately, add `proxy_redirect http://$host:28080/ https://$host/;` to `location /` as a temporary workaround. |
+| AI clients get `421 Invalid Host header` from `https://bi.example.com/mcp`. | The public host name is not in `MCP_ALLOWED_HOSTS`. | Add it as in [Publish the MCP server](#publish-the-mcp-server) and restart the AI Agent. |
 | `504 Gateway Time-out` on long reports or exports. | The query runs longer than `proxy_read_timeout`. | Increase `proxy_read_timeout` for `location /`. |
 | Access logs and security rules see `127.0.0.1` for every user. | Tomcat does not read `X-Forwarded-For`. | Enable `RemoteIpValve` as described in section 3.1 and check `internalProxies` when Nginx is on another host. |
 
 ## Related topics
 
-- [Installation Guide (CentOS)](/documentation/Setup/Installation-CentOS/)
+- [Installation Guide (RHEL-compatible Linux)](/documentation/Setup/Installation-CentOS/)
 - [Installation Guide (Ubuntu)](/documentation/Setup/Installation-Ubuntu/)
 - [Installation (Windows)](/documentation/Setup/Installation-windows/)
 - [Deploying Datafor Using Docker](/documentation/Setup/Deploying-Datafor-Using-Dockers/)

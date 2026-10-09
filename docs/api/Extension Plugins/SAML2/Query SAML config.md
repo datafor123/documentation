@@ -57,7 +57,7 @@ Use of this API requires authentication. For details about the authentication me
 {
   "code": "200",
   "data": {
-    "idp_entity_id": "https://sts.windows.net/dff6f1-4338-4212-bdc7-4544f8c9b2f6/",
+    "idp_entity_id": "https://sts.windows.net/<tenant-id>/",
     "initroles": [
       "SYS_Reader"
     ],
@@ -69,14 +69,14 @@ Use of this API requires authentication. For details about the authentication me
     "includeList": [
       "/datafor/console"
     ],
-    "idp_sso_url": "https://login.microsoftonline.com/dff6f1-4338-4212-bdc7-4544f8c9b2f6/saml2",
+    "idp_sso_url": "https://login.microsoftonline.com/<tenant-id>/saml2",
     "ignoreList": [
       "/plugin/datafor-modeler/api"
     ],
     "initpwd": "",
     "sp_entity_id": "bi",
     "allowed_clock_skew": 2,
-    "idp_certificate": "-----BEGIN CERTIFICATE-----\nMI.....uAe0vzQ94DSLPpp2CoryL/4Tla67zlKsq1EbPTVELngkT6D22q1VQ29ivUEr\nS6OVVx93CK/8CZXnCyii\n-----END CERTIFICATE-----\n",
+    "idp_certificate": "-----BEGIN CERTIFICATE-----\n<base64-encoded certificate>\n-----END CERTIFICATE-----\n",
     "inituser": "1",
     "enable": "1"
   },

@@ -127,9 +127,9 @@ Read on a data connection lets a user build models and reports on it, but not on
 
 A connection on the repository's server is **sensitive** when its account can reach the repository, for example a PostgreSQL superuser, a MySQL account with global privileges or one that can see the repository database, a SQL Server sysadmin, or an Oracle DBA. Use an account without those rights for reporting connections.
 
-On a sensitive connection, an ordinary user cannot submit custom SQL: SQL views and SQL preview, `where` conditions, column expressions, row access conditions, or SQL inside a model. Publishing or validating such a model fails with `SQL_FRAGMENT_FORBIDDEN:<connection>` or `SQL_EXECUTE_FORBIDDEN:<connection>`. The schemas of the repository (for example `datafor`, `upload`, `hibernate`, `quartz`, `jackrabbit`) are hidden from them.
+On a sensitive connection, an ordinary user cannot submit custom SQL: SQL views and SQL preview, `where` conditions, column expressions, row access conditions, or SQL inside a model. Publishing or validating such a model fails with `SQL_FRAGMENT_FORBIDDEN:<connection>` or `SQL_EXECUTE_FORBIDDEN:<connection>`. The schemas of the Datafor repository are hidden from them.
 
-On any connection, raw SQL from an ordinary user needs **Full control** on the connection, and SQL that calls server-side functions such as `dblink`, `pg_read_file`, `load_file`, `sleep`, `benchmark`, `openrowset` or `xp_cmdshell` is rejected. Saving or deleting legacy data permissions and query configurations through the API also needs Full control on the connection, and copying permissions is limited to administrators.
+On any connection, raw SQL from an ordinary user needs **Full control** on the connection, and SQL that calls functions that run on the database server or reach other databases, such as file access, remote connections or command execution, is rejected. Saving or deleting legacy data permissions and query configurations through the API also needs Full control on the connection, and copying permissions is limited to administrators.
 
 ## 3. RLS: matching policies form a union
 
@@ -195,7 +195,7 @@ These results assume ordinary accounts unless a privileged role is explicitly na
 
 ## 6. Typical access designs
 
-The names below are illustrative, not built-in roles. Treat the expected results as acceptance criteria to test in your deployment.
+The names below are illustrative, not built-in roles.
 
 ### Regional readers sharing one report
 
@@ -228,7 +228,6 @@ Share links can use the sharer's data permissions; do not assume they enforce pe
 5. **Run Data Security → Test access.** Select the actual user as **Simulated subject**, then the schema and tables. Check **Resolved subject**, **Row access**, **Effective condition**, **Field visibility**, and **Policies in effect**. Saved drafts and unsaved edits do not participate.
 6. **Explain unexpected access using all policies.** For excess rows, look for missing coverage, additional matching roles, or Return all rows. For a visible sensitive field, check the OLS visibility mode and full resolved role list. For a missing field, inspect every policy that actually excludes it.
 7. **Verify the real workflow.** Preview data is a sample of up to 50 rows, not full sign-in impersonation or an ACL test. Run the report as the ordinary user, including prohibited rows/fields and editable report filters. Test the actual integration if applicable.
-8. **Record the result.** Keep the before/after configuration and test evidence with the change record. If unresolved, give support the identities, resource paths, policy names, timestamps, and expected/actual results; exclude passwords, tokens, and unnecessary sensitive records.
 
 ## 8. Audit permission changes
 
@@ -262,20 +261,6 @@ A **System settings changes** record lists each changed setting with its value b
 
 Do not assume that file/folder ACL edits, role membership changes, User Type changes, ownership changes, and model security-setting changes all have equivalent entries in this operation log. Keep a separate change record for them. Also retain identity-provider audit evidence when memberships are supplied by an external system.
 
-### Use a permission-change record
-
-For every material access change, retain:
-
-- **Who and why:** requester, approver, operator, reason, and change/ticket identifier.
-- **What and where:** affected users/roles/User Types; exact resource paths; datasource, schema, tables and columns; policy names and IDs where available.
-- **Before and after:** memberships, ACL grants, inheritance/owner, policy conditions and enabled state, and relevant model settings. Capture these before deletion or replacement.
-- **Impact and evidence:** intended access, representative allowed and prohibited cases, the complete resolved subject, Test access results, and the real-user workflow result.
-- **Timing and recovery:** change time with timezone, related audit event identifiers where available, and the configuration needed to reverse an unintended change.
-
-Before applying a change, confirm audit collection and retention meet your team's requirements. Afterward, review the corresponding records using your deployment's approved audit reporting or retrieval process; distinguish a started operation from a completed or failed one. Verify the saved configuration and effective access rather than treating the existence of a log entry as proof of success.
-
-Preserve required evidence before retention expiry or manual cleanup. Restrict access to audit evidence itself, and never include credentials or unnecessary raw business data in the change record.
-
 ## Related topics
 
 - [User Creation and User Types](/documentation/System/UserTypes/)
@@ -283,34 +268,3 @@ Preserve required evidence before retention expiry or manual cleanup. Restrict a
 - [Data Security](/documentation/Datasource/Data-Security/)
 - [Row-Level Security in Analytics](/documentation/Datasource/Row-Level-Security-in-Analytics/)
 
-<!--
-Maintenance evidence for the evaluation rules (source review, not an end-to-end
-permission test report):
-- datafor-modeler-plugin: auth/FileService.java doGetCanAccessList,
-  prepareAclAce, setFileAcls, and canManage; auth/user/UsersService.java
-  transUser and userTypeRoles.
-- Repository ACL implementation: JcrRepositoryFileAclUtils.updateAcl and
-  PentahoEntryCollector.findNonInheritingNode, addOwnerAce, and
-  getRelevantAncestorAces. Console ACL writes grants, not deny ACEs.
-- datafor-modeler-plugin: auth/policy/DataPolicyEngine.java
-  evaluateRowPolicies, evaluateObjectPolicies, ObjectPolicy.isExcluded,
-  and BYPASS_ROLES. In particular, role-only exclusions use containsAll,
-  not an any-role match. datasource/utils/SessionUtils.java resolves the
-  authority list including User Types. AuthConfigObjResource.buildPolicyRows
-  preserves the editor's selected visibility mode for each grant.
-- DataPolicyEngineTest.java has OR-combination and cross-policy object
-  exclusion assertions; reading those tests is not a claim they were run here.
-- Audit coverage: AuthConfigRowResource and AuthConfigObjResource operation
-  hooks; datasource/utils/PentahoAuditHelper.java collection gating and event
-  fields; Frontend packages/webconsole/src/pages/setting_content/audit/Audit.tsx
-  (groups via getAuditGroupKey) and packages/common/src/locales/en.json for
-  configuration controls. System settings audit: settings/SystemConfigService
-  AUDIT_OPERATION "System settings edit" with before/after per key (3add315).
-- 10.00 delete rule: FileResource.assertCanDelete (04d9cda, batch checks all
-  first), FileService.doGetCanAccessList + aclGrants and AclPermissionEvaluator
-  (add1b15, 178aedd). Model publish/delete: AnalysisService ownerOnlyAcl,
-  bindsNewDataSource/canReadConnection, canDeleteCatalog (f7ae8b4).
-- Grant dependency notice: Frontend common GrantDependencyNotice and
-  services/grantDependencyService.js (2883b32f), max 200 reports per folder.
-Recheck these behaviors when the permission evaluator or audit coverage changes.
--->

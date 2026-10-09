@@ -1,12 +1,13 @@
 ---
 title: Managing High Concurrency
 permalink: /documentation/AI-Agent/Managing-High-Concurrency/
+description: Raise the number of AI Agent dispatch workers when questions queue up, choose the count by measuring, and read the queue health endpoint.
 createTime: 2026/09/07 13:25:00
 ---
 
 # Managing High Concurrency
 
-An installation administrator can increase the number of AI Agent analysis workers when questions are waiting in a queue. Configure the count on the **server**, in the installed Agent's `.env` file. Ordinary users share this capacity; they do not need separate Agent installations.
+An installation administrator can increase the number of AI Agent analysis workers when questions are waiting in a queue. Configure the count on the **server**, in the installed Agent's `.env` file.
 
 This guide covers the packaged deployment with the supplied startup scripts. The current scripts support **1–8 dispatch workers**, with **1 worker by default**. Worker count is a manual deployment setting. There is no worker-count control in **Ops**, **LLM**, or the console's AI Agent settings.
 
@@ -109,22 +110,11 @@ Each value is 1 to 3600 seconds, or `0` for no limit. Once the variable is set, 
 
 There is no universal “users per worker” or CPU/RAM specification for every analysis model and LLM provider. Treat **8** as the startup script's supported maximum, not a recommended default or a guarantee that every server can run eight workers effectively.
 
-Use a repeatable comparison:
+Compare counts under the same load:
 
-1. **Define your target.** Specify the expected peak questions per minute, a realistic simultaneous burst, and an acceptable wait for an answer. Include the normal mix of simple questions, follow-ups, and complex analyses.
-2. **Measure the current count.** Record successful answers per minute, submission-to-answer time, failures, and queue depth. Include some different questions and sessions; repeating one warm, cached question is not a complete workload.
-3. **Increase one step.** For example, compare `1 → 2`, then consider `4` if needed. Keep the analysis models, LLM assignments, question mix, and submission rate comparable.
-4. **Observe sustained traffic and recovery.** Continue long enough to see whether the queue grows during steady traffic. After submissions stop, confirm that pending work drains. Keep a margin for bursts and slower questions.
-5. **Keep the smallest count that meets the target.** Stop increasing if answer throughput stops improving, failures rise, or the model provider, Datafor, database, CPU, or memory becomes the bottleneck.
-
-Use a record like this for each comparison:
-
-| Workers | Questions/min submitted | Successful answers/min | Submit-to-answer p95 | Peak pending tasks / time to drain | Errors and resource observations |
-| --- | --- | --- | --- | --- | --- |
-| Current count | Measured | Measured | Measured | Measured | Measured |
-| Candidate count | Same target load | Measured | Measured | Measured | Measured |
-
-**p95** is the time within which approximately 95% of measured responses finish. It helps reveal the long waits that a median can hide. Use enough representative samples and record the sample count; a handful of questions cannot establish production capacity.
+- Record successful answers per minute, submission-to-answer time and the queue (section 4) at the current count, with a realistic mix of simple questions, follow-ups and complex analyses.
+- Raise the count one step (for example `1 → 2`, then `4`) and repeat with the same models, LLM assignments and submission rate. Check that the queue drains after submissions stop.
+- Keep the smallest count that meets your target. Stop increasing when throughput no longer improves, failures rise, or the model provider, Datafor, the database, CPU or memory becomes the bottleneck.
 
 ### Check the resources that workers share
 
@@ -144,10 +134,6 @@ If reports and AI share infrastructure, include normal report traffic in your ca
 1. Sign in as an administrator and click **AI Agent** in the left navigation.
 2. Click **Ops**, then **Usage**.
 3. Select **Today**, **Last 7 days**, **This month**, or **Custom**, then click **Refresh**.
-
-<div align="left"><img src="./images/ai-concurrency-usage.jpg" alt="English Ops Usage panel with Questions, Success rate, Response time, p95, and Total tokens" width="100%" /></div>
-
-*Captured from a local development installation. These values illustrate the controls; they are not a capacity benchmark.*
 
 | Indicator | How to use it |
 | --- | --- |
@@ -189,21 +175,9 @@ The response reports database reachability and separate `queues.routing` and `qu
 
 `stalled` can reflect old ready work with nothing in progress, very old pending work, or an expired lease. It does not exclusively mean “no workers are running.” A **200** response with growing `pending` can still mean users are waiting too long.
 
-## 5. Use quotas to manage daily demand
+## 5. Daily quotas
 
-Click **AI Agent** in the left navigation, then **Ops → Quota**.
-
-<div align="left"><img src="./images/ai-concurrency-quota.jpg" alt="English Ops Quota panel with daily question quota disabled, default quota, administrator exemption, and role or user type overrides" width="100%" /></div>
-
-*Controls are disabled in this screenshot because the daily question quota is off.*
-
-1. Turn on **Enable daily question quota**.
-2. Set **Default quota** in **questions / day / user** to match your usage policy.
-3. Decide whether **Exempt administrators** should remain enabled. Exempt administrators will not exercise the daily limit during a quota test.
-4. Use **Add rule** under **Overrides by role and user type** if groups need different allowances. When a user matches several rules, the largest matching quota wins.
-5. Click **Save**.
-
-Daily quotas help manage demand and usage budgets. **They do not limit how many questions arrive at the same instant or reserve a worker for a user.** Concurrent submissions can exceed the daily ceiling because the allowance is checked without reserving a slot. Quotas therefore complement worker sizing; they are not an overload-protection mechanism. See [AI Operations and Quotas](/documentation/AI-Agent/LLM-Permission-Management/) for the full settings guide.
+A daily question quota limits how many questions each user asks per day; it does not limit simultaneous questions or reserve a worker. See [AI Operations and Quotas](/documentation/AI-Agent/LLM-Permission-Management/).
 
 ## 6. Troubleshoot before adding more workers
 
@@ -224,8 +198,6 @@ For support, record the product version, configured worker count, affected time 
 
 ## 7. When one installation is not enough
 
-If a measured workload still misses its response-time target at the largest count the host and downstream services can sustain, involve the deployment administrator and Datafor support in capacity planning. The limiting resource may require more provider capacity, faster queries, or additional infrastructure.
-
-**This setting scales workers within the supplied deployment; it does not enable a multi-server cluster or automatic scaling.** The current API also holds worker authorization credentials in process memory, so copying API instances behind a load balancer requires a supported design for authorization and shared state. Do not treat additional API instances as a configuration-only extension of this procedure.
+This setting scales workers within the supplied deployment; it does not enable a multi-server cluster or automatic scaling.
 
 Related guides: [Enable the AI Feature](/documentation/AI-Agent/AI-Feature/), [LLM Configuration](/documentation/AI-Agent/LLM-Configuration/), and [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).

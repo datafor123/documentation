@@ -2,135 +2,112 @@
 title: GeoJSON Map
 permalink: /documentation/Tools/GeoJSON/
 tags: null
+description: Maintain the GeoJSON maps used by GeoJSON filled and marker maps - add maps and sub-maps, upload GeoJSON files, set map and region aliases and region centres.
 createTime: 2026/09/01 22:03:26
 ---
 
 
-# 🌍 GeoJSON Map
+# GeoJSON Map
 
-## Feature Overview
+**Tools › GeoJSON** maintains the maps that the GeoJSON **Filled map** and **Marker map** components draw. Here you can:
 
-Datafor provides a visual tool for managing and maintaining GeoJSON map data. Through this interface, you can:
+- add maps and sub-maps for drill-down (for example **World → United States → California**);
+- upload the GeoJSON file of each map;
+- set aliases for a map and for its regions so that the names in your data match;
+- set the centre (latitude and longitude) of each region, where marker maps place their points.
 
-- Add world or country/region administrative maps  
-- Bind GeoJSON map data files  
-- Set map and region aliases to match your data fields  
-- Define the central coordinates (latitude and longitude) of each administrative area for GeoJSON map markers  
-- Add sub-regions to maps (Datafor's GeoJSON map component supports drill-down)
+<div align="left"><img src="./images/image-20250720155650963.png" alt="GeoJSON tool with the map view on the left and the Maps tree on the right" /></div>
 
-<div align="left"><img src="./images/image-20250720155650963.png" /></div>
+The map view on the left has two tabs: **Administrative Region** shows the region boundaries of the selected map, **Center Point** shows each region's centre as a point.
 
+## The Maps tree
 
+The buttons at the top of the **Maps** panel act on all maps:
 
-## Common Operations Guide
+| Button | Action |
+| --- | --- |
+| **Add Map** (+) | Add a new top-level map by name. |
+| **Import** | Upload a `.zip` exported from this tool. Maps in the archive replace maps with the same name; other maps are kept. |
+| **Export** | Download all maps as a `.zip`, for example to copy them to another server. |
 
-### 1️⃣ Add a Country Map
+Each map in the tree has these buttons (hover for the name):
 
-1. Click the `➕` icon in the top-right corner of the “Maps” panel to add a country or region map.
+| Button | Action |
+| --- | --- |
+| **Set Map Alias** | Other names of the map, separated by `/`. |
+| **Set GeoJSON File** | Upload the map's GeoJSON file. The icon is red while no file is bound. |
+| **Set Region Alias** | Other names for each region of the map. |
+| **Set Region Center** | Latitude and longitude of each region's centre. |
+| **Add Map** (+) | Add a sub-map, chosen from the regions of this map. |
+| **Delete Map** (−) | Delete the map and all its sub-maps, after confirmation. |
 
-<div align="left"><img src="./images/image-20250720153041816.png" /></div>
+## Add a map or sub-map
 
-2. The list shows countries or regions included in the “World” map.
+1. On the parent map (for example **World**), click **Add Map** (+).
+2. In **Add Sub-map**, search for and select the region, for example **United States**, and click **Save**.
 
-<div align="left"><img src="./images/image-20250720153447081.png" /></div>
+   <div align="left"><img src="./images/image-20250720153447081.png" alt="Add Sub-map dialog listing the regions of the World map" /></div>
 
-3. For example, select “United States”.
+3. The new map appears under its parent. Bind its GeoJSON file (next section) before using it in a report.
 
-<div align="left"><img src="./images/image-20250720153642281.png" width="33%" /></div>
+The list in **Add Sub-map** comes from the parent's GeoJSON file, so a parent needs its file before you can add sub-maps to it. On **United States**, for example, it lists the states:
 
-### 2️⃣ Bind GeoJSON Map Data File
+<div align="left"><img src="./images/image-20250720154626191.png" alt="Add Sub-map dialog on the United States map with California selected" /></div>
 
-1. Locate the target map entry (e.g., United States) and click the 📎 icon to bind a data file.
+<div align="left"><img src="./images/image-20250720154730287.png" alt="California sub-map under United States, showing its county boundaries" /></div>
 
-   <div align="left"><img src="./images/image-20250720153853478.png" width="43%" /></div>
+Sub-maps are what a GeoJSON map drills down to when a user clicks a region.
 
-2. In the upload window, select your GeoJSON file (must be under 1MB).
+## Upload the GeoJSON file
 
-   <div align="left"><img src="./images/image-20250720153926842.png" /></div>
+1. Click **Set GeoJSON File** on the map.
+2. Click **Upload File** and choose a `.json` or `.geojson` file. The file must not exceed 1 MB.
 
-3. Click **Save** to complete the binding.
+   <div align="left"><img src="./images/image-20250720153926842.png" alt="Set GeoJSON File dialog with the Upload File button and the 1 MB limit" /></div>
 
-   <div align="left"><img src="./images/image-20250720153951487.png" /></div>
+3. Click **Save**. The map view shows the boundaries of the uploaded file.
 
-### 3️⃣ Set Map Alias
+   <div align="left"><img src="./images/image-20250720153951487.png" alt="United States map with its state boundaries after the GeoJSON file is bound" /></div>
 
-To ensure consistency with your data fields, you can configure a map alias:
+## Set aliases
 
-1. Click the ✏️ icon next to the target map.
+**Set Map Alias** takes other names of the map separated by `/`, for example `USA/United States/America`.
 
-   <div align="left"><img src="./images/image-20250720154059685.png" width="43%" /></div>
+<div align="left"><img src="./images/image-20250720154240888.png" alt="Set Map Alias dialog with aliases separated by slashes" /></div>
 
-2. Enter aliases such as `USA/United States/America` in the pop-up input box.
+**Set Region Alias** lists every region of the map by **Region Name**. Enter the other spellings your data uses in **Region Alias**, separated by `/`, for example `CA/06` for California, and click **Save**.
 
-   <div align="left"><img src="./images/image-20250720154240888.png" /></div>
+<div align="left"><img src="./images/image-20250720154514258.png" alt="Set Region Alias dialog with a Region Alias for each state" /></div>
 
-3. Click **Save** to apply changes.
+How report values are matched against region names, codes and aliases is described in [GeoJSON Filled Map](/documentation/Visualization/GeoJSON-Filled-Map/#how-region-values-are-matched). Do not give a region an alias that equals another region's name or code; that alias is never used, because the other region matches first.
 
+## Set region centres
 
+Click **Set Region Center** on the map and enter **Center Latitude** and **Center Longitude** for each region, then click **Save**. Switch the map view to **Center Point** to check the positions.
 
-### 4️⃣ Set Region Aliases
+<div align="left"><img src="./images/image-20250720154821445.png" alt="Center Point view with a point for each region" /></div>
 
-If your map includes sub-regions (e.g., states or provinces), you can assign aliases for each:
+<div align="left"><img src="./images/image-20250720154926912.png" alt="Region Center Latitude and Longitude dialog" /></div>
 
-1. Click the second ✏️ icon next to the target map.
+## Import aliases or centres from a file
 
+Both region dialogs have an **Import** button that reads a `.xlsx`, `.xls` or `.csv` file:
 
-   <div align="left"><img src="./images/image-20250720154335012.png" width="43%" /></div>
+- Only the first sheet is read.
+- Column A is the region name. It must equal the **Region Name** shown in the dialog exactly; rows that match no region are ignored.
+- For **Set Region Alias**, column B holds the aliases, separated by `/`. They are added to the aliases already entered; duplicates are dropped.
+- For **Set Region Center**, column B is the latitude and column C the longitude. They replace the current values.
 
-   
+| A | B | C |
+| --- | --- | --- |
+| California | CA/06 | |
+| Texas | TX/48 | |
 
-2. In the pop-up window, enter aliases for each sub-region (batch import supported).
+Importing only fills the dialog. Click **Save** to keep the result.
 
-   <div align="left"><img src="./images/image-20250720154514258.png" /></div>
+## GeoJSON file format
 
-3. Click **Save** to confirm.
-
-
-
-### 5️⃣ Add Sub-region Maps (Drill-down Support)
-
-You can use the GeoJSON map component to add drill-down sub-region maps (e.g., US states):
-
-1. Click the ➕ icon next to the parent map.
-
-   <div align="left"><img src="./images/image-20250720154605172.png" width="43%" /></div>
-
-2. In the “Add Sub-map” dropdown, search and select a sub-region (e.g., California).
-
-   <div align="left"><img src="./images/image-20250720154626191.png" /></div>
-
-3. The added sub-map will appear under the parent map.
-
-   <div align="left"><img src="./images/image-20250720154651997.png" width="43%" /></div>
-
-4. You’ll also need to bind GeoJSON data for sub-regions using the same method.
-
-   <div align="left"><img src="./images/image-20250720154730287.png" /></div>
-
-
-
-### 6️⃣ Set Region Center Coordinates
-
-Switch to the **Center Point** tab at the top of the map to define region center points:
-
-1. All regions will be displayed as point markers on the map.
-
-   <div align="left"><img src="./images/image-20250720154821445.png" /></div>
-
-2. Click the 📍 icon on the right to open the coordinate input window.
-
-
-   <div align="left"><img src="./images/image-20250720154902413.png" width="43%" /></div>
-
-3. You can manually enter latitude and longitude or use batch import.
-
-   <div align="left"><img src="./images/image-20250720154926912.png" /></div>
-
-
-
-## GeoJSON File Format Requirements
-
-Uploaded map data must comply with standard GeoJSON structure as shown below:
+Uploaded map data must be a standard GeoJSON `FeatureCollection`:
 
 ```json
 {
@@ -152,8 +129,6 @@ Uploaded map data must comply with standard GeoJSON structure as shown below:
 }
 ```
 
-### Field Descriptions
-
 | Field | Description |
 | --- | --- |
 | `name` | Region name (system identifier) |
@@ -161,19 +136,3 @@ Uploaded map data must comply with standard GeoJSON structure as shown below:
 | `aliases` | Region aliases for matching business data |
 | `center` | Center coordinates of the region [longitude, latitude] |
 | `geometry` | Region boundary; supports Polygon / MultiPolygon |
-
-## How data is matched to regions
-
-The **Filled map** and **Marker map** look up each value of the report's Geographic field among the regions of the selected map, in this order:
-
-1. `name`
-2. `adcode`
-3. `aliases`
-
-A value is first compared with all region names, then with all codes, then with all aliases; the first match is used. Matching is exact, including letter case and spaces; an empty value or a region without a name never matches. Rows that resolve to the same region and have the same other fields are merged, and their values are summed.
-
-## Recommendations
-
-- Setting correct map and region aliases is crucial for accurate chart display.
-- Do not give a region an alias that equals another region's `name` or `adcode`. Such an alias is never used, because the other region matches first.
-- Use one consistent spelling per region in the data where possible, especially for averages and ratios, which are summed when rows are merged.

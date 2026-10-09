@@ -39,8 +39,8 @@ The AI Agent's launcher manages the secret when two conditions hold:
 ### What the launcher does on every start
 
 1. **Finds the value**, first match wins:
-   1. `DATAFOR_AGENT_SECRET` in `instance-secrets.env` in the AI Agent folder;
-   2. `DATAFOR_AGENT_SECRET` in `.env` in the same folder. It is used as it is and not copied into `instance-secrets.env`;
+   1. a non-empty `DATAFOR_AGENT_SECRET` in `.env` in the AI Agent folder. The AI Agent processes load `.env` over everything else, so this is the value they present to Datafor. It is used as it is and not copied into `instance-secrets.env`;
+   2. `DATAFOR_AGENT_SECRET` in `instance-secrets.env` in the same folder;
    3. an `<agent-secret>` with a value outside comments in Datafor's `settings.xml`, for example one an administrator set by hand. The launcher **adopts** it and copies it into `instance-secrets.env`, so Datafor keeps its value;
    4. otherwise it generates a new value: 43 characters of letters, digits, `-` and `_`, stored in `instance-secrets.env`.
 2. **Writes the value into Datafor's `settings.xml`.** It replaces the `<agent-secret>` element that is outside comments, or adds one before `</settings>` if there is none. The commented-out example in the shipped file is left alone, the rest of the file (encoding, byte-order mark, line endings) is unchanged, and the file is not touched when it already holds the value.
@@ -53,10 +53,11 @@ The launcher prints what it did in the console where it runs (with `start-server
 | New value generated | `generated DATAFOR_AGENT_SECRET in instance-secrets.env` | `Generated in instance-secrets.env: DATAFOR_AGENT_SECRET` |
 | Value adopted from Datafor | `took DATAFOR_AGENT_SECRET from Datafor's settings into instance-secrets.env` | `Took from Datafor's settings into instance-secrets.env: DATAFOR_AGENT_SECRET` |
 | `settings.xml` updated | `set <agent-secret> in <path>; Datafor reads it when it starts, so restart the BI server if it is already running` | the same text, starting with `Set` |
-| `settings.xml` could not be written | `could not set <agent-secret> in <path> : <reason>` | `Could not set <agent-secret> in <path>` |
+| `settings.xml` could not be written | `could not set <agent-secret> in <path> : <reason>` | `Could not set <agent-secret> in <path>: <reason>. Set it by hand to this service's DATAFOR_AGENT_SECRET, or start this service as a user that can write the file; until then users who are not administrators cannot use Datafor-configured models.` |
+| `.env` and `instance-secrets.env` hold different values | `DATAFOR_AGENT_SECRET in .env differs from the one in instance-secrets.env; this service uses the .env value, so that is the one given to Datafor. Keep it in one of the two files only.` | the same text |
 | Datafor's `settings.xml` not found | `Datafor's datafor-modeler settings.xml is not beside this AI service: set its <agent-secret> to DATAFOR_AGENT_SECRET from instance-secrets.env so that users who are not administrators can use Datafor-configured models.` | the same text |
 
-The generated line may list other per-installation secrets as well. When `settings.xml` cannot be written (for example, the file is read-only or has no `</settings>` element), the AI Agent still starts; fix the cause, or set the value by hand as in section 3.
+The generated line may list other per-installation secrets as well. On Linux, `<reason>` names the cause, for example that the file has no `<agent-secret>` element and no `</settings>` to add one before, or that the user running the launcher cannot write it. When `settings.xml` cannot be written, the AI Agent still starts; fix the cause, or set the value by hand as in section 3.
 
 ### When Datafor needs a restart
 
@@ -71,7 +72,7 @@ Datafor reads `settings.xml` once, when it starts. A value written while Datafor
 ### Keep the value in one place
 
 - In a co-located installation, do not also set `DATAFOR_AGENT_SECRET` on the Datafor side as an environment variable or a JVM option. Datafor prefers those to `settings.xml`, and the launcher neither reads nor updates them. If you need one, give it exactly the same value.
-- Do not define `DATAFOR_AGENT_SECRET` in both `ai-agent/.env` and `instance-secrets.env`.
+- Do not define `DATAFOR_AGENT_SECRET` in both `ai-agent/.env` and `instance-secrets.env`. If the two differ, the `.env` value wins and the launcher prints the "differs" warning on every start.
 
 ## 3. Split deployment: configure by hand
 
@@ -85,10 +86,11 @@ Configure the secret by hand when the AI Agent runs on another server, or in a f
 
 ### Copy the value from the AI Agent server
 
-1. In the AI Agent folder, open `instance-secrets.env` and find the line that starts with `DATAFOR_AGENT_SECRET=`.
-2. Copy the text after `=`.
+1. In the AI Agent folder, check `.env` first. If it has a `DATAFOR_AGENT_SECRET=` line with a value, that value is the one in use.
+2. Otherwise open `instance-secrets.env` and find the line that starts with `DATAFOR_AGENT_SECRET=`.
+3. Copy the text after `=`.
 
-If `instance-secrets.env` has no such line, look in `.env` in the same folder: when the key is defined there, that value is the one in use. If neither file has it, the AI Agent is older than 10.00 or was not started with its launcher.
+If neither file has it, the AI Agent is older than 10.00 or was not started with its launcher.
 
 Treat the value like a password. Move it over a secure channel, and do not paste it into email, chat or support tickets.
 
@@ -125,7 +127,7 @@ Restart the Datafor server with your usual procedure.
 
 ## 4. Verify
 
-1. **Compare the values.** The AI Agent's value is `DATAFOR_AGENT_SECRET` in `instance-secrets.env` (or in `.env`, if it is defined there). Datafor's value is the JVM option if set, else the environment variable, else the `<agent-secret>` element outside comments in `settings.xml`. They must be identical. Do not share them while comparing.
+1. **Compare the values.** The AI Agent's value is a non-empty `DATAFOR_AGENT_SECRET` in `.env` if there is one, otherwise the one in `instance-secrets.env`. Datafor's value is the JVM option if set, else the environment variable, else the `<agent-secret>` element outside comments in `settings.xml`. They must be identical. Do not share them while comparing.
 2. **Check that Datafor has been restarted** since the value last changed.
 3. **Optional functional test.** It proves something only if a feature actually falls back to an LLM configured in Datafor, that is, if one of the stages in section 1 has no assignment. Asking questions on the **AI Agent** page never uses the secret. As a user who is not an administrator, use such a feature, then check that the AI Agent logs have no new `Datafor withheld the api_key` line.
 
@@ -161,12 +163,7 @@ Use `app-console restart` without a target, so that the MCP server restarts too.
 
 | Symptom | What to check |
 | --- | --- |
-| Administrators are fine, other users get model errors, and the AI Agent log has `Datafor withheld the api_key` | The values differ, Datafor was not restarted after the change, or a Datafor environment variable or JVM option overrides `settings.xml`. Compare as in section 4. If the values match, check that the LLM configuration in Datafor has an API key. |
-| The launcher printed `set <agent-secret> in …; … restart the BI server if it is already running` | Restart Datafor if it was running when the AI Agent started. |
-| The launcher printed `could not set <agent-secret> in <path> : <reason>` | The file could not be written, for example because it is read-only. The AI Agent runs anyway. Fix the cause and restart the AI Agent, or set the value by hand (section 3), then restart Datafor. |
-| The launcher printed the "settings.xml is not beside this AI service" message | Split deployment: configure Datafor as in section 3, or move the AI Agent folder next to `pentaho-solutions`. |
-| `instance-secrets.env` has no `DATAFOR_AGENT_SECRET` line | `.env` defines the key (then that value is in use), the AI Agent is older than 10.00, or it was started without its launcher. |
-| After changing the secret, the old value is back | Only one side was deleted. Follow section 5. |
+| Administrators are fine, other users get model errors, and the AI Agent log has `Datafor withheld the api_key` | The values differ (check `.env` first on the AI Agent side), Datafor was not restarted after the change, or a Datafor environment variable or JVM option overrides `settings.xml`. Compare as in section 4. If the values match, check that the LLM configuration in Datafor has an API key. |
 | Users who are not administrators started failing after a Datafor upgrade (split deployment) | The upgrade replaced `settings.xml`. Add the `<agent-secret>` line again and restart Datafor, or switch to Option B. |
 | `tomcat/logs/pentaho.log` has `AI service secret is not configured` | No value is set on the Datafor side. Co-located: start the AI Agent with its launcher, then restart Datafor. Split: section 3. |
 

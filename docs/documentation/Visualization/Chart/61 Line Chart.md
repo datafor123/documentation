@@ -47,7 +47,7 @@ A line connects values in order, usually time, to show change and trend. It does
 
 - **The Y axis follows the data range**; unlike column charts it is not forced to start at 0. A restricted range makes small changes look larger: use consistent **Y-axis min value** / **Y-axis max value** across charts readers compare. If the minimum is not less than the maximum, both are ignored.
 - **Y axis → Scale** sets the tick unit (**Auto**, **K**, **M**, **B**, **T**, **%**); a % axis is used only when every measure is a percentage. See [Value axis units](/documentation/Visualization/Display-Units/#value-axis-units).
-- **X axis → Type** switches between **Categorical** and **Continuous** for a date or numeric field; see [X axis type](/documentation/Visualization/X-Axis-Type-Settings/). **Show all labels**, when never set, is on for Categorical and off for Continuous.
+- **X axis → Type** switches between **Categorical** and **Continuous** for a date or time field (text and numeric fields always use categorical spacing); see [X axis type](/documentation/Visualization/X-Axis-Type-Settings/). **Show all labels**, when never set, is on for Categorical and off for Continuous.
 - On a continuous time axis, each period is labelled once, the first label starts at the axis origin, and the number of labels follows the plot width and the longest label. After zooming, partial-window ticks are hidden and labels are thinned evenly.
 - Category labels that do not fit are rotated 30°, 45°, 60° or 90° automatically unless **Rotate labels** is set.
 - Hiding a series in the legend rescales the Y axis to the remaining data; fixed bounds are kept.
@@ -59,7 +59,7 @@ A line connects values in order, usually time, to show change and trend. It does
 | **Zoom slider → Zoom** | Adds sliders for zooming into an axis range. | Off |
 | **Zoom slider → Zoom direction** | **Both**, **Horizontal only** or **Vertical only**: which axes get a slider. | **Horizontal only** for new charts, **Both** in older reports |
 
-Sliders exist only on continuous axes: a time or numeric X axis and the value axis. With a categorical X axis (a text field, or **X axis → Type** = **Categorical**), **Horizontal only** shows no slider at all; long category axes get the automatic scrollbar instead. Use **Both** or **Vertical only** to zoom the value axis. The horizontal slider sits below the X-axis name.
+Sliders exist only on continuous axes: a date or time X axis set to **Continuous**, and the value axis. With a categorical X axis (a text or numeric field, or **X axis → Type** = **Categorical**), **Horizontal only** shows no slider at all; long category axes get the automatic scrollbar instead. Use **Both** or **Vertical only** to zoom the value axis. The horizontal slider sits below the X-axis name.
 
 ## Tooltip
 

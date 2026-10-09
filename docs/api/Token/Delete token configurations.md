@@ -9,10 +9,6 @@ description: null
 createTime: 2026/09/01 22:03:26
 ---
 
-Thanks for clarifying! Based on your preference, here’s the revised API documentation:
-
----
-
 **Method**  
 `POST`
 
@@ -69,6 +65,3 @@ Use of this API requires authentication. For details about the authentication me
 | `success`| boolean | **Yes**  | none         | Indicates if the deletion was successful (`true` or `false`). |
 | `msg`    | string  | No       | none         | Error message, if applicable. |
 
----
-
-Is this aligned with your preferred format? Let me know if you'd like to make any further tweaks!

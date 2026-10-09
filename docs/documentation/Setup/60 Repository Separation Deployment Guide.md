@@ -1,202 +1,133 @@
 ---
 title: Repository Separation Deployment Guide
 permalink: /documentation/Setup/repository-reparation-deployment-guide/
+description: Move Datafor's repository databases from the built-in PostgreSQL to your own PostgreSQL server and repoint Datafor and the AI Agent.
 createTime: 2026/09/01 22:03:26
 ---
 
 # Repository Separation Deployment Guide
 
-This guide provides instructions for migrating the Datafor repository database to a user-defined PostgreSQL database environment.
+Datafor keeps its repository (reports, models, users, permissions, schedules, AI Agent data) in the built-in PostgreSQL server on port `25432`. This guide moves the repository databases to a PostgreSQL server you manage and points Datafor and the AI Agent to it. It works the same for an existing installation and for a new one: for a new installation, start Datafor once with the built-in database so that it initializes the databases, then follow the steps below.
 
-> **Important Notice**: Before proceeding, ensure that you have completed a **full backup** of the system to prevent data loss or service disruption due to misconfiguration.
+> **Important**: Take a **full backup** first (see [Backup and Restore](/documentation/System/backup/)) and keep a copy of every file you edit in section 4.
 
+## 1. What is moved
 
-## 1. Prerequisites and Preparation
+| Database | Account in the built-in setup | Used by |
+| --- | --- | --- |
+| `hibernate` | `hibuser` | `jdbc/Hibernate` in `server.xml`; `postgresql.hibernate.cfg.xml` |
+| `quartz` | `pentaho_user` | `jdbc/Quartz` (schedules) |
+| `jackrabbit` | `jcr_user` | `jdbc/jackrabbit`; Jackrabbit repository files (reports, models and other content) |
+| `datafor` | `postgres` | `jdbc/datafor_modeler_auth`; `applicationContext-spring-security-jdbc.properties` (users and roles); the AI Agent (`DATABASE_URL`) |
+| `upload` | `upload` | `jdbc/datafor_repository` |
 
-- **Verify PostgreSQL Environment**: Ensure that PostgreSQL is correctly installed and accessible. 
-- **Stop Datafor Services**: Before migration or configuration, stop Datafor services to avoid data conflicts.
+The sample database `foodmart` is business data, not part of the repository. Move it only if your reports use it.
 
+**Keep business data on a separate server.** Since 10.00, authors who are not administrators get `SQL_FRAGMENT_FORBIDDEN` or `SQL_EXECUTE_FORBIDDEN` when they write SQL views, conditions or expressions on a connection whose database account can reach the repository databases. Put business data on another PostgreSQL instance, or connect to it with a reporting account that has no rights on the repository databases.
 
-## 2. Initializing the Repository Database
+## 2. Prerequisites
 
-### 2.1 Modify Database Initialization Scripts
+- A PostgreSQL server that the Datafor server can reach, preferably over a private network. Use a version at least as new as the built-in one; check it with `bi-server/pgsql/bin/postgres --version` (Linux) or `bi-server\postgresql\bin\postgres.exe --version` (Windows).
+- A superuser account on that server for the steps below.
+- Datafor and the AI Agent stopped (see the installation guide for your platform).
 
-1. Navigate to `data/postgresql/` and edit the following SQL files:
+## 3. Copy the databases
 
-   - `create_jcr_postgresql.sql`
-   - `create_quartz_postgresql.sql`
-   - `create_repository_postgresql.sql`
-   - `create_upload_postgresql.sql`
+### 3.1 Dump the built-in databases
 
-2. Locate the following SQL statement (example from `create_jcr_postgresql.sql`):
+Start only the built-in database and dump the five databases with the tools that come with it. On Linux, as `biadmin`:
 
-   ```sql
-   CREATE USER jcr_user PASSWORD 'password';
-   ```
+```bash
+cd /opt/bi-server
+pgsql/bin/pg_ctl -D pgsql/data start
+for db in hibernate quartz jackrabbit datafor upload; do
+  pgsql/bin/pg_dump -h 127.0.0.1 -p 25432 -U postgres -Fc -f /tmp/$db.dump $db
+done
+pgsql/bin/pg_ctl -D pgsql/data stop
+```
 
-3. Replace `'password'` with a **strong password** that complies with security policies and keep it securely stored.
+On Windows, in a Command Prompt in the `bi-server` folder:
 
+```bat
+postgresql\bin\pg_ctl.exe -D postgresql\data start
+for %d in (hibernate quartz jackrabbit datafor upload) do postgresql\bin\pg_dump.exe -h 127.0.0.1 -p 25432 -U postgres -Fc -f %d.dump %d
+postgresql\bin\pg_ctl.exe -D postgresql\data stop
+```
 
-### 2.2 Execute Database Initialization
+### 3.2 Create the accounts and databases on your server
 
-1. Use `psql` to connect to the PostgreSQL server:
+Connect with `psql` as a superuser, for example `psql -h <database_host> -p <port> -U postgres -d postgres`, and run the following with strong passwords of your own:
 
-   ```shell
-   psql -h <database_host> -p <port> -U postgres -d postgres
-   ```
+```sql
+CREATE USER hibuser PASSWORD '<password-1>';
+CREATE USER pentaho_user PASSWORD '<password-2>';
+CREATE USER jcr_user PASSWORD '<password-3>';
+CREATE USER upload PASSWORD '<password-4>';
+CREATE USER datafor_owner PASSWORD '<password-5>';
 
-   **Example**:
+CREATE DATABASE hibernate OWNER hibuser ENCODING 'UTF8';
+CREATE DATABASE quartz OWNER pentaho_user ENCODING 'UTF8';
+CREATE DATABASE jackrabbit OWNER jcr_user ENCODING 'UTF8';
+CREATE DATABASE upload OWNER upload ENCODING 'UTF8';
+CREATE DATABASE datafor OWNER datafor_owner ENCODING 'UTF8';
+```
 
-   ```shell
-   psql -h 127.0.0.1 -p 5432 -U postgres -d postgres
-   ```
+The built-in setup uses the superuser `postgres` for the `datafor` database. The example gives it its own owner, `datafor_owner`; Datafor and the AI Agent create and change their own tables in this database, so the account must own it.
 
-2. Execute all SQL files located in `data/postgresql/` to complete the database initialization.
+Do not run the scripts in `bi-server/data/postgresql/` against a server that already holds Datafor data: each of them starts with `drop database if exists`.
 
+### 3.3 Restore the dumps
 
-## 3. Configuring Datafor to Connect to an Independent PostgreSQL Database
+Restore each dump into its database, owned by the account from 3.2:
 
-### 3.1 Modify Tomcat Data Source Configuration
+```bash
+pg_restore -h <database_host> -p <port> -U postgres -d hibernate  --no-owner --role=hibuser       hibernate.dump
+pg_restore -h <database_host> -p <port> -U postgres -d quartz     --no-owner --role=pentaho_user  quartz.dump
+pg_restore -h <database_host> -p <port> -U postgres -d jackrabbit --no-owner --role=jcr_user      jackrabbit.dump
+pg_restore -h <database_host> -p <port> -U postgres -d upload     --no-owner --role=upload        upload.dump
+pg_restore -h <database_host> -p <port> -U postgres -d datafor    --no-owner --role=datafor_owner datafor.dump
+```
 
-- **File Path**: `tomcat/conf/server.xml`
+## 4. Point Datafor and the AI Agent to the new server
 
-- Instructions
+In every file below, replace `localhost:25432` or `127.0.0.1:25432` with `<database_host>:<port>` and set the account and password from 3.2. All paths are relative to `bi-server`.
 
-  : Locate the 
+| File | What to change |
+| --- | --- |
+| `tomcat/conf/server.xml` | In `<Context path="/datafor" …>`, the `url`, `username` and `password` of the five `<Resource>` entries: `jdbc/Hibernate`, `jdbc/Quartz`, `jdbc/jackrabbit`, `jdbc/datafor_modeler_auth` (database `datafor`) and `jdbc/datafor_repository` (database `upload`). Keep the `?stringtype=unspecified` suffix of the last two URLs. |
+| `pentaho-solutions/system/applicationContext-spring-security-jdbc.properties` | `datasource.url`, `datasource.username`, `datasource.password` (database `datafor`). |
+| `pentaho-solutions/system/hibernate/postgresql.hibernate.cfg.xml` | `connection.url`, `connection.username`, `connection.password` (database `hibernate`). |
+| `pentaho-solutions/system/jackrabbit/repository.xml` | The six `jdbc:postgresql://localhost:25432/jackrabbit` URLs and the `jcr_user` password next to each. |
+| `pentaho-solutions/system/jackrabbit/repository/workspaces/default/workspace.xml` and `…/workspaces/security/workspace.xml` | The same Jackrabbit URL and password, twice in each file. These files are created from `repository.xml` at the first start, so they exist in any installation that has run. |
+| `ai-agent/.env` | `DATABASE_URL=postgresql+asyncpg://datafor_owner:<password-5>@<database_host>:<port>/datafor`. Without this line the AI Agent keeps using the built-in database (`postgresql+asyncpg://postgres:postgres@127.0.0.1:25432/datafor`). URL-encode special characters in the password, for example `@` as `%40`. |
 
-  ```
-  <Context path="/datafor" docBase="datafor" debug="0" privileged="true">
-           <Resource name="jdbc/Hibernate" auth="Container" type="javax.sql.DataSource"
-		factory="org.pentaho.di.core.database.util.DecryptingDataSourceFactory" maxActive="200" minIdle="10" maxIdle="200" initialSize="10"
-		maxWait="10000" username="hibuser" password="password"
-		driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:25432/hibernate"
-		testOnBorrow="true"
-		validationQuery="select 1" />
-		
-	         <Resource name="jdbc/Quartz" auth="Container" type="javax.sql.DataSource"
-		factory="org.pentaho.di.core.database.util.DecryptingDataSourceFactory" maxActive="200" minIdle="10" maxIdle="200" initialSize="10"
-		maxWait="10000" username="pentaho_user" password="password"
-		driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:25432/quartz"
-		testOnBorrow="true"
-		validationQuery="select 1"/>
+The built-in database is still started by `start-server`. It is no longer used, but keep it until you have verified the new setup.
 
-   	       <Resource name="jdbc/jackrabbit" auth="Container" type="javax.sql.DataSource"
-		factory="org.pentaho.di.core.database.util.DecryptingDataSourceFactory" maxActive="200" minIdle="10"
-		maxIdle="200" initialSize="10"
-		maxWait="10000" username="jcr_user" password="password"
-		driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:25432/jackrabbit"
-		testOnBorrow="true"
-		validationQuery="select 1"/>	
-					<Resource name="jdbc/datafor_modeler_auth" auth="Container" type="javax.sql.DataSource"
-		factory="org.pentaho.di.core.database.util.DecryptingDataSourceFactory" maxActive="200" minIdle="10"
-		maxIdle="200" initialSize="10"
-		maxWait="10000" username="postgres" password="postgres"
-		driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:25432/datafor?stringtype=unspecified"
-		testOnBorrow="true"
-		validationQuery="select 1"/>
-				<Resource name="jdbc/datafor_repository" auth="Container" type="javax.sql.DataSource"
-		factory="org.pentaho.di.core.database.util.DecryptingDataSourceFactory" maxActive="200" minIdle="10"
-		maxIdle="200" initialSize="10"
-		maxWait="10000" username="upload" password="password"
-		driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:25432/upload?stringtype=unspecified"
-		testOnBorrow="true"
-		validationQuery="select 1"/>		
-       </Context>
-  ```
+## 5. Clear the caches
 
-   node and modify the url and credentials for all the following resources:
+In the `bi-server` folder:
 
-   configuration:
+- **Windows:** double-click `clear.bat`. It also deletes `pentaho-solutions\system\jackrabbit\repository`, so the workspace files are created again from `repository.xml` and the first start takes longer while the search index is rebuilt.
+- **Linux:**
 
-  - `url`: Update to the PostgreSQL server address and port
-  - `username` / `password`: Update database credentials
-
-
-### 3.2 Modify JDBC Connection Configuration
-
-- **File Path**: `pentaho-solutions/system/applicationContext-spring-security-jdbc.properties`
-
-- Instructions
-
-  : Update the following parameters:
-
-  ```properties
-  datasource.url=jdbc:postgresql://<database_host>:<port>/<database_name>
-  datasource.username=<database_username>
-  datasource.password=<database_password>
+  ```shell
+  cd /opt/bi-server
+  sh clear.sh
   ```
 
+## 6. Start and verify
 
-### 3.3 Modify Jackrabbit Repository Configuration
+1. Start Datafor and the AI Agent, and check `tomcat/logs/catalina.out` (Linux) or the server console (Windows) for connection errors.
+2. Sign in as `admin`. Open reports and models in the **Public** folder and check that they display data.
+3. Open **Datasource** and update connections that pointed to the built-in server, such as the sample `foodmart`, if you moved that database too.
+4. Check the AI Agent: `curl -i http://127.0.0.1:28081/ai/health` must return `200`. A `503` with `database.reachable: false` means `DATABASE_URL` is wrong.
+5. Take a new backup.
 
-- **File Path**: `pentaho-solutions/system/jackrabbit/repository.xml`
+## Appendix: PostgreSQL parameters
 
-- Instructions
-
-  :
-
-  - Locate all database connection-related configurations (6 occurrences) and update the database address and credentials.
-  - Locate the `jcr_user` configuration and update the `password` to match the password set in **section 2.1**.
-
-
-### 3.4 Modify Hibernate Configuration
-
-- **File Path**: `pentaho-solutions/system/hibernate/postgresql.hibernate.cfg.xml`
-
-- Instructions
-
-  : Update the following database connection parameters:
-
-  - `connection.url`
-  - `connection.username`
-  - `connection.password`
-
-
-## 4. Clear System Cache
-
-After completing all configurations, clear the Datafor cache to ensure the new settings take effect.
-
-- **Navigate to the Datafor server root directory**:
-
-- **Execute the cache clearing script**:
-
-  - **Windows**: Double-click `clear.bat`
-
-  - Linux
-
-    :
-
-    ```shell
-    cd /opt/bi-server
-    sh clear.sh
-    ```
-
-
-## 5. Start Datafor Services
-
-- Start Datafor services and check logs to ensure there are no errors.
-
-
-## 6. Verify System Configuration
-
-1. Access Datafor via a web browser and log in with the default administrator account (`admin`).
-2. Navigate to **Data Source Management** and confirm that the repository switch was successful.
-3. Update connection details for example data sources such as `foodmart` to ensure business data sources are accessible.
-4. Go to the **Public** directory, upload, and test sample analytical pages to verify data display correctness.
-
-
-## 7. Important Considerations
-
-- **Database Security**: After migration, it is strongly recommended to perform a **full backup** and document the system state.
-- **Production Deployment**: For production environments, submit a detailed change request and undergo review before implementation.
-- **Network Security**: It is advised to use a **private network or VPN** for communication between Datafor and the PostgreSQL database to avoid exposing it to the public internet.
-
-
-## 8. Appendix: Recommended PostgreSQL Configuration Parameters
-
-| Parameter       | Recommended Value | Description                       |
-| --------------- | ----------------- | --------------------------------- |
-| max_connections | 200+              | Adjust based on concurrency needs |
-| shared_buffers  | 25% of total RAM  | Optimize database caching         |
-| work_mem        | 4MB ~ 64MB        | Query memory allocation           |
-| wal_level       | replica           | Enhance log security              |
+| Parameter | Recommended value | Note |
+| --- | --- | --- |
+| `max_connections` | 200 or more | Each `<Resource>` in `server.xml` opens 10 connections at start (`initialSize`) and may grow to `maxActive`; the AI Agent and other applications need connections too. |
+| `shared_buffers` | 25% of the server's RAM | Database cache. |
+| `work_mem` | 4MB–64MB | Memory per sort or hash operation. |
+| `wal_level` | `replica` | Needed for replication and point-in-time recovery. |
