@@ -121,7 +121,7 @@ export const documentationNote = defineNoteConfig({
 					link: "/documentation/Visualization/81 X 轴类型设置：连续和类别.md",
 				},
 				{
-					text: "Conditional Colors",
+					text: "Conditional Formatting",
 					link: "/documentation/Visualization/110 条件颜色设置.md",
 				},
 				{
