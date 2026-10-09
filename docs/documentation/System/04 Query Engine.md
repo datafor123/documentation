@@ -18,6 +18,7 @@ createTime: 2026/10/09 17:30:00
 | **Max concurrent queries** | Queries that may run at the same time; further queries wait | `200` |
 | **Max result rows** | The most rows one query may return; 0 = no limit | `500000` |
 | **Query timeout (seconds)** | A query running longer is stopped; 0 = no timeout. Reports wait this long plus 10 seconds before showing *The query timed out*. | `300` |
+| **UseAggregates** / **ReadAggregates** | Let the engine read and use mapped aggregation tables; both must be on. Loaded models pick up the change after the model cache is cleared or the server restarts. See [Use Aggregation Tables](/documentation/Model/Use-Aggregation-Tables/). | Off |
 
 **Reset to default** returns every engine setting to its factory value, including settings this page does not show. **Save** applies the changes.
 

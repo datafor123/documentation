@@ -56,7 +56,7 @@ Raise `-Xmx` when the server logs `java.lang.OutOfMemoryError: Java heap space`,
    Change only the numbers and leave the other options on the line as they are.
 4. Start Datafor. The Linux script prints the options it used (`Using CATALINA_OPTS: …`).
 
-An update package can replace the start scripts; the replaced files are kept in `bi-server/update/backup<time stamp>/`. Check the `CATALINA_OPTS` line again after every update.
+An update package replaces `start-server.*`, `set-env.*` and `tomcat/conf/server.xml`; the replaced files are kept in `bi-server/update/backup<time stamp>/`. Note your `-Xms`/`-Xmx` values before every update and restore them in the `CATALINA_OPTS` line afterwards.
 
 ### Windows service
 

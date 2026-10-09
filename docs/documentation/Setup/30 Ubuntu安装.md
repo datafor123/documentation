@@ -122,6 +122,8 @@ Change the `admin` password right after the first sign-in (see [Modify Password]
 
 # Updating the System
 
+> **Important**: The update package replaces `start-server.sh`, `set-env.sh` and `tomcat/conf/server.xml` as a whole and keeps the old files in `bi-server/update/backup<time stamp>/`. Before you update, write down any custom heap size (`-Xms`/`-Xmx` in `CATALINA_OPTS`) and any database connections, passwords or ports you changed in `server.xml`. After the update, stop Datafor, copy these settings from the backup folder into the new files, and start it again.
+
 1. **Back up first.** Create a backup (see [Backup and Restore](/documentation/System/backup/)) and copy `bi-server/ai-agent/instance-secrets.env` and `bi-server/ai-agent/.env` to a safe place. The LLM API keys saved in Datafor are encrypted with a key from `instance-secrets.env`; without that file a restored system cannot read them.
 2. Read the upgrade notes of the release, for example [10.00 Upgrade notes](/release/10.00/#upgrade-notes).
 3. **Install all components of the update package together.** Several features need matching browser and server parts, so do not install parts of an update package on their own.

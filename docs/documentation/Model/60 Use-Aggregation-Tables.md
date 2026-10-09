@@ -25,16 +25,17 @@ For example, a sales fact table can be summarized by customer and day with preco
 
 ### Enable aggregation tables on the server
 
-The query engine ships with aggregation tables turned off. While either property below is `false`, the engine ignores every aggregation mapping and always queries the detail tables. **Settings › Data › Query engine** does not show these properties, so an administrator must edit the files on the server:
+The query engine ships with aggregation tables turned off. While either **UseAggregates** (`mondrian.rolap.aggregates.Use`) or **ReadAggregates** (`mondrian.rolap.aggregates.Read`) is off, the engine ignores every aggregation mapping and always queries the detail tables.
 
-1. In both `bi-server/pentaho-solutions/system/datafor/mondrian.properties` and `bi-server/pentaho-solutions/system/mondrian/mondrian.properties`, set:
+1. As an administrator, open **Settings › Data › Query engine** (see [Query Engine](/documentation/System/Query-Engine/)), turn on **UseAggregates** and **ReadAggregates**, and click **Save**.
+2. Clear the model cache or restart the Datafor server. Models that are already loaded keep ignoring aggregation tables until then.
 
-   ```properties
-   mondrian.rolap.aggregates.Use=true
-   mondrian.rolap.aggregates.Read=true
-   ```
+Alternatively, edit the files on the server: in both `bi-server/pentaho-solutions/system/datafor/mondrian.properties` and `bi-server/pentaho-solutions/system/mondrian/mondrian.properties`, set the lines below, then restart the Datafor server. Both files are read only at startup.
 
-2. Restart the Datafor server. Both files are read only at startup.
+```properties
+mondrian.rolap.aggregates.Use=true
+mondrian.rolap.aggregates.Read=true
+```
 
 The setting applies to every Analysis Model on the server.
 

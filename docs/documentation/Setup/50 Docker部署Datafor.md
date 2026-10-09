@@ -102,3 +102,5 @@ Because the installation lives in the volume, pulling a newer image does not upd
    ```
 
    `start-server.sh` applies every `.jar` file in `update` before it starts the server and renames it with a time stamp.
+
+> **Important**: The update package replaces `start-server.sh`, `set-env.sh` and `tomcat/conf/server.xml` as a whole and keeps the old files in `/opt/bi-server/update/backup<time stamp>/`. Before you update, write down any custom heap size (`-Xms`/`-Xmx` in `CATALINA_OPTS`) and any database connections, passwords or ports you changed in `server.xml`. After the update, stop Datafor, copy these settings from the backup folder into the new files, and start it again.

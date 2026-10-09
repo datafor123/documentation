@@ -19,7 +19,7 @@ Readers explore a report through the components themselves: clicking, right-clic
 | **Drill down to “{level}”** | The field has a lower hierarchy level | Drills to that level. See [Drill Down](/documentation/Analysis/Drill-down/). |
 | **Drill up one level** | The chart is drilled | Goes back one level. |
 | **View details** | The author turned it on | Opens the detail rows of this point. |
-| **Jump** | A drill-through is set up | Opens the target report or URL. See [Drill through](/documentation/Analysis/Drill-through/). |
+| **Drill through** | A drill-through is set up | Opens the target report or URL. See [Drill through](/documentation/Analysis/Drill-through/). |
 | **Copy value** | Always | Copies the value as displayed. |
 
 The menu is available on charts in the report and in the editor, not on tables, GIS maps or phones. The *Others* item of a row limit offers only **Copy value**.

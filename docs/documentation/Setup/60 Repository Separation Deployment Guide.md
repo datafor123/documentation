@@ -103,6 +103,8 @@ In every file below, replace `localhost:25432` or `127.0.0.1:25432` with `<datab
 
 The built-in database is still started by `start-server`. It is no longer used, but keep it until you have verified the new setup.
 
+> **Important**: An update package replaces `tomcat/conf/server.xml` as a whole (the old file is kept in `bi-server/update/backup<time stamp>/`), so after an update Datafor connects to the built-in database again. Before every update, note the `<Resource>` settings you changed above; after the update, stop Datafor, copy them from the backup folder into the new `server.xml`, and start it again.
+
 ## 5. Clear the caches
 
 In the `bi-server` folder:
