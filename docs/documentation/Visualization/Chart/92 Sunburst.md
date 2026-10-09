@@ -37,15 +37,10 @@ Keep the tooltip on when segments are too narrow to label. Do not reduce the ent
 
 When you resize the component, the chart recenters and fits the new size without querying again, and the current drill level is kept.
 
-## Read and check a branch
+## Read a branch
 
 Follow one inner segment outward to see how its contribution is divided. Compare siblings at the same hierarchy level. A child's share of its parent and its share of the entire chart answer different questions; check the tooltip's proportion context before quoting a percentage.
 
-Save and open **Preview**. Inspect one branch and compare its values with a table using the same hierarchy and filters. If a branch looks unexpectedly large, check field order and whether its measure is additive. If leaves are missing or illegible, reduce depth, filter the data, or enlarge the component.
-
-## Reports from earlier versions
-
-- **Color by parent** stays off unless you turn it on, so existing colors do not change.
-- The new **Show Tooltip** switch is on.
+If a branch looks unexpectedly large, check field order and whether its measure is additive. If leaves are missing or illegible, reduce depth, filter the data, or enlarge the component.
 
 Use [Grouped donuts](/documentation/Visualization/Grouped-Donut-Chart/) for parallel group compositions and [Treemap](/documentation/Visualization/Treemap/) for a compact rectangular hierarchy view.

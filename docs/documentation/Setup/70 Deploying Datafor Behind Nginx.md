@@ -14,7 +14,7 @@ The examples use the host name `bi.example.com`, a Datafor server on the same ma
 
 ## 1. Before you begin
 
-- Install Datafor and confirm that `http://<server-ip>:28080/datafor/` opens in a browser. See [Installation Guide (RHEL-compatible Linux)](/documentation/Setup/Installation-CentOS/), [Installation Guide (Ubuntu)](/documentation/Setup/Installation-Ubuntu/), [Installation (Windows)](/documentation/Setup/Installation-windows/), or [Deploying Datafor Using Docker](/documentation/Setup/Deploying-Datafor-Using-Dockers/).
+- Install Datafor and confirm that `http://<server-ip>:28080/datafor/` opens in a browser. See [Installation Guide (RHEL-compatible Linux)](/documentation/Setup/Installation-CentOS/), [Installation Guide (Ubuntu)](/documentation/Setup/Installation-Ubuntu/), [Installation (Windows)](/documentation/Setup/Installation-windows/), or [Deploying Datafor Using Docker](/documentation/Setup/Deploying-Datafor-Using-Docker/).
 - Install Nginx on the Datafor server, or on a host that can reach port 28080 of the Datafor server.
 - Prepare a DNS name for the site and a TLS certificate and private key for that name.
 - Obtain administrator access to the server, because the procedure edits Nginx and Tomcat configuration files and restarts services.
@@ -231,7 +231,7 @@ Once Nginx is in place, allow port 28080 only from the Nginx host, or only on th
 - [Installation Guide (RHEL-compatible Linux)](/documentation/Setup/Installation-CentOS/)
 - [Installation Guide (Ubuntu)](/documentation/Setup/Installation-Ubuntu/)
 - [Installation (Windows)](/documentation/Setup/Installation-windows/)
-- [Deploying Datafor Using Docker](/documentation/Setup/Deploying-Datafor-Using-Dockers/)
+- [Deploying Datafor Using Docker](/documentation/Setup/Deploying-Datafor-Using-Docker/)
 - [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/)
 - [AI Assistant](/documentation/AI-Agent/AI-Chat/)
 - [Managing High Concurrency](/documentation/AI-Agent/Managing-High-Concurrency/)

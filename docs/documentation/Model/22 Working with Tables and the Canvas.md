@@ -1,6 +1,7 @@
 ---
 title: Working with Tables and the Canvas
 permalink: /documentation/Model/Working-with-Tables-and-the-Canvas/
+description: Add, locate and preview source tables in the modeler, use the table menu, and navigate the model canvas.
 createTime: 2026/09/03 21:51:06
 ---
 
@@ -89,7 +90,7 @@ Use the minimap to move quickly between distant parts of a large model.
 
 The operation does not retest key uniqueness, create relationships, choose join fields, or rearrange the canvas. It can remove bound Measures or leave calculated measures with missing references, so review every proposed removal and validate the result before saving.
 
-If the cleanup removes bound Measures, the designer requests that their enterprise metrics be unbound. Verify **Metric bindings** after applying or undoing the cleanup: Undo can restore the editor model, but it cannot restore external Metrics Library registry changes.
+If the cleanup removes bound Measures, the modeler requests that their enterprise metrics be unbound. Verify **Metric bindings** after applying or undoing the cleanup: Undo can restore the editor model, but it cannot restore external Metrics Library registry changes.
 
 See [Tidy Model into a Star Schema](/documentation/Model/Tidy-Model-into-a-Star-Schema/) for the required pre-checks and post-apply validation.
 

@@ -42,16 +42,7 @@ Hierarchy table filter, Search and Paginate cannot bind parameters. System varia
 
 Switching back to **Data source → Model field** restores the field box and keeps the analysis model; you choose the field again.
 
-## Example: a growth slider
-
-1. Create a report parameter **GrowthRate**: **Type → Numeric**, **Suggested values → Any value**, **Default value → 0.1**.
-2. Add a **Numeric slider**, choose **Data source → Parameter** and select **GrowthRate**.
-3. Set **Minimum value** `-0.2`, **Maximum value** `0.2` and **Step** `0.01`.
-4. Use the parameter in a measure such as `[Measures].[Net Sales] * (1 + ParamRef("GrowthRate"))`.
-
-![Numeric slider bound to GrowthRate](../Visualization/Filters/images/numeric-slider-parameter.png)
-
-The full, verified walk-through is in [What-if Analysis](/documentation/Analysis/What-if-Analysis/).
+For a worked example, a Numeric slider bound to a *GrowthRate* parameter that drives a scenario measure, see [What-if Analysis](/documentation/Analysis/What-if-Analysis/); the slider's own range and step settings are in [Numeric Slider](/documentation/Visualization/Number-Range-Filter/#drive-a-parameter).
 
 ## Write a Date component's value to a parameter
 
@@ -65,4 +56,4 @@ A Date component that filters by a field can also copy its value into a paramete
 | The value changes but nothing re-queries. | No component references the parameter, or the reference name differs in case or spelling. |
 | A multiple selection breaks a formula. | `ParamRef()` receives a JSON array text; use a single selection, or use the parameter in model SQL. |
 
-Related: [Filters](/documentation/Visualization/Filters/) · [Using Parameters in Component Titles](/documentation/Analysis/Using-Parameters-in-Component-Titles/)
+Related: [Filters](/documentation/Visualization/Filters/) · [Parameters in component titles](/documentation/Analysis/Creating-Parameters/#component-titles)

@@ -1,6 +1,6 @@
 ---
 title: Pass Parameters Through URL
-permalink: /documentation/Pass-parameters-through-URL/
+permalink: /documentation/Embedded/URL-Parameters/
 createTime: 2026/09/04 13:45:56
 ---
 
@@ -8,7 +8,7 @@ createTime: 2026/09/04 13:45:56
 
 Append named values to initialize Report or Global Parameters when an Open or Embed URL loads.
 
-This guide covers Report and Global Parameters in the form `?<ParameterName>=<value>`. To set the opening selection of a filter component directly, use `default_<component title or id>=value1;value2` (see [Filters](/documentation/Visualization/Filters/)); the SDK's `initialFilterValues` option does the same (see [SDK Embedding](/documentation/SDK-Embedding/)).
+This guide covers Report and Global Parameters in the form `?<ParameterName>=<value>`. To set the opening selection of a filter component directly, use `default_<component title or id>=value1;value2` (see [Filters](/documentation/Visualization/Filters/)); the SDK's `initialFilterValues` option does the same (see [SDK Embedding](/documentation/Embedded/SDK-Embedding/)).
 
 URL values only narrow the data within what the signed-in user may see. Anyone can change a URL, so do not rely on URL values to restrict data; use [row-level security](/documentation/Datasource/Row-Level-Security-in-Analytics/).
 
@@ -95,5 +95,5 @@ https://analytics.example.com/datafor/plugin/datafor/api/integrate/<pageId>?__co
 
 - [Creating Parameters](/documentation/Analysis/Creating-Parameters/)
 - [Parameter Controllers](/documentation/Analysis/Parameter-Controllers/)
-- [Report URLs (open, edit, embed)](/documentation/Embedded/Reports-REST-API/)
-- [SDK Embedding](/documentation/SDK-Embedding/)
+- [Report URLs (open, edit, embed)](/documentation/Embedded/Report-URLs/)
+- [SDK Embedding](/documentation/Embedded/SDK-Embedding/)

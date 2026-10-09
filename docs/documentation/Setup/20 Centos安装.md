@@ -11,7 +11,7 @@ These steps apply to RHEL-compatible distributions, version 8 or 9 (for example 
 
 **Requirements**
 
-- **Memory:** the Datafor server starts with a Java heap of 2 GB that can grow to 6 GB (`-Xms2048m -Xmx6144m`). The built-in PostgreSQL database and the AI Agent run beside it, so plan at least **8 GB RAM**. To change the heap, see [Increasing Memory Limit for Datafor Server](/documentation/Tools/Increasing-Memory-Limit/).
+- **Memory:** the Datafor server starts with a Java heap of 2 GB that can grow to 6 GB (`-Xms2048m -Xmx6144m`). The built-in PostgreSQL database and the AI Agent run beside it, so plan at least **8 GB RAM**. To change the heap, see [Increasing Memory Limit for Datafor Server](/documentation/Best/Performance-Tuning/#memory-heap-size).
 - **Java:** bundled in `bi-server/java`. You do not need to install Java.
 - **Ports:** `28080` (web server), `25432` (built-in PostgreSQL), `28081` (AI Agent API) and `38081` (AI Agent MCP server). Open only `28080` in the firewall, or only the Nginx ports when Datafor runs [behind Nginx](/documentation/Setup/Deploying-Datafor-Behind-Nginx/). Keep `25432`, `28081` and `38081` closed to the network.
 
@@ -161,7 +161,7 @@ Open `http://<server-ip>:28080/` in a browser. The installation comes with two a
 - **Administrator:** `admin` / `password`
 - **Demo user:** `demo` / `demo`
 
-Change the `admin` password right after the first sign-in (see [Modify Password](/documentation/System/Modify-Password/)), and change the `demo` password or delete that user if you do not need it.
+Change the `admin` password right after the first sign-in (see [Modify Password](/documentation/System/Users/#_6-resetting-a-password)), and change the `demo` password or delete that user if you do not need it.
 
 ------
 

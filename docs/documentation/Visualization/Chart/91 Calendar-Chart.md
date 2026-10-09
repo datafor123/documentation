@@ -16,7 +16,7 @@ Show a daily measure on a calendar to reveal weekday patterns, busy periods and 
 3. Set **Filters** to the period you want to display. Add supporting values to **Tooltips** if needed.
 4. Leave **Color** empty when you want the color to represent the measure.
 
-**Date** lists only day-level fields that have a date format in the model. Month-level and second-level fields are not offered. If the model has no such field, the picker shows *There is no valid date field in the analysis model*. When several fields have the same name, the list adds the hierarchy, for example *Day › Day* and *Date hierarchy › Day*. Multiple records for one day follow the measure's aggregation.
+**Date** lists only day-level fields that have a date format in the model. Month-level and second-level fields are not offered. If the model has no such field, the picker shows *There is no valid date field in the analysis model*. When several fields have the same name, the list adds the hierarchy, for example *Day › Day* and *Date hierarchy › Day*. Multiple records for one day follow the measure's aggregation. Check that the date field and any timezone handling in the source match the business day.
 
 ## Layout and range
 
@@ -31,7 +31,7 @@ All in **Style → Plot area**:
 | **Cell background color** | Color of days without a value. | Transparent for new calendars; white in reports from earlier versions |
 | **Color by value** | Shades the cells by the measure and shows a color scale; see below. Off: every day with a value has the same color. | On for new calendars; off in reports from earlier versions |
 
-Cells are always square: their side is the smaller of the two directions, in whole pixels, at most 40 px. The calendar is centered horizontally and aligned to the top of the component.
+Cells are always square: their side is the smaller of the two directions, in whole pixels, at most 40 px. The calendar is centered horizontally and aligned to the top of the component. If cells become too small, shorten the period or enlarge the component.
 
 The **Year**, **Month** and **Weekday** groups each have **Show** and **Font**. On small cells, month labels are thinned to every other month, then to quarter starts (Jan, Apr, Jul, Oct), then hidden; weekday labels go to Mon, Wed and Fri, then are hidden. They come back when you enlarge the component. With several calendars and year labels turned off, the first month label of each calendar includes the year, for example *Jan 2025*.
 
@@ -45,6 +45,8 @@ With **Color by value** on and no **Color** field:
 | Negative and positive values | Diverging, symmetric around 0: red for negative values, light grey at 0, the palette color for positive values. The ends are labelled ±max. |
 | All values ≤ 0 | The more negative, the deeper the red. |
 | No values, or all values equal | A single color. |
+
+If one day dominates the colors, inspect its value before treating the remaining pale cells as unimportant.
 
 The color scale under the chart is labelled in the measure's format, for example *24K* or *5,686.77*, and a marker shows the hovered value. In a narrow component the scale bar shrinks and drops its end labels; a segmented legend drops items from the end and shows *+N*. Change the palette in [Colors and Color Schemes](/documentation/Visualization/Colors/). There are no separate minimum and maximum color settings.
 
@@ -62,14 +64,7 @@ The tooltip shows the date with its weekday, for example *2025-03-26 Wed*, and t
 
 Clicking a day filters the other components on the page; the selected day gets a dark 2 px outline until the selection is cleared. See [Cross-filtering](/documentation/Analysis/Cross-Filtering/).
 
-## Check the result
-
-Save and open **Preview**. Hover dates near the start and end of the range and verify the daily values. Check multi-year boundaries and confirm that the date grain, timezone handling in the source, and period filter match the business question.
-
-If cells become too small, reduce the period or enlarge the component. If one day dominates the colors, inspect its value before treating the remaining pale cells as unimportant.
-
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - Cells are square now. Calendars whose cells were stretched (for example 18.4 × 28 px) look different.
 - Days with the value 0 are colored instead of left blank.
-- **Layout type**, **Display range**, **Cell background color** and **Color by value** keep their saved values, or Horizontal, Whole year, white and off if never set.
+:::

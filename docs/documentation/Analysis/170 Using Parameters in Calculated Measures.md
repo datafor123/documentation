@@ -1,6 +1,7 @@
 ---
 title: Using Parameters in Calculated Measures
 permalink: /documentation/Analysis/Using-Parameters-in-Calculated-Measures/
+description: Read a parameter in an MDX calculated measure with ParamRef() or ${name} text substitution.
 createTime: 2026/09/04 00:23:35
 ---
 
@@ -42,29 +43,8 @@ IIf([Store].CurrentMember.Name = "${Region}", [Measures].[Net Sales], NULL)
 
 Use `ParamRef()` when the value is a number you compute with, and `${name}` when you need the value inside a string or an MDX expression.
 
-## Create the report-level measure
+## Create the measure
 
-For an interactive Report Parameter, keep the dependent measure on the report page:
+Create a report-level measure with **New measure → New measure** in the component's Measures picker; **Insert parameter** adds a `ParamRef()` for the parameter you pick. See [Calculated Measures](/documentation/Analysis/Calculated-Measures/) for the steps and [What-if Analysis](/documentation/Analysis/What-if-Analysis/) for a complete example with a slider. A name that does not match a parameter gives *Unknown parameter* when the component queries.
 
-1. Create the Report Parameter and set its **Type**, value source, and **Default value**.
-2. Open the target component's Measures picker.
-3. Select **New measure → New measure**.
-4. Enter a unique **Caption**, the MDX **Formula**, and the result **Format**. **Insert parameter** inserts a `ParamRef()` reference for the selected parameter.
-5. Add the measure to the component and bind a filter to the parameter (**Data → Data source → Parameter**).
-6. Test the component in **Preview** and save the report.
-
-A report-level calculated measure is stored on that page and can be used by page components that use the same analysis model. Use a model-level calculated measure for governed logic that does not depend on a report-local definition.
-
-![A report measure that reads GrowthRate](../Visualization/images/current/scenario-measure.jpg)
-
-## Common issues
-
-| Symptom | Cause or action |
-| --- | --- |
-| `Unknown parameter '<name>'` | The definition is missing or the name, case, or spaces do not match. |
-| A numeric expression fails | Use a **Numeric** parameter and verify whether it stores percentage points or a decimal rate. |
-| The result does not update | Confirm the controller binding, `ParamRef()` name, and the measure selected by the result component. |
-| The formula saves but the component query fails | Correct the MDX or referenced measure names. Some errors are exposed only when the query runs. |
-| A removed parameter is still referenced | Update every `ParamRef()` formula before deleting the parameter; references are not guaranteed to be repaired automatically. |
-
-See [Creating Parameters](/documentation/Analysis/Creating-Parameters/), [What-if Analysis](/documentation/Analysis/What-if-Analysis/), and [Calculated Measures](/documentation/Analysis/Calculated-Measures/) for the related workflows.
+Related: [Creating Parameters](/documentation/Analysis/Creating-Parameters/) · [Bind Filters to Parameters](/documentation/Analysis/Parameter-Controllers/)

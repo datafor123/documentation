@@ -1,6 +1,6 @@
 ---
 title: Branding (White Label)
-permalink: /documentation/Embedded/White-Label/
+permalink: /documentation/Console/Branding/
 tags:
   - Brand
   - White label
@@ -11,8 +11,6 @@ createTime: 2026/09/01 22:03:26
 # Branding (White Label)
 
 **Branding** (called *White Label* before 10.00) lets you give the Datafor login page and console a consistent identity: your logos, product copy, colors, navigation styling, and selected reports on Home. Use it for the application around your reports; it is not a replacement for designing individual report pages or configuring embedded authentication.
-
-These are administrative settings, not personal preferences. Plan changes for the users of the deployment, and test them with the accounts and screen sizes your audience uses.
 
 ## Open the configuration
 
@@ -59,9 +57,9 @@ The remaining groups control different parts of the page:
 - **Card layout** controls the login card's width, corner radius, shadow, background, and border.
 - **Inputs** controls field corners, borders, focus-ring color, and font size. Keep the focused field easy to identify.
 - **Buttons** controls the primary login button's normal and hover colors, text, corners, and font size.
-- **Google Button** controls the Google login button's appearance and visibility. It does not configure the OAuth provider.
+- **Google button** controls the Google login button's appearance and visibility. It does not configure the OAuth provider.
 - **Visibility** includes **Show 'Remember me'**, **Show 'Sign up'**, **Show 'Forgot password'**, and **Show SSO area**.
-- **Legal** sets the footer's **Copyright text**, **Footer Link**, text color, and font size. The link is attached to the footer text; enter the intended destination, such as your company's legal page.
+- **Legal** sets the footer's **Copyright text**, **Footer link**, text color, and font size. The link is attached to the footer text; enter the intended destination, such as your company's legal page.
 
 Only show login options that your deployment supports. The Google button requires **Show Google button** and **Show SSO area** to be on, as well as the underlying OAuth login service to be enabled. Turning on a display switch is not sufficient. Verify registration and password recovery end to end before exposing their links. See [OAuth2 Authentication](/documentation/System/OAuth2-Authentication/) for provider configuration.
 
@@ -96,13 +94,13 @@ This is different from **Other > Browser title**, which controls the default bro
 
 ### Navigation and feature visibility
 
-Use **Sidebar**, **Top Bar**, and **Search Box** to coordinate backgrounds, text, icons, active states, and font sizes. Test a selected menu item, a hovered item, and the search placeholder as well as the normal state.
+Use **Sidebar**, **Top bar**, and **Search box** to coordinate backgrounds, text, icons, active states, and font sizes. Test a selected menu item, a hovered item, and the search placeholder as well as the normal state.
 
 For manual color entry, the field already supplies `#`. Enter hexadecimal digits, for example `1677ffff`: the final `ff` makes the color fully opaque. Click outside the field to finish editing it.
 
 **Features** has one switch: **Show help menu** controls the top-bar help menu. If you hide it, provide another route to documentation and support for your users. (*Show Start Using Module* was removed together with the Learn & resources section of Home.)
 
-Hiding a visual entry point is not an access-control rule. Manage report permissions separately through [Access Control List](/documentation/System/Access-Control%20List/).
+Hiding a visual entry point is not an access-control rule. Manage report permissions separately through [Access Control List](/documentation/System/Access-Control-List/).
 
 ## Choose the report cards shown on Home
 
@@ -116,7 +114,7 @@ To add a useful starting point for your audience:
 2. Open **Sample pages** and select **Add card**. The editor supports up to **10 cards**, including hidden cards.
 3. Enter a short **Title** that explains the report's purpose.
 4. Choose its **Page link** from the resource picker. The picker browses accessible resources under Public; this is not a free-text external website URL field.
-5. Upload a **Card image (local upload)**. This is a thumbnail, not a live report preview; replace it when the report's appearance changes.
+5. Upload a **Card image**. This is a thumbnail, not a live report preview; replace it when the report's appearance changes.
 6. Turn **Visible** on, and choose whether to **Open in new tab**. Use the up/down arrows to arrange the cards.
 7. Click **Save**, open Home, and test the card with a representative reader account.
 
@@ -142,7 +140,7 @@ Use **Export** to download the saved configuration for backup or reuse. Save int
 
 **Import** accepts a ZIP configuration package. Selecting the file starts the import immediately; it is not held as a form draft until you click Save. Export the destination's current configuration first, and import only a package you trust and intend to use there.
 
-After a successful import, check the main enable switch, reload the console, and review all four areas. When moving between environments, confirm that linked reports exist at the expected paths and that users can access them. Do not assume a configuration that works in one environment is ready for another without checking it.
+After a successful import, check the main enable switch, reload the console, and review all four areas. When moving between environments, confirm that linked reports exist at the expected paths and that users can access them.
 
 ### Reset to default
 
@@ -160,5 +158,5 @@ Reset means “use product defaults,” not “restore my previously saved custo
 
 If saved branding does not appear, first confirm that the main switch is **Enabled**, then reload the affected page. If only an image or favicon is stale, test in a fresh browser session to distinguish cached assets from an incorrect configuration. If a selected image never appears in the editor, check its format and file size.
 
-For embedding and authentication, continue with [SDK Embedding](/documentation/SDK-Embedding/) and [SSO for Embedded Analytics](/documentation/Embedded/How-SSO-Improves-the-Embedded-Analytics-Experience/). White Label changes the surrounding experience; embedding, authentication, and permissions still need their own configuration.
+For embedding and authentication, continue with [SDK Embedding](/documentation/Embedded/SDK-Embedding/) and [SSO for Embedded Analytics](/documentation/Embedded/Signing-In-Users/). Branding changes the surrounding experience; embedding, authentication, and permissions still need their own configuration.
 

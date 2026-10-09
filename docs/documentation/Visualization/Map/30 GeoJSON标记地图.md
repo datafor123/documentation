@@ -9,7 +9,7 @@ createTime: 2026/09/01 22:03:26
 
 Show a measure as markers at the centres of regions on a GeoJSON boundary map, for example sales by province as markers sized by value. It needs no online map service. To colour the regions themselves, use [Filled map](/documentation/Visualization/GeoJSON-Filled-Map/); to place points by coordinates or addresses on an online basemap, use [GIS marker map](/documentation/Visualization/Marker-Map/) or [Mapbox/Amap](/documentation/Visualization/Mapbox-Amap-Marker-Map/).
 
-## Build it
+## Bind regions and choose the map
 
 1. Add **Components → Charts → Maps → Marker map** (480 × 360 px) and select an **Analysis model**.
 2. Bind **Geographic field** (region names or codes) and **Measure**.
@@ -53,4 +53,7 @@ Markers are at least 6 px wide, so zero and very small values stay visible and c
 - **Aspect ratio**: maps added in this version keep the shape of the GeoJSON map inside the component instead of being stretched.
 - **China map**: the South China Sea islands are drawn in a framed inset at the bottom right. See the [Filled map](/documentation/Visualization/GeoJSON-Filled-Map/#china-map) page, including the note on saved views in reports from earlier versions.
 
-Reports from earlier versions: rows with several spellings of one region used to produce stacked markers with partial values, and unmatched rows were dropped without notice.
+::: details Opening reports made before 10.00
+- Rows with several spellings of one region used to produce stacked markers with partial values; they now give one marker with the summed value.
+- Unmatched rows used to be dropped without notice; they are now listed in edit mode.
+:::

@@ -1,6 +1,6 @@
 ---
 title: Combo
-permalink: /documentation/Visualization/Combo Chart/
+permalink: /documentation/Visualization/Combo-Chart/
 description: Combine columns and lines on shared categories with two value axes, for example sales and margin rate; axis alignment, merging, stacking and labels.
 createTime: 2026/09/01 22:03:26
 ---
@@ -28,6 +28,8 @@ Drag a measure between **Column measures** and **Line measures** to change how i
 Gross margin rate should divide aggregated gross margin by aggregated sales; averaging individual transaction percentages can give a different result.
 
 ![Combo fields: Region, Net Sales and Gross Margin Rate](../images/current/combo-data.jpg)
+
+![Finished combo in Preview: Net Sales columns on the left axis and the Gross Margin Rate line on the right percentage axis, by region](../images/current/combo-preview.jpg)
 
 The example has separate sales and percentage axes. East China has the largest sales column; North China has the highest margin rate. A line point cannot be compared directly with a column on a different scale.
 
@@ -78,16 +80,7 @@ Enter bounds in the measure's stored units. For a rate stored as a decimal, **0.
 - The tooltip also appears in the blank space between and above columns, for the category under the pointer. Rows without a value show "-", or the text set in the measure's **Empty values as**. **Style → Tooltip** has only **Show Tooltip**.
 - Clicking a line point, or within 8 px of it, cross-filters, drills, jumps or opens the data point menu for that point. During cross-filtering, lines are dimmed too and the selected point stays opaque.
 
-## Reports from earlier versions
-
-- **Display units** stays **Follow measure format** and **Zoom direction** stays **Both**.
-- Column axes now include 0 unless the old **Align Column Zeros** was saved off; zero lines of the two axes may now be aligned.
-- The **Stacked** switch was missing from the panel; it is back under **Column type**.
-- A merged axis no longer shows values such as 35000000% when an amount and a rate are merged.
-
-## Check the result
-
-Save, then open **Preview**. Hover a category and confirm both values and units. Apply a report filter and check both series again.
+## Common symptoms
 
 | Symptom | Check |
 | --- | --- |
@@ -97,6 +90,11 @@ Save, then open **Preview**. Hover a category and confirm both values and units.
 | Percentage is 100 times too large | Check whether the source stores 0.42 or 42 and whether its measure format is a percentage. |
 | No zoom slider | The X axis is categorical and **Zoom direction** is **Horizontal only**. |
 | Color field group is missing | With several measures it is not available; each measure gets its own colour. |
-| Result differs from another chart | Match the measure definition, category grain and [component filters](/documentation/Analysis/Component-Level-Filtering/). |
+
+::: details Opening reports made before 10.00
+- Column axes now include 0 unless the old **Align Column Zeros** was saved off; zero lines of the two axes may now be aligned.
+- The **Stacked** switch was missing from the panel; it is back under **Column type**.
+- A merged axis no longer shows values such as 35000000% when an amount and a rate are merged.
+:::
 
 Related: [Line](/documentation/Visualization/Line-Chart/) · [Clustered column](/documentation/Visualization/Clustered-Column-Chart/) · [Legends](/documentation/Visualization/Legends/) · [Cross-filtering](/documentation/Analysis/Cross-Filtering/)

@@ -1,6 +1,7 @@
 ---
 title: Model Diagnostics
 permalink: /documentation/Model/Model-Diagnostics/
+description: Read the structural, semantic and metric-governance problems that Model diagnostics reports, and review metric bindings before using a model.
 createTime: 2026/09/03 21:51:11
 ---
 
@@ -14,7 +15,7 @@ A bar at the bottom of the canvas has two tabs, **Model diagnostics** and **Metr
 
 <div align="left"><img src="./images/analysis-model-diagnostics.png" alt="Model diagnostics panel showing severity counts, a category filter, and semantic completeness hints" width="100%" /></div>
 
-Use the severity controls and **All categories** filter to narrow the list. Select an issue to focus the designer on the related table, relationship, field, Dimension, or Measure.
+Use the severity controls and **All categories** filter to narrow the list. Select an issue to focus the modeler on the related table, relationship, field, Dimension, or Measure.
 
 ## Severity levels
 
@@ -45,7 +46,7 @@ When you save a model:
 
 - Warnings and hints do not block the save operation.
 - Errors open a detailed review dialog.
-- You can return to the designer or explicitly choose to continue saving.
+- You can return to the modeler or explicitly choose to continue saving.
 - Server-side verification runs after the client diagnostics.
 
 An **Error** requires an explicit override; it is not an absolute save block. Use **Continue to save** only when you understand the impact. A model with no tables cannot be saved.

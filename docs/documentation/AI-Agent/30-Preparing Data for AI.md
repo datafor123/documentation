@@ -96,5 +96,3 @@ A schedule belongs to the analysis model, so every index row of that model shows
 3. Run **Prep data for AI** for any model that has no index yet and has not been saved since auto-build was turned on.
 4. Add a refresh schedule when member values change regularly.
 5. After changing the embedding model, click **Rebuild index** for every index.
-
-The storage implementation is intentionally not part of this administrator workflow; use the Datafor UI and supported service interfaces instead of depending on a particular vector-database product.

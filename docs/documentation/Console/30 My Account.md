@@ -92,7 +92,12 @@ Turn off **Customize** and click **Apply**. The console reloads and returns to t
 
 ## Review share links
 
-Open **Share link** to review report links listed for your account. The table shows the report title, expiry, permission, toolbar visibility, creation date, and **Sharing Enabled** status. Use the button in **Copy link** to copy a link.
+Open **Share link** to review report links listed for your account. The table shows the report title, expiry, permission, toolbar visibility, creation date, and **Sharing Enabled** status. Use **Search Reports** to find a report by title.
+
+- **Sharing Enabled**: turn the switch off to stop a link from opening without deleting it, and on again to restore it.
+- **Copy link**: copy the link to the clipboard.
+- **Edit** (row menu): change **Access permission** (**Readonly** or **Editable**), **Expires** and **Show Toolbar**, then click **Upgrade** to save.
+- **Delete** (row menu): remove the link permanently after confirmation. The report itself is not deleted.
 
 For link creation, access options, and disabling sharing, see [Share Link](/documentation/Embedded/Share-link/).
 

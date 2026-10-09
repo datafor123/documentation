@@ -29,23 +29,12 @@ The step is derived from the data range, and the input boxes show thousands sepa
 
 ## Drive a parameter
 
-1. Create a **Numeric** parameter with **Suggested values → Any value**, for example `GrowthRate` with default `0.1` (see [Creating Parameters](/documentation/Analysis/Creating-Parameters/)).
-2. Add a Numeric slider and choose **Data source → Parameter**.
-3. Select the parameter in the list. Parameters that are not Numeric with Any value are greyed out; hover for the reason.
-4. Set **Minimum value**, **Maximum value** and **Step**, for example `-0.2`, `0.2` and `0.01`.
+Choose **Data source → Parameter** and a **Numeric** parameter with **Any value**, for example `GrowthRate` with default `0.1`; binding rules are in [Bind Filters to Parameters](/documentation/Analysis/Parameter-Controllers/). Then set **Minimum value**, **Maximum value** and **Step**, for example `-0.2`, `0.2` and `0.01`.
 
 ![Numeric slider bound to GrowthRate with an explicit range](./images/numeric-slider-parameter.png)
 
 If you leave the range empty, it is derived from the parameter's default: a positive value *v* gives 0 to 2*v*, a negative value 2*v* to 0, and 0 gives 0 to 20. The step follows the default's decimals (0.1 → 0.1, 0.05 → 0.01, an integer → 1).
 
-Moving the slider changes the parameter and re-queries only the components that use it. The title defaults to the parameter name. For a worked example, see [What-if Analysis](/documentation/Analysis/What-if-Analysis/).
-
-## Troubleshooting
-
-| Symptom | Check |
-| --- | --- |
-| **Numeric field** shows **Empty**. | The model has no numeric dimension field. Add one in the model, or filter by measure with a component filter. |
-| The parameter you want is greyed out. | It must be **Numeric** with **Any value**. A list or SQL parameter belongs in a Dropdown or List box. |
-| Moving the slider changes nothing. | Check that a formula, title or text references the parameter, for example `ParamRef("GrowthRate")` or `${GrowthRate}`. |
+For a worked example, see [What-if Analysis](/documentation/Analysis/What-if-Analysis/).
 
 Related: [Filters](/documentation/Visualization/Filters/) · [Bind Filters to Parameters](/documentation/Analysis/Parameter-Controllers/)

@@ -1,6 +1,7 @@
 ---
 title: Creating SQL Views
 permalink: /documentation/Model/Creating-SQL-Views/
+description: Add a SQL query result to an Analysis Model as a model table, edit it safely, and choose between a SQL View and a calculated column.
 createTime: 2026/09/04 09:07:11
 ---
 
@@ -10,18 +11,18 @@ A SQL View adds a query result to an Analysis Model as a model table. Use one wh
 
 ## Create a SQL View
 
-1. In the model designer toolbar, click **SQL**.
+1. In the modeler toolbar, click **SQL**.
 2. Enter a unique **View Name**. Do not reuse another table or SQL View name in the model.
 3. Enter the **SQL Expression** using syntax supported by the selected datasource.
 4. Click **Check and preview**.
 5. Verify that the first 50 rows contain the expected fields, types, and representative values. Do not continue until a failed preview is understood.
-6. Click **Ok** to add the SQL View to the designer draft.
+6. Click **Ok** to add the SQL View to the modeler draft.
 7. Review the generated table and semantic objects. Add the required relationships, Dimensions, Measure Groups, and business metadata.
-8. Click the model designer's **Save** button to persist the model.
+8. Click the modeler's **Save** button to persist the model.
 
 <div align="left"><img src="./images/analysis-model-sql-view-editor.png" alt="Create SQL View dialog with a view name, SQL expression, and Check and preview action" width="85%" /></div>
 
-The screenshot illustrates the editor; preview success still depends on the selected connection's raw-SQL permission. Clicking **Ok** changes the current designer draft; it does not replace the model-level **Save** step or prove that the query is valid.
+The screenshot illustrates the editor; preview success still depends on the selected connection's raw-SQL permission. Clicking **Ok** changes the current modeler draft; it does not replace the model-level **Save** step or prove that the query is valid.
 
 ### Raw SQL permission
 
@@ -37,7 +38,7 @@ The generic message **The table fields are empty, the table may not exist** can 
 
 ## Edit an existing SQL View safely
 
-Open the SQL View table's menu and select **Edit**. Editing is a rebuild operation, not an in-place SQL text update. When you confirm the dialog, the designer replaces the model table and regenerates default semantic objects from the current output fields. This removes the SQL View's existing relationships, Dimensions, and Measure Groups from the draft.
+Open the SQL View table's menu and select **Edit**. Editing is a rebuild operation, not an in-place SQL text update. When you confirm the dialog, the modeler replaces the model table and regenerates default semantic objects from the current output fields. This removes the SQL View's existing relationships, Dimensions, and Measure Groups from the draft.
 
 Before confirming an edit:
 
@@ -51,7 +52,7 @@ After confirming:
 1. Recreate and verify the required relationships.
 2. Rebuild the required Dimensions, Measure Groups, and business metadata.
 3. Repair calculated measures that reference removed Measures.
-4. Review **Metric bindings**. The designer can request unbinding when bound Measures are removed.
+4. Review **Metric bindings**. The modeler can request unbinding when bound Measures are removed.
 5. Run **Model diagnostics** and validate representative totals before saving.
 
 An unbind request can fail independently of the editor change. Verify the binding state rather than relying on the editor notification.

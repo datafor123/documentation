@@ -9,7 +9,7 @@ createTime: 2026/10/09 15:00:00
 
 **Display units** and **Decimal places** change how a component writes its numbers, for example 1,037,979.98 as *1.04M*, without changing the measure's format in the model or on other components. Tooltips keep showing the full formatted value.
 
-![Data labels with Display units set to Auto, and the Display units list](./images/display-units-labels.png)
+![Data labels with Display units set to Auto: 1.04M, 0.58M](./images/display-units-labels.png)
 
 ## Where to find them
 

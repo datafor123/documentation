@@ -1,6 +1,6 @@
 ---
 title: Repository Separation Deployment Guide
-permalink: /documentation/Setup/repository-reparation-deployment-guide/
+permalink: /documentation/Setup/Repository-Separation-Deployment-Guide/
 description: Move Datafor's repository databases from the built-in PostgreSQL to your own PostgreSQL server and repoint Datafor and the AI Agent.
 createTime: 2026/09/01 22:03:26
 ---

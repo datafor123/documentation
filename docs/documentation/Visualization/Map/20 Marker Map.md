@@ -11,7 +11,7 @@ Place markers by longitude and latitude, or by place name, on an OpenStreetMap o
 
 For values per country or province without an online basemap, use [Filled map](/documentation/Visualization/GeoJSON-Filled-Map/) or [Marker map](/documentation/Visualization/GeoJSON-marked-map/). For a Mapbox or Amap basemap, use [Mapbox/Amap](/documentation/Visualization/Mapbox-Amap-Marker-Map/).
 
-## Build it
+## Bind locations and choose the basemap
 
 1. Add **Components → Charts → Maps → GIS marker map** (480 × 360 px) and choose an **Analysis model**.
 2. Bind the location: either **Geographic field**, or **Longitude** and **Latitude**. Binding one hides the other.
@@ -36,8 +36,6 @@ Thousands of points are supported (tested with 2,000 points); markers are not cl
 - Rows with an empty measure value are not drawn and do not affect the marker sizes; a value of 0 is drawn.
 
 In Geographic field mode, names that could not be located are listed in edit mode (*Places that could not be located ({count}): {list}*). A failed name is retried after 24 hours. See [GIS Map Settings](/documentation/Visualization/GIS-Map-Settings/#troubleshooting) for all geocoding messages.
-
-Reports from earlier versions: each row now keeps its own value. Before, points on the same latitude, or places with the same name under different parents, showed one shared value and marker size, and tooltips in place-name mode showed "NaN". One empty measure value no longer leaves the whole map without markers.
 
 ## Style
 
@@ -74,3 +72,8 @@ The heat layer does not react to clicks and has no data tooltip, so **Actions** 
 - **Mouse wheel in the editor**: the wheel scrolls the report page. Hold **Ctrl** (**⌘** on Mac) and scroll, or pinch on a touchpad, to zoom the map; a hint says so for 1.5 s. In view mode and in the enlarged view the wheel zooms the map.
 - **Chart switch**: GIS marker map and GIS heat map are listed first for each other, and the fields carry over.
 - **Page zoom**: the basemap text and buttons keep their size when the page scale changes (Fit to page, Fit to width, window resize).
+
+::: details Opening reports made before 10.00
+- Each row now keeps its own value. Before, points on the same latitude, or places with the same name under different parents, showed one shared value and marker size, and tooltips in place-name mode showed "NaN".
+- One empty measure value no longer leaves the whole map without markers.
+:::

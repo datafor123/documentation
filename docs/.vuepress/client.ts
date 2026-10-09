@@ -7,6 +7,7 @@ import { defineClientConfig } from "vuepress/client";
 // import CustomComponent from './theme/components/Custom.vue'
 
 import "./theme/styles/custom.css";
+import { normalizePath, redirects } from "./redirects";
 
 export default defineClientConfig({
 	enhance({ app, router }) {
@@ -18,8 +19,12 @@ export default defineClientConfig({
 		// your custom components
 		// app.component('CustomComponent', CustomComponent)
 		router.beforeEach((to, from, next) => {
+			const moved = redirects[normalizePath(to.path)];
 			if (to.path === "/" || to.path === "/documentation") {
 				next("/documentation/welcome/"); // 访问首页时自动重定向
+			} else if (moved) {
+				const [path, anchor] = moved.split("#");
+				next({ path, hash: anchor ? `#${anchor}` : to.hash, replace: true });
 			} else {
 				next();
 			}

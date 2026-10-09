@@ -7,7 +7,7 @@ createTime: 2026/09/01 22:03:26
 
 # Scatter
 
-Compare two numeric measures to find clusters, unusual observations and possible relationships. Each point represents a member of the **Marker** field. A pattern is evidence of association, not proof that one variable causes the other.
+Compare two numeric measures to find clusters, unusual observations and possible relationships. Each point represents a member of the **Marker** field.
 
 ![Observation grain for Scatter, Box plot and Histogram](../images/current/observation-grain-concept.svg)
 
@@ -50,14 +50,14 @@ Scatter has no Display units setting; format the axes with the measure's **Forma
 
 Each label tries the left, right, top and bottom of its point, then the four diagonals, and takes the first position that overlaps no other bubble or label and stays inside the plot. If none is free, it takes the least crowded position. With more than 400 points, labels are only kept inside the plot. Labels that still overlap other labels are hidden. Use labels sparingly in a dense plot and keep identity and values in the tooltip.
 
-## Read and check the result
+## Read the plot
 
 Start with the overall spread, then inspect individual outliers. A store can have high sales but a low margin rate; that is a different finding from a high margin amount. If Size is bound, explain what it represents in the title or supporting text, and do not read bubble diameter as a precise value.
 
-Save and open **Preview**. Hover points from different regions and compare their X and Y values with a table at the same Store grain. If points overlap, reduce **Size**, narrow the filters or enlarge the component. If many points share one coordinate, check the measure aggregation and missing values before concluding that the relationship is real.
+If points overlap, reduce **Size**, narrow the filters or enlarge the component. If many points share one coordinate, check the measure aggregation and missing values before concluding that the relationship is real.
 
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - A ratio line added with the old Analysis menu appears in the **Analytics** tab as a **Diagonal**.
+:::
 
 Related: [Box plot](/documentation/Visualization/Box-Plot/) · [Histogram](/documentation/Visualization/Histogram-Chart/) · [Legends](/documentation/Visualization/Legends/) · [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/)

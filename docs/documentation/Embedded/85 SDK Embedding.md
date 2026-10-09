@@ -1,6 +1,6 @@
 ---
 title: SDK Embedding
-permalink: /documentation/SDK-Embedding/
+permalink: /documentation/Embedded/SDK-Embedding/
 description: Render a Datafor report inside a div of your own web page with the JavaScript SDK, authenticated by an embed token.
 createTime: 2026/09/01 22:03:26
 ---
@@ -271,7 +271,7 @@ export default function DataforReport() {
 
 ## Notes
 
-* **Single instance only**: only one instance can exist at a time. Creating a new instance destroys the previous one. To show several reports on one page, use `iframe` embedding (see [Report URLs](/documentation/Embedded/Reports-REST-API/)).
+* **Single instance only**: only one instance can exist at a time. Creating a new instance destroys the previous one. To show several reports on one page, use `iframe` embedding (see [Report URLs](/documentation/Embedded/Report-URLs/)).
 * **Container**: it must have an explicit width and height. The SDK sets `position: relative` on it.
 * **Destroy on route change**: in single-page apps, call `destroy()` when the component unmounts.
 * **Global request patching**: the SDK changes `window.fetch` and adds a jQuery AJAX hook for the whole page. Relative `fetch` requests whose URL contains `datafor` are sent to `serverUrl`, and these requests, as well as every jQuery AJAX request whose URL contains `datafor`, carry `Authorization: Bearer <jwt>`. Keep other requests of your page from matching, and do not send jQuery requests to third-party URLs that contain `datafor`. The `fetch` change stays in place after `destroy()`; the token is removed.

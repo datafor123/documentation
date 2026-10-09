@@ -1,6 +1,7 @@
 ---
 title: Measures and Calculated Measures
 permalink: /documentation/Model/Measures-and-Calculated-Measures/
+description: Configure Measures, create calculated and quick measures, and change or remove Measures without breaking reports.
 createTime: 2026/09/03 21:51:09
 ---
 
@@ -12,7 +13,7 @@ A Measure aggregates a source field. A calculated measure is evaluated at query 
 
 When a table is added, eligible numeric fields are initially created as Sum measures. The generated Measure Group also contains **Fact Count**.
 
-To add or remove a source field as a Measure, open the field menu and toggle **Set as measure**. If the table has no Measure Group, the designer creates one when you add the Measure. A nonnumeric field is initially assigned Count rather than Sum. There is no setting for the default aggregation: new measures always start with Sum for numeric fields and Count for other fields.
+To add or remove a source field as a Measure, open the field menu and toggle **Set as measure**. If the table has no Measure Group, the modeler creates one when you add the Measure. A nonnumeric field is initially assigned Count rather than Sum. There is no setting for the default aggregation: new measures always start with Sum for numeric fields and Count for other fields.
 
 Select a Measure in the **Analysis model** tree and configure its properties.
 

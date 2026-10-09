@@ -5,7 +5,7 @@ description: Set measure units and default display scales, understand report for
 createTime: 2026/09/07 10:00:00
 ---
 
-Use **Unit** to describe what a measure represents, and **Display scale** to make large values easier to read. Set them on a measure in the Model Designer, then check how a report displays that measure.
+Use **Unit** to describe what a measure represents, and **Display scale** to make large values easier to read. Set them on a measure in the modeler, then check how a report displays that measure.
 
 For example, a sales amount can have unit **USD** and display scale **M**. The amount is still measured in US dollars; the report displays it in millions.
 
@@ -130,7 +130,7 @@ Available scale choices also depend on language. Some interfaces offer **10k** o
 
 For reports used across languages, prefer **K**, **M**, or **B**, and review the result in the intended viewing language. Avoid putting an abbreviation such as “million dollars” into a new unit definition when you can select **USD** and **M** separately.
 
-Older models may contain combined text such as **million USD**. The Model Designer can interpret recognized combinations as a unit plus a scale. Check both fields before saving a change, especially when the source itself already contains scaled amounts.
+Older models may contain combined text such as **million USD**. The modeler can interpret recognized combinations as a unit plus a scale. Check both fields before saving a change, especially when the source itself already contains scaled amounts.
 
 ## Use units in Metrics Library and AI
 

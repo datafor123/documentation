@@ -24,12 +24,3 @@ export const enNavbar = defineNavbarConfig([
 	// },
 ]);
 
-export const zhNavbar = defineNavbarConfig([
-	{
-		text: "文档",
-		link: "/documentation/intro.md",
-		activeMatch: "^/documentation/",
-	},
-	{ text: "接口", link: "/api/intro.md", activeMatch: "^/api/" },
-	//{ text: "博客", link: "/blog/intro.md", activeMatch: "^/release/" },
-]);

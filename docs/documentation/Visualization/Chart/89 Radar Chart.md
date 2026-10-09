@@ -42,14 +42,12 @@ With overlapping profiles, use a small number of series so users can follow each
 
 Clicking a radar does not filter other components, drill, or open a data point menu. **Actions** therefore has no **Linked components** or **View details** settings; **Data refresh** and **Events** (such as **Plot area click**) remain. The radar still responds to filters and to clicks on other components; see [Cross-filtering](/documentation/Analysis/Cross-Filtering/).
 
-## Validate the result
+## Read the profiles
 
-Save and open **Preview**. Hover individual criteria rather than relying only on polygon area. Confirm that a missing score is not being interpreted as poor performance, and check whether every criterion has the same desirable direction.
+Hover individual criteria rather than relying only on polygon area. Confirm that a missing score is not being interpreted as poor performance, and check whether every criterion has the same desirable direction.
 
 If labels overlap, shorten names, reduce the number of criteria or enlarge the component. For many entities, close numeric comparisons, or mixed units, use a table or a [Clustered bar](/documentation/Visualization/Clustered-Bar-Chart/) instead.
 
-## Reports from earlier versions
-
-- **Diameter** and **Value scale** keep their saved values, or 60% and off if never set.
+::: details Opening reports made before 10.00
 - Legend markers are dots instead of map pins, and the tooltip has the common chart style and obeys **Show Tooltip**.
-- Linked-component and view-details settings saved under **Actions** are hidden. They never had an effect.
+:::

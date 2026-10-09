@@ -48,16 +48,48 @@ Click **New metric**, then complete:
 | --- | --- |
 | **Business name** | Use the name people should see in reports and questions. |
 | **Metric ID** | Enter a lowercase suffix beginning with a letter and containing only letters, digits, or underscores. Datafor adds the `metric.` prefix. The ID cannot be changed after creation. |
-| **Synonyms** | Add common, unambiguous business wording. |
-| **Business definition** | State what is included, excluded, and any timing or policy conditions. |
-| **Calculation method** | Choose **Base metric**, **Ratio**, **Difference**, **Attainment rate**, or **Custom formula**. |
-| **Unit / Direction / Owner** | Set the unit, whether higher or lower is better (or **Not specified**), and the accountable owner. Units are stored as language-neutral codes and shown in each user's language; see [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/). |
+| **Synonyms** | Add common, unambiguous business wording, at least one. See [Synonyms](#synonyms). |
+| **Business definition** | State what is included, excluded, and any timing or policy conditions. See [Business definition and caveats](#business-definition-and-caveats). |
+| **Caveats / notes** | Aggregation traps and historical breaks. The AI Agent carries this text whenever it reports or explains the metric. |
+| **Calculation method** and **Calculation relation** | Choose **Base metric**, **Ratio**, **Difference**, **Attainment rate**, or **Custom formula**, and pick the base metrics it relates. A **Base metric** has no relation. |
+| **Unit / Direction / Owner** | Set the unit, whether higher or lower is better (or **Not specified**), and the accountable owner, whom the Agent can name as the person to ask. Units are stored as language-neutral codes and shown in each user's language; see [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/). |
+| **Applicable dimensions (concept references)** | The dimension concepts the metric is meaningful on. Register them on the **Dimension concepts** tab first. |
 
-A custom formula accepts metric references, numbers, arithmetic operators, and parentheses. It is a governance relationship, not SQL, MDX, or a replacement for the model measure.
+A relation is not SQL or MDX; the executable aggregation and filters stay in the analysis model. A custom formula accepts metric references, numbers, arithmetic operators, and parentheses. For **Ratio**, **Difference** and **Attainment rate** the relation decides which measures the Agent queries (see [section 6](#_6-ask-ai-agent-about-an-enterprise-metric)); a **Custom formula** relation is read only when comparing definitions.
 
 Click **Save changes**. New records are Draft.
 
+### Synonyms
+
+The AI Agent matches metrics by exact name and synonym, with no fuzzy guessing: "Net Sales", "Gross Sales" and "Sales after Returns" sound alike and mean different things, and a wrong guess would be a silently wrong number. The price is that a wording you did not register does not match. The Agent then falls back to the model's own field, without a warning, which looks exactly as if the term were never governed.
+
+- Include the wording people actually use: `AOV, average order value, basket size`. The form warns when a metric has no synonyms.
+- Check the synonyms again before certifying. A certified metric without synonyms is the definition that most needs governance and the easiest to bypass.
+- When a model author binds a measure, the modeler lists **Synonyms missing from the metrics library** and offers **Add to metrics library**.
+
+### Business definition and caveats
+
+Write the business meaning and, in the same place, what is included, what is excluded, and any caveats. The Agent uses the text to disambiguate, to explain results, and to compare the model implementation. Make it specific enough for **Compare definition** to reach a verdict:
+
+- Weak: `Net sales`
+- Usable: `Sales amount of completed and paid orders, net of returned amounts`
+- Good: `Sales amount of completed and paid orders, net of returned amounts. Cancelled and unpaid orders are excluded. Differs from "Gross Sales", which includes cancelled and unpaid orders and does not deduct returns.`
+
+Use **Caveats / notes** for traps and breaks such as `Do not average line-level margin rates; aggregate numerator and denominator first` or `Data before June 2025 still includes internal transfers`.
+
+### Dimension concepts
+
+The **Dimension concepts** tab registers business dimensions shared across models, each with **Name**, **Concept ID**, **Synonyms** and **Description** (**Register concept**). Metrics reference them in **Applicable dimensions**. The Agent sees every concept with its synonyms, so it knows that "region", "area" and "territory" describe the same business dimension, and on which dimensions a metric is meaningful.
+
+### Certify
+
 Certification requires a **Business definition** and a **Unit**; without them Datafor asks you to fill them in first. Use **Mark as certified** only after the definition, synonyms, calculation relationship, unit, direction, owner, and intended model implementation have been reviewed. Missing synonyms or model bindings produce warnings but do not block certification. The current interface does not provide a return-to-Draft action.
+
+Draft metrics take part in answers, but the Agent labels the definition as not certified. Once certified, the Agent must use the definition when answering questions about the metric and may no longer improvise. A certified metric that no model binds can still be explained in full; asked for a number, the Agent answers from the model's fields and says that the number did not come through a certified binding.
+
+### Change a certified or bound definition
+
+Editing a substantive field (**Business definition**, **Calculation relation**, **Unit**, **Direction**, **Applicable dimensions**) of a certified or bound metric opens **Definition change requires a new version** when you save. **Bump version and save** increments the version, and every model binding switches to **Needs comparison (metric definition changed)**. Until a model author runs **Compare against new definition** on the **Metric bindings** tab, answers that use the metric carry a "pending re-check" note. Drafts without bindings can be edited freely and keep their version.
 
 ## 3. Generate metrics from an analysis model
 
@@ -96,19 +128,19 @@ The batch is all or nothing: if one metric cannot be saved, none is created.
 
 <div align="left"><img src="./images/gross-margin-rate-governance.jpg" alt="Gross Margin Rate bound to an enterprise metric in Retail Chain Operations" width="100%" /></div>
 
-Saving the model writes the binding back to Metrics Library. The current Modeler allows both Draft and Certified records to be selected; use a Certified record for governed production analysis.
+Saving the model writes the binding back to Metrics Library. The modeler allows both Draft and Certified records to be selected; use a Certified record for governed production analysis.
 
-Binding one enterprise metric to multiple measures in the same model is allowed but produces an ambiguity warning. Avoid duplicate bindings unless the measures are intentionally equivalent.
+Keep one measure per metric in each model. Binding a metric that another measure in the model already uses opens **Metric already bound**, because the AI Agent cannot tell which measure to compute with; if you confirm, Model diagnostics reports both measures as an Error. For the other binding options, see [Bind a governed enterprise metric](/documentation/Model/Business-Semantics-for-AI/#bind-a-governed-enterprise-metric).
 
 ## 5. Review definition consistency
 
-Open **Metric bindings** at the bottom of the Modeler. The panel lists the model measure, enterprise metric, comparison status, effective grain, and last comparison time.
+Open **Metric bindings** at the bottom of the modeler. The panel lists the model measure, enterprise metric, comparison status, effective grain, and last comparison time.
 
 <div align="left"><img src="./images/retail-chain-metric-bindings.jpg" alt="Metric bindings review panel in Retail Chain Operations" width="100%" /></div>
 
-Use **Compare definition** for one binding or **Compare all** for the model. Datafor sends the model implementation and business definition to AI and stores the verdict in Metrics Library. It does not change the formula, aggregation, filters, or model.
+Use **Compare definition** for one binding (also in the **Definition consistency** row under the measure's **Metric governance**) or **Compare all** for the model. Datafor sends the model implementation and business definition to AI and stores the verdict in Metrics Library. It does not change the formula, aggregation, filters, or model.
 
-The comparison judges only what the model shows: which measures a formula combines, how they are aggregated, what it divides by, what it excludes, empty values and grain. A bound measure, and every measure its formula uses, is assumed to hold what its name and description say, or what the definition says when it has no description. Exclusions count only when the definition or its notes state them. A verdict stored before 10.00 was made under stricter rules; run **Compare all** again.
+The comparison judges only what the model shows: which measures a formula combines, how they are aggregated, what it divides by, what it excludes, empty values and grain. A bound measure, and every measure its formula uses, is assumed to hold what its name and description say, or what the definition says when it has no description. Exclusions count only when the definition or its notes state them, so write a scope that matters, such as "the denominator excludes cancelled orders", into the definition; a measure description that contradicts it is flagged. When a comparison flags something that is not really wrong, fix the description or the definition text rather than changing the model to silence the warning. A verdict stored before 10.00 was made under stricter rules; run **Compare all** again.
 
 A successful comparison also moves the binding to the metric's current version, which clears "Bound to v1, current is v2". Saving the model writes the measure's **Effective grain** and dimension mapping into the bindings it creates.
 
@@ -116,8 +148,8 @@ A successful comparison also moves the binding to the metric's current version, 
 | --- | --- |
 | **Not compared** | Run the comparison before governance approval. |
 | **Matches definition** | The supplied implementation evidence supports the definition. |
-| **Possible drift** | Review a likely conflict between the implementation and definition. |
-| **Needs comparison** | Re-run the comparison because the definition or implementation changed. |
+| **Possible drift** | The implementation likely contradicts the definition; the one-line reason says how. Agree with the metric owner whether to change the formula or the definition, then compare again. |
+| **Needs comparison** | The definition got a new version or the implementation changed. Click **Compare against new definition**. |
 | **Not enough evidence** | Part of the implementation could not be read, for example a referenced member of unknown kind or a cut-off formula. Inspect the measure manually; the result is not proof that the implementation is wrong. |
 
 ## 6. Ask AI Agent about an enterprise metric
@@ -151,11 +183,11 @@ Draft, stale, drift, or inconclusive bindings can produce governance warnings in
 | **Can one metric be reused across models?** | Yes. Each model supplies its own binding and implementation. Review each binding independently. |
 | **Why did the Agent ask which metric I meant?** | A name or synonym matched multiple metrics. Use the official name or Metric ID, then remove ambiguous synonyms during governance review. |
 | **Can I change a Metric ID?** | No. Create a replacement metric and rebind affected model measures. |
-| **What does Metric missing mean in Modeler?** | The referenced library record no longer exists. Use **Rebind**, or clear **Enterprise metric** and save the model. |
+| **What does Metric missing mean in the modeler?** | The referenced library record no longer exists. Use **Rebind**, or clear **Enterprise metric** and save the model. |
 
 ## 8. Bulk maintenance and access
 
-- **Import:** Accepts exported JSON or CSV files up to 2 MB. Resolve each conflict as Skip or Overwrite. New records default to Draft unless certification status is explicitly retained. Model bindings are never imported; overwriting a metric preserves its existing bindings.
-- **Export:** If rows are selected, Datafor exports the selection. With no selection, it exports the complete library. Search and filters do not define the export scope.
+- **Import:** Accepts exported JSON or CSV files up to 2 MB. Resolve each conflict as Skip or Overwrite. New records arrive as Draft and existing ones keep their status unless **Keep the certification status from the file** is ticked; tick it only when migrating a whole environment. Model bindings are never imported; overwriting a metric preserves its existing bindings.
+- **Export:** **Export CSV (editable in Excel)** suits bulk editing of synonyms and definitions; **Export JSON (full bundle)** moves the library between environments. If rows are selected, Datafor exports the selection. With no selection, it exports the complete library. Search and filters do not define the export scope.
 - **Delete:** Deletion is permanent. Existing model bindings and derived-metric references produce warnings but do not block deletion or repair dependent objects. Rebind or update dependencies first.
 - **Access:** The Metrics Library page requires administrator or metric-creation permission. Metric definitions themselves are readable by every signed-in user (not share links), so the AI Agent can use them when anyone asks.

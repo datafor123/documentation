@@ -81,11 +81,11 @@ Without a Legend field, each measure's tooltip also shows its share, for example
 
 If every value is 0, the pie is a light grey ring with *All values are 0* in the centre. If every value is empty, the empty-data message is shown; a mix of empty and 0 counts as all zero. See [Empty Data and Error Messages](/documentation/Visualization/Empty-Data-and-Errors/).
 
-In the example, East China accounts for 30.63% of the displayed 2025 sales. Save and open **Preview**, then hover slices to check the values and the percentage basis. Filters remove contributions from the whole; label the scope clearly. With negative values, do not present an absolute-total share as an ordinary revenue share; use a bar or waterfall chart instead.
+In the example, East China accounts for 30.63% of the displayed 2025 sales. Hover a slice to see which percentage basis applies. Filters remove contributions from the whole; label the scope clearly. With negative values, do not present an absolute-total share as an ordinary revenue share; use a bar or waterfall chart instead.
 
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - **Min. proportion** is now exact: slices between 1.00% and 1.11% that lost their label with the 1% setting show it again.
 - A pie whose values are all 0 now shows the grey ring instead of a blank area.
+:::
 
 Related: [Grouped donuts](/documentation/Visualization/Grouped-Donut-Chart/) for composition across groups · [Treemap](/documentation/Visualization/Treemap/) and [Sunburst](/documentation/Visualization/Sunburst/) for nested categories · [Colors](/documentation/Visualization/Colors/) · [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/)

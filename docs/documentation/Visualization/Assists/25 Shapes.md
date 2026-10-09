@@ -24,6 +24,16 @@ createTime: 2026/10/06 20:53:56
 
 ![Style presets](./images/shape-presets.png)
 
+### Common shapes
+
+Add a shape with **Components → Assists → Shape** and a click on the canvas, then:
+
+| Shape | Steps |
+| --- | --- |
+| Line or arrow | **Type → Line**, **Arrow** or **Double arrow** (the **Divider** preset gives a thin grey line), then a **Direction**. Resize the component to change the length and angle. |
+| Circle or ellipse | **Type → Ellipse**. Give the component the same width and height for a circle. |
+| Panel or card | **Type → Rectangle** or **Rounded rectangle**, or the **Card background** or **Title block** preset. Put it behind the charts with **Move layer → Move to bottom** in the toolbar or the right-click menu. |
+
 ## Style → Fill and line
 
 **Fill**: None, Solid (default) or Gradient, with **Fill color** and **End color**. **Line width** (0 = no outline), **Line color**, **Line style** (Solid, Dashed, Dotted), **Line ends** for lines (Flat, Round, Square) and **Shadow**.
@@ -46,4 +56,4 @@ See [Click Actions and Visibility](/documentation/Visualization/Click-Actions-an
 
 Rectangle, Line and Ellipse components from earlier versions still work. Select one and click **Style → Shape → Convert to shape → Convert** to replace it with a Shape that keeps its position, size, style, click action and visibility.
 
-Related: [Lines and arrows](/documentation/Visualization/Line/) · [Assist Components](/documentation/Visualization/Assist-Components/)
+Related: [Assist Components](/documentation/Visualization/Assist-Components/)

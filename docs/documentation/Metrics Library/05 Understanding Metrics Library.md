@@ -61,7 +61,7 @@ A metric and the measure that calculates it often share a name, like Gross Margi
 
 <div align="left"><img src="./images/metric-measure-binding.svg" alt="Gross Margin Rate is defined once in Metrics Library and bound to the measure that calculates it in each Analysis Model; reports and AI answers get their numbers from the models" width="100%" /></div>
 
-A **binding** tells Datafor: *in this model, this measure calculates that metric.* A model author creates it in the Model Designer: select the measure or calculated measure, expand **Metric governance**, choose the metric under **Enterprise metric**, and save the model. See [Metrics Library](/documentation/Metrics-Library/Metrics-Library/) for the full steps.
+A **binding** tells Datafor: *in this model, this measure calculates that metric.* A model author creates it in the modeler: select the measure or calculated measure, expand **Metric governance**, choose the metric under **Enterprise metric**, and save the model. See [Metrics Library](/documentation/Metrics-Library/Metrics-Library/) for the full steps.
 
 Keep bindings clear:
 
@@ -87,7 +87,7 @@ Treat a metric as ready for production use only when all three are in place for 
 No. It stores definitions only. Reports and AI answers get their numbers from Analysis Models.
 
 **Does binding a measure change my reports?**\
-No. Binding does not change the measure's formula, aggregation, or filters, and it does not copy the library's text into the measure. If the unit, direction, or synonyms differ, the designer shows the difference so you can decide.
+No. Binding does not change the measure's formula, aggregation, or filters, and it does not copy the library's text into the measure. If the unit, direction, or synonyms differ, the modeler shows the difference so you can decide.
 
 **The library shows a calculation such as "Gross Margin Amount ÷ Net Sales". Is that the formula Datafor runs?**\
 Not as written. It describes how the metric relates to other metrics, and the numbers always come from measures in the model. How the relation is used depends on the **Calculation method**: for **Ratio**, **Difference** and **Attainment rate**, the AI Agent finds each operand metric through its own binding in the model, queries those measures and computes the result itself, unless the model formula already declares the parts. A **Custom formula** relation is used only when comparing definitions.
@@ -96,7 +96,7 @@ Not as written. It describes how the metric relates to other metrics, and the nu
 No. The binding, not the name, decides which metric a measure calculates.
 
 **What is the difference between measure aliases and metric synonyms?**\
-Aliases help people and the AI Agent find a measure in one model. Synonyms lead to the official metric in every model that binds it. The AI Agent matches metric names and synonyms exactly, so add the words people really use. When you bind a measure, the designer lists aliases missing from the library and can add them for you.
+Aliases help people and the AI Agent find a measure in one model. Synonyms lead to the official metric in every model that binds it. The AI Agent matches metric names and synonyms exactly, so add the words people really use. When you bind a measure, the modeler lists aliases missing from the library and can add them for you.
 
 **Is a Certified metric ready to use?**\
 Not on its own. Certification approves the definition; a model author must also bind a measure to it in the model you use. Until then, the AI Agent can explain the definition, but its numbers come from the model's own fields, with a note saying so.

@@ -34,6 +34,10 @@ Start with a small, useful set of dimensions. Very high-cardinality fields can c
 3. Add another available dimension to investigate the selected subset.
 4. To choose a different path, click **×** in a level's header (**Remove level**). It removes that level and every level after it.
 
+![The + menu of a selected node lists Explain by fields, then High value and Low value](./images/decomposition-tree-add-split.jpg)
+
+If a dimension is missing from the **+** menu, check **Explain by**, the dimensions already used in the path and the current data result.
+
 Every level inherits the selections above it. A Store value under East China is not a store total for all regions. Recheck the path after changing a report filter.
 
 The path you build in the editor is saved with the report and is what readers see first. Readers can build their own path in view mode; it is not saved, and reopening the report shows the saved path again. A tree can have up to 50 levels and 5,000 data points.
@@ -57,6 +61,8 @@ With **Style → Analysis settings → Smart split** on (default), the **+** men
 | **Absolute** (default) | Compares member values directly. Useful for finding the largest or smallest result. |
 | **Relative** | Compares a member value with the absolute average of its candidate dimension. Useful for finding a value that stands out within that dimension. |
 
+![Style tab with Analysis settings (Smart split on, Comparison mode Absolute) and Tree layout (Density, Responsive, Node width, Level spacing)](./images/decomposition-tree-analysis-layout-settings.jpg)
+
 A relative recommendation need not have the largest absolute sales. A high/low recommendation also does not mean good/bad performance. Use a manual split when the business question specifies a dimension or a candidate is unavailable under the current filters. When you add a manual level below High value or Low value levels, those levels are fixed to the dimension they picked.
 
 ## Set a meaningful bar scale
@@ -70,7 +76,3 @@ In **Style → Data bars → Scale to**:
 These choices change bar lengths, not the measure values. For ratios, averages and distinct counts, child values may not add up to their parent; do not read every bar as an additive contribution. **Data bars** also has **Positive bar**, **Negative bar** and **Conditional color**, which overrides both; see [Conditional colors](/documentation/Visualization/Conditional-Colors/).
 
 Use **Tree layout**, **Nodes**, **Connectors**, **Category labels**, **Values**, and **Level headers** to keep the path readable. Leave enough width for category names; a level with more nodes than fit scrolls inside the component.
-
-## Verify interaction
-
-Save and open **Preview**. Expand a manual path, try a Smart split, change a filter, and select and deselect a node while watching the linked components. Confirm the root and selected branch values against the same filtered table. If a dimension is missing from the split menu, check **Explain by**, dimensions already used in the path, and the current data result.

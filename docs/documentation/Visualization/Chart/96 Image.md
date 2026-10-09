@@ -32,9 +32,7 @@ With **Auto**, resize the component to the image proportions to avoid empty marg
 
 The component shows the image of the **first row** only. Filter to one member, for example with a Dropdown on Product, when readers should pick the image.
 
-## Test the report interaction
-
-Save and open **Preview**. Select at least two products and confirm that both image and name update. Test a product with no image reference and a selection with no matching data.
+## Messages and missing images
 
 Two messages tell the causes apart: *"{value}" is not an image address. Choose a field that holds image URLs* means the field holds something else; *Image failed to load* means the address is right but the browser cannot load it (access, expired link). An empty query shows the empty-data message. If the image is correct but the name is wrong, inspect the model relationship and field grain.
 

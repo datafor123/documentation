@@ -1,6 +1,7 @@
 ---
 title: Establishing Table Relationships
 permalink: /documentation/Model/Establishing-Table-Relationships/
+description: Join tables in an Analysis Model with the right keys, join type and cardinality, including composite keys.
 createTime: 2026/09/03 21:51:08
 ---
 
@@ -22,7 +23,7 @@ Relationships determine how Datafor joins tables when a query uses fields from m
 
 ## Choose the join type
 
-The available join types depend on the current data source. When supported by the connection, the designer can offer:
+The available join types depend on the current data source. When supported by the connection, the modeler can offer:
 
 | Join | Use when |
 | --- | --- |
@@ -42,13 +43,13 @@ The relationship edge derives its **1** and **N** labels from the two uniqueness
 
 For example, a unique customer key joined to repeated customer keys in a sales table is a 1:N relationship.
 
-The designer can check whether a selected field combination is unique in the current source data. Treat a warning or inconclusive result as evidence to investigate; it does not always prevent you from confirming the relationship.
+The modeler can check whether a selected field combination is unique in the current source data. Treat a warning or inconclusive result as evidence to investigate; it does not always prevent you from confirming the relationship.
 
 ## Composite keys
 
 Use multiple field pairs when the business key is only unique as a combination. Keep the fields aligned in the same logical order on both sides. Do not omit tenant, organization, date, or version fields when they are part of the real key.
 
-A pair of table aliases has one relationship record. Put all required field pairs in that relationship instead of creating separate relationships for the same alias pair. Each pair is drawn as an edge on the canvas; deleting one edge removes that field pair, and deleting the final pair removes the relationship.
+A pair of table aliases has one relationship record. Put all required field pairs in that relationship instead of creating separate relationships for the same alias pair, and check uniqueness for the complete combination. Each pair is drawn as an edge on the canvas; deleting one edge removes that field pair, and deleting the final pair removes the relationship. A partially completed field-pair row is not kept, so review all pairs after editing.
 
 ## Edit or delete a relationship
 

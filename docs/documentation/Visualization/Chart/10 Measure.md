@@ -63,6 +63,7 @@ In **Style → Comparison color**:
 - The arrow shows the numeric direction; the colour shows whether that change is favorable. A downward arrow is green for a lower-is-better metric.
 - **Follow measure** uses the measure's **Direction** in the model (see [Measures](/documentation/Model/Measures-and-Calculated-Measures/)). A measure without a direction is treated as **Higher is better**.
 - Equal values are grey with no arrow. **Neutral** shows grey with an arrow.
+- If the status colour looks wrong, check **Comparison direction** and the measure's **Direction** in the model before swapping the colours.
 
 ## Layout, colour rules and empty values
 
@@ -74,12 +75,7 @@ In **Style → Comparison color**:
 
 The other **Empty data** options are described in [Empty data and errors](/documentation/Visualization/Empty-Data-and-Errors/).
 
-## Reports from earlier versions
-
-- Cards keep **Follow measure format** and **Higher is better**, so their look does not change.
+::: details Opening reports made before 10.00
 - **Growth%** against a negative reference now shows the correct sign, and equal values are grey instead of favorable.
 - An automatic title that was never edited now names only the main measure.
-
-## Verify the card
-
-Save and open **Preview**. Compare the main value and both references with a table using the same filters. Test a filter selection with no result and, for **Growth%**, a zero reference. If the result is unexpectedly large, check the aggregation before changing display units. If the status colour is wrong, check **Comparison direction** and the measure's **Direction** in the model before swapping colours.
+:::

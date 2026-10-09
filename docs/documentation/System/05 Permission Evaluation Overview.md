@@ -14,7 +14,7 @@ createTime: 2026/09/05 00:00:00
 
 A user can be allowed to open a report but see only some rows, have a column hidden, or be unable to edit the report. These are different permission decisions, not contradictory results.
 
-This guide connects the standard Console permission controls and database Data Security rules. Use it to design access, explain an unexpected result, and review a permission change. For individual configuration screens, see [User Types](/documentation/System/UserTypes/), [Access Control List](/documentation/System/Access-Control%20List/), and [Data Security](/documentation/Datasource/Data-Security/).
+This guide connects the standard Console permission controls and database Data Security rules. Use it to design access, explain an unexpected result, and review a permission change. For individual configuration screens, see [User Types](/documentation/System/Users/), [Access Control List](/documentation/System/Access-Control-List/), and [Data Security](/documentation/Datasource/Data-Security/).
 
 > **There is no single “deny always wins” rule.** File ACLs combine grants, matching RLS policies combine with OR, and OLS exclusions accumulate after each object policy is evaluated. Unmatched RLS subjects are not denied by default.
 
@@ -263,8 +263,8 @@ Do not assume that file/folder ACL edits, role membership changes, User Type cha
 
 ## Related topics
 
-- [User Creation and User Types](/documentation/System/UserTypes/)
-- [Access Control List](/documentation/System/Access-Control%20List/)
+- [User Creation and User Types](/documentation/System/Users/)
+- [Access Control List](/documentation/System/Access-Control-List/)
 - [Data Security](/documentation/Datasource/Data-Security/)
 - [Row-Level Security in Analytics](/documentation/Datasource/Row-Level-Security-in-Analytics/)
 

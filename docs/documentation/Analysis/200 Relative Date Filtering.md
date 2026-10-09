@@ -15,7 +15,7 @@ You can use relative periods in three places:
 | --- | --- | --- |
 | **Date** component | **Default value → Relative** | A date range or period that readers can still change. |
 | **Dropdown**, **List box**, **Button group**, **Radio/Checkbox** on a year, quarter, month, week or day field | **Default value → Relative** | Preselecting the current or previous period in a member list. |
-| Component filter | **Data → Filters → +**, then **Filter type → Relative** | A fixed rule on one chart, such as *the last 12 months*. |
+| [Component filter](/documentation/Analysis/Component-Level-Filtering/#relative-dates) | **Data → Filters → +**, then **Filter type → Relative** | A fixed rule on one chart, such as *the last 12 months*. |
 
 ## Presets
 
@@ -43,7 +43,7 @@ At the end of every relative list, **Custom…** builds a rule from parts:
 - **Include today** / **Exclude today** (or the current week, month… for calendar units).
 - **More → Shift back**: move the whole range back, for example *the last 7 days, one year ago*.
 
-![A custom rule: last 7 days, rolling, include today, with Shift back](./images/relative-custom-rule.png)
+![A custom rule: last 7 days, rolling, include today, with Shift back](../Visualization/Filters/images/date-custom-rule.png)
 
 Examples:
 
@@ -52,15 +52,6 @@ Examples:
 | The last three full months | Last · 3 · months · Calendar · Exclude current month |
 | The same month last year | Back · 12 · months (single period) |
 | The last 7 days a year ago | Last · 7 · days · Include today · Shift back 1 year |
-
-## Component filters
-
-1. Select the chart and open **Data → Filters → +**.
-2. Select a date field or a time level.
-3. Set **Filter type → Relative**, then choose **Reference time**, the **Relative time condition**, the number of periods and the unit.
-4. Click **Apply**.
-
-![A relative component filter on a Year field](../Visualization/images/current/relative-date.jpg)
 
 ## Things to check
 

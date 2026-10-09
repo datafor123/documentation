@@ -46,9 +46,9 @@ The waterfall has no **Display units** setting; use **Compact numbers**. Labels 
 
 The total bar shows the **model's aggregate** of the measure, not the running total. For an additive measure (an amount, a quantity, a change) the two are equal; for a ratio or an average they differ. Use an additive measure for an ordinary bridge.
 
-## Check order and arithmetic
+## Tooltip and arithmetic
 
-Save and open **Preview** and hover the bars:
+Hover a bar to check the arithmetic:
 
 - A step shows **Before**, the step value and **After** (the running total around the step).
 - The total bar shows its value as *‹measure› (model total)*. When the model total differs from the sum of the steps, it adds a **Sum of steps** row.
@@ -58,15 +58,13 @@ Running totals are calculated in the browser and formatted like the step values 
 - Wrong sequence: sort by business step or time, not by the size of the change.
 - Unexpected final total: check whether the measure is additive and whether an opening or closing total was also included as a change.
 - Wrong sign: verify how reductions are represented in the source.
-- Missing step: check filters, empty values and data limits.
 
 The **Analytics** tab adds constant lines, bands and vertical lines at a category; statistic lines are not available. See [Reference lines](/documentation/Analysis/Chart-Reference-Lines/).
 
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - Negative, zero-crossing and negative-total steps are redrawn at their true positions, and empty members no longer restart the running total at 0.
 - In English, a total bar whose label was never stored is now called *Total* instead of *Accumulated value*. A label you typed is kept.
 - Saved positive and negative colors are kept when the report is reopened.
-- **Auto label contrast** stays off, so label colors do not change.
+:::
 
 Use a [Line](/documentation/Visualization/Line-Chart/) chart for a series of ending balances and a [Stacked column](/documentation/Visualization/Stacked-Column-Chart/) for contributions that do not need a running sequence.

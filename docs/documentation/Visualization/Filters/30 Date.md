@@ -25,6 +25,19 @@ Changing **Filter by** or **Select** converts the component in place: it keeps i
 
 Until a time field is chosen, the component shows **Choose a date field** in edit mode and nothing in view mode.
 
+## Filter by time axis
+
+With **Filter by → Time axis**, the Date component is not tied to one model field. It filters each component through that component's own **Time axis** field (**Data → Time axis**), so one Date can filter charts built on different date fields, such as Sales Date and Purchase Date, or on different time levels.
+
+The selected period is applied to each time axis at its own level, provided that level is as detailed as the Date's **Granularity** or more. For example, with **Granularity → Year** and 1998 selected:
+
+| Component's time axis | Condition applied |
+| --- | --- |
+| Sales Month | January 1998 to December 1998 |
+| Purchase Year | 1998 |
+
+A less detailed time axis is not filtered: with **Granularity → Month**, a component whose time axis is a Year field is listed greyed in [Interactions](#interactions) as *Time axis less detailed than the date – not filtered yet*.
+
 ## Default values
 
 - **All (no filter)**: no date condition. The box shows **All dates** and has a clear button; **Reset to default** returns to no filter.
@@ -38,17 +51,7 @@ Until a time field is chosen, the component shows **Choose a date field** in edi
 
 ### Custom rules
 
-Choose **Custom…** at the end of the relative list to build a rule:
-
-| Part | Range | Single period |
-| --- | --- | --- |
-| Direction | **Last**, **Next**, **This** | **Current**, **Back**, **Ahead** |
-| Number and unit | 1–9999 days, weeks, months, quarters or years (never finer than the field) | Same |
-| Rolling or calendar | **Rolling** (exactly N units) or **Calendar** (whole units); for **This**: **To date** or **Whole period** | – |
-| Current period | **Include today** / **Exclude today** (or include/exclude the current unit) | – |
-| **More → Shift back** | Move the whole range back by N units, for example the last 7 days one year ago | – |
-
-![A custom relative rule with Shift back](./images/date-custom-rule.png)
+**Custom…** at the end of the relative list builds a rule from a direction (**Last**, **Next**, **This**, or **Current**, **Back**, **Ahead** for a single period), a number and unit, **Rolling** or **Calendar**, **Include today** or **Exclude today**, and **More → Shift back**. See [Custom rules](/documentation/Analysis/Relative-Date-Filtering/#custom-rules) for each part and examples.
 
 ## Interactions
 
@@ -61,7 +64,7 @@ Choose **Custom…** at the end of the relative list to build a rule:
 
 ## Bind the Date component to a parameter
 
-Choose **Data source → Parameter** and pick a **Date** parameter with **Any value**; others are greyed out with the reason. The component then shows the parameter value, writes it when the reader changes the date, and filters nothing directly. Other controls bound to the same parameter stay in sync. See [Bind Filters to Parameters](/documentation/Analysis/Parameter-Controllers/).
+With **Data source → Parameter** and a **Date** parameter with **Any value**, the component sets the parameter instead of filtering. See [Bind Filters to Parameters](/documentation/Analysis/Parameter-Controllers/).
 
 ## Style
 
@@ -81,8 +84,7 @@ Choose **Data source → Parameter** and pick a **Date** parameter with **Any va
 | Symptom | Check |
 | --- | --- |
 | The charts show *No data under the current filters*. | The relative period may lie after the last loaded date. Use **View conditions** on the chart to see the date range. |
-| A component is not filtered. | It may lack a **Time axis** field (Time axis mode) or be at a coarser time level; see the greyed groups in Interactions. |
+| A component is not filtered. | In Time axis mode it needs a **Time axis** field at the Date's granularity or finer; see [Filter by time axis](#filter-by-time-axis). |
 | *Last 7 Days* differs from an older report by one day. | Since 10.00 the *Last N* presets include today. |
-| The week starts on the wrong day. | Check **First day of the week** in System configuration. |
 
 Related: [Filters](/documentation/Visualization/Filters/) · [Relative Date Filtering](/documentation/Analysis/Relative-Date-Filtering/) · [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/)

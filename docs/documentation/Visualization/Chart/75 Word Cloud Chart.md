@@ -40,14 +40,14 @@ Word size scales between **Min font** and **Max font** over the positive values.
 - Colours are per member. With **Consistent member colors** on, a word has the same colour as that member in other charts; otherwise each member still keeps a stable colour. See [Colors](/documentation/Visualization/Colors/).
 - The hover tooltip has no **Show Tooltip** switch and no **Tooltips** fields, and values use the measure's format (no display units).
 
-## Check missing words
+## Missing or unreadable words
 
 Words with no value, zero or a negative value are not shown. If an expected word is absent, check its weight and the component filters first, then the available space and the font range.
 
-Save and open **Preview** at the report's intended size. If important words cannot be read, give the cloud more space or reduce the number of words. Raising **Min font** makes small words larger, but fewer words fit. Keep a table or ranked bar chart available when users need exact values.
+If important words cannot be read at the report's intended size, give the cloud more space or reduce the number of words. Raising **Min font** makes small words larger, but fewer words fit. Keep a table or ranked bar chart available when users need exact values.
 
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - Words are no longer rotated at random angles: **Horizontal and vertical** uses only 0° and 90°, so existing clouds look different.
+:::
 
 Related: [Cross-filtering](/documentation/Analysis/Cross-Filtering/) · [Adding Components](/documentation/Visualization/Adding-Charts/)

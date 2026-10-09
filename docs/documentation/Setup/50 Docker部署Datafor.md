@@ -1,6 +1,6 @@
 ---
 title: Deploying Datafor Using Docker
-permalink: /documentation/Setup/Deploying-Datafor-Using-Dockers/
+permalink: /documentation/Setup/Deploying-Datafor-Using-Docker/
 tags: null
 description: Run Datafor from the datafor123/datafor-ee image with a persistent volume, publish only the ports you need, and stop, update and back up the container safely.
 createTime: 2026/09/01 22:03:26
@@ -58,7 +58,7 @@ docker ps
 docker logs -f datafor-ee
 ```
 
-The log shows the Tomcat output; Datafor is ready when it prints `Server startup in [...] milliseconds`. Press Ctrl+C to leave the log. Then open `http://localhost:28080` and sign in with `admin` / `password`. Change that password right away (see [Modify Password](/documentation/System/Modify-Password/)), and change the password of the `demo` user (`demo` / `demo`) or delete that user.
+The log shows the Tomcat output; Datafor is ready when it prints `Server startup in [...] milliseconds`. Press Ctrl+C to leave the log. Then open `http://localhost:28080` and sign in with `admin` / `password`. Change that password right away (see [Modify Password](/documentation/System/Users/#_6-resetting-a-password)), and change the password of the `demo` user (`demo` / `demo`) or delete that user.
 
 If the image contains the AI Agent (the folder `/opt/bi-server/ai-agent`), start it and check it with:
 

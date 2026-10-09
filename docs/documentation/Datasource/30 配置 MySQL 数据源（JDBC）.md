@@ -139,7 +139,7 @@ Change idle validation, abandoned-connection cleanup, and prepared-statement poo
 2. Wait for the result. Resolve any failure before using the connection for analysis. If the message is too brief, ask your administrator to inspect the server log at the time of the test.
 3. Click **Save** to persist the connection. Confirm that its name appears under **Connections**.
 4. Select the saved connection to reopen it and check its settings. **Save confirms that the configuration was stored; it does not replace a successful connectivity test.**
-5. Select the connection's **Actions** menu, then **New model**. In the model designer, select the datasource and schema, and verify that the expected tables are listed. Add a representative table and inspect its data preview.
+5. Select the connection's **Actions** menu, then **New model**. In the modeler, select the datasource and schema, and verify that the expected tables are listed. Add a representative table and inspect its data preview.
 6. Check a known text value, timestamp, and numeric value. A successful connection test alone does not prove that all required tables are readable or that their data is interpreted correctly.
 
 Continue with [Creating an Analysis Model](/documentation/Model/Creating-an-Analysis-Model/) to define relationships, dimensions, and measures.

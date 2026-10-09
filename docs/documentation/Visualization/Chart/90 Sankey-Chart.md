@@ -40,15 +40,14 @@ Keep names distinguishable when the same label can occur at different stages. A 
 - **Hover** a link or node to emphasize only that link or node; the rest of the diagram does not fade.
 - **Click** a node to fade every node and link not connected to it and filter the other components on the page by it; see [Cross-filtering](/documentation/Analysis/Cross-Filtering/).
 
-## Validate the flow
+## Read the flow
 
-Save and open **Preview**. Hover links and check their endpoints and weights against the source-target table. Follow a few paths from left to right and verify that their direction matches the business definition.
+Follow a few paths from left to right and verify that their direction matches the business definition.
 
 Incoming and outgoing amounts need not balance if the dataset covers only part of the process or uses different populations. Investigate the scope before describing missing flow as loss. If the diagram cannot form a useful flow, check self-links, cycles, missing endpoints and negative values, then simplify the model or use a table.
 
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - Hovering no longer fades the other flows, and the hover highlight no longer stays after the pointer leaves the chart.
-- Data labels keep **Follow measure format** unless you change **Display units**.
+:::
 
 Use [Funnel](/documentation/Visualization/Funnel/) for a sequential stage-total comparison, [Sunburst](/documentation/Visualization/Sunburst/) for a hierarchy, and [Decomposition tree](/documentation/Visualization/Decomposition-Tree/) for interactive dimensional breakdowns.

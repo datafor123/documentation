@@ -11,7 +11,7 @@ Colour geographic regions such as countries, provinces or states by a measure. I
 
 Large regions draw attention regardless of their value. Decide whether an absolute total or a normalised measure (per head, per store, a rate) answers the question. To show values as sized markers instead, use [Marker map](/documentation/Visualization/GeoJSON-marked-map/).
 
-## Build it
+## Bind regions and choose the map
 
 1. Add **Components → Charts → Maps → Filled map** (480 × 360 px) and choose an **Analysis model**.
 2. Bind **Geographic field** and **Measure**.
@@ -34,7 +34,10 @@ The first match is used. Matching is exact, including letter case and spaces. An
 - **Unmatched regions**: in edit mode a yellow box at the top left reads *{count} of {total} regions do not match the current map*; hover it for the names (up to 30). It is not shown in view mode or when everything matches. A value that matches a different region is not reported: on the World map "Georgia" is the country and "CA" is Canada. Choose the map that fits the data.
 - **No data**: when the query returns no rows, the grey map stays and the [empty-data message](/documentation/Visualization/Empty-Data-and-Errors/) is drawn over it. The map can still be zoomed and panned, and the component menu (including going back after a drill) stays usable.
 
-Reports from earlier versions: region codes now match the right province. Before, some codes coloured a different province (110000 coloured Liaoning instead of Beijing, for example), and a region's colour and tooltip could disagree when rows used several spellings.
+::: details Opening reports made before 10.00
+- Region codes now match the right province. Before, some codes coloured a different province (110000 coloured Liaoning instead of Beijing, for example).
+- A region's colour and tooltip could disagree when rows used several spellings; they now agree.
+:::
 
 ## Data picker (colour bar)
 
@@ -56,7 +59,10 @@ Reports from earlier versions: region codes now match the right province. Before
 - With colour rules (below) there are no end texts; each rule's range is labelled instead, using **Display units** and **Decimal places**.
 - In edit mode, dragging a handle moves the handle, not the component.
 
-Reports from earlier versions: the old horizontal and vertical position settings become **Position** (a bar that was centred in the middle of the map moves to Bottom center; an unset position becomes Bottom left). The bar's text changes to the report's default font, and the end texts sit a little further from the bar so they no longer overlap the handles.
+::: details Opening reports made before 10.00
+- The old horizontal and vertical position settings become **Position**: a bar that was centred in the middle of the map moves to Bottom center; an unset position becomes Bottom left.
+- The bar's text changes to the report's default font, and the end texts sit a little further from the bar so they no longer overlap the handles.
+:::
 
 ## Colour rules
 
@@ -89,7 +95,9 @@ Maps added in this version keep the shape of the GeoJSON map inside the componen
 
 On the China map the South China Sea islands are drawn at a smaller scale in a framed inset at the bottom right of the map. The inset is labelled `南海诸岛` in every interface language and does not react to the pointer. The islands in the inset take the colour of Hainan. Because the islands no longer extend the map area to the south, the mainland is drawn larger in a component of the same size.
 
-Reports from earlier versions: if a China map was panned or zoomed and that view was saved, it looks different after the upgrade; the map appears larger and may be partly cut off. Open the report in edit mode, adjust the position and zoom of the map, and save it again. Maps without a saved view are not affected.
+::: details Opening reports made before 10.00
+- If a China map was panned or zoomed and that view was saved, it looks different after the upgrade: the map appears larger and may be partly cut off. Open the report in edit mode, adjust the position and zoom of the map, and save it again. Maps without a saved view are not affected.
+:::
 
 ## Drill down and switching
 

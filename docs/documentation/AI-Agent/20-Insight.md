@@ -27,13 +27,15 @@ createTime: 2026/09/01 21:50:46
 
 Clicking the component opens the insight, also in the editor; you do not need to preview first. The insight leaves out the AI insight component itself, empty components and Rich text value blocks, and says which components it skipped.
 
+The insight analyses only the data already loaded in the page's components and runs no extra queries. When that data is truncated or incomplete, the answer says so. **Generate business brief** writes a management brief from the same data.
+
 ## Open insight from other components
 
 Any Text, Rich text, Image, Icon, Shape or Action button can open the same insight: set its click action to **Open AI insight** and choose an **Analysis scope**. See [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
 
 ## Requirements
 
-- The AI Agent must be configured and the reader must be allowed to use it. See [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/) and [AI Operations and Quotas](/documentation/AI-Agent/LLM-Permission-Management/).
+- The AI Agent must be configured and the reader must be allowed to use it. See [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/) and [AI Operations and Quotas](/documentation/AI-Agent/AI-Operations-and-Quotas/).
 - The insight reads the data the reader is allowed to see, under the current filters.
 - Treat the text as an interpretation of the numbers on the page, not as a replacement for governed metric definitions.
 

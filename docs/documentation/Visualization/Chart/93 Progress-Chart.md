@@ -41,19 +41,18 @@ Use a concise name such as Order completion. The ring has no **Show Tooltip** sw
 
 **Conditional color** opens a dialog where you choose the **Configuration type**, **Value** or **Percentage**, and add ranges with a **Start value**, an **End value** (blank means −∞ or +∞) and a **Color**. A percentage condition and a value condition are different: check the selected type and test the boundary values. Use conditional colors only when the thresholds have a clear meaning.
 
-## Verify more than the ring shape
+## Above target, empty values and clicks
 
-Save and open **Preview**. Check a partial result and a result at or above target. Read the numeric label and underlying values: above 100% the ring is simply full, so it cannot show how far a result exceeds the target.
+Above 100% the ring is simply full, so it cannot show how far a result exceeds the target. Read the numeric label, and show the amounts with **Sub-label** when that matters.
 
-If the percentage is unexpected, compare the actual and target in a table with identical filters. Check units, zero or missing targets and whether the target measure repeats at a finer grain.
+If the percentage is unexpected, check units, zero or missing targets and whether the target measure repeats at a finer grain.
 
 When the actual value is empty, the ring shows the empty-data message instead of 0.00%, also with a fixed target. **Style → Empty data** only changes the text; see [Empty data and error messages](/documentation/Visualization/Empty-Data-and-Errors/).
 
 Clicking the ring does not filter, drill or highlight anything, but a script under **Actions → Events → Plot area click** runs.
 
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - **Ring background** is now applied. Earlier versions drew the unfinished part in the palette's second color (often red), so such rings look different.
-- **Show name** stays off unless you turn it on.
 - A ring without an actual value shows the empty-data message instead of 0.00%.
 - The automatic title no longer includes the target measure.
+:::

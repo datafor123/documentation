@@ -22,7 +22,7 @@ This guide explains Datafor's policy rules and how to verify the resulting acces
 
 | Requirement | Control |
 | --- | --- |
-| Decide who can open or manage a report, model, or datasource | [Access Control List (ACL)](/documentation/System/Access-Control%20List/) |
+| Decide who can open or manage a report, model, or datasource | [Access Control List (ACL)](/documentation/System/Access-Control-List/) |
 | Limit the records returned from a table or view | **Row access** (RLS) |
 | Hide a table, view, or column | **Table & column access** (OLS) |
 

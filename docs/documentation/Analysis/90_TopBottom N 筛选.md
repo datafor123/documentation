@@ -33,7 +33,7 @@ A field with a row limit shows a check mark next to **Row limit** in its menu, a
 
 "Others" needs the 10.00 query engine on the server; with an older server the option is ignored and only the top N appear.
 
-## Check the result
+## Ranking and filters
 
 The ranking follows the current filters, links and drill level, so it can change when readers filter. For a table that must show the whole list but highlight the top items, use [conditional formatting](/documentation/Visualization/Conditional-Colors/) instead.
 

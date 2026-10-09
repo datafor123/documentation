@@ -11,7 +11,7 @@ Place markers on a Mapbox or Amap (Gaode) basemap, drawn with WebGL. Markers can
 
 An administrator must first enter the Mapbox or Amap keys in **Settings → Data → Maps** ([GIS Map Settings](/documentation/Visualization/GIS-Map-Settings/)).
 
-## Build it
+## Bind locations and markers
 
 1. Add **Components → Charts → Maps → Mapbox/Amap** (480 × 360 px) and choose an **Analysis model**.
 2. Bind the location: either **Geographic field** (place names or addresses, geocoded through the selected service), or **Longitude** and **Latitude**.

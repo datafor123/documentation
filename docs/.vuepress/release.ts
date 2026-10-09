@@ -98,9 +98,3 @@ export const releaseNote = defineNoteConfig({
 		},			
 	],
 });
-
-export const releaseNoteZH = defineNoteConfig({
-	dir: "zh/release",
-	link: "/release",
-	sidebar: "auto",
-});

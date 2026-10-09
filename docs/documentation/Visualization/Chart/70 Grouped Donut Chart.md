@@ -53,18 +53,13 @@ Grouped donuts have no **Sort slices by value** and no **Percentage decimal plac
 - **Colours follow the slice.** With **Consistent member colors** on (the default for new reports), slices are coloured by their **Details** member, so a category has the same colour in every donut. See [Colors](/documentation/Visualization/Colors/).
 - **Group names.** Each name is drawn once in its donut's centre, and stays when filters leave only one group. In new components whose grouping-label font size was never changed, the name grows with the hole (up to 24 px). Setting a font size fixes it.
 - **All-zero groups.** A donut whose values are all 0 is a light grey ring with *All values are 0* under the group name, and gets no labels. Missing values are not zero: a group with no values draws no ring. Positive and negative values that cancel out are not treated as zero.
+- **Shares, not amounts.** Two equal-looking slices in different donuts can stand for very different amounts, because their group totals differ. Compare the tooltip values, or pair the donuts with a total-sales chart when volume matters.
 - **Negative values.** The tooltip share reads, for example, *25% of the absolute total*.
 - **Label fitting.** Each donut lays out its outer labels within its own area, so they never overlap the neighbours. All donuts shrink equally to make room (down to 40% of the radius), then long labels are cut with "…". If not even three characters fit, no labels are drawn. At the default 480 × 300 px with about five groups this means labels may not appear at all; enlarge the component or reduce the groups.
 
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - A donut whose values are all 0 shows the grey ring instead of equal slices labelled *0 (0%)*.
 - **Min. proportion** is now exact, so a few labels of slices just above the threshold reappear.
+:::
 
-## Read and validate
-
-Two equal-looking slices can stand for very different amounts, because their group totals differ. Compare the tooltip values, or pair the donuts with a total-sales chart when volume matters.
-
-Save and open **Preview**. Hover the same category in two groups and check its amount and its share of the group. If a donut is missing, check the group filter and missing values. If a category is absent from one group, confirm the data before treating it as zero.
-
-Related: [Pie](/documentation/Visualization/Pie-Chart/) · [100% stacked bar](/documentation/Visualization/100-Stacked-Bar-Chart/) when there are many groups or precise side-by-side comparison matters · [Legends](/documentation/Visualization/Legends/) · [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/)
+Related: [Pie](/documentation/Visualization/Pie-Chart/) · [100% stacked bar](/documentation/Visualization/100-Stacked-Column-Chart/#column-or-bar) when there are many groups or precise side-by-side comparison matters · [Legends](/documentation/Visualization/Legends/) · [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/)

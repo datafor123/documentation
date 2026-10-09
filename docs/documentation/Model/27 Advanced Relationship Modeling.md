@@ -1,6 +1,7 @@
 ---
 title: Advanced Relationship Modeling
 permalink: /documentation/Model/Advanced-Relationship-Modeling/
+description: Model role-playing tables, several fact tables and many-to-many associations with aliases, shared dimensions and bridge tables.
 createTime: 2026/09/04 09:08:14
 ---
 
@@ -8,7 +9,7 @@ createTime: 2026/09/04 09:08:14
 
 Use advanced relationship patterns when a model contains multiple fact tables, one source table serving several business roles, or a genuine many-to-many association. The objective is still a predictable path from each Measure Group to every applicable Dimension.
 
-Before using these patterns, verify the keys, join type, and **Key values are unique** settings described in [Establishing Table Relationships](/documentation/Model/Establishing-Table-Relationships/).
+Before using these patterns, verify the keys, join type, and **Key values are unique** settings described in [Establishing Table Relationships](/documentation/Model/Establishing-Table-Relationships/). A business key made of several columns belongs in one relationship; see [Composite keys](/documentation/Model/Establishing-Table-Relationships/#composite-keys).
 
 ## Use an alias for each table role
 
@@ -56,12 +57,6 @@ For example, `inventory_fact` and `sales_fact` both join `product`, and only `sa
 
 If a Dimension applies to several Measure Groups, relate it directly to each fact table. If it does not apply to a Measure Group, leave it unattached rather than routing through another fact table.
 
-## Keep composite keys in one relationship
-
-The same pair of table aliases can have one relationship record. When the business key contains several columns, add every field pair to that relationship and verify uniqueness for the complete combination.
-
-Each field pair is drawn as an edge on the canvas. Deleting one edge removes that pair; deleting the final edge removes the relationship. A partially completed field-pair row is not retained, so review all pairs after editing.
-
 ## Model a many-to-many association with a bridge
 
 Use a bridge table when one business entity can be associated with several members of a Dimension, such as an order assigned to multiple sales representatives.
@@ -74,7 +69,7 @@ A typical bridge design has:
 
 A bridge can let one fact participate in multiple associations. Validate additive Measures at the total level and at each bridged Dimension level; do not assume duplicate contributions are removed. Do not expose bridge-row Measures unless those values have an intentional business meaning.
 
-If a direct N:N relationship is intentional, leave **Key values are unique** disabled on both sides and validate its results with a trusted source query. The designer warns about N:N cardinality but does not prevent confirmation. Prefer a bridge when the association itself needs a defined grain or attributes.
+If a direct N:N relationship is intentional, leave **Key values are unique** disabled on both sides and validate its results with a trusted source query. The modeler warns about N:N cardinality but does not prevent confirmation. Prefer a bridge when the association itself needs a defined grain or attributes.
 
 **Left table**, **Right table**, and the join type control row preservation in the SQL join. They are not cross-filter direction settings.
 

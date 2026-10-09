@@ -32,12 +32,4 @@ You can drag a field between **Series** and **Detail**; dropping it on a filled 
 
 There are no settings for block spacing or a minimum block size. Choose **Name and value** only when the blocks have room for two lines, and keep exact values in the tooltip. Resize the component before hiding labels. A large parent containing many tiny children may need a filter or a separate detail view.
 
-## Check the result
-
-Save and open **Preview**. Compare a large and a small rectangle with their tooltip values. Apply the intended report filters and inspect whether labels and child blocks remain useful.
-
-If a category is missing, check filters, row limits and the selected hierarchy levels. If many rectangles have similar sizes, use a sorted bar chart for ranking. Use [Sunburst](/documentation/Visualization/Sunburst/) when the sequence of hierarchy levels is more important than packing many values into the available space.
-
-## Reports from earlier versions
-
-**Label**, **Display units** and **Color by parent** keep their saved values, or Name, Follow measure format and off if never set, so existing treemaps look the same.
+If many rectangles have similar sizes, use a sorted bar chart for ranking. Use [Sunburst](/documentation/Visualization/Sunburst/) when the sequence of hierarchy levels is more important than packing many values into the available space.

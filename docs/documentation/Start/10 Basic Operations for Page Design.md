@@ -39,7 +39,7 @@ Hover a setting's name to see what it does. Collapse the panel with **>|** in it
 | Toolbar button | Use |
 | --- | --- |
 | **Delete**, **Create copy** | Remove or duplicate the selection. A copy keeps model, fields, filters and style. |
-| Layer | **Bring to front**, **Send to back**, for example to put a shape behind charts. |
+| **Move layer** | **Move up**, **Move to top**, **Move down**, **Move to bottom**, for example to put a shape behind charts. Also in the right-click menu. |
 | Align | Align the selected components on an edge or centre. |
 | Distribute | Space three or more components evenly. |
 | **Chart switch** | Change the chart type of the selected chart. |

@@ -34,6 +34,8 @@ To fix the model yourself, click a model card on the welcome screen or pick the 
 
 The list has four places: Common Questions configured by an administrator come first, and the Agent generates the rest. **Regenerate** replaces the generated questions with a new batch. Generated questions are shared per model and interface language for seven days, so a regenerated batch is what other users of the model see too. The button is hidden when configured questions fill all four places.
 
+To start from a metric instead of a question, pick the metric on the welcome screen and choose one of the **Quick Actions**: **Metric change check**, **Generate metric report**, **View trends**, **Breakdown analysis** or **Compare and rank**, with a time range of your choice.
+
 <div align="left"><img src="./images/ai-assistant-model-selected.png" alt="AI Assistant with an analysis model selected" width="100%" /></div>
 
 ### How Auto-select model chooses
@@ -99,7 +101,19 @@ Examples:
 - `Rank product departments by margin, highest first.`
 - `Compare units ordered with units shipped by warehouse class.`
 
-The answer is governed by the analysis model named in the answer card or the selector and by your data permissions. Check returned metrics, filters, and time basis before relying on the interpretation.
+The answer is governed by the analysis model named in the answer card or the selector and by your data permissions. A question about a definition, such as `How is net sales calculated?`, is answered from the model's declared definition (or the Metrics Library definition) without running a query.
+
+### Time phrases
+
+Vague time phrases still work: "recently" is read as the last 30 days and "the last few days" as the last 7 days. The answer states the date range it used, and one sentence is enough to correct it. A phrase that gives no usable range, such as "a while ago", makes the Agent ask.
+
+### Progress and stopping
+
+While the analysis runs, each step shows on screen: understanding the question, matching it to the model, querying, concluding. To cancel, click **Stop** in the composer. A cancelled question stays in the conversation, marked as cancelled, also when you reopen it from **History**.
+
+### When the Agent asks for a detail
+
+When something essential is missing, such as which metric, which date or which definition, the Agent asks before it queries. Pick one of the options it offers, or type the missing detail in your own words in the reply box and click **Send**. The analysis continues from there; you do not have to ask the question again.
 
 ### Answer language
 
@@ -119,7 +133,9 @@ One dimension runs as a single query. Several dimensions run as a multi-step ana
 
 Contributions show where a change sits in the data, not why it happened. A question about causes outside the data, or about a change the model cannot measure, gets an answer that states that boundary.
 
-## 5. Time limit and partial answers
+## 5. Multi-step analysis, time limit and partial answers
+
+A question that no single query can answer, such as `Which stores have both high sales and a high return rate?`, runs as a multi-step analysis. The Agent sets a plan of a few steps before it starts, runs independent steps in parallel, shows the result and evidence of each step, and then combines them into one conclusion. It does not explore open-endedly.
 
 The query steps of one multi-step analysis may run for 180 seconds in the AI Assistant and in embedded applications. Writing the answer afterwards is not cut off by this limit. At the limit:
 
@@ -162,9 +178,21 @@ A cell that is infinite or undefined, for example the result of a division by ze
 - The answer discloses that NaN values are not used in calculations or rankings.
 - In threshold filters such as "above 10%", ∞ and −∞ compare normally. Rows with NaN are kept, and the answer warns that it could not decide whether they meet the condition.
 
+### Views, export and Add to page
+
+- **Switch the view**: the view selector above a result offers the views that fit it, for example **Table**, **Bar**, **Line** or **KPI**. A follow-up such as `show it as a pie chart` also works. Either way the chart changes in seconds, from the data already fetched; nothing is queried again.
+- **Export image** saves the chart; **Export Excel** saves the table. The screen shows only the first rows of a large result, but the export takes the complete result. When a full export is not possible, the export contains the rows shown on screen and says so.
+- **Add to page**: when the Agent runs beside the dashboard editor, **Add to page** inserts the result into the page as a component. The component runs the same query the answer ran. A result that cannot be reproduced as a component shows "This result cannot be added to the page."
+
+### Evidence and limits
+
+- Conclusions cite their evidence: hover over or click a citation to reach the exact figure it refers to.
+- A **Limitations** box lists what limits the answer, for example a time range that was not given and was taken from the available data, a result that was cut to keep it manageable, or context hidden by your permissions.
+- An answer that reuses the data of the previous question instead of running a new query says "These figures reuse the data fetched for your previous question; no new query was run."
+
 ### What was sent to Datafor
 
-Under the progress steps, **Technical details** opens the **Query model**: the request the Agent sent to Datafor for this answer, loaded when you expand it. An answer that needed several requests lists them in order, with their role, for example "selects the ranked members", "current period" and "comparison period"; a request that failed is marked "did not succeed". Only the user who asked can open it. Use it to check which measures, filters and dates were really queried.
+Under the progress steps, **Technical details** opens **How I read the question** (the metrics, groupings, time with its date basis, and filters the Agent used) and the **Query model**: the request the Agent sent to Datafor for this answer, loaded when you expand it. An answer that needed several requests lists them in order, with their role, for example "selects the ranked members", "current period" and "comparison period"; a request that failed is marked "did not succeed". Only the user who asked can open it. Use it to check which measures, filters and dates were really queried.
 
 **Copy** and **Export** on a **Business brief** or **Complex report** card copy or save its text as Markdown, with headings in the interface language.
 
@@ -181,10 +209,10 @@ The AI Assistant still says "vector index" where the console now says **knowledg
 
 ## 8. Continue or review conversations
 
-- Click **New Chat** to start a separate conversation.
-- Click **History** to reopen an earlier conversation. The model used at the time is restored, and failed questions show their original message.
-- Use the model's suggested questions, or the follow-up suggestions under an answer, to continue with requests that match the available metadata.
-- To change the business domain, select a different model or start **New Chat**; follow-ups stay on the conversation's model.
+- **Follow-up suggestions** under each answer are drawn from the objects and findings in that result; one click asks the next question.
+- Build on the previous answer without restating it: `only East China`, `break it down by month`, `exclude returned orders`. Follow-ups stay on the conversation's model.
+- A question that fails does not break the conversation. Rephrase it and ask again.
+- A conversation reopened from **History** restores the model used at the time; failed questions show their original message.
 
 ## 9. Related administration
 

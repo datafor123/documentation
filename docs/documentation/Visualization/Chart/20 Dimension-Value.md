@@ -47,8 +47,8 @@ Hovering the text shows the listed names. Names are shown as plain text, even if
 
 Give long product or store names enough width. Do not design the report as though a single value is guaranteed unless the filters enforce that. Avoid a specific region name as the empty-data text, because it could imply that a filter is active when no data matches.
 
-## Verify the context
+## When the text is wrong
 
-Save and use **Preview**. Change the controlling filter and check that both the text and the related charts update. A label that changes while the charts remain unchanged can mislead readers; verify the interactions for every target component.
+A label that changes while the related charts stay unchanged misleads readers: when you change the controlling filter, both the text and the charts must update, so check the interactions for every target component.
 
 If the component shows several values or ends with "…", narrow its filters or the controlling selection to one member. If it shows an unexpected value, check the model, exact field and filter subscriptions. For a fixed heading or a sentence assembled with dynamic values, use **Assists → Text** instead.

@@ -76,9 +76,9 @@ In the **Analytics** tab you can add fixed lines and bands; statistic lines are 
 
 **Maximum** and **Minimum** are the largest and smallest samples, not the whisker ends; the whisker ends are not listed. Clicking a box keeps that group's outliers and mean highlighted.
 
-## Validate
+## Example result
 
-Save and open **Preview**. Check the sample count, quartiles, median and extremes in the tooltip. In the saved example, East China shows **5 samples**, a median of **171.92K**, lower and upper quartiles of **154.92K / 205.71K** and **0 outliers**. These are the chart's rounded display values.
+In the saved example, the box tooltip of East China shows **5 samples**, a median of **171.92K**, lower and upper quartiles of **154.92K / 205.71K** and **0 outliers**. These are the chart's rounded display values.
 
 ![Saved Box plot Preview with East China sample statistics](../images/current/box-plot-preview.jpg)
 

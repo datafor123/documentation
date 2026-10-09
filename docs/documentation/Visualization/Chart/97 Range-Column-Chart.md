@@ -24,6 +24,8 @@ The automatic title names both measures and the category. The default Y-axis nam
 
 The lower endpoint is the minimum, the upper endpoint is the maximum, and their difference is the range. A tall range column means a wide interval; it does not mean a large total. Two columns can have the same height but different absolute levels. The automatic value axis follows the data and does not have to start at 0.
 
+If a range is reversed or absent, inspect the source values and measure definitions. If the endpoints are identical, a collapsed interval may be a valid zero-width range. Do not label the range as uncertainty or a confidence interval unless those are actually the statistics supplied by the data.
+
 ## Format the columns
 
 | Option (Style) | Effect | Default |
@@ -39,16 +41,10 @@ A narrow **Bar width** with wide caps draws an error-bar style line; a wide bar 
 
 The range column has no **Display units** setting; change the measure's format instead. The **Analytics** tab adds reference lines and bands; statistics use the raw minimum and maximum measures over all points. See [Reference lines](/documentation/Analysis/Chart-Reference-Lines/).
 
-## Validate the bounds
-
-Save and open **Preview**. Check several intervals against a table using the same category grain and filters. Include a narrow range, a wide range and a category with a missing bound.
-
-If a range is reversed or absent, inspect the source values and measure definitions. If the endpoints are identical, a collapsed interval may be a valid zero-width range. Do not label the range as uncertainty or a confidence interval unless those are actually the statistics supplied by the data.
-
-## Reports from earlier versions
-
-- **Bar width** and **Cap width** keep their saved values, or 1.5 px and 200% if never set. **Cap width** was called *Overflow margin*.
+::: details Opening reports made before 10.00
+- **Cap width** was called *Overflow margin*.
 - The low end of each column is labelled again; earlier versions labelled only the maximum.
 - An automatic Y-axis name reads *A and B* instead of *A~B*.
+:::
 
 Use [Box plot](/documentation/Visualization/Box-Plot/) for median, quartiles and outliers, or [Clustered column](/documentation/Visualization/Clustered-Column-Chart/) to compare two separate measures without implying an interval.

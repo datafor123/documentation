@@ -1,6 +1,6 @@
 ---
 title: Exploratory Analysis
-permalink: /documentation/Analysis/Exploratory Analysis/
+permalink: /documentation/Analysis/Exploratory-Analysis/
 description: "What readers can do with a chart: filter other charts, drill, open details, see the conditions behind a number and jump to other reports."
 createTime: 2026/09/01 22:03:26
 ---
@@ -43,7 +43,7 @@ Point to a component (tap on a touch screen) to show its toolbar:
 | **Zoom in** | Opens the component large. |
 | **⋮** | **Export**, **Data preview**, **Execution cost**. |
 
-![Conditions applied to a component](./images/conditions-filter.png)
+![Conditions applied to a component](../Visualization/Filters/images/conditions-popover.png)
 
 Authors set when the toolbar appears in **Style → Toolbar → Display mode**: **Show on hover** (default), **Always visible** or **Hidden**.
 

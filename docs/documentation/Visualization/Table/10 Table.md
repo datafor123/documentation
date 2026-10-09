@@ -64,7 +64,7 @@ Layout behaviour worth knowing:
 - Style changes keep the scroll position.
 - Cell text is shown as plain text: HTML in data values is not rendered.
 
-## Check the result
+## Totals and limits
 
 - **Totals.** A ratio or distinct count is recalculated for the total row, so it does not equal the sum of the rows. That is correct; check the measure definition.
 - **Truncated results.** If the page's **Max query records** cuts the result, a warning icon in the bottom-right corner shows *Showing the first … of … rows*. Add a filter or a row limit.

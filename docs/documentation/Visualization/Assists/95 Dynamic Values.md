@@ -37,6 +37,6 @@ If the report has parameters or filters, the menu lists each by name. Otherwise 
 
 ## Where they work
 
-Text, Shape text, Rich text, Image URL, Web page address, and the rules of [Visibility](/documentation/Visualization/Click-Actions-and-Visibility/). Component titles use a different syntax, `${NAME}`; see [Using Parameters in Component Titles](/documentation/Analysis/Using-Parameters-in-Component-Titles/).
+Text, Shape text, Rich text, Image URL, Web page address, and the rules of [Visibility](/documentation/Visualization/Click-Actions-and-Visibility/). Component titles use a different syntax, `${NAME}`; see [Parameters in component titles](/documentation/Analysis/Creating-Parameters/#component-titles).
 
 Related: [Creating Parameters](/documentation/Analysis/Creating-Parameters/) · [Text](/documentation/Visualization/Text/)

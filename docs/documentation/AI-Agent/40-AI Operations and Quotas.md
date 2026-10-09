@@ -1,6 +1,6 @@
 ---
 title: AI Operations and Quotas
-permalink: /documentation/AI-Agent/LLM-Permission-Management/
+permalink: /documentation/AI-Agent/AI-Operations-and-Quotas/
 description: Review AI Agent usage and set the optional daily question quota per user, with overrides by role and user type.
 createTime: 2026/09/01 21:50:50
 ---

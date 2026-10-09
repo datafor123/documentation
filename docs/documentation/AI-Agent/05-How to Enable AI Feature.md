@@ -31,8 +31,6 @@ Each user also needs AI access: in **Users**, the **AI Agent** switch in the use
 
 In the packaged installation, where the AI Agent runs on the Datafor server, both fields can stay empty and the AI Assistant uses the unified Datafor service. The fields show `http://localhost:28080/datafor/ai` as a placeholder, not as a value that must be copied to every environment.
 
-If your deployment supplies explicit endpoints, use the addresses provided by the deployment administrator. The public URL must be reachable by browser clients.
-
 ## 4. Save and verify
 
 1. Click **Save**. The button is enabled only after you change a value.
@@ -60,6 +58,6 @@ When the AI Agent runs on another server, or anywhere that is not the packaged `
 | A user gets "Please contact your administrator to enable AI for this user" | Turn on AI access for that user in **Users**. |
 | AI Assistant does not open | Confirm that the configured **Public URL** is reachable from the browser. |
 | Backend AI requests fail but the page loads | Check **Internal URL** and server-to-server network access. |
-| **Save** is disabled | The form has no unsaved changes. Modify a setting only when the deployment configuration needs to change. |
+| **Save** is disabled | The form has no unsaved changes. |
 | Administrators can use AI features, other users get model errors | The shared secret is missing or differs between the AI Agent and Datafor. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/). |
 | The AI Assistant loads, but the progress title does not change until the answer appears | Datafor is behind a reverse proxy that buffers the AI Agent stream. Disable buffering for `/datafor/ai/` as described in [Deploying Datafor Behind Nginx](/documentation/Setup/Deploying-Datafor-Behind-Nginx/). |

@@ -3,6 +3,7 @@ import { defineUserConfig } from "vuepress";
 import { plumeTheme } from "vuepress-theme-plume";
 import fs from "fs-extra";
 import path from "path";
+import { redirects } from "./redirects";
 
 export default defineUserConfig({
 	base: "/",
@@ -13,18 +14,23 @@ export default defineUserConfig({
 			lang: "en-US",
 			description: "Datafor documentation",
 		},
-		// "/zh/": {
-		// 	title: "Datafor",
-		// 	lang: "zh-CN",
-		// 	description: "Datafor documentation",
-		// },
 	},
 
 	onGenerated: async app => {
-		// let sourceDir = path.resolve(__dirname, "../../CNAME");
-		// let destDir = path.resolve(app.dir.dest(), "CNAME");
-		// await fs.copy(sourceDir, destDir);
-		// console.log(`>>> Copy favicon.ico and plume.svg to ${app.dir.dest()}`);
+		// Static redirect pages for moved URLs (see redirects.ts).
+		for (const [from, to] of Object.entries(redirects)) {
+			const file = path.join(app.dir.dest(), from, "index.html");
+			if (await fs.pathExists(file)) continue; // never overwrite a real page
+			const target = encodeURI(to);
+			await fs.outputFile(
+				file,
+				`<!doctype html><html lang="en"><head><meta charset="utf-8">` +
+					`<title>Page moved</title><link rel="canonical" href="${target}">` +
+					`<meta http-equiv="refresh" content="0; url=${target}">` +
+					`<script>location.replace(${JSON.stringify(target)}${to.includes("#") ? "" : " + location.hash"})</script>` +
+					`</head><body><p>This page has moved to <a href="${target}">${to}</a>.</p></body></html>`,
+			);
+		}
 	},
 
 	head: [

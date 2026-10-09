@@ -51,7 +51,7 @@ An end you do not set is calculated once for all gauges in the component:
 | Negative values | Minimum = −(2 × the absolute smallest value), rounded; maximum as above, or 0 if no value is positive. |
 | All values 0, or no numbers | 0–1 |
 
-Because targets are included, the target always lands on the arc. Without a target and without a maximum, the pointer usually sits near the middle of the arc. Set **Maximum value** when the scale has a business meaning, and give several gauges the same range when readers compare them.
+Because targets are included, the target always lands on the arc. Without a target and without a maximum, the pointer usually sits near the middle of the arc. Set **Maximum value** when the scale has a business meaning, and give several gauges the same range when readers compare them: gauges on different scales cannot be compared by pointer angle. A value outside a fixed range is a reason to check the data and the chosen scale, not automatically to extend the maximum.
 
 ## How the target is drawn
 
@@ -92,14 +92,7 @@ Bound **Minimum value** and **Maximum value** measures also appear. See [Tooltip
 
 When no gauge has a number, for example because the filters exclude everything, the component shows the empty-data message instead of an empty 0–1 gauge. A gauge with the value 0 is drawn normally. See [Empty data and errors](/documentation/Visualization/Empty-Data-and-Errors/).
 
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - Gauges without a set range use the new automatic range, so their pointer position and fill change.
 - The target is redrawn as a line across the arc with the label outside it.
-- **Display units** stays **Follow measure format** and **Tick mark label** stays off.
-
-## Read and validate
-
-Read the actual value together with its bounds and target. Two gauges using different scales cannot be compared by pointer angle alone.
-
-Save and open **Preview**. Inspect an ordinary result, a value near a boundary and a filtered result. An out-of-range value is a signal to check the data and the chosen scale, not automatically a reason to extend the maximum. If the gauge shows the invalid-range message, check the numbers or measures for **Minimum value** and **Maximum value**.
+:::

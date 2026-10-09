@@ -1,6 +1,6 @@
 import { defineThemeConfig } from "vuepress-theme-plume";
-import { enNavbar, zhNavbar } from "./navbar";
-import { enNotes, zhNotes } from "./notes";
+import { enNavbar } from "./navbar";
+import { enNotes } from "./notes";
 
 /**
  * @see https://theme-plume.vuejs.press/config/basic/
@@ -66,7 +66,7 @@ export default defineThemeConfig({
 			home: "https://www.datafor.com.cn",
 			footer: {
 				message: "Datafor Documentation",
-				copyright: "Copyright ©2025 Datafor All rights reserved.",
+				copyright: "Copyright © 2025–2026 Datafor. All rights reserved.",
 			},
 
 			navbar: enNavbar,
@@ -83,38 +83,5 @@ export default defineThemeConfig({
 			//   content: '',
 			// },
 		},
-		// "/zh/": {
-		// 	/**
-		// 	 * @see https://theme-plume.vuejs.press/config/basic/#profile
-		// 	 */
-		// 	profile: {
-		// 		avatar: "https://theme-plume.vuejs.press/plume.png",
-		// 		name: "Datafor Docs",
-		// 		description: "Datafor documentation",
-		// 		// circle: true,
-		// 		// location: '',
-		// 		// organization: '',
-		// 	},
-
-		// 	home: "https://www.Datafor.com",
-		// 	footer: {
-		// 		message: "Datafor Documentation",
-		// 		copyright: "Copyright ©2025 Datafor All rights reserved.",
-		// 	},
-
-		// 	navbar: zhNavbar,
-		// 	notes: zhNotes,
-
-		// 	/**
-		// 	 * 公告板
-		// 	 * @see https://theme-plume.vuejs.press/guide/features/bulletin/
-		// 	 */
-		// 	// bulletin: {
-		// 	//   layout: 'top-right',
-		// 	//   contentType: 'markdown',
-		// 	//   title: '',
-		// 	//   content: '',
-		// 	// },
-		// },
 	},
 });

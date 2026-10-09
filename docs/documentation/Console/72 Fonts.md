@@ -42,8 +42,9 @@ In **Settings › General › System configuration → Reports → Report defaul
 
 In the English interface the list offers Segoe UI, Arial, Calibri, Tahoma, Verdana, Trebuchet MS, Helvetica Neue and Roboto; Chinese and Japanese interfaces add their own fonts.
 
-::: warning Reports from earlier versions
-*Follow interface font* and *Other local font* were removed. Reports that had no stored font, or followed the interface font, now use **System default**. A font typed by hand is still applied and shown as an extra entry.
+::: details Opening reports made before 10.00
+- *Follow interface font* and *Other local font* were removed. Reports that had no stored font, or followed the interface font, now use **System default**.
+- A font typed by hand is still applied and shown as an extra entry.
 :::
 
 ## Element font
@@ -52,5 +53,5 @@ Every font control in a component's **Style** starts as **Default (font name)**,
 
 ## Related topics
 
-- [White Label](/documentation/Embedded/White-Label/)
+- [Branding](/documentation/Console/Branding/)
 - [Page Settings](/documentation/Visualization/Size-Display/)

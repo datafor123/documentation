@@ -27,7 +27,7 @@ This page also describes the behaviour that all six column and bar charts share:
 | **Tooltips** | Order Count | Extra values in the tooltip; not drawn. |
 | **Color** | Optional field | Colours the columns by a dimension or measure; single measure only. |
 
-- With several measures, **Legend** and **Color** are not available: each measure is a series with its own colour, set in the measure's **Color** menu. Keep the units compatible; use a [Combo](/documentation/Visualization/Combo%20Chart/) for an amount and a rate.
+- With several measures, **Legend** and **Color** are not available: each measure is a series with its own colour, set in the measure's **Color** menu. Keep the units compatible; use a [Combo](/documentation/Visualization/Combo-Chart/) for an amount and a rate.
 - Measures without an **X-axis** field give one column per measure, each in its own palette colour.
 - Drag a field between **X-axis** and **Legend** to swap the roles; see [Adding Components](/documentation/Visualization/Adding-Charts/).
 - The automatic title reads *Net Sales by Region, Product Category* (X-axis field before Legend). After a drill-down it names only the current level.
@@ -37,6 +37,8 @@ This page also describes the behaviour that all six column and bar charts share:
 ![Clustered, stacked and 100% stacked views of the same illustrative values](../images/current/chart-comparison-concept.svg)
 
 ## Style settings
+
+![Clustered column of net sales by region with the Style tab groups](../images/current/column-style.jpg)
 
 | Group → option | Effect | Default |
 | --- | --- | --- |
@@ -64,7 +66,7 @@ These rules apply to Clustered column, Stacked column, Clustered bar and Stacked
 - **The automatic range always includes 0.** Column length encodes the value, so all-positive data starts at 0, all-negative data ends at 0, and mixed data spans both. An axis that started near the smallest value would make a 2.8× difference look like 18×.
 - **Fixed bounds** in **Y-axis min value** / **Y-axis max value** (on bar charts **X-axis min value** / **X-axis max value**) override the automatic range. If the minimum is not less than the maximum, both are ignored and the axis stays automatic.
 - **Scale → Auto** picks the unit from the tick interval: an axis from 0 to 2 million in 500K steps reads 0, 0.5M, 1.0M, 1.5M, 2.0M. A fixed unit gives every tick the same number of decimals. See [Value axis units](/documentation/Visualization/Display-Units/#value-axis-units).
-- **Percent axis only for percentages.** The axis shows % only when every measure on it is formatted as a percentage. An amount and a rate on one axis show plain numbers, and the rate stays close to zero: use a [Combo](/documentation/Visualization/Combo%20Chart/) with two axes instead.
+- **Percent axis only for percentages.** The axis shows % only when every measure on it is formatted as a percentage. An amount and a rate on one axis show plain numbers, and the rate stays close to zero: use a [Combo](/documentation/Visualization/Combo-Chart/) with two axes instead.
 - **Hiding a series** in the legend rescales the automatic axis to the remaining series (still from 0). Fixed bounds are kept. Showing all series restores the original range.
 
 ## Data labels
@@ -98,19 +100,10 @@ Switching to Combo or to other chart types, or within the same orientation, is u
 
 - **Tooltip**: rest the pointer on a column. **Sort**, **Show total** and **Show percentage** list all series of the category; see [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/).
 - **Legend**: click to hide a series, double-click to show only that series; see [Legends](/documentation/Visualization/Legends/).
-- **Click a column** to [cross-filter](/documentation/Analysis/Cross-Filtering/) other components (**Actions → Interactions**) or [drill down](/documentation/Analysis/Drill-down/). Right-click for the [data point menu](/documentation/Analysis/Exploratory%20Analysis/); **Actions → View details** adds a detail table to it.
+- **Click a column** to [cross-filter](/documentation/Analysis/Cross-Filtering/) other components (**Actions → Interactions**) or [drill down](/documentation/Analysis/Drill-down/). Right-click for the [data point menu](/documentation/Analysis/Exploratory-Analysis/); **Actions → View details** adds a detail table to it.
 - **Analytics** adds target and average lines and bands; see [Reference lines](/documentation/Analysis/Chart-Reference-Lines/).
 
-## Reports from earlier versions
-
-- Automatic value axes now include 0, so a chart whose axis started near the smallest value is redrawn from 0 when opened. Charts where the old **Zero align** switch (no longer in the panel) was saved off keep the data range.
-- Labels inside columns that do not fit are now hidden.
-- **Display units** stays **Follow measure format**, label colours stay fixed and the size is unchanged. The new defaults apply only to charts placed in 10.00.
-- The default X-axis name is now always the X-axis field at the current drill level. Before, it could show the Legend field or the top drill level.
-
-## Check the result
-
-Save and open **Preview**. Hover at least one category and compare the values with a table using the same filters.
+## Common symptoms
 
 | Symptom | Check |
 | --- | --- |
@@ -121,4 +114,12 @@ Save and open **Preview**. Hover at least one category and compare the values wi
 | Categories are missing | Check filters and any [row limit](/documentation/Analysis/Top-Bottom-N/); see also [Empty data and errors](/documentation/Visualization/Empty-Data-and-Errors/). |
 | **Legend** or **Color** is missing | Several measures are assigned. |
 
-Related: [Stacked column](/documentation/Visualization/Stacked-Column-Chart/) · [100% stacked column](/documentation/Visualization/100-Stacked-Column-Chart/) · [Clustered bar](/documentation/Visualization/Clustered-Bar-Chart/) · [Component filters](/documentation/Analysis/Component-Level-Filtering/)
+If the values themselves look wrong, see [Resolve common data problems](/documentation/Visualization/Choose-a-Chart/#resolve-common-data-problems).
+
+::: details Opening reports made before 10.00
+- Automatic value axes now include 0, so a chart whose axis started near the smallest value is redrawn from 0 when opened. Charts where the old **Zero align** switch (no longer in the panel) was saved off keep the data range.
+- Labels inside columns that do not fit are now hidden.
+- The default X-axis name is now always the X-axis field at the current drill level. Before, it could show the Legend field or the top drill level.
+:::
+
+Related: [Stacked column and bar](/documentation/Visualization/Stacked-Column-Chart/) · [100% stacked column and bar](/documentation/Visualization/100-Stacked-Column-Chart/) · [Clustered bar](/documentation/Visualization/Clustered-Bar-Chart/) · [Component filters](/documentation/Analysis/Component-Level-Filtering/)

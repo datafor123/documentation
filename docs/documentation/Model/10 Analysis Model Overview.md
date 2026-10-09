@@ -1,6 +1,7 @@
 ---
 title: Analysis Model Overview
 permalink: /documentation/Model/Analysis-Model-Overview/
+description: What an Analysis Model contains, the areas of the modeler, and the recommended order for building a model.
 createTime: 2026/09/03 21:51:00
 ---
 
@@ -22,9 +23,9 @@ An Analysis Model is the semantic layer between a data source and Datafor report
 | **Business semantics** | Adds descriptions, aliases, roles, units, direction, and recommended dimensions. |
 | **Enterprise metric binding** | Connects a model measure to a governed definition in Metrics Library. |
 
-## Designer workspace
+## Modeler workspace
 
-<div align="left"><img src="./images/analysis-model-designer-overview.png" alt="Analysis Model designer showing the Data panel, model canvas, Analysis model tree, Attributes panel, and the diagnostics bar" width="100%" /></div>
+<div align="left"><img src="./images/analysis-model-designer-overview.png" alt="Modeler showing the Data panel, model canvas, Analysis model tree, Attributes panel, and the diagnostics bar" width="100%" /></div>
 
 | Area | Use it to |
 | --- | --- |

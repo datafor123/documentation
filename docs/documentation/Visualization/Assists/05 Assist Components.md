@@ -7,7 +7,7 @@ createTime: 2026/10/09 16:00:00
 
 # Assist Components
 
-Assist components add titles, explanations, decoration and navigation to a report. They need no data model, except the Action button and Web page when you bind them to data.
+Assist components add titles, explanations, decoration and navigation to a report. They need no data model, except Rich text value blocks, which query a measure, and the Action button and Web page when you bind them to data.
 
 ![The Assists section of the palette](./images/assists-palette.png)
 

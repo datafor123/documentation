@@ -71,17 +71,13 @@ The KPI trend card has its own unit setting and does not use the shared **Displa
 
 The card does not react to clicks: it cannot cross-filter other components, drill or open **View details**, and it has no data point menu. **Actions** has only **Data refresh** and **Events** (before fetch, before execution); there are no **Interactions** settings.
 
-## Reports from earlier versions
+## Missing final-period data
 
-- **Direction** stays **Higher is better**.
+When the last returned period has a target but no actual, the card can display an earlier actual and its target while labeling them with the final period's date. Verify the date and actual together in the component's **More → Data preview**. Filter to completed periods or use a table to show the missing value explicitly; do not treat the headline as the final period's result. A partially loaded current month is also not directly comparable with a completed month unless that is the intended question.
+
+::: details Opening reports made before 10.00
 - Saved style settings and the **Static target** are now applied when the report is opened. Earlier versions reset them to the defaults on reopening, so such cards can look different now.
 - A card that never stored its own **Label text** now shows *Target* instead of *Target label*.
-- Click actions saved under **Actions** are kept but never run.
-
-## Check before sharing
-
-Save and open **Preview**. Compare the highlighted value with the final valid observation in a table at the same time grain. Check the target or previous value used as the baseline.
-
-**Current limitation with missing final-period data:** when the last returned period has a target but no actual, the card can display an earlier actual and its target while labeling them with the final period's date. Verify the date and actual together in the component's **More → Data preview**. Filter to completed periods or use a table to show the missing value explicitly; do not treat the headline as the final period's result. A partially loaded current month is also not directly comparable with a completed month unless that is the intended question.
+:::
 
 Use a [Measure card](/documentation/Visualization/Measure/) for an aggregate over the entire selected period, and a [Line](/documentation/Visualization/Line-Chart/) chart when readers need a full axis and precise trend inspection.

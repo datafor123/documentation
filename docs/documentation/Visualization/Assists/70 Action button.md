@@ -44,5 +44,3 @@ Details of each action and rule: [Click Actions and Visibility](/documentation/V
 ## Bind the button to data
 
 New buttons need no data. Turn on **Data → Data binding** to show a value from the model on the button: choose **Analysis model**, **Field** and **Filters**. The first member of the field becomes the button text, can be mapped to an image, and is passed as a parameter when the button opens a report. **Disable condition → When there is no data** then greys the button out when the query returns nothing.
-
-Use labels that say what happens, such as *Reset filters* or *Open store details*.

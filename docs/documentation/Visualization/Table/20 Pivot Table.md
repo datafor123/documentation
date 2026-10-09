@@ -58,7 +58,7 @@ The row-field columns stay frozen while readers scroll sideways, as long as they
 
 Templates, conditional formatting, data bars and icons work as on the Table. See [Table Styles](/documentation/Visualization/Table-Styles/) and [Conditional Formatting](/documentation/Visualization/Conditional-Colors/).
 
-## Check the result
+## Totals and known issues
 
 - A ratio or distinct count in a subtotal is recalculated, not summed.
 - Do not turn on **Show total** for the first row field while **Grand total** is on: both produce the same overall total row.

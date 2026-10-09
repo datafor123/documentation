@@ -1,6 +1,7 @@
 ---
 title: Tidy Model into a Star Schema
 permalink: /documentation/Model/Tidy-Model-into-a-Star-Schema/
+description: Use Tidy model into a star schema to remove semantic roles that conflict with the inferred star-schema roles of the tables, and validate the result before saving.
 createTime: 2026/09/04 09:07:12
 ---
 
@@ -30,7 +31,7 @@ Also review:
 
 ## Review and apply the preview
 
-1. Click **Tidy model into a star schema** in the model designer.
+1. Click **Tidy model into a star schema** in the modeler.
 2. Review every proposed removal in the preview. Tidy can remove the last Measure Group or Dimension from a table.
 3. Review **Left as is**. This section contains tables for which no removal is proposed; it can include already-correct tables as well as tables whose role could not be inferred.
 4. Click **Cancel** if a proposed role is wrong. Correct the relationship cardinality or semantic design, then run Tidy again.
@@ -48,7 +49,7 @@ After applying the cleanup:
 4. Resolve relevant **Model diagnostics** issues.
 5. Validate representative totals and drill paths, then save the model.
 
-When a removed Measure has a Metrics Library binding, the designer requests an unbind. That request can fail independently of the editor change. Treat the registry separately from editor history: **Ctrl+Z** can restore the editor draft, but it does not restore an external Metrics Library binding. Always recheck **Metric bindings** after applying or undoing Tidy.
+When a removed Measure has a Metrics Library binding, the modeler requests an unbind. That request can fail independently of the editor change. Treat the registry separately from editor history: **Ctrl+Z** can restore the editor draft, but it does not restore an external Metrics Library binding. Always recheck **Metric bindings** after applying or undoing Tidy.
 
 ## When not to use Tidy
 

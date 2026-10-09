@@ -50,15 +50,14 @@ For a target of 100, illustrative boundaries of 0, 60, 80, 100, 110 and 120 defi
 
 Keep the actual bar and target marker easy to see against the ranges. In horizontal bullets the right margin grows so that the last tick label, such as *100%*, is not cut off, unless you set the right padding yourself.
 
-## Check boundary behavior
+## When ranges or the target look wrong
 
-Save and open **Preview**. Compare one category's actual, target and thresholds with a table. Inspect values below target, at target and beyond the last range. Check that a higher value really is better for the chosen metric; range labels should not imply success for rising defect counts.
+Check that a higher value really is better for the chosen metric; range labels should not imply success for rising defect counts.
 
 If ranges look wrong, inspect the data-bound threshold first, then the fallback percentage. If the target marker is missing, check for a missing or zero target.
 
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - Rows are drawn in data order; earlier versions put the first row at the bottom.
 - Without a Maximum, the scale now ends just above the largest value, so bars and the target marker move.
 - Tick labels use K, M or B and one unit for the chart instead of long raw numbers.
-- Range colors keep their saved values or the earlier colored defaults.
+:::

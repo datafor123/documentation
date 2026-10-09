@@ -200,15 +200,3 @@ export const apiNote = defineNoteConfig({
 	],
 });
 
-export const apiNoteZH = defineNoteConfig({
-	dir: "zh/api",
-	link: "/api",
-	sidebar: [
-		{
-			text: "Authentication",
-			collapsed: true,
-			prefix: "/api/Authentication/",
-			items: "auto",
-		}
-	],
-});

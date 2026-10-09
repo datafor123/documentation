@@ -23,9 +23,7 @@ Horizontal bars, side by side, measured from a common zero baseline. Use it for 
 | **Measures** | Net Sales | One or more measures to compare. |
 | **Tooltips** | Order Count | Extra values in the tooltip; not drawn. |
 
-With several measures, **Legend** and **Color** are not available; each measure gets its own colour. Use a [Combo](/documentation/Visualization/Combo%20Chart/) for an amount and a rate.
-
-![Clustered, stacked and 100% stacked views of the same illustrative values](../images/current/chart-comparison-concept.svg)
+With several measures, **Legend** and **Color** are not available; each measure gets its own colour. Use a [Combo](/documentation/Visualization/Combo-Chart/) for an amount and a rate.
 
 ## Settings specific to bars
 
@@ -39,27 +37,19 @@ On bar charts the **X axis** is the value axis and the **Y axis** holds the cate
 | **Data labels → Position** | **Inside left**, **Center**, **Inside right**, **Right**. | **Inside left** |
 | **X axis → Scale** | Tick unit: **Auto**, **K**, **M**, **B**, **T**, **%**. | **Auto** |
 | **X axis → X-axis min value**, **X-axis max value** | Fixed bounds. Empty = automatic, from 0. | Empty |
-| **Y axis → Label width** | Width of the category labels (40–800 px); longer names are cut off with "...". | 50 px |
+| **Y axis → Label width** | Width of the category labels (40–800 px); longer names are cut off with "..."; increase it or the chart width. | 50 px |
 | **Y axis → Show axis name**, **Axis name** | Category-axis title. Empty = the Y-axis field. | On |
 
-- With **Position** = **Right**, the automatic right margin is sized from the widest formatted label, so long labels are not cut off at the edge.
+- With **Position** = **Right**, the automatic right margin is sized from the widest formatted label, so long labels are not cut off at the edge. If labels overlap the right edge or the scrollbar, clear **Right margin** so it is sized automatically.
 - Labels inside bars that do not fit are hidden. With the default **Inside left**, labels of short bars can disappear; choose **Right** when many bars are short.
 - **Data labels → Display units** is **Auto** for new charts. Font, decimals and the remaining options are as on the [Clustered column](/documentation/Visualization/Clustered-Column-Chart/#style-settings).
 
 The value axis always includes 0, fixed bounds are ignored when the minimum is not less than the maximum, and hiding a series rescales the axis; see [Value axis](/documentation/Visualization/Clustered-Column-Chart/#value-axis). Switching to a column chart moves the axis settings to the matching axis; see [Switch between column and bar charts](/documentation/Visualization/Clustered-Column-Chart/#switch-between-column-and-bar-charts).
 
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - **X axis → Scale** used to be ignored on bar charts; a unit saved in an old report now takes effect.
 - **Right margin** = 0 now removes the margin, and clearing the box returns to automatic spacing immediately.
 - Automatic value axes now start at 0, and labels inside bars that do not fit are hidden.
+:::
 
-## Check the result
-
-Save and open **Preview**. Hover at least one bar and compare its value with a table using the same filters.
-
-- If labels overlap the right edge or the scrollbar, clear **Right margin** so it is sized automatically.
-- If category names are cut off, increase **Y axis → Label width** or the chart width.
-- If categories are missing, check filters and any [row limit](/documentation/Analysis/Top-Bottom-N/).
-
-Related: [Stacked bar](/documentation/Visualization/Stacked-Bar-Chart/) · [100% stacked bar](/documentation/Visualization/100-Stacked-Bar-Chart/) · [Clustered column](/documentation/Visualization/Clustered-Column-Chart/) · [Component filters](/documentation/Analysis/Component-Level-Filtering/)
+Related: [Stacked column and bar](/documentation/Visualization/Stacked-Column-Chart/) · [100% stacked column and bar](/documentation/Visualization/100-Stacked-Column-Chart/) · [Clustered column](/documentation/Visualization/Clustered-Column-Chart/) · [Component filters](/documentation/Analysis/Component-Level-Filtering/)

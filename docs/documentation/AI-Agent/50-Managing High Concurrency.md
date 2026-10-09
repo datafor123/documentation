@@ -177,7 +177,7 @@ The response reports database reachability and separate `queues.routing` and `qu
 
 ## 5. Daily quotas
 
-A daily question quota limits how many questions each user asks per day; it does not limit simultaneous questions or reserve a worker. See [AI Operations and Quotas](/documentation/AI-Agent/LLM-Permission-Management/).
+A daily question quota limits how many questions each user asks per day; it does not limit simultaneous questions or reserve a worker. See [AI Operations and Quotas](/documentation/AI-Agent/AI-Operations-and-Quotas/).
 
 ## 6. Troubleshoot before adding more workers
 

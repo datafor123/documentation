@@ -49,9 +49,9 @@ The relative choices follow the field's level:
 | Week | This Week, Last Week |
 | Day | Today, Yesterday |
 
-Every list ends with **Custom…**, where you set **Current** / **Back** / **Ahead**, a number and a unit, for example *12 months back* for the same month last year.
+Every list ends with **Custom…**, where you set **Current** / **Back** / **Ahead**, a number and a unit, for example *12 months back* for the same month last year. See [Custom rules](/documentation/Analysis/Relative-Date-Filtering/#custom-rules).
 
-If the computed period has no member in the data, the filter still applies it, the charts show no data, and the period appears in red with a strikethrough: *No member for this period in the current data; the period is still applied as a filter*.
+If the computed period has no member in the data, it is still applied and shown in red with a strikethrough; see [Values that are no longer in the data](/documentation/Visualization/Filter-Subscriptions/#values-that-are-no-longer-in-the-data).
 
 ## Selection rules
 
@@ -62,7 +62,7 @@ If the computed period has no member in the data, the filter still applies it, t
 
 ## Search and long lists
 
-Dropdown and List box can show a search box (**Style → Search**). The list loads at most 1,000 members. When it is cut, the footer says *Showing the first 1,000 of 10,181 items. Type to search all*, and typing searches all members on the server, taking the other filters into account. Search stays available on a cut list even if the search box is turned off.
+Dropdown and List box can show a search box (**Style → Search**). The list loads at most 1,000 members; typing searches all of them on the server. See [Long member lists](/documentation/Visualization/Filter-Subscriptions/#long-member-lists).
 
 In a List box, the search filters as you type (it waits while an input method is composing), and the result scrolls to the top.
 
@@ -95,13 +95,6 @@ In a List box, the search filters as you type (it waits while an input method is
 **Radio/Checkbox**
 - A tooltip with the full name appears only when a name is cut off.
 
-## Troubleshooting
-
-| Symptom | Check |
-| --- | --- |
-| The chart still shows every value. | The chart is not in **Linked components**, or it uses another model without the field. |
-| A relative default shows in red. | The period has no data yet (for example, last month before the data load). The filter is still applied. |
-| A value saved earlier shows in red with a strikethrough. | The member no longer exists in the data. Untick it. |
-| A member beyond the first 1,000 cannot be found by scrolling. | Type in the search box to search all members. |
+When a chart ignores the filter, a value shows in red, or a member cannot be found, see [Diagnose an unexpected result](/documentation/Visualization/Filter-Subscriptions/#diagnose-an-unexpected-result).
 
 Related: [Filters](/documentation/Visualization/Filters/) · [Date](/documentation/Visualization/Datepicker/) · [Relative Date Filtering](/documentation/Analysis/Relative-Date-Filtering/)

@@ -7,9 +7,7 @@ createTime: 2026/09/11 16:30:00
 
 # Improving AI Agent Answers
 
-This guide is for everyone who works with the AI Agent: the people who ask questions, the model authors who maintain analysis models, the metric owners who govern definitions in Metrics Library, and administrators. It covers one idea: **how well the Agent answers depends mostly on what it is given, and all of that is in your hands.**
-
-Feature names follow the current English interface; check the version you are running.
+This guide is for everyone who works with the AI Agent: the people who ask questions, the model authors who maintain analysis models, the metric owners who govern definitions in Metrics Library, and administrators. How well the Agent answers depends mostly on what it is given. Each section lists what one role can do, with links to the pages that describe the settings in full.
 
 ## 0. Where the Agent's understanding comes from
 
@@ -17,11 +15,11 @@ The Agent does not guess table structures and does not invent definitions from g
 
 | Source | Who maintains it | Where | What it decides |
 | --- | --- | --- | --- |
-| **Business semantics of the analysis model** | Model authors | Model Designer → properties panel | Whether a user's wording maps to a field; how time, units, percentages, and "higher is better" are understood |
+| **Business semantics of the analysis model** | Model authors | Modeler → **Attributes** panel | Whether a user's wording maps to a field; how time, units, percentages, and "higher is better" are understood |
 | **Metrics Library** | Metric owners | Console → **Data → Metrics Library** | What a business term means, which measure computes it, which model answers a question that names no model, and whether the number must carry a caveat |
 | **Knowledge index** (called vector index before 10.00) | Built automatically when a model is saved; administrators monitor it | **Settings › AI Agent › Knowledge indexes**; **Prep data for AI** on the model | Whether business terms and member values ("East Region", "Completed") are recognized |
 
-Plus **the question itself**. The sections below are organized by role. The model-author and metric-owner sections each end with "How to confirm it worked", so you can verify a change yourself.
+Plus **the question itself**. The model-author and metric-owner sections each end with "How to confirm it worked", so you can verify a change yourself.
 
 ---
 
@@ -32,12 +30,10 @@ Plus **the question itself**. The sections below are organized by role. The mode
 If your organization has registered enterprise metrics in Metrics Library (for example **Net Sales** or **Average Order Value**), **ask with the metric's name or one of its synonyms**. The Agent then computes the registered definition instead of a similarly named raw field in the model.
 
 - "Net sales by region this year" is computed with the certified definition.
-- "How is net sales defined?" returns the business definition, its caveats, unit, and direction from Metrics Library, and says which model currently implements it. No query is executed.
-- When one word matches two metrics (for example **Profit Rate** as a synonym of both **Gross Margin Rate** and **Contribution Margin Rate**), the Agent lists the candidates and asks you to choose. **It never picks one silently.**
+- "How is net sales defined?" returns the business definition, its caveats, unit, and direction from Metrics Library, and says which model currently implements it. No query is executed. If the answer contains a business definition and an owner, the term is registered.
+- When one word matches two metrics (for example **Profit Rate** as a synonym of both **Gross Margin Rate** and **Contribution Margin Rate**), the Agent lists the candidates and asks you to choose. It never picks one silently.
 
-Not sure what is in the library? Ask the Agent "How is X defined?". If the answer contains a business definition and an owner, the term is registered. You can also ask a metric owner for a list exported from the Console.
-
-With **Auto-select model**, the metric name also picks the model: the Agent answers from the model the metric is bound to, and the answer card says so ("Basis: the governed metric … is bound to this model."). If the metric is bound in several models you can use, the card lists the others, or the Agent asks which one you mean. See [AI Assistant](/documentation/AI-Agent/AI-Chat/).
+With **Auto-select model**, the metric name also picks the model: the answer card says "Basis: the governed metric … is bound to this model." See [AI Assistant](/documentation/AI-Agent/AI-Chat/).
 
 ### 1.2 Read the governance notes in an answer
 
@@ -46,133 +42,38 @@ An answer that involves an enterprise metric sometimes carries a short note. Eac
 | Note in the answer | Meaning | What to do |
 | --- | --- | --- |
 | The definition is not certified / still a draft | The Metrics Library record is a draft. The number is given as usual, but the business has not stood behind the definition yet. | Ask the metric owner to review it and click **Mark as certified**. |
-| The number was not computed through a certified binding | The library defines the metric, but no measure in the current model is bound to it, so the Agent used a model field. | Ask the model author to bind a measure to the metric in the properties panel. |
+| The number was not computed through a certified binding | The library defines the metric, but no measure in the current model is bound to it, so the Agent used a model field. | Ask the model author to bind a measure to the metric. |
 | The definition is not certified at this grain | The dimension you asked for (for example, by city) is outside the metric's **Effective grain**. The number is still computed. | Usually nothing. If that grain is genuinely needed, ask the metric owner to extend the effective grain. |
 | Possible drift / implementation contradicts the definition | The definition comparison found a conflict between the model formula and the business definition; the answer states the conflict. | Hand it to the metric owner and model author: change the definition or the formula, then compare again. |
 | Pending re-check / definition changed | The definition or the model implementation changed and has not been compared again. | Ask the model author to click **Compare against new definition** on the **Metric bindings** tab. |
 
-These notes appear **only when the metric is actually registered in Metrics Library**. No note at all means the term is not in the library, or definition and implementation were already compared and match, or the metric is a draft generated from the model (tagged **From model**) whose definition nobody has edited yet: such a draft only repeats the model description, so it carries no draft note. The first case is itself a signal; see §3.7.
+These notes appear **only when the metric is actually registered in Metrics Library**. No note at all means the term is not in the library, or definition and implementation were already compared and match, or the metric is a draft generated from the model (tagged **From model**) whose definition nobody has edited yet. The first case is itself a signal; see §3.2.
 
-When the Agent asks "which date?" or "which definition?", the model or the library has two candidates. Pick one. If the same question keeps coming back, fix it at the source: see §2.4 (Default time field) and §3.1 (Synonyms).
+When the Agent asks "which date?" or "which definition?", the model or the library has two candidates. Pick one. If the same question keeps coming back, fix it at the source: the measure's **Default time field** or the metric's synonyms.
 
 ---
 
 ## 2. If you maintain the analysis model
 
-Where: Model Designer → select an object in the tree or on the canvas → the **properties panel** on the right. The panel is grouped into **Core**, **Business semantics**, **Advanced** (attributes only), and **Metric governance** (measures only). The fields the Agent cares about are in **Business semantics** and **Metric governance**.
+### 2.1 Checklist
 
-One principle first: **metadata does not have to be perfect, but it has to be readable and written in business language.** The Agent discloses limits on an imperfect model instead of forcing an answer. When a particular phrasing does not work, fix the description or aliases first; you rarely need to restructure the model.
+Work in the modeler's **Attributes** panel. Each item links to the full description in [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/).
 
-### 2.1 Captions and descriptions: the Agent's primary material
+1. **Captions and descriptions in business language** on every user-visible dimension, attribute, hierarchy, measure and calculated measure. Fields with the same name and different meanings ("Sales (gross)" and "Net Sales") must each say what they include and exclude; this is the most frequent source of wrong answers. [Write captions and descriptions](/documentation/Model/Business-Semantics-for-AI/#write-captions-and-descriptions)
+2. **Aliases** with the words users really say, and **Sample values** on attributes with many members (cities, stores, products), so that a question naming only a value ("East Region sales") lands on the right field. [Aliases and sample values](/documentation/Model/Business-Semantics-for-AI/#aliases-and-sample-values)
+3. **Semantic roles**: the time roles on every level of a complete date hierarchy, plus geography, code, name and status roles. [Semantic roles](/documentation/Model/Business-Semantics-for-AI/#semantic-roles)
+4. **Default dates**: the model's **Default time dimension** when most measures follow one date, and a measure's **Default time field** for the exceptions. [Default time field](/documentation/Model/Business-Semantics-for-AI/#default-time-field)
+5. **Measure fields**: a percentage **Data Format** for ratios, **Unit**, **Display scale**, **Direction** (**Lower is better** for costs and return rates), and one to three **Recommended dimensions**, which decide the grouping of an unspecified breakdown and of a "why did it change?" answer. [Describe Measures](/documentation/Model/Business-Semantics-for-AI/#describe-measures)
+6. **Ratios as numerator / denominator** (`N / D`, `IIf(D = 0, NULL, N / D)`, or `N - D` for a difference), without `*100`. Otherwise year-over-year comparisons of the ratio may be partial and its changes cannot be decomposed. [Write ratios as numerator and denominator](/documentation/Model/Business-Semantics-for-AI/#write-ratios-as-numerator-and-denominator)
+7. **Bindings** to the enterprise metrics, one measure per metric in each model, then save the model. Bindings also choose the model for questions asked with **Auto-select model**, so bind each metric in the model that should answer for it. [Bind a governed enterprise metric](/documentation/Model/Business-Semantics-for-AI/#bind-a-governed-enterprise-metric)
 
-| Object | What to write |
-| --- | --- |
-| Dimension | What business entity it represents: "Product master data with brand and category" |
-| Attribute (field) | Its business meaning: "Unique product code, same as the ERP item number" |
-| Hierarchy | The drill-down path: "Country → Province → City" |
-| Measure | The **business definition**: "Store sales including tax, excluding returns" |
-| Calculated measure | What it measures and how: "Gross margin rate = gross margin / sales" |
+Use the **Model diagnostics** tab at the bottom of the canvas as a checklist for missing descriptions (category **Semantic completeness**). See [Model Diagnostics](/documentation/Model/Model-Diagnostics/).
 
-Three points:
+### 2.2 Compare definitions
 
-- **Use business words for captions.** "Sales" rather than `AMT_1`; the words in a user's question have to match a caption or a description.
-- **Fields with the same name and different meanings must be told apart.** A model that contains both "Sales (gross)" and "Net Sales" is common and legitimate, but each description must state what it includes and excludes. This is the most frequent source of wrong answers.
-- **Do not put SQL or table names in descriptions.** The Agent does not need them and users cannot read them.
+After binding and saving, click **Compare definition** in the measure's **Definition consistency** row, or **Compare all** on the **Metric bindings** tab. Unresolved **Possible drift** and **Needs comparison** states show up in users' answers as they are (§1.2): a warning the user can see is better than a possibly wrong number that looks authoritative. The statuses, and what to do about each, are in [Review definition consistency](/documentation/Metrics-Library/Metrics-Library/#_5-review-definition-consistency).
 
-The **Model diagnostics** tab in the **Insights** panel at the bottom of the designer lists every object that "has no description for AI to read" (category **Semantic completeness**). Use it as a checklist. See [Model Diagnostics](/documentation/Model/Model-Diagnostics/).
-
-### 2.2 Aliases and Sample values: register the words users actually say
-
-The **Aliases** field in **Business semantics** (dimensions, attributes, and measures all have it), comma separated:
-
-- Dimension: `goods, items, SKUs`
-- Attribute: `product code, SKU, item number`
-- Measure: `revenue, sales, turnover`
-
-What to register? **The words users really use**: colloquial terms, abbreviations, English column names, and the different names departments use for the same thing. Any wording users tried that did not map to a field belongs here.
-
-Attributes also have a **Sample values** field (**Business semantics**, below Aliases): a few real member values, comma separated. A region field might carry `East, North, South`; a status field `Completed, Cancelled`.
-It solves a different kind of miss: the user says a **value**, not a field name. "East Region sales last month" never mentions "region", so the Agent has to know which field "East Region" belongs to.
-
-- Three to five representative real values are enough; do not list them all. For fields with few members (a few dozen) the Agent reads every member itself, so sample values matter most for fields with many members: cities, stores, products, customers.
-- Write the values as they appear in the data. The Agent uses them only to pick the field; the filter itself is still matched against the real members, so a sample value never becomes a filter on its own.
-- Takes effect within a few minutes of saving the model; no re-indexing is needed. The panel is described in [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/).
-
-### 2.3 Attribute semantic roles: tell the Agent this is a "month" or a "city"
-
-An attribute's **Semantic role** in **Core** is not a comment; it changes how the Agent understands the field:
-
-- **Time: Year / Quarter / Month / Week / Date** set the field's time grain. With the right roles, "trend by month", "same period last year", and "month over month" have something to land on. Build the full date hierarchy (Year → Quarter → Month, optionally → Day) and assign the matching time role to every level. See [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/).
-- **Geography: Country / State / City**, **Identifier / Code**, **Name / Display name**, **Category**, **Type**, **Segment / Range**, **Status**, **Flag**, **Numeric attribute**, and **Sort field** are hints that help the Agent judge how a field is used (a code is not a good grouping label; a status is usually a filter).
-
-### 2.4 Default time field: required for models with several dates
-
-An order fact table often has an order date, a ship date, and a delivery date. When a user says "this year", the Agent has to decide which one applies. Without a declaration it either asks or infers from descriptions, and neither is stable.
-
-Set **Default time field** in the measure's **Business semantics** to a time attribute or hierarchy level. From then on, "sales this year" is read against that date field, and the answer's **Evidence and boundaries** section states which date was used. Each measure can differ: "Refund amount" can default to the return date while "Sales" defaults to the order date.
-
-The model also has a model-level **Default time dimension** in **Model properties**: one time dimension for the whole model. The Agent reads it when a measure declares no Default time field of its own, and reads "this year" against a date field of that dimension. A measure's own Default time field always takes precedence, and a date the user names wins over both. For a model where most measures follow the same date, set this first and give only the exceptions a Default time field. See [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/).
-
-### 2.5 Unit, Display scale, Data Format, Direction, Recommended dimensions
-
-All five live on the measure and each controls one thing:
-
-| Field | Location | Effect | How to fill it in |
-| --- | --- | --- | --- |
-| **Data Format** | Core | Give ratio measures a percentage format such as `0.00%`; the Agent then presents them as percentages instead of `0.41`. | Required for ratios |
-| **Unit** | Business semantics | The Agent names the unit in the reader's language (dollars, days, orders). | Pick a standard unit or type your own; units already used in this model are listed first. See [Units and Display Scale](/documentation/Model/Units-and-Display-Scale/). |
-| **Display scale** | Core | The Agent and reports present the number at this magnitude (K, M, B). | Only for amounts and counts read as trends; leave detail values unscaled. |
-| **Direction** | Business semantics | Higher is better / Lower is better / Neutral; helps the Agent describe whether a change is good or bad. | Remember to set "Lower is better" for costs and return rates. |
-| **Recommended dimensions** | Business semantics | Tells the Agent which dimensions this measure is normally analyzed by. When a user asks for "the breakdown of sales" without naming an axis, the Agent picks the grouping from here first; it also picks from here the dimensions it uses to break down a change ("why did sales fall?"), and the suggested questions on the model's start page use it too. | Pick one to three dimensions users most often split this measure by. A dimension the user names always wins, and no grouping is added to a question that did not ask for one. |
-
-With several measures selected, fields such as Unit and Direction can be set in bulk. Caption, Description, Aliases, and the enterprise metric binding identify a single measure and must be set one at a time.
-
-### 2.6 Ratios and differences: write them as numerator and denominator
-
-When the Agent can see a ratio's numerator and denominator, it queries both and computes the ratio itself. Period comparisons of the ratio (year over year, against last month) are then exact, and a "why did it change?" question can split each member's contribution into the part from its weight in the denominator and the part from its own ratio. A ratio without visible components is opaque: its comparison may be missing and the answer partial.
-
-The Agent reads the components from a calculated measure's formula only in these shapes:
-
-| Shape | Example |
-| --- | --- |
-| `N / D` or `(N) / (D)` | `[Measures].[Gross Profit] / [Measures].[Net Sales]` |
-| `IIf(D = 0, NULL, N / D)` | `IIf([Measures].[Paid Orders] = 0, NULL, [Measures].[Net Sales] / [Measures].[Paid Orders])` |
-| `N - D` (a difference) | `[Measures].[Net Sales] - [Measures].[Cost]` |
-
-- **N** and **D** must each be a measure users can see, or a parenthesized expression that equals another visible calculated measure. For example, `([Measures].[Net Sales] - [Measures].[Cost]) / [Measures].[Net Sales]` works when the model also has a visible calculated measure Gross Profit = Net Sales − Cost.
-- `*100`, any other function, or three or more operands make the ratio opaque. Show a percentage through a percentage **Data Format** (§2.5) instead of multiplying by 100.
-- When the formula cannot take one of these shapes, the components can come from Metrics Library instead: bind the measure to a metric whose **Calculation method** is **Ratio**, **Difference**, or **Attainment rate** (§3.2). A component declaration in the model formula takes precedence.
-- Declared relations also answer "is it A or B?" questions. With Average Order Value = Net Sales / Paid Orders declared, a change in net sales can be split into the contributions of paid orders and of average order value.
-
-### 2.7 Bind measures to enterprise metrics (Metric governance)
-
-A definition in Metrics Library only constrains the Agent's computation once it is bound to a measure in the model. Binding happens in the designer, in one of two ways:
-
-- **Existing measure**: select the measure → properties panel → **Metric governance** → **Enterprise metric**, and choose a library record. Fill in **Effective grain** only when the metric stops being meaningful at other grains (sales per square meter is only valid by store and month, for example). Leave it empty for "any grain".
-- **New calculated measure**: choose **Reference from metrics library** when creating it → select the metric → **Next: write formula**.
-
-Rules and reminders:
-
-- **One metric, one measure per model.** Binding a second measure raises the "Metric already bound" dialog, which warns that the Agent cannot tell which one to compute with. Do not force it.
-- **Save the model after binding.** Saving writes the binding and a snapshot of the measure's implementation (aggregation or formula) to Metrics Library; the definition can be compared only after that. A binding shown as **Not registered** just needs a save.
-- After renaming a measure or changing its formula, save once more. The snapshot updates automatically and the binding switches to **Needs comparison**.
-- **Bindings also choose the model.** When a user asks without selecting a model, the Agent answers from the model the named metric is bound to. Bind each metric in the model that should answer for it. A metric bound in several models leads to an answer card listing the other models, or to a question asking the user which model to use.
-
-### 2.8 Compare definitions: catch drift before users do
-
-After binding and saving, the **Definition consistency** row appears under **Metric governance**; click **Compare definition**. Or open the **Metric bindings** tab in the **Insights** panel and click **Compare all** to run the whole model at once. The comparison is done by AI and has five outcomes:
-
-| Status | Meaning | What to do |
-| --- | --- | --- |
-| **Matches definition** | The implementation agrees with the business definition. | Nothing. |
-| **Possible drift** | The implementation contradicts the definition, with a one-line reason (for example "the denominator uses all orders, the definition requires paid orders"). | Agree with the metric owner: change the model formula or change the definition, then compare again. |
-| **Not enough evidence** | Part of the implementation could not be read, for example a formula that references a member of unknown kind or a formula that was cut off. | Check the formula and the members it references, then compare again. |
-| **Not compared** | Never run. | Run it. |
-| **Needs comparison** | The definition got a new version, or the model implementation changed. | Click **Compare against new definition**. |
-
-**Unresolved "Possible drift" and "Needs comparison" states show up in users' answers as-is** (§1.2). That is deliberate: a warning the user can see is better than a possibly wrong number that looks authoritative. The comparison assumes that each measure holds what its name and description say, and takes exclusions only from the definition text. A scope that matters, for example "the denominator excludes cancelled orders", must therefore be written in the definition or its notes, and a measure description that contradicts it is flagged. When a comparison flags something that is not really wrong, fix the description or the definition text; do not change the model just to silence the warning. Verdicts stored before 10.00 were made under stricter rules: run **Compare all** again.
-
-### 2.9 After changing the model: the knowledge index
+### 2.3 After changing the model: the knowledge index
 
 Once the model is saved, the Agent sees the new metadata immediately. The **knowledge index** follows on its own while **Auto-build knowledge index** is on, which is the default (**Settings › General › System configuration**): saving the model, including **Save as**, copying it, or importing it as a new model builds or updates its index in the background. Check the result on **Settings › AI Agent › Knowledge indexes**.
 
@@ -182,73 +83,32 @@ Once the model is saved, the Agent sees the new metadata immediately. The **know
 
 See [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
 
-### 2.10 How to confirm it worked
+### 2.4 How to confirm it worked
 
 1. Ask again with the exact wording that failed before, and check that it now maps to the right field.
-2. Ask a question that names only a value, not a field ("East Region sales last month"), and check that "East Region" landed on the right field. Fields with many members rely on sample values (§2.2); a recognized value also means the index is healthy.
-3. Ask "sales this year" and check that **Evidence and boundaries** names the date field you set as the default; for a measure without one, check that the date comes from the model's Default time dimension.
+2. Ask a question that names only a value, not a field ("East Region sales last month"), and check that "East Region" landed on the right field. Fields with many members rely on sample values; a recognized value also means the index is healthy.
+3. Ask "sales this year" and check under **Technical details** → **How I read the question** that the date basis is the field you set as the default; for a measure without one, check that the date comes from the model's **Default time dimension**.
 4. Ask for a ratio ("gross margin rate by category") and check that it is shown as a percentage.
-5. Ask for a breakdown without naming the axis ("how is sales split?") and check that the grouping is one of the measure's recommended dimensions (§2.5).
-6. Ask for a ratio compared with last year ("gross margin rate this year versus last year") and check that the answer gives the comparison without a partial note (§2.6).
+5. Ask for a breakdown without naming the axis ("how is sales split?") and check that the grouping is one of the measure's recommended dimensions.
+6. Ask for a ratio compared with last year ("gross margin rate this year versus last year") and check that the answer gives the comparison without a partial note.
 
 ---
 
 ## 3. If you own metric definitions
 
-Where: Console → **Data → Metrics Library**, with two tabs: **Metrics** and **Dimension concepts**. Metrics Library is the single source of truth for enterprise metrics. The Agent treats it as the authority on **what a business term means**, and treats the analysis model as the authority on **what exists and how it is computed**. The binding from §2.7 connects the two. For the full page reference see [Metrics Library](/documentation/Metrics-Library/Metrics-Library/).
+Metrics Library is the Agent's authority on **what a business term means**; the analysis model is its authority on **what exists and how it is computed**. A binding connects the two. Work in **Data → Metrics Library**; each item links to [Metrics Library](/documentation/Metrics-Library/Metrics-Library/).
 
-### 3.1 Synonyms are the lifeline: add at least one
+### 3.1 Checklist
 
-The Agent matches metrics by **exact match on name and synonyms**, with no fuzzy guessing. Names such as "Net Sales", "Gross Sales", and "Sales after Returns" are semantically close and mean completely different things; a wrong guess would be a silently wrong number.
+1. **At least one synonym per metric**, with the wording people actually use (`AOV, average order value, basket size`). The Agent matches names and synonyms exactly; a wording you did not register silently falls back to the raw model field. [Synonyms](/documentation/Metrics-Library/Metrics-Library/#synonyms)
+2. **A business definition that states inclusions and exclusions**, specific enough for **Compare definition** to reach a verdict, and **Caveats / notes** for aggregation traps and historical breaks. [Business definition and caveats](/documentation/Metrics-Library/Metrics-Library/#business-definition-and-caveats)
+3. **Calculation method**: **Ratio**, **Difference** or **Attainment rate** make the Agent query the operand metrics through their own bindings and compute the result itself, which needs the operands bound in the same model. A **Custom formula** is read only when comparing definitions. [Ask AI Agent about an enterprise metric](/documentation/Metrics-Library/Metrics-Library/#_6-ask-ai-agent-about-an-enterprise-metric)
+4. **Unit, Direction, Owner and Applicable dimensions**, with dimension concepts registered on the **Dimension concepts** tab. [Dimension concepts](/documentation/Metrics-Library/Metrics-Library/#dimension-concepts)
+5. **Mark as certified** once the definition is confirmed. From then on the Agent must use it. A certified metric without a binding is explained in full, but its numbers come from model fields with a note. [Certify](/documentation/Metrics-Library/Metrics-Library/#certify)
+6. **Changing a certified or bound definition bumps its version** and puts every binding on **Needs comparison**; answers carry a "pending re-check" note until the model author compares again. [Change a certified or bound definition](/documentation/Metrics-Library/Metrics-Library/#change-a-certified-or-bound-definition)
+7. **Bulk maintenance**: **Export CSV (editable in Excel)** to fill in synonyms and definitions, then **Import**. Model bindings never travel with the file. [Bulk maintenance and access](/documentation/Metrics-Library/Metrics-Library/#_8-bulk-maintenance-and-access)
 
-The price: **a wording you did not register does not match.** The Agent quietly falls back to the raw model field, and from the outside that looks exactly like "this term was never governed". There is no warning. So:
-
-- **Add at least one synonym when creating a metric** (the form reminds you), and include the wording people actually use: `AOV, average order value, basket size`.
-- Check again before certifying. A certified metric with no synonyms is the most dangerous combination: the definition that most needs governance is the easiest to bypass.
-- When a model author binds a measure, the designer shows **Synonyms missing from the metrics library** and offers **Add to metrics library** in one click; synonyms that exist only in the library can be merged into the measure the same way.
-
-### 3.2 Business definition and caveats: written for the Agent to read verbatim
-
-**Business definition**: describe the business meaning and, in the same place, **what is included, what is excluded, and any caveats**. The Agent uses it to disambiguate, to explain results, and to compare the model implementation for drift. How specific? Specific enough for **Compare definition** to reach a verdict:
-
-- Weak: `Net sales`
-- Usable: `Sales amount of completed and paid orders, net of returned amounts`
-- Good: `Sales amount of completed and paid orders, net of returned amounts. Cancelled and unpaid orders are excluded. Differs from "Gross Sales", which includes cancelled and unpaid orders and does not deduct returns.`
-
-**Caveats / notes**: the Agent carries this text whenever it reports or explains the metric. Use it for aggregation traps and historical breaks: `Do not average line-level margin rates; aggregate numerator and denominator first`, `Data before June 2025 still includes internal transfers`.
-
-**Calculation method / Calculation relation**: choose **Base metric**, **Ratio**, **Difference**, **Attainment rate**, or **Custom formula**, and express the relation with other base metrics in the library. It is **not SQL or MDX**, and the executable aggregation and filters stay in the analysis model. How the Agent uses it depends on the method:
-
-- **Ratio**, **Difference**, **Attainment rate** (actual / target): the relation decides which measures the Agent queries. Each operand metric is resolved through its own binding to a measure in the same model, and the Agent queries numerator and denominator (or minuend and subtrahend) and computes the result itself. Period comparisons are then exact, and changes can be decomposed (§2.6). This needs the operand metrics bound in that model; when the model's own formula already declares the components, the model wins.
-- **Custom formula**: the relation is read only when comparing definitions and detecting drift. A **Base metric** has no relation.
-
-The form's hint still says the relation is "never used to compute a number"; for the three methods above that no longer holds.
-
-### 3.3 Unit, Direction, Applicable dimensions, Owner
-
-- **Unit**: pick a standard unit or type your own. Units are stored as language-neutral codes and named in each reader's language.
-- **Direction**: Higher is better or Lower is better.
-- **Applicable dimensions (concept references)**: register concepts on the **Dimension concepts** tab first (Name, Concept ID, Synonyms, Description), then reference them on the metric. Dimension concepts are cross-model conformance anchors: the Agent sees every concept with its synonyms, so it knows that "region", "area", and "territory" describe the same business dimension, and it knows which dimensions a metric is meaningful on.
-- **Owner**: someone is accountable for the definition, and the Agent can name who to ask.
-
-### 3.4 Draft and Certified
-
-- A new metric is a **Draft**. Drafts take part in answers, but the Agent labels the definition as not certified.
-- Once the definition is confirmed, click **Mark as certified**. Certification means: **the Agent must use this definition when answering questions about the metric and may no longer improvise.**
-- Certifying a metric that is not bound to any model is allowed. The Agent can explain its definition in full; when asked for a number it answers from the model's fields as usual and states that the number did not come through a certified binding (§1.2). For the definition to constrain the computation, complete the binding in §2.7.
-
-### 3.5 Changing a definition bumps the version
-
-When you edit a certified or bound metric and change a **substantive field** (Business definition, Calculation relation, Unit, Direction, Applicable dimensions), saving shows **Definition change requires a new version**. The version increments and every model binding switches to **Needs comparison (metric definition changed)**. A model author then has to click **Compare against new definition** on the **Metric bindings** tab; until then, users' answers carry a "pending re-check" note. Drafts without bindings can be edited freely and do not bump the version.
-
-### 3.6 Import, export, and bulk maintenance
-
-- **Export CSV**, fill in synonyms and definitions in Excel, then **Import** the file back. **Export JSON** produces a full bundle for moving between environments.
-- On import, an existing ID can be skipped or overwritten; **overwriting keeps the metric's existing model bindings**.
-- Imported new metrics arrive as **Draft**; certification stays a manual step. Tick **Keep the certification status from the file** only when migrating a whole environment.
-- Model bindings never travel with the file; they are maintained in the designer.
-
-### 3.7 How to confirm governance is really in effect
+### 3.2 How to confirm governance is really in effect
 
 For a certified metric whose comparison matches, the Agent **does not** add any "certified" wording to the answer; by design it stays quiet. So you cannot tell by looking for keywords. Use two checks instead:
 
@@ -273,29 +133,29 @@ One reminder: **after changing the embedding model, click Rebuild index for ever
 
 | What the user sees | Who | What to do |
 | --- | --- | --- |
-| A business term never maps to a field, or maps to the wrong one | Model author | Add the wording to the field's description or aliases, then check that the knowledge index updated (§2.1, §2.2, §2.9) |
-| The user names only a value ("East Region", "Completed") and the Agent asks which field it belongs to, or picks the wrong field | Model author | Add sample values to that field (§2.2) |
+| A business term never maps to a field, or maps to the wrong one | Model author | Add the wording to the field's description or aliases, then check that the knowledge index updated (§2.1 items 1–2, §2.3) |
+| The user names only a value ("East Region", "Completed") and the Agent asks which field it belongs to, or picks the wrong field | Model author | Add sample values to that field (§2.1 item 2) |
 | A region or product name is "not found" | Administrator / model author | Check for the **Vector index is temporarily unavailable** banner first; if it is there, check the model on **Knowledge indexes** and build its index, otherwise check the member value's spelling (§4) |
-| Two departments get different numbers for the same term | Model author + metric owner | Same name, different meaning: write both descriptions clearly; register the governed definition in Metrics Library and bind it (§2.1, §3.2, §2.7) |
-| Asked with the library name, but a raw field was computed | Metric owner | The user's wording is not among the synonyms; add it (§3.1). Then confirm the metric is bound in the current model (§2.7) |
-| The answer says "definition not certified" | Metric owner | Review and **Mark as certified** (§3.4) |
-| The answer says "not computed through a certified binding" | Model author | Bind the measure to the metric and save the model (§2.7) |
-| The answer carries "possible drift" | Metric owner + model author | Read the comparison reason, change the definition or the formula, compare again (§2.8) |
-| The answer carries "pending re-check / definition changed" | Model author | **Compare against new definition** on the Metric bindings tab (§2.8, §3.5) |
-| "This year" keeps triggering "which date?", or the wrong date is used | Model author | Set the measure's **Default time field**, or the model's **Default time dimension** (§2.4) |
-| Trends by month or quarter fail, or "same period last year" is wrong | Model author | Complete the time hierarchy and assign time semantic roles (§2.3) |
-| A ratio shows as 0.41 instead of 41% | Model author | Give the measure a percentage **Data Format** (§2.5) |
-| Amounts should read in thousands or millions | Model author | Set **Display scale** (§2.5) |
-| A breakdown asked without naming the axis lands on an unhelpful grouping | Model author | Set the measure's **Recommended dimensions** (§2.5) |
-| A "why did it change?" answer breaks the change down by unhelpful dimensions | Model author | Set the measure's **Recommended dimensions** (§2.5); users can also name the dimensions in the question |
-| A ratio's year-over-year comparison is missing, or its change cannot be decomposed | Model author / metric owner | Write the ratio as numerator / denominator (§2.6), or bind it to a Ratio metric whose operands are bound in the same model (§3.2) |
-| With **Auto-select model**, the Agent answers from the wrong model or keeps asking which model to use | Model author | Bind the metric in the model that should answer for it, and avoid binding it in models that should not (§2.7) |
+| Two departments get different numbers for the same term | Model author + metric owner | Same name, different meaning: write both descriptions clearly; register the governed definition in Metrics Library and bind it (§2.1 items 1 and 7, §3.1 item 2) |
+| Asked with the library name, but a raw field was computed | Metric owner | The user's wording is not among the synonyms; add it (§3.1 item 1). Then confirm the metric is bound in the current model (§2.1 item 7) |
+| The answer says "definition not certified" | Metric owner | Review and **Mark as certified** (§3.1 item 5) |
+| The answer says "not computed through a certified binding" | Model author | Bind the measure to the metric and save the model (§2.1 item 7) |
+| The answer carries "possible drift" | Metric owner + model author | Read the comparison reason, change the definition or the formula, compare again (§2.2) |
+| The answer carries "pending re-check / definition changed" | Model author | **Compare against new definition** on the **Metric bindings** tab (§2.2, §3.1 item 6) |
+| "This year" keeps triggering "which date?", or the wrong date is used | Model author | Set the measure's **Default time field**, or the model's **Default time dimension** (§2.1 item 4) |
+| Trends by month or quarter fail, or "same period last year" is wrong | Model author | Complete the time hierarchy and assign time semantic roles (§2.1 item 3) |
+| A ratio shows as 0.41 instead of 41% | Model author | Give the measure a percentage **Data Format** (§2.1 item 5) |
+| Amounts should read in thousands or millions | Model author | Set **Display scale** (§2.1 item 5) |
+| A breakdown asked without naming the axis lands on an unhelpful grouping | Model author | Set the measure's **Recommended dimensions** (§2.1 item 5) |
+| A "why did it change?" answer breaks the change down by unhelpful dimensions | Model author | Set the measure's **Recommended dimensions** (§2.1 item 5); users can also name the dimensions in the question |
+| A ratio's year-over-year comparison is missing, or its change cannot be decomposed | Model author / metric owner | Write the ratio as numerator / denominator (§2.1 item 6), or bind it to a Ratio metric whose operands are bound in the same model (§3.1 item 3) |
+| With **Auto-select model**, the Agent answers from the wrong model or keeps asking which model to use | Model author | Bind the metric in the model that should answer for it, and avoid binding it in models that should not (§2.1 item 7) |
 
 ---
 
 ## 6. A sequence for a new model
 
-When a new analysis model is being onboarded and you want the Agent to be useful from day one, do the following in order; each step takes an hour or two:
+When a new analysis model is being onboarded and you want the Agent to be useful from day one, do the following in order:
 
 1. **Model author**: write a definition-style description and aliases for every measure; assign time semantic roles to date attributes; write ratio measures as numerator / denominator and give them a percentage format; set a default time field on measures when the model has several dates; save the model.
 2. **Administrator**: check on **Knowledge indexes** that the save built the model's index (run **Prep data for AI** if **Auto-build knowledge index** is off).
@@ -305,7 +165,7 @@ When a new analysis model is being onboarded and you want the Agent to be useful
 6. **Model author**: bind those metrics to measures, save the model, run **Compare all**, and resolve any possible drift.
 7. **Metric owner**: once everything checks out, **Mark as certified**.
 
-After these seven steps the Agent is close to its ceiling for that model. Ongoing maintenance is one task: keep adding the new wordings that show up in users' questions as aliases and synonyms.
+Ongoing maintenance is one task: keep adding the new wordings that show up in users' questions as aliases and synonyms.
 
 ## Related topics
 

@@ -7,7 +7,7 @@ createTime: 2026/10/06 20:51:07
 
 # Funnel
 
-Show values across process stages, such as leads, qualified leads, proposals and wins. A process funnel requires a meaningful stage order and comparable values. A funnel-shaped ranking of unrelated categories does not establish a conversion process.
+Show values across process stages, such as leads, qualified leads, proposals and wins. A process funnel requires a meaningful stage order and comparable values. A funnel-shaped ranking of unrelated categories does not establish a conversion process; use a [Clustered bar](/documentation/Visualization/Clustered-Bar-Chart/) to rank unrelated categories.
 
 ## Bind the stages
 
@@ -55,7 +55,7 @@ This settings example ranks regional sales and uses **No percentages**. Regions 
 
 Percentages always appear in the tooltip. To show them on the chart, tick **vs previous** or **vs first** in **Style → Data labels → Label contents**. **vs previous** compares with the preceding stage; **vs first** compares with the starting stage. Stages of 1,000, 600 and 300 give 50% from the second to the third stage, but 30% from the first to the third: the denominators differ. The first stage has no "vs previous" line.
 
-When a percentage cannot be calculated, the tooltip shows "—" with the reason, for example *The base stage is 0*, *Negative values cannot form a percentage* or *Percentages are turned off*. Do not read an unavailable percentage as 0%.
+When a percentage cannot be calculated, the tooltip shows "—" with the reason, for example *The base stage is 0*, *Negative values cannot form a percentage* or *Percentages are turned off*. Do not read an unavailable percentage as 0%. If conversion exceeds 100%, check cohort definitions, repeated entities, stage order and date filters before assuming a product error.
 
 ## Data labels
 
@@ -71,18 +71,11 @@ Labels get the space they need on their side, and the funnel keeps at least 40% 
 
 **Style → Tooltip → Show Tooltip** (default on) turns the hover tooltip off; see [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/).
 
-## Check the result
-
-Save and open **Preview**. Read stage tooltips in the intended direction and inspect the base behind each percentage. Missing, zero or negative bases prevent a meaningful ratio.
-
-If conversion exceeds 100%, check cohort definitions, repeated entities, stage order and date filters before assuming a product error. Use a [Clustered bar](/documentation/Visualization/Clustered-Bar-Chart/) when the purpose is simply to rank unrelated categories.
-
-## Reports from earlier versions
-
-- Arrangement, label contents and display units keep their saved or earlier default values (see the tables above).
+::: details Opening reports made before 10.00
 - Labels are dark grey instead of the stage colour. Set **Font** colour to restore a colour.
 - **Stage percentages → Auto** hides the ratios when the stages are averages or percentages, or use different currencies or units. Choose **Always calculate** to show them anyway.
 - Stage colors no longer change when you switch the arrangement.
 - The first stage no longer shows "vs previous: —".
+:::
 
 Related: [Sankey](/documentation/Visualization/Sankey-Chart/) · [Cross-filtering](/documentation/Analysis/Cross-Filtering/) · [Adding Components](/documentation/Visualization/Adding-Charts/)

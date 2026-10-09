@@ -36,7 +36,9 @@ For amounts measured in dollars, a width of 100 means intervals of 100 dollars, 
 
 Changing bins can reveal or hide apparent peaks. Compare populations using the same bin settings and filters; use percentages when the population sizes differ and the question concerns shape rather than count.
 
-Bin counts respect component filters, report filters and cross-filtering from other components.
+Bin counts respect component filters, report filters and cross-filtering from other components. Percentages may add up to slightly more or less than 100% because of rounding.
+
+If one extreme value compresses the rest, inspect it before filtering it out. If all observations fall into one interval, check the width, the numeric type and the actual data range.
 
 ## Format
 
@@ -64,15 +66,8 @@ The **Analytics** tab adds reference lines and bands; statistics are estimated f
 | *This analysis model does not support histogram pushdown.* | The model's data source cannot run the binning query. |
 | *No data* | No rows, or every bin count is 0. See [Empty data and error messages](/documentation/Visualization/Empty-Data-and-Errors/). |
 
-## Check the result
-
-Save and open **Preview**. Check a low, central and high interval. Counts should describe the eligible, filtered observations; percentage totals may differ slightly from 100% because of rounding.
-
-If one extreme value compresses the rest, inspect it before filtering it out. If all observations fall into one interval, check the width, numeric type and actual data range.
-
-## Reports from earlier versions
-
+::: details Opening reports made before 10.00
 - Bin counts under filters and cross-filtering are now correct. Earlier versions could show 0 or too few rows for filtered bins.
 - A histogram whose title was never set shows the field name instead of *Untitled*.
 - X labels are no longer rotated when they fit flat.
-- **Show Tooltip** now shows on when it was never set, matching the behavior.
+:::

@@ -32,9 +32,13 @@ Open **Style → Color scale → Normalize**.
 | **By row** | High within its own row. In this example, the strongest region for each category. |
 | **By column** | High within its own column. In this example, the strongest category within each region. |
 
-Normalisation changes colours only: with **By row** or **By column**, two equally dark cells need not have equal values, the colour legend reads **Low**–**High**, and the tooltip still shows the raw value.
+Normalisation changes colours only: with **By row** or **By column**, two equally dark cells need not have equal values, the colour legend reads **Low**–**High**, and the tooltip still shows the raw value. If a dark cell holds an unexpectedly small value, check the normalisation mode before assuming a calculation error, and change the mode only when you mean to change the comparison question.
 
 ![Heat matrix normalization choices](../images/current/heat-matrix-normalize.jpg)
+
+With **By row**, the same data shows East China as the darkest cell in every category row, although Home Care sales are much lower than Personal Care & Beauty sales:
+
+![Heat matrix normalized by row: each category row is shaded from its own lowest to highest region](../images/current/heat-matrix-by-row.jpg)
 
 ## Color scale settings
 
@@ -72,9 +76,5 @@ The Y axis runs from top to bottom. Overlapping X labels are hidden; for long na
 - Cells without a value show *(Blank)* in the tooltip and cannot be clicked. They differ from a measured zero.
 - The axes never scroll: with many members the cells get smaller. The data point limit counts cells.
 - There is no **Analytics** tab, so no reference lines.
-
-## Verify the comparison
-
-Save and open **Preview**. Hover a cell and check its row, column and value. Change normalisation only when you mean to change the comparison question. If a dark cell seems unexpectedly small, check the normalisation mode before assuming a calculation error.
 
 Related: [Calendar chart](/documentation/Visualization/Calendar-Chart/) · [Top/Bottom N](/documentation/Analysis/Top-Bottom-N/) · [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/) · [Empty Data and Error Messages](/documentation/Visualization/Empty-Data-and-Errors/)

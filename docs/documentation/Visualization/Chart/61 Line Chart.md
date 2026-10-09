@@ -7,7 +7,7 @@ createTime: 2026/09/01 22:03:26
 
 # Line
 
-A line connects values in order, usually time, to show change and trend. It does not prove what happened between observations. Use a [Clustered column](/documentation/Visualization/Clustered-Column-Chart/) or bar for an unordered ranking, an [Area](/documentation/Visualization/Area/) chart to emphasise magnitude, and a [Combo](/documentation/Visualization/Combo%20Chart/) for measures with different units.
+A line connects values in order, usually time, to show change and trend. It does not prove what happened between observations. Use a [Clustered column](/documentation/Visualization/Clustered-Column-Chart/) or bar for an unordered ranking, an [Area](/documentation/Visualization/Area/) chart to emphasise magnitude, and a [Combo](/documentation/Visualization/Combo-Chart/) for measures with different units.
 
 ## Build a sales trend
 
@@ -41,7 +41,7 @@ A line connects values in order, usually time, to show change and trend. It does
 
 - Labels are always placed above the points (there is no position option), and space is kept at the top so the highest label is not cut off.
 - A point without neighbours, such as the only point left after a filter or a point between empty values, is drawn as a 6 px circle (or larger if **Symbol size** is larger), so it does not disappear with the default 1 px symbol.
-- Keep the number of series low enough to follow each line.
+- Keep the number of series low enough to follow each line. With too many labels, shorten the period range or turn on [Zoom](#zoom-slider) on a continuous time axis.
 
 ## Axes
 
@@ -65,20 +65,9 @@ Sliders exist only on continuous axes: a date or time X axis set to **Continuous
 
 Line tooltips always list one row per series, under a header such as *Month 2025-11*. In **Style → Tooltip**, **Sort**, **Show total**, **Show percentage** and **Highlight hovered series** also apply to lines with several measures; total and percentage need series of one measure (a **Legend** field). The highlighted row is the line nearest the pointer. See [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/).
 
-## Reports from earlier versions
-
-- **Display units** stays **Follow measure format** and **Zoom direction** stays **Both** (bottom and left sliders).
+::: details Opening reports made before 10.00
 - Labels that had no saved colour are now drawn in the default grey instead of black.
 - Isolated points are now visible, a measure in **Color** now colours the line, and **Highlight hovered series** now has an effect.
+:::
 
-## Check missing points and dense data
-
-Save and open **Preview**, then hover the first, middle and last periods. Confirm the values and the date granularity.
-
-- A gap or missing period may mean no matching data, not zero. Check the source and filters before reading it as a fall.
-- A flat line can be a scale problem or repeated aggregation. Inspect a table at the same date grain.
-- Too many labels: reduce the period range, or turn on **Zoom** on a continuous time axis.
-- No zoom slider: the X axis is categorical; see [Zoom slider](#zoom-slider).
-- A surprising spike: check the measure definition and whether the period is complete.
-
-Related: [Area](/documentation/Visualization/Area/) · [Combo](/documentation/Visualization/Combo%20Chart/) · [Reference lines](/documentation/Analysis/Chart-Reference-Lines/) · [Legends](/documentation/Visualization/Legends/) · [Component filters](/documentation/Analysis/Component-Level-Filtering/)
+Related: [Area](/documentation/Visualization/Area/) · [Combo](/documentation/Visualization/Combo-Chart/) · [Reference lines](/documentation/Analysis/Chart-Reference-Lines/) · [Legends](/documentation/Visualization/Legends/) · [Component filters](/documentation/Analysis/Component-Level-Filtering/)
