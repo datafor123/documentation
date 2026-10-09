@@ -34,6 +34,8 @@ The automatic title and the X-axis name are the **Value** field's name.
 
 For amounts measured in dollars, a width of 100 means intervals of 100 dollars, not 100 observations. A width that would produce more than 100 bins is rejected; see the messages below. Hover bars to read their actual interval boundaries rather than assuming where the first bin begins.
 
+![Style → Distribution with Frequency Count, Bins Number of bins and Number 10](../images/current/histogram-distribution-settings.png)
+
 Changing bins can reveal or hide apparent peaks. Compare populations using the same bin settings and filters; use percentages when the population sizes differ and the question concerns shape rather than count.
 
 Bin counts respect component filters, report filters and cross-filtering from other components. Percentages may add up to slightly more or less than 100% because of rounding.
@@ -52,6 +54,8 @@ If one extreme value compresses the rest, inspect it before filtering it out. If
 | **Tooltip → Show Tooltip** | Hover tooltip; see below. | On |
 
 The tooltip shows the interval, the count and the percentage, and a last row *Samples: N detail rows, binned by raw value, nulls excluded*. A non-zero share too small to round shows two significant digits in the tooltip (for example *0.0032%*) and `<0.1%` as a bar label. The histogram has no **Display units** setting.
+
+![Histogram of order-line Net Sales for 2025 in 10 bins, with the tooltip of the first bin: interval, Count, Percentage and Samples](../images/current/histogram-net-sales-tooltip.jpg)
 
 The **Analytics** tab adds reference lines and bands; statistics are estimated from the bins and marked "≈". See [Reference lines](/documentation/Analysis/Chart-Reference-Lines/).
 

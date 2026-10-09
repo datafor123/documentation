@@ -35,6 +35,8 @@ For a dynamically selected label, use the same business field as the controlling
 
 Hovering the text shows the listed names. Names are shown as plain text, even if they contain HTML. When the component cross-filters other components or links to another page, it passes only the first member.
 
+![Dimension field in Preview with Region and no filter: the first three regions followed by …](../images/current/dimension-field-multi.jpg)
+
 ## Format for the available space
 
 | Option | Effect | Default |

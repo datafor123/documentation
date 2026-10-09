@@ -23,6 +23,10 @@ Show values across process stages, such as leads, qualified leads, proposals and
 
 Do not mix a count, a rate and a currency amount and then interpret their ratios as conversion.
 
+![Funnel Data tab with separate measures as stages: List Sales, Sales and Net Sales in Measures; Field is hidden](../images/current/funnel-measures-data.png)
+
+![Funnel in Preview with the three measures as stages in Stage order, labels showing name, value and vs first](../images/current/funnel-stage-measures.jpg)
+
 The **Stage order** dialog lists the stages in their current order. **Not in current data** marks stages that the current filters do not return; they are not visible zero stages. **Reset to default order** restores the query order. If the funnel is sorted by value, the button reads **Use stage order**, and the dialog's **Switch to stage order when confirmed** switch (on by default) changes the arrangement when you confirm. When separate measures are the stages, the dialog lists the measures, and confirming reorders the **Measures** box.
 
 ## Choose arrangement before interpreting percentages

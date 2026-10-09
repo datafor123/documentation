@@ -58,6 +58,8 @@ Because targets are included, the target always lands on the arc. Without a targ
 - A short line crosses the arc at the target, in the colour of **Target value → Target value color**.
 - The target value is written just outside the arc at the target's angle. If there is not enough room, all gauges shrink by up to 15%; if that is still not enough, the label moves inside the arc.
 - A target outside the range is drawn at the end of the arc as a faded line, and its label gets › (above the maximum) or ‹ (below the minimum).
+
+![Gauge in Preview: Gross Margin Rate 40.85% on a fixed 0–60% scale with the 45% target line and its label outside the arc](../images/current/gauge-target.jpg)
 - A typed target is written in the main value's format: next to 40.97%, a target of 0.3 shows as 30.00%.
 - The label is always shown when there is a target.
 

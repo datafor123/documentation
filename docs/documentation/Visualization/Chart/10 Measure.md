@@ -26,6 +26,8 @@ Display one aggregated result prominently, with up to two comparisons. Use it fo
 
 Comparisons come only from the measures in the comparison slots. A measure in Comparison #2 is "last year" only if the model measure calculates last year. Actual and reference must have compatible units and scope.
 
+![Measure card Data tab: Net Sales in Measure and a calculated Previous Month measure in Comparison #1](../images/current/measure-card-data.png)
+
 ## Choose what each comparison shows
 
 Open **Style → Comparison #1 settings** or **Comparison #2 settings**:
@@ -38,6 +40,8 @@ Open **Style → Comparison #1 settings** or **Comparison #2 settings**:
 | **Font**, **Align** | Text style and horizontal alignment. | – |
 
 **Growth%** divides by the absolute reference, so a negative reference keeps the sign meaningful: −50 against −100 is +50%. When the reference is 0, no growth rate is shown.
+
+![Measure card in Preview: Net Sales for Nov 2025 with a green +28.27% Growth% against the Previous Month comparison](../images/current/measure-card-growth.jpg)
 
 ## Format the main value
 

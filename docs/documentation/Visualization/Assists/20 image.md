@@ -17,7 +17,7 @@ createTime: 2026/09/01 22:03:26
    - **URL → Image URL**: an `http` or `https` address, loaded each time the report opens. It can contain [dynamic values](/documentation/Visualization/Dynamic-Values/), for example `https://cdn.example.com/logos/{{param.Brand}}.png`.
 3. Set **Style → Image**.
 
-![Image source](../images/current/image-source.jpg)
+![An Image component with Image source set to URL and an Image URL](../images/current/image-url-source.png)
 
 ## Style → Image
 

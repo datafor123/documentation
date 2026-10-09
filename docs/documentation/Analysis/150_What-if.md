@@ -57,7 +57,7 @@ If you choose to store percentage points such as `10` instead, divide the parame
 4. In the chart's **Style → Title**, enter `Sales Scenario (rate: ${GrowthRate})`.
 5. Save and open **Preview**. Move the slider or type a value in its input and press **Enter**.
 
-![GrowthRate binding and decimal slider range](../Visualization/images/current/scenario-slider-settings.jpg)
+![Numeric slider bound to GrowthRate with a decimal range, next to the chart whose title shows the rate](../Visualization/images/current/scenario-slider-growthrate.jpg)
 
 ## 4. Validate the result
 

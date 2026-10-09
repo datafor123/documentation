@@ -9,7 +9,7 @@ createTime: 2026/09/01 22:03:26
 
 The console is where you find reports, ask the AI Agent, and manage data, models and the server. What you see depends on your permissions.
 
-![Console Home](./images/console-home.jpg)
+![Console Home with the left navigation, the four shortcuts, Recent work and the start of Report templates](./images/console-home-10.jpg)
 
 ## Home
 

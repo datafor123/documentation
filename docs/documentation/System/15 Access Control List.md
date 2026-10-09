@@ -30,17 +30,17 @@ You can grant access to individual users, to business roles (every member receiv
 
 Permissions must be explicitly granted to users, roles, or user types for each resource (such as reports, data sources, or models). Follow these steps to assign permissions:
 
-1. Navigate to the **Manage** page of the resource.
+1. In **Public** (or another folder you manage), open the row menu of the report or folder and click **Permissions**.
 
-   <div align="left"><img src="./images/1739528156832.png"  /></div>
+   <div align="left"><img src="./images/acl-row-menu-permissions.png" alt="Report action menu in Public with Permissions highlighted" width="520px" /></div>
 
-2. Locate the resource management menu and click **“Permissions”** to open the permission settings interface.
+2. In **Add principals**, search for users, roles or user types; narrow the results with **Users**, **Roles** or **User Type**. Tick the principals, choose the **Initial permission** and click **Add**. Principals that already have entries show **Added**.
 
-   <div align="left"><img src="./images/1739528225650.png" /></div>
+   <div align="left"><img src="./images/acl-add-principals-user-type.png" alt="Add principals filtered to User Type, with Initial permission Read and the Add button; Administrator shows Added" width="684px" /></div>
 
-3. Select the user, role, or user type to grant permissions, and assign **Read**, **Edit**, **Delete**, or **Full control** rights.
+3. In **Authorized principals**, set **Read**, **Edit**, **Delete** and **Full control** for each row. To change several rows at once, select them, choose a level in **Batch grant** and click **Apply**. **Delete** in a row, or **Remove selected**, removes the grant. **Locked** rows, such as the Administrator user type, cannot be changed.
 
-   <div align="left"><img src="./images/1739528375825.png" width="67%" /></div>
+   <div align="left"><img src="./images/acl-permissions-dialog.png" alt="Permissions dialog with Inherit parent, Add principals, and Authorized principals with Read, Edit, Delete and Full control" width="90%" /></div>
 
 4. Click **Save**.
 
@@ -56,7 +56,6 @@ Datafor provides three user types (see [User Creation and User Types](/documenta
 
 A grant to a user type applies to every user of that type. For example, granting **Read** on a folder to **Reader** lets all Reader users open it. For the **Reader** user type and for Reader users, only **Read** can be granted.
 
-<div align="left"><img src="./images/1739528547452(1).png" width="67%" /></div>
 
 ## 3. Folder and Report Authorization
 
@@ -73,15 +72,15 @@ Turning **Inherit parent** on clears the item's own entries. Datafor asks for co
 
 For grant combination, folder-operation checks, and owner/administrator exceptions, see [File and folder ACLs](/documentation/System/Permission-Evaluation-Overview/#_2-file-and-folder-acls-grants-and-inheritance).
 
-<div align="left"><img src="./images/1739528638687(1).png" width="67%" /></div>
+<div align="left"><img src="./images/acl-inherit-parent-confirm.png" alt="Inherit parent permissions confirmation with Cancel and Continue inheritance" width="440px" /></div>
 
 ## 5. Viewing Permissions
 
-On the **Users** page (**Users**, **Roles** or **User Type** tab), open a row's menu and click **Details** to view all resources granted to that user, role or user type: data sources, models, reports, and folders.
+On the **Users** page (**Users**, **Roles** or **User Type** tab), open a row's menu and click **Details** to see what that user, role or user type can access. **Details** has the tabs **Personal information**, **File permissions**, **Model permissions** and **Connections**.
 
-<div align="left"><img src="./images/1739528756307(1).png"   width="90%" /></div>
+<div align="left"><img src="./images/user-type-row-menu-details.png" alt="User Type tab with the row menu of Creator open: File permissions, Model permissions, Copy permissions to and Details" width="90%" /></div>
 
-In **Details**, you can see which resources the user or role has access to and their specific permissions (Read, Edit, Delete, etc.).
+Each permissions tab lists the granted items with their rights (Read, Edit, Delete, Full control).
 
-<div align="left"><img src="./images/1739528902335.png"  width="80%"  /></div>
+<div align="left"><img src="./images/user-type-details-file-permissions.png" alt="Details of the Creator user type, File permissions tab, with Read on Public" width="80%" /></div>
 

@@ -19,6 +19,8 @@ Large regions draw attention regardless of their value. Decide whether an absolu
 4. Add supporting **Tooltips**, a **Time axis** and any **Filters**.
 5. Check a few known regions against the source data.
 
+![Filled map Data tab: Geographic field, Measure and the searchable Map list with World/China selected](../images/current/filled-map-data.png)
+
 ## How region values are matched
 
 Each value of the Geographic field is looked up among the regions of the selected map, first among all region names, then among all codes, then among all aliases:

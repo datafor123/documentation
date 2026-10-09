@@ -19,7 +19,7 @@ createTime: 2026/10/06 20:53:56
 3. **Insert dynamic value** appends a value such as `{{param.Region}}` to the address; values are URL-encoded. See [Dynamic Values](/documentation/Visualization/Dynamic-Values/).
 4. **Append filter values** (on by default) adds the selections of linked filters as `field=value` to the address.
 
-![Web page address options](../images/current/web-page.jpg)
+![Web page Data panel: Custom Hyperlink with an inserted dynamic value, From repository, Insert dynamic value and Append filter values](../images/current/web-page-address.png)
 
 The page reloads when parameters or filters in the address change. Only `http`, `https` and relative addresses are used.
 

@@ -16,7 +16,7 @@ createTime: 2026/09/01 22:03:26
 - set aliases for a map and for its regions so that the names in your data match;
 - set the centre (latitude and longitude) of each region, where marker maps place their points.
 
-<div align="left"><img src="./images/image-20250720155650963.png" alt="GeoJSON tool with the map view on the left and the Maps tree on the right" /></div>
+<div align="left"><img src="./images/geojson-tool-united-states.jpg" alt="GeoJSON tool with the United States map in the map view on the left and the Maps tree on the right" width="100%" /></div>
 
 The map view on the left has two tabs: **Administrative Region** shows the region boundaries of the selected map, **Center Point** shows each region's centre as a point.
 
@@ -46,13 +46,13 @@ Each map in the tree has these buttons (hover for the name):
 1. On the parent map (for example **World**), click **Add Map** (+).
 2. In **Add Sub-map**, search for and select the region, for example **United States**, and click **Save**.
 
-   <div align="left"><img src="./images/image-20250720153447081.png" alt="Add Sub-map dialog listing the regions of the World map" /></div>
+   <div align="left"><img src="./images/geojson-add-sub-map-world.png" alt="Add Sub-map dialog listing the regions of the World map" width="520px" /></div>
 
 3. The new map appears under its parent. Bind its GeoJSON file (next section) before using it in a report.
 
 The list in **Add Sub-map** comes from the parent's GeoJSON file, so a parent needs its file before you can add sub-maps to it. On **United States**, for example, it lists the states:
 
-<div align="left"><img src="./images/image-20250720154626191.png" alt="Add Sub-map dialog on the United States map with California selected" /></div>
+<div align="left"><img src="./images/geojson-add-sub-map-california.png" alt="Add Sub-map dialog on the United States map with California found by searching Cal" width="520px" /></div>
 
 <div align="left"><img src="./images/image-20250720154730287.png" alt="California sub-map under United States, showing its county boundaries" /></div>
 
@@ -63,21 +63,21 @@ Sub-maps are what a GeoJSON map drills down to when a user clicks a region.
 1. Click **Set GeoJSON File** on the map.
 2. Click **Upload File** and choose a `.json` or `.geojson` file. The file must not exceed 1 MB.
 
-   <div align="left"><img src="./images/image-20250720153926842.png" alt="Set GeoJSON File dialog with the Upload File button and the 1 MB limit" /></div>
+   <div align="left"><img src="./images/geojson-set-file.png" alt="Set GeoJSON File dialog with the Upload File button and the 1 MB limit" width="520px" /></div>
 
 3. Click **Save**. The map view shows the boundaries of the uploaded file.
 
-   <div align="left"><img src="./images/image-20250720153951487.png" alt="United States map with its state boundaries after the GeoJSON file is bound" /></div>
+   <div align="left"><img src="./images/geojson-united-states-boundaries.jpg" alt="United States map with its state boundaries after the GeoJSON file is bound" width="494px" /></div>
 
 ## Set aliases
 
 **Set Map Alias** takes other names of the map separated by `/`, for example `USA/United States/America`.
 
-<div align="left"><img src="./images/image-20250720154240888.png" alt="Set Map Alias dialog with aliases separated by slashes" /></div>
+<div align="left"><img src="./images/geojson-set-map-alias.png" alt="Set Map Alias dialog for United States with the aliases United States / US" width="520px" /></div>
 
 **Set Region Alias** lists every region of the map by **Region Name**. Enter the other spellings your data uses in **Region Alias**, separated by `/`, for example `CA/06` for California, and click **Save**.
 
-<div align="left"><img src="./images/image-20250720154514258.png" alt="Set Region Alias dialog with a Region Alias for each state" /></div>
+<div align="left"><img src="./images/geojson-set-region-alias.png" alt="Set Region Alias dialog with a Region Alias for each state, such as CA for California" width="80%" /></div>
 
 How report values are matched against region names, codes and aliases is described in [GeoJSON Filled Map](/documentation/Visualization/GeoJSON-Filled-Map/#how-region-values-are-matched). Do not give a region an alias that equals another region's name or code; that alias is never used, because the other region matches first.
 
@@ -85,9 +85,9 @@ How report values are matched against region names, codes and aliases is describ
 
 Click **Set Region Center** on the map and enter **Center Latitude** and **Center Longitude** for each region, then click **Save**. Switch the map view to **Center Point** to check the positions.
 
-<div align="left"><img src="./images/image-20250720154821445.png" alt="Center Point view with a point for each region" /></div>
+<div align="left"><img src="./images/geojson-center-point-view.jpg" alt="Center Point view with a point for each state of the United States" width="494px" /></div>
 
-<div align="left"><img src="./images/image-20250720154926912.png" alt="Region Center Latitude and Longitude dialog" /></div>
+<div align="left"><img src="./images/geojson-region-center.png" alt="Region Center Latitude and Longitude dialog with Center Latitude and Center Longitude for each state" width="80%" /></div>
 
 ## Import aliases or centres from a file
 

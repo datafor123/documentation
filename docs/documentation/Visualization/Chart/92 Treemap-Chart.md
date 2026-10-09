@@ -30,6 +30,8 @@ You can drag a field between **Series** and **Detail**; dropping it on a filled 
 | **Data labels → Font** | Font of the block labels. | 10 px, white |
 | **Tooltip → Show Tooltip** | Hover tooltip with the exact value; see [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/). | On |
 
+![Treemap in Preview: Category L1 in Series and Category L2 in Detail, Name and value labels, Color by parent on](../images/current/treemap-category.jpg)
+
 There are no settings for block spacing or a minimum block size. Choose **Name and value** only when the blocks have room for two lines, and keep exact values in the tooltip. Resize the component before hiding labels. A large parent containing many tiny children may need a filter or a separate detail view.
 
 If many rectangles have similar sizes, use a sorted bar chart for ranking. Use [Sunburst](/documentation/Visualization/Sunburst/) when the sequence of hierarchy levels is more important than packing many values into the available space.

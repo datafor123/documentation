@@ -31,6 +31,8 @@ Choose fields that form a meaningful hierarchy in your model. Two unrelated dime
 | **Data labels → Trailing label** | Places the labels of the outermost ring outside the chart; allow enough padding. | Off |
 | **Tooltip → Show Tooltip** | Hover tooltip; see [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/). | On |
 
+![Sunburst in Preview: Category L1 in the inner ring and Category L2 in the outer ring, Color by parent on](../images/current/sunburst-category.jpg)
+
 **Color by parent** keeps working after you change the color scheme; see [Colors and Color Schemes](/documentation/Visualization/Colors/).
 
 Keep the tooltip on when segments are too narrow to label. Do not reduce the entire chart to unreadably small text just to display every leaf name. A parent segment's tooltip shows its total in the same format as the leaves, for example *2,508,880.81*.

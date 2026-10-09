@@ -14,8 +14,8 @@ Compare the spread of a measure across observations, optionally separated into g
 ## Choose the observation first
 
 1. In **Components → Charts → Distribution & correlation**, add **Box plot** and select an **Analysis model** in **Data**.
-2. Bind **Sample** to Store, **Group** to Region and **Measure** to Net Sales.
-3. Set **Filters**, such as Year = 2025. Each store contributes its sales for that period as one observation.
+2. Bind **Sample** to Product, **Group** to Region and **Measure** to Net Sales.
+3. Set **Filters**, such as Year = 2025. Each product contributes its sales in the region for that period as one observation.
 4. Add supporting fields to **Tooltips** if needed. Omit **Group** for a single box.
 
 | Slot | Takes | Notes |
@@ -27,9 +27,9 @@ Compare the spread of a measure across observations, optionally separated into g
 
 There is no **Color** slot. **Sample** defines the observation grain: Store gives a distribution of store-level values, an order identifier gives a different one. The chart does not use individual source rows unless the Sample field is that fine. Avoid a row limit on Sample: it silently removes observations and changes the distribution.
 
-The example below uses **Retail Chain Operations**, **Store** as Sample, **Region** as Group, **Net Sales** as Measure and **Year = 2025**. Each point is one store's total for the year. East China has enough observations for a box; the smaller regions appear as individual points, which are not outliers.
+The example below uses **Retail Chain Operations**, **Product** as Sample, **Region** as Group, **Net Sales** as Measure and **Year = 2025**. Each observation is one product's 2025 sales in a region, so every region has enough observations for a box. With **Store** as Sample instead, most regions have fewer than five stores and appear as individual points, which are not outliers.
 
-![Store sales grouped by region with current Data bindings](../images/current/box-plot-data.jpg)
+![Box plot with Product in Sample, Region in Group and Net Sales in Measure: every region forms a box](../images/current/box-plot-product-data.jpg)
 
 A new box plot is placed at 400 × 300 px, with **Display units** set to **Auto**.
 
@@ -78,9 +78,9 @@ In the **Analytics** tab you can add fixed lines and bands; statistic lines are 
 
 ## Example result
 
-In the saved example, the box tooltip of East China shows **5 samples**, a median of **171.92K**, lower and upper quartiles of **154.92K / 205.71K** and **0 outliers**. These are the chart's rounded display values.
+In the example, the box tooltip of East China shows **54 samples**, a median of **15.62K**, lower and upper quartiles of **8.05K / 25.79K**, a maximum of **45.33K** and **0 outliers**; South China and Southwest China have outliers above their whiskers. These are the chart's rounded display values.
 
-![Saved Box plot Preview with East China sample statistics](../images/current/box-plot-preview.jpg)
+![Box plot in Preview with Product as Sample: the East China box tooltip lists Samples, Maximum, quartiles, Median, Minimum and Outliers](../images/current/box-plot-product-preview.jpg)
 
 - Small groups appear as points instead of a box; check the sample count before comparing their spread.
 - Every box collapses to a line: check whether the observations really are identical, or whether the Sample field is too coarse.

@@ -7,7 +7,7 @@ createTime: 2026/10/09 14:00:00
 
 # Search and Paginate
 
-![A Search box above a Paginate control showing All](./images/search-paginate.png)
+![Search with the keyword zhou and Paginate on East China, both linked to a Net Sales by City chart that now shows Hangzhou and Suzhou](./images/search-paginate-linked.jpg)
 
 ## Search
 

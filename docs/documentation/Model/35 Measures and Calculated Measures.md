@@ -17,7 +17,7 @@ To add or remove a source field as a Measure, open the field menu and toggle **S
 
 Select a Measure in the **Analysis model** tree and configure its properties.
 
-<div align="left"><img src="./images/analysis-model-measure-properties.png" alt="Net Sales selected in the Measures tree with aggregation, format, and business semantics" width="100%" /></div>
+<div align="left"><img src="./images/analysis-model-net-sales-properties.png" alt="Net Sales selected in the Measures tree with Caption, Aggregation type, Data Format, Display scale, and Business semantics including Unit" width="510px" /></div>
 
 | Property | What to set |
 | --- | --- |

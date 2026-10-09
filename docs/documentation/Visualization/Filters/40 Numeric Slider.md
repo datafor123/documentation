@@ -31,7 +31,7 @@ The step is derived from the data range, and the input boxes show thousands sepa
 
 Choose **Data source → Parameter** and a **Numeric** parameter with **Any value**, for example `GrowthRate` with default `0.1`; binding rules are in [Bind Filters to Parameters](/documentation/Analysis/Parameter-Controllers/). Then set **Minimum value**, **Maximum value** and **Step**, for example `-0.2`, `0.2` and `0.01`.
 
-![Numeric slider bound to GrowthRate with an explicit range](./images/numeric-slider-parameter.png)
+![Numeric slider bound to the report parameter GrowthRate with Minimum -0.2, Maximum 0.2 and Step 0.01](./images/numeric-slider-growthrate.png)
 
 If you leave the range empty, it is derived from the parameter's default: a positive value *v* gives 0 to 2*v*, a negative value 2*v* to 0, and 0 gives 0 to 20. The step follows the default's decimals (0.1 → 0.1, 0.05 → 0.01, an integer → 1).
 

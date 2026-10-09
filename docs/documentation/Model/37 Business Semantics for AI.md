@@ -107,7 +107,7 @@ For each user-visible Measure or calculated measure, set a precise Caption and D
 | **Default time field** | Business semantics | The date that "this year" is read against for this measure; see below. |
 | **Recommended dimensions** | Business semantics | One to three Dimensions users most often split this measure by. When a question asks for a breakdown without naming the axis, the Agent groups by these first; it also breaks down a change ("why did sales fall?") by them, and the suggested questions on the model's start page use them. A Dimension the user names always wins, and no grouping is added to a question that did not ask for one. |
 
-<div align="left"><img src="./images/analysis-model-business-semantics.png" alt="Measure Business semantics showing description, aliases, unit, direction, default time field, and recommended dimensions" width="100%" /></div>
+<div align="left"><img src="./images/analysis-model-net-sales-business-semantics.png" alt="Measure Business semantics showing description, aliases, unit, direction, default time field, recommended dimensions and the collapsed Metric governance group" width="250px" /></div>
 
 With several measures selected, fields such as **Unit** and **Direction** can be set in bulk. Caption, Description, Aliases and the enterprise metric binding identify a single measure and are set one at a time.
 

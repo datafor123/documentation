@@ -15,7 +15,7 @@ Click **AI Agent** in the left navigation, directly below **Home**. The **AI Age
 
 **AI Agent** appears only when an administrator has enabled the AI service. A user without AI access who clicks it sees "Please contact your administrator to enable AI for this user" and stays on the current page.
 
-<div align="left"><img src="./images/ai-welcome.jpg" alt="AI Assistant welcome screen with the toolbar, the available models and Auto-select model in the composer" width="100%" /></div>
+<div align="left"><img src="./images/ai-welcome-toolbar.png" alt="AI Assistant welcome screen with the toolbar buttons New Chat, History, Connect AI, Common Questions, Ops and LLM" width="100%" /></div>
 
 | Toolbar button | Use |
 | --- | --- |
@@ -30,13 +30,15 @@ When the assistant is shown as a side panel, these functions are icon buttons, f
 
 The model selector sits at the top of the composer. Its first item, **Auto-select model**, is the default: the placeholder reads "Ask directly; the analysis model is chosen from your question".
 
+<div align="left"><img src="./images/ai-composer-auto-select.png" alt="Composer with Auto-select model in the model selector and the placeholder Ask directly; the analysis model is chosen from your question" width="690px" /></div>
+
 To fix the model yourself, click a model card on the welcome screen or pick the model in the selector. The placeholder then reads "Ask a question related to the *model* model", and Datafor displays a model brief, the number of available metrics and analysis dimensions, suggested questions under **You can ask**, and a link to the complete metric list.
 
 The list has four places: Common Questions configured by an administrator come first, and the Agent generates the rest. **Regenerate** replaces the generated questions with a new batch. Generated questions are shared per model and interface language for seven days, so a regenerated batch is what other users of the model see too. The button is hidden when configured questions fill all four places.
 
 To start from a metric instead of a question, pick the metric on the welcome screen and choose one of the **Quick Actions**: **Metric change check**, **Generate metric report**, **View trends**, **Breakdown analysis** or **Compare and rank**, with a time range of your choice.
 
-<div align="left"><img src="./images/ai-assistant-model-selected.png" alt="AI Assistant with an analysis model selected" width="100%" /></div>
+<div align="left"><img src="./images/ai-assistant-retail-model-selected.png" alt="AI Assistant with Retail Chain Operations selected: the model brief, four suggested questions under You can ask with Regenerate, and All 36 metrics" width="700px" /></div>
 
 ### How Auto-select model chooses
 

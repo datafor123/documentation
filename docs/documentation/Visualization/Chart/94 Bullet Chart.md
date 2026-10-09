@@ -28,6 +28,8 @@ Under **Percentage settings (Based on target value)**, enter percentages as whol
 
 For a target of 100, illustrative boundaries of 0, 60, 80, 100, 110 and 120 define an increasing set of ranges. Choose boundaries appropriate to your business; the labels Normal, Good and Excellent do not determine the numeric thresholds for you.
 
+![Bullet in Preview: Net Sales by Region against a fixed Target value of 600,000 with percentage thresholds 60, 80, 100 and 110; each row has its own scale](../images/current/bullet-region-target.jpg)
+
 ## The scale
 
 - **Each row has its own scale range.** Bar lengths are not comparable between rows; compare each bar with its own target and ranges.

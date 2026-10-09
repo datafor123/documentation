@@ -18,6 +18,10 @@ Show how a quantity flows between categories. Link width represents the measure 
 
 To reverse the direction, drag the field from **Source** onto **Target**: the two fields swap and keep their settings.
 
+![Sankey Data tab: Channel Type in Source, Region in Target and Net Sales in Measure](../images/current/sankey-data.png)
+
+![Sankey in Preview: 2025 Net Sales flowing from the Offline and Online channel types to the five regions](../images/current/sankey-channel-region.jpg)
+
 For example, a channel-transition dataset could contain Previous Channel, Current Channel and Customer Count. These are illustrative field roles; use the equivalent fields in your own model. Each source-target pair needs a meaningful, non-negative weight.
 
 Do not use percentages with different denominators as if they were additive flows. Decide whether one customer can contribute to several links; repeated transitions and unique-customer counts answer different questions.

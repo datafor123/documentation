@@ -23,7 +23,7 @@ Text, Rich text, Image, Icon and Shape have **Actions → Click action → On cl
 | **Full screen** | Shows the page full screen; click again to leave | – |
 | **Open AI insight** | Opens an AI reading of the data | **Analysis scope**: Whole page, Current tab page, Selected components |
 
-![Click actions of an Action button](./images/button-click-actions.png)
+![The Click action list of an Action button](./images/button-click-action-list.png)
 
 - Actions run in the report (Preview and view mode). In the editor a click selects the component.
 - The pointer turns into a hand only when the action is complete, for example **Open link** with a URL.
@@ -50,7 +50,7 @@ Text, Rich text, Image, Icon and Shape have **Actions → Click action → On cl
 
 In the editor, hidden components are drawn semi-transparent and marked *Hidden in preview* or *Conditional*.
 
-![The Conditional mark on an Action button](./images/conditional-mark.png)
+![In the editor, a Text set to Hidden in preview and an Action button with a parameter rule marked Conditional](./images/visibility-marks.png)
 
 Visibility is a layout tool, not security: hidden components still belong to the report. Use permissions and row-level security for data access.
 

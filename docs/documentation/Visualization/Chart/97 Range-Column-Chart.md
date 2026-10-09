@@ -14,11 +14,17 @@ Show a lower and upper value for each category. A column spans the interval betw
 1. Add **Components → Charts → Column & bar → Range column** (a new range column is 400 × 300 px) and choose an **Analysis model** in **Data**.
 2. Put the category, such as Product, in **Category field**.
 3. Put the lower-bound measure in **Minimum value** and the upper-bound measure in **Maximum value**.
-4. Set **Filters** to a common period and population. Add optional **Color** or **Tooltips** fields for context.
+4. Set **Filters** to a common period and population. Add optional **Tooltips** fields for context.
 
 For example, use Minimum Selling Price and Maximum Selling Price by Product. Both measures must use the same units, and the lower value should not exceed the upper value. Prepare the intended minimum/maximum aggregations in the model instead of assuming that any two numeric fields define those statistics.
 
 The automatic title names both measures and the category. The default Y-axis name is *‹minimum measure› and ‹maximum measure›*.
+
+![Range column Data tab: Category L1 in Category field, a calculated Lowest Month in Minimum value and Highest Month in Maximum value](../images/current/range-column-data.png)
+
+![Range column in Preview: the lowest and highest monthly Net Sales of 2025 for each Category L1, with the tooltip of Food & Beverage](../images/current/range-column-monthly.jpg)
+
+Here both measures are report-level calculated measures, such as `Min([Date].[year_month].[year_month].Members, [Measures].[Net Sales])`.
 
 ## Read the interval
 

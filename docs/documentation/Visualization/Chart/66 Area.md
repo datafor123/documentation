@@ -36,6 +36,14 @@ On the stacked variants each series must be a distinct part of the whole. Do not
 
 A new chart is placed at 400 × 300 px. A new Area or Stacked area has data-label **Display units** set to **Auto**.
 
+The same 2025 data in the three variants:
+
+![Area in Preview: total monthly Net Sales for 2025, filled down to 0](../images/current/area-preview.jpg)
+
+![Stacked area in Preview: monthly Net Sales with one band per Region; the top edge is the total](../images/current/stacked-area-preview.jpg)
+
+![100% stacked area in Preview: each Region's share of monthly Net Sales, filling 0–100%](../images/current/percent-stacked-area-preview.jpg)
+
 ## Settings that matter
 
 All in the **Style** tab. Variant differences are listed in [Choose the variant](#choose-the-variant).

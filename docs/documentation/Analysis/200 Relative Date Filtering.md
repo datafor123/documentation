@@ -39,11 +39,11 @@ At the end of every relative list, **Custom…** builds a rule from parts:
 
 - **Direction**: **Last**, **Next** or **This** for a range; **Current**, **Back** or **Ahead** for a single period.
 - **Number and unit**: 1–9999 days, weeks, months, quarters or years, never finer than the field.
-- **Rolling** (exactly N units back from today) or **Calendar** (whole units); for **This**: **To date** or **Whole period**.
+- **Rolling** (exactly N units back from today) or **Calendar** (whole units); not offered for days, which always count back from today. For **This**: **To date** or **Whole period**.
 - **Include today** / **Exclude today** (or the current week, month… for calendar units).
 - **More → Shift back**: move the whole range back, for example *the last 7 days, one year ago*.
 
-![A custom rule: last 7 days, rolling, include today, with Shift back](../Visualization/Filters/images/date-custom-rule.png)
+![A custom rule: Last 7 days, Include today, Shift back 1 year](../Visualization/Filters/images/date-custom-shift-back.png)
 
 Examples:
 

@@ -49,6 +49,8 @@ Read each segment as a share of its category: 30 out of 100 and 300 out of 1,000
 | **Data labels → Font** | Size, colour, bold, italic. | – |
 | **Tooltip → Show Tooltip** | Turns the data tooltip on or off. | On |
 
+![100% stacked column in Preview: Category L1 share of Net Sales in each Region, with Percent labels](../images/current/percent-stacked-column-labels.jpg)
+
 - There is no **Display units**, **Decimal places**, **Show total** or **Hide labels below (%)**. Format raw values through the measure's **Format**.
 - The tooltip shows the share followed by the value, for example *34.5% (334,626.13)*.
 - Right-click → **Copy value** copies what the label shows: the share by default, the value when **Content** is **Value**.

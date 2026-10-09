@@ -13,7 +13,7 @@ Model diagnostics identify structural, reference, semantic, and metric-governanc
 
 A bar at the bottom of the canvas has two tabs, **Model diagnostics** and **Metric bindings**. It appears when the model has diagnostics, bound measures, or visible measures that are not bound to a metric, and it starts collapsed. Click **Model diagnostics** to expand it; the tab badges show the number of errors and warnings.
 
-<div align="left"><img src="./images/analysis-model-diagnostics.png" alt="Model diagnostics panel showing severity counts, a category filter, and semantic completeness hints" width="100%" /></div>
+<div align="left"><img src="./images/analysis-model-diagnostics-panel.png" alt="Model diagnostics panel showing severity counts, a category filter, and semantic completeness hints" width="440px" /></div>
 
 Use the severity controls and **All categories** filter to narrow the list. Select an issue to focus the modeler on the related table, relationship, field, Dimension, or Measure.
 

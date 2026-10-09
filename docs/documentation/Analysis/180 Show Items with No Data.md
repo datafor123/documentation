@@ -14,7 +14,7 @@ Keep dimension members visible when they have no measure result in the current q
 1. Select the chart or table and open **Data**.
 2. Hover a dimension field and choose **⋮ → Show items with no data**.
 
-The field's summary line in **Data** then reads *Show items with no data*. The item is in the ⋮ menu of the category, row and column fields of charts and tables; where a field group does not support it, the item is greyed out.
+The field in **Data** then shows an icon whose tooltip reads *Data settings changed: Show items with no data*. The item is in the ⋮ menu of the category, row and column fields of charts and tables; where a field group does not support it, the item is greyed out.
 
 ## The switch applies to the whole axis
 
@@ -23,6 +23,10 @@ Normally the query drops empty rows and columns. **Show items with no data** tur
 With two or more fields on the axis, every combination of their members is returned, including combinations that never occur together. For example, Region × Product with 8 regions and 2,000 products gives 16,000 rows even if most products sell in only one region. Such a query can stop at the page's **Max query records** (Page → **Settings** → **Performance**, default 5,000) and show *Showing the first … of … rows*. Use it with one field on the axis, or narrow the other fields with filters. See [Page Settings](/documentation/Visualization/Size-Display/).
 
 A filter on the field itself still applies: an excluded member does not come back. A filter on another field, such as Year = 2025, only empties the values, so members without 2025 data are shown. The switch also cannot add members that do not exist in the model, such as a month missing from the date table.
+
+In this chart a component filter keeps Region = East China, and **Show items with no data** is on for City: the cities of other regions stay on the axis without columns.
+
+![Net Sales by City filtered to East China, with the other cities shown without data](./images/show-items-no-data.jpg)
 
 ## What empty members look like
 

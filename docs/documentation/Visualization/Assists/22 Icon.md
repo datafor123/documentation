@@ -13,6 +13,9 @@ createTime: 2026/10/09 16:00:00
 2. In **Style → Icon**, choose **Icon source**:
    - **Icon library**: click **Icon** to open the picker, then **Search icons** or browse **All**, **Font Awesome**, **Product icons** and **Glyphicons** (862 icons).
    - **Upload SVG**: choose an **SVG file**. Scripts and event attributes are removed; the file is saved with the report.
+
+   ![The icon picker opened from Style → Icon, with Search icons and the library tabs](./images/icon-picker.png)
+
 3. Set the look:
 
 | Setting | Options |

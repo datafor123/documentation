@@ -15,7 +15,7 @@ The Data panel controls which source objects enter the model. The canvas shows t
 2. Search for the required table.
 3. Click its add control, double-click it, or drag it onto the canvas.
 
-<div align="left"><img src="./images/analysis-model-data-and-canvas.png" alt="Data panel with added tables beside the relationship canvas" width="80%" /></div>
+<div align="left"><img src="./images/analysis-model-data-panel-canvas.png" alt="Data panel with added tables beside the relationship canvas, zoomed in on fact_sales_line and fact_store_month" width="80%" /></div>
 
 A check mark means the table is already in the model. A count such as **×2** means that the same source table has been added with multiple aliases. Select the table entry to locate a specific alias on the canvas.
 

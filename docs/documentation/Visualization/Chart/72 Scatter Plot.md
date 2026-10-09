@@ -23,9 +23,14 @@ Compare two numeric measures to find clusters, unusual observations and possible
 | **Y Axis** | Gross Margin Rate | Vertical position. |
 | **Size** | Optional order count | Bubble size as a third measure. |
 | **Legend** | Optional Region | Separates groups of points by colour. Not drillable. |
-| **Color / Tooltips** | Optional context | Helps identify and inspect points. |
+| **Tooltips** | Optional context | Extra values shown when hovering a point. |
+| **Time axis** | Optional date field | Lets a page **Date** filter that filters by time axis filter this chart; see [Date](/documentation/Visualization/Datepicker/). |
 
 Use a store identifier that tells apart stores with the same name. Without the intended Marker grain, the chart shows a few aggregated points instead of individual stores. Measures can be dragged between **X Axis**, **Y Axis** and **Size**.
+
+![Scatter Data tab: Store in Marker, Region in Legend, Net Sales in X Axis, Gross Margin Rate in Y Axis and Order Count in Size](../images/current/scatter-data.png)
+
+![Scatter in Preview: one bubble per store, Net Sales against Gross Margin Rate, sized by Order Count and coloured by Region](../images/current/scatter-store-margin.jpg)
 
 The default title lists the X and Y measures but not the Size measure, for example *Net Sales, Gross Margin Rate by Store, Region*. A new Scatter is placed at 400 × 300 px.
 

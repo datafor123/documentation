@@ -46,6 +46,8 @@ The waterfall has no **Display units** setting; use **Compact numbers**. Labels 
 
 The total bar shows the **model's aggregate** of the measure, not the running total. For an additive measure (an amount, a quantity, a change) the two are equal; for a ratio or an average they differ. Use an additive measure for an ordinary bridge.
 
+![Waterfall in Preview: Net Sales built up by Category L2 with Compact numbers, connector lines and the Total bar; the tooltip of the Total bar is shown](../images/current/waterfall-category-total.jpg)
+
 ## Tooltip and arithmetic
 
 Hover a bar to check the arithmetic:

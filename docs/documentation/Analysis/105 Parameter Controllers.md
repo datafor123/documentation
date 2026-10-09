@@ -16,7 +16,7 @@ Any list filter, the Numeric slider and the Date component can set a parameter i
 3. Select the parameter in the list. The list shows **Report parameters** and **Global parameters**; **+ New parameter** at the end opens the parameter dialog with a matching type.
 4. Save, preview and change the value. Check the formula, title or text that uses the parameter.
 
-![Dropdown in Parameter mode; GrowthRate is greyed out with the reason](../Visualization/Filters/images/dropdown-parameter-list.png)
+![Dropdown in Parameter mode; the Any-value parameter GrowthRate is greyed out and its tooltip gives the reason](../Visualization/Filters/images/dropdown-parameter-reason.png)
 
 ## Which parameters a filter can use
 

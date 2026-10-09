@@ -25,6 +25,8 @@ Horizontal bars, side by side, measured from a common zero baseline. Use it for 
 
 With several measures, **Legend** and **Color** are not available; each measure gets its own colour. Use a [Combo](/documentation/Visualization/Combo-Chart/) for an amount and a rate.
 
+![Clustered bar in Preview: Net Sales by Store sorted from highest to lowest, with data labels to the right of the bars](../images/current/clustered-bar-store-ranking.jpg)
+
 ## Settings specific to bars
 
 On bar charts the **X axis** is the value axis and the **Y axis** holds the category names.

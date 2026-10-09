@@ -34,6 +34,8 @@ This page also describes the behaviour that all six column and bar charts share:
 - The X-axis name defaults to the **X-axis** field, at the current drill level. It appears as grey placeholder text in **X-axis name** until you type your own.
 - To rank, sort with the X-axis field's **More function** menu; see [Sorting](/documentation/Analysis/Sorting/).
 
+![Clustered column in Preview: Net Sales by Region with one column per Category L1 and data labels on, Year = 2025](../images/current/clustered-column-preview.jpg)
+
 ![Clustered, stacked and 100% stacked views of the same illustrative values](../images/current/chart-comparison-concept.svg)
 
 ## Style settings

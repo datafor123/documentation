@@ -35,9 +35,9 @@ Buttons from earlier versions show the style type **Legacy style** and keep thei
 | **Action** | **Click action**: None, Go to report, Open link, Switch tab, Reset filters, Clear filters, Refresh data, Export PDF, Full screen, Open AI insight |
 | **Disable condition** | **Never**, **When there is no data**, **By report parameter** |
 | **Visibility** | Always, Hidden in preview, by report parameter, user or role |
-| **Custom script** | Runs on click; return `false` to cancel the action |
+| **Custom script** | **Click-on-cell event**: runs on click; return `false` to cancel the action |
 
-![Click actions](./images/button-click-actions.png)
+![The Click action list of an Action button](./images/button-click-action-list.png)
 
 Details of each action and rule: [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
 

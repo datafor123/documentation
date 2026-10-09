@@ -18,6 +18,8 @@ Use word size to give a quick impression of category weight, such as frequently 
 
 The Word field must already contain the categories you want to show. Binding a paragraph does not extract topics or count individual words; prepare that grouping in your source or model. To show only the top words, set a [row limit](/documentation/Analysis/Top-Bottom-N/) on **Word**; a grouped "Others" word is drawn in neutral grey.
 
+![Word cloud in Preview: City in Word and 2025 Net Sales in Measure, Circle shape, Max font 54 px](../images/current/word-cloud-city.jpg)
+
 ## Fit the cloud
 
 All in **Style → Words**.

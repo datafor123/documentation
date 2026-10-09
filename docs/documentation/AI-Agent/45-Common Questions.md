@@ -16,13 +16,13 @@ createTime: 2026/09/01 21:50:52
 
 The list is scoped to the selected model and can be searched by question content.
 
-<div align="left"><img src="./images/ai-common-questions.png" alt="Common Questions list" width="100%" /></div>
+<div align="left"><img src="./images/ai-common-questions-panel.png" alt="Common Questions panel with the Analysis Model selector set to Retail Chain Operations, the search box and New Question" width="420px" /></div>
 
 ## 2. Add a question
 
 Click **New Question**. Select the target analysis model and enter the user-facing question (up to 500 characters), then click **Save**.
 
-<div align="left"><img src="./images/ai-common-question-form.png" alt="New Common Question form" width="100%" /></div>
+<div align="left"><img src="./images/ai-common-question-add-dialog.png" alt="Add Common Question dialog with Analysis Model, Common Question (0 / 500), Cancel and Save" width="520px" /></div>
 
 Write questions that can be answered from the selected model. Include a clear metric, grouping, comparison, or time basis when needed.
 

@@ -19,6 +19,8 @@ Compare profiles across a small set of dimensions arranged around a circle. Use 
 
 Do not put currency, headcount and percentage values on a shared profile without a meaningful normalization. Prepare normalized scores in the model and explain what a high score means.
 
+![Radar in Preview: Category L2 as Radial axes, 2025 Net Sales, and Region in Legend filtered to three regions](../images/current/radar-category-region.jpg)
+
 ## Format the profiles
 
 | Option (Style) | Effect | Default |

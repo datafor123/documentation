@@ -20,7 +20,7 @@ The panel contains **Usage** and **Quota** tabs.
 
 Use **Today**, **Last 7 days**, **This month**, or **Custom** to select a period, then click **Refresh**.
 
-<div align="left"><img src="./images/ai-ops-usage.png" alt="AI usage statistics" width="100%" /></div>
+<div align="left"><img src="./images/ai-ops-usage-panel.png" alt="Ops panel, Usage tab for Last 7 days: Questions, Success rate, Response time with p95, and Total tokens with input and output" width="420px" /></div>
 
 The current summary shows:
 
@@ -37,7 +37,7 @@ For queue monitoring, worker configuration, and a repeatable capacity test, see 
 
 Open **Quota**.
 
-<div align="left"><img src="./images/ai-ops-quota.png" alt="AI daily question quota settings" width="100%" /></div>
+<div align="left"><img src="./images/ai-ops-quota-panel.png" alt="Ops panel, Quota tab: Enable daily question quota, Default quota, Exempt administrators, Overrides by role and user type with Add rule, and Save" width="420px" /></div>
 
 Available controls are:
 

@@ -28,6 +28,8 @@ A line connects values in order, usually time, to show change and trend. It does
 - With several measures, **Legend** and **Color** are not available.
 - With a measure in **Color**, each point takes a colour from that measure's value and the line changes colour halfway between adjacent points. This works on continuous and categorical axes and with zoom. No colour legend is shown. See [Colors](/documentation/Visualization/Colors/).
 
+![Line chart in Preview: monthly Net Sales for 2025 with one line per Region](../images/current/line-preview.jpg)
+
 ## Line, points and labels
 
 | Group → option | Effect | Default |

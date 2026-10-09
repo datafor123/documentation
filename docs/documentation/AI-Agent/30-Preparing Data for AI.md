@@ -49,7 +49,7 @@ Use it when **Auto-build knowledge index** is off, for models that have not been
 
 ## 4. Review knowledge indexes
 
-<div align="left"><img src="../System/images/settings-knowledge.png" alt="Settings, AI Agent, Knowledge indexes with the Refresh schedule column" width="100%" /></div>
+<div align="left"><img src="../System/images/settings-knowledge-indexes-retail.png" alt="Settings, AI Agent, Knowledge indexes filtered to Retail Chain Operations, with the Refresh schedule column" width="100%" /></div>
 
 Go to **Settings › AI Agent › Knowledge indexes**. The page lists one row per cube of each analysis model. **Refresh** reloads the list; while a build is running, the list refreshes itself every 10 seconds ("A build is running; refreshing every 10 seconds").
 

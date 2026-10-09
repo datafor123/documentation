@@ -17,6 +17,8 @@ Show a measure as markers at the centres of regions on a GeoJSON boundary map, f
 4. Add **Tooltips**, **Time axis** and **Filters** as needed.
 5. Format it in **Style** (below), then test a few known regions.
 
+![Marker map Data tab: Geographic field, Measure and the searchable Map list with World/China selected](../images/current/marker-map-data.png)
+
 The marker of a region is placed at the region's centre point, which is set in the GeoJSON Map tool.
 
 ## Matching regions

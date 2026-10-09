@@ -29,6 +29,10 @@ Use additive, non-negative measures; a rate is not a meaningful slice weight. Li
 
 A new Grouped donuts component is placed at 480 × 300 px.
 
+![Grouped donuts Data tab: Category L1 in Details (Slices), Region in Grouping (Donuts) and Net Sales in Measures](../images/current/grouped-donuts-data.png)
+
+![Grouped donuts in Preview: one donut per Region showing its Category L1 mix of 2025 Net Sales](../images/current/grouped-donuts-region.jpg)
+
 ## Settings that matter
 
 All in the **Style** tab.

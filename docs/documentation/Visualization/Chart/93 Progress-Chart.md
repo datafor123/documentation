@@ -20,6 +20,8 @@ For example, 75 completed items against a target of 100 represents 75% achieveme
 
 The automatic title names only the Progress measure, not the target.
 
+![Ring progress in Preview: Net Sales for 2025 at 86.94% of a fixed Target value of 3,500,000, with the name line under the percentage](../images/current/ring-progress-target.jpg)
+
 ## Make the meaning visible
 
 | Option (Style) | Effect | Default |

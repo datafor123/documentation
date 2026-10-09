@@ -32,9 +32,9 @@ The stage **Model Resolution** is new in 10.00. While it has no assignment of it
 
 From **Assignments**, click **Manage models →**, then click **Add Model**.
 
-<div align="left"><img src="./images/llm-models-current.png" alt="Current LLM models" width="100%" /></div>
+<div align="left"><img src="./images/llm-models-panel.png" alt="Models list in the LLM panel with the model count, Add Model, search, and model cards showing Used by n stages" width="420px" /></div>
 
-<div align="left"><img src="./images/llm-add-model-current.png" alt="Add Model form" width="100%" /></div>
+<div align="left"><img src="./images/llm-add-model-form.png" alt="Add Model form with Verify and enable, Create, Model Name, Display name, Provider, API Endpoint, API Key and Extra Parameters with its help text" width="420px" /></div>
 
 | Field | Required | Description |
 | --- | --- | --- |
@@ -63,8 +63,6 @@ For chat profiles, verification checks real structured output against the provid
 ## 3. Configure Extra Parameters
 
 Use **Extra Parameters** only for provider request settings such as `temperature`, `max_output_tokens`, `top_p`, reasoning effort, embedding `dimensions`, `encoding_format`, `seed`, or vendor-specific flags.
-
-<div align="left"><img src="./images/llm-extra-parameters-current.png" alt="Extra Parameters help text" width="100%" /></div>
 
 The value must be a JSON object. Do not put credentials, authorization headers, endpoints, `response_format`, `tools`, `tool_choice`, or structured-output controls here; the runtime removes those keys. Do not set both `reasoning_effort` and `thinking_budget`.
 
@@ -115,7 +113,9 @@ Questions in the AI Assistant use only the assignments on this page. A few featu
 
 **Current scheme** records the template that was last applied or saved. Later manual assignment changes do not rename it, so the scheme name is not proof that the live configuration still matches the template.
 
-<div align="left"><img src="./images/llm-switch-scheme-current.jpg" alt="Switch scheme page with built-in and custom templates and file import" width="100%" /></div>
+<div align="left"><img src="./images/llm-switch-scheme-templates.png" alt="Switch scheme with the built-in OpenAI template and a custom template, each with Apply template" width="420px" /></div>
+
+<div align="left"><img src="./images/llm-switch-scheme-import.png" alt="Import from file card in Switch scheme with the Choose file button" width="410px" /></div>
 
 Use the controls as follows:
 

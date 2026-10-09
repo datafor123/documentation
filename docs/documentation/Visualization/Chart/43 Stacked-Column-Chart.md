@@ -22,6 +22,8 @@ Both are in **Components → Charts → Column & bar** and work the same way apa
 | **Round corners** | Top of a positive stack, bottom of a negative one | Right end of a positive stack, left end of a negative one |
 | Bar-only settings | – | **Bar → Space (%)** (5–90, default 50), **Bar → Right margin**, **Y axis → Label width** (40–800 px, default 50 px) |
 
+![Stacked bar in Preview: Net Sales by Region split by Category L1, with segment labels and the total at the right end of each bar](../images/current/stacked-bar-preview.jpg)
+
 ## Build a sales breakdown
 
 1. In **Components → Charts → Column & bar**, click **Stacked column** or **Stacked bar**, then click the canvas. A new chart is 400 × 300 px.
@@ -47,6 +49,8 @@ Open **Style → Data labels** and turn on **Show**:
 | **Show total** | Sum of the segments at the end of each column or bar. When the category's net value is negative, the total is drawn beyond the negative part of the stack (below the column, left of the bar). Needs **Show**. | On for new charts, off in older reports |
 | **Hide labels below (%)** | Hides the label of a segment whose share of its column or bar is below this value (0–20). The share is the segment divided by the sum of the absolute segment values in that category. | 0 (all labels) |
 | **Display units**, **Decimal places** | Format of segment labels and totals. | **Auto** for new charts |
+
+![Stacked column in Preview with Show and Show total on: segment labels for each Category L1 and the regional total above each column](../images/current/stacked-column-total.jpg)
 
 - The total is the net value: positive and negative segments are added. A positive net total always sits at the end of the positive part of the stack, even when the last series is negative.
 - Totals use the measure format with the label's **Display units** and **Decimal places**. With a unit and **Auto** decimals, labels and totals share about three significant digits (1.85M, 0.97M, 0.50M).

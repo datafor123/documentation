@@ -18,6 +18,8 @@ Show a daily measure on a calendar to reveal weekday patterns, busy periods and 
 
 **Date** lists only day-level fields that have a date format in the model. Month-level and second-level fields are not offered. If the model has no such field, the picker shows *There is no valid date field in the analysis model*. When several fields have the same name, the list adds the hierarchy, for example *Day › Day* and *Date hierarchy › Day*. Multiple records for one day follow the measure's aggregation. Check that the date field and any timezone handling in the source match the business day.
 
+![Calendar chart in Preview: daily Net Sales for 2025 with Color by value and the colour scale from the lowest to the highest day](../images/current/calendar-daily-sales.jpg)
+
 ## Layout and range
 
 All in **Style → Plot area**:
