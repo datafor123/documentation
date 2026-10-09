@@ -25,7 +25,13 @@ The screenshot illustrates the editor; preview success still depends on the sele
 
 ### Raw SQL permission
 
-**Check and preview** requires permission to execute raw SQL on the connection. In the current release, uploaded datasets do not allow raw SQL execution; use a native database connection when a SQL View is required.
+**Check and preview** requires permission to execute raw SQL on the connection. Administrators always have it. Other users need:
+
+- **Full control** on the connection;
+- a connection that is not sensitive: not an engine running inside Datafor (DuckDB, uploaded datasets and similar), not JNDI, and not a connection on the database server that holds the Datafor repository whose account can reach the repository;
+- SQL that does not call blocked server-side functions such as `dblink`, `pg_read_file`, `load_file`, `sleep` or `xp_cmdshell`.
+
+Otherwise the check fails with `SQL_EXECUTE_FORBIDDEN:<connection>`, and saving a model with the view fails with `SQL_FRAGMENT_FORBIDDEN:<connection>`. See [Data connections: targets and custom SQL](/documentation/System/Permission-Evaluation-Overview/#data-connections-targets-and-custom-sql).
 
 The generic message **The table fields are empty, the table may not exist** can also represent a permission or SQL execution failure. Check the connection type and raw-SQL policy before concluding that the referenced table is missing.
 

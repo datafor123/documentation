@@ -12,7 +12,7 @@ Datafor has three time settings with different purposes. Configure the setting u
 | --- | --- | --- |
 | Time **Semantic role** | An Attribute | Identifies Year, Quarter, Month, Week, or Date levels for time-aware report and MDX behavior. |
 | **Default time field** | A Measure or calculated measure | Tells the Agent which date context to use for that Measure. |
-| **Default time dimension** | Model properties | Stores the model's designated time Dimension as model metadata. It does not choose the Agent's date field or replace Attribute time roles. |
+| **Default time dimension** | Model properties | The model-wide date context. The Agent uses it for Measures without a **Default time field**. It does not replace Attribute time roles. |
 
 ## Configure a time Dimension
 
@@ -59,7 +59,7 @@ Examples:
 - Refund Measures may use return date rather than order date.
 - Inventory snapshots use the snapshot date.
 
-Set this value independently for Measures with different date meanings. The Agent reads the Measure-level setting; changing only the model's **Default time dimension** does not change that behavior.
+Set this value independently for Measures with different date meanings. A Measure's own setting takes precedence over the model's **Default time dimension**, and a date the user names in the question wins over both. Measures without a setting use the model's Default time dimension.
 
 ## Models with several date roles
 

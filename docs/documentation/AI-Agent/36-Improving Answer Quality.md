@@ -19,7 +19,7 @@ The Agent does not guess table structures and does not invent definitions from g
 | --- | --- | --- | --- |
 | **Business semantics of the analysis model** | Model authors | Model Designer → properties panel | Whether a user's wording maps to a field; how time, units, percentages, and "higher is better" are understood |
 | **Metrics Library** | Metric owners | Console → **Data → Metrics Library** | What a business term means, which measure computes it, which model answers a question that names no model, and whether the number must carry a caveat |
-| **Knowledge index** (called vector index before 9.04.6) | Built automatically when a model is saved; administrators monitor it | **Settings › AI Agent › Knowledge indexes**; **Prep data for AI** on the model | Whether business terms and member values ("East Region", "Completed") are recognized |
+| **Knowledge index** (called vector index before 10.00) | Built automatically when a model is saved; administrators monitor it | **Settings › AI Agent › Knowledge indexes**; **Prep data for AI** on the model | Whether business terms and member values ("East Region", "Completed") are recognized |
 
 Plus **the question itself**. The sections below are organized by role. The model-author and metric-owner sections each end with "How to confirm it worked", so you can verify a change yourself.
 
@@ -166,11 +166,11 @@ After binding and saving, the **Definition consistency** row appears under **Met
 | --- | --- | --- |
 | **Matches definition** | The implementation agrees with the business definition. | Nothing. |
 | **Possible drift** | The implementation contradicts the definition, with a one-line reason (for example "the denominator uses all orders, the definition requires paid orders"). | Agree with the metric owner: change the model formula or change the definition, then compare again. |
-| **Not enough evidence** | The definition is not specific enough, or the formula references something the comparison cannot see. | Make the definition concrete (see §3.2) and compare again. |
+| **Not enough evidence** | Part of the implementation could not be read, for example a formula that references a member of unknown kind or a formula that was cut off. | Check the formula and the members it references, then compare again. |
 | **Not compared** | Never run. | Run it. |
 | **Needs comparison** | The definition got a new version, or the model implementation changed. | Click **Compare against new definition**. |
 
-**Unresolved "Possible drift" and "Needs comparison" states show up in users' answers as-is** (§1.2). That is deliberate: a warning the user can see is better than a possibly wrong number that looks authoritative. Conversely, when a comparison flags something that is not really wrong, the usual cause is a definition that does not state its scope (for example, whether the denominator includes cancelled orders). Fix the definition text; do not change the model just to silence the warning.
+**Unresolved "Possible drift" and "Needs comparison" states show up in users' answers as-is** (§1.2). That is deliberate: a warning the user can see is better than a possibly wrong number that looks authoritative. The comparison assumes that each measure holds what its name and description say, and takes exclusions only from the definition text. A scope that matters, for example "the denominator excludes cancelled orders", must therefore be written in the definition or its notes, and a measure description that contradicts it is flagged. When a comparison flags something that is not really wrong, fix the description or the definition text; do not change the model just to silence the warning. Verdicts stored before 10.00 were made under stricter rules: run **Compare all** again.
 
 ### 2.9 After changing the model: the knowledge index
 

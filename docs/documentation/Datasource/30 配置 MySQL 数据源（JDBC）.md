@@ -111,25 +111,27 @@ For a reusable query over source tables, create a [SQL View in an analysis model
 **Pooling → Enable Connection Pooling** lets Datafor reuse database connections. There are two controls to distinguish:
 
 1. The section's main switch enables pooling for this datasource.
-2. Each row's **Enable** switch determines whether that parameter is explicitly included in the configuration. A grey value in a disabled row is not an active override.
+2. Each row's **Enable** switch decides whether that parameter is saved with the connection. A row that is switched off shows the server default in grey; the connection uses that default.
 
-![Pooling rows with initialSize 5, maxActive 200, maxIdle 20, minIdle 5, and validationQuery select 1 enabled; maxWait is disabled](./images/mysql-connection-pooling-en.png)
+![Pooling rows all switched off, showing the server defaults: initialSize 0, maxActive 20, maxIdle 2, minIdle 1, maxWait 100, no validation query](./images/mysql-connection-pooling-en.png)
 
-The new form in the example installation shows:
+A new connection starts with every row switched off, so it runs on the server defaults. The defaults come from `dbcp-defaults` in `pentaho-solutions/system/pentaho.xml`; a standard installation has:
 
-| Parameter | Initial row state | Meaning |
+| Parameter | Server default | Meaning |
 | --- | --- | --- |
-| `initialSize` | Enabled, `5` | Initial pool size. |
-| `maxActive` | Enabled, `200` | Upper limit for active connections requested through this pool. Review against the database's connection budget. |
-| `maxIdle` | Enabled, `20` | Maximum idle connections retained by the pool. |
-| `minIdle` | Enabled, `5` | Minimum idle-connection target. |
-| `maxWait` | Disabled; `-1` is displayed | Wait for an available pooled connection, in milliseconds. If explicitly enabled with `-1`, the setting requests an indefinite wait. This is not a query execution timeout. |
-| `validationQuery` | Enabled, `select 1` | A lightweight query used to check whether a connection is usable. |
-| `testOnBorrow` | Enabled, `true` | Validates a connection before it is borrowed from the pool. |
+| `initialSize` | `0` | Connections opened when the pool starts. |
+| `maxActive` | `20` | Upper limit for active connections from this pool. Review against the database's connection budget. |
+| `maxIdle` | `2` | Maximum idle connections kept open. |
+| `minIdle` | `1` | Minimum idle connections kept open. |
+| `maxWait` | `100` | Milliseconds to wait for a free pooled connection. This is not a query timeout. |
+| `validationQuery` | none | A lightweight query, such as `select 1`, used to check a connection. |
+| `testOnBorrow` | `true` | Checks a connection before it is used. |
 
-Start with a pool size agreed with your DBA. The prefilled `200` is not a target to reach: multiple datasources, server instances, and other applications can share the same MySQL connection limit. Raising it can increase database load without making slow queries faster.
+To override a value, switch its row on and enter the value; only rows that are switched on are saved. A datasource that serves many concurrent users, for example a production reporting database, usually needs a larger `maxActive` than 20: agree the number with your DBA, because several datasources, Datafor servers and other applications can share the same MySQL connection limit. A larger pool does not make slow queries faster.
 
-Change idle validation, abandoned-connection cleanup, and prepared-statement pooling only when investigating a specific operational need. Keep the row switch enabled for each setting you intend to apply, then **Test** and **Save**. Database privileges, rather than a pool's read-only setting alone, should enforce read-only access.
+Connections saved before 10.00 keep the values they saved (in 9.04 the form saved `maxActive` 200, `maxIdle` 20, `minIdle` 5, `initialSize` 5 and `select 1`); rows they never set now show the server default. To change the defaults for every connection that does not override them, edit `dbcp-defaults` and restart Datafor.
+
+Change idle validation, abandoned-connection cleanup, and prepared-statement pooling only when investigating a specific operational need. Then **Test** and **Save**. Database privileges, rather than a pool's read-only setting alone, should enforce read-only access.
 
 ## 6. Test, save, and verify table access
 

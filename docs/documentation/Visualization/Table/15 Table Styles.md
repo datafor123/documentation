@@ -19,7 +19,7 @@ Click the template button to open the gallery.
 
 | Group | Template | Look |
 | --- | --- | --- |
-| Light | **Classic** | The appearance of tables before 9.04.6. |
+| Light | **Classic** | The appearance of tables before 10.00. |
 | | **Minimal** | Plain header with an accent line, horizontal lines only. |
 | | **Banded rows** | Tinted header and alternating tinted rows, no grid lines. |
 | | **Bold header** | Solid accent header with white text, horizontal lines. |
@@ -46,7 +46,7 @@ Click the template button to open the gallery.
 A table without its own template follows the report's default template, shown as **Page default** in the picker.
 
 - New reports use **Minimal** as the page default. The first item in the gallery, **Page default · Minimal**, removes the table's own template.
-- Reports created before 9.04.6 have no page default, so their tables, including tables you add later, use **Classic**.
+- Reports created before 10.00 have no page default, so their tables, including tables you add later, use **Classic**.
 
 ## Related settings
 

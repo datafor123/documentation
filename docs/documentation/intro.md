@@ -8,7 +8,7 @@ description: Where to start in the Datafor documentation, by task.
 
 # Welcome to Datafor
 
-Datafor is a business intelligence platform: connect databases, describe them once in an analysis model, build interactive reports on the model, and ask questions about the data in plain language with the AI Agent. These pages describe Datafor **9.04.6**; see the [release notes](/release/9.04.6/) for what changed.
+Datafor is a business intelligence platform: connect databases, describe them once in an analysis model, build interactive reports on the model, and ask questions about the data in plain language with the AI Agent. These pages describe Datafor **10.00**; see the [release notes](/release/10.00/) for what changed.
 
 ## Start here
 

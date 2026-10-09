@@ -23,4 +23,8 @@ createTime: 2026/10/09 17:30:00
 
 A report page can lower the rows per component with **Page → Settings → Performance → Max query records**; the default for that is in [System Configuration](/documentation/System/System-Configuration/).
 
+## SQL statements of the engine
+
+Each query sends SQL statements to the database through a shared set of engine threads (`mondrian.rolap.maxSqlThreads`, default 100). When all threads are busy, further statements wait in a queue; before 10.00 the whole query failed with *The number of concurrent SQL statements … has been reached*. One query may use at most `mondrian.rolap.maxSqlThreadsPerQuery` of the threads; the default `0` means half of `maxSqlThreads`, so one wide query cannot block the others. Both are set in `bi-server/pentaho-solutions/system/datafor/mondrian.properties` and take effect after a restart; they are not on this page.
+
 Related: [Empty Data and Error Messages](/documentation/Visualization/Empty-Data-and-Errors/)

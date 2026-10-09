@@ -7,7 +7,7 @@ createTime: 2026/10/06 20:53:56
 
 # Web page
 
-**Web page** (called *Iframe* before 9.04.6) embeds another page in the report, such as a map service, a form or an internal portal.
+**Web page** (called *Iframe* before 10.00) embeds another page in the report, such as a map service, a form or an internal portal.
 
 ## Set the address
 

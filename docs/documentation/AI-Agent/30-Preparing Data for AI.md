@@ -7,7 +7,7 @@ createTime: 2026/09/01 21:50:47
 
 # Preparing Data for AI
 
-A **knowledge index** holds what the AI Agent has learned from an analysis model: its fields, dimensions, business meaning and member values, stored as vectors made by the embedding model. Versions before 9.04.6 called it a *vector index*, and the AI Assistant's messages still use that term.
+A **knowledge index** holds what the AI Agent has learned from an analysis model: its fields, dimensions, business meaning and member values, stored as vectors made by the embedding model. Versions before 10.00 called it a *vector index*, and the AI Assistant's messages still use that term.
 
 The Agent uses the index to recognise business terms, near-synonyms and member values ("East Region", "Completed"), to pick the relevant fields of a large model, and as evidence when it chooses the analysis model for a question that names none. Without an index the Agent still answers, but noticeably worse.
 
@@ -67,8 +67,8 @@ Go to **Settings › AI Agent › Knowledge indexes**. The page lists one row pe
 | **Details** | Opens the build record: analysis model, index, status, stage, embedding model, vectors, **Run started**, **Run finished**, **Duration**, **Last activity**, **Updated**, **Created at**. A failed build adds **Failure reason** and **Diagnostic details**, with **Copy**; the full log is in the AI service's `logs/app.log`. |
 | **Rebuild index** | Deletes this index and builds it again from scratch. Not available while a build is running. Users get the "being built" message (section 6) until it completes, so rebuild outside busy hours. |
 | **Set refresh schedule** / **Delete refresh schedule** | Create, edit or remove the model's refresh schedule. Deleting the schedule keeps the index. |
-| **Mark as failed** | Only while a build is **Pending** or **Indexing**. Use it for a build that stopped making progress, for example after the AI service restarted, so that it can be rebuilt. If the build is in fact still running, it overwrites this status when it finishes. |
-| **Delete** | Deletes the index of every cube in the model ("Indexes of every cube in this model are removed."). |
+| **Mark as failed** | Only while a build is **Pending** or **Indexing**. Use it for a build that stopped making progress, for example after the AI service restarted, so that it can be rebuilt. If the build is in fact still running, it stops at its next progress report and stays **Failed**. |
+| **Delete** | Deletes the index of every cube in the model ("Indexes of every cube in this model are removed."). Refused while a build of the model is still running; use **Mark as failed** first. |
 
 ## 5. Set a refresh schedule
 

@@ -89,8 +89,9 @@ When a saved selection or default no longer exists in the data, the filter keeps
 
 ## Layout
 
-- **Style → Title → Position**: **Top** or **Left**. A left title takes at most half the width and shows an ellipsis when it is longer.
-- **Content alignment** (Top / Middle / Bottom) and **Control size** (Compact / Standard / Spacious) for Dropdown and Date keep the input at a fixed height when you resize the component.
+- **Style → Title → Position**: **Top** or **Left**, on Dropdown, Button group, Radio/Checkbox, Search, Date and Paginate. List box, Hierarchy table filter and Numeric slider always show the title on top. A left title takes at most half the width and shows an ellipsis when it is longer.
+- Dropdown and Date have an input box of fixed height (from the font size) that no longer stretches with the component. **Style → Content → Content alignment** (Top / Middle / Bottom) places it in a taller component, and **Control size** (Compact / Standard / Spacious) sets its padding. In the editor these components cannot be made shorter than the input box.
+- New filters start with the title on top and Content alignment **Top**. Filters from reports made before 10.00 keep a left title, and their box stays where the text was: Middle for a single-selection Dropdown and for Date, Top for a multiple-selection Dropdown.
 - New filters get a size that fits their type, for example Dropdown 240×60, Date 320×48, List box 200×240 and Filter button 120×40.
 
 ## Troubleshooting

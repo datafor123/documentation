@@ -7,7 +7,7 @@ createTime: 2026/10/06 20:51:07
 
 # Heat matrix
 
-Cross two dimensions and use cell colour to compare a measure. A heat matrix helps find patterns across region and product, day and hour, or team and metric category. It is new in 9.04.6.
+Cross two dimensions and use cell colour to compare a measure. A heat matrix helps find patterns across region and product, day and hour, or team and metric category. It is new in 10.00.
 
 ## Build regional category sales
 

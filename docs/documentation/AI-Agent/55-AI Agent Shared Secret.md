@@ -11,7 +11,7 @@ Datafor returns the full configuration of an LLM configured in Datafor, includin
 
 The AI Agent reads model configurations with the signed-in user's session. It therefore needs the same secret as the Datafor server: without a matching value, features that use an LLM configured in Datafor fail for users who are not administrators.
 
-This guide applies to Datafor 9.04.6 and later. The value is called `DATAFOR_AGENT_SECRET` on the AI Agent side and `<agent-secret>` in Datafor's settings file.
+This guide applies to Datafor 10.00 and later. The value is called `DATAFOR_AGENT_SECRET` on the AI Agent side and `<agent-secret>` in Datafor's settings file.
 
 ## 1. Who is affected
 
@@ -88,7 +88,7 @@ Configure the secret by hand when the AI Agent runs on another server, or in a f
 1. In the AI Agent folder, open `instance-secrets.env` and find the line that starts with `DATAFOR_AGENT_SECRET=`.
 2. Copy the text after `=`.
 
-If `instance-secrets.env` has no such line, look in `.env` in the same folder: when the key is defined there, that value is the one in use. If neither file has it, the AI Agent is older than 9.04.6 or was not started with its launcher.
+If `instance-secrets.env` has no such line, look in `.env` in the same folder: when the key is defined there, that value is the one in use. If neither file has it, the AI Agent is older than 10.00 or was not started with its launcher.
 
 Treat the value like a password. Move it over a secure channel, and do not paste it into email, chat or support tickets.
 
@@ -165,7 +165,7 @@ Use `app-console restart` without a target, so that the MCP server restarts too.
 | The launcher printed `set <agent-secret> in …; … restart the BI server if it is already running` | Restart Datafor if it was running when the AI Agent started. |
 | The launcher printed `could not set <agent-secret> in <path> : <reason>` | The file could not be written, for example because it is read-only. The AI Agent runs anyway. Fix the cause and restart the AI Agent, or set the value by hand (section 3), then restart Datafor. |
 | The launcher printed the "settings.xml is not beside this AI service" message | Split deployment: configure Datafor as in section 3, or move the AI Agent folder next to `pentaho-solutions`. |
-| `instance-secrets.env` has no `DATAFOR_AGENT_SECRET` line | `.env` defines the key (then that value is in use), the AI Agent is older than 9.04.6, or it was started without its launcher. |
+| `instance-secrets.env` has no `DATAFOR_AGENT_SECRET` line | `.env` defines the key (then that value is in use), the AI Agent is older than 10.00, or it was started without its launcher. |
 | After changing the secret, the old value is back | Only one side was deleted. Follow section 5. |
 | Users who are not administrators started failing after a Datafor upgrade (split deployment) | The upgrade replaced `settings.xml`. Add the `<agent-secret>` line again and restart Datafor, or switch to Option B. |
 | `tomcat/logs/pentaho.log` has `AI service secret is not configured` | No value is set on the Datafor side. Co-located: start the AI Agent with its launcher, then restart Datafor. Split: section 3. |

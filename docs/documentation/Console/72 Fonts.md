@@ -26,6 +26,8 @@ Datafor does not ship font files. A font is used only when it is installed on th
 1. Open **Settings › General › Branding** and the **Other** tab.
 2. Choose a font from **Interface font** and click **Save**. The change applies without reloading.
 
+The interface font applies only while the main Branding switch is **Enabled**; with Branding disabled, the console and the editor use the product's default fonts. Each font in the list is drawn in its own typeface and labelled **System default**, **Built into Windows**, **Built into macOS**, **Built into Windows and macOS** or **Needs installing**. A font that is not installed on a viewer's computer falls back to similar system fonts.
+
 The list depends on the interface language: Simplified Chinese, Traditional Chinese and Japanese fonts are listed only in those languages. A font typed by hand in earlier versions is kept until you choose another one; typing new names is no longer possible.
 
 ## Default font of new reports

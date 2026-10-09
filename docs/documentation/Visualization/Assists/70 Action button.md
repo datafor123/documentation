@@ -7,7 +7,7 @@ createTime: 2026/10/06 20:53:56
 
 # Action button
 
-An **Action button** (called *Image Button* before 9.04.6) is a button that does one thing when clicked: open a report, switch a tab, reset filters, export the page and more.
+An **Action button** (called *Image Button* before 10.00) is a button that does one thing when clicked: open a report, switch a tab, reset filters, export the page and more.
 
 ## Add a button
 

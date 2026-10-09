@@ -65,7 +65,7 @@ The same combination rules apply: the resolved condition is ORed with other matc
 
 A row policy restricts a measure group only through the tables that this measure group's query joins. In an analysis model with several fact tables, a dimension table that a measure group reaches only through another fact table is not attached to that measure group, so a policy on that table does not restrict it.
 
-For example, inventory and sales fact tables share `product`, and only `sales_fact` joins `customer`. A row policy on `customer` restricts sales measures but not inventory measures, because `customer` is reachable from inventory only through `sales_fact` (one product has many sales rows). Before 9.04.6 the engine followed that path, which applied the customer filter to inventory but also repeated each inventory row once per matching sales row.
+For example, inventory and sales fact tables share `product`, and only `sales_fact` joins `customer`. A row policy on `customer` restricts sales measures but not inventory measures, because `customer` is reachable from inventory only through `sales_fact` (one product has many sales rows). Before 10.00 the engine followed that path, which applied the customer filter to inventory but also repeated each inventory row once per matching sales row.
 
 - To restrict such a measure group, add a row policy on a table that it joins itself, such as its fact table or a dimension related directly to it.
 - Check measures from each fact table in the actual report as the restricted user. **Test access** evaluates tables, not measure groups, and a correct result for one fact table does not prove the other.

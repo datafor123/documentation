@@ -105,7 +105,7 @@ Switching to Combo or to other chart types, or within the same orientation, is u
 
 - Automatic value axes now include 0, so a chart whose axis started near the smallest value is redrawn from 0 when opened. Charts where the old **Zero align** switch (no longer in the panel) was saved off keep the data range.
 - Labels inside columns that do not fit are now hidden.
-- **Display units** stays **Follow measure format**, label colours stay fixed and the size is unchanged. The new defaults apply only to charts placed in 9.04.6.
+- **Display units** stays **Follow measure format**, label colours stay fixed and the size is unchanged. The new defaults apply only to charts placed in 10.00.
 - The default X-axis name is now always the X-axis field at the current drill level. Before, it could show the Legend field or the top drill level.
 
 ## Check the result

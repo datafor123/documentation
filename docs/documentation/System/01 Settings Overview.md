@@ -30,4 +30,4 @@ Administrators open **Settings** (gear icon) in the left navigation. Pages are g
 
 Each page has its own address (for example `#/settings/sso/ldap`), so reloading stays on the page and the browser's Back button returns to the previous settings page. Pages with unsaved changes ask before you leave. Below 1,280 px window width the second-level navigation becomes a list at the top.
 
-Names before 9.04.6: *White label* is now **Branding**, *Vector indexes* **Knowledge indexes**, the OLAP page **Query engine**, the JDBC page **Database drivers**; LDAP, OAuth2, SAML2 and CAS are tabs of **Single sign-on**, and *Vector jobs* is the **Refresh schedule** column of Knowledge indexes.
+Names before 10.00: *White label* is now **Branding**, *Vector indexes* **Knowledge indexes**, the OLAP page **Query engine**, the JDBC page **Database drivers**; LDAP, OAuth2, SAML2 and CAS are tabs of **Single sign-on**, and *Vector jobs* is the **Refresh schedule** column of Knowledge indexes.

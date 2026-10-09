@@ -66,7 +66,7 @@ Examples:
 
 - **No data yet.** A relative period after the last loaded date returns no data. In a list filter the period is shown in red with a strikethrough and still applied; charts say *No data under the current filters*, and **View conditions** shows the range.
 - **Weeks** start on the day set in **Settings › General › System configuration › Modeling › First day of the week**.
-- **Older reports**: *Last 7 Days* and the other *Last N* presets cover one day less than before 9.04.6, and *Last Year*, *Last Month*, *Last Quarter*, *This Year to Last Month* and *Year to Date* were corrected for edge cases.
+- **Older reports**: *Last 7 Days* and the other *Last N* presets cover one day less than before 10.00, and *Last Year*, *Last Month*, *Last Quarter*, *This Year to Last Month* and *Year to Date* were corrected for edge cases.
 - **URL values win**: a default passed in the URL replaces the relative default on the first load.
 
 Related: [Date](/documentation/Visualization/Datepicker/) · [Dropdown, List Box, Button Group and Radio/Checkbox](/documentation/Visualization/List-Box/) · [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/)

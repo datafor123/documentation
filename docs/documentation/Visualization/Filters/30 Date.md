@@ -28,7 +28,7 @@ Until a time field is chosen, the component shows **Choose a date field** in edi
 ## Default values
 
 - **All (no filter)**: no date condition. The box shows **All dates** and has a clear button; **Reset to default** returns to no filter.
-- **Fixed**: the dates in the box below. Picking a date on the canvas while editing also sets a fixed default, rounded to the granularity.
+- **Fixed**: the dates in the box below. Picking a date on the canvas while editing also sets a fixed default, rounded to the granularity. A reader's choice in view or preview mode never changes the saved default, so **Refresh** and **Reset to default** return to it.
 - **Relative**: a period computed from the viewer's date every time the report opens. The list is grouped into **Current period**, **Previous period**, **Recent** and **Custom**, and each entry shows the range it resolves to today.
 - **Parameter**: the value of the parameter chosen in **Parameter name**. When the parameter has no value, the current period is used.
 
@@ -63,6 +63,15 @@ Choose **Custom…** at the end of the relative list to build a rule:
 
 Choose **Data source → Parameter** and pick a **Date** parameter with **Any value**; others are greyed out with the reason. The component then shows the parameter value, writes it when the reader changes the date, and filters nothing directly. Other controls bound to the same parameter stay in sync. See [Bind Filters to Parameters](/documentation/Analysis/Parameter-Controllers/).
 
+## Style
+
+| Group | Styles |
+| --- | --- |
+| **Title** | **Show** and **Position** (Top or Left). |
+| **Content** | **Content alignment** (where the input box sits in a taller component) and **Control size** (Compact, Standard or Spacious padding). |
+| **Component frame** | Background, border, radius and shadow of the whole component. Transparent by default, so the page theme shows through. |
+| **Input box** | Background, border, radius and shadow of the date box itself. Settings made in the *Effects* group before 10.00 are kept here. |
+
 ## Weeks
 
 *This Week*, *Last Week* and week ranges start on the day set in **Settings › General › System configuration › Modeling › First day of the week** (Monday by default). Match it to the week definition of your model.
@@ -73,7 +82,7 @@ Choose **Data source → Parameter** and pick a **Date** parameter with **Any va
 | --- | --- |
 | The charts show *No data under the current filters*. | The relative period may lie after the last loaded date. Use **View conditions** on the chart to see the date range. |
 | A component is not filtered. | It may lack a **Time axis** field (Time axis mode) or be at a coarser time level; see the greyed groups in Interactions. |
-| *Last 7 Days* differs from an older report by one day. | Since 9.04.6 the *Last N* presets include today. |
+| *Last 7 Days* differs from an older report by one day. | Since 10.00 the *Last N* presets include today. |
 | The week starts on the wrong day. | Check **First day of the week** in System configuration. |
 
 Related: [Filters](/documentation/Visualization/Filters/) · [Relative Date Filtering](/documentation/Analysis/Relative-Date-Filtering/) · [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/)

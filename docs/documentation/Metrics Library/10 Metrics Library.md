@@ -38,7 +38,7 @@ The indicators answer different questions:
 
 A metric can be Certified and still have no model reference. It can also be Certified and bound while its implementation comparison needs attention.
 
-The example below shows **Net Sales** as Certified and bound to the **Retail Chain Operations** model, but the comparison result is **Not enough evidence** because the implementation does not provide enough evidence about order-status and return treatment.
+The example below shows **Net Sales** as Certified and bound to the **Retail Chain Operations** model, with a comparison result that needs review.
 
 <div align="left"><img src="./images/net-sales-metric-detail.jpg" alt="Certified Net Sales metric with a Retail Chain Operations binding that needs review" width="100%" /></div>
 
@@ -112,13 +112,17 @@ The sample model currently shows 13 bound measures, with four requiring attentio
 
 Use **Compare definition** for one binding or **Compare all** for the model. Datafor sends the model implementation and business definition to AI and stores the verdict in Metrics Library. It does not change the formula, aggregation, filters, or model.
 
+The comparison judges only what the model shows: which measures a formula combines, how they are aggregated, what it divides by, what it excludes, empty values and grain. A bound measure, and every measure its formula uses, is assumed to hold what its name and description say, or what the definition says when it has no description. Exclusions count only when the definition or its notes state them. A verdict stored before 10.00 was made under stricter rules; run **Compare all** again.
+
+A successful comparison also moves the binding to the metric's current version, which clears "Bound to v1, current is v2". Saving the model writes the measure's **Effective grain** and dimension mapping into the bindings it creates.
+
 | Status | Required response |
 | --- | --- |
 | **Not compared** | Run the comparison before governance approval. |
 | **Matches definition** | The supplied implementation evidence supports the definition. |
 | **Possible drift** | Review a likely conflict between the implementation and definition. |
 | **Needs comparison** | Re-run the comparison because the definition or implementation changed. |
-| **Not enough evidence** | Inspect the measure manually; the result is inconclusive, not proof that the implementation is wrong. |
+| **Not enough evidence** | Part of the implementation could not be read, for example a referenced member of unknown kind or a cut-off formula. Inspect the measure manually; the result is not proof that the implementation is wrong. |
 
 Resolve comparison warnings before treating a metric as production-ready.
 
@@ -149,7 +153,7 @@ Draft, stale, drift, or inconclusive bindings can produce governance warnings in
 | **Does Certified mean the metric can be queried?** | No. Certification approves the definition. The selected Analysis Model still needs a usable metric binding. |
 | **Does a binding mean the definition is approved?** | No. A Draft metric can currently be bound. Review and certify it separately. |
 | **Does Compare definition fix the measure?** | No. It records an AI verdict and never edits the model. |
-| **Why is a Certified metric marked Not enough evidence?** | The definition is approved, but the supplied model metadata does not prove that every rule is implemented. Review the formula, aggregation, filters, and supporting descriptions. |
+| **Why is a Certified metric marked Not enough evidence?** | Certification approves the definition; the comparison checks the model separately. **Not enough evidence** means the comparison could not read part of the implementation. A verdict stored before 10.00 may come from the old rules; compare again. Review the formula, aggregation, filters, and supporting descriptions. |
 | **Can one metric be reused across models?** | Yes. Each model supplies its own binding and implementation. Review each binding independently. |
 | **Why did the Agent ask which metric I meant?** | A name or synonym matched multiple metrics. Use the official name or Metric ID, then remove ambiguous synonyms during governance review. |
 | **Can I change a Metric ID?** | No. Create a replacement metric and rebind affected model measures. |

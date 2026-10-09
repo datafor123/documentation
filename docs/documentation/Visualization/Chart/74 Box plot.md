@@ -7,7 +7,7 @@ createTime: 2026/10/06 20:51:07
 
 # Box plot
 
-Compare the spread of a measure across observations, optionally separated into groups. For example, compare the distribution of store sales in each region rather than only each region's total. Box plot is new in 9.04.6.
+Compare the spread of a measure across observations, optionally separated into groups. For example, compare the distribution of store sales in each region rather than only each region's total. Box plot is new in 10.00.
 
 ![Observation grain for Scatter, Box plot and Histogram](../images/current/observation-grain-concept.svg)
 

@@ -22,10 +22,10 @@ LLM configuration has three layers:
 
 The LLM panel is available to administrators in the full AI Agent view. It opens on **Assignments** and shows the current scheme and assignment status.
 
-Datafor 9.04.6 has 15 Agent stages and one **Embedding Model** role: 16 assignments. **16/16 assigned** means that every role has a compatible profile and every chat profile has current structured-output verification. It is not a continuous provider-health check.
+Datafor 10.00 has 15 Agent stages and one **Embedding Model** role: 16 assignments. **16/16 assigned** means that every role has a compatible profile and every chat profile has current structured-output verification. It is not a continuous provider-health check.
 
-::: warning After an upgrade to 9.04.6
-The new stage **Model Resolution** has no assignment in an upgraded installation, nor in a custom scheme saved before 9.04.6. The badge then reads **15/16 assigned**, and the Assignments **Save** button stays disabled until you assign it. Until then, automatic model selection uses the **Workflow Routing** assignment at runtime. The built-in **OpenAI** template includes the stage.
+::: warning After an upgrade to 10.00
+The new stage **Model Resolution** has no assignment in an upgraded installation, nor in a custom scheme saved before 10.00. The badge then reads **15/16 assigned**, and the Assignments **Save** button stays disabled until you assign it. Until then, automatic model selection uses the **Workflow Routing** assignment at runtime. The built-in **OpenAI** template includes the stage.
 
 <div align="left"><img src="./images/llm-assignments-upgrade.png" alt="Assignments after an upgrade: 15/16 assigned, Model Resolution required, Save disabled" width="420" /></div>
 :::
@@ -130,7 +130,7 @@ Save live assignments before saving a scheme. Schemes and exports never contain 
 
 When applying a scheme, review the stage changes, enter the provider API key, and change the shared endpoint only if the deployment uses a gateway or proxy. Datafor creates or overwrites profiles referenced by the scheme, verifies them, and writes assignments last; unrelated profiles are untouched. If verification is incomplete, assignments can remain pending. Return to **Assignments**, resolve any warnings, confirm **16/16 assigned**, and click **Save**.
 
-After importing, add the missing API keys and run **Verify and enable** on the saved profiles before saving assignments. A scheme saved or exported before 9.04.6 has no **Model Resolution** assignment; assign it by hand after applying the scheme.
+After importing, add the missing API keys and run **Verify and enable** on the saved profiles before saving assignments. A scheme saved or exported before 10.00 has no **Model Resolution** assignment; assign it by hand after applying the scheme.
 
 If a scheme changes the **Embedding Model**, rebuild the knowledge index of every data model immediately: click **Rebuild index** for each index on **Settings › AI Agent › Knowledge indexes**. An index built with the previous embedding model is not compatible with the new one.
 

@@ -32,7 +32,7 @@ Assist components add titles, explanations, decoration and navigation to a repor
 
 ## Names in earlier versions
 
-| Before 9.04.6 | Now |
+| Before 10.00 | Now |
 | --- | --- |
 | Text Box | **Rich text** |
 | Image file | **Image** |

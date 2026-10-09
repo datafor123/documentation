@@ -113,7 +113,7 @@ This guide provides an overview of essential MDX functions grouped by their comm
 
 ## Datafor Functions
 
-Datafor's query engine adds its own functions to standard MDX. [Quick calculated measures](/documentation/Analysis/Quick-Calculated-Measures/) generate most of them, and you can also write them in a [calculated measure](/documentation/Analysis/Calculated-Measures/) yourself. The behaviour below applies to Datafor 9.04.6 and later.
+Datafor's query engine adds its own functions to standard MDX. [Quick calculated measures](/documentation/Analysis/Quick-Calculated-Measures/) generate most of them, and you can also write them in a [calculated measure](/documentation/Analysis/Calculated-Measures/) yourself. The behaviour below applies to Datafor 10.00 and later.
 
 ### Calculations along the rows
 
@@ -156,8 +156,20 @@ Aggregate(FilteredLoopPeriod([Time].[Time Hierarchy], -1), [Measures].[Sales Qua
 
 - **Without a date filter** on the hierarchy, each cell is compared with the period it shows itself. With months on rows, for example, a year-over-year measure compares every month with the same month a year earlier.
 - **No comparable period gives an empty cell.** When neither the cell nor the date filter names a specific period (the cell is on the All member, an empty member or a calculated total, and the date filter is absent or selects only the All member), the result is empty: not 0.00 %, not an error and not a comparison with all time. Earlier versions showed 0.00 % or a misleading value in these cells.
-- A date range filter is still shifted as a range.
+- **With a date range filter**, each row's part of the range is shifted when a finer time level (for example month) is on rows; without a time level on rows, the whole range is shifted.
+- `FilteredLoopPeriod` with a negative count looks back by the length of the window in calendar periods, so a window of five months is compared with the five months before it.
+- A window of whole months is shifted to whole months: February one month back is all of January.
 - A date member that cannot be read as a date still raises an error.
+
+### Top and bottom N with ties
+
+`TopCount` and `BottomCount` accept a fourth argument `WITH_TIES`:
+
+```text
+TopCount([Store].[Store Name].Members, 5, [Measures].[Net Sales], WITH_TIES)
+```
+
+The result also includes every member whose value equals the fifth one. Members with an empty value are not ranked and take no place. `WITH_TIES` needs the sort expression and cannot be combined with an offset. The AI Agent uses it for "top N" questions.
 
 ### Aggregate of an empty set
 

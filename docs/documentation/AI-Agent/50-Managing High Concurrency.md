@@ -103,6 +103,8 @@ AGENT_VNEXT_INVESTIGATION_EVIDENCE_DEADLINE_SECONDS=ui=180,embed=180,mcp=120
 
 Each value is 1 to 3600 seconds, or `0` for no limit. Once the variable is set, a channel it does not list has no limit. A longer limit lets more steps finish, and users wait longer for those answers.
 
+**Knowledge-index builds.** Builds send embedding requests to the embedding provider in batches. All builds that run at the same time in one AI Agent process share one limit on requests in flight, `AGENT_EMBEDDING_CONCURRENCY` (default `2`, minimum `1`). Lower it to `1` when the provider rejects requests for rate limits; raise it only when the provider allows more parallel requests. Set it in the same `.env` file and run `restart agent`.
+
 ## 3. Choose a count by measuring
 
 There is no universal “users per worker” or CPU/RAM specification for every analysis model and LLM provider. Treat **8** as the startup script's supported maximum, not a recommended default or a guarantee that every server can run eight workers effectively.

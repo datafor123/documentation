@@ -62,6 +62,6 @@ Templates, conditional formatting, data bars and icons work as on the Table. See
 
 - A ratio or distinct count in a subtotal is recalculated, not summed.
 - Do not turn on **Show total** for the first row field while **Grand total** is on: both produce the same overall total row.
-- Known issue in 9.04.6: with a subtotal on an inner **column** field and two or more measures, the subtotal columns do not show every measure. Put that field on Rows, or use one measure.
+- Known issue in 10.00: with a subtotal on an inner **column** field and two or more measures, the subtotal columns do not show every measure. Put that field on Rows, or use one measure.
 
 Related: [Table](/documentation/Visualization/Table/) · [Tree table](/documentation/Visualization/Hierarchy-Table/) · [Export](/documentation/Visualization/Export/)

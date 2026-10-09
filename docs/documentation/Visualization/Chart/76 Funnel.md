@@ -23,7 +23,7 @@ Show values across process stages, such as leads, qualified leads, proposals and
 
 Do not mix a count, a rate and a currency amount and then interpret their ratios as conversion.
 
-The **Stage order** dialog lists the stages in their current order. **Not in current data** marks stages that the current filters do not return; they are not visible zero stages. **Reset to default order** restores the query order. If the funnel is sorted by value, the button reads **Use stage order**, and the dialog's **Switch to stage order when confirmed** switch (on by default) changes the arrangement when you confirm.
+The **Stage order** dialog lists the stages in their current order. **Not in current data** marks stages that the current filters do not return; they are not visible zero stages. **Reset to default order** restores the query order. If the funnel is sorted by value, the button reads **Use stage order**, and the dialog's **Switch to stage order when confirmed** switch (on by default) changes the arrangement when you confirm. When separate measures are the stages, the dialog lists the measures, and confirming reorders the **Measures** box.
 
 ## Choose arrangement before interpreting percentages
 
@@ -67,6 +67,8 @@ When a percentage cannot be calculated, the tooltip shows "—" with the reason,
 | **Label contents** | Any of **Name**, **Value**, **vs previous**, **vs first**; at least one. | Name + Value for new funnels; Name, Value and vs first in reports from earlier versions |
 | **Display units**, **Decimal places** | Unit and decimals of the values; see [Display units and decimal places](/documentation/Visualization/Display-Units/). | Auto for new funnels; Follow measure format in reports from earlier versions |
 
+Labels get the space they need on their side, and the funnel keeps at least 40% of the width. A label that still does not fit is truncated, with the full text in the tooltip; labels that overlap are hidden. With **Position → Center** and the default font colour, labels switch to white text with an outline for contrast.
+
 **Style → Tooltip → Show Tooltip** (default on) turns the hover tooltip off; see [Tooltips](/documentation/Visualization/Tooltips-for-Chart-Components/).
 
 ## Check the result
@@ -78,6 +80,8 @@ If conversion exceeds 100%, check cohort definitions, repeated entities, stage o
 ## Reports from earlier versions
 
 - Arrangement, label contents and display units keep their saved or earlier default values (see the tables above).
+- Labels are dark grey instead of the stage colour. Set **Font** colour to restore a colour.
+- **Stage percentages → Auto** hides the ratios when the stages are averages or percentages, or use different currencies or units. Choose **Always calculate** to show them anyway.
 - Stage colors no longer change when you switch the arrangement.
 - The first stage no longer shows "vs previous: —".
 

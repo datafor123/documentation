@@ -23,6 +23,8 @@ createTime: 2026/09/01 22:03:26
 
 The **Numeric field** list contains only dimension fields that the model defines as numeric (quantitative). Measures such as amounts cannot be range-filtered here; the list says **Empty** when the model has no such field. To filter by a measure value, use a [component filter](/documentation/Analysis/Component-Level-Filtering/) with a condition instead.
 
+**Less than or equal** and **Greater than or equal** filter by the chosen end only. Values beyond the data range seen when you set the filter, for example larger orders loaded later, are included.
+
 The step is derived from the data range, and the input boxes show thousands separators. **Clear selections** in the toolbar returns to the full range.
 
 ## Drive a parameter

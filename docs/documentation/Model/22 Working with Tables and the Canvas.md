@@ -56,6 +56,18 @@ Click **SQL** in the toolbar to enter a **View Name** and **SQL Expression**, th
 
 Editing an existing SQL View rebuilds its model table. Existing relationships, Dimensions, and Measure Groups are removed from the draft, and default semantic objects are generated again. Review the complete workflow and safeguards in [Creating SQL Views](/documentation/Model/Creating-SQL-Views/) before confirming an edit.
 
+## Select tables and fields on the canvas
+
+Clicking on the canvas selects the model objects built on what you click, and the properties pane shows them:
+
+| You click | Selected |
+| --- | --- |
+| A table card | The Dimension(s) and the Measure Group built on that table. |
+| A field | The Attribute that uses it as key, caption or sort column, or the Measure built on it. A field that is both shows the Measure, with the dual-role hint. |
+| A table or field that is not modeled | A read-only **Table properties** or **Field properties** pane with the **Table alias** and **Field**, and the note "This table is not modeled as a dimension or measure group." or "This field is not modeled as a dimension attribute or measure." An unmodeled field also highlights its table's objects in the model tree. |
+
+Key columns show a grey **PK** badge after the field name ("Primary key (defined in the database)"). A darker line marks the end of a composite key.
+
 ## Navigate a large canvas
 
 Use the controls in the lower-right corner to:

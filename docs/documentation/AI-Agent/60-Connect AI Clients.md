@@ -11,7 +11,7 @@ Datafor offers an MCP (Model Context Protocol) server, so you can ask about your
 
 By default Datafor returns the result rows, the query behind them and any disclosures, and the AI client writes the answer from those rows. Datafor instructs the client never to change a value and to label anything it calculates itself as its own work.
 
-This page applies to Datafor 9.04.6 and later. 9.04.6 is the first version in which users see **Connect AI**.
+This page applies to Datafor 10.00 and later. 10.00 is the first version in which users see **Connect AI**.
 
 ## 1. What the AI client can do
 
@@ -248,7 +248,7 @@ Restart with `app-console.bat restart` or `./app-console.sh restart` after a cha
 - When the **Question Suggestions** stage has no assignment on the **LLM** page, `generate_sample_questions` falls back to an LLM configured in Datafor. For users who are not administrators, that needs the [shared secret](/documentation/AI-Agent/Agent-Shared-Secret/).
 - Distribute `datafor.mcpb` to users of Claude Desktop.
 
-### 8.5 After upgrading to 9.04.6
+### 8.5 After upgrading to 10.00
 
 - Claude Desktop users reinstall the extension: uninstall the old version first, then install the new one. The new version passes the token header correctly on Windows and waits for Datafor to start.
 - Nothing to do for Claude Code, Codex or JSON clients. Clients that were connected before the upgrade keep working.

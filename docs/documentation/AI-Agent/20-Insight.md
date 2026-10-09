@@ -7,7 +7,7 @@ createTime: 2026/09/01 21:50:46
 
 # AI Insight Component
 
-**AI insight** (called *Insight* before 9.04.6) is a button on the report page. A click sends the data of the page, a tab or selected components to the AI Agent, which returns an overview and key insights.
+**AI insight** (called *Insight* before 10.00) is a button on the report page. A click sends the data of the page, a tab or selected components to the AI Agent, which returns an overview and key insights.
 
 ## Add it
 

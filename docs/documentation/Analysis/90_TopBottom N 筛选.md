@@ -12,7 +12,7 @@ createTime: 2026/09/01 22:03:26
 ## Set a row limit
 
 1. Select the component and open **Data**.
-2. Hover the dimension (for example *Province*) and choose **⋮ → Row limit**. You can also set it on a measure.
+2. Hover the dimension (for example *Province*) and choose **⋮ → Row limit**. You can also set it on a measure; the **Sort measure** then defaults to that measure.
 3. Turn on **Enable row limit**.
 4. Choose **Type** (**Top N** or **Bottom N**), the **Sort measure** and the **Row limit**, for example 5.
 5. To keep the rest, turn on **Group the rest as "Others"** and, if you like, change **Name for "Others"** (up to 50 characters).
@@ -31,7 +31,7 @@ A field with a row limit shows a check mark next to **Row limit** in its menu, a
 - It cannot filter other charts, drill or jump; right-click offers only **Copy value**. Reference-line statistics leave it out.
 - It is not available on Funnel, Sankey, maps, Calendar chart, filter components, or on a measure's row limit.
 
-"Others" needs the 9.04.6 query engine on the server; with an older server the option is ignored and only the top N appear.
+"Others" needs the 10.00 query engine on the server; with an older server the option is ignored and only the top N appear.
 
 ## Check the result
 

@@ -85,7 +85,7 @@ Owner access or datasource Full control is not, by itself, the Data Security byp
 
 ### Deleting requires Delete or Full control
 
-Deleting a report, file, or folder (moving it to the Trash) or an analysis model requires **Delete** or **Full control** in the item's effective ACL. The grant can be made to the user, one of their roles, their User Type, or Authenticated, and it can be inherited from the folder. **Edit** does not allow deleting, including Edit on the parent folder. Before 9.04.6, Edit on a folder let a user delete other users' reports in it.
+Deleting a report, file, or folder (moving it to the Trash) or an analysis model requires **Delete** or **Full control** in the item's effective ACL. The grant can be made to the user, one of their roles, their User Type, or Authenticated, and it can be inherited from the folder. **Edit** does not allow deleting, including Edit on the parent folder. Before 10.00, Edit on a folder let a user delete other users' reports in it.
 
 - **Batch delete of files and folders is all-or-nothing.** If one selected item lacks Delete, nothing is deleted and the error names that item (`no delete permission: <path>`).
 - **Models:** a model the user may not delete stays in place and the deletion is reported as failed (`Delete Denied: <model>`), also in a batch. A model that no longer exists counts as deleted.
@@ -94,7 +94,7 @@ Deleting a report, file, or folder (moving it to the Trash) or an analysis model
 
 ### Analysis models: default ACL and data source Read
 
-- A model created through the API without an ACL is available only to its creator (**Full control**, not inherited). Before 9.04.6 it inherited Full control for all signed-in users. Models created, saved with **Save as**, cloned, or uploaded in the Console carry their own ACL as before.
+- A model created through the API without an ACL is available only to its creator (**Full control**, not inherited). Before 10.00 it inherited Full control for all signed-in users. Models created, saved with **Save as**, cloned, or uploaded in the Console carry their own ACL as before.
 - Publishing a new model, or changing the data source of an existing one, requires **Read** on that data source. Otherwise the save fails with `Connection READ permission is required: <data source>`. Re-saving or renaming a model that keeps its data source is not checked. Administrators are exempt.
 - A user without the **Create content** capability who creates a model gets `Create Denied`.
 
@@ -112,6 +112,24 @@ Each entry is headed **Model** or **Data source** with the item's name and lists
 - For a folder, only reports that inherit this grant are checked, and at most 200 ("The folder contains many reports; only the first 200 were checked.").
 - A user counts as having Read when a grant to the user, one of their roles, their User Type, or Authenticated provides it. Roles and User Types you grant are checked for their direct grants only; if their members have access through another role, ignore the entry.
 - Reports saved before Datafor recorded which models they use, and resources you cannot read, are listed as not checked. Saving such a report again fixes this.
+
+### Data connections: targets and custom SQL
+
+Read on a data connection lets a user build models and reports on it, but not on every kind of connection. Administrators are not restricted.
+
+| Connection target | Ordinary users can use it (Read) | Ordinary users can create it | Custom SQL by ordinary users |
+| --- | --- | --- | --- |
+| A database server other than the one holding the Datafor repository | Yes | Yes (with the Create capability) | Allowed |
+| The database server holding the Datafor repository | Yes | No | Blocked when the connection's account can reach the repository |
+| An engine running inside Datafor (DuckDB, SQLite, MS Access, CSV) | Yes | No | Blocked |
+| An uploaded file dataset | Yes | Through **File datasets** | Blocked |
+| JNDI, or a target Datafor cannot identify | No | No | Blocked |
+
+A connection on the repository's server is **sensitive** when its account can reach the repository, for example a PostgreSQL superuser, a MySQL account with global privileges or one that can see the repository database, a SQL Server sysadmin, or an Oracle DBA. Use an account without those rights for reporting connections.
+
+On a sensitive connection, an ordinary user cannot submit custom SQL: SQL views and SQL preview, `where` conditions, column expressions, row access conditions, or SQL inside a model. Publishing or validating such a model fails with `SQL_FRAGMENT_FORBIDDEN:<connection>` or `SQL_EXECUTE_FORBIDDEN:<connection>`. The schemas of the repository (for example `datafor`, `upload`, `hibernate`, `quartz`, `jackrabbit`) are hidden from them.
+
+On any connection, raw SQL from an ordinary user needs **Full control** on the connection, and SQL that calls server-side functions such as `dblink`, `pg_read_file`, `load_file`, `sleep`, `benchmark`, `openrowset` or `xp_cmdshell` is rejected. Saving or deleting legacy data permissions and query configurations through the API also needs Full control on the connection, and copying permissions is limited to administrators.
 
 ## 3. RLS: matching policies form a union
 
@@ -288,7 +306,7 @@ permission test report):
   (groups via getAuditGroupKey) and packages/common/src/locales/en.json for
   configuration controls. System settings audit: settings/SystemConfigService
   AUDIT_OPERATION "System settings edit" with before/after per key (3add315).
-- 9.04.6 delete rule: FileResource.assertCanDelete (04d9cda, batch checks all
+- 10.00 delete rule: FileResource.assertCanDelete (04d9cda, batch checks all
   first), FileService.doGetCanAccessList + aclGrants and AclPermissionEvaluator
   (add1b15, 178aedd). Model publish/delete: AnalysisService ownerOnlyAcl,
   bindsNewDataSource/canReadConnection, canDeleteCatalog (f7ae8b4).

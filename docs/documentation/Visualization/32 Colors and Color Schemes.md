@@ -27,7 +27,7 @@ Choosing a scheme fills the **Colors** palette (20 swatches; shorter schemes are
 
 ![A chart with the Colorblind-friendly scheme](./images/color-scheme-chart.png) ![The palette filled by the scheme](./images/color-scheme-palette.png)
 
-In 9.04.6 the swatches can keep showing the previous scheme until you reopen the report; the charts already use the new colours.
+In 10.00 the swatches can keep showing the previous scheme until you reopen the report; the charts already use the new colours.
 
 New reports start with the scheme set in **Settings › General › System configuration › Reports › Default color scheme**.
 
@@ -35,7 +35,7 @@ New reports start with the scheme set in **Settings › General › System confi
 
 With **Consistent member colors** on, a member keeps the same colour in every chart on the page, also after filtering and sorting: *Online* is the same blue in the column chart, the pie and the line chart.
 
-- On by default in new reports, off in reports created before 9.04.6.
+- On by default in new reports, off in reports created before 10.00.
 - Colours are recorded while you edit, in the order members first appear, up to 50 members per field. Members beyond that get a fixed colour derived from their name, which also stays the same when filters change.
 - After you change the scheme or a swatch, recorded members are moved to the new colour at the same position.
 - Colours set on the component itself, a **Color** field and conditional colours take priority.

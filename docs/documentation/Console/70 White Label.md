@@ -10,7 +10,7 @@ createTime: 2026/09/01 22:03:26
 
 # Branding (White Label)
 
-**Branding** (called *White Label* before 9.04.6) lets you give the Datafor login page and console a consistent identity: your logos, product copy, colors, navigation styling, and selected reports on Home. Use it for the application around your reports; it is not a replacement for designing individual report pages or configuring embedded authentication.
+**Branding** (called *White Label* before 10.00) lets you give the Datafor login page and console a consistent identity: your logos, product copy, colors, navigation styling, and selected reports on Home. Use it for the application around your reports; it is not a replacement for designing individual report pages or configuring embedded authentication.
 
 These are administrative settings, not personal preferences. Plan changes for the users of the deployment, and test them with the accounts and screen sizes your audience uses.
 

@@ -30,7 +30,9 @@ When the assistant is shown as a side panel, these functions are icon buttons, f
 
 The model selector sits at the top of the composer. Its first item, **Auto-select model**, is the default: the placeholder reads "Ask directly; the analysis model is chosen from your question".
 
-To fix the model yourself, click a model card on the welcome screen or pick the model in the selector. The placeholder then reads "Ask a question related to the *model* model", and Datafor displays a model brief, the number of available metrics and analysis dimensions, suggested questions, and a link to the complete metric list.
+To fix the model yourself, click a model card on the welcome screen or pick the model in the selector. The placeholder then reads "Ask a question related to the *model* model", and Datafor displays a model brief, the number of available metrics and analysis dimensions, suggested questions under **You can ask**, and a link to the complete metric list.
+
+The list has four places: Common Questions configured by an administrator come first, and the Agent generates the rest. **Regenerate** replaces the generated questions with a new batch. Generated questions are shared per model and interface language for seven days, so a regenerated batch is what other users of the model see too. The button is hidden when configured questions fill all four places.
 
 <div align="left"><img src="./images/ai-assistant-model-selected.png" alt="AI Assistant with an analysis model selected" width="100%" /></div>
 
@@ -99,6 +101,10 @@ Examples:
 
 The answer is governed by the analysis model named in the answer card or the selector and by your data permissions. Check returned metrics, filters, and time basis before relying on the interpretation.
 
+### Answer language
+
+Answers, follow-up suggestions, clarifying questions and progress labels are written in your **interface language**, not in the language of the question. To get another language, say so in the question, for example `Please answer in English`. AI clients connected through MCP can pass the language with the question.
+
 ## 4. Ask why a number changed
 
 Questions such as `Why did net sales fall in Q3 compared with Q2?`, `Where did the increase in gross margin come from?` or `Which stores caused the drop?` are answered with a breakdown of the change:
@@ -122,12 +128,45 @@ The query steps of one multi-step analysis may run for 180 seconds in the AI Ass
 
 If no step finished, the answer reads "The multi-step investigation ran past its time limit before any of its steps finished, and was stopped. A narrower question, or one dimension at a time, fits within the limit." Ask about one dimension, a shorter period, or use the follow-up suggestions to go one step at a time.
 
-## 6. Special values in results
+## 6. Reading the result
+
+### No matching data
+
+When the query returns no rows, the answer is a **No matching data** card and nothing else: no insight text and no follow-up suggestions. The card lists the conditions that were actually used (**Metrics**, the filters, **Period** with its date dimension, **Grouped by**) and suggests removing a breakdown or a filter, or widening the time range. Compare these conditions with what you meant before asking again.
+
+### Rankings with ties
+
+"Top 5", "bottom 3" or "the highest" also return the members that tie with the last place, and the answer names them as tied. Two stores with the same order count in fifth place are both shown. When more than 32 members tie, the first 32 are used and the answer is marked incomplete.
+
+### Comparison columns
+
+Calculated columns are named after what they hold:
+
+| Column | Holds |
+| --- | --- |
+| *Net Sales* (Y-1), (Q-1), (M-1), (D-1) | The value of the comparison period. |
+| *Net Sales* (Δ vs M-1) | The difference from the comparison period. |
+| *Net Sales* (Δ% vs Y-1) | The growth rate. |
+| *Net Sales* (YTD), (QTD), (MTD) | Running totals. |
+
+The same names are used in every interface language, in exports and when a follow-up refers to a column. Only rates are shown as percentages.
+
+### Pie charts
+
+When you ask for a pie chart and the result has one grouping with more than six categories, the pie shows the five largest slices and one slice **Other (N)** for the remaining N categories. A truncated or sampled result, or one with two groupings, is shown as a table. **Add to page** inserts the full pie, without the combined slice.
+
+### Special values
 
 A cell that is infinite or undefined, for example the result of a division by zero, is kept and shown as **∞**, **−∞** or **NaN** instead of failing the whole result. Rows whose only values are special values are kept too.
 
 - The answer discloses that NaN values are not used in calculations or rankings.
 - In threshold filters such as "above 10%", ∞ and −∞ compare normally. Rows with NaN are kept, and the answer warns that it could not decide whether they meet the condition.
+
+### What was sent to Datafor
+
+Under the progress steps, **Technical details** opens the **Query model**: the request the Agent sent to Datafor for this answer, loaded when you expand it. An answer that needed several requests lists them in order, with their role, for example "selects the ranked members", "current period" and "comparison period"; a request that failed is marked "did not succeed". Only the user who asked can open it. Use it to check which measures, filters and dates were really queried.
+
+**Copy** and **Export** on a **Business brief** or **Complex report** card copy or save its text as Markdown, with headings in the interface language.
 
 ## 7. Messages about access and knowledge indexes
 
@@ -143,7 +182,7 @@ The AI Assistant still says "vector index" where the console now says **knowledg
 ## 8. Continue or review conversations
 
 - Click **New Chat** to start a separate conversation.
-- Click **History** to reopen an earlier conversation. The model used at the time is restored.
+- Click **History** to reopen an earlier conversation. The model used at the time is restored, and failed questions show their original message.
 - Use the model's suggested questions, or the follow-up suggestions under an answer, to continue with requests that match the available metadata.
 - To change the business domain, select a different model or start **New Chat**; follow-ups stay on the conversation's model.
 
@@ -162,7 +201,9 @@ The AI Assistant still says "vector index" where the console now says **knowledg
 | The answer card names the wrong model | Click `Answer with "Y" instead`, or select the model in the selector and ask again. |
 | The Agent keeps asking which model to use | Select the model yourself. Ask the model author to bind each metric to its primary model in Metrics Library. |
 | Model brief or suggestions do not load | Check AI Agent connectivity, LLM assignments, and the selected model's knowledge index. |
-| A query returns no data | Check the model, metric, time range, filters, source data, and row-level permissions. |
+| A query returns no data | Read the conditions on the **No matching data** card (section 6), then check source data and row-level permissions. |
+| A "top N" answer has more than N rows | Members tie with the last place (section 6). |
+| The answer is in the wrong language | Answers follow the interface language. Ask for another language in the question. |
 | The Agent reports a model-stage error | Open **LLM** and confirm that all 16 required assignments are complete and verified. |
 | A multi-step answer stops at the time limit | Ask a narrower question, or one dimension at a time (section 5). |
 | The progress title stays at **Understanding your question** until the whole answer appears at once | Datafor is running behind a reverse proxy that buffers the progress stream. Configure the proxy as described in [Deploying Datafor Behind Nginx](/documentation/Setup/Deploying-Datafor-Behind-Nginx/). |
