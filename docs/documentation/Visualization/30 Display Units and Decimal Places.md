@@ -43,9 +43,9 @@ Data labels choose one unit per measure, so in a combo chart a quantity of 35 an
 
 ## Defaults
 
-- New charts, measure cards, gauges and reference lines start with **Auto**.
+- New charts, measure cards, gauges, filled maps and reference lines start with **Auto**. Exception: new Grouped donuts start with **Follow measure format**.
 - Components in reports created before 9.04.6 keep **Follow measure format**, so they look as before.
-- The filled map data picker starts with **Follow measure format**; the KPI trend card unit starts with **None**.
+- The KPI trend card unit starts with **None**.
 
 ## Value axis units
 

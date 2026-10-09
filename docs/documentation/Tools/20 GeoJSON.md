@@ -152,15 +152,28 @@ Uploaded map data must comply with standard GeoJSON structure as shown below:
 }
 ```
 
-### Field Descriptions:
+### Field Descriptions
 
-| Field      | Description                                            |
-| ---- |  |
-| `name`     | Region name (system identifier)                        |
-| `aliases`  | Region aliases for matching business data              |
-| `center`   | Center coordinates of the region [longitude, latitude] |
-| `geometry` | Region boundary; supports Polygon / MultiPolygon       |
+| Field | Description |
+| --- | --- |
+| `name` | Region name (system identifier) |
+| `adcode` | Optional administrative code, such as the 6-digit code of a Chinese administrative division (110000 for Beijing) |
+| `aliases` | Region aliases for matching business data |
+| `center` | Center coordinates of the region [longitude, latitude] |
+| `geometry` | Region boundary; supports Polygon / MultiPolygon |
+
+## How data is matched to regions
+
+The **Filled map** and **Marker map** look up each value of the report's Geographic field among the regions of the selected map, in this order:
+
+1. `name`
+2. `adcode`
+3. `aliases`
+
+A value is first compared with all region names, then with all codes, then with all aliases; the first match is used. Matching is exact, including letter case and spaces; an empty value or a region without a name never matches. Rows that resolve to the same region and have the same other fields are merged, and their values are summed.
 
 ## Recommendations
 
 - Setting correct map and region aliases is crucial for accurate chart display.
+- Do not give a region an alias that equals another region's `name` or `adcode`. Such an alias is never used, because the other region matches first.
+- Use one consistent spelling per region in the data where possible, especially for averages and ratios, which are summed when rows are merged.

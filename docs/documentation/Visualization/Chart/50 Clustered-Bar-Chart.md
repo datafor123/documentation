@@ -1,48 +1,65 @@
 ---
 title: Clustered bar
 permalink: /documentation/Visualization/Clustered-Bar-Chart/
+description: Rank and compare categories with long names using horizontal bars, including label positions, the right margin and the category label width.
 createTime: 2026/09/01 22:03:26
 ---
 
 # Clustered bar
 
-Use horizontal bars to rank categories with long names. Each bar or column has a common baseline, making individual values easy to compare.
+Horizontal bars, side by side, measured from a common zero baseline. Use it for rankings and for categories with long names or many members, for example net sales by store. Use a [Clustered column](/documentation/Visualization/Clustered-Column-Chart/) when there are few categories with short names, or a period axis.
 
-## Build a sales-comparison chart
+## Build a sales ranking
 
-1. Add **Components → Charts → Clustered bar**, select it, and choose an **Analysis model** in **Data**.
-2. Use **+** to choose the fields below. Click **Back** after each selection.
+1. In **Components → Charts → Column & bar**, click **Clustered bar**, then click the canvas. A new chart is 400 × 300 px.
+2. In **Data**, choose an **Analysis model** and fill the field groups. Click **Back** after each selection.
+3. Set **Filters** to a defined period, such as Year = 2025.
+4. Sort with the Y-axis field's **More function** menu so the largest value appears where readers expect it; see [Sorting](/documentation/Analysis/Sorting/).
 
-| Slot | Example | Purpose |
+| Field group | Example | Purpose |
 | --- | --- | --- |
-| **Y-axis** | Region | One row per category. |
-| **Measures** | Net Sales | The amount to compare. |
-| **Legend** | Product Category | Optional series shown side by side. |
-| **Tooltips** | Optional order count or quantity | Context without adding another plotted measure. |
+| **Y-axis** | Region | One row of bars per member. |
+| **Legend** | Product Category | Optional. One bar per member inside each row. |
+| **Measures** | Net Sales | One or more measures to compare. |
+| **Tooltips** | Order Count | Extra values in the tooltip; not drawn. |
 
-3. Set **Filters** to a defined period, such as Year = 2025. Start with a manageable number of categories.
-4. Check the category and series values before opening **Style**.
-
-For several measures, add them to **Measures** instead of using a Legend field. Keep their units compatible; use a [Combo chart](/documentation/Visualization/Combo%20Chart/) for sales and a percentage rate. The **Legend** and **Color** slots can disappear when several measures are assigned; the measure names then identify the series.
+With several measures, **Legend** and **Color** are not available; each measure gets its own colour. Use a [Combo](/documentation/Visualization/Combo%20Chart/) for an amount and a rate.
 
 ![Clustered, stacked and 100% stacked views of the same illustrative values](../images/current/chart-comparison-concept.svg)
 
-## Read and format the chart
+## Settings specific to bars
 
-Compare endpoints against the same value axis. For a ranking, use the category field’s **More function** menu to set the order and check that the largest value appears where readers expect it.
+On bar charts the **X axis** is the value axis and the **Y axis** holds the category names.
 
-- **Bar** controls the mark presentation and spacing. Increase the chart size before squeezing many categories into it.
-- **Data labels** are useful for a small number of values; use **Tooltip** for a dense chart.
-- **X axis** is the value axis. Use a zero baseline for length comparisons and a display unit appropriate to the values.
-- **Y axis** contains category labels. Leave room for long names.
-- Keep the **Legend** visible for multiple series. Use the same series colors across related charts.
+| Group → option | Effect | Default |
+| --- | --- | --- |
+| **Bar → Space (%)** | Gap between rows, as a share of the row height (5–90). | 50 |
+| **Bar → Round corners** | **None**, 2px … 64px. | **None** |
+| **Bar → Right margin** | Space in px to the right of the plot. Empty = automatic; **0** = no margin. | Empty (**Auto**) |
+| **Data labels → Position** | **Inside left**, **Center**, **Inside right**, **Right**. | **Inside left** |
+| **X axis → Scale** | Tick unit: **Auto**, **K**, **M**, **B**, **T**, **%**. | **Auto** |
+| **X axis → X-axis min value**, **X-axis max value** | Fixed bounds. Empty = automatic, from 0. | Empty |
+| **Y axis → Label width** | Width of the category labels (40–800 px); longer names are cut off with "...". | 50 px |
+| **Y axis → Show axis name**, **Axis name** | Category-axis title. Empty = the Y-axis field. | On |
 
-## Validate and troubleshoot
+- With **Position** = **Right**, the automatic right margin is sized from the widest formatted label, so long labels are not cut off at the edge.
+- Labels inside bars that do not fit are hidden. With the default **Inside left**, labels of short bars can disappear; choose **Right** when many bars are short.
+- **Data labels → Display units** is **Auto** for new charts. Font, decimals and the remaining options are as on the [Clustered column](/documentation/Visualization/Clustered-Column-Chart/#style-settings).
 
-Save and open **Preview**. Hover at least one category and compare its values with the source or a table using the same filters.
+The value axis always includes 0, fixed bounds are ignored when the minimum is not less than the maximum, and hiding a series rescales the axis; see [Value axis](/documentation/Visualization/Clustered-Column-Chart/#value-axis). Switching to a column chart moves the axis settings to the matching axis; see [Switch between column and bar charts](/documentation/Visualization/Clustered-Column-Chart/#switch-between-column-and-bar-charts).
 
-- If values overlap, reduce series count or give the chart more space.
-- If categories are missing, check filters and any row limit before changing the axis.
-- If series disappear after a chart-type change, recheck the data slots.
+## Reports from earlier versions
 
-Choose a stacked chart for totals and composition, or a horizontal bar chart when names are too long. See [component filters](/documentation/Analysis/Component-Level-Filtering/).
+- **X axis → Scale** used to be ignored on bar charts; a unit saved in an old report now takes effect.
+- **Right margin** = 0 now removes the margin, and clearing the box returns to automatic spacing immediately.
+- Automatic value axes now start at 0, and labels inside bars that do not fit are hidden.
+
+## Check the result
+
+Save and open **Preview**. Hover at least one bar and compare its value with a table using the same filters.
+
+- If labels overlap the right edge or the scrollbar, clear **Right margin** so it is sized automatically.
+- If category names are cut off, increase **Y axis → Label width** or the chart width.
+- If categories are missing, check filters and any [row limit](/documentation/Analysis/Top-Bottom-N/).
+
+Related: [Stacked bar](/documentation/Visualization/Stacked-Bar-Chart/) · [100% stacked bar](/documentation/Visualization/100-Stacked-Bar-Chart/) · [Clustered column](/documentation/Visualization/Clustered-Column-Chart/) · [Component filters](/documentation/Analysis/Component-Level-Filtering/)
