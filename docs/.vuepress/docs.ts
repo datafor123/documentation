@@ -109,10 +109,6 @@ export const documentationNote = defineNoteConfig({
 					link: "/documentation/Visualization/12 手机布局视图.md",
 				},
 				{
-					text: "Link Filters and Charts",
-					link: "/documentation/Visualization/20 筛选器订阅.md",
-				},
-				{
 					text: "Multi-Tabbed Page",
 					link: "/documentation/Visualization/26 制作多标签页面.md",
 				},				

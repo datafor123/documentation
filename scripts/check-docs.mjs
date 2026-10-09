@@ -111,6 +111,24 @@ for (const page of pages) {
   }
 }
 
+// Sidebar and navbar links in the VuePress config must point to an existing page or route.
+for (const configFile of ['docs.ts', 'release.ts', 'api.ts', 'navbar.ts']) {
+  const file = path.join(docs, '.vuepress', configFile);
+  if (!fs.existsSync(file)) continue;
+  // Skip commented-out lines and the unused zh locale (its note link is "/documenation").
+  const text = fs.readFileSync(file, 'utf8').split(/\r?\n/).filter(line => !line.trim().startsWith('//')).join('\n');
+  for (const match of text.matchAll(/link:\s*"([^"]+)"/g)) {
+    const link = match[1];
+    if (/^https?:/.test(link) || link === '/documenation') continue;
+    checked++;
+    if (link.endsWith('.md')) {
+      if (!existsExact(path.join(docs, link))) problems.push(`.vuepress/${configFile}: link to missing page ${link}`);
+    } else if (!routes.has(normalizeRoute(link)) && !existsExact(path.join(docs, link)) && !/^\/(documentation|api|release)\/?$/.test(link)) {
+      problems.push(`.vuepress/${configFile}: link to unknown route ${link}`);
+    }
+  }
+}
+
 console.log(`pages ${pages.length}, references checked ${checked}, problems ${problems.length}, warnings ${warnings.length}`);
 for (const p of problems) console.log('ERROR ' + p);
 if (process.argv.includes('--warnings')) for (const w of warnings) console.log('WARN  ' + w);

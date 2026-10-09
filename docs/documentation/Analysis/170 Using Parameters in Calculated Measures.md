@@ -28,6 +28,20 @@ If you instead store percentage points (`10` means 10%), divide by `100`:
 [Measures].[Net Sales] * (1 + ParamRef("GrowthRate") / 100)
 ```
 
+## `${name}` text substitution
+
+A formula can also contain `${name}`. Datafor replaces it with the parameter value (the bound filter's value, otherwise the default) before the formula is parsed. Because it is plain text substitution, quote text values yourself:
+
+```mdx
+IIf([Store].CurrentMember.Name = "${Region}", [Measures].[Net Sales], NULL)
+```
+
+```mdx
+[Measures].[Net Sales] * (1 + ${GrowthRate})
+```
+
+Use `ParamRef()` when the value is a number you compute with, and `${name}` when you need the value inside a string or an MDX expression.
+
 ## Create the report-level measure
 
 For an interactive Report Parameter, keep the dependent measure on the report page:
@@ -36,7 +50,7 @@ For an interactive Report Parameter, keep the dependent measure on the report pa
 2. Open the target component's Measures picker.
 3. Select **New measure → New measure**.
 4. Enter a unique **Caption**, the MDX **Formula**, and the result **Format**. **Insert parameter** inserts a `ParamRef()` reference for the selected parameter.
-5. Add the measure to the component and bind a compatible Parameter Controller.
+5. Add the measure to the component and bind a filter to the parameter (**Data → Data source → Parameter**).
 6. Test the component in **Preview** and save the report.
 
 A report-level calculated measure is stored on that page and can be used by page components that use the same analysis model. Use a model-level calculated measure for governed logic that does not depend on a report-local definition.

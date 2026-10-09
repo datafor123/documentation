@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 330" width="720" height="330" font-family="Segoe UI, Arial, sans-serif" font-size="14">
+  <rect x="0" y="0" width="720" height="330" rx="10" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5b6575"/></marker>
+  </defs>
+  <!-- source -->
+  <rect x="20" y="118" width="150" height="84" rx="8" fill="#eef4ff" stroke="#3a6fd8"/>
+  <text x="95" y="150" text-anchor="middle" font-weight="600" fill="#1f2a3d">Filter component</text>
+  <text x="95" y="172" text-anchor="middle" fill="#43506a">Dropdown, List box,</text>
+  <text x="95" y="190" text-anchor="middle" fill="#43506a">Date, Numeric slider…</text>
+  <!-- labels -->
+  <text x="190" y="68" fill="#3a6fd8" font-weight="600">Data source: Model field</text>
+  <text x="190" y="268" fill="#a05a00" font-weight="600">Data source: Parameter</text>
+  <!-- field path -->
+  <rect x="260" y="80" width="200" height="64" rx="8" fill="#ffffff" stroke="#3a6fd8"/>
+  <text x="360" y="106" text-anchor="middle" font-weight="600" fill="#1f2a3d">Filter condition</text>
+  <text x="360" y="127" text-anchor="middle" fill="#43506a">Region is East China</text>
+  <rect x="500" y="80" width="200" height="64" rx="8" fill="#ffffff" stroke="#3a6fd8"/>
+  <text x="600" y="106" text-anchor="middle" font-weight="600" fill="#1f2a3d">Linked components</text>
+  <text x="600" y="127" text-anchor="middle" fill="#43506a">re-query with the condition</text>
+  <!-- parameter path -->
+  <rect x="260" y="182" width="200" height="64" rx="8" fill="#ffffff" stroke="#d68a1c"/>
+  <text x="360" y="208" text-anchor="middle" font-weight="600" fill="#1f2a3d">Parameter value</text>
+  <text x="360" y="229" text-anchor="middle" fill="#43506a">GrowthRate = 0.15</text>
+  <rect x="500" y="182" width="200" height="64" rx="8" fill="#ffffff" stroke="#d68a1c"/>
+  <text x="600" y="208" text-anchor="middle" font-weight="600" fill="#1f2a3d">Components that use it</text>
+  <text x="600" y="229" text-anchor="middle" fill="#43506a">${GrowthRate}, ParamRef(…)</text>
+  <!-- arrows -->
+  <path d="M170,140 C215,140 215,112 258,112" fill="none" stroke="#5b6575" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M170,180 C215,180 215,214 258,214" fill="none" stroke="#5b6575" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M460,112 L498,112" fill="none" stroke="#5b6575" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M460,214 L498,214" fill="none" stroke="#5b6575" stroke-width="1.6" marker-end="url(#a)"/>
+  <text x="20" y="306" fill="#43506a">A parameter adds no filter condition: only components whose query, title or text references it re-query.</text>
+  <text x="20" y="34" fill="#43506a">Each filter uses one data source, chosen in Data → Data source.</text>
+</svg>
