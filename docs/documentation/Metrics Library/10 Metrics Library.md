@@ -21,7 +21,7 @@ New to Metrics Library? Start with [Understanding Metrics Library](/documentatio
 
 Open **Data > Metrics Library**.
 
-<div align="left"><img src="./images/enterprise-metrics-overview.jpg" alt="Metrics Library with enterprise metrics and governance filters" width="100%" /></div>
+<div align="left"><img src="./images/metrics-library-overview-bound.png" alt="Metrics Library listing the Retail Chain Operations sample metrics with status, model references and the All, Certified, Draft and No model references filters" width="100%" /></div>
 
 Search by business name, Metric ID, or synonym. Use **Certified**, **Draft**, **No model references**, **From model** (shown when metrics were generated from a model), and the owner filter to narrow the table. The whole library is listed on one page.
 
@@ -36,9 +36,9 @@ The indicators answer different questions:
 
 A metric can be Certified and still have no model reference. It can also be Certified and bound while its implementation comparison needs attention.
 
-The example below shows **Net Sales** as Certified and bound to the **Retail Chain Operations** model, with the comparison result **Not enough evidence**.
+The example below shows **Net Sales** as Certified and bound to the **Retail Chain Operations** model, with the comparison result **Matches definition**.
 
-<div align="left"><img src="./images/net-sales-metric-detail.jpg" alt="Certified Net Sales metric with a Retail Chain Operations binding that needs review" width="100%" /></div>
+<div align="left"><img src="./images/net-sales-metric-detail-bound.png" alt="Certified Net Sales metric with its definition, synonyms and a Retail Chain Operations binding that matches the definition" width="480px" /></div>
 
 ## 2. Create and certify a metric
 
@@ -126,7 +126,7 @@ The batch is all or nothing: if one metric cannot be saved, none is created.
 5. Set **Effective grain** only when the value is valid at a specific analytical grain; otherwise leave it empty.
 6. Click **Save** for the model.
 
-<div align="left"><img src="./images/gross-margin-rate-governance.jpg" alt="Gross Margin Rate bound to an enterprise metric in Retail Chain Operations" width="100%" /></div>
+<div align="left"><img src="./images/gross-margin-rate-metric-governance-matches.png" alt="Gross Margin Rate selected in Retail Chain Operations, with the Metric governance group showing its enterprise metric, Effective grain and Definition consistency Matches definition" width="500px" /></div>
 
 Saving the model writes the binding back to Metrics Library. The modeler allows both Draft and Certified records to be selected; use a Certified record for governed production analysis.
 
@@ -136,7 +136,7 @@ Keep one measure per metric in each model. Binding a metric that another measure
 
 Open **Metric bindings** at the bottom of the modeler. The panel lists the model measure, enterprise metric, comparison status, effective grain, and last comparison time.
 
-<div align="left"><img src="./images/retail-chain-metric-bindings.jpg" alt="Metric bindings review panel in Retail Chain Operations" width="100%" /></div>
+<div align="left"><img src="./images/retail-chain-metric-bindings-compared.png" alt="Metric bindings panel in Retail Chain Operations with 13 bound measures, each marked Matches definition with its grain and last comparison time" width="680px" /></div>
 
 Use **Compare definition** for one binding (also in the **Definition consistency** row under the measure's **Metric governance**) or **Compare all** for the model. Datafor sends the model implementation and business definition to AI and stores the verdict in Metrics Library. It does not change the formula, aggregation, filters, or model.
 
@@ -146,6 +146,7 @@ A successful comparison also moves the binding to the metric's current version, 
 
 | Status | Required response |
 | --- | --- |
+| **Not registered** | The binding is in the model but not yet in Metrics Library, because the model was imported or has not been saved since the measure was bound. Save the model; definitions can be compared after that. |
 | **Not compared** | Run the comparison before governance approval. |
 | **Matches definition** | The supplied implementation evidence supports the definition. |
 | **Possible drift** | The implementation likely contradicts the definition; the one-line reason says how. Agree with the metric owner whether to change the formula or the definition, then compare again. |
@@ -168,7 +169,7 @@ Metrics Library supplies the governed meaning and synonyms. The model binding su
 
 The **Calculation method** also affects how the value is computed. For a **Ratio**, **Difference**, or **Attainment rate** metric, the Agent resolves the numerator and denominator (or the two operands) through their own bindings in the same model, queries them, and computes the result itself, unless the model's formula already declares them. Year-over-year comparisons of the ratio are then exact, and "why did it change?" questions can split the change into the effect of each member's share and of its own ratio, or into the contributions of the operand metrics. Bind the operand metrics in the model for this to work. A **Custom formula** relation is used only for the definition comparison.
 
-Synonyms must remain unambiguous. In the sample data, **GM%** resolves to **Gross Margin Rate** and **AOV** resolves to **Average Order Value**, while **Profit Rate** matches both **Gross Margin Rate** and **Contribution Margin Rate**. Use the official name or Metric ID when a term can identify more than one metric.
+Synonyms must remain unambiguous. In the sample data, **GM%** resolves to **Gross Margin Rate** and **AOV** resolves to **Average Order Value**. If the same term is registered as a synonym of two metrics, the Agent asks which one you meant. Use the official name or Metric ID when a term can identify more than one metric.
 
 Draft, stale, drift, or inconclusive bindings can produce governance warnings in an Agent answer. Treat the warning as a review requirement. A draft generated from the model and never edited carries no draft warning. AI clients connected through MCP do not receive these warnings in the default data mode.
 
