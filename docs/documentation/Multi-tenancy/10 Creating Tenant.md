@@ -36,7 +36,7 @@ Only users signed in with the **superadmin** account can see the **Multi-tenancy
 
 After entering Multi-tenancy, the system displays the tenant list by default. This page provides an overview and helps you quickly locate tenants.
 
-<div align="left"><img src="./images/image-20260213144356786.png" /></div>
+<div align="left"><img src="./images/multi-tenancy-tenant-list-template0.png" alt="Multi-tenancy tenant list under Settings › Operations, with the + button, Search, All statuses and All plans filters, and the template0 row" width="100%" /></div>
 
 ### 3.1 Column Descriptions
 
@@ -54,7 +54,7 @@ The list includes the following columns:
 
 ### 3.2 Search and Filters
 
-The top-right of the list page provides:
+Above the tenant list, on the right:
 
 - **Search**: Search by keywords such as Tenant ID / Tenant Name / Admin Email
 - **All statuses**: Filter by status
@@ -62,15 +62,13 @@ The top-right of the list page provides:
 
 ### 3.3 Create Tenant Entry (“+”)
 
-Click the **“+”** button to the right of the **Multi-tenancy** page title to open the **Create Tenant** dialog and create a new tenant (see Section 4).
+Click **+** at the top-left of the tenant list, left of **Search**, to open the **Create Tenant** dialog (see Section 4).
 
 ### 3.4 Tenant Template (template0)
 
-In the tenant list, you may see a tenant named **template0** (as shown in the screenshot). It is a built-in **Tenant Template** used to initialize new tenants.
+In the tenant list, you may see a tenant named **template0** (as shown in the screenshot in Section 3). It is a built-in **Tenant Template** used to initialize new tenants.
 
 > Important: If you upgrade the system using an **upgrade package**, the tenant template (**template0**) is **not created automatically**. Until it exists, creating any other tenant fails with "Tenant template0 does not exist,create it first". To create it, click **+** and create a tenant with **Tenant ID** `template0` (see Section 4); it is the only tenant that can be created without a template.
-
-<div align="left"><img src="./images/image-20260218161843715.png" /></div>
 
 - **Default behavior**: When you create a new tenant, the system **copies (clones) template0** to generate the tenant’s initial content and default configuration.
 - **Copy scope**: the tenant's initial content and configuration, including:
@@ -79,7 +77,7 @@ In the tenant list, you may see a tenant named **template0** (as shown in the sc
   - **Analytic models**: published/available models and semantic configurations
   - **Sample pages / sample content**: sample reports, dashboards/pages, demo assets and folder structure
 - **Impact**: Changes to **template0** apply to tenants created after the change. Existing tenants are not updated.
-- **template0** cannot be deleted: its row menu has no **Delete**.
+- **template0** cannot be deleted from the list: its row menu has no **Delete**. Its details page still shows a **Delete** button; do not use it on template0.
 
 > Recommendation: Treat **template0** as a system template tenant. Avoid using it as a real customer tenant. If you need to change the “default content/configuration for new tenants”, update template0 carefully, assess impact, and verify the initialization result by creating a new tenant.
 
@@ -89,13 +87,13 @@ On the tenant list page, the **copy** button next to a **Tenant ID** is used to 
 
 ### 3.6 Row Menu
 
-Each row's menu offers **Details** (opens the tenant details page), **Enabled** (shown when the tenant is disabled), **Disabled** (shown when the tenant is enabled), and **Delete** (not shown for **template0**).
+Hover a row to show its menu (**⋮**) at the far right of the table, after **Last Updated**; scroll the table horizontally if that column is out of view. The menu offers **Details** (opens the tenant details page), **Enabled** (shown when the tenant is disabled), **Disabled** (shown when the tenant is enabled), and **Delete** (not shown for **template0**).
 
 ## 4. Create Tenant
 
 On the tenant list page, click **“+”** to open the **Create Tenant** dialog.
 
-<div align="left"><img src="./images/image-20260213145108643.png" width="100%"/></div>
+<div align="left"><img src="./images/multi-tenancy-create-tenant-dialog.png" alt="Create Tenant dialog with Tenant ID, Tenant Name, Plan, Admin Email, Creator Seat Limit, Reader Seat Limit, Enable Trial and Trial End Date" width="600px"/></div>
 
 ### 4.1 Steps
 
@@ -172,10 +170,10 @@ The Seats section shows **used/total** (e.g., Creators 1/5, Readers 0/5).
 
 ## 7. Admin: Update the Tenant Admin Account Email
 
-<div align="left"><img src="./images/image-20260213144621277.png" width="100%"/></div>
+<div align="left"><img src="./images/multi-tenancy-tenant-admin-tab.png" alt="Tenant details page for template0 on the Admin tab, showing the current admin email and the Change Admin button" width="100%"/></div>
 
 - In the **Admin** tab, you can view and update the email address of the tenant’s **admin account**.
-  - View: **Current admin account email:** **xxx@xxx.com**
+  - View: **Current admin:** followed by the email address
   - Update: Click **Change Admin**, enter the new email address, and save
 
 > Note: **Change Admin updates the email of the tenant’s admin account** (i.e., it changes the *email address* associated with that admin account for the tenant).
