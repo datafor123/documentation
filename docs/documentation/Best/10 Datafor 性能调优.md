@@ -24,7 +24,7 @@ In edit mode, point to the component, open **⋮** and select **Execution cost**
 | Model cache | **Cache expire** in the model; the default for new models is **Default model cache expiration** in **System configuration** (0 = never expires) | Repeated queries are answered from the cache instead of the database. Use an expiration that matches how often the data is loaded. See [Creating an Analysis Model](/documentation/Model/Creating-an-Analysis-Model/). |
 | Connection pool | **Pooling** in the datasource; server defaults in `dbcp-defaults` in `pentaho-solutions/system/pentaho.xml` (`maxActive` 20) | A busy datasource may need a larger pool. A larger pool does not make a slow query faster. See [Configuring MySQL Data Source](/documentation/Datasource/Configuring-MySQL-Data-Source/). |
 | Aggregation tables | Model | Large fact tables are answered from pre-aggregated tables. See [Use Aggregation Tables](/documentation/Model/Use-Aggregation-Tables/). |
-| AI Agent workers | `AI_AGENT_DISPATCH_WORKERS` in `bi-server/ai-agent/.env` (1–8, default 1) | Questions to the AI Agent stop queuing behind each other. See [Managing High Concurrency](/documentation/AI-Agent/Managing-High-Concurrency/). |
+| AI Agent workers | `AI_AGENT_DISPATCH_WORKERS` in `bi-server/ai-agent/.env` (1–8, default 2) | Questions to the AI Agent stop queuing behind each other. See [Managing High Concurrency](/documentation/AI-Agent/Managing-High-Concurrency/). |
 
 ## Memory (heap size)
 

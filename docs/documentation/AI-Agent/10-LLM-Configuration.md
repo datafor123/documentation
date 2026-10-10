@@ -128,7 +128,7 @@ Save live assignments before saving a scheme. Schemes and exports never contain 
 
 When applying a scheme, review the stage changes, enter the provider API key, and change the shared endpoint only if the deployment uses a gateway or proxy. Datafor creates or overwrites profiles referenced by the scheme, verifies them, and writes assignments last; unrelated profiles are untouched. If verification is incomplete, assignments can remain pending. Return to **Assignments**, resolve any warnings, confirm **16/16 assigned**, and click **Save**.
 
-After importing, add the missing API keys and run **Verify and enable** on the saved profiles before saving assignments. A scheme saved or exported before 10.00 has no **Model Resolution** assignment, so applying it leaves that row on the profile it had before. Check the row after applying such a scheme, and assign it by hand if it is empty.
+After importing, add the missing API keys and run **Verify and enable** on the saved profiles before saving assignments. A scheme saved or exported before 10.00 has no **Model Resolution** assignment; applying it sets that row to the scheme's **Workflow Routing** model. Check the row afterwards if you want a different model for it.
 
 If a scheme changes the **Embedding Model**, rebuild the knowledge index of every data model immediately: click **Rebuild index** for each index on **Settings › AI Agent › Knowledge indexes**. An index built with the previous embedding model is not compatible with the new one.
 
