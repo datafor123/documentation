@@ -115,7 +115,7 @@ curl -u analyst1:password -X POST "http://localhost:28080/datafor/plugin/datafor
 { "success": true }
 ```
 
-A revoked token is rejected at the next sign-in (within a minute on every node of a cluster); a session opened with it before lasts until it times out. Changing the configuration's secret or deleting the configuration still invalidates every token issued from it at once. With the audit log on, each token issued is recorded as **Token personal** and each revocation as **Token personal revoke**.
+A revoked token stops working at once on the node that handled the revocation, and the sessions opened with it there end; other nodes of a cluster follow within a minute. Changing the configuration's secret or deleting the configuration still invalidates every token issued from it at once. With the audit log on, each token issued is recorded as **Token personal** and each revocation as **Token personal revoke**.
 
 Tokens issued before Datafor 10.00 carry no `jti`: they keep working until they expire, are not listed and cannot be revoked individually.
 

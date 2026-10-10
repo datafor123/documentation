@@ -38,7 +38,7 @@ An AI client signs in to Datafor with a **personal token**. The token stands for
 3. Click **New token**, give it a name (for example the client it is for), choose how long it stays valid, and confirm.
 4. The token is shown **once**. Copy it now and paste it into your client as described in section 3.
 
-The page lists every token you have created: name, creation and expiry time, last use and status. When a token expires, when you change computers, or when it may have leaked, click **Revoke** on that row and create a new one. A revoked token is rejected immediately; a session that was opened with it before lasts until it times out.
+The page lists every token you have created: name, creation and expiry time, last use and status. When a token expires, when you change computers, or when it may have leaked, click **Revoke** on that row and create a new one. A revoked token stops working at once, and the sessions opened with it end. An AI client connected over MCP can keep working for up to a minute, because the MCP server caches token checks for 60 seconds; other nodes of a cluster also follow within a minute.
 
 | The page says | What it means |
 | --- | --- |
@@ -176,7 +176,7 @@ The Claude Desktop extension writes its log to `%LOCALAPPDATA%\Claude\logs\mcp-s
 
 - A personal token stands for you and all your permissions. Keep it only in your own AI client's configuration; do not paste it into a chat, commit it to a repository or forward it. On a shared computer, remove the configuration when you are done.
 - Use a separate token for each client and each computer, so that a leak costs you one token, not all of them.
-- If a token may have leaked, revoke it on **My account › Personal tokens** and create a new one. Revocation takes effect at once for new sign-ins (within a minute on every node of a cluster); a session opened with the token before lasts until it times out. An administrator can also invalidate every token of a configuration at once by changing its secret (section 8.1).
+- If a token may have leaked, revoke it on **My account › Personal tokens** and create a new one. Revocation takes effect at once and ends the sessions opened with the token; MCP clients and other nodes of a cluster follow within a minute. An administrator can also invalidate every token of a configuration at once by changing its secret (section 8.1).
 
 ## 8. For administrators
 
