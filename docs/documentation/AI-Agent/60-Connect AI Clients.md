@@ -13,6 +13,8 @@ By default Datafor returns the result rows, the query behind them and any disclo
 
 This page applies to Datafor 10.00 and later.
 
+To try Datafor quickly in Claude Desktop, Claude Code or the ChatGPT desktop app, start with [Try Datafor in Claude and ChatGPT](/documentation/AI-Agent/Try-in-Claude-and-ChatGPT/).
+
 ## 1. What the AI client can do
 
 Once connected, the client has four Datafor tools:
@@ -78,7 +80,7 @@ claude mcp add --transport http datafor "<MCP address>" --header "Authorization:
 
 `claude mcp list` should show the server as connected. Claude Code and Claude Desktop keep separate configurations: a server added with `claude mcp add` does not appear in Claude Desktop conversations, and the other way round.
 
-### Codex (desktop app, CLI and IDE extension)
+### Codex and the ChatGPT desktop app (desktop app, CLI and IDE extension)
 
 1. Open your Codex user configuration: `~/.codex/config.toml` on macOS and Linux, `%USERPROFILE%\.codex\config.toml` on Windows, or `config.toml` in `$CODEX_HOME` when that is set.
 2. Add this section and keep the rest of the file. If a `datafor` server is already there, update its section instead of adding a second one.
@@ -94,7 +96,7 @@ claude mcp add --transport http datafor "<MCP address>" --header "Authorization:
 
 3. Save, restart Codex, open a new conversation and ask: "Use Datafor to list the analysis models I can access."
 
-The desktop app, the CLI and the IDE extension on one computer share this configuration. Codex connects to the HTTP server directly: no extension, Node.js or `codex mcp login` is needed. `tool_timeout_sec = 600` leaves time for slower analyses. In the CLI, `codex mcp list` shows the configuration and `/mcp` the connection status. Codex cloud tasks do not read the configuration on your computer.
+The desktop app, the CLI and the IDE extension on one computer share this configuration, and so does the ChatGPT desktop app's **MCP servers** setting. The header value must start with `Bearer ` followed by the token. Codex connects to the HTTP server directly: no extension, Node.js or `codex mcp login` is needed. `tool_timeout_sec = 600` leaves time for slower analyses. In the CLI, `codex mcp list` shows the configuration and `/mcp` the connection status. Codex cloud tasks do not read the configuration on your computer.
 
 ### Cursor, VS Code, Cherry Studio and other clients with a JSON configuration
 
