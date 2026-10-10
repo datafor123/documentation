@@ -19,7 +19,7 @@ This page applies to Datafor 10.00 and later.
 | --- | --- | --- |
 | **Claude Desktop** (Windows, macOS) | Yes | The Datafor extension `datafor.mcpb` |
 | **Claude Code** | Yes | One `claude mcp add` command |
-| **ChatGPT desktop app**, through its **MCP servers** setting | Yes | An entry in your local Codex configuration |
+| **ChatGPT desktop app** | Yes | An MCP server under **Settings › Plugins › MCP** |
 | Claude on the web (claude.ai) and Claude's **custom connectors** | Not yet | These sign in with OAuth, which Datafor does not offer yet |
 | ChatGPT on the web, ChatGPT connectors and developer mode | Not yet | Same reason: they accept only OAuth or no sign-in at all |
 
@@ -71,30 +71,52 @@ Then start a new Claude Code session. `claude mcp list` should show `datafor` as
 
 ## 4. Set up the ChatGPT desktop app
 
-The ChatGPT desktop app connects to MCP servers through the same configuration file as Codex. Servers added there are available to the desktop app's agent conversations on your computer, not to conversations on chatgpt.com or in the mobile apps.
+The ChatGPT desktop app keeps its MCP servers in the same local configuration as Codex. Servers added there are available to the desktop app's conversations on your computer, not to conversations on chatgpt.com or in the mobile apps.
 
-1. Quit the ChatGPT desktop app.
-2. Open your configuration file: `%USERPROFILE%\.codex\config.toml` on Windows, `~/.codex/config.toml` on macOS. Create it if it does not exist.
-3. Add this section at the end and keep everything else in the file. If a `datafor` section is already there, edit it instead of adding a second one.
+### Add Datafor in the settings
 
-   ```toml
-   [mcp_servers."datafor"]
-   url = "<MCP address>"
-   tool_timeout_sec = 600
+1. In the ChatGPT desktop app, open **Settings**, then **Plugins** under **Integrations**, and select the **MCP** tab.
+2. Click **Add** at the top right and add an MCP server of type **Streamable HTTP** named `Datafor`. The type cannot be changed later; to change it, uninstall the server and add it again.
+3. Fill in the form:
 
-   [mcp_servers."datafor".http_headers]
-   "Authorization" = "Bearer <token>"
-   ```
+   | Field | Value |
+   | --- | --- |
+   | **URL** | `<MCP address>` |
+   | **Bearer token environment variable** | Leave empty. |
+   | **Headers** | Click **Add header**. Key: `Authorization`. Value: `Bearer <token>`. |
+   | **Headers from environment variables** | Leave empty. |
 
-4. Save the file and start ChatGPT again, then open a new conversation.
+4. Click **Save**, quit the ChatGPT app completely and start it again, then open a new conversation.
 
 Three details matter:
 
-- **Write `Bearer`, a space, then the token.** A value with only the token, or with a different word in front, makes Datafor answer `Missing Datafor MCP authentication`.
-- **Keep `tool_timeout_sec = 600`.** Without it the app gives up on a tool call after 60 seconds, and a question with Datafor's written analysis can take about three minutes.
+- **Write `Bearer`, a space, then the token** in the header value. A value with the token alone, or with another word in front, can make Datafor answer `Missing Datafor MCP authentication`.
+- **Leave the bearer token environment variable empty.** When it names a variable, the app takes the token from that variable instead; a variable that is not set on your computer sends no token.
 - **Restart after every change.** A conversation keeps the configuration it started with; asking again in the same conversation does not pick up a corrected token.
 
-You can also add the server in the app under **Settings › MCP servers › Add server**: choose **Streamable HTTP**, enter `<MCP address>` as the URL, add the request header `Authorization` with the value `Bearer <token>`, save and select **Restart**. If your version of the form has no field for request headers, use the configuration file above. If the form offers a **bearer token environment variable**, leave it empty when you set the header; the app reads that variable, not the header, and an unset variable sends no token.
+### Allow slower answers
+
+The app gives up on a tool call after 60 seconds by default, while a question with Datafor's written analysis can take about three minutes. The form has no field for this, so set it in the configuration file:
+
+1. Quit the ChatGPT desktop app.
+2. Open `%USERPROFILE%\.codex\config.toml` on Windows or `~/.codex/config.toml` on macOS.
+3. Find the section the app wrote for the server, for example `[mcp_servers.datafor]`, and add `tool_timeout_sec = 600` under its `url` line.
+4. Save and start the app again.
+
+### Or write the whole entry in the configuration file
+
+Instead of using the form, you can add the entry to `config.toml` directly. Keep everything else in the file; if a `datafor` section is already there, edit it instead of adding a second one.
+
+```toml
+[mcp_servers.datafor]
+url = "<MCP address>"
+tool_timeout_sec = 600
+
+[mcp_servers.datafor.http_headers]
+Authorization = "Bearer <token>"
+```
+
+Save the file and restart the app. The entry then also appears on the **MCP** tab of the settings.
 
 ## 5. Try it
 
@@ -124,15 +146,15 @@ If the app asks permission before it uses a Datafor tool, allow it. The tools on
 | --- | --- |
 | No Datafor tools in Claude Desktop | Open a new conversation and check that the extension is enabled and has a token. If Claude started before Datafor was running, turn the extension off and on under **Settings › Extensions**, or restart Claude. |
 | Claude Desktop cannot find `npx` | Install Node.js 18 or later, or enter the full path to `npx` in the extension's **npx path**. |
-| No Datafor tools in ChatGPT | Check that the section is in the `config.toml` of your own user account, then quit and restart the app. |
+| No Datafor tools in ChatGPT | Check that Datafor is listed and enabled on **Settings › Plugins › MCP**, then quit and restart the app. |
 | `Missing Datafor MCP authentication` | No token reached Datafor. In ChatGPT, check that the header value starts with `Bearer ` and restart the app; in Claude Code, check the `--header` value. |
 | 401, or a sign-in failure on a tool call | The token has expired or was revoked. Create a new one and update the app. |
 | Cannot connect, or the call times out at once | The MCP address is not reachable from your computer. The `127.0.0.1` address only works on the Datafor computer; ask your administrator for the published address. |
-| The answer stops after about a minute | ChatGPT: add `tool_timeout_sec = 600` (section 4). Other apps: raise their tool timeout. |
+| The answer stops after about a minute | ChatGPT: add `tool_timeout_sec = 600` (section 4, *Allow slower answers*). Other apps: raise their tool timeout. |
 
 More cases, the server logs and the administrator settings are in [Connect AI Clients (MCP)](/documentation/AI-Agent/Connect-AI-Clients/#_6-troubleshooting).
 
 ## 7. When you are done
 
 - To stop an app from using Datafor, revoke its token on **My account › Personal tokens**. It stops working at once; an app that is connected can keep working for up to a minute.
-- On a shared computer, also remove the extension (Claude Desktop), run `claude mcp remove datafor` (Claude Code), or delete the `datafor` section from `config.toml` (ChatGPT).
+- On a shared computer, also remove the extension (Claude Desktop), run `claude mcp remove datafor` (Claude Code), or uninstall Datafor on **Settings › Plugins › MCP** (ChatGPT).

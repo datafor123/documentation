@@ -96,7 +96,7 @@ claude mcp add --transport http datafor "<MCP address>" --header "Authorization:
 
 3. Save, restart Codex, open a new conversation and ask: "Use Datafor to list the analysis models I can access."
 
-The desktop app, the CLI and the IDE extension on one computer share this configuration, and so does the ChatGPT desktop app's **MCP servers** setting. The header value must start with `Bearer ` followed by the token. Codex connects to the HTTP server directly: no extension, Node.js or `codex mcp login` is needed. `tool_timeout_sec = 600` leaves time for slower analyses. In the CLI, `codex mcp list` shows the configuration and `/mcp` the connection status. Codex cloud tasks do not read the configuration on your computer.
+The desktop app, the CLI and the IDE extension on one computer share this configuration, and so does the ChatGPT desktop app's MCP servers (**Settings › Plugins › MCP**). The header value must start with `Bearer ` followed by the token. Codex connects to the HTTP server directly: no extension, Node.js or `codex mcp login` is needed. `tool_timeout_sec = 600` leaves time for slower analyses. In the CLI, `codex mcp list` shows the configuration and `/mcp` the connection status. Codex cloud tasks do not read the configuration on your computer.
 
 ### Cursor, VS Code, Cherry Studio and other clients with a JSON configuration
 
