@@ -19,6 +19,10 @@ Show a measure as markers at the centres of regions on a GeoJSON boundary map, f
 
 ![Marker map Data tab: Geographic field, Measure and the searchable Map list with World/China selected](../images/current/marker-map-data.png)
 
+On the **United States** map, the markers sit at the state centres and are sized by store sales:
+
+![Marker map on the United States map: markers in Washington, Oregon and California sized by store sales](./images/marker-map-us-states-store-sales.jpg)
+
 The marker of a region is placed at the region's centre point, which is set in the GeoJSON Map tool.
 
 ## Matching regions

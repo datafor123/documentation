@@ -21,6 +21,10 @@ Large regions draw attention regardless of their value. Decide whether an absolu
 
 ![Filled map Data tab: Geographic field, Measure and the searchable Map list with World/China selected](../images/current/filled-map-data.png)
 
+On the **United States** map, two-letter state codes such as `CA`, `OR` and `WA` match through the map's region aliases:
+
+![Filled map on the United States map: Washington, Oregon and California coloured by store sales, with the colour bar from Low 270.88K to High 531.48K at the bottom left](./images/filled-map-us-states-store-sales.jpg)
+
 ## How region values are matched
 
 Each value of the Geographic field is looked up among the regions of the selected map, first among all region names, then among all codes, then among all aliases:
