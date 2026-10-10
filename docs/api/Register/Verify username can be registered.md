@@ -5,72 +5,43 @@ tags:
   - api
   - Users
   - Register
-description: null
+description: Check that a login name is valid and not taken.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`POST`
+Checks that a login name is valid and not used by another user, for example while a registration or user form is being filled in.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/user/isRightUsernameForAdd
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/user/isRightUsernameForAdd` |
+| Permission | Anyone (no sign-in) |
+| Content type | `application/x-www-form-urlencoded` |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `username` | form | string | Yes | Login name to check. It is taken if it matches another user's login name (ignoring case) or email. |
+
+## Example
+
+```bash
+curl -X POST "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/isRightUsernameForAdd" \
+  -d "username=new.user"
 ```
 
-**Authorization**  
-Authentication is **not required** to use this API.
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-## **Description**
-This API checks whether a given username can be used for registration. The verification is **case-insensitive**, meaning uppercase and lowercase variations of the same username are treated identically.
-
----
-
-### **Request Example**
-```yaml
-username: admin
-```
-
-### **Parameters Schema**
-
-| Name       | Location | Type   | Required | Description |
-|------------|----------|--------|----------|-------------|
-| `username` | body    | string | **Yes**  | The username to be verified (case-insensitive). |
-
----
-
-## **Response Examples**
-
-### **Successful Response (HTTP 200)**
 ```json
 {
-  "success": true
+  "success": true,
+  "code": "200"
 }
 ```
 
-### **Failure Response (Example)**
-```json
-{
-  "msg": "Username already exists",
-  "success": false
-}
-```
+## Errors
 
----
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `"400"` | `?/'" cannot be used` | The name is empty or contains `?`, `/`, `'` or `"`. |
+| `"409"` | `<username> already existed` | The name is taken. |
 
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                              | Description | Data Schema |
-|------------------|----------------------------------------------------------------------|-------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)              | Request was successful | Inline |
-
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type     | Required | Description |
-|-----------|---------|----------|-------------|
-| `success` | boolean | **Yes**  | Indicates whether the username is available for registration. |
-| `msg`     | string  | No       | Response message (only present when the username cannot be used). |
+Related: [Register](/api/Register/Register/)

@@ -4,92 +4,52 @@ permalink: /api/Metadata/Check unique for columns/
 tags:
   - api
   - Metadata
-description: null
+description: Check whether a column or combination of columns has unique values in a table or query.
 createTime: 2026/09/01 22:03:26
 ---
+Checks whether the values of one column, or a combination of columns, are unique in a table or SQL query. Use it to confirm a key before relating tables in a model.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/metadata/checkunique` |
+| Permission | **Read** on the connection, and the columns must be visible under Table & column access. `sql` needs permission to run raw SQL on the connection. |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/metadata/checkunique
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `connection` | body | string | Yes | Connection name. |
+| `schema` | body | string | With `table` | Schema of the table. |
+| `table` | body | string | `table` or `sql` | Table name. |
+| `sql` | body | string | `table` or `sql` | A query to check instead of a table. |
+| `isEncode` | body | boolean | No | Default `false`. `true` when `sql` is Base64-encoded (UTF-8). |
+| `fields` | body | string array | Yes | Column names whose combined values must be unique. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/metadata/checkunique" \
+  -H "Content-Type: application/json" \
+  -d '{ "connection": "Sales DW", "schema": "public", "table": "orders", "fields": ["order_id"] }'
 ```
-
-**Authorization**  
-The current user must have read privileges for the specified connection.
-
----
-
-### **Request Example**
 
 ```json
-{
-  "connection": "foodmart",
-  "schema": "foodmart",
-  "table": "time_by_day",
-  "fields": [
-    "the_year",
-    "the_month"
-  ]
-}
+{ "success": true, "code": "200", "data": true }
 ```
 
----
+`data` is `false` when at least one combination of values occurs more than once. The request still succeeds.
 
-## **Params**
+## Errors
 
-| Name          | Location | Type      | Required | Description      |
-|--------------|----------|-----------|----------|------------------|
-| `Accept`     | header   | string    | No       | None             |
-| `body`       | body     | object    | No       | None             |
-| `connection` | body     | string    | Yes      | Connection name  |
-| `schema`     | body     | string    | Yes      | Schema name      |
-| `table`      | body     | string    | Yes      | Table name       |
-| `fields`     | body     | array[string] | Yes  | Column names to check for uniqueness |
+HTTP 200 with `success: false`.
 
----
+| `code` | When |
+| --- | --- |
+| `400` | `connection`, `fields`, `schema` or `table` is missing, or a column does not exist (`column not found:<name>`). |
+| `403` | `no table privileges` or `no column privileges`, or `SQL_EXECUTE_FORBIDDEN:<connection>` for `sql`. |
+| `404` | `table not found`. |
+| `500` | The query failed. |
 
-## **Response Examples**
-
-#### ✅ **Success Response**
-```json
-{
-  "code": "200",
-  "data": true,
-  "success": true
-}
-```
-
-#### ❌ **Failure Response**
-```json
-{
-  "code": "400",
-  "data": false,
-  "success": false,
-  "msg": "Duplicate values found in specified columns"
-}
-```
-
----
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Columns checked successfully. |
-| 400              | Bad Request                                             | Invalid input or duplicate values found. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 403              | Forbidden                                               | User lacks required privileges. |
-| 500              | Internal Server Error                                   | Unexpected server error. |
-
----
-
-## **Response Data Schema**
-
-| Name      | Type    | Required | Description |
-|----------|--------|----------|-------------|
-| `success` | boolean | Yes      | `true` if request was successful, `false` otherwise. |
-| `data`    | boolean | Yes      | `true` if columns are unique, `false` if duplicates exist. |
-| `code`    | string  | No       | Response status code (`200` for success, `400` for failure). |
-| `msg`     | string  | No       | Error message (if applicable). |
+Related: [Establishing table relationships](/documentation/Model/Establishing-Table-Relationships/)

@@ -31,6 +31,8 @@ Each preset name means one exact range:
 - **Last N Calendar Months** are whole calendar months, while *Last 365 Days* is a rolling window; *Month to Date* is the current month up to today. Check the range shown next to each preset.
 - The list in the Date component shows the range each preset resolves to today, so you can check it before saving.
 
+![On 9 October 2026: Last 7 Days is 3–9 Oct, Exclude today gives 2–8 Oct, Month to Date 1–9 Oct, Last Month September, Last 3 Calendar Months July to September, Last 365 Days from 10 Oct 2025, and Last 7 days shifted back 1 year 3–9 Oct 2025](./images/relative-date-windows.svg)
+
 ![Relative presets with their computed ranges](../Visualization/Filters/images/date-relative-presets.png)
 
 ## Custom rules

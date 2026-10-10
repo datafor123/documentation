@@ -6,11 +6,9 @@ description: Let users sign in to Datafor with their LDAP directory account, con
 createTime: 2026/09/01 22:03:26
 ---
 
-## Single sign-on page
+LDAP is set up on **Settings › Access & Integration › Single sign-on**. For the page, the other sign-in methods and the **New users** settings, see [Single Sign-On Overview](/documentation/System/Single-Sign-On/).
 
-LDAP, OAuth 2.0, SAML 2.0 and CAS are configured on one page: **Settings › Access & Integration › Single sign-on**. A card per method at the top shows its status: **On** (enabled), **Off** (configured but not enabled), or **Not set up** (the method's address field is empty: **LDAP URL**, **Authorization endpoint**, **IdP SSO URL** or **CAS server URL**); **Unknown** means the status could not be read. Select a card to show that method's settings below it; if the current method has unsaved changes, Datafor asks you to save or discard them first. The cards refresh after each save. Each method has an **Enable** switch; while it is off, the fields are locked and the page shows "Turn on to edit." The **New users** group sets up accounts for first-time users: **Create users on first sign-in**, **Default user type** and **Default role**.
-
-<div align="left"><img src="./images/settings-sso.png" width="80%" /></div>
+<div align="left"><img src="./images/settings-sso.png" alt="Single sign-on page with the LDAP card selected and the LDAP Server settings below" width="80%" /></div>
 
 ## 1. LDAP settings
 

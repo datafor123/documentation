@@ -51,6 +51,8 @@ Datafor attaches a Dimension to a Measure Group only when the Dimension is reach
 
 For example, `inventory_fact` and `sales_fact` both join `product`, and only `sales_fact` joins `customer`. The path from inventory to `customer` runs `product` → `sales_fact` → `customer`, and `product` → `sales_fact` is one-to-many. Since 10.00, `customer` is therefore not attached to the inventory Measure Group:
 
+![From inventory_fact, the many-to-one steps to product and on to product_class are followed, so both are attached to the inventory Measure Group. The step from product to sales_fact is one-to-many, so the walk stops and customer, joined only by sales_fact, is not attached. Before 10.00 the path was followed and inventory rows were repeated once per matching sales row](./images/fan-out-through-another-fact.svg)
+
 - `customer` is unrelated to the inventory measures: a chart that combines them does not distribute inventory by customer, and a row policy on `customer` does not restrict inventory. See [Models with several fact tables](/documentation/Datasource/Row-Level-Security-in-Analytics/#models-with-several-fact-tables).
 - Earlier versions followed this path and repeated each inventory row once per matching sales row; in one test, a warehouse sales total was about 9.4 times the true value.
 - Aggregate tables are linked the same way.

@@ -4,65 +4,56 @@ permalink: /api/Users/Get user types/
 tags:
   - api
   - Users
-description: null
+description: List the three user types that can be given to a user.
 createTime: 2026/09/01 22:03:26
 ---
 
+Lists the user types, the special roles that decide what a user may do in general. Every user has exactly one.
 
-**Method**  
-`GET`
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor-modeler/api/roles/types` |
+| Permission | Any signed-in user |
+| Content type | None |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/roles/types
+## Parameters
+
+None.
+
+## Example
+
+```bash
+curl -u admin:password "http://localhost:28080/datafor/plugin/datafor-modeler/api/roles/types"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
----
-
-### **Response Examples**
 
 ```json
 {
+  "success": true,
+  "code": "200",
   "data": {
-    "total": 3,
     "success": true,
+    "total": 3,
     "list": [
-      {
-        "authority": "SYS_Reader"
-      },
-      {
-        "authority": "SYS_Creator"
-      },
-      {
-        "authority": "Administrator"
-      }
+      {"authority": "SYS_Reader"},
+      {"authority": "SYS_Creator"},
+      {"authority": "Administrator"}
     ]
-  },
-  "success": true
+  }
 }
 ```
 
----
+| `authority` | User type in the console |
+| --- | --- |
+| `SYS_Reader` | Reader: views content. |
+| `SYS_Creator` | Creator: also creates reports and models. |
+| `Administrator` | Administrator: also manages users, settings and permissions. |
 
-### **HTTP Responses**
+Pass one of these values as `usertype` to [Add or modify a user](/api/Users/Add%20or%20modify%20a%20user/).
 
-| HTTP Status Code | Meaning                                                                  | Description | Data Schema |
-|------------------|--------------------------------------------------------------------------|-------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                  | none        | Inline      |
+## Errors
 
----
+| `code` | When |
+| --- | --- |
+| `"500"` | Unexpected server error. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name        | Type    | Required | Description                            |
-|-------------|---------|----------|----------------------------------------|
-| `data`      | object  | Yes      | Contains response data.                |
-| ├── `total` | integer | Yes      | Total number of user types available.  |
-| ├── `success` | boolean | Yes      | Indicates whether the request was successful. |
-| ├── `list`   | [object] | Yes      | List of available user types.           |
-| ├── └── `authority` | string  | Yes  | Name of the user authority type (e.g., `SYS_Reader`). |
-| `success`   | boolean | Yes      | Overall success status of the request. |
+Related: [Users](/documentation/System/Users/#_3-selecting-a-user-type)

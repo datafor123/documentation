@@ -4,66 +4,59 @@ permalink: /api/Users/Get user's own information/
 tags:
   - api
   - Users
-description: null
+description: Read the profile of the signed-in user, or of any user for an administrator.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`GET`
+Returns the profile of the signed-in user. Administrators can name another user.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/user/detail
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor-modeler/api/user/detail` |
+| Permission | Any signed-in user for their own profile; Administrator for other users |
+| Content type | None |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `username` | query | string | No | User to read. Default: the signed-in user. |
+
+## Example
+
+```bash
+curl -u analyst1:password "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/detail"
 ```
-
-**Authorization**  
-The current user must be authenticated to access their own information.
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-### **Response Examples**
 
 ```json
 {
+  "success": true,
+  "code": "200",
   "data": {
     "user": {
-      "dept": "IT",
-      "email": "administrator@x.com",
+      "userid": "analyst1",
+      "username": "analyst1",
+      "name": "Analyst One",
+      "title": "Analyst",
+      "company": "Example Corp",
+      "dept": "Sales",
+      "email": "analyst1@example.com",
+      "mobile": "555-0100",
       "enabled": "1",
-      "mobile": "1",
-      "name": "administrator",
-      "password": "5f4dcc3b5aa765d61d8327deb882cf99",
-      "title": "administrator",
-      "username": "admin"
+      "ai_enabled": "0",
+      "create_time": 1737601114115,
+      "update_time": 1740013039357
     }
-  },
-  "success": true
+  }
 }
 ```
 
----
+The fields are those of [Get Users](/api/Users/Get%20Users/) without the role fields; empty fields are left out, and the password is never returned. `data` is `{}` when the user does not exist, or when the call is anonymous.
 
-### **Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                                 | Description        | Data schema |
-|------------------|-------------------------------------------------------------------------|--------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                  | The request was successful. | Inline      |
+| `code` | When |
+| --- | --- |
+| `"401"` | `username` names another user and the caller is not an administrator (`msg`: `no auth`). |
 
-### **Responses Data Schema (HTTP 200)**
-
-| Name            | Type    | Required | Restrictions     | Description                    |
-|-----------------|---------|----------|------------------|--------------------------------|
-| `data`          | object  | **Yes**  | none             | Contains user details.         |
-| `» user`        | object  | **Yes**  | none             | Contains user's personal info. |
-| `»» dept`       | string  | **No**   | none             | The user's department.         |
-| `»» email`      | string  | **No**   | none             | The user's email address.      |
-| `»» enabled`    | string  | **Yes**  | none             | The user's account status.     |
-| `»» mobile`     | string  | **No**   | none             | The user's mobile number.      |
-| `»» name`       | string  | **Yes**  | none             | The user's full name.          |
-| `»» password`   | string  | **Yes**  | MD5 hash         | The user's password (hashed).  |
-| `»» title`      | string  | **No**   | none             | The user's title.              |
-| `»» username`   | string  | **Yes**  | none             | The user's username.           |
-| `success`       | boolean | **Yes**  | none             | Whether the operation was successful. |
+Related: [Add or modify a user](/api/Users/Add%20or%20modify%20a%20user/)

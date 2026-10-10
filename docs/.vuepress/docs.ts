@@ -39,6 +39,7 @@ export const documentationNote = defineNoteConfig({
 			prefix: "/documentation/Model/",
 			items: [
 				{ text: "Analysis Model Overview", link: "/documentation/Model/Analysis-Model-Overview/" },
+				{ text: "Managing Analysis Models", link: "/documentation/Model/Managing-Analysis-Models/" },
 				{ text: "Creating an Analysis Model", link: "/documentation/Model/Creating-an-Analysis-Model/" },
 				{ text: "Working with Tables and the Canvas", link: "/documentation/Model/Working-with-Tables-and-the-Canvas/" },
 				{ text: "Creating SQL Views", link: "/documentation/Model/Creating-SQL-Views/" },

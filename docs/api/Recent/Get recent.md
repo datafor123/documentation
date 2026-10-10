@@ -4,54 +4,44 @@ permalink: /api/Recent/Get recent/
 tags:
   - api
   - Recent
-description: null
+description: List the files the signed-in user opened recently.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`GET`
+Returns the signed-in user's recently opened files, the `recent` user setting shown under **Recent** on the home page.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/user-settings/recent
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor-modeler/api/user-settings/recent` |
+| Permission | Any signed-in user (own list) |
+| Content type | None |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `all` | query | boolean | No | `true` returns the stored list unchanged. By default, entries whose file no longer exists or that the user can no longer read are left out. |
+
+## Example
+
+```bash
+curl -u analyst1:password "http://localhost:28080/datafor/plugin/datafor-modeler/api/user-settings/recent"
 ```
 
-**Authorization**  
-Authentication is required to use this API. For details on the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
----
-
-## **Description**
-This API retrieves a list of recently accessed items for the current user. It provides quick access to previously viewed resources.
-
----
-
-## **Response Examples**
-
-### **Successful Response (HTTP 200)**
 ```json
 [
   {
-    "fullPath": "/public/workshop.datafor",
-    "lastUse": 1722219194406,
-    "title": "workshop"
+    "fullPath": "/public/Sales/Sales overview.datafor",
+    "title": "Sales overview",
+    "lastUse": 1722219194406
   }
 ]
 ```
 
----
+The response is the array itself, newest first, not wrapped in `success`/`data`; `[]` when the list is empty. The fields are those of [Get favorites](/api/Favorites/Get%20favorites/).
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                              | Description | Data Schema |
-|------------------|----------------------------------------------------------------------|-------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)              | Request was successful | Inline |
+On a server error the response is `{"success": false, "msg": "<reason>"}`.
 
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type     | Required | Description |
-|-----------|---------|----------|-------------|
-| `fullPath` | string  | **Yes**  | The absolute path of the accessed resource. |
-| `lastUse`  | integer | **Yes**  | The timestamp (in milliseconds) of the last access. |
-| `title`    | string  | **Yes**  | The display name of the accessed resource. |
+Related: [Add recent](/api/Recent/Add%20recent/)

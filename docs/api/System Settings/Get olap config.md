@@ -4,139 +4,83 @@ permalink: /api/System Settings/Get olap config/
 tags:
   - api
   - System Settings
-description: null
+description: Read the query engine settings, such as query timeout, row limit and concurrent queries.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`GET`
+Returns the settings of the analysis (OLAP) engine, with their current values. The editable ones are those on **Settings › Data › Query engine**.
 
-**Request URL**
-```html
-/plugin/datafor/api/modeler/olap/config/meta
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor/api/modeler/olap/config/meta` |
+| Permission | Any signed-in user |
+| Content type | None |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `editable` | query | string | No | `true` returns only the settings shown on the Query engine page; `false` only the others. Leave it out for all. |
+
+## Example
+
+```bash
+curl -u admin:password "http://localhost:28080/datafor/plugin/datafor/api/modeler/olap/config/meta?editable=true"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-### Parameters
-
-| Name      | Location | Type   | Required | Description |
-|-----------|----------|--------|----------|-------------|
-| editable  | query   | string | no       | Specifies whether the configuration is editable |
-
----
-
-## **Response Examples**
 
 ```json
 {
+  "success": true,
   "msg": "success",
   "data": [
     {
-      "code": "mondrian.rolap.EnableSumBottom",
-      "defaults": "true",
+      "code": "mondrian.rolap.queryTimeout",
+      "name": "QueryTimeout",
+      "type": "Integer",
+      "value": "300",
+      "defaults": "0",
+      "range": "",
       "editable": true,
-      "name": "EnableSumBottom",
-      "zhdesc": "Total at the bottom",
-      "range": "true,false",
-      "type": "Boolean",
-      "value": "true",
-      "desc": "Controls whether the sum line appears at the bottom or top."
+      "desc": "the timeout value (in seconds) for queries"
     },
     {
       "code": "mondrian.olap.NullMemberCaption",
-      "defaults": "",
-      "editable": true,
       "name": "NullMemberCaption",
-      "zhdesc": "Null member title",
-      "range": "",
       "type": "String",
       "value": "",
-      "desc": "Defines how a null member value is represented in the result output."
-    },
-    {
-      "code": "mondrian.olap.InfinityRepresentation",
-      "defaults": "Infinity",
-      "editable": true,
-      "name": "InfinityRepresentation",
-      "zhdesc": "Infinity name",
+      "defaults": "",
       "range": "",
-      "type": "String",
-      "value": "Infinity",
-      "desc": "Defines how the Infinity value is represented in the result output."
-    },
-    {
-      "code": "mondrian.result.limit",
-      "defaults": "0",
       "editable": true,
-      "name": "ResultLimit",
-      "zhdesc": "Maximum number of query result rows and hierarchical members",
-      "range": "",
-      "type": "Integer",
-      "value": "500000",
-      "desc": "Limits the maximum size of a result set when set to a value greater than zero."
-    },
-    {
-      "code": "mondrian.rolap.queryTimeout",
-      "defaults": "0",
-      "editable": true,
-      "name": "QueryTimeout",
-      "zhdesc": "Query timeout duration (seconds)",
-      "range": "",
-      "type": "Integer",
-      "value": "300",
-      "desc": "Defines the timeout value (in seconds) for queries."
-    },
-    {
-      "code": "mondrian.query.limit",
-      "defaults": "40",
-      "editable": true,
-      "name": "QueryLimit",
-      "zhdesc": "Maximum concurrent queries",
-      "range": "",
-      "type": "Integer",
-      "value": "200",
-      "desc": "Maximum number of simultaneous queries the system will allow."
+      "desc": "how a null member value is represented in the result output"
     }
-  ],
-  "success": true
+  ]
 }
 ```
 
----
+| Field | Description |
+| --- | --- |
+| `code` | Property name. Pass it to [Set olap config](/api/System%20Settings/Set%20olap%20config/). |
+| `name` | Short name. |
+| `type` | `String`, `Integer` or `Boolean`. |
+| `value` | Current value, as a string. |
+| `defaults` | The engine's built-in default. Datafor ships its own values for several settings, so `value` can differ from `defaults` on a new installation. |
+| `range` | Allowed values, comma-separated, when the setting has a fixed list. |
+| `editable` | `true` for the settings shown on the Query engine page. |
+| `desc` | Description. Some entries also have `zhdesc`, a Chinese description. |
 
-## **HTTP Responses**
+The editable settings:
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | Request was successful | Inline     |
+| `code` | Query engine field |
+| --- | --- |
+| `mondrian.olap.InfinityRepresentation` | **Show infinity as** |
+| `mondrian.olap.NullMemberCaption` | **Show empty members as** |
+| `mondrian.query.limit` | **Max concurrent queries** |
+| `mondrian.result.limit` | **Max result rows** (0 = no limit) |
+| `mondrian.rolap.queryTimeout` | **Query timeout (seconds)** (0 = no timeout) |
+| `mondrian.rolap.aggregates.Use`, `mondrian.rolap.aggregates.Read` | **UseAggregates**, **ReadAggregates** |
 
-### **Response Data Schema (HTTP 200)**
+## Errors
 
-| Name      | Type    | Required | Description    |
-|-----------|---------|---------:|----------------|
-| `msg`     | string  | No       | Response message |
-| `data`    | array   | **Yes**  | List of OLAP configuration settings |
-| `success` | boolean | **Yes**  | Indicates whether the request was successful |
+If the settings cannot be read, `success` is `false` and `msg` has the reason.
 
-#### **Data Object Schema**
-
-| Name      | Type    | Required | Description    |
-|-----------|---------|---------:|----------------|
-| `code`    | string  | **Yes**  | Configuration code identifier |
-| `defaults` | string  | **Yes**  | Default value of the configuration |
-| `editable` | boolean | **Yes**  | Indicates whether the configuration is editable |
-| `name`    | string  | **Yes**  | Configuration name |
-| `zhdesc`  | string  | No       | Chinese description of the configuration |
-| `range`   | string  | No       | Valid value range for the configuration |
-| `type`    | string  | **Yes**  | Data type of the configuration |
-| `value`   | string  | **Yes**  | Current value of the configuration |
-| `desc`    | string  | **Yes**  | Description of the configuration |
-
+Related: [Query Engine](/documentation/System/Query-Engine/)

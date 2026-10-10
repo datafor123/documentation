@@ -4,65 +4,46 @@ permalink: /api/Alert/Execute an alert by name/
 tags:
   - api
   - Alert
-description: null
+description: Run a saved alert now and send its email if the conditions match.
 createTime: 2026/09/01 22:03:26
 ---
+Runs a saved alert immediately, outside its schedule: executes its query, checks the conditions, and sends the email when they match.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor/api/alert/executeByName` |
+| Permission | **Read** on the alert. If the alert's `executor` is another user, administrator rights. |
+| Content type | `application/x-www-form-urlencoded` |
 
-**Request URL**
-```html
-/plugin/datafor/api/alert/execute
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `name` | form | string | Yes | Alert name. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor/api/alert/executeByName" \
+  --data-urlencode "name=low_sales_north"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-**Preconditions**
-- The current user must have **read** privileges for the alert.
-
----
-
-### **Parameters Schema**
-
-| Name    | Location | Type   | Required | Description                         |
-|---------|----------|--------|----------|-------------------------------------|
-| **name**| body     | string | No       | Name of the alert to be executed    |
-
-### **Request Example**
-```
-name: alert1
-```
-
----
-
-## **Response Examples**
 
 ```json
-{
-  "msg": "success",
-  "success": true
-}
+{ "success": true, "code": "200", "data": "send mail success" }
 ```
 
----
+`data` is `send mail success` when a condition matched and the email was sent, and `not match condition` when nothing matched.
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+HTTP 200 with `success: false`.
 
-### **Response Data Schema (HTTP 200)**
+| `code` / `msg` | When |
+| --- | --- |
+| `404` (number), `not found` | No alert has this name, or the caller cannot read it. |
+| `"400"`, `rule is required` / `conditions is required` / `qm is required` | The saved definition is incomplete. |
+| `"400"`, `toUsers is required` / `no effective email` | A condition matched but no recipient has an email address. |
+| `"500"`, `no data` / `column lost` / query error | The query returned no rows, the measures in the conditions are not in the result, or the query failed. |
 
-| Name      | Type    | Required | Description    |
-|-----------|---------|----------|----------------|
-| `msg`     | string  | No       | Message string |
-| `success` | boolean | Yes      | Request status |
+Related: [Execute an alert](/api/Alert/Execute%20an%20alert/), [Mail Server Configuration](/documentation/System/Mail-Server-Configuration/)

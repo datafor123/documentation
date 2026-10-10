@@ -4,88 +4,68 @@ permalink: /api/Email/Test email config/
 tags:
   - api
   - Email
-description: null
+description: Send a test message with the SMTP settings in the request, before saving them.
 createTime: 2026/09/01 22:03:26
 ---
 
-## **POST Test email config**
+Sends a test message using the SMTP settings in the request body, not the saved ones, as **Test connection** on the Email settings page does. The message goes to the sender address (`defaultFrom`), with the subject `Datafor` and the text `Test Succeeded!`.
 
-**Endpoint**  
-`POST /plugin/datafor-modeler/api/email/sendEmailTest`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/email/sendEmailTest` |
+| Permission | Administrator |
+| Content type | `application/json` |
 
-### **Preconditions**
-- The current user's user type must be **Administrator**.
+## Parameters
 
----
+The fields are those returned by [Get email config](/api/Email/Get%20email%20config/).
 
-### **Request Example**
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `smtpHost` | body | string | Yes | SMTP server. |
+| `smtpPort` | body | integer | Yes | Port, for example `25`, `465` (SSL) or `587` (STARTTLS). |
+| `smtpProtocol` | body | string | Yes | `smtp` or `smtps`. |
+| `userId` | body | string | Yes | Account for signing in to the SMTP server. |
+| `password` | body | string | Yes | Password of that account. |
+| `authenticate` | body | boolean | Yes | `true` to sign in to the SMTP server. |
+| `useStartTls` | body | boolean | No | `true` to upgrade the connection with STARTTLS. |
+| `useSsl` | body | boolean | No | `true` to connect over SSL/TLS. |
+| `defaultFrom` | body | string | Yes | Sender address. The test message is sent to this address. |
+| `fromName` | body | string | No | Sender name. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor-modeler/api/email/sendEmailTest" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "smtpHost": "smtp.example.com",
+    "smtpPort": 465,
+    "smtpProtocol": "smtps",
+    "userId": "reports@example.com",
+    "password": "<smtp-password>",
+    "authenticate": true,
+    "useStartTls": false,
+    "useSsl": true,
+    "defaultFrom": "reports@example.com",
+    "fromName": "Datafor Reports"
+  }'
+```
+
 ```json
 {
-  "smtpHost": "smtp.a.com",
-  "smtpPort": "465",
-  "userId": "a@a.com",
-  "password": "",
-  "smtpProtocol": "smtp",
-  "defaultFrom": "a@a.com",
-  "fromName": "a",
-  "useStartTls": "false",
-  "useSsl": "true",
-  "authenticate": true
+  "success": true,
+  "code": "200"
 }
 ```
 
----
+Success means the SMTP server accepted the message. Check the sender mailbox, including the spam folder, to confirm delivery.
 
-### **Params**
+## Errors
 
-| Name          | Location | Type    | Required | Description |
-|--------------|----------|---------|----------|-------------|
-| `smtpHost`   | body     | string  | Yes      | SMTP server hostname |
-| `smtpPort`   | body     | string  | Yes      | SMTP port number |
-| `userId`     | body     | string  | Yes      | SMTP authentication user ID |
-| `password`   | body     | string  | Yes      | SMTP password |
-| `smtpProtocol` | body   | string  | Yes      | SMTP protocol (`smtp` or `smtps`) |
-| `defaultFrom` | body   | string  | Yes      | Default sender email |
-| `fromName`   | body     | string  | Yes      | Sender's display name |
-| `useStartTls` | body   | boolean | Yes      | Use STARTTLS (`true`/`false`) |
-| `useSsl`     | body     | boolean | Yes      | Use SSL (`true`/`false`) |
-| `authenticate` | body   | boolean | Yes      | Enable authentication (`true`/`false`) |
+| `code` | When |
+| --- | --- |
+| `"401"` | The caller is not an administrator. |
+| `"500"` | Sending failed; `msg` has the mail server's or the mail library's message, for example an authentication or connection error. |
 
----
-
-### **Response Examples**
-
-#### ✅ **Success Response**
-```json
-{
-  "code": "200",
-  "success": true
-}
-```
-
-#### ❌ **Failure Response**
-```json
-{
-  "msg": "Empty address",
-  "code": "500",
-  "success": false,
-  "type": "1"
-}
-```
-
----
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
-
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type    | Required | Description |
-|----------|--------|----------|-------------|
-| `msg`    | string | No       | Response message (e.g., error details) |
-| `code`   | string | No       | Response status code (`200` for success, `500` for failure) |
-| `success` | boolean | Yes     | `true` if request was successful, `false` otherwise |
-| `type`   | string | No       | Error type (if applicable) |
+Related: [Mail Server Configuration](/documentation/System/Mail-Server-Configuration/#_3-test-the-connection)

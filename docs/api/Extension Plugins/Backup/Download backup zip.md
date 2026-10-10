@@ -5,53 +5,41 @@ tags:
   - api
   - Extension Plugins
   - Backup
-description: null
+description: Download a backup package to keep a copy off the server.
 createTime: 2026/09/01 22:03:26
 ---
+Downloads a backup package from the server's `backup/` folder, for example to keep a copy elsewhere.
 
-**Method**  
-`GET`
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor-backup/api/log/download` |
+| Permission | Administrators |
+| Content type | none (query string) |
 
-**Request URL**
-```html
-/plugin/datafor-backup/api/log/download
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `id` | query | string | Yes | Backup ID from [Query backup logs](/api/Extension%20Plugins/Backup/Query%20backup%20logs/), for example `Backup_2026.10.10-02.00.00.205+0800`. |
+
+## Example
+
+```bash
+curl -u admin:password -G \
+  "http://localhost:28080/datafor/plugin/datafor-backup/api/log/download" \
+  --data-urlencode "id=Backup_2026.10.10-02.00.00.205+0800" \
+  -o backup.zip
 ```
 
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
+On success the body is the zip file, named `<id>.zip` in `Content-Disposition`.
 
-**Content Type**  
-`application/json`
+## Errors
 
----
+Errors are returned with HTTP 200 as a plain-text attachment named `info.txt`. Check the `Content-Disposition` header before saving the body.
 
-**Preconditions**
-- The current user's user type **must be** `Administrator`.
+| `info.txt` content | When |
+| --- | --- |
+| `no permission` | The caller is not an administrator. |
+| `<id>.zip not found` | No backup has this ID. |
 
----
-
-## **Params**
-
-| Name    | Location | Type   | Required | Description |
-|---------|----------|--------|----------|-------------|
-| `id`    | query   | string | Yes      | The unique backup identifier (e.g., `Backup_2023.10.27-10.59.45.850+0800`). |
----
-
-## **Response Examples**
-
-### ✅ Success Response (200 OK)
-The response will contain a downloadable **ZIP file**.
-
----
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Backup file download successful. |
-| 400              | Bad Request                                             | Invalid request parameters. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 403              | Forbidden                                               | User does not have permission. |
-| 404              | Not Found                                               | The specified backup file does not exist. |
-| 500              | Internal Server Error                                   | Unexpected server error. |
+Related: [Backup and Restore](/documentation/System/backup/)

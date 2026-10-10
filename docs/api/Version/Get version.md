@@ -4,72 +4,59 @@ permalink: /api/Version/Get version/
 tags:
   - api
   - Version
-description: null
+description: Read the installed Datafor version and whether a newer release is published.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`GET`
+Returns the installed Datafor version and the newest published one. Use `current` to check which release a server runs before calling endpoints that changed between releases.
 
-**Request URL**
-```html
-/plugin/datafor/api/version/info
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor/api/version/info` |
+| Permission | Anyone |
+| Content type | None |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `refresh` | query | boolean | No | `true` makes the server look up the newest release before answering. Default `false`, which returns the result of the last lookup. |
+
+The server looks up the newest release on the internet (the published version file on GitHub, or SourceForge as a fallback) once a day, starting a second after start-up. On a server without internet access the lookup fails silently, and `newest` stays empty.
+
+## Example
+
+```bash
+curl -u admin:password "http://localhost:28080/datafor/plugin/datafor/api/version/info"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
----
-
-### **Parameters Schema**
-
-| Name       | Location | Type     | Required | Description |
-|------------|----------|----------|----------|-------------|
-| `refresh`  | query    | string   | no       | Specifies whether to refresh the version information. |
-
----
-
-### **Response Examples**
 
 ```json
 {
-  "current": {
-    "buildId": "datafor-2024-07-26",
-    "branch": "commercial",
-    "version": "6.06"
-  },
   "success": true,
-  "newest": {
-    "buildId": "datafor-2022-06-14",
+  "current": {
+    "version": "10.00",
     "branch": "commercial",
-    "version": "4.01"
+    "buildId": "datafor-2026-10-01"
   },
-  "status": -1
+  "newest": {
+    "version": "10.00",
+    "branch": "commercial",
+    "buildId": "datafor-2026-10-01"
+  },
+  "status": 0
 }
 ```
 
----
+| Field | Description |
+| --- | --- |
+| `current` | The installed release: `version`, `branch` and `buildId` (build date). Read from `pentaho-solutions/system/datafor/version.xml`. |
+| `newest` | The newest published release, same fields. `{}` until a lookup has succeeded. |
+| `status` | `1`: a newer release exists (higher `version`, or the same `version` with a later `buildId`). `0`: the installed release is the newest. `-1`: the installed release is newer than the published one, for example a pre-release build. |
 
-### **HTTP Responses**
+`status` is `1` until the first lookup succeeds, so read it together with `newest`: if `newest` is empty, no comparison was made.
 
-| HTTP Status Code | Meaning                                                                  | Description | Data Schema |
-|------------------|--------------------------------------------------------------------------|-------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                  | none        | Inline      |
+## Errors
 
----
+If the version information cannot be assembled, `success` is `false` and `msg` is `cannot fetch version info`.
 
-### **Response Data Schema (HTTP 200)**
-
-| Name           | Type    | Required | Description                            |
-|----------------|---------|----------|----------------------------------------|
-| `current`      | object  | Yes      | Contains information about the current version. |
-| ├── `buildId`  | string  | Yes      | The build ID of the current version.   |
-| ├── `branch`   | string  | Yes      | The branch of the current version.     |
-| ├── `version`  | string  | Yes      | The version number of the current build. |
-| `success`      | boolean | Yes      | Overall success status of the request. |
-| `newest`       | object  | No       | Contains information about the newest available version. |
-| ├── `buildId`  | string  | No       | The build ID of the newest version.    |
-| ├── `branch`   | string  | No       | The branch of the newest version.      |
-| ├── `version`  | string  | No       | The version number of the newest version. |
-| `status`       | integer | Yes      | The status of the version check. A negative value typically indicates an issue. |
+Related: [Release notes for 10.00](/release/10.00/)

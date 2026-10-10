@@ -4,97 +4,67 @@ permalink: /api/Email/Get email config/
 tags:
   - api
   - Email
-description: null
+description: Read the outgoing mail server settings, including the SMTP password.
 createTime: 2026/09/01 22:03:26
 ---
 
-## **GET Get email config**
+Returns the SMTP settings that Datafor uses to send email, as on **Settings › General › Email**.
 
-**Endpoint**  
-`GET /api/emailconfig/getEmailConfig`
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor-modeler/api/email/getEmailConfig` |
+| Permission | Administrator |
+| Content type | None |
 
-### **Preconditions**
-The current user's user type must be **Administrator**.
+## Parameters
 
----
+None.
 
-### **Response Example**
+## Example
+
+```bash
+curl -u admin:password "http://localhost:28080/datafor/plugin/datafor-modeler/api/email/getEmailConfig"
+```
 
 ```json
 {
-  "authenticate": "true",
-  "debug": "false",
-  "defaultFrom": "",
-  "fromName": "",
-  "password": "",
-  "smtpHost": "",
-  "smtpPort": "25",
-  "smtpProtocol": "smtp",
-  "smtpQuitWait": "false",
-  "useSsl": "false",
-  "useStartTls": "false",
-  "userId": ""
+  "smtpHost": "smtp.example.com",
+  "smtpPort": 465,
+  "smtpProtocol": "smtps",
+  "userId": "reports@example.com",
+  "password": "<smtp-password>",
+  "authenticate": true,
+  "useStartTls": false,
+  "useSsl": true,
+  "defaultFrom": "reports@example.com",
+  "fromName": "Datafor Reports",
+  "isSmtpQuitWait": false,
+  "isDebug": false
 }
 ```
 
----
+The response is not wrapped in `success`/`data`.
 
-## **HTTP Responses**
+| Field | Console field |
+| --- | --- |
+| `smtpHost` | **SMTP server** |
+| `smtpPort` | **Port** (a number) |
+| `smtpProtocol` | **Protocol**: `smtp` or `smtps` |
+| `userId` | **Username** |
+| `password` | **Password**, in plain text |
+| `authenticate` | Whether to sign in to the SMTP server |
+| `useStartTls` | **Use STARTTLS** |
+| `useSsl` | **Use SSL/TLS** |
+| `defaultFrom` | **Sender address** |
+| `fromName` | **Sender name** |
+| `isSmtpQuitWait`, `isDebug` | Mail library options, not shown in the console |
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+The SMTP password is returned in plain text to administrators. Treat the response as a secret: do not log it or pass it on.
 
-### **Response Data Schema (HTTP 200)**
+## Errors
 
-| Name            | Type    | Required | Description |
-|----------------|--------|----------|-------------|
-| `authenticate`  | string | No       | Whether authentication is enabled (`true`/`false`) |
-| `debug`         | string | No       | Debug mode (`true`/`false`) |
-| `defaultFrom`   | string | No       | Default sender email |
-| `fromName`      | string | No       | Sender's display name |
-| `password`      | string | No       | Email password (if applicable) |
-| `smtpHost`      | string | No       | SMTP server hostname |
-| `smtpPort`      | string | No       | SMTP port (default: `25`) |
-| `smtpProtocol`  | string | No       | SMTP protocol (`smtp` or `smtps`) |
-| `smtpQuitWait`  | string | No       | Whether to wait for server response on quit (`true`/`false`) |
-| `useSsl`        | string | No       | Whether SSL is used (`true`/`false`) |
-| `useStartTls`   | string | No       | Whether STARTTLS is used (`true`/`false`) |
-| `userId`        | string | No       | SMTP authentication user ID |
-  "debug": "false",
-  "defaultFrom": "",
-  "fromName": "",
-  "password": "",
-  "smtpHost": "",
-  "smtpPort": "25",
-  "smtpProtocol": "smtp",
-  "smtpQuitWait": "false",
-  "useSsl": "false",
-  "useStartTls": "false",
-  "userId": ""
-}
-```
+| `code` | When |
+| --- | --- |
+| `"401"` | The caller is not an administrator (`msg`: `no auth`). |
 
-### Responses
-
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
-
-### Responses Data Schema
-
-HTTP Status Code **200**
-
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» authenticate|string|false|none||none|
-|» defaultFrom|string|false|none||none|
-|» fromName|string|false|none||none|
-|» password|string|false|none||none|
-|» smtpHost|string|false|none||none|
-|» smtpPort|string|false|none||none|
-|» smtpProtocol|string|false|none||none|
-|» smtpQuitWait|string|false|none||none|
-|» useSsl|string|false|none||none|
-|» useStartTls|string|false|none||none|
-|» userId|string|false|none||none|
+Related: [Mail Server Configuration](/documentation/System/Mail-Server-Configuration/), [Test email config](/api/Email/Test%20email%20config/)

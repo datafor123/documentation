@@ -4,94 +4,58 @@ permalink: /api/Folders/Add a folder/
 tags:
   - api
   - Folders
-description: null
+description: Create a folder, and any missing parent folders, with an optional ACL.
 createTime: 2026/09/01 22:03:26
 ---
+Creates a folder at the given path. Missing parent folders are created too.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/repo/dirs/add` |
+| Permission | **Edit** on the parent folder |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/repo/dirs/add
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `pathId` | query | string | Yes | Full path of the new folder, for example `/public/Sales/2026`. Folders cannot be created directly under the root (`/`). |
+| (body) | body | object | No | ACL for the new folder, in the format of [Change ACLs for files](/api/Files/Change%20acl%20for%20files/). Without a body the folder inherits its parent's ACL. An empty `owner` or `recipient` is filled in with the caller. |
+
+## Example
+
+Create a folder that only its creator and the `Sales` role can open:
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/repo/dirs/add?pathId=/public/Sales/2026" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "owner": "admin",
+    "ownerType": 0,
+    "entriesInheriting": false,
+    "aces": [
+      { "recipient": "admin", "recipientType": 0, "permissions": [4], "modifiable": true },
+      { "recipient": "Sales", "recipientType": 1, "permissions": [0], "modifiable": true }
+    ]
+  }'
 ```
-
-**Authorization**  
-The current user must have administrator authority over the parent folder.
-
-**Content Type**  
-`application/json`
-
----
-
-### **Request Example**
 
 ```json
-{
-  "aces": [
-    {
-      "recipient": "admin",
-      "tenantPath": null,
-      "modifiable": true,
-      "recipientType": 0,
-      "permissions": [
-        4
-      ]
-    }
-  ],
-  "id": null,
-  "owner": "admin",
-  "tenantPath": null,
-  "ownerType": 0,
-  "entriesInheriting": false
-}
+{ "success": true, "code": 200 }
 ```
 
-| Name                  | Location | Type     | Required | Description |
-|-----------------------|----------|---------|----------|-------------|
-| `pathId`             | query     | string  | No       | Parent folder path where the new folder will be created. |
-| `body`               | body      | object  | No       | JSON payload for folder creation. |
-| `aces`               | body      | array   | **Yes**  | List of access control entries (ACL). |
-| `recipient`          | body      | string  | No       | User or role receiving permissions. |
-| `tenantPath`         | body      | null    | No       | Tenant path (if applicable). |
-| `modifiable`         | body      | boolean | No       | Whether the ACL is modifiable. |
-| `recipientType`      | body      | integer | No       | Type of recipient (e.g., user or role). |
-| `permissions`        | body      | array   | No       | List of permission levels assigned. |
-| `id`                | body      | null    | No       | Folder ID (set to `null` for new folder). |
-| `owner`             | body      | string  | **Yes**  | Owner of the folder. |
-| `tenantPath`        | body      | null    | No       | Tenant path (if applicable). |
-| `ownerType`         | body      | integer | **Yes**  | Owner type identifier. |
-| `entriesInheriting` | body      | boolean | **Yes**  | Whether the folder inherits permissions from its parent. |
+## Errors
 
----
+HTTP 200 with `success: false`. Here `code` is a number.
 
-## **Response Examples**
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `403` | `couldNotCreateRootLevelFolder` | The path is directly under `/`. |
+| `409` | `couldNotCreateFolderDuplicate` | The folder already exists. |
+| `410` | `pathId could not be null` | `pathId` is missing. |
+| `410` | `containsIllegalCharacters` | The name contains a character that is not allowed, such as `\`. |
+| `410` | `invalid acl` | The body is not a valid ACL. |
+| `500` | (reason) | Any other failure, including missing Edit on the parent folder. |
 
-#### ✅ **Success Response**
-```json
-{
-  "code": 200,
-  "success": true
-}
-```
-
----
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                 | Description                                     |
-|------------------|---------------------------------------------------------|-------------------------------------------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Folder created successfully.                    |
-| 400              | Bad Request                                             | Invalid request format or missing parameters.  |
-| 401              | Unauthorized                                            | Authentication required.                        |
-| 403              | Forbidden                                               | User lacks the required permissions.           |
-| 500              | Internal Server Error                                   | Unexpected error occurred.                      |
-
----
-
-## **Response Data Schema**
-
-| Name      | Type    | Required | Description |
-|-----------|--------|----------|-------------|
-| `code`    | integer | No       | HTTP response code. |
-| `success` | boolean | **Yes**  | `true` if the folder was successfully created, `false` otherwise. |
+Related: [Access Control List](/documentation/System/Access-Control-List/)

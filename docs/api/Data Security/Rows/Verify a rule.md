@@ -4,144 +4,81 @@ permalink: /api/Data Security/Rows/Verify a rule/
 tags:
   - api
   - Data Security
-description: null
+description: Check Row access conditions against the database without saving them.
 createTime: 2026/09/01 22:03:26
 ---
+Runs each Row access condition against its table, with the caller's own account substituted for system variables, and reports per condition whether it is valid. This is **Validate expression** in the console. Nothing is saved.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/auth/row/verify` |
+| Permission | **Full control** on the connection, and permission to use SQL fragments on it |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/auth/row/verify
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `dbconn` | body | string | Yes | Connection name. |
+| `configList` | body | array | Yes | Conditions to check, each with `schema`, `tbname` and `sql`, as in [Add or modify a rule for rows](/api/Data%20Security/Rows/Add%20or%20modify%20a%20rule%20for%20rows/). |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/auth/row/verify" \
+  -H "Content-Type: application/json" \
+  -d @verify.json
 ```
 
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
-**Preconditions**
-- The current user’s type **cannot** be `SYS_Reader`.
-- The current user must have **administrative privileges** for the connection.
-
----
-
-### **Parameters Schema**
-
-| Name         | Location | Type   | Required | Description |
-|-------------|----------|--------|----------|-------------|
-| **body**    | body     | object | Yes      | Request payload |
-| ├── `dbconn`      | body | string  | Yes  | Database connection name |
-| ├── `configList`  | body | array   | Yes  | List of rule configurations |
-| │ ├── `schema` | body | string | Yes  | Schema name |
-| │ ├── `tbname` | body | string | Yes  | Table name |
-| │ ├── `rows`   | body | string | No   | JSON formatted rule condition |
-| │ ├── `sql`    | body | string | Yes  | SQL condition |
-
----
-
-### **Request Example**
+with `verify.json`:
 
 ```json
 {
-  "dbconn": "Demo",
+  "dbconn": "Sales DW",
   "configList": [
-    {
-      "schema": "public",
-      "tbname": "time_dim",
-      "rows": "{\"field\":\"YEAR\",\"operator\":\"=\",\"value\":2005}",
-      "sql": "\"YEAR\"=2005"
-    }
+    { "schema": "public", "tbname": "stores", "sql": "\"store_manager\" = #{system.username}" },
+    { "schema": "public", "tbname": "orders", "sql": "\"regoin\" = 'North'" }
   ]
 }
 ```
 
----
+The response echoes the request. Each `configList` entry gains `success`, a `msg` when it failed, `data` with at most one sample row when it passed, and `resolvedSql` when a system variable was substituted:
 
-## **Response Examples**
-
-### **Error Response Example**
 ```json
 {
-  "dbconn": "Demo",
+  "dbconn": "Sales DW",
   "configList": [
     {
       "schema": "public",
-      "msg": "org.postgresql.util.PSQLException: Unterminated identifier started at position 40 in SQL select * from \"public\".\"time_dim\" where \"YEAR=2005. Expected \" char",
-      "tbname": "time_dim",
+      "tbname": "stores",
+      "sql": "\"store_manager\" = #{system.username}",
+      "resolvedSql": "\"store_manager\" = 'admin'",
+      "data": [ [ 12, "Downtown", "admin" ] ],
+      "success": true
+    },
+    {
+      "schema": "public",
+      "tbname": "orders",
+      "sql": "\"regoin\" = 'North'",
       "success": false,
-      "rows": "{\"field\":\"YEAR\",\"operator\":\"=\",\"value\":2005}",
-      "sql": "\"YEAR=2005"
+      "msg": "ERROR: column \"regoin\" does not exist"
     }
   ]
 }
 ```
 
-### **Success Response Example**
-```json
-{
-  "dbconn": "Demo",
-  "configList": [
-    {
-      "schema": "public",
-      "tbname": "time_dim",
-      "data": [
-        {
-          "MONTH_KEY": 200501,
-          "YEAR": 2005,
-          "QUARTER_KEY": 20051,
-          "DAY_KEY": 20050101,
-          "DAY_DATE": "2005-01-01 00:00:00.0"
-        }
-      ],
-      "meta": [
-        {
-          "typeDesc": "Integer",
-          "comments": "DAY_KEY",
-          "originalColumnType": 4,
-          "originalNullable": 0,
-          "length": 9,
-          "type": 5,
-          "originalColumnTypeName": "int4",
-          "originalPrecision": 10,
-          "originalSigned": true,
-          "name": "DAY_KEY",
-          "originalScale": 0,
-          "storageType": 0,
-          "originName": "DAY_KEY"
-        }
-      ],
-      "success": true,
-      "rows": "{\"field\":\"YEAR\",\"operator\":\"=\",\"value\":2005}",
-      "sql": "\"YEAR\"=2005"
-    }
-  ]
-}
-```
+There is no top-level `success` when the conditions were checked; read it from each entry.
 
----
+## Errors
 
-## **HTTP Responses**
+When the request itself is rejected, the response is the usual envelope with `success: false`:
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `401` | `No administrative privileges:<connection>` | The caller lacks Full control on the connection. |
+| `403` | `SQL_FRAGMENT_FORBIDDEN:<connection>` | The caller may not use SQL fragments on this connection. |
+| `400` | `configList cannot be empty` | No conditions were sent. |
+| `500` | (reason) | The connection could not be opened. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name        | Type     | Required | Description |
-|------------|---------|----------|-------------|
-| `dbconn`   | string  | Yes      | Database connection name |
-| `configList` | array  | Yes      | List of rule verification results |
-| ├── `schema` | string | No      | Schema name |
-| ├── `msg`    | string | No      | Error message (if any) |
-| ├── `tbname` | string | No      | Table name |
-| ├── `success` | boolean | No   | Whether the verification was successful |
-| ├── `rows`   | string  | No      | JSON formatted rule condition |
-| ├── `sql`    | string  | No      | SQL condition |
-| ├── `data`   | array  | No      | Retrieved data if verification passes |
-| ├── `meta`   | array  | No      | Column metadata for retrieved data |
-
+Related: [Data Security](/documentation/Datasource/Data-Security/)

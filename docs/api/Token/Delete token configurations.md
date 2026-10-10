@@ -5,63 +5,52 @@ tags:
   - api
   - Authentication
   - Token
-description: null
+description: Delete one or several embed token (JWT) configurations by name.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`POST`
+Deletes embed token (JWT) configurations. Tokens issued from a deleted configuration, personal tokens included, stop working at once.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/token/deleteBatch
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/token/deleteBatch` (several) or `POST /plugin/datafor-modeler/api/token/delete` (one) |
+| Permission | Administrator |
+| Content type | `application/json` for `deleteBatch`; `application/x-www-form-urlencoded` for `delete` |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| (body) | body | string[] | Yes, for `deleteBatch` | Names of the configurations, as a JSON array. |
+| `name` | form | string | Yes, for `delete` | Name of the configuration. |
+
+A name that does not exist is skipped without an error.
+
+## Example
+
+```bash
+curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor-modeler/api/token/deleteBatch" \
+  -H "Content-Type: application/json" \
+  -d '["ERP", "OA"]'
+
+curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor-modeler/api/token/delete" \
+  -d "name=ERP"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
----
-
-**Preconditions**
-- The current user's user type **must** be `Administrator`.
-
----
-
-### Parameters
-
-```json
-[
-  "ERP",
-  "OA"
-]
-```
-
----
-
-## **Response Examples**
 
 ```json
 {
-  "success": true
+  "success": true,
+  "msg": "success"
 }
 ```
 
----
+Deletion is permanent; configurations do not go to the trash. With the audit log on, each one is recorded as **Token delete**.
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                                 | Description        | Data schema |
-|------------------|-------------------------------------------------------------------------|--------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                  | The request was successful. | Inline      |
+| `code` | When |
+| --- | --- |
+| `"403"` | The caller is not an administrator (`msg`: `no permission`). |
+| (none) | A configuration could not be deleted: `success` is `false` and `msg` has the reason. With `deleteBatch`, the configurations before it in the list are already deleted. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name     | Type    | Required | Restrictions | Description       |
-|----------|---------|----------|--------------|-------------------|
-| `success`| boolean | **Yes**  | none         | Indicates if the deletion was successful (`true` or `false`). |
-| `msg`    | string  | No       | none         | Error message, if applicable. |
-
+Related: [JSON Web Token (JWT)](/documentation/System/JWT/)

@@ -6,94 +6,40 @@ tags:
   - Extension Plugins
   - Authentication
   - LDAP
-description: null
+description: Test a connection to the LDAP server with the given settings, without saving them.
 createTime: 2026/09/01 22:03:26
 ---
+Connects to the LDAP server with the given settings and binds with the bind DN. This is **Test connection** in the console. Nothing is saved.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-ldap/api/application/verifyConfig` |
+| Permission | Administrator user type; the LDAP plugin must be installed |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-ldap/api/application/verifyConfig
+## Parameters
+
+The body takes the same fields as [Save LDAP config](/api/Extension%20Plugins/LDAP/Save%20LDAP%20config/). The test uses `url`, `initial`, `authtype`, `dn` and `secret`.
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-ldap/api/application/verifyConfig" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "ldap://ldap.example.com:389",
+    "initial": "com.sun.jndi.ldap.LdapCtxFactory",
+    "authtype": "simple",
+    "dn": "cn=admin,dc=example,dc=com",
+    "secret": "bind-password"
+  }'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
----
-
-**Preconditions**
-1. The `datafor-ldap` plugin must be installed.
-2. The current user's user type **must be** `Administrator`.
-
----
-
-## **Params**
-
-| Name          | Location | Type    | Required | Description |
-|--------------|----------|---------|----------|-------------|
-| `Cookie`     | header   | string  | Yes      | Session cookie for authentication. |
-| `Content-Type` | header | string  | Yes      | Must be set to `application/json`. |
-
----
-
-### **Request Example**
 
 ```json
-{
-  "initial": "com.sun.jndi.ldap.LdapCtxFactory",
-  "dn": "cn=admin,dc=example,dc=com",
-  "url": "ldap://127.0.0.1:389",
-  "authtype": "simple",
-  "secret": "<bind-password>"
-}
+{ "success": true }
 ```
 
----
+When the server cannot be reached or the bind fails, the response has `success: false` and the reason in `msg`.
 
-### **Body Parameters Schema**
-
-| Name        | Location | Type    | Required | Description |
-|------------|----------|---------|----------|-------------|
-| `initial`  | body     | string  | Yes      | Initial LDAP context factory class name. Example: `com.sun.jndi.ldap.LdapCtxFactory` |
-| `dn`       | body     | string  | Yes      | Distinguished Name (DN) used for authentication. Example: `cn=admin,dc=example,dc=com` |
-| `url`      | body     | string  | Yes      | LDAP server URL. Example: `ldap://127.0.0.1:389` |
-| `authtype` | body     | string  | Yes      | LDAP authentication type. Example: `simple` or `none` |
-| `secret`   | body     | string  | Yes      | LDAP administrator password. |
-
----
-
-## **Response Examples**
-
-### ✅ Success Response (200 OK)
-```json
-{
-  "success": true
-}
-```
-
----
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | LDAP configuration verified successfully. |
-| 400              | Bad Request                                             | Invalid request parameters. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 403              | Forbidden                                               | User does not have permission. |
-| 500              | Internal Server Error                                   | Unexpected server error. |
-
----
-
-## **Response Data Schema (HTTP 200)**
-
-| Name      | Type    | Required | Description |
-|-----------|---------|----------|-------------|
-| `msg`     | string  | No       | Message string (if any error occurs). |
-| `success` | boolean | Yes      | `true` if the request was successful, `false` otherwise. |
+Related: [LDAP Integration Configuration](/documentation/System/LDAP/)

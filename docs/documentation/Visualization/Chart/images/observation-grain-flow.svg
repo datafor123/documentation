@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="1030" viewBox="0 0 700 1030" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Aggregated values versus raw row values: Scatter, Box plot and Histogram</title>
+  <desc id="desc">The same detail rows are used in two ways. Scatter and Box plot first aggregate the rows to one value per member of the Marker or Sample field, then split those values by the Legend or Group field. A Box plot draws one box per group from these values: the box runs from the lower to the upper quartile with the median inside, the whiskers end at the most extreme samples within 1.5 times the interquartile range, and samples beyond are outliers. A group with fewer than 5 samples is drawn as points only. Histogram does not aggregate: it bins the raw value of every detail row and excludes empty values.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="1030" fill="#FFFFFF"/>
+
+  <!-- Lane: detail rows -->
+  <rect x="10" y="10" width="680" height="210" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="30" y="42" font-size="18" font-weight="700" fill="#3B4252">Detail rows (one per order line)</text>
+  <rect x="30" y="56" width="340" height="150" rx="8" fill="#FFFFFF" stroke="#D5D9E0"/>
+  <text x="50" y="80" font-size="14" font-weight="700" fill="#5B6472">Store</text>
+  <text x="140" y="80" font-size="14" font-weight="700" fill="#5B6472">Region</text>
+  <text x="250" y="80" font-size="14" font-weight="700" fill="#5B6472">Net Sales</text>
+  <line x1="40" y1="88" x2="360" y2="88" stroke="#D5D9E0"/>
+  <text x="50" y="108" font-size="14" fill="#2B2B3A">S01</text><text x="140" y="108" font-size="14" fill="#2B2B3A">East</text><text x="250" y="108" font-size="14" fill="#2B2B3A">120</text>
+  <text x="50" y="130" font-size="14" fill="#2B2B3A">S01</text><text x="140" y="130" font-size="14" fill="#2B2B3A">East</text><text x="250" y="130" font-size="14" fill="#2B2B3A">80</text>
+  <text x="50" y="152" font-size="14" fill="#2B2B3A">S02</text><text x="140" y="152" font-size="14" fill="#2B2B3A">East</text><text x="250" y="152" font-size="14" fill="#2B2B3A">150</text>
+  <text x="50" y="174" font-size="14" fill="#2B2B3A">S03</text><text x="140" y="174" font-size="14" fill="#2B2B3A">West</text><text x="250" y="174" font-size="14" fill="#2B2B3A">90</text>
+  <text x="50" y="196" font-size="14" fill="#2B2B3A">S04</text><text x="140" y="196" font-size="14" fill="#2B2B3A">West</text><text x="250" y="196" font-size="14" font-style="italic" fill="#7A8390">empty</text>
+  <text x="400" y="104" font-size="15" fill="#3B4252">The chart type decides whether</text>
+  <text x="400" y="126" font-size="15" fill="#3B4252">rows are aggregated before</text>
+  <text x="400" y="148" font-size="15" fill="#3B4252">they are plotted.</text>
+
+  <!-- Lane: Scatter and Box plot -->
+  <rect x="10" y="262" width="410" height="368" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="30" y="292" font-size="18" font-weight="700" fill="#1F4FD8">Scatter and Box plot</text>
+  <text x="30" y="314" font-size="14" fill="#5B6FB0">Aggregated first: one value per member</text>
+
+  <rect x="30" y="328" width="370" height="126" rx="8" fill="#FFFFFF" stroke="#B9CCFF"/>
+  <text x="48" y="352" font-size="15" font-weight="700" fill="#2B2B3A">Marker (Scatter) / Sample (Box plot) = Store</text>
+  <text x="48" y="376" font-size="14" fill="#2B2B3A">S01</text><text x="104" y="376" font-size="14" fill="#2B2B3A">120 + 80 = 200</text>
+  <text x="48" y="398" font-size="14" fill="#2B2B3A">S02</text><text x="104" y="398" font-size="14" fill="#2B2B3A">150</text>
+  <text x="48" y="420" font-size="14" fill="#2B2B3A">S03</text><text x="104" y="420" font-size="14" fill="#2B2B3A">90</text>
+  <text x="48" y="442" font-size="14" fill="#7A8390">S04</text><text x="104" y="442" font-size="14" fill="#7A8390">empty: not counted as a sample</text>
+
+  <rect x="30" y="480" width="370" height="90" rx="8" fill="#FFFFFF" stroke="#B9CCFF"/>
+  <text x="48" y="504" font-size="15" font-weight="700" fill="#2B2B3A">Legend (Scatter) / Group (Box plot) = Region</text>
+  <text x="48" y="528" font-size="14" fill="#2B2B3A">East</text><text x="104" y="528" font-size="14" fill="#2B2B3A">S01 200, S02 150</text>
+  <text x="48" y="550" font-size="14" fill="#2B2B3A">West</text><text x="104" y="550" font-size="14" fill="#2B2B3A">S03 90</text>
+
+  <text x="30" y="596" font-size="14" fill="#2B2B3A">Scatter: one point per store, coloured by region</text>
+  <text x="30" y="618" font-size="14" fill="#2B2B3A">Box plot: one box per region (see below)</text>
+
+  <!-- Lane: Histogram -->
+  <rect x="440" y="262" width="250" height="368" rx="12" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="460" y="292" font-size="18" font-weight="700" fill="#2E7D32">Histogram</text>
+  <text x="460" y="314" font-size="14" fill="#4F8F55">Raw row values, no aggregation</text>
+
+  <rect x="460" y="328" width="210" height="100" rx="8" fill="#FFFFFF" stroke="#9CCFA4"/>
+  <text x="476" y="352" font-size="15" font-weight="700" fill="#2B2B3A">Value = Net Sales</text>
+  <text x="476" y="376" font-size="14" fill="#2B2B3A">120, 80, 150, 90</text>
+  <text x="476" y="400" font-size="14" fill="#7A8390">Empty value excluded</text>
+
+  <line x1="470" y1="570" x2="666" y2="570" stroke="#3B4252" stroke-width="1.2"/>
+  <rect x="478" y="480" width="54" height="90" fill="#7FBF87" stroke="#2E7D32"/>
+  <rect x="536" y="525" width="54" height="45" fill="#7FBF87" stroke="#2E7D32"/>
+  <rect x="594" y="525" width="54" height="45" fill="#7FBF87" stroke="#2E7D32"/>
+  <text x="505" y="472" font-size="14" font-weight="700" text-anchor="middle" fill="#2B2B3A">2</text>
+  <text x="563" y="517" font-size="14" font-weight="700" text-anchor="middle" fill="#2B2B3A">1</text>
+  <text x="621" y="517" font-size="14" font-weight="700" text-anchor="middle" fill="#2B2B3A">1</text>
+  <text x="505" y="590" font-size="14" text-anchor="middle" fill="#2B2B3A">50–100</text>
+  <text x="563" y="590" font-size="14" text-anchor="middle" fill="#2B2B3A">100–150</text>
+  <text x="621" y="590" font-size="14" text-anchor="middle" fill="#2B2B3A">150–200</text>
+  <text x="460" y="616" font-size="14" fill="#4F8F55">Rows per bin (bin width 50)</text>
+
+  <!-- Lane: box anatomy -->
+  <rect x="10" y="672" width="680" height="348" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <text x="30" y="702" font-size="18" font-weight="700" fill="#5B3FBF">Box plot: how each group is drawn</text>
+  <text x="30" y="724" font-size="14" fill="#7A6BB0">Default whisker rule 1.5 × IQR (Style → Box → Whiskers); IQR = Q3 − Q1</text>
+
+  <circle cx="110" cy="762" r="6" fill="#D64545"/>
+  <line x1="94" y1="792" x2="126" y2="792" stroke="#5B3FBF" stroke-width="2"/>
+  <line x1="110" y1="792" x2="110" y2="832" stroke="#5B3FBF" stroke-width="2"/>
+  <rect x="80" y="832" width="60" height="70" fill="#FFFFFF" stroke="#5B3FBF" stroke-width="2"/>
+  <line x1="80" y1="860" x2="140" y2="860" stroke="#5B3FBF" stroke-width="3"/>
+  <line x1="110" y1="902" x2="110" y2="938" stroke="#5B3FBF" stroke-width="2"/>
+  <line x1="94" y1="938" x2="126" y2="938" stroke="#5B3FBF" stroke-width="2"/>
+
+  <g stroke="#9C8FD0" stroke-width="1" stroke-dasharray="3 3">
+    <line x1="120" y1="762" x2="156" y2="762"/>
+    <line x1="130" y1="792" x2="156" y2="792"/>
+    <line x1="144" y1="832" x2="156" y2="832"/>
+    <line x1="144" y1="860" x2="156" y2="860"/>
+    <line x1="144" y1="902" x2="156" y2="902"/>
+    <line x1="130" y1="938" x2="156" y2="938"/>
+  </g>
+  <text x="162" y="767" font-size="14" fill="#2B2B3A"><tspan font-weight="700">Outlier</tspan>: a sample beyond the whisker end</text>
+  <text x="162" y="797" font-size="14" fill="#2B2B3A"><tspan font-weight="700">Whisker end</tspan>: most extreme sample within Q3 + 1.5 × IQR</text>
+  <text x="162" y="837" font-size="14" fill="#2B2B3A"><tspan font-weight="700">Upper quartile</tspan> (Q3)</text>
+  <text x="162" y="865" font-size="14" fill="#2B2B3A"><tspan font-weight="700">Median</tspan></text>
+  <text x="162" y="907" font-size="14" fill="#2B2B3A"><tspan font-weight="700">Lower quartile</tspan> (Q1)</text>
+  <text x="162" y="943" font-size="14" fill="#2B2B3A"><tspan font-weight="700">Whisker end</tspan>: most extreme sample within Q1 − 1.5 × IQR</text>
+
+  <line x1="30" y1="960" x2="670" y2="960" stroke="#C9BBF2"/>
+  <circle cx="92" cy="984" r="5" fill="#5B3FBF"/>
+  <circle cx="110" cy="992" r="5" fill="#5B3FBF"/>
+  <circle cx="128" cy="980" r="5" fill="#5B3FBF"/>
+  <text x="162" y="988" font-size="14" fill="#2B2B3A"><tspan font-weight="700">Fewer than 5 samples</tspan>: points only, no box.</text>
+  <text x="162" y="1008" font-size="14" fill="#7A6BB0">East and West in the example above have 2 and 1 samples.</text>
+
+  <!-- Arrows are drawn after the lanes so the lane backgrounds do not cover them -->
+  <line x1="215" y1="222" x2="215" y2="259" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="565" y1="222" x2="565" y2="259" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="215" y1="455" x2="215" y2="477" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="215" y1="632" x2="215" y2="669" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+</svg>

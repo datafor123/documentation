@@ -4,77 +4,44 @@ permalink: /api/Roles/Add a role/
 tags:
   - api
   - Roles
-description: null
+description: Create a business role that users can be given and that permissions can refer to.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`POST`
+Creates a business role. Give it to users with [Add or modify a user](/api/Users/Add%20or%20modify%20a%20user/) (`roles`), and refer to it in access control lists and Data Security.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/roles/insert
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/roles/insert` |
+| Permission | Administrator |
+| Content type | `application/x-www-form-urlencoded` |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `authority` | form | string | Yes | Role name. Must not contain `&`, `\` or `/`. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor-modeler/api/roles/insert" \
+  -d "authority=Sales"
 ```
 
-**Authorization**  
-Authentication is **required** to use this API. The current user **must have Administrator privileges**.
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-## **Preconditions**
-- The current user's **user type must be "Administrator"** to execute this API.
-
----
-
-## **Description**
-This API creates a new user role with the specified authority level. Roles define user permissions and access control within the system.
-
----
-
-### **Request Example**
-```yaml
-authority: DEV
-```
-
-### **Parameters Schema**
-
-| Name        | Location | Type   | Required | Description |
-|------------|----------|--------|----------|-------------|
-| `authority` | body    | string | **Yes**  | The role name or authority level to be assigned. |
-
----
-
-## **Response Examples**
-
-### **Successful Response (HTTP 200)**
 ```json
 {
-  "success": true
+  "success": true,
+  "code": "200"
 }
 ```
 
-### **Failure Response (Example)**
-```json
-{
-  "msg": "Permission denied",
-  "success": false
-}
-```
+## Errors
 
----
+| `code` | When |
+| --- | --- |
+| `"400"` | The name contains `&`, `\` or `/` (`msg`: `can not contain & \ /`). |
+| `"401"` | The caller is not an administrator. |
+| `"500"` | The role could not be stored, for example because it already exists; `msg` has the database message. |
 
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                              | Description | Data Schema |
-|------------------|----------------------------------------------------------------------|-------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)              | Request was successful | Inline |
-
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type     | Required | Description |
-|-----------|---------|----------|-------------|
-| `success` | boolean | **Yes**  | Indicates whether the role was successfully added. |
-| `msg`     | string  | No       | Response message (only present when the request fails). |
+Related: [Get roles](/api/Roles/Get%20roles/), [Delete a role](/api/Roles/Delete%20a%20role/)

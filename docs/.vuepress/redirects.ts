@@ -5,6 +5,22 @@
  * static redirect page at each old path so bookmarks and search results work.
  */
 export const redirects: Record<string, string> = {
+	"/api/Alert/Execute one by name/": "/api/Alert/Delete an alert by name/",
+	"/api/Extension Plugins/SAML2/saml consumer/": "/documentation/System/Single-Sign-On/",
+	"/api/Extension Plugins/White Label/Get favicon/": "/api/Extension Plugins/White Label/Get a branding image/",
+	"/api/Extension Plugins/White Label/Get login logo/": "/api/Extension Plugins/White Label/Get a branding image/",
+	"/api/Extension Plugins/White Label/Get main logo small/": "/api/Extension Plugins/White Label/Get a branding image/",
+	"/api/Extension Plugins/White Label/Get main logo/": "/api/Extension Plugins/White Label/Get a branding image/",
+	"/api/Lineage/Get connection's lineage/": "/api/Lineage/Get-lineage/",
+	"/api/Lineage/Get model's lineage/": "/api/Lineage/Get-lineage/",
+	"/api/Lineage/Get page's lineage/": "/api/Lineage/Get-lineage/",
+	"/api/Models/Delete a model/": "/api/Models/Delete models/",
+	"/api/Parameters/Get parameters in visulization/": "/api/Parameters/Get parameters/",
+	"/api/Parameters/parameter in execute/": "/api/Parameters/Get parameters/",
+	"/api/Schedule/Add a job/": "/api/index/",
+	"/api/Schedule/Get jobs/": "/api/index/",
+	"/api/System Settings/Init locale/": "/api/index/",
+	"/api/Token/Delete a token configuration/": "/api/Token/Delete token configurations/",
 	"/documentation/AI-Agent/AI-Agent-Overview-and-Roadmap/": "/documentation/AI-Agent/AI-Agent-Overview/",
 	"/documentation/AI-Agent/LLM-Permission-Management/": "/documentation/AI-Agent/AI-Operations-and-Quotas/",
 	"/documentation/Analysis/Exploratory Analysis/": "/documentation/Analysis/Exploratory-Analysis/",

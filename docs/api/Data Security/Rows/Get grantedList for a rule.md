@@ -4,90 +4,50 @@ permalink: /api/Data Security/Rows/Get grantedList for a rule/
 tags:
   - api
   - Data Security
-description: null
+description: Return the users, roles, and user types a Row access policy applies to.
 createTime: 2026/09/01 22:03:26
 ---
+Returns the subjects (**Applies to**) of one Row access policy. [Get rule list](/api/Data%20Security/Rows/Get%20rule%20list/) with `withGranted: true` returns the same data for several policies at once.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/auth/row/granted/query` |
+| Permission | **Full control** on the connection |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/auth/row/granted/query
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `dbconn` | body | string | Yes | Connection name. |
+| `group_id` | body | string | Yes | Policy ID. |
+| `type` | body | string | No | Only subjects of this type: `0` user, `1` role, `2` user type. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/auth/row/granted/query" \
+  -H "Content-Type: application/json" \
+  -d '{ "dbconn": "Sales DW", "group_id": "8699a11df24c49ddab9451e249ff2c97" }'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
-**Preconditions**
-- The current user’s type **cannot** be `SYS_Reader`.
-- The current user must have **administrative privileges** for the connection.
-
----
-
-### **Parameters Schema**
-
-| Name         | Location | Type   | Required | Description |
-|-------------|----------|--------|----------|-------------|
-| **body**    | body     | object | Yes      | Request payload |
-| ├── `group_id` | body | string | Yes      | Rule group ID |
-| ├── `dbconn`   | body | string | Yes      | Database connection name |
-
----
-
-### **Request Example**
 
 ```json
 {
-  "group_id": "b096f367be994cf9bf9080c72120df3e",
-  "dbconn": "Demo"
-}
-```
-
----
-
-## **Response Examples**
-
-```json
-{
-  "msg": "success",
+  "success": true,
   "code": "200",
   "data": [
-    {
-      "group_id": "b096f367be994cf9bf9080c72120df3e",
-      "name": "admin",
-      "type": "0"
-    },
-    {
-      "group_id": "b096f367be994cf9bf9080c72120df3e",
-      "name": "Administrator",
-      "type": "1"
-    }
-  ],
-  "success": true
+    { "group_id": "8699a11df24c49ddab9451e249ff2c97", "name": "Store Managers", "type": "1" },
+    { "group_id": "8699a11df24c49ddab9451e249ff2c97", "name": "alice", "type": "0" }
+  ]
 }
 ```
 
----
+## Errors
 
-## **HTTP Responses**
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `400` | `dbconn cannot be empty` / `group_id cannot be empty` | A required field is missing. |
+| `401` | `No administrative privileges:<connection>` | The caller lacks Full control on the connection. |
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
-
-### **Response Data Schema (HTTP 200)**
-
-| Name        | Type     | Required | Description |
-|------------|---------|----------|-------------|
-| `msg`      | string  | No       | Response message |
-| `code`     | string  | No       | Response status code |
-| `data`     | array   | Yes      | List of granted users and roles |
-| ├── `group_id` | string | Yes   | Rule group ID |
-| ├── `name` | string  | Yes      | User or role name |
-| ├── `type` | string  | Yes      | `0` for user, `1` for role |
-| `success`  | boolean | Yes      | Request success status |
+Related: [Data Security](/documentation/Datasource/Data-Security/)

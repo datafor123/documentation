@@ -9,6 +9,10 @@ createTime: 2026/09/01 21:50:44
 
 Datafor uses the AI Agent service for conversational analysis in the AI Assistant, dashboard AI insight, AI clients connected through MCP, and the knowledge indexes of analysis models. An administrator turns the service on and sets its addresses on one page.
 
+In the packaged installation the AI Agent runs on the Datafor server, and browsers reach it through Datafor:
+
+![Browsers call Tomcat on 28080; Tomcat forwards /datafor/ai to the AI Agent API on the Internal URL (default 127.0.0.1:28081/ai). The AI Agent runs the API, one routing worker, 1 to 8 dispatch workers and the MCP server on 38081, which AI clients reach with a Bearer token. The AI Agent calls Datafor at DATAFOR_URL with the X-Datafor-Agent-Secret header, stores its data in the bundled PostgreSQL on 25432, and calls the LLM and embedding providers. Its launcher writes DATAFOR_AGENT_SECRET from instance-secrets.env into Datafor's settings.xml](./images/ai-agent-deployment-topology.svg)
+
 ## 1. Open the AI service settings
 
 1. Sign in to Datafor with an administrator account.
@@ -29,7 +33,7 @@ Each user also needs AI access: in **Users**, the **AI Agent** switch in the use
 | **Public URL** | "The address browsers use to reach the AI Agent." | Enter the URL that users' browsers can reach. |
 | **Internal URL** | "The address the Datafor server uses to call the AI Agent; usually the same as the public URL." | Keep it aligned with the public URL unless the Datafor server must use a separate private route. |
 
-In the packaged installation, where the AI Agent runs on the Datafor server, both fields can stay empty and the AI Assistant uses the unified Datafor service. The fields show `http://localhost:28080/datafor/ai` as a placeholder, not as a value that must be copied to every environment.
+In the packaged installation, where the AI Agent runs on the Datafor server, both fields can stay empty. Browsers then use **Site URL** (**Settings › Access & Integration › Site address**) followed by `ai`, for example `https://bi.example.com/datafor/ai`, and the Datafor server calls the AI Agent at `http://127.0.0.1:28081/ai`. Set **Site URL** to the address users open; with the shipped `http://localhost:28080/datafor/` the AI Assistant works only on the server itself. See [Site Address](/documentation/System/Site-Address/). The fields show `http://localhost:28080/datafor/ai` as a placeholder, not as a value that must be copied to every environment.
 
 ## 4. Save and verify
 

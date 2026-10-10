@@ -80,7 +80,9 @@ Examples:
 - Refund Measures may use return date rather than order date.
 - Inventory snapshots use the snapshot date.
 
-Set this value independently for Measures with different date meanings. A Measure's own setting takes precedence over the model's **Default time dimension**, and a date the user names in the question wins over both. Measures without a setting use the model's Default time dimension.
+Set this value independently for Measures with different date meanings. A Measure's own setting takes precedence over the model's **Default time dimension**, and a date the user names in the question wins over both. Measures without a setting use the model's Default time dimension. With neither setting, the Agent judges which date the Measure describes and the answer states that assumption.
+
+![The Agent uses the first of: a date the question names, the measure's Default time field, the model's Default time dimension, and, with no setting, its own judgment, which the answer states. The Semantic role or Convert type sets each Attribute's level type for quick-measure time templates and relative dates and does not choose the Agent's date](./images/agent-date-precedence.svg)
 
 ## Models with several date roles
 

@@ -1,173 +1,164 @@
-﻿---
-title: Datafor API Overview
+---
+title: Getting Started with the REST API
 createTime: 2025/02/10 17:14:56
 permalink: /api/index/
 author: Datafor
 tags:
   - API
-description: 
+description: Base URL, authentication, response format and a first call for the Datafor REST API.
 ---
 
+# Getting Started with the REST API
 
-# **Datafor API Overview**
+The Datafor console is built on the endpoints in this reference, so a script can do what an administrator or user does in the console: manage users and roles, read and write settings, list files, and so on. This page covers what every call has in common.
 
-Datafor provides a robust set of APIs that enable seamless interaction with its platform, allowing users to programmatically manage and automate various functionalities. These APIs cover a wide range of features, including **user and role management**, **access control**, **file and folder operations**, **data modeling**, **system configuration**, **user personalization**, and **parameter management**.
+## Base URL
 
-This documentation serves as a comprehensive guide to understanding and integrating Datafor’s API into your workflow.
+All paths in this reference are relative to the web application:
 
-
-## **1. API Functional Categories**
-
-### **Files & Folders**
-
-- Manage file and folder operations, including **uploading, downloading, renaming, and deletion**.
-- Organize and structure content storage efficiently.
-
-### **Reports & Models**
-
-- Handle report execution, querying, and exporting analytical results.
-- Interact with data models to optimize reporting capabilities.
-
-### **Users & Permissions**
-
-- Manage **user authentication**, **role-based access control (RBAC)**, and **permissions** to ensure secure data access.
-- Grant or restrict access to specific resources within the platform.
-
-### **Data Sources & Metadata**
-
-- Connect to external databases and retrieve metadata for seamless integration.
-- Manage **data assets** and ensure consistency across different environments.
-
-### **Scheduling & Alerts**
-
-- Automate business intelligence (BI) operations by creating **scheduled tasks**.
-- Configure **notifications and alerts** for timely data updates and system monitoring.
-
-
-## **2. API Request Format**
-
-Datafor APIs adhere to **RESTful principles**, utilizing standard HTTP methods for communication:
-
-- **GET** – Retrieve data
-- **POST** – Create resources or execute actions
-- **PUT** – Update existing resources
-- **DELETE** – Remove resources
-
-### **Data Format**
-
-- Both request and response bodies primarily use **JSON**.
-- Refer to individual endpoint documentation for **specific parameters, payload structures, and sample requests**.
-
-
-## **3. API Response Handling**
-
-All API responses adhere to standard **HTTP status codes** to indicate the outcome of requests:
-
-| HTTP Status Code              | Meaning                | Description                                                  |
-| ----------------------------- | ---------------------- | ------------------------------------------------------------ |
-| **200 OK**                    | Success                | The request was successfully processed.                      |
-| **400 Bad Request**           | Invalid Request        | The request contained incorrect or missing parameters.       |
-| **401 Unauthorized**          | Authentication Failure | The request lacks valid authentication credentials.          |
-| **403 Forbidden**             | Access Denied          | The authenticated user does not have permission to perform this action. |
-| **404 Not Found**             | Resource Not Found     | The requested resource could not be located.                 |
-| **500 Internal Server Error** | Server Error           | An error occurred on the server side.                        |
-
-Proper error handling is recommended to ensure smooth API integration.
-
-
-## **4. API Usage & Integration**
-
-### **1. Browser-Based Access**
-
-- Some **GET** endpoints can be accessed directly via a web browser for quick retrieval of data.
-
-### **2. Debugging & Testing Tools**
-
-- Utilize tools like **Postman, cURL, or API testing frameworks** to send requests and debug API responses.
-
-### **3. Programmatic Integration**
-
-- Datafor APIs can be integrated into applications via scripting languages such as **Python, Java, JavaScript, or any HTTP client**.
-- API access can be embedded into workflows for automated **data processing, reporting, and system configuration**.
-
-
-## **5. Authentication & Security**
-
-Datafor supports multiple authentication mechanisms to ensure **secure and controlled API access**.
-
-### **1. Session-Based Authentication (Cookie)**
-
-- When authenticated via the **Datafor web interface**, the session cookie can be used for subsequent API requests.
-- Requests should include the session cookie in the **HTTP headers**.
-
-**Example (Request Headers):**
-
-```http
-Cookie: session-flushed=true;
-        JSESSIONID=72B613231EB93BA9EB9DF9417E1B0F67;
-        session-expiry=1741238288603;
-        server-time=1741231088603
+```text
+http(s)://<host>:<port>/datafor
 ```
 
-Supported login mechanisms include:
+A default local installation listens on `http://localhost:28080/datafor`, which the examples use. So the path `/plugin/datafor-modeler/api/user/detail` is called as `http://localhost:28080/datafor/plugin/datafor-modeler/api/user/detail`.
 
-- **Username/Password**
-- **OAuth2**
-- **LDAP**
-- **SAML**
-- **CAS (Central Authentication Service)**
+Paths start with one of:
 
-### **2. Basic Authentication**
+| Prefix | What it is |
+| --- | --- |
+| `/plugin/datafor/api/...`, `/plugin/datafor-modeler/api/...` | Datafor endpoints. Most of this reference. |
+| `/plugin/<other-plugin>/api/...` | Endpoints of extension plugins such as backup, LDAP or SAML. |
+| `/api/...` | Endpoints inherited from the Pentaho platform that Datafor is built on. They keep the Pentaho behavior (plain HTTP status codes, XML or JSON). |
 
-- Uses **Base64-encoded credentials** for authentication.
-- Ensure that sensitive credentials are transmitted securely over **HTTPS**.
+## Authentication
 
-**Example (Request Headers):**
+Choose one of three ways to identify the caller. Every call then runs with that user's permissions: an endpoint marked "Administrator" needs a user of type **Administrator**.
 
-```http
-Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+### Session login
+
+Sign in once, keep the `JSESSIONID` cookie, and send it with later calls. Use this for scripts that make many calls, and for users of a tenant other than the default one.
+
+```bash
+# Sign in and store the session cookie
+curl -c cookies.txt -X POST "http://localhost:28080/datafor/plugin/datafor/api/extension/auth/login" \
+  -d "username=admin" -d "password=password"
+
+# Call with the cookie
+curl -b cookies.txt "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/detail"
 ```
 
-(The encoded value represents `admin:password`—replace with actual credentials.)
+A successful login returns `"success": true` and `"data": "1"`. See [Log in](/api/Authentication/Restful%20Login/) for the fields, the captcha and tenant errors, and [Log out](/api/Authentication/Restful%20Logout/) to end the session.
 
-### **3. JWT Token Authentication**
+### HTTP Basic
 
-- Datafor can be configured to support **JWT authentication**.
-- The token should be included in the request, either in the URL or header.
+Send the user name and password with every request. This works on `/plugin/...` and `/api/...` paths and needs no login call.
 
-**Example Usage:**
-
-```http
-https://your-Datafor-url/api/endpoint?token=<YOUR_VALID_JWT_TOKEN>
+```bash
+curl -u admin:password "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/detail"
 ```
 
+curl builds the header `Authorization: Basic <base64 of user:password>` for you. Wrong credentials return HTTP 401. Use HTTPS outside a test machine, because Basic credentials are only encoded, not encrypted.
 
-## **6. Best Practices for API Security**
+### JSON Web Token (JWT)
 
-- Always **use HTTPS** to prevent unauthorized data interception.
-- Implement **role-based access control (RBAC)** to restrict sensitive actions.
-- Regularly **rotate authentication credentials** to enhance security.
-- Monitor API usage logs for **unusual access patterns**.
+Send a signed JWT, either in the `Authorization: Bearer` header or in a URL parameter whose name is the configuration's **Token name** (default `token`). Datafor accepts tokens on `/plugin/...` paths only.
 
+```bash
+curl -H "Authorization: Bearer <signed-jwt>" \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/detail"
+```
 
-## **7. Getting Started**
+Tokens come from one of three places:
 
-To quickly start using Datafor APIs:
+- Your own system signs them with an embed token configuration set up by an administrator. See [JSON Web Token (JWT)](/documentation/System/JWT/) for the claims Datafor reads.
+- An administrator issues a test token with [Generate a token](/api/Token/Generate%20a%20token/).
+- A signed-in user issues one for themselves with [Personal tokens](/api/Token/Personal-tokens/), when the administrator has allowed it.
 
-1. **Log in** to Datafor and obtain the necessary authentication credentials.
-2. **Explore available API endpoints** in the documentation.
-3. **Use an API client** (such as Postman or cURL) to test API requests.
-4. **Integrate API calls** into your application workflow.
-5. **Ensure proper error handling** and security measures during implementation.
+## Requests
 
-For additional details, refer to the **specific API endpoint documentation**.
+Each page states the content type an endpoint expects. Sending the wrong one is the most common cause of a call that "does nothing".
 
+| Content type | How to send it with curl | Used by |
+| --- | --- | --- |
+| `application/x-www-form-urlencoded` | `-d "name=value"` (one `-d` per field) | Login, most create and delete calls that take a few fields |
+| `application/json` | `-H "Content-Type: application/json" -d '{"name":"value"}'` | Calls that take an object or a list |
+| `multipart/form-data` | `-F "file=@users.xlsx"` | File uploads |
 
-## **Conclusion**
+Query parameters go in the URL. Encode spaces and special characters (`curl -G --data-urlencode "filter=sales team" URL` does it for you).
 
-Datafor APIs empower users to efficiently interact with the platform, enabling automation, integration, and advanced data operations. By following best practices and leveraging the provided authentication methods, users can build **secure and scalable** solutions tailored to their needs.
+## Responses
 
-For further assistance, consult the **detailed API documentation** or contact **Datafor support**.
+Datafor endpoints answer with HTTP 200 and report the outcome in the body:
 
+```json
+{
+  "success": true,
+  "code": "200",
+  "data": { }
+}
+```
 
+```json
+{
+  "success": false,
+  "code": "403",
+  "msg": "no permission",
+  "type": "1"
+}
+```
 
+| Field | Meaning |
+| --- | --- |
+| `success` | `true` or `false`. Always check it; the HTTP status is 200 in both cases. |
+| `code` | A string. `"200"` on success. On failure usually `"400"` (invalid parameter), `"401"` (not signed in, or not allowed), `"403"` (no permission), `"404"` (not found), `"409"` (conflict, for example a name that already exists), `"500"` (server error) or `"503"` (a required configuration is missing). Some endpoints use their own codes; their pages list them. |
+| `msg` | Error text, in English. |
+| `data` | The result. Its shape depends on the endpoint. |
+| `type` | On failures: `"1"` for an error, `"2"` for a warning that still succeeded. |
+
+Not every endpoint wraps its result. Some return `success` and their fields at the top level, a plain JSON array, or a file. Each page shows the actual response.
+
+Exceptions to "always HTTP 200":
+
+- Wrong Basic credentials return HTTP 401 before the endpoint runs.
+- `/api/...` platform endpoints return ordinary HTTP status codes, and HTTP 401 when the call is not authenticated.
+- A call to `/plugin/...` without credentials is not rejected up front: it runs as an anonymous user, and the endpoint answers with `"code": "401"` or `"403"`, or with an empty result.
+- Download endpoints return the file itself; a few connection endpoints return HTTP 403 or 404 directly. Their pages say so.
+
+## Tenants
+
+On a server with [multi-tenancy](/documentation/Multi-tenancy/Multi-tenancy/), every call works inside the tenant of the signed-in user. To sign in to another tenant, pass `tenantId` to [Log in](/api/Authentication/Restful%20Login/), either the short id (`tenant1`) or the full path (`/pentaho/tenant1`). Without `tenantId`, the user is looked up in the default tenant.
+
+## Calls from a browser
+
+A page on another origin can call Datafor only after an administrator allows that origin under **Settings › Access & Integration › Cross-origin access (CORS)**: add the origin to **Allowed origins** and any extra request header, such as `Authorization`, to **Allowed request headers**. The default allowed methods are GET, HEAD and POST. [SDK Embedding](/documentation/Embedded/SDK-Embedding/) walks through these settings for embedded reports. Server-side scripts and curl do not need CORS.
+
+## A first call
+
+Check that authentication works by asking who you are:
+
+```bash
+curl -u admin:password "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/detail"
+```
+
+```json
+{
+  "success": true,
+  "code": "200",
+  "data": {
+    "user": {
+      "userid": "admin",
+      "username": "admin",
+      "name": "Administrator",
+      "email": "admin@example.com",
+      "enabled": "1",
+      "ai_enabled": "0"
+    }
+  }
+}
+```
+
+If `data` is empty (`{}`), the call ran as an anonymous user: check the credentials or the cookie.
+
+## Stability
+
+These endpoints are the ones the Datafor console itself calls. They are not a versioned public API: parameters and responses can change between releases, and the release notes do not list every change. Pin your integration to a release, and re-test it after upgrading. Where an endpoint has a newer replacement, its page says so.

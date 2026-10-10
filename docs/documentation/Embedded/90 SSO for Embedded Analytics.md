@@ -31,19 +31,23 @@ An embedded report, whether in an `iframe` or rendered by the [SDK](/documentati
 
 ## Embed token
 
+![Your backend signs a JWT with the embed token configuration's key. The browser sends it to Datafor either in the iframe URL under the Token name parameter, or from the SDK in an Authorization Bearer header after a CORS preflight. Datafor checks the token only when the browser has no Datafor session: it verifies signature and expiry, takes the login name from the Username field claim, creates the user if Initialize user is selected, and renders the report under that user's permissions and row-level security](./images/embedded-sign-in-sequence.svg)
+
 1. Create and enable a configuration in **Settings › Access & Integration › Embed tokens (JWT)**.
 2. When a user opens the page with the report, your backend signs a token whose payload has the Datafor login name in the claim named by **Username field**, and an `exp` claim. See [Send a token](/documentation/System/JWT/#_3-send-a-token).
 3. Pass the token:
    - `iframe`: add it to the report URL, for example `http://your-server:28080/datafor/plugin/datafor/api/integrate/<report id>?__compact=true&token=your-jwt-token`.
-   - SDK: pass it as the `jwt` option. The SDK sends it as `Authorization: Bearer <jwt>`; the Datafor server must allow your page's origin and the `Authorization` header in **Cross-origin access (CORS)** (see [SDK Embedding](/documentation/Embedded/SDK-Embedding/)).
+   - SDK: pass it as the `jwt` option. The SDK sends it as `Authorization: Bearer <jwt>`; the Datafor server must allow your page's origin and the `Authorization` header in **Cross-origin access (CORS)** (see [Cross-Origin Access (CORS)](/documentation/System/CORS/)).
 
 Users who do not exist in Datafor yet are created on first use when **Initialize user** is selected in the configuration, with its **User type** and **Initialization role**. Existing users keep their own user type and roles. Without **Initialize user**, create the users in Datafor in advance with the same login names.
+
+Datafor checks the token only when the request has no Datafor session. If the browser is already signed in to Datafor, for example as an administrator testing in the same browser, the report runs as that user and the token is ignored. Test in a private window.
 
 Keep the signing key on your server, and give tokens a short lifetime: a token in a URL is stored in browser history and can appear in server logs.
 
 ## Single sign-on
 
-OAuth 2.0, SAML 2.0 and CAS are set up in **Settings › Access & Integration › Single sign-on**. Each method has a **New users** group: **Create users on first sign-in**, **Default user type** and **Default role**.
+OAuth 2.0, SAML 2.0 and CAS are set up in **Settings › Access & Integration › Single sign-on**. Each method has a **New users** group: **Create users on first sign-in**, **Default user type** and **Default role**. For the sign-in flow and the addresses to register at the provider, see [Single Sign-On Overview](/documentation/System/Single-Sign-On/).
 
 In an `iframe`, the sign-in pages of an identity provider are often not allowed to be shown inside a frame, and browsers that block third-party cookies may not keep the Datafor session of an `iframe` on another site. Test the whole flow in the browsers your users use. If it fails, let users sign in once in a top-level window, or use an embed token.
 

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="836" viewBox="0 0 700 836" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">How a single sign-on sign-in works with OAuth 2.0, SAML 2.0 and CAS</title>
+  <desc id="desc">1. The browser requests a Datafor page without a Datafor session. 2. Datafor applies its path rules: the request must not be for a static file or a share link, must not be in Paths that skip single sign-on, and must be in Paths that require single sign-on if that list has entries. 3. Datafor remembers the requested page and redirects the browser to the provider. 4. The user signs in at the provider: the OAuth 2.0 Authorization endpoint, the SAML IdP SSO URL or the CAS Login URL. 5. The browser returns to Datafor: OAuth 2.0 to the redirect_uri with code and state, SAML by POST to /datafor/saml/consumer, CAS to the page with a ticket. 6. Datafor checks who signed in: OAuth 2.0 calls the Token and UserInfo endpoints, CAS validates the ticket, SAML checks the signature locally. 7. Datafor finds the Datafor user by login name; a missing user is created if Create users on first sign-in is selected, otherwise the user is not signed in. 8. Datafor creates a session and returns the browser to the requested page.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5B3FBF"/>
+    </marker>
+    <style>
+      .h { paint-order: stroke; stroke: #FFFFFF; stroke-width: 6px; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <rect width="700" height="836" fill="#FFFFFF"/>
+
+  <!-- Participants -->
+  <rect x="15" y="14" width="120" height="60" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="75" y="50" font-size="17" font-weight="700" fill="#3B4252" text-anchor="middle">Browser</text>
+
+  <rect x="230" y="14" width="200" height="60" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="330" y="40" font-size="17" font-weight="700" fill="#1F4FD8" text-anchor="middle">Datafor</text>
+  <text x="330" y="62" font-size="14" fill="#5B6FB0" text-anchor="middle">https://your-server/datafor/</text>
+
+  <rect x="530" y="14" width="160" height="60" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <text x="610" y="40" font-size="16" font-weight="700" fill="#5B3FBF" text-anchor="middle">Identity provider</text>
+  <text x="610" y="62" font-size="14" fill="#7A6BB0" text-anchor="middle">IdP or CAS server</text>
+
+  <!-- Lifelines -->
+  <line x1="75" y1="74" x2="75" y2="790" stroke="#B4BAC4" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <line x1="330" y1="74" x2="330" y2="790" stroke="#B4BAC4" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <line x1="610" y1="74" x2="610" y2="790" stroke="#B4BAC4" stroke-width="1.5" stroke-dasharray="5 5"/>
+
+  <!-- 2. Path rules -->
+  <rect x="185" y="134" width="290" height="94" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="200" y="157" font-size="15" font-weight="700" fill="#1F4FD8">2  Path rules</text>
+  <text x="200" y="179" font-size="14" fill="#2B2B3A">Not a static file or a share link</text>
+  <text x="200" y="198" font-size="14" fill="#2B2B3A">Not in Paths that skip single sign-on</text>
+  <text x="200" y="217" font-size="14" fill="#2B2B3A">In Paths that require it, if any</text>
+
+  <!-- 7. User matching -->
+  <rect x="150" y="604" width="360" height="122" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="166" y="628" font-size="15" font-weight="700" fill="#1F4FD8">7  Find the Datafor user by login name</text>
+  <text x="166" y="651" font-size="14" fill="#2B2B3A">Found and active → signed in</text>
+  <text x="166" y="671" font-size="14" fill="#2B2B3A">Not found → created if Create users on first</text>
+  <text x="166" y="690" font-size="14" fill="#2B2B3A">sign-in is on (Default user type, Default role)</text>
+  <text x="166" y="710" font-size="14" fill="#2B2B3A">Otherwise → not signed in</text>
+
+  <!-- Messages (drawn after the boxes) -->
+  <!-- 1 -->
+  <text x="88" y="108" font-size="14" fill="#2B2B3A" class="h"><tspan font-weight="700">1</tspan>  GET a page, no session</text>
+  <line x1="75" y1="118" x2="328" y2="118" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- 3 -->
+  <text x="88" y="250" font-size="14" fill="#2B2B3A" class="h"><tspan font-weight="700">3</tspan>  Redirect to the provider;</text>
+  <text x="88" y="268" font-size="14" fill="#5B6472" class="h">the requested page is remembered</text>
+  <line x1="330" y1="280" x2="77" y2="280" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- 4 -->
+  <text x="88" y="312" font-size="14" fill="#2B2B3A" class="h"><tspan font-weight="700">4</tspan>  The user signs in at the provider</text>
+  <text x="88" y="331" font-size="14" fill="#5B6472" class="h">OAuth 2.0: Authorization endpoint · SAML: IdP SSO URL · CAS: Login URL</text>
+  <line x1="75" y1="344" x2="608" y2="344" stroke="#5B3FBF" stroke-width="1.8" marker-end="url(#arrowPurple)"/>
+
+  <!-- 5 -->
+  <text x="344" y="376" font-size="14" fill="#2B2B3A" class="h"><tspan font-weight="700">5</tspan>  Browser returns to Datafor</text>
+  <text x="344" y="395" font-size="14" fill="#5B6472" class="h">OAuth 2.0: redirect_uri ?code&amp;state</text>
+  <text x="344" y="414" font-size="14" fill="#5B6472" class="h">SAML: POST /datafor/saml/consumer</text>
+  <text x="344" y="433" font-size="14" fill="#5B6472" class="h">CAS: the page again, with ?ticket</text>
+  <line x1="610" y1="446" x2="332" y2="446" stroke="#5B3FBF" stroke-width="1.8" marker-end="url(#arrowPurple)"/>
+
+  <!-- 6 -->
+  <text x="344" y="476" font-size="14" fill="#2B2B3A" class="h"><tspan font-weight="700">6</tspan>  Check who signed in</text>
+  <text x="344" y="495" font-size="14" fill="#5B6472" class="h">OAuth 2.0: Token + UserInfo endpoints</text>
+  <text x="344" y="514" font-size="14" fill="#5B6472" class="h">CAS: validate the ticket</text>
+  <text x="344" y="533" font-size="14" fill="#5B6472" class="h">SAML: signature checked locally</text>
+  <line x1="330" y1="550" x2="608" y2="550" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="610" y1="570" x2="332" y2="570" stroke="#3B4252" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+  <text x="344" y="590" font-size="14" fill="#5B6472" class="h">user name</text>
+
+  <!-- 8 -->
+  <text x="88" y="752" font-size="14" fill="#2B2B3A" class="h"><tspan font-weight="700">8</tspan>  Session created; back to</text>
+  <text x="88" y="770" font-size="14" fill="#5B6472" class="h">the requested page</text>
+  <line x1="330" y1="782" x2="77" y2="782" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- Footer -->
+  <text x="15" y="822" font-size="14" fill="#5B6472">LDAP has no redirect: users type their directory password on the Datafor sign-in page.</text>
+</svg>

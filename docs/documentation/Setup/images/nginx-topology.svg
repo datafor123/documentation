@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="684" viewBox="0 0 700 684" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Datafor behind Nginx: which requests go where</title>
+  <desc id="desc">Browsers and, optionally, AI clients on other computers reach the server only on HTTPS port 443; port 80 only redirects to HTTPS. Nginx sends /datafor/ai/ to Tomcat on 127.0.0.1:28080 without buffering or compression and with a one-hour read timeout, sends everything else under / to the same Tomcat upstream with a 600-second timeout, and sends /mcp to the MCP server on 127.0.0.1:38081. Tomcat forwards AI requests internally to the AI Agent API on port 28081. Port 28080 is allowed only from Nginx, and ports 28081, 38081 and the PostgreSQL port 25432 stay closed to the network.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="684" fill="#FFFFFF"/>
+
+  <!-- Callers -->
+  <rect x="20" y="12" width="310" height="60" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="38" y="38" font-size="17" font-weight="700" fill="#3B4252">Browsers</text>
+  <text x="38" y="60" font-size="14" fill="#5B6472">https://bi.example.com/datafor/</text>
+
+  <rect x="370" y="12" width="310" height="60" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="388" y="38" font-size="17" font-weight="700" fill="#3B4252">AI clients on other computers</text>
+  <text x="388" y="60" font-size="14" fill="#5B6472">optional: https://bi.example.com/mcp</text>
+
+  <text x="185" y="98" font-size="14" font-weight="700" fill="#3B4252">HTTPS :443</text>
+  <text x="572" y="98" font-size="14" font-weight="700" fill="#3B4252">HTTPS :443</text>
+
+  <!-- Server, its border is the firewall boundary -->
+  <rect x="10" y="112" width="680" height="490" rx="12" fill="#F5F6F8" stroke="#9A5B00" stroke-width="1.8" stroke-dasharray="8 5"/>
+  <text x="28" y="588" font-size="16" font-weight="700" fill="#3B4252">Datafor server<tspan font-weight="400" font-size="14" fill="#9A5B00">  dashed border: the firewall lets in only 443 and 80</tspan></text>
+
+  <!-- Nginx -->
+  <rect x="28" y="160" width="644" height="146" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <text x="44" y="184" font-size="16" font-weight="700" fill="#5B3FBF">Nginx</text>
+
+  <rect x="40" y="198" width="222" height="96" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <text x="52" y="220" font-size="14" font-weight="700" fill="#2B2B3A">location ^~ /datafor/ai/</text>
+  <text x="52" y="241" font-size="14" fill="#2B2B3A">proxy_buffering off</text>
+  <text x="52" y="261" font-size="14" fill="#2B2B3A">gzip off, proxy_cache off</text>
+  <text x="52" y="281" font-size="14" fill="#2B2B3A">read timeout 3600s</text>
+
+  <rect x="274" y="198" width="178" height="96" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <text x="286" y="220" font-size="14" font-weight="700" fill="#2B2B3A">location /</text>
+  <text x="286" y="241" font-size="14" fill="#2B2B3A">everything else</text>
+  <text x="286" y="261" font-size="14" fill="#2B2B3A">read timeout 600s</text>
+  <text x="286" y="281" font-size="14" fill="#2B2B3A">uploads up to 1024m</text>
+
+  <rect x="464" y="198" width="196" height="96" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <text x="476" y="220" font-size="14" font-weight="700" fill="#2B2B3A">location /mcp</text>
+  <text x="476" y="241" font-size="14" fill="#2B2B3A">optional</text>
+  <text x="476" y="261" font-size="14" fill="#2B2B3A">proxy_buffering off</text>
+  <text x="476" y="281" font-size="14" fill="#2B2B3A">read timeout 600s</text>
+
+  <!-- Back ends -->
+  <rect x="28" y="364" width="424" height="76" rx="10" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="44" y="388" font-size="16" font-weight="700" fill="#1F4FD8">Datafor web server (Tomcat) :28080</text>
+  <text x="44" y="410" font-size="14" fill="#2B2B3A">RemoteIpValve reads the X-Forwarded-* headers</text>
+  <text x="44" y="430" font-size="14" fill="#2B2B3A">allowed only from Nginx (here: loopback)</text>
+
+  <rect x="464" y="364" width="196" height="76" rx="10" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <text x="476" y="388" font-size="16" font-weight="700" fill="#5B3FBF">MCP server :38081</text>
+  <text x="476" y="410" font-size="14" fill="#2B2B3A">listens on 127.0.0.1</text>
+  <text x="476" y="430" font-size="14" fill="#2B2B3A">MCP_ALLOWED_HOSTS</text>
+
+  <rect x="28" y="484" width="300" height="68" rx="10" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <text x="44" y="508" font-size="16" font-weight="700" fill="#5B3FBF">AI Agent API :28081</text>
+  <text x="44" y="530" font-size="14" fill="#2B2B3A">reached only through Tomcat</text>
+
+  <rect x="352" y="484" width="308" height="68" rx="10" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="368" y="508" font-size="16" font-weight="700" fill="#2E7D32">PostgreSQL :25432</text>
+  <text x="368" y="530" font-size="14" fill="#2B2B3A">local connections only</text>
+
+  <!-- Arrows are drawn after the boxes -->
+  <line x1="175" y1="72" x2="175" y2="195" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M175,140 H363 V195" fill="none" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="562" y1="72" x2="562" y2="195" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <line x1="151" y1="294" x2="151" y2="361" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="363" y1="294" x2="363" y2="361" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="161" y="324" font-size="14" fill="#5B6472">upstream datafor_backend</text>
+  <text x="161" y="343" font-size="14" fill="#5B6472">127.0.0.1:28080</text>
+  <line x1="562" y1="294" x2="562" y2="361" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="572" y="333" font-size="14" fill="#5B6472">127.0.0.1:38081</text>
+
+  <line x1="151" y1="440" x2="151" y2="481" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="161" y="466" font-size="14" fill="#5B6472">/datafor/ai/* via the Internal URL</text>
+
+  <!-- Legend -->
+  <text x="10" y="630" font-size="14" fill="#5B6472">Nginx terminates HTTPS; port 80 only redirects to HTTPS. Close 28080 to</text>
+  <text x="10" y="650" font-size="14" fill="#5B6472">everything except Nginx, otherwise users can bypass HTTPS. Keep 28081, 38081</text>
+  <text x="10" y="670" font-size="14" fill="#5B6472">and 25432 closed to the network.</text>
+</svg>

@@ -28,6 +28,8 @@ Datafor listens on these ports:
 | 38081 | AI Agent MCP server, for AI clients such as Claude Desktop | **Only if AI clients on other computers connect**, through `location /mcp` (section 2). It listens on `127.0.0.1` by default. |
 | 25432 | Built-in PostgreSQL database | **No.** Never expose it. |
 
+![Browsers and, optionally, AI clients on other computers reach the server only on HTTPS 443. Nginx sends /datafor/ai/ unbuffered with a one-hour timeout and everything else under / to Tomcat on 127.0.0.1:28080, and /mcp to the MCP server on 127.0.0.1:38081. Tomcat forwards AI requests to the AI Agent API on 28081. 28080 is allowed only from Nginx; 28081, 38081 and 25432 stay closed](./images/nginx-topology.svg)
+
 ## 2. Add the Nginx site configuration
 
 Create `/etc/nginx/conf.d/datafor.conf` with the following content. On distributions that use `sites-available`, create the file there and enable it with a symbolic link in `sites-enabled`.
@@ -173,7 +175,7 @@ fully-qualified-server-url=https://bi.example.com/datafor/
 
 The platform uses this value when it needs an absolute address on the server side.
 
-Then set the same address in the console. Sign in as an administrator, open **Settings › Access & Integration › Site address**, enter it in **Site URL** (for example `https://bi.example.com/datafor/`) and save. Datafor builds the links it hands out, such as share links and tenant addresses, from **Site URL**; when the field is empty it falls back to `server.properties`. The setting is saved in the repository and needs no restart.
+Then set the same address in the console. Sign in as an administrator, open **Settings › Access & Integration › Site address**, enter it in **Site URL** (for example `https://bi.example.com/datafor/`) and save. Datafor builds tenant addresses and the default AI Agent address (**Site URL** followed by `ai`) from it; share links come from the address in the browser. The setting is saved in the repository and needs no restart. See [Site Address](/documentation/System/Site-Address/).
 
 ### 3.3 Restart Datafor
 
@@ -204,7 +206,7 @@ Then verify each part of the deployment:
 
 Go to **Settings › AI Agent › AI service** (see [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/)).
 
-- If **Public URL** is empty, browsers use the same address as the console, and nothing needs to change.
+- If **Public URL** is empty, browsers use **Site URL** followed by `ai`, for example `https://bi.example.com/datafor/ai`. Nothing needs to change once **Site URL** is set as in section 3.2.
 - If it is set explicitly, it must be the public HTTPS address, for example `https://bi.example.com/datafor/ai`. Browsers block an `http://` address on an HTTPS page as mixed content, and the AI Assistant will not load.
 - **Internal URL** is used by the Datafor backend only and does not go through Nginx. Leave it as configured.
 

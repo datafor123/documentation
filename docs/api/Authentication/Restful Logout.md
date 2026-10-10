@@ -1,47 +1,48 @@
 ---
-title: Restful Logout
+title: Log out
 permalink: /api/Authentication/Restful Logout/
 tags:
   - api
   - Authentication
-description: null
+description: End the session of the current cookie and get the result in JSON.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`GET`
+Ends the session identified by the `JSESSIONID` cookie.
 
-**Request URL**
-```html
-/plugin/datafor/api/extension/auth/logout
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor/api/extension/auth/logout` |
+| Permission | Anyone |
+| Content type | None |
+
+## Parameters
+
+None. The session is taken from the cookie.
+
+## Example
+
+```bash
+curl -b cookies.txt "http://localhost:28080/datafor/plugin/datafor/api/extension/auth/logout"
 ```
-
-**Description**  
-Logs the user out of the application, returning a JSON response indicating the result.
-
-**Content Type**  
-No request body is typically used with a `GET` request.
-
----
-
-## **Response Examples**
 
 ```json
 {
+  "success": true,
   "code": "200",
-  "success": true
+  "data": "1"
 }
 ```
 
-## **HTTP Responses**
+| `data` | Meaning |
+| --- | --- |
+| `"1"` | The session was signed in and is now closed. |
+| `"2"` | The session was not signed in; nothing changed. |
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+## Errors
 
-### **Response Data Schema (HTTP 200)**
+| `code` | When |
+| --- | --- |
+| `"500"` | The session could not be closed; `msg` has the reason. |
 
-| Name      | Type    | Required | Description                      |
-|-----------|---------|----------|----------------------------------|
-| `code`    | string  | Yes      | Code indicating the response (e.g., `"200"`) |
-| `success` | boolean | Yes      | Whether the logout was successful          |
+Related: [Log in](/api/Authentication/Restful%20Login/)

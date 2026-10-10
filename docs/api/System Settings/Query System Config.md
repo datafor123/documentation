@@ -4,78 +4,61 @@ permalink: /api/System Settings/Query System Config/
 tags:
   - api
   - System Settings
-description: null
+description: Read the tenant's system settings; non-administrators get only the report and modeling defaults.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`GET`
+Returns the system settings of the current tenant as one flat object: server address, CORS, login captcha, and the report and modeling defaults of **Settings › General › System configuration**.
 
-**Request URL**
-```html
-/plugin/datafor/api/system/settings/query
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor/api/system/settings/query` |
+| Permission | Any signed-in user. Administrators get every key; other users get only the report, modeling, query and AI defaults. |
+| Content type | None |
+
+## Parameters
+
+None.
+
+## Example
+
+```bash
+curl -u admin:password "http://localhost:28080/datafor/plugin/datafor/api/system/settings/query"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-## **Response Examples**
 
 ```json
 {
+  "success": true,
   "code": "200",
   "data": {
-    "locale-country": "",
-    "cors-requests-allowed": "true",
-    "cors-requests-exposed-headers": "",
-    "cors-requests-allowed-domains": "https://portal.example.com, http://localhost:28080",
-    "cors-requests-allowed-methods": "GET,HEAD,POST",
-    "cors-requests-allow-credentials": "true",
     "fully-qualified-server-url": "http://localhost:28080/datafor/",
-    "allowRegister": "true",
-    "cors-requests-allowed-headers": "CONTENT-TYPE,X-CSRF-TOKEN",
-    "locale-language": "",
-    "cors-root-config-is-abstract": "false"
-  },
-  "success": true
+    "cors-requests-allowed": "true",
+    "cors-requests-allowed-domains": "https://app.example.com",
+    "cors-requests-allowed-methods": "GET,HEAD,POST",
+    "cors-requests-allowed-headers": "Content-Type,Authorization",
+    "cors-requests-allow-credentials": "true",
+    "cors-requests-exposed-headers": "",
+    "captcha-enable": "false",
+    "report-default-color-scheme": "default",
+    "week-start-day": "monday",
+    "chart-default-max-rows": "5000"
+  }
 }
 ```
 
----
+Keys that were never set are left out. All values are strings.
 
-## **HTTP Responses**
+| Key | Meaning | Who sees it |
+| --- | --- | --- |
+| `fully-qualified-server-url` | Public address of the server, ending in `/`. | Administrators |
+| `cors-requests-allowed`, `cors-requests-allowed-domains`, `cors-requests-allowed-methods`, `cors-requests-allowed-headers`, `cors-requests-allow-credentials`, `cors-requests-exposed-headers` | Cross-origin access, as on **Cross-origin access (CORS)**. | Administrators |
+| `captcha-enable`, `captcha-try-count` | Login captcha, and the failed attempts after which it is required. See [Log in](/api/Authentication/Restful%20Login/#captcha). | Administrators |
+| `trusted-domains`, `backup-reserve-sec`, `locale-language`, `locale-country` | Other server settings. | Administrators |
+| `report-default-font`, `report-default-color-scheme`, `report-default-tooltip-style`, `report-default-empty-show`, `report-default-empty-text`, `measure-default-number-format`, `measure-default-percent-format`, `model-default-cache-expire`, `week-start-day`, `chart-default-max-rows`, `auto-refresh-min-interval`, `ai-index-auto-build-on-model-save` | The defaults of **System configuration**. Change them with [Patch system settings](/api/System-Settings/Patch-settings/). | Everyone |
+| `report-default-table-style` | Table style of new reports. | Everyone |
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | Request was successful | Inline     |
+## Errors
 
-### **Response Data Schema (HTTP 200)**
+None specific; a non-administrator simply gets fewer keys.
 
-| Name      | Type    | Required | Description                          |
-|-----------|---------|---------:|--------------------------------------|
-| `code`    | string  | No       | Response status code                |
-| `data`    | object  | **Yes**  | System configuration settings        |
-| `success` | boolean | **Yes**  | Indicates whether the request was successful |
-
-#### **Data Object Schema**
-
-| Name                                      | Type    | Required | Description                                      |
-|-------------------------------------------|---------|---------:|--------------------------------------------------|
-| `locale-country`                          | string  | **Yes**  | Country-specific locale setting                 |
-| `cors-requests-allowed`                   | string  | **Yes**  | Whether CORS requests are allowed               |
-| `cors-requests-exposed-headers`           | string  | **Yes**  | Headers exposed in CORS requests                |
-| `cors-requests-allowed-domains`           | string  | **Yes**  | Allowed domains for CORS requests               |
-| `cors-requests-allowed-methods`           | string  | **Yes**  | Allowed HTTP methods for CORS requests          |
-| `cors-requests-allow-credentials`         | string  | **Yes**  | Whether credentials are allowed in CORS requests |
-| `fully-qualified-server-url`              | string  | **Yes**  | Fully qualified server URL                      |
-| `allowRegister`                           | string  | **Yes**  | Whether user registration is allowed            |
-| `cors-requests-allowed-headers`           | string  | **Yes**  | Headers allowed in CORS requests                |
-| `locale-language`                         | string  | **Yes**  | Language-specific locale setting                |
-| `cors-root-config-is-abstract`            | string  | **Yes**  | Whether the CORS root configuration is abstract |
-
+Related: [System Configuration](/documentation/System/System-Configuration/), [Get system settings snapshot](/api/System-Settings/Get-settings-snapshot/)

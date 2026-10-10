@@ -4,58 +4,57 @@ permalink: /api/Alert/Query an alert/
 tags:
   - api
   - Alert
-description: null
+description: Read one alert's definition and schedule state by name.
 createTime: 2026/09/01 22:03:26
 ---
+Returns one alert's full definition, including its query model, plus its last and next run times.
 
-**Method**  
-`GET`
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor/api/alert/detail` |
+| Permission | **Read** on the alert |
+| Content type | none (query string) |
 
-**Request URL**
-```html
-/plugin/datafor/api/alert/detail
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `name` | query | string | Yes | Alert name. |
+
+## Example
+
+```bash
+curl -u admin:password -G \
+  "http://localhost:28080/datafor/plugin/datafor/api/alert/detail" \
+  --data-urlencode "name=low_sales_north"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Preconditions**
-- The current user must have **read** privileges for the alert.
-
-**Content Type**  
-No request body is typically sent with a GET request.
-
----
-
-### **Parameters Schema**
-
-| Name    | Location | Type   | Required | Description                      |
-|---------|----------|--------|----------|----------------------------------|
-| **name**| query    | string | No       | Alert name to be queried         |
-
-*(Although an empty body `{}` is shown, this endpoint primarily uses the `name` query parameter.)*
-
----
-
-## **Response Examples**
 
 ```json
 {
-  "msg": "success",
-  "success": true
+  "success": true,
+  "data": {
+    "name": "low_sales_north",
+    "title": "Low sales in North",
+    "pagePath": "/public/Sales/Revenue.datafor",
+    "componentId": "C739239F-0000-0000-0000-000000000001",
+    "enabled": "1",
+    "executor": "admin",
+    "jobId": "<scheduler job ID>",
+    "state": "NORMAL",
+    "nextRun": "2026-10-12T08:00:00.000+08:00",
+    "rule": { "logical": "or", "conditions": [ { "id": "orders.sales.1717310261398", "comparator": "<", "value": [10000], "match": "any" } ] },
+    "emailConfig": { "toUsers": ["alice"], "ccUsers": [], "bccUsers": [], "subject": "Sales below target", "content": "Sales in North dropped to ${value}." },
+    "qm": { "...": "..." }
+  }
 }
 ```
 
-## **HTTP Responses**
+The fields are described on [Add an alert](/api/Alert/Add%20an%20alert/).
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+## Errors
 
-### **Response Data Schema (HTTP 200)**
+| `code` | When |
+| --- | --- |
+| `404` | No alert has this name, or the caller cannot read it. |
 
-| Name      | Type    | Required | Description     |
-|-----------|---------|----------|-----------------|
-| `msg`     | string  | No       | Message string  |
-| `success` | boolean | Yes      | Request status  |
+Related: [Update an alert](/api/Alert/Update%20%20an%20alert/)

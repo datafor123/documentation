@@ -22,11 +22,13 @@ Rows follow the data order from top to bottom; sort the **Category** field to ch
 
 ## Use fixed targets and relative thresholds
 
-If no usable target measure is supplied, **Style → Data values → Target value** provides a fixed target. It is also used for categories whose Target value measure is empty.
+If no usable target measure is supplied, **Style → Data values → Target value** provides a fixed target. It is also used for categories whose Target value measure is empty or 0.
 
-Under **Percentage settings (Based on target value)**, enter percentages as whole numbers: **80** means 80% of the target. Each field (**Normal %**, **Satisfactory %**, **Good %**, **Excellent %**, **Minimum %**, **Maximum %**) is used only when the corresponding measure in **Data** is not bound or has no value. Percentage thresholds have no effect without a target.
+Under **Percentage settings (Based on target value)**, enter percentages as whole numbers: **80** means 80% of the target. Each field (**Normal %**, **Satisfactory %**, **Good %**, **Excellent %**, **Minimum %**, **Maximum %**) is used only when the corresponding measure in **Data** is not bound or its value for the row is empty or not above 0. Percentage thresholds have no effect without a target.
 
-For a target of 100, illustrative boundaries of 0, 60, 80, 100, 110 and 120 define an increasing set of ranges. Choose boundaries appropriate to your business; the labels Normal, Good and Excellent do not determine the numeric thresholds for you.
+For a target of 100, the boundaries 0, 50, 70, 90, 105 and 120 below define an increasing set of ranges. Choose boundaries appropriate to your business; the labels Normal, Good and Excellent do not determine the numeric thresholds for you.
+
+![One bullet row with target 100: boundaries Minimum 0, Normal 50, Satisfactory 70, Good 90, Excellent 105 and Maximum 120 cut five coloured ranges behind the value bar (82) and the target marker. Each boundary comes from its measure when above 0, else from target × %, else it is not drawn; the scale ends at the largest value when a Maximum is set, otherwise 5% above it, rounded up](./images/bullet-anatomy.svg)
 
 ![Bullet in Preview: Net Sales by Region against a fixed Target value of 600,000 with percentage thresholds 60, 80, 100 and 110; each row has its own scale](../images/current/bullet-region-target.jpg)
 

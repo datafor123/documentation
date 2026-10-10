@@ -4,79 +4,43 @@ permalink: /api/Models/Download models/
 tags:
   - api
   - Models
-description: null
+description: Download one or more analysis models as a zip archive.
 createTime: 2026/09/01 22:03:26
 ---
+Downloads analysis models as a zip archive that can be imported with [Upload files](/api/Files/Upload%20files/) (`importDir` can be left empty for model zips). For the schema XML of one model, see [Download a model](/api/Models/Download%20a%20model/).
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/datasource/analysis/catalogs/downloadList` |
+| Permission | **Read** on each model |
+| Content type | `application/x-www-form-urlencoded` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/datasource/analysis/catalogs/downloadList
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `nameList` | form | string | Yes | A JSON array of model names, sent as one string, for example `["SalesModel","Finance"]`. |
+
+The zip is named after the model's display name when one model is requested, otherwise `Models.zip`.
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/datasource/analysis/catalogs/downloadList" \
+  --data-urlencode 'nameList=["SalesModel","Finance"]' \
+  -o Models.zip
 ```
 
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
+On success the body is the zip (`Content-Type: application/zip`).
 
-**Content Type**  
-`application/json`
+## Errors
 
----
+Errors are returned with HTTP 200 as a plain-text attachment named `error.txt`. Check the `Content-Disposition` header before saving the body.
 
-**Preconditions**
-- The current user needs **read privileges** to the models.
+| `error.txt` content | When |
+| --- | --- |
+| `Not Found` | A requested model does not exist or the caller cannot read it. |
+| Other text | `nameList` is not a JSON array, or the export failed. |
 
----
-
-### **Parameters Schema**
-
-| Name      | Location | Type   | Required | Description |
-|-----------|---------|--------|----------|-------------|
-| `body`    | body    | object | **No**   | The request payload containing the list of models to download. |
-| ├── `nameList` | body | array of strings | **No** | A list of model names to be downloaded. |
-
-### **Request Example**
-
-```yaml
-nameList: ["Demo"]
-```
-
----
-
-### **Response Examples**
-
-#### **200 Response**
-```json
-{
-  "msg": "success",
-  "data": [
-    {
-      "name": "Demo",
-      "status": "available"
-    }
-  ],
-  "success": true
-}
-```
-
----
-
-### **HTTP Responses**
-
-| HTTP Status Code | Meaning | Description | Data schema |
-|------------------|---------|-------------|-------------|
-| `200`           | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | The request was successful, and the response contains model download details. | Inline |
-
----
-
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type     | Required | Description |
-|-----------|---------|----------|-------------|
-| `msg`     | string  | **Yes**  | Message indicating the status of the request (e.g., `"success"`). |
-| `data`    | array   | **Yes**  | The list of models available for download. |
-| ├── `name` | string | **Yes**  | The name of the model. |
-| ├── `status` | string | **Yes**  | The availability status of the model. |
-| `success` | boolean | **Yes**  | A boolean flag indicating whether the request was processed successfully. |
+Related: [Backup and restore](/documentation/System/backup/)

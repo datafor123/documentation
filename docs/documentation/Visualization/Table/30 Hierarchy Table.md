@@ -38,6 +38,8 @@ Not available on Tree tables: **Font color**, **Background color**, **Data bars*
 | Separate level columns: category, subcategory, product | **Tree table** |
 | One ID column and one parent ID column: employee and manager, account and parent account | [Parent-child table](/documentation/Visualization/Parent-Child-Table/) |
 
+The two data shapes, and how each table shows a parent row, are compared in [Tree table or parent-child table](/documentation/Visualization/Parent-Child-Table/#tree-table-or-parent-child-table).
+
 To let readers filter other components by picking nodes of a hierarchy, use the [Hierarchy table filter](/documentation/Visualization/Hierarchy-Table-Filter/).
 
 Related: [Table](/documentation/Visualization/Table/) · [Creating Hierarchies](/documentation/Model/Creating-Hierarchy/)

@@ -50,6 +50,7 @@ Diagnostics detect many structural and semantic problems, but they cannot prove 
 
 ## Related topics
 
+- [Managing Analysis Models](/documentation/Model/Managing-Analysis-Models/)
 - [Creating an Analysis Model](/documentation/Model/Creating-an-Analysis-Model/)
 - [Working with Tables and the Canvas](/documentation/Model/Working-with-Tables-and-the-Canvas/)
 - [Creating SQL Views](/documentation/Model/Creating-SQL-Views/)

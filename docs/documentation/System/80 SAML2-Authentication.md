@@ -8,9 +8,7 @@ description: Let users sign in to Datafor through a SAML 2.0 identity provider, 
 createTime: 2026/09/01 22:03:26
 ---
 
-## Single sign-on page
-
-LDAP, OAuth 2.0, SAML 2.0 and CAS are configured on one page: **Settings › Access & Integration › Single sign-on**. A card per method at the top shows its status: **On** (enabled), **Off** (configured but not enabled), or **Not set up** (the method's address field is empty: **LDAP URL**, **Authorization endpoint**, **IdP SSO URL** or **CAS server URL**); **Unknown** means the status could not be read. Select a card to show that method's settings below it; if the current method has unsaved changes, Datafor asks you to save or discard them first. The cards refresh after each save. Each method has an **Enable** switch; while it is off, the fields are locked and the page shows "Turn on to edit." The **New users** group sets up accounts for first-time users: **Create users on first sign-in**, **Default user type** and **Default role**.
+SAML 2.0 is set up on **Settings › Access & Integration › Single sign-on**. For the page, the sign-in flow, the addresses to register at the provider and the **New users** settings, see [Single Sign-On Overview](/documentation/System/Single-Sign-On/).
 
 ## 1. Register Datafor at the identity provider
 
@@ -21,7 +19,7 @@ Create an application (service provider) for Datafor at your IdP with these valu
 | Assertion Consumer Service (ACS) / reply URL | `https://your-server/datafor/saml/consumer` (HTTP POST binding) |
 | Entity ID / identifier | The same value you enter in **SP entity ID**, e.g. `bi` |
 
-Use the address users open Datafor with, including the port if it is not the default, e.g. `http://your-server:28080/datafor/saml/consumer`. After a successful sign-in, Datafor returns the user to the page they originally requested.
+Use the address users open Datafor with, including the port if it is not the default, e.g. `http://your-server:28080/datafor/saml/consumer`. Datafor puts `fully-qualified-server-url` from `pentaho-solutions/system/server.properties` followed by `saml/consumer` into its sign-in requests as the ACS URL, so set that value to the same public address and restart Datafor (see [Protocol and host of the return addresses](/documentation/System/Single-Sign-On/#protocol-and-host-of-the-return-addresses)). After a successful sign-in, Datafor returns the user to the page they originally requested.
 
 ## 2. SAML 2.0 settings
 

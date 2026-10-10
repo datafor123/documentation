@@ -5,77 +5,47 @@ tags:
   - api
   - Users
   - Register
-description: null
+description: Check a registration code before submitting the registration.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`POST`
+Checks that a registration code matches the one emailed by [Get register code](/api/Register/Get%20register%20code/). It does not use up the code; [Register](/api/Register/Register/) checks it again.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/user/verifyRegisterCode
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/user/verifyRegisterCode` |
+| Permission | Anyone (no sign-in) |
+| Content type | `application/json` |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `email` | body | string | Yes | The address the code was sent to. |
+| `code` | body | string | Yes | The code from the email. |
+
+## Example
+
+```bash
+curl -X POST "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/verifyRegisterCode" \
+  -H "Content-Type: application/json" \
+  -d '{"email": "new.user@example.com", "code": "<code-from-email>"}'
 ```
 
-**Authorization**  
-Authentication is **not required** to use this API.
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-## **Description**
-This API verifies whether a given registration code is valid for the provided email address. The registration code is typically sent to the user's email during the signup process.
-
----
-
-### **Request Example**
 ```json
 {
-  "email": "a@a.com",
-  "code": "037173"
+  "success": true,
+  "code": "200"
 }
 ```
 
-### **Parameters Schema**
+## Errors
 
-| Name    | Location | Type   | Required | Description |
-|---------|----------|--------|----------|-------------|
-| `email` | body    | string | **Yes**  | The email address used for registration. |
-| `code`  | body    | string | **Yes**  | The registration verification code sent to the email. |
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `"400"` | `invalid parameter` | A field is missing or the body is not JSON. |
+| `"428"` | `Send verify code please` | No code was sent to this address, or it expired (after 30 minutes). |
+| `"412"` | `Check verify code please` | Wrong code. |
+| `"406"` | `you have tried too many times,please resend code 1 min later` | More than 5 wrong codes within a minute. Wait a minute. |
 
----
-
-## **Response Examples**
-
-### **Successful Response (HTTP 200)**
-```json
-{
-  "success": true
-}
-```
-
-### **Failure Response (HTTP 200)**
-```json
-{
-  "msg": "Email already existed",
-  "code": 409,
-  "success": false
-}
-```
-
----
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                              | Description | Data Schema |
-|------------------|----------------------------------------------------------------------|-------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)              | Request was successful | Inline |
-
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type     | Required | Description |
-|-----------|---------|----------|-------------|
-| `msg`     | string  | No       | Response message (only present when the request fails). |
-| `success` | boolean | **Yes**  | Indicates whether the verification was successful. |
+Related: [Register](/api/Register/Register/)

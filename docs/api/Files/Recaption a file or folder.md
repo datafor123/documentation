@@ -4,82 +4,45 @@ permalink: /api/Files/Recaption a file or folder/
 tags:
   - api
   - Files
-description: null
+description: Change the display name of a report, file, or folder.
 createTime: 2026/09/01 22:03:26
 ---
+Changes the display name (`title`) of a repository item, which is what **Rename** does in the console. The item's path and ID do not change, so links and references keep working.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/repo/files/recaption` |
+| Permission | **Edit** on the item |
+| Content type | `application/x-www-form-urlencoded` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/repo/files/recaption
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `pathId` | form | string | Yes | Repository path of the item, for example `/public/Sales/Revenue.datafor`. |
+| `newName` | form | string | Yes | New display name, without the file extension. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/repo/files/recaption" \
+  --data-urlencode "pathId=/public/Sales/Revenue.datafor" \
+  --data-urlencode "newName=Revenue 2026"
 ```
-
-**Authorization**  
-The current user must have administrator authority over the folder or file.
-
-**Content Type**  
-`application/json`
-
----
-
-### **Request Example**
 
 ```json
-{
-  "pathId": "/public/workshop.datafor",
-  "newName": "workshop3"
-}
+{ "success": true, "code": 200 }
 ```
 
-### **Params**
+## Errors
 
-| Name      | Location | Type   | Required | Description |
-|-----------|----------|--------|----------|-------------|
-| `pathId`  | body    | string | **Yes**  | The full path of the file or folder to rename. |
-| `newName` | body    | string | **Yes**  | The new name for the file or folder. |
+HTTP 200 with `success: false`. Here `code` is a number.
 
----
+| `code` | When |
+| --- | --- |
+| `400` | `pathId` is empty. |
+| `404` | The item does not exist or the caller cannot read it. |
+| `500` | Any other failure, including missing Edit permission (`msg` has the reason). |
 
-## **Response Examples**
-
-#### ✅ **Success Response**
-```json
-{
-  "code": 200,
-  "success": true
-}
-```
-
-#### ❌ **Failure Response**
-```json
-{
-  "code": 403,
-  "success": false,
-  "message": "Insufficient permissions"
-}
-```
-
----
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | File or folder renamed successfully. |
-| 400              | Bad Request                                             | Invalid parameters provided. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 403              | Forbidden                                               | User lacks permission to rename the file or folder. |
-| 404              | Not Found                                               | Specified file or folder not found. |
-| 500              | Internal Server Error                                   | Unexpected error occurred. |
-
----
-
-## **Response Data Schema**
-
-| Name      | Type    | Required | Description |
-|-----------|---------|----------|-------------|
-| `code`    | integer | **Yes**  | HTTP status code of the response. |
-| `success` | boolean | **Yes**  | Indicates whether the request was successful. |
-| `message` | string  | No       | Additional information about the response (if applicable). |
+Related: [Get file tree](/api/Files/Get%20file%20tree/)

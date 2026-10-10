@@ -1,69 +1,45 @@
 ---
-title: Execute one by name
-permalink: /api/Alert/Execute one by name/
+title: Delete an alert by name
+permalink: /api/Alert/Delete an alert by name/
 tags:
   - api
   - Alert
-description: null
+description: Delete an alert and its schedule.
 createTime: 2026/09/01 22:03:26
 ---
+Deletes an alert permanently and removes its schedule.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor/api/alert/delete` |
+| Permission | **Delete** on the alert |
+| Content type | `application/x-www-form-urlencoded` |
 
-**Request URL**
-```html
-/plugin/datafor/api/alert/delete
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `name` | form | string | Yes | Alert name. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor/api/alert/delete" \
+  --data-urlencode "name=low_sales_north"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-**Preconditions**
-- The current user must have administrative privileges to the alert.
-
----
-
-### **Body Parameters Schema**
-
-| Name | Location        | Type   | Required | Description                            |
-|------|-----------------|--------|----------|----------------------------------------|
-| **name** | form-data / body | string | No       | The name of the alert to be deleted     |
-
-### **Request Example**
-
-```yaml
-name: test
-```
-
----
-
-## **Response Examples**
 
 ```json
-{
-  "msg": "success",
-  "success": true
-}
+{ "success": true, "code": "200" }
 ```
 
----
+## Errors
 
-## **HTTP Responses**
+HTTP 200 with `success: false`.
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+| `code` | When |
+| --- | --- |
+| `404` | No alert has this name, or the caller cannot read it. |
+| `500` | The alert could not be deleted, for example because the caller lacks Delete. The schedule is kept. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type    | Required | Description         |
-|-----------|---------|----------|---------------------|
-| `msg`     | string  | No       | Message string      |
-| `success` | boolean | Yes      | Request status      |
+Related: [List alerts](/api/Alert/List%20alerts/)

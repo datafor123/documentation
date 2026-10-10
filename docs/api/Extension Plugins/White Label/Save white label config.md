@@ -1,95 +1,50 @@
 ---
-title: Save White Label Config
+title: Save branding configuration
 permalink: /api/Extension Plugins/White Label/Save white label config/
 tags:
   - api
   - Extension Plugins
-  - White Label
-description: null
+  - Branding
+description: Save the branding settings and images, as the console's branding editor does.
 createTime: 2026/09/01 22:03:26
 ---
+Saves the branding settings together with any new images. The settings you send replace the stored ones, so read the current configuration with [Get branding configuration](/api/Extension%20Plugins/White%20Label/Query%20white%20label%20config/), change it, and send the whole object back.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-whitelabel/api/save` |
+| Permission | Administrator user type |
+| Content type | `multipart/form-data` |
 
-**Request URL**
-```html
-/plugin/datafor-whitelabel/api/update
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `config` | form | string | Yes | The full configuration as a JSON string, with the keys returned by [Get branding configuration](/api/Extension%20Plugins/White%20Label/Query%20white%20label%20config/). Set `whiteLabelEnabled` to `true` to use it. |
+| `wl_logo.png` | form | file | No | New login page logo (PNG). |
+| `wl_main.png` | form | file | No | New console logo (PNG). |
+| `wl_main_small.png` | form | file | No | New collapsed-sidebar logo (PNG). |
+| `wl_favicon.ico` | form | file | No | New browser tab icon (ICO). |
+| `loginBgImage.png` | form | file | No | New login page background (PNG). |
+| `wl_<card id>.png` | form | file | No | New image for a report card on Home. |
+
+For each uploaded image, set the matching key in `config` to its URL, for example `"wl_logo.png": "/datafor/plugin/datafor/api/core/wl/wl_logo.png"`. Set it to an empty string to remove the image and use the default.
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-whitelabel/api/save" \
+  -F "config=<branding.json" \
+  -F "wl_logo.png=@logo.png"
 ```
 
-**Authorization**  
-The current user must have **Administrator** privileges.
+`branding.json` is the `data` object from [Get branding configuration](/api/Extension%20Plugins/White%20Label/Query%20white%20label%20config/) with your changes.
 
-**Content Type**  
-`application/json`
-
----
-
-## **Preconditions**
-1. The `datafor-whitelabel` plugin must be installed.
-2. The current user’s type must be **Administrator**.
-
----
-
-### **Request Example**
-
-```yaml
-login_title: Access and manage your instances from this account
-login_copyright: Copyright ©2025 company All rights reserved.
-main_title: Datafor Visualization and Analysis
-main_subtitle: Discover the value of data, help your business smarter
-enable_help: "1"
-enable_start: "1"
-wl_logo: file://D:\images\wl_logo.png
-wl_main: file://D:\images\wl_main.png
-wl_favicon: file://D:\images\wl_favicon.ico
-wl_main_small: file://D:\images\wl_main_small.png
-```
-
----
-
-## **Params**
-
-| Name               | Location | Type              | Required | Description                      |
-|--------------------|----------|------------------|----------|----------------------------------|
-| `login_title`      | body     | string           | No       | Login page title.               |
-| `login_copyright`  | body     | string           | No       | Copyright text on login page.   |
-| `main_title`       | body     | string           | No       | Main title displayed in the UI. |
-| `main_subtitle`    | body     | string           | No       | Subtitle below the main title.  |
-| `enable_help`      | body     | string           | No       | `1` (true) or `0` (false).      |
-| `enable_start`     | body     | string           | No       | `1` (true) or `0` (false).      |
-| `wl_logo`         | body     | string (binary)  | No       | Path to the login page logo (PNG). |
-| `wl_main`         | body     | string (binary)  | No       | Path to the main logo (PNG).    |
-| `wl_favicon`      | body     | string (binary)  | No       | Path to the favicon (ICO).      |
-| `wl_main_small`   | body     | string (binary)  | No       | Path to the small main logo (PNG). |
-
----
-
-## **Response Examples**
-
-### ✅ Success Response (200 OK)
 ```json
-{
-  "msg": "success",
-  "success": true
-}
+{ "success": true }
 ```
 
----
+Changes apply to pages loaded after the save; users may need to reload, and browsers can cache the favicon.
 
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Configuration saved successfully. |
-| 400              | Bad Request                                             | Invalid request format or parameters. |
-| 500              | Internal Server Error                                   | Unexpected server error. |
-
----
-
-## **Response Data Schema**
-
-| Name       | Type    | Required | Description |
-|------------|--------|----------|-------------|
-| `msg`      | string | No       | Response message. |
-| `success`  | boolean | **Yes**  | `true` if the request was successful. |
+Related: [Branding](/documentation/Console/Branding/)

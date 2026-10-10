@@ -4,55 +4,33 @@ permalink: /api/Models/Check a model if exists/
 tags:
   - api
   - Models
-description: null
+description: Check whether an analysis model name is already in use.
 createTime: 2026/09/01 22:03:26
 ---
+Reports whether a model with the given name exists, whether or not the caller can read it. Use it before publishing to decide whether to send `overwrite=true` or pick another name.
 
-**Method**  
-`GET`
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor-modeler/api/mondrian/checkexists` |
+| Permission | Any signed-in user |
+| Content type | none (query string) |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/mondrian/checkexists
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `name` | query | string | Yes | Model name (not the display name). |
+
+## Example
+
+```bash
+curl -u admin:password -G \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/mondrian/checkexists" \
+  --data-urlencode "name=SalesModel"
 ```
 
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
----
-
-### **Parameters Schema**
-
-| Name  | Location | Type   | Required | Description |
-|-------|---------|--------|----------|-------------|
-| `name` | query | string | **No** | The name of the model to check if it exists. |
-
----
-
-### **Response Examples**
-
-#### **200 Response**
 ```json
-{
-  "success": true,
-  "exists": true
-}
+{ "success": true, "exists": true }
 ```
 
----
-
-### **HTTP Responses**
-
-| HTTP Status Code | Meaning | Description | Data schema |
-|------------------|---------|-------------|-------------|
-| `200`           | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | The request was successful, and the response indicates whether the model exists. | Inline |
-
----
-
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type    | Required | Description |
-|-----------|--------|----------|-------------|
-| `success` | boolean | **Yes**  | A boolean flag indicating whether the request was processed successfully. |
-| `exists`  | boolean | **Yes**  | A boolean flag indicating whether the specified model exists (`true` if it exists, `false` otherwise). |
+Related: [Add or modify a model](/api/Models/Add%20or%20modify%20a%20model/)

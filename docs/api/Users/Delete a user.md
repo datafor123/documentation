@@ -4,61 +4,48 @@ permalink: /api/Users/Delete a user/
 tags:
   - api
   - Users
-description: null
+description: Delete a user and their role assignments.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`POST`
+Deletes a user and removes their role assignments. Files in the user's home folder and permissions granted to the user are not removed.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/user/delete
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/user/delete` |
+| Permission | Administrator, or the user themselves |
+| Content type | `application/x-www-form-urlencoded` |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `username` | form | string | Yes | Login name of the user. |
+
+To delete several users in one call, see [Bulk user operations](/api/Users/Bulk-user-operations/).
+
+## Example
+
+```bash
+curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/delete" \
+  -d "username=analyst1"
 ```
-
-**Authorization**  
-Use of this API requires authentication. The current user's user type must be **Administrator**.
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-### **Request Example**
-
-```yaml
-username: dev
-```
-
-### **Parameters Schema**
-
-| Name            | Location | Type     | Required | Description                         |
-|-----------------|----------|----------|----------|-------------------------------------|
-| body            | body     | object   | no       | none                                |
-| ├── username    | body     | string   | yes      | The username of the user to delete. |
-
----
-
-### **Response Examples**
 
 ```json
 {
   "success": true,
-  "username": "dev"
+  "code": "200"
 }
 ```
 
----
+A user name that does not exist also returns success.
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                                 | Description        | Data schema |
-|------------------|-------------------------------------------------------------------------|--------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                  | The request was successful. | Inline      |
+| `code` | When |
+| --- | --- |
+| `"400"` | `username` is missing. |
+| `"401"` | The caller is not an administrator and `username` is not their own. |
+| `"500"` | The user could not be deleted; `msg` has the reason. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name     | Type    | Required | Restrictions | Description |
-|----------|---------|----------|--------------|-------------|
-| `success`| boolean | **Yes**  | none         | Whether the operation was successful. |
-| `username`| string | **No**  | none         | The username of the deleted user. |
+Related: [Users](/documentation/System/Users/)

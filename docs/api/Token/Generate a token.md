@@ -5,97 +5,69 @@ tags:
   - api
   - Authentication
   - Token
-description: null
+description: Have Datafor sign a JWT for any user with an embed token configuration, to test embedding or token sign-in.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`POST`
+Signs a JWT with an embed token configuration, for a user you name. Use it to test token sign-in or embedding before your own system issues tokens, or for a server-side integration that has no signing code of its own. To let users get a token for themselves, use [Personal tokens](/api/Token/Personal-tokens/) instead.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/token/generate
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/token/generate` |
+| Permission | Administrator |
+| Content type | `application/json` |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `name` | body | string | Yes | Name of the embed token configuration. |
+| `privateKey` | body | string | Yes | The configuration's secret. Datafor signs with the value you send and does not compare it with the stored secret, so a wrong value gives a token that Datafor later rejects. |
+| `payload` | body | object | Yes | Claims to put in the token. `payload.username` (the Datafor login name) is required. |
+
+Every key of `payload` becomes a claim. A key that has an entry in the configuration's `fieldmap` is renamed to the mapped claim: with `"fieldmap": {"username": "loginname"}`, `"username": "analyst1"` becomes the claim `"loginname": "analyst1"`, which is what Datafor looks for when the token comes back. Arrays stay arrays; other values become strings. Datafor adds `exp`, set to now plus the configuration's `expire`.
+
+Only `HS256`, `HS384` and `HS512` configurations can sign here. For `RS*` and `ES*` configurations Datafor holds only the public key, so sign the token in your own system.
+
+## Example
+
+```bash
+curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor-modeler/api/token/generate" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "ERP",
+    "privateKey": "<the-configuration-secret>",
+    "payload": {"username": "analyst1", "name": "Analyst One", "email": "analyst1@example.com"}
+  }'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
----
-
-**Preconditions**
-- The current user's user type **must** be `Administrator`.
-
----
-
-### Parameters
-
-```yaml
-name: ERP
-privateKey: abcd
-payload:
-  username: admin
-  name: ERP
-  roles:
-    - SYS_CREATOR
-    - Manager
-  inituser: string
-  password: string
-  company: string
-  dept: string
-  email: string
-  description: string
-  title: string
-  dob: string
-  mobile: string
-```
-
-| Name         | Location | Type     | Required | Description                             |
-|--------------|----------|----------|----------|-----------------------------------------|
-| body         | body     | object   | yes      | The main data object for generating the token. |
-| ├── name     | body     | string   | yes      | Name of the token. |
-| ├── privateKey | body   | string   | yes      | Private key associated with the token. |
-| ├── payload  | body     | object   | yes      | The payload object containing user and role info. |
-| &emsp;├── username   | body | string | yes    | Username for token generation. |
-| &emsp;├── name       | body | string | no     | User's name. |
-| &emsp;├── roles      | body | array(string) | no | List of user roles. |
-| &emsp;├── inituser   | body | string | no     | Initial user. |
-| &emsp;├── password   | body | string | no     | User password. |
-| &emsp;├── company    | body | string | no     | Company name. |
-| &emsp;├── dept       | body | string | no     | Department name. |
-| &emsp;├── email      | body | string | no     | Email address. |
-| &emsp;├── description | body | string | no    | Description. |
-| &emsp;├── title      | body | string | no     | Title. |
-| &emsp;├── dob        | body | string | no     | Date of birth. |
-| &emsp;└── mobile     | body | string | no     | Mobile number. |
-
----
-
-## **Response Examples**
 
 ```json
 {
   "success": true,
-  "expire": 86400,
-  "token": "<signed-jwt>"
+  "token": "<signed-jwt>",
+  "expire": 86400
 }
 ```
 
----
+`token` is the JWT; `expire` is its lifetime in seconds. Send it as described in [JSON Web Token (JWT)](/documentation/System/JWT/#_3-send-a-token), for example:
 
-## **HTTP Responses**
+```bash
+curl -H "Authorization: Bearer <signed-jwt>" \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/detail"
+```
 
-| HTTP Status Code | Meaning                                                                 | Description        | Data schema |
-|------------------|-------------------------------------------------------------------------|--------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                  | The request was successful. | Inline      |
+The configuration must be enabled (`"enable": "1"`) for Datafor to accept the token.
 
-### **Response Data Schema (HTTP 200)**
+## Errors
 
-| Name     | Type    | Required | Restrictions | Description       |
-|----------|---------|----------|--------------|-------------------|
-| `success`| boolean | **Yes**  | none         | Indicates if the token generation was successful (`true` or `false`). |
-| `expire` | integer | **Yes**  | none         | The token's expiration time in seconds. |
-| `token`  | string  | **Yes**  | none         | The generated token string. |
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `"403"` | `no permission` | The caller is not an administrator. |
+| (none) | `secret can not be empty` | `privateKey` is missing. |
+| (none) | `username can not be empty` | `payload.username` is missing. |
+| (none) | `name does not exist` | No configuration has this `name`. |
+| (none) | other text | Signing failed, for example with an `RS*` or `ES*` configuration. |
+
+Errors without a `code` have `"success": false`.
+
+Related: [JSON Web Token (JWT)](/documentation/System/JWT/), [Get token configurations](/api/Token/Get%20token%20configurations/)

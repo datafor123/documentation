@@ -4,95 +4,61 @@ permalink: /api/Parameters/Add or modify a parameter/
 tags:
   - api
   - Parameters
-description: null
+description: Create or update a global parameter (administrators only).
 createTime: 2026/09/01 22:03:26
 ---
+Creates a global parameter, or updates one when `id` is sent. Reports use global parameters by name, and model SQL references them as `${name}`.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/parameter/update` |
+| Permission | Administrator user type |
+| Content type | `application/x-www-form-urlencoded` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/parameter/update
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `id` | form | string | To update | ID from [Get parameters](/api/Parameters/Get%20parameters/). Omit to create. |
+| `name` | form | string | Yes | 1 to 32 letters, digits, underscores, dots or Chinese characters. Must not start with `system.` and must be unique. |
+| `datatype` | form | string | Yes | `2` Text, `5` Numeric, `9` Date. |
+| `type` | form | string | Yes | Suggested values: `1` Any value, `2` SQL, `3` List of values. A Date parameter uses `1`. |
+| `detail` | form | string | With `type` 2 or 3 | For `2`: one read-only `SELECT` statement whose first column holds the values. For `3`: a JSON array such as `[{"name": "region", "value": "North"}, {"name": "region", "value": "West"}]`. |
+| `dbconn` | form | string | With `type` 2 | Connection the SQL runs on. |
+| `schema` | form | string | No | Schema for the SQL. |
+| `default` | form | string | No | Default value. Numeric parameters need a number; Date parameters need `yyyy-MM-dd`. |
+| `desc` | form | string | No | Description. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/parameter/update" \
+  --data-urlencode "name=region" \
+  --data-urlencode "datatype=2" \
+  --data-urlencode "type=2" \
+  --data-urlencode "dbconn=Sales DW" \
+  --data-urlencode "detail=select distinct region from public.orders" \
+  --data-urlencode "default=North" \
+  --data-urlencode "desc=Sales region"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-### **Request Example**
-
-```yaml
-id: dev
-name: dev
-desc: for develop
-datatype: "2"
-type: "3"
-dbconn: ""
-schema: ""
-default: "3"
-detail: '[{"name":"dev","value":"a"},{"name":"dev","value":"b"}]'
-```
-
----
-
-### **Parameters Schema**
-
-| Name       | Location | Type     | Required | Description |
-|------------|----------|----------|----------|-------------|
-| `body`     | body     | object   | no       | The request body containing the parameter data. |
-| ├── `id`   | body     | string   | no       | If empty, the parameter will be added; otherwise, it will be updated. |
-| ├── `name` | body     | string   | yes      | The name of the parameter. |
-| ├── `desc` | body     | string   | no       | A description of the parameter. |
-| ├── `datatype` | body  | string   | no       | The datatype of the parameter. Possible values: `1` (NUMBER), `2` (STRING), `9` (TIMESTAMP). |
-| ├── `type` | body     | string   | yes      | The type of the parameter. Possible values: `1` (list), `2` (SQL), `3` (filter). |
-| ├── `dbconn` | body   | string   | no       | Database connection string, if applicable. |
-| ├── `schema` | body   | string   | no       | The schema name, if applicable. |
-| ├── `default` | body  | string   | no       | The default value for the parameter. |
-| ├── `detail` | body   | string   | no       | A JSON array or SQL query detailing the parameter values. |
-
----
-
-### **Enum Values**
-
-| Name        | Value   |
-|-------------|---------|
-| `datatype`  | `1`     |
-| `datatype`  | `2`     |
-| `datatype`  | `9`     |
-| `type`      | `1`     |
-| `type`      | `2`     |
-| `type`      | `3`     |
-
----
-
-### **Response Examples**
 
 ```json
-{
-  "msg": "success",
-  "success": true
-}
+{ "success": true, "msg": "success", "startQuote": "\"", "endQuote": "\"" }
 ```
 
----
+## Errors
 
-### **HTTP Responses**
+HTTP 200 with `success: false` and a `msg`.
 
-| HTTP Status Code | Meaning                                                                  | Description | Data Schema |
-|------------------|--------------------------------------------------------------------------|-------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                  | none        | Inline      |
+| `msg` | When |
+| --- | --- |
+| `Only administrators can manage global parameters` | The caller is not an administrator. |
+| `parameter name is required` / `is too long (max 32 characters)` | Missing or long `name`. |
+| `parameter name must not start with "system."` | The name collides with the system parameters. |
+| `parameter name may only contain letters, digits, underscores, dots and Chinese characters` | Invalid character in `name`. |
+| `The name already exists` | Creating a parameter whose name is taken. |
+| `default value of a numeric parameter must be a number` | `datatype` 5 with a non-numeric `default`. |
+| `default value of a date parameter must be in yyyy-MM-dd` | `datatype` 9 with another date format. |
 
----
-
-### **Response Data Schema (HTTP 200)**
-
-| Name        | Type    | Required | Description                            |
-|-------------|---------|----------|----------------------------------------|
-| `msg`       | string  | No       | The message indicating the result.     |
-| `success`   | boolean | Yes      | Indicates whether the operation was successful. |
+Related: [Creating parameters](/documentation/Analysis/Creating-Parameters/), [Get value range](/api/Parameters/Get%20value%20range/)

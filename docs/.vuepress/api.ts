@@ -5,9 +5,19 @@ export const apiNote = defineNoteConfig({
 	link: "/api",
 	sidebar: [
 		{
+			text: "Getting Started",
+			link: "/api/intro.md",
+		},
+		{
 			text: "Authentication",
 			collapsed: true,
 			prefix: "/api/Authentication/",
+			items: "auto",
+		},
+		{
+			text: "Token",
+			collapsed: true,
+			prefix: "/api/Token/",
 			items: "auto",
 		},
 		{
@@ -89,48 +99,6 @@ export const apiNote = defineNoteConfig({
 			items: "auto",
 		},
 		{
-			text: "Email",
-			collapsed: true,
-			prefix: "/api/Email/",
-			items: "auto",
-		},
-		{
-			text: "Version",
-			collapsed: true,
-			prefix: "/api/Version/",
-			items: "auto",
-		},
-		{
-			text: "Schedule",
-			collapsed: true,
-			prefix: "/api/Schedule/",
-			items: "auto",
-		},
-		{
-			text: "Token",
-			collapsed: true,
-			prefix: "/api/Token/",
-			items: "auto",
-		},
-		{
-			text: "System Settings",
-			collapsed: true,
-			prefix: "/api/System Settings/",
-			items: "auto",
-		},
-		{
-			text: "Lineage",
-			collapsed: true,
-			prefix: "/api/Lineage/",
-			items: "auto",
-		},
-		{
-			text: "Alert",
-			collapsed: true,
-			prefix: "/api/Alert/",
-			items: "auto",
-		},
-		{
 			text: "Data Security",
 			collapsed: true,
 			prefix: "/api/Data Security/",
@@ -146,10 +114,41 @@ export const apiNote = defineNoteConfig({
 					collapsed: true,
 					prefix: "/api/Data Security/Objects/",
 					items: "auto",
-				}]
+				},
+			],
 		},
 		{
-			text: "Extention Plugins",
+			text: "Alert",
+			collapsed: true,
+			prefix: "/api/Alert/",
+			items: "auto",
+		},
+		{
+			text: "Lineage",
+			collapsed: true,
+			prefix: "/api/Lineage/",
+			items: "auto",
+		},
+		{
+			text: "System Settings",
+			collapsed: true,
+			prefix: "/api/System Settings/",
+			items: "auto",
+		},
+		{
+			text: "Email",
+			collapsed: true,
+			prefix: "/api/Email/",
+			items: "auto",
+		},
+		{
+			text: "Version",
+			collapsed: true,
+			prefix: "/api/Version/",
+			items: "auto",
+		},
+		{
+			text: "Extension Plugins",
 			collapsed: true,
 			prefix: "/api/Extension Plugins/",
 			items: [
@@ -157,12 +156,6 @@ export const apiNote = defineNoteConfig({
 					text: "White Label",
 					collapsed: true,
 					prefix: "/api/Extension Plugins/White Label/",
-					items: "auto",
-				},
-				{
-					text: "Audit",
-					collapsed: true,
-					prefix: "/api/Extension Plugins/Audit/",
 					items: "auto",
 				},
 				{
@@ -178,25 +171,18 @@ export const apiNote = defineNoteConfig({
 					items: "auto",
 				},
 				{
-					text: "OAuth2",
-					collapsed: true,
-					prefix: "/api/Extension Plugins/OAuth2/",
-					items: "auto",
-				},
-				{
 					text: "SAML2",
 					collapsed: true,
 					prefix: "/api/Extension Plugins/SAML2/",
 					items: "auto",
 				},
 				{
-					text: "Cas",
+					text: "CAS",
 					collapsed: true,
-					prefix: "/api/Extension Plugins/Cas/",
+					prefix: "/api/Extension Plugins/CAS/",
 					items: "auto",
-				}
-			]
-		}
+				},
+			],
+		},
 	],
 });
-

@@ -119,7 +119,9 @@ To confirm that the query used the aggregation table, select the Pivot table in 
 
 ## Understand query matching and fallback
 
-The query engine can use the aggregation table when the requested Dimensions, filters, and Measures can be answered from its mapped grain and columns.
+The query engine can use the aggregation table when the requested Dimensions, filters, and Measures can be answered from its mapped grain and columns. It checks the conditions in this order, and the first one that fails sends the query to the detail tables. When several aggregation tables qualify, it reads the smallest.
+
+![The engine reads an aggregation table only when UseAggregates and ReadAggregates are on, every requested level is covered by a Group by mapping, every measure is mapped with the same column and summarization, and every filter is within the grain; otherwise it reads the detail fact table. With agg_l_03_sales_fact_1997, Store Sales by Customer reads the aggregation table and Store Sales by Store reads sales_fact_1997](./images/aggregation-table-routing.svg)
 
 If a report adds a Dimension, filter, or Measure that the aggregation table cannot answer, the engine can fall back to the detail tables. This is expected and preserves query correctness. For example, an aggregation grouped only by customer and time cannot answer a query grouped by store unless store is also represented in its mappings.
 

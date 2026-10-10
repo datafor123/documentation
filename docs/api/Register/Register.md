@@ -5,98 +5,63 @@ tags:
   - api
   - Users
   - Register
-description: null
+description: Create your own Creator account with an emailed registration code.
 createTime: 2026/09/01 22:03:26
 ---
 
-## **User Registration API**
+Creates a user account with the code emailed by [Get register code](/api/Register/Get%20register%20code/). Registered users get the user type `SYS_Creator` and no business roles.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/user/register` |
+| Permission | Anyone (no sign-in) |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/user/register
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `username` | body | string | Yes | Login name. Must not contain `?`, `/`, `'` or `"`. Check it first with [Verify username can be registered](/api/Register/Verify%20username%20can%20be%20registered/). |
+| `email` | body | string | Yes | The address the code was sent to. |
+| `code` | body | string | Yes | The code from the email. |
+| `password` | body | string | Yes | Password. |
+| `name` | body | string | No | Full name. |
+| `company`, `dept`, `title`, `dob`, `mobile`, `description` | body | string | No | Profile fields. |
+
+`roles` and `usertype` in the body are ignored.
+
+## Example
+
+```bash
+curl -X POST "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/register" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "new.user",
+    "email": "new.user@example.com",
+    "code": "<code-from-email>",
+    "password": "<password>",
+    "name": "New User",
+    "company": "Example Corp"
+  }'
 ```
 
-**Authorization**  
-Authentication is **not required** to use this API.
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-## **Description**
-This API registers a new user account by providing user details and a verification code. The email address must be unique, and the registration code must be valid.
-
----
-
-### **Request Example**
 ```json
 {
-  "company": "Datafor",
-  "dept": "IT",
-  "description": "dev",
-  "dob": "2001-01-01",
-  "email": "a@a.com",
-  "mobile": "111",
-  "name": "Administrator",
-  "password": "password",
-  "title": "Developer",
-  "username": "dev",
-  "code": "037173"
+  "success": true,
+  "username": "new.user"
 }
 ```
 
-### **Parameters Schema**
+The user can sign in at once with [Log in](/api/Authentication/Restful%20Login/).
 
-| Name        | Location | Type   | Required | Description |
-|------------|----------|--------|----------|-------------|
-| `company`  | body    | string | No       | The name of the company the user belongs to. |
-| `dept`     | body    | string | No       | The department the user is associated with. |
-| `description` | body | string | No       | A brief description of the user. |
-| `dob`      | body    | string | No       | The user's date of birth (format: `YYYY-MM-DD`). |
-| `email`    | body    | string | **Yes**  | The email address used for registration. |
-| `mobile`   | body    | string | No       | The user's mobile phone number. |
-| `name`     | body    | string | **Yes**  | The full name of the user. |
-| `password` | body    | string | **Yes**  | The password for the new account. |
-| `title`    | body    | string | No       | The user's job title. |
-| `username` | body    | string | **Yes**  | The username for login. |
-| `code`     | body    | string | **Yes**  | The registration verification code sent to the email. |
+## Errors
 
----
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `"400"` | `invalid parameter` | `username` or `email` is missing or invalid, or the body is not JSON. |
+| `"428"` | `Send verify code please` | No code was sent to this address, or it expired. |
+| `"412"` | `Check verify code please` | Wrong code. |
+| `"406"` | `you have tried too many times,please 1 min later` | Too many wrong codes. Wait a minute. |
+| `"409"` | `<value> already existed` | The user name or email is taken. |
 
-## **Response Examples**
-
-### **Successful Response (HTTP 200)**
-```json
-{
-  "success": true
-}
-```
-
-### **Failure Response (HTTP 200)**
-```json
-{
-  "msg": "Email already exists",
-  "code": 409,
-  "success": false
-}
-```
-
----
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                              | Description | Data Schema |
-|------------------|----------------------------------------------------------------------|-------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)              | Request was successful | Inline |
-
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type     | Required | Description |
-|-----------|---------|----------|-------------|
-| `msg`     | string  | No       | Response message (only present when the request fails). |
-| `code`    | integer | No       | HTTP status code indicating the failure reason. |
-| `success` | boolean | **Yes**  | Indicates whether the request was successful. |
+Related: [Get register code](/api/Register/Get%20register%20code/)

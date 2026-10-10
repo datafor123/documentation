@@ -92,6 +92,8 @@ pg_restore -h <database_host> -p <port> -U postgres -d datafor    --no-owner --r
 
 In every file below, replace `localhost:25432` or `127.0.0.1:25432` with `<database_host>:<port>` and set the account and password from 3.2. All paths are relative to `bi-server`.
 
+![After the five databases are copied with pg_dump and pg_restore, server.xml points jdbc/Hibernate, jdbc/Quartz, jdbc/jackrabbit, jdbc/datafor_modeler_auth and jdbc/datafor_repository to hibernate, quartz, jackrabbit, datafor and upload; postgresql.hibernate.cfg.xml points to hibernate, the Jackrabbit repository.xml and workspace.xml files to jackrabbit, and applicationContext-spring-security-jdbc.properties and DATABASE_URL in ai-agent/.env to datafor](./images/repository-separation-config-map.svg)
+
 | File | What to change |
 | --- | --- |
 | `tomcat/conf/server.xml` | In `<Context path="/datafor" …>`, the `url`, `username` and `password` of the five `<Resource>` entries: `jdbc/Hibernate`, `jdbc/Quartz`, `jdbc/jackrabbit`, `jdbc/datafor_modeler_auth` (database `datafor`) and `jdbc/datafor_repository` (database `upload`). Keep the `?stringtype=unspecified` suffix of the last two URLs. |
@@ -103,7 +105,7 @@ In every file below, replace `localhost:25432` or `127.0.0.1:25432` with `<datab
 
 The built-in database is still started by `start-server`. It is no longer used, but keep it until you have verified the new setup.
 
-> **Important**: An update package replaces `tomcat/conf/server.xml` as a whole (the old file is kept in `bi-server/update/backup<time stamp>/`), so after an update Datafor connects to the built-in database again. Before every update, note the `<Resource>` settings you changed above; after the update, stop Datafor, copy them from the backup folder into the new `server.xml`, and start it again.
+> **Important**: An update package replaces `tomcat/conf/server.xml` as a whole (the old file is kept in `bi-server/update/backup<time stamp>/`), so after an update Datafor connects to the built-in database again. Before every update, note the `<Resource>` settings you changed above; after the update, stop Datafor, copy them from the backup folder into the new `server.xml`, and start it again. See [Upgrading Datafor](/documentation/Setup/Upgrading-Datafor/).
 
 ## 5. Clear the caches
 

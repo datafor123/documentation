@@ -4,105 +4,67 @@ permalink: /api/Metadata/Get tables of a schema/
 tags:
   - api
   - Metadata
-description: null
+description: List the tables and views in one or more schemas of a connection, filtered by data security.
 createTime: 2026/09/01 22:03:26
 ---
+Lists the tables and views in one or more schemas, grouped by schema. Tables hidden from the caller by **Table & column access** rules are left out.
 
-## **POST Get tables of a schema**
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/metadata/tables` |
+| Permission | **Read** on the connection. `all=true` needs **Full control** on the connection. |
+| Content type | `application/x-www-form-urlencoded` |
 
-**Method**  
-`POST`
+## Parameters
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/metadata/tables
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `connection` | form | string | Yes | Connection name. |
+| `schema` | form | string | No | A schema name, or a JSON array of names such as `["public","staging"]`. Ignored for file dataset connections. |
+| `tables` | form | string | No | Instead of listing schemas, look up specific objects: a JSON array of `{"schema": "...", "name": "...", "type": "1"}`. Objects that do not exist are left out. |
+| `includeCaption` | form | boolean | No | Default `false`. Add `caption` from the table dictionary. |
+| `includeQuery` | form | boolean | No | Default `false`. Also list saved queries (`type` `3`) in the requested schemas. |
+| `all` | form | boolean | No | Default `false`. `true` skips Table & column access filtering. |
+| `refresh`, `usemeta` | form | boolean | No | Default `true`. Accepted for compatibility; they do not change the result. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/metadata/tables" \
+  --data-urlencode "connection=Sales DW" \
+  --data-urlencode 'schema=["public"]'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
----
-
-**Preconditions**
-- The current user needs **read privileges** to the database connection.
-
----
-
-### **Parameters Schema**
-
-| Name            | Location | Type    | Required | Description |
-|----------------|----------|---------|----------|-------------|
-| `body`         | body     | object  | **No**   | The request payload containing details about the schema and connection. |
-| ├── `connection` | body   | string  | **No**   | The name of the database connection for which tables will be retrieved. |
-| ├── `schema`   | body     | string  | **No**   | The schema from which to retrieve table metadata. |
-| ├── `includeQuery` | body | boolean | **No**   | Whether to include additional query-related metadata. |
-| ├── `includeCaption` | body | boolean | **No**   | Whether to include captions for table names. |
-| ├── `all`      | body     | boolean | **No**   | If `true`, the user must be an **administrator** of the connection. |
-
-### **Request Example**
-
-```yaml
-connection: foodmart
-schema: public
-includeQuery: "false"
-includeCaption: "false"
-all: "false"
-```
-
----
-
-### **Response Examples**
 
 ```json
 {
+  "success": true,
   "msg": "success",
+  "databaseTypeName": "PostgreSQL",
+  "databaseTypeShortName": "POSTGRESQL",
+  "startQuote": "\"",
   "endQuote": "\"",
   "data": {
-    "foodmart": [
-      {
-        "schema": "foodmart",
-        "name": "agg_l_03_sales_fact_1997",
-        "fullname": "\"foodmart\".\"agg_l_03_sales_fact_1997\"",
-        "type": "1"
-      },
-      {
-        "schema": "foodmart",
-        "name": "agg_lc_06_sales_fact_1997",
-        "fullname": "\"foodmart\".\"agg_lc_06_sales_fact_1997\"",
-        "type": "1"
-      }
+    "public": [
+      { "schema": "public", "name": "orders", "fullname": "\"public\".\"orders\"", "type": "1" },
+      { "schema": "public", "name": "v_customers", "fullname": "\"public\".\"v_customers\"", "type": "2" }
     ]
   },
-  "success": true,
-  "startQuote": "\""
+  "typeCatalog": "..."
 }
 ```
 
----
+`type` is `1` for a table, `2` for a view, `3` for a saved query.
 
-### **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning | Description | Data schema |
-|------------------|---------|-------------|-------------|
-| `200`           | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | The request was successful, and the response contains the list of tables. | Inline |
+HTTP 200 with `success: false`.
 
----
+| `code` / `msg` | When |
+| --- | --- |
+| `msg`: `parameter connection cannot be empty` | `connection` is missing. |
+| `msg`: `parameter tables is invalid` | `tables` is not a JSON array of objects. |
+| `code` `"401"`, `msg`: `No administrative privileges:<connection>` | `all=true` without Full control on the connection. |
+| `msg`: `CONNECTION_READ_FORBIDDEN: ...` | The caller lacks Read on the connection. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type     | Required | Description |
-|-----------|---------|----------|-------------|
-| `msg`     | string  | **Yes**  | Message indicating the status of the request (e.g., `"success"`). |
-| `endQuote` | string  | **Yes**  | The character used for quoting identifiers at the end (e.g., `"`). |
-| `data`    | object  | **Yes**  | The retrieved table metadata, grouped by schema name. |
-| ├── `schemaName` | object | **Yes** | An object containing tables under a specific schema. |
-| │   ├── `schema` | string | **Yes** | The name of the schema to which the table belongs. |
-| │   ├── `name` | string | **Yes** | The name of the table. |
-| │   ├── `fullname` | string | **Yes** | The fully qualified name of the table, including schema (e.g., `"foodmart"."agg_l_03_sales_fact_1997"`). |
-| │   ├── `type` | string | **Yes** | The type of the table (`1` indicates a regular table). |
-| `success` | boolean | **Yes**  | A boolean flag indicating whether the request was processed successfully. |
-| `startQuote` | string | **Yes**  | The character used for quoting identifiers at the start (e.g., `"`). |
+Related: [Get Columns of tables](/api/Metadata/Get%20Columns%20of%20tables/), [Data Security](/documentation/Datasource/Data-Security/)

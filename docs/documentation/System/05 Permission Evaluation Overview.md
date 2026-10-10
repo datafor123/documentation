@@ -36,6 +36,8 @@ For an ordinary account, use this reasoning sequence when diagnosing access. It 
 4. For governed data access, evaluate OLS visibility and the effective RLS condition on the actual datasource and physical objects.
 5. Apply the report's ordinary filters to the permitted data.
 
+![Diagnosis order: identity (user, User Type, all roles), then capability, then the file and folder ACL (grants from the user, roles and User Type add up; Inherit parent uses the nearest ancestor that does not inherit; deleting needs Delete or Full control), then OLS (exclusions from all policies accumulate and any exclusion hides the object), then RLS (matching policies combine with OR, a matching Return all rows policy removes the limit, no matching policy means all rows), then the report's filters. Built-in Administrator and SuperUser bypass OLS and RLS](./images/permission-evaluation-order.svg)
+
 A failure at one required layer cannot be repaired by granting permission at a different layer. An RLS full-row exception cannot open an inaccessible report; a report's **Full control** cannot make a hidden column visible.
 
 ### User Types and Business Roles are different
@@ -231,35 +233,7 @@ Share links can use the sharer's data permissions; do not assume they enforce pe
 
 ## 8. Audit permission changes
 
-### Know what the Audit log provides
-
-Open **Settings › Operations › Audit log** as an administrator. The page configures which operations are recorded and how long records are kept. It is not a complete permission-history or before/after ACL comparison screen.
-
-<div align="left"><img src="./images/settings-audit.png" alt="Audit log page with the Record audit logs switch, Recorded operations groups, and the Summary panel" width="100%" /></div>
-
-| Area | What to set |
-| --- | --- |
-| **Status** › **Record audit logs** | Turn on to record anything. While it is off, the operations cannot be chosen ("Turn on to choose the operations to record."). |
-| **Recorded operations** | Tick the operations to record, grouped as **Authentication**, **Reports**, **Sharing**, **Folders**, **Models**, **Datasources**, **Security**, **Dictionaries**, and **Other operations**. **Select all** ticks every operation; the counter shows how many are enabled. |
-| **Retention** › **Keep records for** | Number of days to keep records. |
-| **Retention** › **Clear records** | Opens **Clear audit logs**: enter **Keep logs from the last** *n* days. Older records are removed immediately. |
-| **Summary** | Shows the status, the number of recorded operations, and the retention. |
-
-Click **Save** to apply the switch, the operation selection, and the retention.
-
-Operations relevant to permission and configuration changes:
-
-| Change | Recorded operation (group) |
-| --- | --- |
-| RLS policy creation, editing/state changes, deletion | **Create row security**, **Edit row security**, **Delete row security** (Security) |
-| OLS policy creation, editing/state changes, deletion | **Create object security**, **Edit object security**, **Delete object security** (Security) |
-| Saved changes on **Settings › General › System configuration** | **System settings changes** (Other operations) |
-
-Recording requires **Record audit logs** and the relevant operation to be enabled when the event occurs. Turning recording on later does not reconstruct earlier changes. Data Security records identify the actor, operation, target, and operation lifecycle, but do not constitute a complete snapshot of the rules before and after the change.
-
-A **System settings changes** record lists each changed setting with its value before and after the save. If the audit entry cannot be written, the settings are still saved and the page shows "Settings were saved, but the audit entry failed. Check the audit service." See [System Configuration](/documentation/System/System-Configuration/).
-
-Do not assume that file/folder ACL edits, role membership changes, User Type changes, ownership changes, and model security-setting changes all have equivalent entries in this operation log. Keep a separate change record for them. Also retain identity-provider audit evidence when memberships are supplied by an external system.
+Row and object security policy changes and system settings changes can be recorded in the audit log; file and folder ACL edits, role memberships and User Type changes have no equivalent entries. See [Audit Log](/documentation/System/Audit-Log/).
 
 ## Related topics
 
@@ -267,4 +241,5 @@ Do not assume that file/folder ACL edits, role membership changes, User Type cha
 - [Access Control List](/documentation/System/Access-Control-List/)
 - [Data Security](/documentation/Datasource/Data-Security/)
 - [Row-Level Security in Analytics](/documentation/Datasource/Row-Level-Security-in-Analytics/)
+- [Audit Log](/documentation/System/Audit-Log/)
 

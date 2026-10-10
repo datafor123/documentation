@@ -13,6 +13,8 @@ The AI Agent reads model configurations with the signed-in user's session. It th
 
 This guide applies to Datafor 10.00 and later. The value is called `DATAFOR_AGENT_SECRET` on the AI Agent side and `<agent-secret>` in Datafor's settings file.
 
+![The AI Agent keeps DATAFOR_AGENT_SECRET in instance-secrets.env; on each start its launcher writes the value into the agent-secret element of Datafor's datafor-modeler/settings.xml, and the AI Agent sends it in the X-Datafor-Agent-Secret header when it calls Datafor at DATAFOR_URL](./images/ai-agent-deployment-topology.svg)
+
 ## 1. Who is affected
 
 The questions you ask on the **AI Agent** page use the model profiles assigned to the Agent stages on the **LLM** page (see [LLM Configuration](/documentation/AI-Agent/LLM-Configuration/)) and do not depend on the secret. Some features fall back to an LLM configured in Datafor when their Agent stage has no assignment, and only those need it:

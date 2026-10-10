@@ -4,46 +4,42 @@ permalink: /api/Connections/Delete a connection/
 tags:
   - api
   - Connections
-description: null
+description: Delete a data connection by name.
 createTime: 2026/09/01 22:03:26
 ---
+Deletes a data connection. Models that use it stop working until they are pointed at another connection with [Change datasource of model](/api/Models/Change%20datasource%20of%20model/).
 
-**Method**  
-`DELETE`
+| | |
+| --- | --- |
+| Method and path | `DELETE /plugin/datafor-modeler/api/connection/deletebyname` |
+| Permission | **Delete** on the connection and the Creator or Administrator user type |
+| Content type | none (query string) |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/connection/deletebyname
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `name` | query | string | Yes | Connection name. |
+
+## Example
+
+```bash
+curl -u admin:password -X DELETE -G \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/connection/deletebyname" \
+  --data-urlencode "name=Sales DW"
 ```
 
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
+```json
+{ "success": true, "code": "200" }
+```
 
-**Preconditions**
-1. The current user’s type **cannot** be `SYS_Reader`.
-2. The current user must have **administrative** privileges for the connection.
+## Errors
 
-**Content Type**  
-No request body is typically used with `DELETE`. Parameters are provided via query string.
+HTTP 200 with `success: false`, `code` `"500"`, and the reason in `msg`.
 
----
+| `msg` starts with | When |
+| --- | --- |
+| `CONNECTION_DELETE_FORBIDDEN` | The caller lacks Delete on the connection, or the connection does not exist. |
+| `INTERNAL_CONNECTION_FORBIDDEN` | The connection is one of Datafor's internal data sources. |
 
-### **Parameters Schema**
-
-| Name  | Location | Type   | Required | Description                    |
-|-------|----------|--------|----------|--------------------------------|
-| **name** | query    | string | No       | The name of the connection to delete |
-
----
-
-## **Response Examples**
-
-**200 Response**  
-Indicates the request was processed successfully.
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+Related: [Access Control List](/documentation/System/Access-Control-List/)

@@ -16,6 +16,7 @@ Datafor is a business intelligence platform: connect databases, describe them on
 | --- | --- |
 | Understand what Datafor does | [Datafor Overview](/documentation/Start/Datafor-Overview/) |
 | Find my way around the console | [Quick Tour of the Console](/documentation/Console/Quick-Tour-of-the-Console/) |
+| Load the sample data used in the examples | [Set Up the Sample Data](/documentation/Start/Set-Up-the-Sample-Data/) |
 | Build a first report in ten minutes | [Create Your First Analysis Report](/documentation/Start/Create-Your-First-Analysis-Report/) |
 | Learn the report editor | [Report Editor Basics](/documentation/Start/Basic-Operations-for-Report-Design/) |
 

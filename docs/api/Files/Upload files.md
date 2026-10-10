@@ -4,67 +4,54 @@ permalink: /api/Files/Upload files/
 tags:
   - api
   - Files
-description: null
+description: Import a file, or a zip exported from Datafor, into a repository folder.
 createTime: 2026/09/01 22:03:26
 ---
+Imports one file, or a zip archive such as one produced by [Download folders and files](/api/Files/Download%20folders%20and%20files/), into a repository folder. Analysis models inside the zip are registered as models.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/repo/files/import` |
+| Permission | Creator or Administrator user type, and **Edit** on the target folder |
+| Content type | `multipart/form-data` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/repo/files/import
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `fileUpload` | form | file | Yes | The file or zip to import. |
+| `importDir` | form | string | No | Target folder path. Default `/public`. |
+| `smart` | form | boolean | No | Default `true`: overwrite existing files, keep the ACL of items that already exist, and give new items an ACL with Full control for the uploader. Set `false` to use the four flags below. |
+| `overwriteFile` | form | boolean | No | Default `true`. Replace existing files with the same name. |
+| `applyAclPermissions` | form | boolean | No | Default `false`. Apply ACLs found in the zip manifest or in `acl`. |
+| `overwriteAclPermissions` | form | boolean | No | Default `false`. Replace the ACL of existing items. |
+| `retainOwnership` | form | boolean | No | Default `true`. Keep the current owner of existing items. |
+| `acl` | form | string | No | ACL JSON to apply to new items when `smart` is `false`, in the format of [Change ACLs for files](/api/Files/Change%20acl%20for%20files/). |
+| `fileNameOverride` | form | string | No | Store the file under this name instead of the uploaded file name. |
+| `charSet` | form | string | No | Default `UTF-8`. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/repo/files/import" \
+  -F "importDir=/public/Sales" \
+  -F "fileUpload=@export.zip"
 ```
 
-**Authorization**  
-The current user must have write permissions in the target directory.
-
-**Content Type**  
-`multipart/form-data`
-
----
-
-### **Request Example**
-
-```yaml
-importDir: /public
-fileUpload: file://D:\temp\schema-Demo.zip
-smart: "true"
-```
-
-| Name         | Location | Type   | Required | Description |
-|-------------|----------|--------|----------|-------------|
-| `importDir` | body     | string | No       | Default is `/public`. If empty, the file is uploaded to the root directory. |
-| `fileUpload` | body     | binary | **Yes**  | The file to upload. |
-| `smart`     | body     | boolean | No       | Default is `true`. If `true`, new files or directories inherit the uploader's administrator ACL, but existing files retain their ACL. |
-
----
-
-## **Response Examples**
-
-#### ✅ **Success Response**
 ```json
-{
-  "success": true
-}
+{ "success": true }
 ```
 
----
+## Errors
 
-## **HTTP Responses**
+HTTP 200 with `success: false` and a `msg`.
 
-| HTTP Status Code | Meaning                                                 | Description                                    |
-|------------------|---------------------------------------------------------|------------------------------------------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | File uploaded successfully.                    |
-| 400              | Bad Request                                             | Invalid request format or missing parameters. |
-| 401              | Unauthorized                                            | Authentication required.                      |
-| 403              | Forbidden                                               | User lacks permission to upload.              |
-| 500              | Internal Server Error                                   | Unexpected error occurred.                    |
+| `msg` | When |
+| --- | --- |
+| `User is not authorized to perform this operation` | The caller's user type cannot upload, the caller lacks Edit on `importDir`, or `importDir` is not an existing folder. |
+| `INVALID_MIME_TYPE` | The file type is not supported. |
+| `invalid acl` (`code` 410) | `acl` is not valid JSON. |
+| `Connection MANAGE permission is required to disable data policies` | The zip contains a model with data policies turned off, and the caller cannot manage that model's connection. |
 
----
-
-## **Response Data Schema**
-
-| Name      | Type    | Required | Description |
-|-----------|--------|----------|-------------|
-| `success` | boolean | **Yes**  | `true` if the upload was successful, `false` otherwise. |
+Related: [Backup and restore](/documentation/System/backup/)

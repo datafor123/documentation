@@ -19,6 +19,8 @@ Typical uses:
 
 ## How it works
 
+![The host page opens the report with __xdmTimeout in its URL. The report posts visualizerReportFileLoaded with its id and waits that many milliseconds, 50 by default. A reply with that id as trustMark, event query, init true and filters arrives in time, so the first queries already use the filters. Later messages without init re-query the charts. Messages with another trustMark are ignored, and a report in edit mode does not listen at all](./images/xdm-handshake.svg)
+
 - XDM works only in read-only views: the open and embed URLs and share links. A report opened in edit mode ignores XDM messages.
 - When the report has loaded, it posts `{"event":"visualizerReportFileLoaded","id":"<id>"}` to its parent window (or opener). Every message the host sends must carry that `id` as `trustMark`; messages with another or no `trustMark` are dropped.
 - The report waits for an initial filter message (`init: true`) before it queries data. By default it waits only **50 ms**; add `__xdmTimeout=<milliseconds>` to the report URL to wait longer. After the wait it loads unfiltered, and a late `init` message no longer re-queries the charts. Messages without `init` are applied at any time.

@@ -4,60 +4,66 @@ permalink: /api/Files/Get file tree/
 tags:
   - api
   - Files
-description: null
+description: Return a folder and its descendants as a nested tree.
 createTime: 2026/09/01 22:03:26
 ---
+Returns a folder and its descendants as a nested tree, limited to what the caller can read.
 
-**Method**  
-`GET`
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor-modeler/api/repo/files/tree` |
+| Permission | **Read** on the folder; items the caller cannot read are left out |
+| Content type | none (query string) |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/repo/files/tree
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `pathId` | query | string | No | Repository path of the root folder, for example `/public` or `/home/alice`. Default: the repository root. |
+| `depth` | query | integer | No | Levels to return. Omit or `-1` for all levels. |
+| `filter` | query | string | No | Name pattern and type, for example `*\|FILES`, `*\|FOLDERS`, `*.datafor\|FILES`. Default: all files and folders. |
+| `showHidden` | query | boolean | No | Include hidden items. |
+| `includeAccessMap` | query | boolean | No | Default `false`. Add `accessMap` to each item: which of the permissions in `permissions` the caller has. |
+| `permissions` | query | string | No | Permissions to check for `accessMap`, separated by `\|`. Default `0\|1\|2\|4` (Read, Edit, Delete, Full control). |
+| `includeMetadata` | query | boolean | No | Default `false`. Add the item's metadata. |
+| `includeAcls` | query | boolean | No | Default `false`. Include each item's ACL. |
+| `includeSysDirs` | query | boolean | No | Default `false`. Include system folders such as `/etc`. |
+| `runuser` | query | string | No | Administrators only: build the tree as this user would see it. |
+| `runrole` | query | string | No | Administrators only: build the tree as a member of this role would see it. Ignored when `runuser` is set. |
+
+## Example
+
+```bash
+curl -u admin:password -G \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/repo/files/tree" \
+  --data-urlencode "pathId=/public/Sales" \
+  --data-urlencode "depth=1" \
+  --data-urlencode "includeAccessMap=true"
 ```
 
-**Authorization**  
-The current user must have appropriate permissions to access file structures.
-
-**Content Type**  
-`application/json`
-
----
-
-## **Query Parameters**
-
-| Name        | Location | Type   | Required | Description |
-|------------|----------|--------|----------|-------------|
-| `pathId`   | query   | string | No       | The ID of the folder to retrieve the file tree from. |
-| `showHidden` | query   | string | No       | Whether to include hidden files and folders. |
-
----
-
-## **Response Examples**
-
-#### ✅ **Success Response**
 ```json
 {
   "file": {
-    "name": "public",
-    "id": "44153c42-e4c4-4cce-8ca7-f9025ea7e1ab",
-    "createdDate": "1636119568448",
+    "name": "Sales",
+    "id": "11111111-2222-3333-4444-555555555555",
+    "path": "/public/Sales",
+    "title": "Sales",
     "folder": true,
-    "path": "/public",
     "hidden": false,
-    "title": "Public"
+    "createdDate": "1759900000000",
+    "accessMap": [ { "name": "0", "value": "true" }, { "name": "1", "value": "true" }, { "name": "2", "value": "false" }, { "name": "4", "value": "false" } ]
   },
   "children": [
     {
       "file": {
-        "name": "workshop.datafor",
-        "id": "2f5a2686-50ed-4104-a459-a300013ac2ca",
-        "createdDate": "1722844149655",
-        "fileSize": 322,
+        "name": "Revenue.datafor",
+        "id": "66666666-7777-8888-9999-000000000000",
+        "path": "/public/Sales/Revenue.datafor",
+        "title": "Revenue",
         "folder": false,
-        "path": "/public/workshop.datafor",
-        "hidden": false,
-        "title": "workshop"
+        "fileSize": 4120,
+        "createdDate": "1759900100000",
+        "lastModifiedDate": "1759986500000"
       },
       "children": []
     }
@@ -65,41 +71,14 @@ The current user must have appropriate permissions to access file structures.
 }
 ```
 
----
+`name` is the name in the repository path; `title` is the name shown in the console. Dates are epoch milliseconds as strings.
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | File tree retrieved successfully. |
-| 400              | Bad Request                                             | Invalid parameters provided. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 403              | Forbidden                                               | User lacks permission to access file tree. |
-| 404              | Not Found                                               | Folder not found. |
-| 500              | Internal Server Error                                   | Unexpected error occurred. |
+| Response | When |
+| --- | --- |
+| `{"success": false, "msg": "..."}` | `runuser` or `runrole` was sent by a non-administrator, or the tree could not be built. |
 
----
+A path the caller cannot read returns an empty body or no `children`, not an error.
 
-## **Response Data Schema**
-
-| Name                | Type      | Required | Description |
-|---------------------|----------|----------|-------------|
-| `file`             | object    | **Yes**  | Root folder details. |
-| `file.name`        | string    | **Yes**  | Name of the folder. |
-| `file.id`          | string    | **Yes**  | Unique ID of the folder. |
-| `file.createdDate` | string    | **Yes**  | Creation timestamp. |
-| `file.folder`      | boolean   | **Yes**  | Indicates if the entity is a folder. |
-| `file.path`        | string    | **Yes**  | Full path of the folder. |
-| `file.hidden`      | boolean   | **Yes**  | Indicates if the folder is hidden. |
-| `file.title`       | string    | **Yes**  | Display title of the folder. |
-| `children`         | array     | **Yes**  | List of child folders and files. |
-| `children.file`    | object    | **Yes**  | File or folder details. |
-| `children.file.name` | string  | **Yes**  | Name of the file or folder. |
-| `children.file.id`   | string  | **Yes**  | Unique ID of the file or folder. |
-| `children.file.createdDate` | string | **Yes**  | Creation timestamp. |
-| `children.file.fileSize` | integer | No   | File size in bytes (null for folders). |
-| `children.file.folder` | boolean | **Yes**  | Indicates if it is a folder. |
-| `children.file.path`   | string  | **Yes**  | Full path of the file or folder. |
-| `children.file.hidden` | boolean | **Yes**  | Indicates if the file or folder is hidden. |
-| `children.file.title`  | string  | **Yes**  | Display title of the file or folder. |
-| `children.children`    | array   | No      | Nested child elements (if any). |
+Related: [Get folder's children](/api/Folders/Get%20folder's%20children/), [Search](/api/Files/Search/)

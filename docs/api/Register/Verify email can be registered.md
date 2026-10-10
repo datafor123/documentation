@@ -5,72 +5,43 @@ tags:
   - api
   - Users
   - Register
-description: null
+description: Check that an email address is valid and not used by another user.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`POST`
+Checks that an email address looks valid and is not used by another user.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/user/isRightEmailForAdd
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/user/isRightEmailForAdd` |
+| Permission | Anyone (no sign-in) |
+| Content type | `application/x-www-form-urlencoded` |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `email` | form | string | Yes | Address to check. The only format check is that it contains `@`. It is taken if it matches another user's email or login name. |
+
+## Example
+
+```bash
+curl -X POST "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/isRightEmailForAdd" \
+  -d "email=new.user@example.com"
 ```
 
-**Authorization**  
-Authentication is **not required** to use this API.
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-## **Description**
-This API verifies whether an email address can be used for registration. It checks if the provided email is valid and not already registered in the system.
-
----
-
-### **Request Example**
-```yaml
-email: a@a.com
-```
-
-### **Parameters Schema**
-
-| Name    | Location | Type   | Required | Description |
-|---------|----------|--------|----------|-------------|
-| `email` | body    | string | **Yes**  | The email address to be verified for registration eligibility. |
-
----
-
-## **Response Examples**
-
-### **Successful Response (HTTP 200)**
 ```json
 {
-  "success": true
+  "success": true,
+  "code": "200"
 }
 ```
 
-### **Failure Response (Example)**
-```json
-{
-  "msg": "Email is already registered",
-  "success": false
-}
-```
+## Errors
 
----
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `"400"` | `not invalid email` | The address is empty or has no `@`. |
+| `"409"` | `<email> already existed` | The address is taken. |
 
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                              | Description | Data Schema |
-|------------------|----------------------------------------------------------------------|-------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)              | Request was successful | Inline |
-
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type     | Required | Description |
-|-----------|---------|----------|-------------|
-| `success` | boolean | **Yes**  | Indicates whether the email is available for registration. |
-| `msg`     | string  | No       | Response message (only present when the email cannot be used). |
+Related: [Get register code](/api/Register/Get%20register%20code/)

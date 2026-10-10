@@ -4,112 +4,70 @@ permalink: /api/Metadata/Get Columns of tables/
 tags:
   - api
   - Metadata
-description: null
+description: Return the columns and types of one or more tables, or of a SQL query.
 createTime: 2026/09/01 22:03:26
 ---
+Returns the columns of one or more tables or SQL queries on a connection. Columns hidden from the caller by **Table & column access** rules are left out.
 
-### **Method**
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/metadata/columns` |
+| Permission | **Read** on the connection. `all=true` needs **Full control**; a `sql` entry needs permission to run raw SQL on the connection. |
+| Content type | `application/x-www-form-urlencoded` |
 
-### **Request URL**
-```html
-/plugin/datafor-modeler/api/metadata/columns
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `connection` | form | string | Yes | Connection name. |
+| `pairs` | form | string | Yes | JSON array of objects to describe: `{"schema": "public", "table": "orders"}` for a table, or `{"sql": "select ..."}` for a query. |
+| `isEncode` | form | boolean | No | Default `false`. `true` when each `sql` is Base64-encoded (UTF-8). |
+| `isMoreDetail` | form | boolean | No | Default `false`. Add formatting details to each column, such as `formatMask`, `decimalSymbol`, `groupingSymbol` and locale. |
+| `refresh` | form | boolean | No | Default `true`. Read the columns from the database instead of the server's metadata cache. |
+| `usemeta` | form | boolean | No | Default `true`. Read columns through JDBC metadata; `false` reads them by running an empty query on the table. |
+| `all` | form | boolean | No | Default `false`. `true` skips Table & column access filtering. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/metadata/columns" \
+  --data-urlencode "connection=Sales DW" \
+  --data-urlencode 'pairs=[{"schema":"public","table":"orders"}]'
 ```
-
-### **Authorization**
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-### **Content Type**
-`application/json`
-
----
-
-### **Preconditions**
-- The current user needs **read privileges** to the database connection.
-
----
-
-### **Parameters Schema**
-
-| Name          | Location | Type   | Required | Description |
-|--------------|----------|--------|----------|-------------|
-| `body`       | body     | object | **No**   | The request payload containing the connection name and table details. |
-| ├── `connection` | body | string | **No**   | The name of the database connection from which table metadata will be retrieved. |
-| ├── `pairs`  | body     | string | **No**   | A JSON string containing a list of schema-table pairs that specify the target tables. |
-| ├── `includeField` | body | string | **No**   | Boolean (`"true"`/`"false"`) indicating whether to include field metadata in the response. |
-
-### **Request Example**
-
-```yaml
-connection: foodmart
-pairs: '[{"schema":"public","table":"customer"},{"schema":"public","table":"inventory_fact_1997"},{"schema":"public","table":"sales_fact_1997"},{"schema":"public","table":"store"},{"schema":"public","table":"time_by_day"},{"schema":"public","table":"warehouse"},{"schema":"public","table":"warehouse_class"},{"schema":"public","table":"product_class"},{"schema":"public","table":"product"}]'
-includeField: "true"
-```
-
----
-
-### **Response Examples**
 
 ```json
 {
+  "success": true,
   "msg": "success",
+  "databaseTypeName": "PostgreSQL",
+  "startQuote": "\"",
   "endQuote": "\"",
   "data": [
     {
-      "schema": "foodmart",
+      "schema": "public",
+      "table": "orders",
+      "exist": true,
       "fields": [
-        {
-          "typeDesc": "Integer",
-          "name": "customer_id",
-          "dataType": 1,
-          "originalColumnTypeName": "int4",
-          "originalPrecision": 10,
-          "originalScale": 0
-        },
-        {
-          "typeDesc": "String",
-          "name": "lname",
-          "dataType": 2,
-          "originalColumnTypeName": "varchar",
-          "originalPrecision": 30
-        }
-      ],
-      "table": "customer"
+        { "name": "order_id", "typeDesc": "Integer", "dataType": 1, "originalColumnTypeName": "int4", "originalPrecision": 10, "originalScale": 0 },
+        { "name": "region", "typeDesc": "String", "dataType": 2, "originalColumnTypeName": "varchar", "originalPrecision": 30 }
+      ]
     }
-  ],
-  "success": true,
-  "startQuote": "\""
+  ]
 }
 ```
 
----
+Primary key columns have `primary: true`. `exist` is `false` when the table cannot be found or is hidden from the caller; `fields` is then empty.
 
-### **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning | Description | Data schema |
-|------------------|---------|-------------|-------------|
-| `200`           | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | The request was successful, and the response contains the table column metadata. | Inline |
+HTTP 200 with `success: false`.
 
----
+| `code` / `msg` | When |
+| --- | --- |
+| `msg`: `parameter pairs must be json` / `must be not empty` | `pairs` is missing or empty. |
+| `code` `"401"`, `msg`: `No administrative privileges:<connection>` | `all=true` without Full control. |
+| `code` `"403"`, `msg`: `SQL_EXECUTE_FORBIDDEN:<connection>` | A `sql` entry was sent by a caller who may not run raw SQL on this connection. |
+| `msg`: `CONNECTION_READ_FORBIDDEN: ...` | The caller lacks Read on the connection. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type     | Required | Description |
-|-----------|---------|----------|-------------|
-| `msg`     | string  | **No**   | Message indicating the status of the request (e.g., `"success"`). |
-| `endQuote` | string | **Yes**  | The character used as the end quote in SQL queries (e.g., `"\""` for double quotes). |
-| `data`    | array   | **Yes**  | A list of database schemas and their corresponding table metadata. |
-| ├── `schema` | string | **Yes** | The name of the database schema where the table is located. |
-| ├── `fields` | array  | **Yes** | A list of column definitions within the table. |
-| │   ├── `typeDesc` | string | **Yes** | A human-readable description of the column's data type (e.g., `"Integer"`, `"String"`). |
-| │   ├── `name` | string | **Yes** | The column name as defined in the database. |
-| │   ├── `dataType` | integer | **Yes** | The internal data type representation: `1` (Number), `2` (String), `3` (Date), `9` (Timestamp), `11` (Time). |
-| │   ├── `originalColumnTypeName` | string | **Yes** | The native SQL column type (e.g., `"int4"`, `"varchar"`). |
-| │   ├── `originalPrecision` | integer | **No** | The precision of numeric columns, if applicable. |
-| │   ├── `originalScale` | integer | **No** | The scale of numeric columns, if applicable. |
-| `table`   | string  | **Yes**  | The name of the table for which column metadata is returned. |
-| `success` | boolean | **Yes**  | A boolean flag indicating whether the request was processed successfully. |
-| `startQuote` | string | **Yes** | The character used as the start quote in SQL queries (e.g., `"\""` for double quotes). |
-
----
+Related: [Get connection sensitivity](/api/Connections/Get%20connection%20sensitivity/), [Data Security](/documentation/Datasource/Data-Security/)

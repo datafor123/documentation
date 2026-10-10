@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="950" viewBox="0 0 700 950" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">How an embed token signs in the user of an embedded report</title>
+  <desc id="desc">1. The user opens a page of your application. 2. Your backend signs a JWT: the claim named by Username field holds the Datafor login name, plus an exp claim, signed with the Secret key for HS algorithms or your private key for RS and ES algorithms. 3. The browser receives the page with the token. 4a. With an iframe, the browser requests the report URL with the token in the parameter named by Token name. 4b. With the SDK, the browser first sends an OPTIONS preflight; Datafor answers with CORS headers if the origin is in Allowed origins and Authorization is in Allowed request headers; then the request carries Authorization: Bearer and the token. 5. If the request has no Datafor session, Datafor reads the token from the Authorization header or else the Token name parameter and verifies its signature and exp with the Signature algorithm and Secret key. 6. The login name is the Username field claim; a user who is not in Datafor is created if Initialize user is selected, with User type and Initialization role; existing users keep their type and roles. 7. The report is rendered as that user, with that user's file permissions and row and object security.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1F4FD8"/>
+    </marker>
+    <style>
+      .h { paint-order: stroke; stroke: #FFFFFF; stroke-width: 6px; stroke-linejoin: round; }
+      .m { font-family: Consolas, 'Courier New', monospace; }
+    </style>
+  </defs>
+
+  <rect width="700" height="950" fill="#FFFFFF"/>
+
+  <!-- Participants -->
+  <rect x="15" y="14" width="150" height="60" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="90" y="40" font-size="16" font-weight="700" fill="#9A5B00" text-anchor="middle">Your backend</text>
+  <text x="90" y="62" font-size="14" fill="#9A5B00" text-anchor="middle">holds the key</text>
+
+  <rect x="240" y="14" width="180" height="60" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="330" y="40" font-size="16" font-weight="700" fill="#3B4252" text-anchor="middle">Browser</text>
+  <text x="330" y="62" font-size="14" fill="#5B6472" text-anchor="middle">your page: iframe or SDK</text>
+
+  <rect x="510" y="14" width="180" height="60" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="600" y="40" font-size="16" font-weight="700" fill="#1F4FD8" text-anchor="middle">Datafor</text>
+  <text x="600" y="62" font-size="14" fill="#5B6FB0" text-anchor="middle">…/datafor/plugin/…</text>
+
+  <!-- Lifelines -->
+  <line x1="90" y1="74" x2="90" y2="912" stroke="#B4BAC4" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <line x1="330" y1="74" x2="330" y2="912" stroke="#B4BAC4" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <line x1="600" y1="74" x2="600" y2="912" stroke="#B4BAC4" stroke-width="1.5" stroke-dasharray="5 5"/>
+
+  <!-- 2. Sign -->
+  <rect x="15" y="134" width="240" height="132" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="30" y="157" font-size="15" font-weight="700" fill="#9A5B00">2  Sign a JWT</text>
+  <text x="30" y="180" font-size="14" fill="#2B2B3A">Claim named by Username field</text>
+  <text x="30" y="199" font-size="14" fill="#2B2B3A">= the Datafor login name</text>
+  <text x="30" y="218" font-size="14" fill="#2B2B3A">plus an exp claim</text>
+  <text x="30" y="237" font-size="14" fill="#2B2B3A">HS*: the Secret key</text>
+  <text x="30" y="256" font-size="14" fill="#2B2B3A">RS*, ES*: your private key</text>
+
+  <!-- 5. Check token -->
+  <rect x="370" y="584" width="320" height="134" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="386" y="608" font-size="15" font-weight="700" fill="#1F4FD8">5  Check the token</text>
+  <text x="386" y="631" font-size="14" fill="#2B2B3A">Only when there is no Datafor session</text>
+  <text x="386" y="650" font-size="14" fill="#2B2B3A">Authorization header, else the</text>
+  <text x="386" y="669" font-size="14" fill="#2B2B3A">Token name URL parameter</text>
+  <text x="386" y="688" font-size="14" fill="#2B2B3A">Verify the signature and exp</text>
+  <text x="386" y="707" font-size="14" fill="#2B2B3A">(Signature algorithm, Secret key)</text>
+
+  <!-- 6. Map user -->
+  <rect x="370" y="736" width="320" height="114" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="386" y="760" font-size="15" font-weight="700" fill="#1F4FD8">6  Find or create the user</text>
+  <text x="386" y="783" font-size="14" fill="#2B2B3A">Login name = Username field claim</text>
+  <text x="386" y="802" font-size="14" fill="#2B2B3A">Not in Datafor: created if Initialize</text>
+  <text x="386" y="821" font-size="14" fill="#2B2B3A">user (User type, Initialization role)</text>
+  <text x="386" y="840" font-size="14" fill="#2B2B3A">Existing users keep type and roles</text>
+
+  <!-- Messages -->
+  <!-- 1 -->
+  <text x="104" y="106" font-size="14" fill="#2B2B3A" class="h"><tspan font-weight="700">1</tspan>  User opens your page</text>
+  <line x1="330" y1="118" x2="92" y2="118" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- 3 -->
+  <text x="104" y="290" font-size="14" fill="#2B2B3A" class="h"><tspan font-weight="700">3</tspan>  Page with the token</text>
+  <line x1="90" y1="302" x2="328" y2="302" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- 4a iframe -->
+  <text x="344" y="338" font-size="14" fill="#2B2B3A" class="h"><tspan font-weight="700">4a</tspan>  iframe: report URL with</text>
+  <text x="344" y="357" font-size="14" fill="#2B2B3A" class="h m">?&lt;Token name&gt;=&lt;jwt&gt;</text>
+  <line x1="330" y1="370" x2="598" y2="370" stroke="#1F4FD8" stroke-width="1.8" marker-end="url(#arrowBlue)"/>
+
+  <text x="344" y="402" font-size="14" font-weight="700" fill="#5B6472">or</text>
+
+  <!-- 4b SDK -->
+  <text x="344" y="432" font-size="14" fill="#2B2B3A" class="h"><tspan font-weight="700">4b</tspan>  SDK: OPTIONS preflight</text>
+  <line x1="330" y1="444" x2="598" y2="444" stroke="#1F4FD8" stroke-width="1.8" marker-end="url(#arrowBlue)"/>
+  <text x="344" y="472" font-size="14" fill="#5B6472" class="h">CORS headers if the origin and</text>
+  <text x="344" y="491" font-size="14" fill="#5B6472" class="h">Authorization are allowed</text>
+  <line x1="600" y1="504" x2="332" y2="504" stroke="#3B4252" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+  <text x="344" y="532" font-size="14" fill="#2B2B3A" class="h">then each request carries</text>
+  <text x="344" y="551" font-size="14" fill="#2B2B3A" class="h m">Authorization: Bearer &lt;jwt&gt;</text>
+  <line x1="330" y1="564" x2="598" y2="564" stroke="#1F4FD8" stroke-width="1.8" marker-end="url(#arrowBlue)"/>
+
+  <!-- 7 -->
+  <text x="344" y="874" font-size="14" fill="#2B2B3A" class="h"><tspan font-weight="700">7</tspan>  Report rendered as that user:</text>
+  <text x="344" y="893" font-size="14" fill="#5B6472" class="h">file permissions, RLS and OLS apply</text>
+  <line x1="600" y1="906" x2="332" y2="906" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- Footer -->
+  <text x="15" y="940" font-size="14" fill="#5B6472">The signing key never reaches the browser; only the signed token does.</text>
+</svg>

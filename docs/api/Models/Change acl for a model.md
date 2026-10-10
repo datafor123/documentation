@@ -4,123 +4,66 @@ permalink: /api/Models/Change acl for a model/
 tags:
   - api
   - Models
-description: null
+description: Read or replace who can use, edit, delete, or manage an analysis model.
 createTime: 2026/09/01 22:03:26
 ---
+Replaces the access control list (ACL) of an analysis model. Users also need **Read** on the model's connection to query it.
 
-### **Method**
-`PUT`
+| | |
+| --- | --- |
+| Method and path | `PUT /plugin/datafor-modeler/api/datasource/analysis/{catalog}/acl` |
+| Permission | **Full control** on the model |
+| Content type | `application/json` |
 
-### **Request URL**
-```html
-/datafor/plugin/datafor-modeler/api/datasource/analysis/Demo/acl
-```  
+To read the current ACL, call `GET /plugin/datafor-modeler/api/datasource/analysis/{catalog}/acl`. It returns the structure described in [Get file or folder's ACL](/api/Files/Get%20file%20or%20folder's%20acl/).
 
-### **Authorization**
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
+## Parameters
 
-### **Content Type**
-`application/json`
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `catalog` | path | string | Yes | Model name (not the display name), URL-encoded. |
+| `owner` | body | string | No | Owner user name. Default: the caller. |
+| `ownerType` | body | integer | No | 0 = user, 1 = role. |
+| `entriesInheriting` | body | boolean | Yes | Send `false`. |
+| `aces` | body | array | Yes | Grants. Each has `recipient`, `recipientType`, `permissions` and `modifiable`. |
+| `aces[].recipientType` | body | integer | Yes | 0 = user, 1 = role, 2 = user type. |
+| `aces[].permissions` | body | integer array | Yes | 0 = Read, 1 = Edit, 2 = Delete, 3 = Manage permissions, 4 = Full control. The highest value implies the lower ones. |
+| `aces[].modifiable` | body | boolean | Yes | Send `true`; entries with `false` are dropped. |
 
----
+## Example
 
-### **Preconditions**
-- The current user **must** have administrative privileges for the model.
-
----
-
-### **Request Example**
-
-```json
-{
-  "aces": [
-    {
-      "recipient": "admin",
-      "tenantPath": null,
-      "modifiable": true,
-      "recipientType": 0,
-      "permissions": 4
-    },
-    {
-      "recipient": "Administrator",
-      "tenantPath": null,
-      "modifiable": false,
-      "recipientType": 1,
-      "permissions": 4
-    },
-    {
-      "recipient": "SYS_Reader",
-      "recipientType": 1,
-      "modifiable": "true",
-      "permissions": 0
-    },
-    {
-      "recipient": "SYS_Creator",
-      "recipientType": 1,
-      "modifiable": "true",
-      "permissions": 0
-    }
-  ],
-  "id": "9de1ca48-8144-4a15-b846-b8ed170576e8",
-  "owner": "admin",
-  "tenantPath": null,
-  "ownerType": 0,
-  "entriesInheriting": false
-}
+```bash
+curl -u admin:password -X PUT \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/datasource/analysis/SalesModel/acl" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "owner": "admin",
+    "ownerType": 0,
+    "entriesInheriting": false,
+    "aces": [
+      { "recipient": "admin", "recipientType": 0, "permissions": [4], "modifiable": true },
+      { "recipient": "Sales", "recipientType": 1, "permissions": [0], "modifiable": true }
+    ]
+  }'
 ```
 
-| Name                 | Location | Type     | Required | Description |
-|----------------------|----------|----------|----------|-------------|
-| `body`              | body     | object   | No       | ACL configuration payload. |
-| ├── `aces`          | body     | [object] | **Yes**  | A list of access control entries. |
-| │   ├── `recipient` | body     | string   | **Yes**  | The user or role receiving the permission. |
-| │   ├── `tenantPath` | body    | null     | No       | Tenant path (if applicable). |
-| │   ├── `modifiable` | body    | boolean  | **Yes**  | Whether the permission can be modified. |
-| │   ├── `recipientType` | body | integer  | **Yes**  | The type of recipient (e.g., user or role). |
-| │   ├── `permissions` | body   | integer  | **Yes**  | Permission level assigned. |
-| ├── `id`            | body     | string   | **Yes**  | Unique identifier of the ACL entry. |
-| ├── `owner`         | body     | string   | **Yes**  | Owner of the model. |
-| ├── `tenantPath`    | body     | null     | No       | Tenant path (if applicable). |
-| ├── `ownerType`     | body     | integer  | **Yes**  | Type of owner. |
-| ├── `entriesInheriting` | body | boolean  | **Yes**  | Whether permissions inherit from parent entries. |
-
----
-
-### **Enum Values**
-
-| Name            | Value |
-|----------------|-------|
-| `permissions`  | `1`   |
-| `permissions`  | `2`   |
-| `permissions`  | `3`   |
-| `permissions`  | `4`   |
-
----
-
-### **Response Examples**
-
 ```json
-{
-  "success": true,
-  "responseCode": 200
-}
-```  
+{ "success": true, "responseCode": 200 }
+```
 
----
+### Several models at once
 
-### **HTTP Responses**
+`PUT /plugin/datafor-modeler/api/datasource/analysis/acl` takes a JSON object that maps each model name to an ACL. The response maps each name to a status string, for example `{"SalesModel": "200", "Finance": "410"}`.
 
-| HTTP Status Code | Meaning | Description | Data Schema |
-|------------------|---------|-------------|-------------|
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | The request was successful. | Inline |
+## Errors
 
----
+HTTP 200 with `success: false` and a numeric `responseCode`.
 
-### **Response Data Schema (HTTP 200)**
+| `responseCode` | When |
+| --- | --- |
+| `400` | The body is not a valid ACL. |
+| `401` | Access denied. |
+| `410` | The model does not exist. |
+| `500` | The change failed, for example because the caller lacks Full control. |
 
-| Name          | Type    | Required | Description |
-|--------------|---------|----------|-------------|
-| `success`    | boolean | **Yes**  | Indicates whether the request was successful. |
-| `msg`        | string  | No       | Response message (if applicable). |
-| `responseCode` | integer | No     | HTTP response code. |
+Related: [Access Control List](/documentation/System/Access-Control-List/), [Analysis models: default ACL and data source Read](/documentation/System/Permission-Evaluation-Overview/#analysis-models-default-acl-and-data-source-read)

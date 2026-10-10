@@ -4,89 +4,57 @@ permalink: /api/Parameters/Get parameters/
 tags:
   - api
   - Parameters
-description: null
+description: List global parameters, or find one by name or ID.
 createTime: 2026/09/01 22:03:26
 ---
+Lists the global parameters, newest first, or returns the one matching `name` or `id`.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/parameter/query` |
+| Permission | Any signed-in user |
+| Content type | `application/x-www-form-urlencoded` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/parameter/query
+System parameters such as `system.username` are not in this list; see [Get system parameters](/api/Parameters/Get%20system%20parameters/).
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `name` | form | string | No | Exact parameter name. |
+| `id` | form | string | No | Parameter ID. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/parameter/query" \
+  --data-urlencode "name=region"
 ```
 
-**Authorization**  
-Authentication is required to use this API. For details on the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-## **Description**
-This API retrieves query parameters stored in the system, including metadata such as data type, default values, and update timestamps.
-
----
-
-### **Body Parameters Schema**
-| Name  | Location | Type   | Required | Description |
-|-------|----------|--------|----------|-------------|
-| `body` | body    | object | No       | Request body (empty object expected). |
-
----
-
-## **Response Examples**
-
-### **Successful Response (HTTP 200)**
 ```json
 {
+  "success": true,
   "msg": "",
   "data": [
     {
-      "default": "3",
-      "update_time": "2024-08-06 09:37:28.374",
+      "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+      "name": "region",
       "datatype": "2",
-      "name": "dev",
-      "id": "dev",
-      "detail": "[{\"name\":\"dev\",\"value\":\"a\"},{\"name\":\"dev\",\"value\":\"b\"}]",
-      "source": "1",
-      "type": "3",
+      "type": "2",
+      "dbconn": "Sales DW",
+      "detail": "select distinct region from public.orders",
+      "default": "North",
+      "desc": "Sales region",
+      "add_time": "2026-10-08 09:30:00.0",
+      "update_time": "2026-10-09 14:12:00.0",
       "update_by": "admin",
-      "add_time": "2024-08-06 09:30:37.061",
-      "desc": "for develop"
+      "source": "1"
     }
-  ],
-  "success": true
+  ]
 }
 ```
 
----
+Field meanings are on [Add or modify a parameter](/api/Parameters/Add%20or%20modify%20a%20parameter/). `source` is `1` for global parameters. Empty fields are omitted. If the parameter store cannot be read, the response is `success: true` with an empty `data`.
 
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                              | Description | Data Schema |
-|------------------|----------------------------------------------------------------------|-------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)              | Request was successful | Inline |
-
-### **Response Data Schema (HTTP 200)**
-
-| Name         | Type      | Required | Description |
-|-------------|----------|----------|-------------|
-| `msg`       | string   | No       | Response message (empty if no error). |
-| `data`      | array    | **Yes**  | List of query parameters. |
-| ├── `default`    | string  | No       | The default value of the parameter. |
-| ├── `update_time` | string  | No       | The last update timestamp of the parameter. |
-| ├── `datatype`    | string  | No       | The data type of the parameter. |
-| ├── `name`        | string  | No       | The parameter name. |
-| ├── `id`          | string  | No       | The unique identifier of the parameter. |
-| ├── `detail`      | string  | No       | JSON string containing detailed parameter values. |
-| ├── `source`      | string  | No       | The data source of the parameter. |
-| ├── `type`        | string  | No       | The type identifier of the parameter. |
-| ├── `update_by`   | string  | No       | The user who last updated the parameter. |
-| ├── `add_time`    | string  | No       | The timestamp when the parameter was added. |
-| ├── `desc`        | string  | No       | A description of the parameter. |
-| `success`    | boolean  | **Yes**  | Indicates whether the request was successful. |
-
----
+Related: [Creating parameters](/documentation/Analysis/Creating-Parameters/)

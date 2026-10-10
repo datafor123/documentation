@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="676" viewBox="0 0 700 676" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">How Filled map matches region values</title>
+  <desc id="desc">Each value of the Geographic field is looked up by region name, then administrative code, then alias, and the first match wins. On the World map, Canada matches by name and CAN and CA match Canada's aliases, so the three rows are merged into one region and their values 40, 25 and 10 are summed to 75. Georgia matches the country Georgia by name even if the data meant the US state, and this is not reported. Calif. matches nothing, is not drawn, and edit mode shows the notice 1 of 3 regions do not match the current map. The colour scale uses only matched regions. On the China map 110000 is the code of Beijing and an alias of Liaoning; codes are checked before aliases, so it colours Beijing.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="676" fill="#FFFFFF"/>
+
+  <!-- Lane 1: lookup -->
+  <rect x="10" y="10" width="680" height="300" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="30" y="42" font-size="18" font-weight="700" fill="#3B4252">How each value finds its region (World map)</text>
+  <text x="30" y="64" font-size="14" fill="#5B6472">Checked in this order; the first match wins. Matching is exact, including case.</text>
+
+  <rect x="30" y="78" width="640" height="216" rx="8" fill="#FFFFFF" stroke="#D5D9E0"/>
+  <g font-size="14" font-weight="700" fill="#5B6472">
+    <text x="48" y="106">Value</text>
+    <text x="178" y="106" text-anchor="end">Measure</text>
+    <text x="235" y="106" text-anchor="middle">1 name</text>
+    <text x="340" y="106" text-anchor="middle">2 adcode</text>
+    <text x="445" y="106" text-anchor="middle">3 aliases</text>
+    <text x="500" y="106">Region</text>
+  </g>
+  <line x1="40" y1="116" x2="660" y2="116" stroke="#D5D9E0"/>
+
+  <!-- rows -->
+  <g font-size="14" fill="#2B2B3A">
+    <text x="48" y="146">Canada</text><text x="178" y="146" text-anchor="end">40</text>
+    <text x="48" y="178">CAN</text><text x="178" y="178" text-anchor="end">25</text>
+    <text x="48" y="210">CA</text><text x="178" y="210" text-anchor="end">10</text>
+    <text x="48" y="242">Georgia</text><text x="178" y="242" text-anchor="end">30</text>
+    <text x="48" y="274">Calif.</text><text x="178" y="274" text-anchor="end">15</text>
+  </g>
+
+  <!-- match pills -->
+  <g>
+    <rect x="207" y="130" width="56" height="22" rx="11" fill="#EAF6EC" stroke="#9CCFA4"/>
+    <rect x="417" y="162" width="56" height="22" rx="11" fill="#EAF6EC" stroke="#9CCFA4"/>
+    <rect x="417" y="194" width="56" height="22" rx="11" fill="#EAF6EC" stroke="#9CCFA4"/>
+    <rect x="207" y="226" width="56" height="22" rx="11" fill="#FFF6E5" stroke="#F2C98A"/>
+  </g>
+  <g font-size="13" text-anchor="middle">
+    <text x="235" y="146" fill="#2E7D32">match</text>
+    <text x="445" y="178" fill="#2E7D32">match</text>
+    <text x="445" y="210" fill="#2E7D32">match</text>
+    <text x="235" y="242" fill="#9A5B00">match</text>
+  </g>
+  <g font-size="14" fill="#A0A7B2" text-anchor="middle">
+    <text x="235" y="178">no</text><text x="340" y="178">no</text>
+    <text x="235" y="210">no</text><text x="340" y="210">no</text>
+    <text x="235" y="274">no</text><text x="340" y="274">no</text><text x="445" y="274">no</text>
+  </g>
+  <g font-size="14">
+    <text x="500" y="146" fill="#2B2B3A">Canada</text>
+    <text x="500" y="178" fill="#2B2B3A">Canada</text>
+    <text x="500" y="210" fill="#2B2B3A">Canada</text>
+    <text x="500" y="242" fill="#9A5B00">Georgia (country)</text>
+    <text x="500" y="274" fill="#7A8390" font-style="italic">none</text>
+  </g>
+
+  <!-- Lane 2: result -->
+  <rect x="10" y="350" width="680" height="214" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="30" y="382" font-size="18" font-weight="700" fill="#1F4FD8">What the map shows</text>
+
+  <rect x="30" y="396" width="200" height="126" rx="8" fill="#FFFFFF" stroke="#9CCFA4"/>
+  <text x="46" y="420" font-size="15" font-weight="700" fill="#2E7D32">Merged and summed</text>
+  <text x="46" y="444" font-size="14" fill="#2B2B3A">Canada</text>
+  <text x="46" y="466" font-size="14" fill="#2B2B3A">40 + 25 + 10 = 75</text>
+  <text x="46" y="490" font-size="14" fill="#5B6472">The tooltip lists all</text>
+  <text x="46" y="510" font-size="14" fill="#5B6472">three spellings.</text>
+
+  <rect x="250" y="396" width="200" height="126" rx="8" fill="#FFFFFF" stroke="#F2C98A"/>
+  <text x="266" y="420" font-size="15" font-weight="700" fill="#9A5B00">Wrong region</text>
+  <text x="266" y="444" font-size="14" fill="#2B2B3A">Georgia → the country,</text>
+  <text x="266" y="466" font-size="14" fill="#2B2B3A">even if the data meant</text>
+  <text x="266" y="488" font-size="14" fill="#2B2B3A">the US state.</text>
+  <text x="266" y="510" font-size="14" fill="#5B6472">Not reported.</text>
+
+  <rect x="470" y="396" width="200" height="126" rx="8" fill="#FFFFFF" stroke="#D5D9E0"/>
+  <text x="486" y="420" font-size="15" font-weight="700" fill="#3B4252">No match</text>
+  <text x="486" y="444" font-size="14" fill="#2B2B3A">Calif. is not drawn.</text>
+  <text x="486" y="466" font-size="14" fill="#2B2B3A">Edit mode shows:</text>
+  <text x="486" y="488" font-size="14" font-style="italic" fill="#2B2B3A">1 of 3 regions do not</text>
+  <text x="486" y="508" font-size="14" font-style="italic" fill="#2B2B3A">match the current map</text>
+
+  <text x="30" y="548" font-size="14" fill="#2B2B3A">The colour scale uses matched regions only: 30 to 75, not 15 to 75.</text>
+
+  <!-- Lane 3: why the order matters -->
+  <rect x="10" y="584" width="680" height="82" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="30" y="614" font-size="15" font-weight="700" fill="#9A5B00">Why the order matters (China map)</text>
+  <text x="30" y="640" font-size="14" fill="#2B2B3A">110000 is the adcode of Beijing and an alias of Liaoning. Codes are checked</text>
+  <text x="30" y="658" font-size="14" fill="#2B2B3A">before aliases, so 110000 colours Beijing.</text>
+
+  <!-- Arrows are drawn after the lanes so the lane backgrounds do not cover them -->
+  <line x1="268" y1="101" x2="301" y2="101" stroke="#3B4252" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="380" y1="101" x2="408" y2="101" stroke="#3B4252" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="350" y1="312" x2="350" y2="347" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+</svg>

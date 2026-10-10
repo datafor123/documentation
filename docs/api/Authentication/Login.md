@@ -1,59 +1,51 @@
 ---
-title: Login
+title: Form login
 permalink: /api/Authentication/Login/
 tags:
   - api
   - Authentication
-description: null
+description: The browser sign-in form endpoint, which answers with redirects instead of JSON.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`GET`
+Signs a user in the way an HTML login form does and redirects the browser. Scripts should use [Log in](/api/Authentication/Restful%20Login/), which answers in JSON; this endpoint is for a custom login page that posts a form.
 
-**Request URL**
-```html
-/j_spring_security_check
+| | |
+| --- | --- |
+| Method and path | `POST /j_spring_security_check` |
+| Permission | Anyone (no prior sign-in) |
+| Content type | `application/x-www-form-urlencoded` |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `j_username` | form | string | Yes | User name. |
+| `j_password` | form | string | Yes | Password. |
+
+## Example
+
+```bash
+curl -i -c cookies.txt -X POST "http://localhost:28080/datafor/j_spring_security_check" \
+  -d "j_username=admin" -d "j_password=password"
 ```
 
-**Description**  
-This endpoint allows a user to log in. Upon successful login, the server responds with a 302 redirect to the specified location.
-
-**Content Type**  
-Typically `application/x-www-form-urlencoded` when submitting form data (though it is uncommon to send a request body with `GET`).
-
----
-
-### **Parameters Schema**
-
-| Name          | Location | Type   | Required | Description                                         |
-|---------------|----------|--------|----------|-----------------------------------------------------|
-| **j_username**| body     | string | No       | The username for login (e.g., `admin`)             |
-| **j_password**| body     | string | No       | The password for login (e.g., `password`)          |
-
-### **Request Example**
-```
-j_username: admin
-j_password: password
+```text
+HTTP/1.1 302
+Location: /datafor/Home
+Set-Cookie: JSESSIONID=<session-id>; Path=/datafor; HttpOnly
 ```
 
----
+The answer is always a redirect (HTTP 302):
 
-## **Response Examples**
+| `Location` | When |
+| --- | --- |
+| The page the browser asked for before it was sent to the login page, otherwise `/datafor/Home` | Signed in. The `JSESSIONID` cookie now carries the session. |
+| `/datafor/Login?login_error=1` | Wrong user name or password. |
+| `/datafor/Login?login_error=2` | The request reused a session cookie that belongs to another sign-in. Drop the cookie and post again. |
 
-**302 Response**  
-The server responds with an HTTP 302 (Found) and redirects the user.
+## Errors
 
-## **HTTP Responses**
+After 10 failed attempts from the same client address, further attempts from that address are refused for up to 24 hours; they also redirect to `login_error=1`.
 
-| HTTP Status Code | Meaning                                                                                 | Description                       | Data schema |
-|------------------|-----------------------------------------------------------------------------------------|-----------------------------------|------------|
-| 302              | [Found](https://tools.ietf.org/html/rfc7231#section-6.4.3)                             | Redirect to `/datafor`            | Inline     |
-
-### **Headers**
-
-**Request Headers**
-- **Cookie**: Session cookie for identifying the user’s session.
-
-**Response Headers**
-- **Location**: The URL the client is redirected to (e.g., `/datafor` if login is successful).
+Related: [Log in](/api/Authentication/Restful%20Login/), [Form logout](/api/Authentication/Logout/)

@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="836" viewBox="0 0 700 836" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">How the AI Agent is deployed beside Datafor</title>
+  <desc id="desc">Browsers reach Datafor's Tomcat server on port 28080. Tomcat forwards requests under /datafor/ai to the AI Agent API on the Internal URL, by default http://127.0.0.1:28081/ai. The AI Agent consists of the API, one routing worker, one to eight dispatch workers (two by default) and the MCP server on port 38081. AI clients such as Claude and Codex connect to the MCP address with a Bearer personal token; the MCP server accepts the host names in MCP_ALLOWED_HOSTS and sends ask_datafor through /datafor/ai. The AI Agent calls Datafor at DATAFOR_URL and presents the shared secret in the X-Datafor-Agent-Secret header. On each start the launcher writes DATAFOR_AGENT_SECRET from instance-secrets.env into the agent-secret element of Datafor's settings.xml. The AI Agent stores its data in the bundled PostgreSQL database on port 25432 and calls the LLM and embedding providers.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5B3FBF"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="836" fill="#FFFFFF"/>
+
+  <!-- Callers -->
+  <rect x="20" y="12" width="310" height="66" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="38" y="40" font-size="17" font-weight="700" fill="#3B4252">Browsers</text>
+  <text x="38" y="63" font-size="14" fill="#5B6472">Console, reports, AI Assistant</text>
+
+  <rect x="370" y="12" width="310" height="66" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="388" y="40" font-size="17" font-weight="700" fill="#3B4252">AI clients (MCP)</text>
+  <text x="388" y="63" font-size="14" fill="#5B6472">Claude Desktop, Claude Code, Codex, …</text>
+
+  <text x="185" y="104" font-size="14" font-weight="700" fill="#3B4252">Public URL</text>
+  <text x="185" y="123" font-size="14" fill="#5B6472">default: …/datafor/ai on :28080</text>
+  <text x="630" y="104" font-size="14" text-anchor="end" font-weight="700" fill="#3B4252">MCP address (MCP_PUBLIC_URL)</text>
+  <text x="630" y="123" font-size="14" text-anchor="end" fill="#5B6472">Authorization: Bearer &lt;token&gt;</text>
+
+  <!-- Datafor server -->
+  <rect x="10" y="146" width="680" height="544" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="28" y="676" font-size="16" font-weight="700" fill="#3B4252">Datafor server<tspan font-weight="400" font-size="14" fill="#5B6472">  (bi-server folder)</tspan></text>
+
+  <!-- Tomcat -->
+  <rect x="28" y="162" width="492" height="98" rx="10" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="44" y="186" font-size="16" font-weight="700" fill="#1F4FD8">Datafor web server (Tomcat) :28080</text>
+  <text x="44" y="208" font-size="14" fill="#2B2B3A">/datafor: console, reports, REST APIs</text>
+  <text x="44" y="228" font-size="14" fill="#2B2B3A">/datafor/ai/*: forwarded to the Internal URL</text>
+  <text x="44" y="248" font-size="14" fill="#2B2B3A">datafor-modeler/settings.xml: &lt;agent-secret&gt;</text>
+
+  <!-- AI Agent -->
+  <rect x="28" y="320" width="644" height="242" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <text x="44" y="546" font-size="16" font-weight="700" fill="#5B3FBF">AI Agent<tspan font-weight="400" font-size="14" fill="#7A6BB0">  bi-server/ai-agent, started and stopped by app-console</tspan></text>
+
+  <rect x="44" y="336" width="210" height="80" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <text x="58" y="360" font-size="16" font-weight="700" fill="#2B2B3A">Agent API</text>
+  <text x="58" y="382" font-size="14" fill="#2B2B3A">:28081 /ai</text>
+  <text x="58" y="404" font-size="14" fill="#5B6472">health check: /ai/health</text>
+
+  <rect x="266" y="336" width="190" height="80" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <text x="280" y="360" font-size="16" font-weight="700" fill="#2B2B3A">Routing worker</text>
+  <text x="280" y="382" font-size="14" fill="#5B6472">one process</text>
+  <text x="280" y="404" font-size="14" fill="#5B6472">chooses the workflow</text>
+
+  <rect x="470" y="336" width="190" height="80" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <text x="484" y="360" font-size="16" font-weight="700" fill="#2B2B3A">MCP server</text>
+  <text x="484" y="382" font-size="14" fill="#2B2B3A">:38081 /mcp</text>
+  <text x="484" y="404" font-size="14" fill="#5B6472">MCP_ALLOWED_HOSTS</text>
+
+  <rect x="44" y="428" width="210" height="80" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <text x="58" y="452" font-size="15" font-weight="700" fill="#2B2B3A">instance-secrets.env</text>
+  <text x="58" y="474" font-size="14" fill="#2B2B3A">DATAFOR_AGENT_SECRET</text>
+  <text x="58" y="496" font-size="14" fill="#5B6472">created on first start</text>
+
+  <rect x="266" y="428" width="394" height="80" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <text x="280" y="452" font-size="16" font-weight="700" fill="#2B2B3A">Dispatch workers</text>
+  <text x="280" y="474" font-size="14" fill="#2B2B3A">Run the analyses: 1–8 processes, default 2</text>
+  <text x="280" y="496" font-size="14" fill="#5B6472">AI_AGENT_DISPATCH_WORKERS in ai-agent/.env</text>
+
+  <!-- PostgreSQL -->
+  <rect x="28" y="590" width="532" height="62" rx="10" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="44" y="614" font-size="16" font-weight="700" fill="#2E7D32">Bundled PostgreSQL :25432</text>
+  <text x="44" y="637" font-size="14" fill="#2B2B3A">Datafor repository; AI Agent data in datafor (DATABASE_URL)</text>
+
+  <!-- Providers -->
+  <rect x="380" y="714" width="300" height="62" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="396" y="739" font-size="16" font-weight="700" fill="#9A5B00">LLM and embedding providers</text>
+  <text x="396" y="761" font-size="14" fill="#2B2B3A">assigned under AI Agent › LLM</text>
+
+  <!-- Arrows are drawn after the boxes so the fills do not cover them -->
+  <line x1="175" y1="78" x2="175" y2="159" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="640" y1="78" x2="640" y2="333" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <line x1="134" y1="260" x2="134" y2="333" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="142" y="286" font-size="14" font-weight="700" fill="#3B4252">Internal URL</text>
+  <text x="142" y="305" font-size="14" fill="#5B6472">127.0.0.1:28081/ai</text>
+
+  <line x1="300" y1="320" x2="300" y2="263" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="308" y="286" font-size="14" font-weight="700" fill="#3B4252">DATAFOR_URL</text>
+  <text x="308" y="305" font-size="14" fill="#5B6472">X-Datafor-Agent-Secret</text>
+
+  <line x1="495" y1="336" x2="495" y2="263" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="503" y="286" font-size="14" font-weight="700" fill="#3B4252">ask_datafor</text>
+  <text x="503" y="305" font-size="14" fill="#5B6472">via /datafor/ai</text>
+
+  <line x1="300" y1="562" x2="300" y2="587" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="616" y1="508" x2="616" y2="711" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <polyline points="44,468 19,468 19,244 25,244" fill="none" stroke="#5B3FBF" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#arrowPurple)"/>
+
+  <!-- Legend -->
+  <text x="10" y="804" font-size="14" fill="#5B6472">Solid arrows: requests. Dashed arrow: on each start the launcher writes</text>
+  <text x="10" y="824" font-size="14" fill="#5B6472">DATAFOR_AGENT_SECRET into &lt;agent-secret&gt; in Datafor's settings.xml.</text>
+</svg>

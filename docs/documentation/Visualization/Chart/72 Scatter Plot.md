@@ -9,8 +9,6 @@ createTime: 2026/09/01 22:03:26
 
 Compare two numeric measures to find clusters, unusual observations and possible relationships. Each point represents a member of the **Marker** field.
 
-![Observation grain for Scatter, Box plot and Histogram](../images/current/observation-grain-concept.svg)
-
 ## Build sales versus margin
 
 1. In **Components → Charts → Distribution & correlation**, add **Scatter** and select an **Analysis model** in **Data**.
@@ -27,6 +25,8 @@ Compare two numeric measures to find clusters, unusual observations and possible
 | **Time axis** | Optional date field | Lets a page **Date** filter that filters by time axis filter this chart; see [Date](/documentation/Visualization/Datepicker/). |
 
 Use a store identifier that tells apart stores with the same name. Without the intended Marker grain, the chart shows a few aggregated points instead of individual stores. Measures can be dragged between **X Axis**, **Y Axis** and **Size**.
+
+![The same detail rows two ways: Scatter and Box plot aggregate them to one value per Marker or Sample member and split by Legend or Group; Histogram bins every raw row value and skips empty values. Below, how a box is drawn: quartiles, median, 1.5 × IQR whiskers, outliers, and points only for fewer than 5 samples](./images/observation-grain-flow.svg)
 
 ![Scatter Data tab: Store in Marker, Region in Legend, Net Sales in X Axis, Gross Margin Rate in Y Axis and Order Count in Size](../images/current/scatter-data.png)
 

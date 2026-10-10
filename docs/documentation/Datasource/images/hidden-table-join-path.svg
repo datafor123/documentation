@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="612" viewBox="0 0 700 612" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">What a subject sees when an object policy hides tables in a join path</title>
+  <desc id="desc">In a snowflake model sales_fact joins product, product joins product_class, and sales_fact joins store. A policy hides the whole product and store tables from a subject. The fields and dimensions of product and store are removed, so a chart on a product field fails with Level or measure required not found. The joins are kept: a chart grouped by product_class still returns data through product, a row policy on product still restricts the rows the join contributes, and a row policy on store still filters the fact data. A model saved in an older format refuses such a query with DATA_POLICY_CONFLICT. To hide product_class, hide that table itself.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="612" fill="#FFFFFF"/>
+
+  <text x="20" y="30" font-size="17" font-weight="700" fill="#3B4252">An object policy hides product and store from a subject</text>
+
+  <!-- Tables -->
+  <rect x="20" y="56" width="140" height="70" rx="10" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="36" y="84" font-size="15" font-weight="700" fill="#1F4FD8">sales_fact</text>
+  <text x="36" y="106" font-size="14" fill="#5B6472">fact table</text>
+
+  <rect x="250" y="56" width="180" height="70" rx="10" fill="#F5F6F8" stroke="#A0A7B2" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="266" y="84" font-size="15" font-weight="700" fill="#3B4252">product (hidden)</text>
+  <text x="266" y="106" font-size="14" fill="#5B6472">kept as a join only</text>
+
+  <rect x="520" y="56" width="160" height="70" rx="10" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="536" y="84" font-size="15" font-weight="700" fill="#2E7D32">product_class</text>
+  <text x="536" y="106" font-size="14" fill="#2B2B3A">still available</text>
+
+  <rect x="250" y="160" width="180" height="70" rx="10" fill="#F5F6F8" stroke="#A0A7B2" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="266" y="188" font-size="15" font-weight="700" fill="#3B4252">store (hidden)</text>
+  <text x="266" y="210" font-size="14" fill="#5B6472">has a row policy too</text>
+
+  <!-- Results -->
+  <rect x="20" y="262" width="660" height="304" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="38" y="290" font-size="15" font-weight="700" fill="#3B4252">For this subject</text>
+  <text x="300" y="290" font-size="15" font-weight="700" fill="#3B4252">Result</text>
+
+  <rect x="32" y="302" width="636" height="48" rx="8" fill="#FFFFFF" stroke="#D5D9E0"/>
+  <text x="44" y="331" font-size="14" fill="#2B2B3A">Chart uses a product field</text>
+  <text x="300" y="331" font-size="14" fill="#9A5B00">Level or measure required not found!</text>
+
+  <rect x="32" y="356" width="636" height="48" rx="8" fill="#FFFFFF" stroke="#D5D9E0"/>
+  <text x="44" y="385" font-size="14" fill="#2B2B3A">Chart grouped by product_class</text>
+  <text x="300" y="385" font-size="14" fill="#2E7D32">Returns data; the query joins through product</text>
+
+  <rect x="32" y="410" width="636" height="48" rx="8" fill="#FFFFFF" stroke="#D5D9E0"/>
+  <text x="44" y="439" font-size="14" fill="#2B2B3A">Row policy on product</text>
+  <text x="300" y="439" font-size="14" fill="#2B2B3A">Still restricts the rows the join contributes</text>
+
+  <rect x="32" y="464" width="636" height="48" rx="8" fill="#FFFFFF" stroke="#D5D9E0"/>
+  <text x="44" y="493" font-size="14" fill="#2B2B3A">Row policy on store</text>
+  <text x="300" y="493" font-size="14" fill="#2B2B3A">Still filters sales_fact; store's fields are gone</text>
+
+  <rect x="32" y="518" width="636" height="40" rx="8" fill="#FFFFFF" stroke="#D5D9E0"/>
+  <text x="44" y="543" font-size="14" fill="#2B2B3A">Same, in an older model format</text>
+  <text x="300" y="543" font-size="14" fill="#9A5B00">Refused: DATA_POLICY_CONFLICT</text>
+
+  <text x="20" y="592" font-size="14" fill="#5B6472">Hiding product does not hide product_class. To remove it, hide product_class itself.</text>
+
+  <!-- Arrows are drawn after the boxes -->
+  <line x1="160" y1="91" x2="247" y2="91" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="430" y1="91" x2="517" y2="91" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M90,126 V195 H247" fill="none" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="100" y="185" font-size="14" fill="#5B6472">join kept</text>
+  <text x="172" y="80" font-size="14" fill="#5B6472">join kept</text>
+</svg>

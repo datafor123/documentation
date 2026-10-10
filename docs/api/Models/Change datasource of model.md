@@ -4,70 +4,46 @@ permalink: /api/Models/Change datasource of model/
 tags:
   - api
   - Models
-description: null
+description: Point an analysis model at another data connection or change its settings.
 createTime: 2026/09/01 22:03:26
 ---
+Changes a published model's settings, most often the data connection it queries. The schema itself is not changed.
 
-### **Method**
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/mondrian/changeParameters` |
+| Permission | **Edit** on the model and **Read** on the new connection. Setting `useAuth=false` needs Full control on the connection. |
+| Content type | `application/x-www-form-urlencoded` |
 
-### **Request URL**
-```html
-/plugin/datafor-modeler/api/mondrian/changeParameters
-```  
+## Parameters
 
-### **Authorization**
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `catalogName` | form | string | Yes | Model name. |
+| `parameters` | form | string | Yes | All settings as `key=value` pairs separated by `;`, for example `DataSource=Sales DW;EnableXmla=false`. Settings you leave out are removed, so send the full string. |
 
-### **Content Type**
-`application/x-www-form-urlencoded`
+## Example
 
----
-
-### **Preconditions**
-- The current user’s type **cannot** be `SYS_Reader`.
-- The current user **must** have administrative privileges for the model.
-- The current user **must** have read privileges for the connection.
-
----
-
-### **Request Example**
-
-```yaml
-parameters: DataSource=Demo;EnableXmla=false;Provider=mondrian;overwrite=true
-catalogName: Demo
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/mondrian/changeParameters" \
+  --data-urlencode "catalogName=SalesModel" \
+  --data-urlencode "parameters=DataSource=Sales DW Replica;EnableXmla=false"
 ```
 
-| Name          | Location | Type   | Required | Description |
-|--------------|----------|--------|----------|-------------|
-| `parameters` | body     | string | No       | Connection parameters, formatted as key-value pairs (e.g., `DataSource=Demo;EnableXmla=false`). |
-| `catalogName` | body    | string | No       | The model schema name, which will replace the name in the XML. |
-
----
-
-### **Response Examples**
-
 ```json
-{
-  "msg": "success",
-  "success": true
-}
-```  
+{ "success": true, "msg": "success" }
+```
 
----
+## Errors
 
-### **HTTP Responses**
+HTTP 200 with `success: false` and `msg` starting with `error occured:`.
 
-| HTTP Status Code | Meaning | Description | Data Schema |
-|------------------|---------|-------------|-------------|
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | The request was successful. | Inline |
+| `msg` contains | When |
+| --- | --- |
+| `Edit Denied` | The caller lacks Edit on the model. |
+| `Connection READ permission is required: <connection>` | The caller cannot read the new connection. |
+| `Connection MANAGE permission is required to disable data policies` | `useAuth=false` without Full control on the connection. |
+| `SQL_FRAGMENT_FORBIDDEN:<connection>` | The model contains SQL and the caller may not use SQL fragments on the new connection. |
 
----
-
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type    | Required | Description |
-|-----------|---------|----------|-------------|
-| `msg`     | string  | No       | Response message. |
-| `success` | boolean | **Yes**  | Indicates whether the request was successful. |
+Related: [Get models](/api/Models/Get%20models/), [Analysis models: default ACL and data source Read](/documentation/System/Permission-Evaluation-Overview/#analysis-models-default-acl-and-data-source-read)

@@ -5,71 +5,49 @@ tags:
   - api
   - Users
   - Register
-description: null
+description: Email a registration code to an address, the first step of self-registration.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`POST`
+Sends a registration code to an email address. Self-registration takes three calls: this one, [Verify register code](/api/Register/Verify%20register%20code/) (optional, to check the code before the form is complete) and [Register](/api/Register/Register/).
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/user/sendRegisterCode
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/user/sendRegisterCode` |
+| Permission | Anyone (no sign-in). Registration must be allowed with **Show 'Sign up'** in the branding settings, and a mail server must be configured. |
+| Content type | `application/x-www-form-urlencoded` |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `email` | form | string | Yes | Address to send the code to. |
+| `locale` | form | string | No | Language of the email: `zh-CN` or `en-US`. Anything else sends English. |
+
+The code is valid for 30 minutes. A new code for the same address can be requested after 1 minute and replaces the previous one.
+
+## Example
+
+```bash
+curl -X POST "http://localhost:28080/datafor/plugin/datafor-modeler/api/user/sendRegisterCode" \
+  -d "email=new.user@example.com" -d "locale=en-US"
 ```
 
-**Authorization**  
-Authentication is **not required** to use this API.
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-## **Description**
-This API sends a registration verification code to the specified email address. The code is used for user registration and must be entered within a valid time frame.
-
----
-
-## **Parameters**
-
-### **Body Parameters Schema**
-| Name     | Location | Type   | Required | Description |
-|----------|----------|--------|----------|-------------|
-| `email`  | body    | string | **Yes**  | The recipient email address where the registration code will be sent. |
-| `locale` | body    | string | No       | The preferred language and region format (e.g., `en-US`). |
-
----
-
-## **Response Examples**
-
-### **Successful Response (HTTP 200)**
 ```json
 {
-  "success": true
+  "success": true,
+  "code": "200"
 }
 ```
 
-### **Failure Response (HTTP 200)**
-```json
-{
-  "msg": "email already sent, if not received, please send 1 min later",
-  "code": "send.later",
-  "success": false
-}
-```
+## Errors
 
----
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `"403"` | `register forbidden` | Registration is not allowed. |
+| `"400"` | `invalid parameter` | `email` is missing. |
+| `send.later` | `email already sent,if not received,please send 1 min later` | A code was sent to this address less than 1 minute ago. |
+| `"409"` | `email already existed` | A user already has this email. |
+| `"500"` | `check email config or concat administrator` | The email could not be sent. |
 
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                              | Description | Data Schema |
-|------------------|----------------------------------------------------------------------|-------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)              | Request was successful | Inline |
-
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type     | Required | Description |
-|-----------|---------|----------|-------------|
-| `msg`     | string  | No       | Response message (only present when the request is unsuccessful). |
-| `code`    | string  | No       | Error code indicating the reason for failure. |
-| `success` | boolean | **Yes**  | Indicates whether the request was successful. |
+Related: [Mail Server Configuration](/documentation/System/Mail-Server-Configuration/)

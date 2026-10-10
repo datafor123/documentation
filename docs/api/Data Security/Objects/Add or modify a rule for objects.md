@@ -4,78 +4,67 @@ permalink: /api/Data Security/Objs/Add or modify a rule for objects/
 tags:
   - api
   - Data Security
-description: null
+description: Create or replace a Table & column access policy that hides tables, views, or columns from users, roles, or user types.
 createTime: 2026/09/01 22:03:26
 ---
+Creates a **Table & column access** policy, or replaces one when `id` is sent. A policy lists tables or columns of a connection and, for each, who can or cannot see them.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/auth/obj/update` |
+| Permission | **Full control** on the connection |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/auth/obj/update
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `id` | body | string | To update | Policy ID. Omit to create. Updating replaces all objects and subjects. |
+| `dbconn` | body | string | Yes | Connection name. |
+| `desc` | body | string | Yes | **Policy name**. |
+| `enable` | body | string | No | `1` (default) active, `0` draft. |
+| `configList` | body | array | Yes | One entry per table or column. |
+| `configList[].schema` | body | string | Yes | Schema. |
+| `configList[].tbname` | body | string | Yes | Table or view. |
+| `configList[].obj_type` | body | string | Yes | `1` whole table, `2` column. For the same table, use either the whole table or columns, not both. |
+| `configList[].colname` | body | string | With `obj_type` 2 | Column. Must be empty for `obj_type` 1. |
+| `configList[].visible` | body | string | Yes | `1` **Only selected subjects can view**: everyone not in `grantedList` is excluded. `0` **Selected subjects cannot view**: the subjects in `grantedList` are excluded. Use the same value for every entry of a policy. |
+| `configList[].grantedList` | body | array | With `visible` 0 | Subjects: `{"name": "...", "type": "0"}` with `type` `0` user, `1` role, `2` user type (`Administrator`, `SYS_Creator`, `SYS_Reader`). |
+
+## Example
+
+Only the `Finance` role can see the `salary` column:
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/auth/obj/update" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "dbconn": "Sales DW",
+    "desc": "Salary - Finance only",
+    "enable": "1",
+    "configList": [
+      {
+        "schema": "public", "tbname": "employees", "obj_type": "2", "colname": "salary",
+        "visible": "1",
+        "grantedList": [ { "name": "Finance", "type": "1" } ]
+      }
+    ]
+  }'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
-**Preconditions**
-- The current user’s type **cannot** be `SYS_Reader`.
-- The current user must have **administrative privileges** for the connection.
-
----
-
-### **Parameters Schema**
-
-| Name                        | Location | Type     | Required | Description                                               |
-|-----------------------------|----------|----------|----------|-----------------------------------------------------------|
-| **body**                    | body     | object   | Yes      | JSON payload containing the rule details                  |
-| ├── **dbconn**              | body     | string   | Yes      | Name of the database connection                           |
-| ├── **enable**              | body     | string   | Yes      | `1` to enable, `0` to disable                             |
-| ├── **desc**                | body     | string   | No       | Description of the rule                                   |
-| ├── **configList**          | body     | array    | Yes      | List of object configurations                            |
-| │   ├── **schema**         | body     | string   | Yes      | Schema name                                              |
-| │   ├── **tbname**         | body     | string   | Yes      | Table name                                               |
-| │   ├── **obj_type**       | body     | string   | Yes      | `1` for table, `2` for column                            |
-| │   ├── **colname**        | body     | string   | No       | Column name (if `obj_type` is `2`)                       |
-| │   ├── **visible**        | body     | string   | Yes      | `1`: Selected is visible, unselected is invisible        |
-| │   │                     |          |          |          | `0`: Selected is invisible, unselected is visible        |
-| │   ├── **grantedList**    | body     | array    | No       | List of users/roles granted access                       |
-| │   │   ├── **name**       | body     | string   | Yes      | User or role name                                        |
-| │   │   ├── **type**       | body     | string   | Yes      | `0` for user, `1` for role                               |
-
----
-
-## **Response Examples**
 
 ```json
-{
-  "msg": "success",
-  "endQuote": "\"",
-  "success": true,
-  "id": "371063d227944c5386fbe81faf8c3bc0",
-  "startQuote": "\""
-}
+{ "success": true, "code": "200", "id": "371063d227944c5386fbe81faf8c3bc0" }
 ```
 
----
+## Errors
 
-## **HTTP Responses**
+HTTP 200 with `success: false`.
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `401` | `No administrative privileges:<connection>` | The caller lacks Full control on the connection. |
+| `400` | `configList cannot be empty`, `obj_type must be 1 or 2`, `visible must be 0 or 1`, `column name cannot be empty`, `table policy cannot contain column name`, `table not found: ...`, `column not found: ...`, `grantedList cannot be empty for denySelected policy`, `conflicting visibility for object: ...`, `conflicting object policy for recipient: ...`, `user not found: ...`, `role not found: ...` | The policy is invalid. |
+| `400` or `500` | `Permission group does not exist` / `Permission group is not editable` | `id` does not exist on this connection, or the policy is locked. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name         | Type    | Required | Description                |
-|-------------|---------|----------|----------------------------|
-| `msg`       | string  | No       | Success message            |
-| `endQuote`  | string  | No       | End quote character        |
-| `success`   | boolean | Yes      | Indicates if the request was successful |
-| `id`        | string  | Yes      | Unique identifier of the rule |
-| `startQuote`| string  | No       | Start quote character      |
+Related: [Data Security](/documentation/Datasource/Data-Security/), [OLS evaluation](/documentation/System/Permission-Evaluation-Overview/#_4-ols-evaluate-each-policy-then-combine-exclusions)

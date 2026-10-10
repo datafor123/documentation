@@ -4,104 +4,74 @@ permalink: /api/Connections/Add a connection/
 tags:
   - api
   - Connections
-description: null
+description: Create a JDBC data connection; the creator gets Full control on it.
 createTime: 2026/09/01 22:03:26
 ---
+Creates a data connection. The new connection's ACL gives the caller Full control and nobody else access; share it with [Change ACLs for connections](/api/Connections/Change%20acl%20for%20connections/).
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/connection/add` |
+| Permission | Creator or Administrator user type. Only administrators can create connections to the server that holds the Datafor repository, to engines running inside Datafor (DuckDB, SQLite, MS Access, CSV), to JNDI data sources, or to targets Datafor cannot identify. |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/connection/add
+Test the settings first with [Test a connection](/api/Connections/Test%20a%20connection/).
+
+## Parameters
+
+The body is a connection object. The fields most integrations need:
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `name` | body | string | Yes | Connection name, unique on the server. Leading and trailing spaces are removed. |
+| `databaseType` | body | object | Yes | Database type, at least `name` and `shortName`, for example `{"name": "PostgreSQL", "shortName": "POSTGRESQL"}`. See [Supported databases](/documentation/Datasource/Supported-Databases/). |
+| `accessType` | body | string | Yes | `NATIVE` for JDBC. `JNDI` (administrators only) uses `databaseName` as the JNDI name. |
+| `hostname` | body | string | Yes | Database host. |
+| `databasePort` | body | string | Yes | Port. |
+| `databaseName` | body | string | Yes | Database name (or service name, depending on the database). |
+| `username`, `password` | body | string | No | Database account. Use an account without rights on the Datafor repository database. |
+| `attributes` | body | object | No | String key–value pairs: `PORT_NUMBER` (same as `databasePort`), `driverId` (a driver uploaded in [JDBC Driver Management](/documentation/Datasource/JDBC-Driver-Management/)), `CUSTOM_DRIVER_CLASS` and `CUSTOM_URL` (for the generic database type). |
+| `extraOptions` | body | object | No | JDBC URL options, keyed `<SHORTNAME>.<option>`, for example `"POSTGRESQL.sslmode": "require"`. |
+| `connectSql` | body | string | No | SQL run when each connection opens. |
+| `usingConnectionPool` | body | boolean | No | Use a connection pool. |
+| `connectionPoolingProperties` | body | object | No | Pool settings such as `maxActive`, `maxIdle`, `minIdle`, `validationQuery`. Defaults: [Get pooling parameters](/api/Connections/Get%20pooling%20parameters/). |
+| `id` | body | string | No | Leave `null`; the server assigns it. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/connection/add" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Sales DW",
+    "databaseType": { "name": "PostgreSQL", "shortName": "POSTGRESQL" },
+    "accessType": "NATIVE",
+    "hostname": "db.example.com",
+    "databasePort": "5432",
+    "databaseName": "sales",
+    "username": "report_reader",
+    "password": "db-password",
+    "attributes": { "PORT_NUMBER": "5432" },
+    "extraOptions": {},
+    "usingConnectionPool": true,
+    "connectionPoolingProperties": { "maxActive": "20", "minIdle": "1" }
+  }'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
-**Preconditions**
-- The current user's type **cannot** be `SYS_Reader`.
-
----
-
-### **Parameters Schema**
-
-| Name                                      | Location | Type     | Required | Description                        |
-|-------------------------------------------|----------|----------|----------|------------------------------------|
-| **Accept**                                | header   | string   | No       | Accept header (e.g., `application/json`)      |
-| **Access-Control-Request-Headers**        | header   | string   | No       | Specifies which headers will be used during the request |
-| **body**                                  | body     | object   | No       | Overall JSON payload                |
-| ├── **SQLServerInstance**                 | body     | null     | Yes      | Not applicable (SQL Server only)    |
-| ├── **accessType**                        | body     | string   | Yes      | Type of connection access (e.g., `NATIVE`)    |
-| ├── **accessTypeValue**                   | body     | string   | Yes      | Same as `accessType`                |
-| ├── **attributes**                        | body     | object   | Yes      | Additional connection attributes    |
-| │   ├── **PORT_NUMBER**                   | body     | string   | Yes      | Port for the database (e.g., `25432`)         |
-| │   └── **driverId**                      | body     | string   | Yes      | Driver identifier (e.g., `postgresql`)        |
-| ├── **changed**                           | body     | boolean  | Yes      | Indicates if the connection config has changed |
-| ├── **connectSql**                        | body     | string   | Yes      | SQL statement to execute upon connection (optional) |
-| ├── **connectionPoolingProperties**       | body     | object   | Yes      | Connection pool settings            |
-| │   ├── **initialSize**                   | body     | string   | Yes      | Initial pool size                   |
-| │   ├── **maxActive**                     | body     | string   | Yes      | Maximum active connections          |
-| │   ├── **maxIdle**                       | body     | string   | Yes      | Maximum idle connections            |
-| │   └── **minIdle**                       | body     | string   | Yes      | Minimum idle connections            |
-| ├── **dataTablespace**                    | body     | string   | Yes      | Data tablespace (if applicable)     |
-| ├── **databaseName**                      | body     | string   | Yes      | Name of the database (e.g., `foodmart`)       |
-| ├── **databasePort**                      | body     | string   | Yes      | Port number (e.g., `25432`)         |
-| ├── **databaseType**                      | body     | object   | Yes      | Info about the database type        |
-| │   ├── **defaultDatabasePort**           | body     | string   | Yes      | Default port (e.g., `5432`)         |
-| │   ├── **name**                          | body     | string   | Yes      | Full name of the database type (`PostgreSQL`) |
-| │   └── **shortName**                     | body     | string   | Yes      | Abbreviation of the database type (e.g., `POSTGRESQL`) |
-| ├── **extraOptions**                      | body     | object   | Yes      | Additional driver-specific options  |
-| │   └── **POSTGRESQL.TimeZone**           | body     | string   | Yes      | Time zone setting (e.g., `Australia/Melbourne`)        |
-| ├── **extraOptionsOrder**                 | body     | object   | Yes      | Specifies order of extra options    |
-| │   └── **0**                              | body     | string   | Yes      | The first item in the order list    |
-| ├── **forcingIdentifiersToLowerCase**     | body     | boolean  | Yes      | Whether to force identifiers to lowercase  |
-| ├── **forcingIdentifiersToUpperCase**     | body     | boolean  | Yes      | Whether to force identifiers to uppercase  |
-| ├── **hostname**                          | body     | string   | Yes      | Host IP or domain (e.g., `127.0.0.1`)        |
-| ├── **id**                                | body     | null     | Yes      | Typically unused; set to null       |
-| ├── **indexTablespace**                   | body     | string   | Yes      | Index tablespace (if applicable)    |
-| ├── **informixServername**                | body     | string   | Yes      | Server name for Informix (unused for PostgreSQL) |
-| ├── **initialPoolSize**                   | body     | integer  | Yes      | Initial size for connection pool    |
-| ├── **maximumPoolSize**                   | body     | integer  | Yes      | Maximum pool size                   |
-| ├── **name**                              | body     | string   | Yes      | Connection name (e.g., `foodmart2`) |
-| ├── **partitioned**                       | body     | boolean  | Yes      | Whether the database is partitioned |
-| ├── **password**                          | body     | string   | Yes      | Database user password              |
-| ├── **quoteAllFields**                    | body     | boolean  | Yes      | Whether to quote all SQL fields     |
-| ├── **streamingResults**                  | body     | boolean  | Yes      | Whether to use streaming results    |
-| ├── **username**                          | body     | string   | Yes      | Database user name (e.g., `postgres`)         |
-| ├── **usingConnectionPool**               | body     | boolean  | Yes      | Whether to use connection pooling   |
-| ├── **usingDoubleDecimalAsSchemaTableSeparator** | body | boolean | Yes | Whether to treat double decimals as schema-table separators |
-| ├── **PORT_NUMBER**                       | body     | string   | Yes      | Database port number (duplicate with `databasePort`)         |
-| ├── **driverId**                          | body     | string   | Yes      | Driver ID (duplicate with `attributes.driverId`)             |
-| ├── **CUSTOM_URL**                        | body     | null     | Yes      | Custom URL if not using default driver config |
-| └── **CUSTOM_DRIVER_CLASS**               | body     | null     | Yes      | Custom driver class if needed, otherwise null |
-
----
-
-## **Response Examples**
 
 ```json
-{
-  "msg": "success",
-  "code": "200",
-  "success": true
-}
+{ "success": true, "code": "200" }
 ```
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+HTTP 200 with `success: false`, `code` `"500"`, and the reason in `msg`.
 
-### **Response Data Schema (HTTP 200)**
+| `msg` starts with | When |
+| --- | --- |
+| `CONNECTION_CREATE_FORBIDDEN` | The caller's user type cannot create content. |
+| `LOCAL_CONNECTION_ADMIN_ONLY` | A non-administrator targeted the repository server, an embedded engine, JNDI, or an unrecognized target. |
+| `INTERNAL_CONNECTION_FORBIDDEN` | The name or JNDI name is one of Datafor's own internal data sources. |
+| Text containing the connection name | A connection with this name already exists, or the database rejected the settings. |
 
-| Name       | Type    | Required | Description                             |
-|------------|---------|----------|-----------------------------------------|
-| `msg`      | string  | No       | Response message (e.g., `"success"`)    |
-| `code`     | string  | No       | Status code (e.g., `"200"`)             |
-| `success`  | boolean | Yes      | Indicates whether the request succeeded |
+Related: [Supported databases](/documentation/Datasource/Supported-Databases/), [Data connections: targets and custom SQL](/documentation/System/Permission-Evaluation-Overview/#data-connections-targets-and-custom-sql)

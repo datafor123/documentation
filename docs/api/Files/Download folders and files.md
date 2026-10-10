@@ -4,71 +4,45 @@ permalink: /api/Files/Download folders and files/
 tags:
   - api
   - Files
-description: null
+description: Download several repository files and folders as one zip archive.
 createTime: 2026/09/01 22:03:26
 ---
+Downloads several repository files and folders in one zip archive. To download a single item, see [Download folder](/api/Folders/Download%20folder/).
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/repo/files/downloadList` |
+| Permission | **Read** on every item |
+| Content type | `application/x-www-form-urlencoded` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/repo/files/downloadList
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `pathList` | form | string | Yes | A JSON array of repository paths, sent as one string, for example `["/public/Sales","/public/Finance/Budget.datafor"]`. |
+
+The zip is named after the item when all paths share one title, otherwise after the closest common parent folder. Paths inside the zip are relative to that folder.
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/repo/files/downloadList" \
+  --data-urlencode 'pathList=["/public/Sales","/public/Finance/Budget.datafor"]' \
+  -o export.zip
 ```
 
-**Authorization**  
-The current user must have read access to the specified folder or file.
+On success the response body is the zip file (`Content-Type: application/zip`, file name in `Content-Disposition`).
 
-**Content Type**  
-`application/json`
+## Errors
 
----
+Errors are also returned with HTTP 200, as a plain-text attachment named `error.txt` instead of the zip. Check the `Content-Disposition` header before saving the body.
 
-### **Request Example**
+| `error.txt` content | When |
+| --- | --- |
+| Parser message | `pathList` is not a JSON array. |
+| Other text | Export failed for another reason. |
 
-```json
-{
-  "pathList": ["/public/ivan.datafor"]
-}
-```
+A path that does not exist, or that the caller cannot read, makes the whole request fail. Check paths with [Get file tree](/api/Files/Get%20file%20tree/) first.
 
----
-
-## **Params**
-
-| Name       | Location | Type   | Required | Description |
-|------------|----------|--------|----------|-------------|
-| `body`     | body     | object | No       | JSON payload containing file paths to download. |
-| `pathList` | body     | array  | No       | List of file or folder paths to download. |
-
----
-
-## **Response Examples**
-
-#### ✅ **Success Response**
-```json
-{
-  "success": true
-}
-```
-
----
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request successful, file(s) ready for download. |
-| 400              | Bad Request                                             | Invalid input provided. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 403              | Forbidden                                               | User lacks required permissions. |
-| 404              | Not Found                                               | File or folder not found. |
-| 500              | Internal Server Error                                   | Unexpected error occurred. |
-
----
-
-## **Response Data Schema**
-
-| Name      | Type    | Required | Description |
-|-----------|--------|----------|-------------|
-| `success` | boolean | **Yes**  | `true` if the request was successful, otherwise `false`. |
+Related: [Upload files](/api/Files/Upload%20files/)

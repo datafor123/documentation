@@ -4,88 +4,50 @@ permalink: /api/Data Security/Objs/Enable rules for objects/
 tags:
   - api
   - Data Security
-description: null
+description: Enable or disable one or more Table & column access policies.
 createTime: 2026/09/01 22:03:26
 ---
+Turns Table & column access policies on or off. Disabling keeps the policy but removes it from effective access. Enabling re-validates the stored policy first.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/auth/obj/enableBatch` |
+| Permission | **Full control** on each policy's connection |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/auth/obj/enableBatch
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| (body) | body | array | Yes | `[{"id": "...", "dbconn": "...", "enable": "1"}]`. `enable` is `1` to activate, `0` to deactivate. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/auth/obj/enableBatch" \
+  -H "Content-Type: application/json" \
+  -d '[ { "id": "371063d227944c5386fbe81faf8c3bc0", "dbconn": "Sales DW", "enable": "1" } ]'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
-**Preconditions**
-- The current user’s type **cannot** be `SYS_Reader`.
-- The current user must have **administrative privileges** for the connection.
-
----
-
-### **Parameters Schema**
-
-| Name     | Location | Type           | Required | Description |
-|----------|----------|---------------|----------|-------------|
-| **body** | body     | array[object] | Yes      | List of object rules to enable/disable |
-
----
-
-### **Request Example**
-
-```json
-[
-  {
-    "id": "b096f367be994cf9bf9080c72120df3e",
-    "dbconn": "Demo",
-    "enable": "0"
-  }
-]
-```
-
----
-
-## **Response Examples**
 
 ```json
 {
+  "success": true,
   "code": "200",
   "data": [
-    {
-      "msg": "",
-      "dbconn": "Demo",
-      "enable": "0",
-      "success": true,
-      "id": "b096f367be994cf9bf9080c72120df3e"
-    }
-  ],
-  "success": true
+    { "id": "371063d227944c5386fbe81faf8c3bc0", "dbconn": "Sales DW", "enable": "1", "success": true }
+  ]
 }
 ```
 
----
+## Errors
 
-## **HTTP Responses**
+Per entry in `data`, with `success: false`:
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `401` | `id cannot be empty` / `dbconn cannot be empty` / `enable cannot be empty` / `enable must be 0 or 1` | A field is missing or invalid. |
+| `401` | `No administrative privileges:<connection>` | The caller lacks Full control on the connection. |
+| `400` | Validation message | Enabling failed because a stored table, column, or subject is no longer valid. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name       | Type    | Required | Description                |
-|------------|---------|----------|----------------------------|
-| `code`     | string  | No       | HTTP response code         |
-| `data`     | array   | Yes      | List of enabled/disabled objects |
-| ├── `msg`  | string  | No       | Message (if any)           |
-| ├── `dbconn` | string | No      | Database connection name   |
-| ├── `enable` | string | No      | "1" for enabled, "0" for disabled |
-| ├── `success` | boolean | No    | Indicates if the operation was successful |
-| ├── `id`   | string  | No       | ID of the updated rule     |
-| `success`  | boolean | Yes      | Overall request success status |
+Related: [Data Security](/documentation/Datasource/Data-Security/)

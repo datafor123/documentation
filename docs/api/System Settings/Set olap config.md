@@ -4,72 +4,53 @@ permalink: /api/System Settings/Set olap config/
 tags:
   - api
   - System Settings
-description: null
+description: Change one or more query engine settings; they take effect at once.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`POST`
+Changes query engine settings, as **Save** on **Settings › Data › Query engine** does. Values take effect at once.
 
-**Request URL**
-```html
-/plugin/datafor/api/modeler/olap/config/updateBatch
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor/api/modeler/olap/config/updateBatch` (several) or `POST /plugin/datafor/api/modeler/olap/config/update` (one) |
+| Permission | Administrator |
+| Content type | `application/json` for `updateBatch`; `application/x-www-form-urlencoded` for `update` |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| (body) | body | object[] | Yes, for `updateBatch` | Entries `{"code": "<property>", "value": "<value>"}`. |
+| `code` | form | string | Yes, for `update` | Property name. |
+| `value` | form | string | Yes, for `update` | New value. |
+
+Use the `code` values from [Get olap config](/api/System%20Settings/Get%20olap%20config/) with `editable=true`. Values are strings, also for numbers and booleans (`"300"`, `"true"`). The server does not check codes or values, so a typo is stored as a new, unused property.
+
+## Example
+
+```bash
+curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor/api/modeler/olap/config/updateBatch" \
+  -H "Content-Type: application/json" \
+  -d '[{"code": "mondrian.rolap.queryTimeout", "value": "600"}, {"code": "mondrian.result.limit", "value": "1000000"}]'
+
+curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor/api/modeler/olap/config/update" \
+  -d "code=mondrian.olap.NullMemberCaption" --data-urlencode "value=(blank)"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/x-www-form-urlencoded`
-
----
-
-**Preconditions**
-- The current user's type must be **Administrator**.
-
----
-
-### **Request Example**
-```json
-[
-  {
-    "code": "mondrian.olap.NullMemberCaption",
-    "value": "#null"
-  }
-]
-```
-
-### **Body Parameters Schema**
-
-| Name   | Type   | Required | Description                              |
-|--------|--------|---------:|------------------------------------------|
-| `code` | string | **Yes**  | Configuration code identifier           |
-| `value` | string | **Yes**  | New value for the specified configuration |
-
----
-
-## **Response Examples**
 
 ```json
 {
-  "msg": "success",
-  "success": true
+  "success": true,
+  "msg": "success"
 }
 ```
 
----
+Aggregate table switches (`mondrian.rolap.aggregates.Use` and `Read`) reach models that are already loaded only after their cache is cleared or the server restarts.
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | Request was successful | Inline     |
+| `code` | When |
+| --- | --- |
+| `"403"` | The caller is not an administrator (`msg`: `no permission`). |
+| (none) | The settings could not be stored: `success` is `false` and `msg` has the reason. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type    | Required | Description                          |
-|-----------|---------|---------:|--------------------------------------|
-| `msg`     | string  | No       | Response message                     |
-| `success` | boolean | **Yes**  | Indicates whether the request was successful |
-
+Related: [Query Engine](/documentation/System/Query-Engine/)

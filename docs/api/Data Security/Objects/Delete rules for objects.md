@@ -4,85 +4,52 @@ permalink: /api/Data Security/Objs/Delete rules for objects/
 tags:
   - api
   - Data Security
-description: null
+description: Delete one or more Table & column access policies.
 createTime: 2026/09/01 22:03:26
 ---
+Deletes Table & column access policies with their objects and subjects. Each policy is reported separately.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/auth/obj/deleteBatch` |
+| Permission | **Full control** on each policy's connection |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/auth/obj/deleteBatch
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| (body) | body | array | Yes | Policies to delete: `[{"id": "...", "dbconn": "..."}]`. |
+
+Locked policies (`editable` `0`) are not deleted.
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/auth/obj/deleteBatch" \
+  -H "Content-Type: application/json" \
+  -d '[ { "id": "371063d227944c5386fbe81faf8c3bc0", "dbconn": "Sales DW" } ]'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
-**Preconditions**
-- The current user’s type **cannot** be `SYS_Reader`.
-- The current user must have **administrative privileges** for the connection.
-
----
-
-### **Parameters Schema**
-
-| Name     | Location | Type           | Required | Description |
-|----------|----------|---------------|----------|-------------|
-| **body** | body     | array[object] | Yes      | List of object rules to delete |
-
----
-
-### **Request Example**
-
-```json
-[
-  {
-    "id": "b096f367be994cf9bf9080c72120df3e",
-    "dbconn": "Demo"
-  }
-]
-```
-
----
-
-## **Response Examples**
 
 ```json
 {
+  "success": true,
   "code": "200",
   "data": [
-    {
-      "msg": "success",
-      "dbconn": "foodmart",
-      "success": true,
-      "id": "b60195a71b1140359e3fbec61f3344cd"
-    }
-  ],
-  "success": true
+    { "id": "371063d227944c5386fbe81faf8c3bc0", "dbconn": "Sales DW", "success": true, "msg": "success" }
+  ]
 }
 ```
 
----
+## Errors
 
-## **HTTP Responses**
+Per entry in `data`, with `success: false`:
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `401` | `id cannot be empty` / `dbconn cannot be empty` | A field is missing. |
+| `401` | `No administrative privileges:<connection>` | The caller lacks Full control on the connection. |
+| (none) | Database error | The delete failed. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name       | Type    | Required | Description                |
-|------------|---------|----------|----------------------------|
-| `code`     | string  | Yes      | HTTP response code         |
-| `data`     | array   | Yes      | List of deleted objects    |
-| ├── `msg`  | string  | No       | Success message            |
-| ├── `dbconn` | string | No      | Database connection name   |
-| ├── `success` | boolean | Yes   | Indicates if the deletion was successful |
-| ├── `id`   | string  | Yes      | ID of the deleted rule     |
-| `success`  | boolean | Yes      | Overall request success status |
+Related: [Data Security](/documentation/Datasource/Data-Security/)

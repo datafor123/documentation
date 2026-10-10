@@ -218,7 +218,11 @@ Changing the `secret` of the configuration invalidates every token issued from i
 
 ### 8.2 Let other computers connect
 
-By default the MCP server listens on `127.0.0.1:38081`, so only AI clients on the Datafor computer can connect. Set these keys in `.env` in the AI Agent folder (`bi-server/ai-agent/.env`):
+By default the MCP server listens on `127.0.0.1:38081`, so only AI clients on the Datafor computer can connect. It accepts the host names in `MCP_ALLOWED_HOSTS`, and sends each `ask_datafor` call under the user's own sign-in through Datafor's `/datafor/ai`:
+
+![AI clients connect to the MCP address shown in Connect AI (MCP_PUBLIC_URL) with a Bearer personal token; the MCP server on 38081 checks the host against MCP_ALLOWED_HOSTS and sends ask_datafor through Tomcat's /datafor/ai to the AI Agent API on 28081](./images/ai-agent-deployment-topology.svg)
+
+Set these keys in `.env` in the AI Agent folder (`bi-server/ai-agent/.env`):
 
 | Key | Default | Purpose |
 | --- | --- | --- |

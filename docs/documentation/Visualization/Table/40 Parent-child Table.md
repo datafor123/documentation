@@ -9,7 +9,11 @@ createTime: 2026/10/09 14:00:00
 
 A **Parent-child table** builds a tree from records that point to their parent: an employee and their manager, an account and its parent account, a department and the department above it. The depth does not need to be known in advance.
 
+## Tree table or parent-child table
+
 If your hierarchy is stored as separate level columns (category, subcategory, product), use the [Tree table](/documentation/Visualization/Hierarchy-Table/) instead.
+
+![Level columns Category L1, Category L2 and Product feed a Tree table whose parent rows show the measure for that member (Tea = 50); employee_id and manager_id rows feed a Parent-child table whose parent rows show their own record (Ann = 90, not her team total of 245)](./images/tree-vs-parent-child-data.svg)
 
 ## Build a parent-child table
 

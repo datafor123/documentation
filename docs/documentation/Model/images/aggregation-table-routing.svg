@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="752" viewBox="0 0 700 752" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">How the query engine decides whether to read an aggregation table</title>
+  <desc id="desc">The engine reads an aggregation table only when UseAggregates and ReadAggregates are both on, every level the query asks for is covered by a Group by mapping, every measure is mapped with the same summarization, and every filter is within the aggregation grain. If several tables qualify, it reads the smallest. A No at any step sends the query to the detail fact table. With the example mapping agg_l_03_sales_fact_1997, grouped by customer_id and time_id, Store Sales by Customer reads the aggregation table, while Store Sales by Store reads sales_fact_1997 because store is not a Group by column.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="752" fill="#FFFFFF"/>
+
+  <!-- Start -->
+  <rect x="20" y="12" width="410" height="54" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="38" y="36" font-size="16" font-weight="700" fill="#1F4FD8">Report query</text>
+  <text x="38" y="56" font-size="14" fill="#2B2B3A">levels on rows, columns and filters; measures</text>
+
+  <!-- Decisions -->
+  <rect x="20" y="92" width="410" height="56" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="38" y="116" font-size="15" font-weight="700" fill="#2B2B3A">UseAggregates and ReadAggregates on?</text>
+  <text x="38" y="137" font-size="14" fill="#5B6472">Settings › Data › Query engine, then cache cleared</text>
+
+  <rect x="20" y="176" width="410" height="56" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="38" y="200" font-size="15" font-weight="700" fill="#2B2B3A">Every requested level covered?</text>
+  <text x="38" y="221" font-size="14" fill="#5B6472">reachable through a Group by mapping</text>
+
+  <rect x="20" y="260" width="410" height="56" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="38" y="284" font-size="15" font-weight="700" fill="#2B2B3A">Every measure mapped?</text>
+  <text x="38" y="305" font-size="14" fill="#5B6472">same detail column and same summarization</text>
+
+  <rect x="20" y="344" width="410" height="56" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="38" y="368" font-size="15" font-weight="700" fill="#2B2B3A">Every filter within the grain?</text>
+  <text x="38" y="389" font-size="14" fill="#5B6472">filtered levels are Group by levels too</text>
+
+  <!-- Results -->
+  <rect x="20" y="428" width="410" height="56" rx="12" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="38" y="452" font-size="16" font-weight="700" fill="#2E7D32">Reads the aggregation table</text>
+  <text x="38" y="473" font-size="14" fill="#2B2B3A">if several qualify, the smallest one</text>
+
+  <rect x="480" y="92" width="200" height="308" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="496" y="236" font-size="16" font-weight="700" fill="#3B4252">Reads the detail</text>
+  <text x="496" y="258" font-size="16" font-weight="700" fill="#3B4252">fact table</text>
+  <text x="496" y="282" font-size="14" fill="#5B6472">same result, more rows</text>
+  <text x="496" y="302" font-size="14" fill="#5B6472">scanned</text>
+
+  <!-- Example -->
+  <text x="20" y="524" font-size="16" font-weight="700" fill="#3B4252">Example mapping from this page: agg_l_03_sales_fact_1997</text>
+  <text x="20" y="546" font-size="14" fill="#5B6472">Group by customer_id and time_id; Sum of store_sales, store_cost, unit_sales</text>
+
+  <rect x="20" y="562" width="320" height="176" rx="12" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="38" y="590" font-size="16" font-weight="700" fill="#2E7D32">Store Sales by Customer</text>
+  <text x="38" y="616" font-size="14" fill="#2B2B3A">Customer: Group by customer_id</text>
+  <text x="38" y="638" font-size="14" fill="#2B2B3A">Store Sales: Sum of store_sales</text>
+  <text x="38" y="660" font-size="14" fill="#2B2B3A">no filter outside the grain</text>
+  <text x="38" y="692" font-size="14" fill="#5B6472">reads</text>
+  <text x="38" y="714" font-size="15" font-weight="700" fill="#2E7D32">agg_l_03_sales_fact_1997</text>
+
+  <rect x="360" y="562" width="320" height="176" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="378" y="590" font-size="16" font-weight="700" fill="#3B4252">Store Sales by Store</text>
+  <text x="378" y="616" font-size="14" fill="#2B2B3A">Store: no Group by column</text>
+  <text x="378" y="638" font-size="14" fill="#2B2B3A">stops at "every requested</text>
+  <text x="378" y="660" font-size="14" fill="#2B2B3A">level covered?"</text>
+  <text x="378" y="692" font-size="14" fill="#5B6472">reads</text>
+  <text x="378" y="714" font-size="15" font-weight="700" fill="#3B4252">sales_fact_1997</text>
+
+  <!-- Arrows are drawn after the boxes -->
+  <line x1="225" y1="66" x2="225" y2="89" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="225" y1="148" x2="225" y2="173" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="234" y="166" font-size="14" font-weight="700" fill="#2E7D32">Yes</text>
+  <line x1="225" y1="232" x2="225" y2="257" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="234" y="250" font-size="14" font-weight="700" fill="#2E7D32">Yes</text>
+  <line x1="225" y1="316" x2="225" y2="341" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="234" y="334" font-size="14" font-weight="700" fill="#2E7D32">Yes</text>
+  <line x1="225" y1="400" x2="225" y2="425" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="234" y="418" font-size="14" font-weight="700" fill="#2E7D32">Yes</text>
+
+  <line x1="430" y1="120" x2="477" y2="120" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="440" y="113" font-size="14" font-weight="700" fill="#9A5B00">No</text>
+  <line x1="430" y1="204" x2="477" y2="204" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="440" y="197" font-size="14" font-weight="700" fill="#9A5B00">No</text>
+  <line x1="430" y1="288" x2="477" y2="288" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="440" y="281" font-size="14" font-weight="700" fill="#9A5B00">No</text>
+  <line x1="430" y1="372" x2="477" y2="372" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="440" y="365" font-size="14" font-weight="700" fill="#9A5B00">No</text>
+</svg>

@@ -4,74 +4,59 @@ permalink: /api/Favorites/Modify favorites/
 tags:
   - api
   - Favorites
-description: null
+description: Replace, extend or remove entries of the signed-in user's favorites.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`POST`
+Stores the signed-in user's favorites. Without parameters the body replaces the whole list, which is what the console does after it has changed its copy.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/user-settings/favorites
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/user-settings/favorites` |
+| Permission | Any signed-in user (own favorites) |
+| Content type | `application/json` |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| (body) | body | object[] | Yes | Entries with `fullPath`, `title` and `lastUse`, as returned by [Get favorites](/api/Favorites/Get%20favorites/). |
+| `append` | query | boolean | No | `true` puts the body entries in front of the stored list instead of replacing it. |
+| `distinct` | query | boolean | No | With `append=true`: drop stored entries whose `fullPath` is also in the body, so a file is listed once. |
+
+Without `distinct`, `append` does not check for duplicates.
+
+## Example
+
+Add one file to the front of the list:
+
+```bash
+curl -u analyst1:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/user-settings/favorites?append=true&distinct=true" \
+  -H "Content-Type: application/json" \
+  -d '[{"fullPath": "/public/Sales/Sales overview.datafor", "title": "Sales overview", "lastUse": 1722844154850}]'
 ```
 
-**Authorization**  
-This API requires authentication.
-
-**Content Type**  
-`application/json`
-
----
-
-### **Request Example**
-
-```json
-[
-  {
-    "fullPath": "/public/workshop.datafor",
-    "title": "workshop",
-    "lastUse": 1722844154850
-  }
-]
-```
-
----
-
-## **Params**
-
-| Name       | Location | Type          | Required | Description |
-|------------|----------|---------------|----------|-------------|
-| `body`     | body     | array[object] | No       | Array of favorite items to modify. |
-
----
-
-## **Response Examples**
-
-#### ✅ **Success Response**
 ```json
 {
-  "data": "[{\"fullPath\":\"/public/workshop.datafor\",\"title\":\"workshop\",\"lastUse\":1722844154850}]",
-  "success": true
+  "success": true,
+  "data": "[{\"fullPath\":\"/public/Sales/Sales overview.datafor\",\"title\":\"Sales overview\",\"lastUse\":1722844154850}]"
 }
 ```
 
----
+`data` is the stored list after the change, as a JSON string. Posting `[]` without parameters clears the list.
 
-## **HTTP Responses**
+To remove entries, post them to `/plugin/datafor-modeler/api/user-settings/favorites/deleteBatch`. Stored entries whose `fullPath` matches an entry in the body are removed; `?key=<field>` matches on another field instead.
 
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request successful. |
-| 400              | Bad Request                                             | Invalid input provided. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 500              | Internal Server Error                                   | Unexpected error occurred. |
+```bash
+curl -u analyst1:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/user-settings/favorites/deleteBatch" \
+  -H "Content-Type: application/json" \
+  -d '[{"fullPath": "/public/Sales/Sales overview.datafor"}]'
+```
 
----
+## Errors
 
-## **Response Data Schema**
+The response always has `"success": true`; if storing failed, it also has `msg`.
 
-| Name      | Type    | Required | Description |
-|-----------|--------|----------|-------------|
-| `data`    | string | **Yes**  | JSON string of modified favorites. |
-| `success` | boolean | **Yes**  | `true` if modification is successful, otherwise `false`. |
+Related: [Get favorites](/api/Favorites/Get%20favorites/)

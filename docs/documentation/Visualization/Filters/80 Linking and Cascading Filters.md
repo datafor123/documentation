@@ -70,4 +70,4 @@ A relative period with no member in the data, such as last month before that mon
 
 ![The Conditions list of a chart: Region, Channel Type and Day](./images/conditions-popover.png)
 
-For filters across different models, see [Cross-Model Analysis](/documentation/Analysis/Cross-Model/).
+For how filters combine with component filters, chart clicks and drilling, including two conditions on the same field, see [How Filters, Clicks, Drilling and Parameters Combine](/documentation/Analysis/How-Conditions-Combine/). For filters across different models, see [Cross-Model Analysis](/documentation/Analysis/Cross-Model/).

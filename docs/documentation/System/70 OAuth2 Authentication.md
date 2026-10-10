@@ -6,11 +6,7 @@ description: Let users sign in to Datafor through an OAuth 2.0 identity provider
 createTime: 2026/09/01 22:03:26
 ---
 
-## Single sign-on page
-
-LDAP, OAuth 2.0, SAML 2.0 and CAS are configured on one page: **Settings › Access & Integration › Single sign-on**. A card per method at the top shows its status: **On** (enabled), **Off** (configured but not enabled), or **Not set up** (the method's address field is empty: **LDAP URL**, **Authorization endpoint**, **IdP SSO URL** or **CAS server URL**); **Unknown** means the status could not be read. Select a card to show that method's settings below it; if the current method has unsaved changes, Datafor asks you to save or discard them first. The cards refresh after each save. Each method has an **Enable** switch; while it is off, the fields are locked and the page shows "Turn on to edit." The **New users** group sets up accounts for first-time users: **Create users on first sign-in**, **Default user type** and **Default role**.
-
-See [LDAP](/documentation/System/LDAP/) for a screenshot of the page.
+OAuth 2.0 is set up on **Settings › Access & Integration › Single sign-on**. For the page, the sign-in flow, the addresses to register at the provider and the **New users** settings, see [Single Sign-On Overview](/documentation/System/Single-Sign-On/).
 
 ## 1. OAuth 2.0 settings
 
@@ -50,7 +46,7 @@ Select the **OAuth 2.0** card ("Sign in at the identity provider, then return").
 | Problem | Likely cause | What to do |
 | --- | --- | --- |
 | The provider rejects the sign-in | Wrong **Client ID** or **Client secret** | Copy both again from the provider; use **Replace** to enter a new secret. |
-| The provider reports a redirect URI mismatch | The redirect URI registered at the provider does not match the Datafor address | Correct the redirect URI in the provider's application settings. |
+| The provider reports a redirect URI mismatch | Datafor sends the address of the page where sign-in started as `redirect_uri`, and that address is not registered at the provider | Register `https://your-server/datafor/oauth2` and send users there to sign in; see [Register Datafor at the identity provider](/documentation/System/Single-Sign-On/#register-datafor-at-the-identity-provider). |
 | The code exchange fails | Wrong **Token endpoint**, **Grant type** or **Authorization code parameter** | Check the values against the provider's documentation. |
 | Sign-in succeeds at the provider but Datafor finds no user | **Username JSONPath** does not match the UserInfo response, or the **Scope** does not include the needed claims | Inspect the UserInfo response and adjust the JSONPath or the scopes. |
 | No Datafor user is created on first sign-in | **Create users on first sign-in** is off | Select it, set **Default user type** and **Default role**, then save. |

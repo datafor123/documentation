@@ -4,68 +4,46 @@ permalink: /api/Models/Recaption a model/
 tags:
   - api
   - Models
-description: null
+description: Change the display name of an analysis model.
 createTime: 2026/09/01 22:03:26
 ---
+Changes the display name (caption) of a published model. The model name used in API calls and reports does not change.
 
-### **Method**
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/mondrian/recaption` |
+| Permission | **Edit** on the model |
+| Content type | `application/x-www-form-urlencoded` |
 
-### **Request URL**
-```html
-/plugin/datafor-modeler/api/mondrian/recaption
-```  
+## Parameters
 
-### **Authorization**
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `catalogName` | form | string | Yes | Model name. |
+| `catalogCaption` | form | string | Yes | New display name. |
 
-### **Content Type**
-`application/x-www-form-urlencoded`
+## Example
 
----  
-
-### **Preconditions**
-- The current user **must** have administrative privileges for the model.
-
----  
-
-### **Request Example**
-
-```yaml
-catalogName: toDel3_11111
-catalogCaption: toDel
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/mondrian/recaption" \
+  --data-urlencode "catalogName=SalesModel" \
+  --data-urlencode "catalogCaption=Sales (2026)"
 ```
 
-| Name              | Location | Type   | Required | Description |
-|------------------|----------|--------|----------|-------------|
-| `catalogName`   | body     | string | No       | The name of the model to be updated. |
-| `catalogCaption` | body     | string | No       | The new caption for the model. |
-
----
-
-### **Response Examples**
-
 ```json
-{
-  "msg": "success",
-  "success": true
-}
-```  
+{ "success": true, "msg": "success" }
+```
 
----
+## Errors
 
-### **HTTP Responses**
+HTTP 200 with `success: false` and a `msg`.
 
-| HTTP Status Code | Meaning | Description | Data Schema |
-|------------------|---------|-------------|-------------|
-| 200 | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | The request was successful. | Inline |
+| `msg` | When |
+| --- | --- |
+| `catalogName cannot be blank` | `catalogCaption` is empty (the message names the wrong field). |
+| `origCatalogName cannot be blank` | `catalogName` is empty. |
+| `error occured:Edit Denied` | The caller lacks Edit on the model. |
+| `error occured:<reason>` | The model does not exist, or saving failed. |
 
----
-
-### **Response Data Schema (HTTP 200)**
-
-| Name      | Type    | Required | Description |
-|-----------|---------|----------|-------------|
-| `msg`     | string  | No       | Response message. |
-| `success` | boolean | **Yes**  | Indicates whether the request was successful. |
+Related: [Get models](/api/Models/Get%20models/)

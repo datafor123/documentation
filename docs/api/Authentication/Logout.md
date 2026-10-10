@@ -1,45 +1,38 @@
 ---
-title: Logout
+title: Form logout
 permalink: /api/Authentication/Logout/
 tags:
   - api
   - Authentication
-description: null
+description: The browser sign-out endpoint, which ends the session and redirects to the start page.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`GET`
+Ends the session of the `JSESSIONID` cookie and redirects the browser to the start page. Scripts should use [Log out](/api/Authentication/Restful%20Logout/), which answers in JSON.
 
-**Request URL**
-```html
-/Logout
+| | |
+| --- | --- |
+| Method and path | `GET /Logout` (POST also works) |
+| Permission | Anyone |
+| Content type | None |
+
+## Parameters
+
+None. The session is taken from the cookie.
+
+## Example
+
+```bash
+curl -i -b cookies.txt "http://localhost:28080/datafor/Logout"
 ```
 
-**Description**  
-Logs the user out of the application and responds with a redirect (302) to a specified location.
+```text
+HTTP/1.1 302
+Location: /datafor/index.jsp
+```
 
-**Content Type**  
-No request body is typically used with a `GET` request.
+## Errors
 
----
+None. Without a session the call still redirects.
 
-## **Response Examples**
-
-**302 Response**  
-The server responds with an HTTP 302 (Found) and redirects the user (e.g., to `/datafor/index.jsp`).
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                                 | Description                       | Data schema |
-|------------------|-------------------------------------------------------------------------|-----------------------------------|------------|
-| 302              | [Found](https://tools.ietf.org/html/rfc7231#section-6.4.3)             | Location `/datafor/index.jsp`     | Inline     |
-
-### **Headers**
-
-**Request Headers**
-- **Cookie**: Session cookie to identify the user’s session.
-
-**Response Headers**
-- **Location**: The URL the client is redirected to after logout (e.g., `/datafor/index.jsp`).
-
+Related: [Log out](/api/Authentication/Restful%20Logout/), [Form login](/api/Authentication/Login/)

@@ -5,100 +5,55 @@ tags:
   - api
   - Extension Plugins
   - Authentication
-  - Cas
-description: null
+  - CAS
+description: Save the CAS single sign-on settings.
 createTime: 2026/09/01 22:03:26
 ---
+Saves the CAS single sign-on settings.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-cas/api/update` |
+| Permission | Administrator user type; the CAS plugin must be installed |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-cas/api/update
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `enable` | body | string | Yes | `1` turns CAS sign-in on, `0` off. |
+| `type` | body | string | Yes | **CAS server type**. `jasig` (Jasig/Apereo CAS) is currently the only supported type. |
+| `center_url` | body | string | Yes | **CAS server URL**, for example `https://cas.example.com/cas`. |
+| `login_url` | body | string | No | **Login URL**. Default: `center_url` followed by `/login`. |
+| `logout_url` | body | string | No | **Logout URL**. Default: `center_url` followed by `/logout`. |
+| `inituser` | body | string | No | `1` creates a Datafor user on a CAS user's first sign-in. |
+| `initroles` | body | string array | With `inituser` | Default user type (`SYS_Reader`, `SYS_Creator` or `Administrator`) and roles for new users. |
+| `ignoreList` | body | string array | No | **Paths that skip single sign-on**. A request matches when its URL contains the entry. |
+| `includeList` | body | string array | No | **Paths that require single sign-on**. While empty, every path not in `ignoreList` goes through single sign-on. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-cas/api/update" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "enable": "1",
+    "type": "jasig",
+    "center_url": "https://cas.example.com/cas",
+    "login_url": "https://cas.example.com/cas/login",
+    "logout_url": "https://cas.example.com/cas/logout",
+    "inituser": "1",
+    "initroles": ["SYS_Reader"],
+    "ignoreList": ["/plugin/datafor-modeler/api", "/Login"],
+    "includeList": []
+  }'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
----
-
-**Preconditions**
-1. The `datafor-cas` plugin must be installed.
-2. The current user's user type **must be** `Administrator`.
-3. Currently, the system only supports authentication via **JASIG CAS**.
-
----
-
-## **Params**
-
-| Name          | Location | Type    | Required | Description |
-|--------------|----------|---------|----------|-------------|
-| `Cookie`     | header   | string  | Yes      | Session cookie for authentication. |
-| `Content-Type` | header | string  | Yes      | Must be set to `application/json`. |
-
----
-
-### **Request Example**
 
 ```json
-{
-  "center_url": "http://127.0.0.1:8080/cas",
-  "logout_url": "http://127.0.0.1:8080/cas/logout",
-  "login_url": "http://127.0.0.1:8080/cas/login",
-  "enable": "1",
-  "inituser": "1",
-  "initpwd": "password",
-  "type": "jasig",
-  "ignoreList": [
-    "/plugin/datafor-modeler/api",
-    "/Login"
-  ],
-  "includeList": [
-    "/plugin/datafor-secure/api"
-  ]
-}
+{ "success": true }
 ```
 
----
+On failure the response has `success: false` and a `msg`.
 
-### **Body Parameters Schema**
-
-| Name          | Location | Type    | Required | Description |
-|--------------|----------|---------|----------|-------------|
-| `center_url` | body     | string  | Yes      | CAS server base URL. |
-| `logout_url` | body     | string  | No       | CAS logout URL (default: `center_url/logout`). |
-| `login_url`  | body     | string  | No       | CAS login URL (default: `center_url/login`). |
-| `enable`     | body     | string  | Yes      | Enable CAS authentication (`1` = true, `0` = false). |
-| `inituser`   | body     | string  | Yes      | Enable CAS user initialization (`1` = true, `0` = false, default: `0`). |
-| `initpwd`    | body     | string  | No       | Default password for newly initialized users. |
-| `type`       | body     | string  | Yes      | CAS type (`jasig`, currently the only supported type). |
-| `ignoreList` | body     | [string] | No      | List of paths to be ignored from CAS authentication (uses `contains` matching). |
-| `includeList` | body     | [string] | Yes     | List of paths to be included in CAS authentication (uses `contains` matching). |
-
----
-
-## **Response Examples**
-
-### ✅ Success Response (200 OK)
-```json
-{
-  "success": true
-}
-```
-
----
-
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | CAS configuration saved successfully. |
-| 400              | Bad Request                                             | Invalid request parameters. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 403              | Forbidden                                               | User does not have permission. |
-| 500              | Internal Server Error                                   | Unexpected server error. |
+Related: [CAS Authentication](/documentation/System/CAS-Authentication/), [Single Sign-On Overview](/documentation/System/Single-Sign-On/)

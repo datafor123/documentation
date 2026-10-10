@@ -5,88 +5,75 @@ tags:
   - api
   - Authentication
   - Token
-description: null
+description: List the embed token (JWT) configurations, with their secrets masked.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`GET`
+Lists the embed token (JWT) configurations of the current tenant, as shown on **Settings › Access & Integration › Embed tokens (JWT)**.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/token/list
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor-modeler/api/token/list` |
+| Permission | Administrator |
+| Content type | None |
+
+## Parameters
+
+None.
+
+## Example
+
+```bash
+curl -u admin:password "http://localhost:28080/datafor/plugin/datafor-modeler/api/token/list"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
----
-
-**Preconditions**
-- The current user's user type **must** be `Administrator`.
-
----
-
-### **Response Examples**
 
 ```json
 {
+  "success": true,
   "data": [
     {
-      "initroles": [
-        "SYS_Reader"
-      ],
-      "fieldmap": {
-        "name": "name",
-        "email": "email",
-        "username": "loginname"
-      },
-      "createdDate": 1737599864898,
-      "inituser": "1",
-      "lastModifiedDate": 1737601114115,
-      "enable": "1",
-      "expire": 86400,
       "name": "ERP",
       "token_name": "token",
-      "creatorId": 1737601114115,
-      "secret": "abcd",
-      "algorithm": "HS256"
+      "secret": "************",
+      "expire": 86400,
+      "algorithm": "HS256",
+      "fieldmap": {
+        "username": "loginname",
+        "name": "name",
+        "email": "email"
+      },
+      "enable": "1",
+      "inituser": "1",
+      "initroles": ["SYS_Reader"],
+      "self_service": "0",
+      "createdDate": 1737599864898,
+      "lastModifiedDate": 1737601114115,
+      "creatorId": "admin"
     }
-  ],
-  "success": true
+  ]
 }
 ```
 
----
+| Field | Description |
+| --- | --- |
+| `name` | Name of the configuration. Identifies it in the other token calls. |
+| `token_name` | URL parameter that carries the token. `token` when not set. |
+| `secret` | Always `************` when a secret is stored. The real value is never returned. |
+| `expire` | Lifetime, in seconds, of tokens that Datafor issues from this configuration. |
+| `algorithm` | `HS256`, `HS384`, `HS512`, `RS256`, `RS384`, `RS512`, `ES256`, `ES384` or `ES512`. |
+| `fieldmap` | Token claims that hold the user name, full name and email. |
+| `enable` | `"1"` accepts tokens; `"0"` (the default) does not. |
+| `inituser` | `"1"` (the default) creates unknown users on first sign-in. |
+| `initroles` | User type and roles given to users created that way. `["SYS_Reader"]` when not set. |
+| `self_service` | `"1"` lets signed-in users issue [personal tokens](/api/Token/Personal-tokens/) from this configuration; `"0"` (the default) does not. |
+| `createdDate`, `lastModifiedDate`, `creatorId` | Repository metadata of the stored configuration. |
 
-## **HTTP Responses**
+To read one configuration, call `GET /plugin/datafor-modeler/api/token/content?name=ERP`. It returns the fields as stored, at the top level of the response next to `"success": true`, with the secret masked. Unlike the list, it does not fill in defaults for missing fields and has no repository metadata.
 
-| HTTP Status Code | Meaning                                                                 | Description        | Data schema |
-|------------------|-------------------------------------------------------------------------|--------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                  | The request was successful. | Inline      |
+## Errors
 
-### **Response Data Schema (HTTP 200)**
+| `code` | When |
+| --- | --- |
+| `"403"` | The caller is not an administrator (`msg`: `no permission`). |
 
-| Name            | Type     | Required | Restrictions | Description       |
-|-----------------|----------|----------|--------------|-------------------|
-| `data`          | [object] | **Yes**  | none         | List of token data objects. |
-| ├── `initroles` | [string] | **No**  | none         | List of initial roles assigned to the token. |
-| ├── `fieldmap`  | object   | **No**  | none         | Mapping of token fields. |
-| │   ├── `name`  | string   | **Yes**  | none         | Field name for `name`. |
-| │   ├── `email` | string   | **Yes**  | none         | Field name for `email`. |
-| │   ├── `username` | string   | **Yes**  | none         | Field name for `username`. |
-| ├── `inituser`  | string   | **No**  | none         | Initial user ID. |
-| ├── `enable`    | string   | **No**  | none         | Token enable status (`1` for enabled). |
-| ├── `expire`    | integer  | **No**  | none         | Token expiration time in seconds. |
-| ├── `name`      | string   | **No**  | none         | Name of the token. |
-| ├── `token_name`| string   | **No**  | none         | Token name. |
-| ├── `secret`    | string   | **No**  | none         | Secret key for the token. |
-| ├── `creatorId` | integer  | **No**  | none         | ID of the creator. |
-| ├── `lastModifiedDate` | long     | **No** | none   | Last modified timestamp. |
-| ├── `createdDate` | long     | **No** | none      | Creation timestamp. |
-| ├── `algorithm` | string   | **No**  | none         | Token algorithm used (e.g., `HS256`). |
-| `success`       | boolean  | **Yes**  | none         | Indicates if the request was successful (`true` or `false`). |
+Related: [JSON Web Token (JWT)](/documentation/System/JWT/), [Add or modify a token configuration](/api/Token/Add%20or%20modify%20a%20token%20configuration/)

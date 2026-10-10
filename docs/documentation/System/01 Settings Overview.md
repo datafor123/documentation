@@ -15,17 +15,17 @@ Administrators open **Settings** (gear icon) in the left navigation. Pages are g
 | | **Email** | Set the SMTP server for alerts, password-reset and registration codes, and upload approval results | [Mail Server Configuration](/documentation/System/Mail-Server-Configuration/) |
 | | **System configuration** | Defaults for new reports and models, query limits, first day of the week | [System Configuration](/documentation/System/System-Configuration/) |
 | | **Branding** | Logo, colours, login page, interface font | [White Label](/documentation/Console/Branding/) |
-| **Access & Integration** | **Single sign-on** | LDAP, OAuth 2.0, SAML 2.0 and CAS | [LDAP](/documentation/System/LDAP/), [OAuth2](/documentation/System/OAuth2-Authentication/), [SAML2](/documentation/System/SAML2/), [CAS](/documentation/System/CAS-Authentication/) |
-| | **Site address** | The public address of the server | |
+| **Access & Integration** | **Single sign-on** | LDAP, OAuth 2.0, SAML 2.0 and CAS | [Single Sign-On Overview](/documentation/System/Single-Sign-On/), [LDAP](/documentation/System/LDAP/), [OAuth2](/documentation/System/OAuth2-Authentication/), [SAML2](/documentation/System/SAML2/), [CAS](/documentation/System/CAS-Authentication/) |
+| | **Site address** | The public address of the server | [Site Address](/documentation/System/Site-Address/) |
 | | **Embed tokens (JWT)** | Sign-in for embedded reports | [JSON Web Token (JWT)](/documentation/System/JWT/) |
-| | **Cross-origin access (CORS)** | Allow other sites to call the server | |
+| | **Cross-origin access (CORS)** | Allow other sites to call the server from the browser, for example the SDK | [Cross-Origin Access (CORS)](/documentation/System/CORS/) |
 | **Data** | **Database drivers** | Upload JDBC drivers | [JDBC Driver Management](/documentation/Datasource/JDBC-Driver-Management/) |
 | | **Query engine** | Query limits and display of special values | [Query Engine](/documentation/System/Query-Engine/) |
 | | **Maps** | Tile and geocoding services for GIS maps | [GIS Map Settings](/documentation/Visualization/GIS-Map-Settings/) |
 | **AI Agent** | **AI service** | Connect the AI Agent and language models | [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/) |
 | | **Knowledge indexes** | What the AI Agent has learned from each model, refresh schedules | [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/) |
 | **Operations** | **Backup and restore** | Back up, schedule and restore | [Backup and Restore](/documentation/System/backup/) |
-| | **Audit log** | Choose which operations are recorded | [Permission Evaluation Overview](/documentation/System/Permission-Evaluation-Overview/) |
+| | **Audit log** | Choose which operations are recorded and how long records are kept | [Audit Log](/documentation/System/Audit-Log/) |
 | | **Multi-tenancy** | Create and manage tenants | [Multi-tenancy](/documentation/Multi-tenancy/Multi-tenancy/) |
 
 Each page has its own address (for example `#/settings/sso/ldap`), so reloading stays on the page and the browser's Back button returns to the previous settings page. Pages with unsaved changes ask before you leave. Below 1,280 px window width the second-level navigation becomes a list at the top.

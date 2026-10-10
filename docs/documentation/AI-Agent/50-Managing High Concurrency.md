@@ -9,7 +9,7 @@ createTime: 2026/09/07 13:25:00
 
 An installation administrator can increase the number of AI Agent analysis workers when questions are waiting in a queue. Configure the count on the **server**, in the installed Agent's `.env` file.
 
-This guide covers the packaged deployment with the supplied startup scripts. The current scripts support **1–8 dispatch workers**, with **1 worker by default**. Worker count is a manual deployment setting. There is no worker-count control in **Ops**, **LLM**, or the console's AI Agent settings.
+This guide covers the packaged deployment with the supplied startup scripts. The current scripts support **1–8 dispatch workers**, with **2 workers by default**. Worker count is a manual deployment setting. There is no worker-count control in **Ops**, **LLM**, or the console's AI Agent settings.
 
 ## 1. Increase the worker count
 
@@ -26,16 +26,16 @@ Use this procedure when analysis tasks are backing up and the model service, Dat
 Open `.env` in that directory. Create it as a plain-text file if it does not exist. Add or update this single line:
 
 ```dotenv
-AI_AGENT_DISPATCH_WORKERS=2
+AI_AGENT_DISPATCH_WORKERS=3
 ```
 
-Start with **2** when the current count is **1**. Keep all other existing settings. Save the file as UTF-8 without a BOM, with the exact name `.env`, not `.env.txt`. Keep only one entry for this key.
+Raise the count one step at a time, for example from the default **2** to **3**. Keep all other existing settings. Save the file as UTF-8 without a BOM, with the exact name `.env`, not `.env.txt`. Keep only one entry for this key.
 
 | Setting rule | Behavior |
 | --- | --- |
 | Valid values | Whole numbers from **1 to 8**, inclusive. |
-| No setting | The launcher starts **1** dispatch worker. |
-| Invalid value | A nonnumeric or out-of-range value, such as `two`, `0`, or `9`, causes a warning and a fallback to **1**. |
+| No setting | The launcher starts **2** dispatch workers. An explicit `1` starts one. |
+| Invalid value | A nonnumeric or out-of-range value, such as `two`, `0`, or `9`, causes a warning and a fallback to **2**. |
 | Configuration precedence | A nonempty environment variable inherited by the startup script takes precedence over `.env`. |
 | Scope | Changes dispatch workers only. The supplied launcher keeps one API instance and one routing worker. |
 
@@ -79,6 +79,8 @@ Packaged components can appear as a parent and child with the same executable na
 **To roll back:** restore the previous valid value in `.env` and any startup-environment override, then run the same restart command and repeat verification.
 
 ## 2. Understand what more workers change
+
+![The AI Agent runs the API on 28081, one routing worker and 1 to 8 dispatch workers (two by default, set with AI_AGENT_DISPATCH_WORKERS in ai-agent/.env) beside the MCP server on 38081; all of them use the bundled PostgreSQL and the dispatch workers call the LLM providers and Datafor](./images/ai-agent-deployment-topology.svg)
 
 The API accepts a question and records work. A routing worker selects the workflow when routing is needed. **Dispatch workers perform the analysis work**, including waiting for model responses and Datafor query results. Each dispatch worker handles one claimed task at a time; excess work waits in the queue.
 

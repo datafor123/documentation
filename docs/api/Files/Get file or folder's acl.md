@@ -4,90 +4,59 @@ permalink: /api/Files/Get file or folder's acl/
 tags:
   - api
   - Files
-description: null
+description: Read the access control list of a report, file, or folder.
 createTime: 2026/09/01 22:03:26
 ---
+Returns the access control list (ACL) of a repository item: its owner, whether it inherits from the parent folder, and each grant.
 
-**Method**  
-`GET`
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor-modeler/api/repo/files/acl` |
+| Permission | **Read** on the item |
+| Content type | none (query string) |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/repo/files/acl
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `pathId` | query | string | Yes | Repository path, for example `/public/Sales/Revenue.datafor`. The colon form `:public:Sales:Revenue.datafor` is also accepted. |
+
+## Example
+
+```bash
+curl -u admin:password -G \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/repo/files/acl" \
+  --data-urlencode "pathId=/public/Sales/Revenue.datafor"
 ```
 
-**Authorization**  
-The current user must have appropriate permissions to access ACL information.
-
-**Content Type**  
-`application/json`
-
----
-
-## **Query Parameters**
-
-| Name    | Location | Type   | Required | Description |
-|---------|----------|--------|----------|-------------|
-| `pathId` | query   | string | No       | The ID of the file or folder to retrieve ACL information. |
-
----
-
-## **Response Examples**
-
-#### ✅ **Success Response**
 ```json
 {
-  "aces": [
-    {
-      "recipient": "admin",
-      "tenantPath": null,
-      "modifiable": true,
-      "recipientType": 0,
-      "permissions": [4]
-    },
-    {
-      "recipient": "Administrator",
-      "tenantPath": null,
-      "modifiable": false,
-      "recipientType": 1,
-      "permissions": [4]
-    }
-  ],
-  "id": "2f5a2686-50ed-4104-a459-a300013ac2ca",
+  "id": "11111111-2222-3333-4444-555555555555",
   "owner": "admin",
-  "tenantPath": null,
   "ownerType": 0,
-  "entriesInheriting": false
+  "tenantPath": null,
+  "entriesInheriting": false,
+  "aces": [
+    { "recipient": "admin", "recipientType": 0, "permissions": [0, 1, 2, 3, 4], "modifiable": true, "tenantPath": null },
+    { "recipient": "Reader", "recipientType": 2, "permissions": [0], "modifiable": true, "tenantPath": null },
+    { "recipient": "Administrator", "recipientType": 1, "permissions": [4], "modifiable": false, "tenantPath": null }
+  ]
 }
 ```
 
----
+| Field | Description |
+| --- | --- |
+| `owner`, `ownerType` | Owner name; `ownerType` 0 = user, 1 = role. |
+| `entriesInheriting` | `true` when the item uses its parent folder's ACL. The `aces` then show the effective, inherited grants. |
+| `aces[].recipient` | User, role, or user type name. |
+| `aces[].recipientType` | 0 = user, 1 = role, 2 = user type (Administrator, Creator, Reader and similar). |
+| `aces[].permissions` | 0 = Read, 1 = Edit, 2 = Delete, 3 = Manage permissions, 4 = Full control. |
+| `aces[].modifiable` | `false` for locked grants, such as the Administrator role, that cannot be changed. |
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | ACL information retrieved successfully. |
-| 400              | Bad Request                                             | Invalid parameters provided. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 403              | Forbidden                                               | User lacks permission to access ACL. |
-| 404              | Not Found                                               | File or folder not found. |
-| 500              | Internal Server Error                                   | Unexpected error occurred. |
+| Response | When |
+| --- | --- |
+| `{"success": false, "responseCode": 410}` | The path does not exist or the caller cannot read it. |
 
----
-
-## **Response Data Schema**
-
-| Name                | Type      | Required | Description |
-|---------------------|----------|----------|-------------|
-| `aces`             | array     | **Yes**  | List of access control entries. |
-| `aces.recipient`   | string    | **Yes**  | Name of the user or role. |
-| `aces.tenantPath`  | null      | **Yes**  | Tenant path (if applicable). |
-| `aces.modifiable`  | boolean   | **Yes**  | Indicates if permissions can be modified. |
-| `aces.recipientType` | integer | **Yes**  | Type of recipient (e.g., user or role). |
-| `aces.permissions` | array     | **Yes**  | List of permission levels assigned. |
-| `id`               | string    | **Yes**  | Unique ID of the file or folder. |
-| `owner`            | string    | **Yes**  | Owner of the file or folder. |
-| `tenantPath`       | null      | **Yes**  | Tenant path information (if applicable). |
-| `ownerType`        | integer   | **Yes**  | Type of the owner. |
-| `entriesInheriting` | boolean  | **Yes**  | Indicates if ACL entries inherit from a parent. |
+Related: [Access Control List](/documentation/System/Access-Control-List/), [Change ACLs for files](/api/Files/Change%20acl%20for%20files/)

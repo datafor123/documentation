@@ -1,123 +1,66 @@
 ---
-title: Get value range
+title: Get dictionary values
 permalink: /api/Dictionaries/Get value range/
 tags:
   - api
   - Dictionaries
-description: null
+description: Run a stored dictionary's SQL and return its key and value rows.
 createTime: 2026/09/01 22:03:26
 ---
+Runs a stored dictionary's SQL and returns its rows, as **Preview** does in the dictionary editor.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/dict/data` |
+| Permission | Any signed-in user, with **Read** on the dictionary's connection |
+| Content type | `application/x-www-form-urlencoded` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/dict/data
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `name` | form | string | `name` or `id` | Dictionary name. |
+| `id` | form | string | `name` or `id` | Dictionary ID. |
+
+At most the server's maximum preview rows (default 1,000) are returned. Without `name` or `id`, the first dictionary in the list is used.
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/dict/data" \
+  --data-urlencode "name=product_names"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
----
-
-### **Parameters Schema**
-
-| Name      | Location | Type   | Required | Description |
-|-----------|----------|--------|----------|-------------|
-| **body**  | body     | object | No       | None |
-| ├── `id`  | body     | string | No       | Dictionary ID |
-| ├── `name`| body     | string | No       | Dictionary name |
-
----
-
-### **Request Example**
 
 ```json
 {
-  "id": "dev",
-  "name": ""
-}
-```
-
----
-
-## **Response Example**
-
-```json
-{
-  "msg": "",
-  "data": [
-    {
-      "warehouse_class_id": 1,
-      "description": "Small Independent"
-    },
-    {
-      "warehouse_class_id": 2,
-      "description": "Medium Independent"
-    },
-    {
-      "warehouse_class_id": 3,
-      "description": "Large Independent"
-    },
-    {
-      "warehouse_class_id": 4,
-      "description": "Small Owned"
-    },
-    {
-      "warehouse_class_id": 5,
-      "description": "Medium Owned"
-    },
-    {
-      "warehouse_class_id": 6,
-      "description": "Large Owned"
-    }
-  ],
   "success": true,
+  "msg": "",
   "config": {
-    "dbconn": "foodmart",
-    "default": "1",
-    "update_time": "2024-08-06 10:20:17.532",
-    "expire": "86400",
-    "name": "dev",
-    "id": "dev",
-    "detail": "select warehouse_class_id,description from foodmart.warehouse_class",
+    "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "name": "product_names",
     "type": "2",
-    "update_by": "admin",
-    "add_time": "2024-08-06 10:16:32.634"
-  }
+    "dbconn": "Sales DW",
+    "detail": "select product_id, product_name from public.product",
+    "default": "Unknown product",
+    "expire": "3600"
+  },
+  "data": [
+    { "product_id": 1, "product_name": "Desk lamp" },
+    { "product_id": 2, "product_name": "Office chair" }
+  ]
 }
 ```
 
----
+## Errors
 
-## **HTTP Responses**
+HTTP 200 with `success: false` and a `msg`.
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+| `msg` | When |
+| --- | --- |
+| `CONNECTION_READ_FORBIDDEN: ...` | The caller lacks Read on the dictionary's connection. |
+| Database message | The SQL failed. |
 
-### **Response Data Schema (HTTP 200)**
+A name that does not exist returns `success: true` with empty `data` and no `config`.
 
-| Name       | Type    | Required | Description |
-|-----------|--------|----------|-------------|
-| `msg`     | string | No       | Response message |
-| `data`    | array  | Yes      | List of dictionary values |
-| ├── `warehouse_class_id` | integer  | Yes  | Warehouse class ID |
-| ├── `description` | string  | Yes  | Warehouse class description |
-| `success` | boolean | Yes     | Indicates if the operation was successful |
-| `config`  | object  | Yes     | Dictionary configuration details |
-| ├── `dbconn`      | string  | No  | Database connection name |
-| ├── `default`     | string  | No  | Default value |
-| ├── `update_time` | string  | No  | Last update timestamp |
-| ├── `expire`      | string  | No  | Expiration time in seconds |
-| ├── `name`        | string  | Yes | Dictionary name |
-| ├── `id`          | string  | Yes | Dictionary ID |
-| ├── `detail`      | string  | No  | Dictionary details (SQL query or values) |
-| ├── `type`        | string  | Yes | `1` for list, `2` for SQL |
-| ├── `update_by`   | string  | No  | Last updated by user |
-| ├── `add_time`    | string  | No  | Creation timestamp |
+Related: [Data Dictionary](/documentation/Tools/Data-Dictionary/)

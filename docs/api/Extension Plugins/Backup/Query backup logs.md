@@ -5,82 +5,61 @@ tags:
   - api
   - Extension Plugins
   - Backup
-description: null
+description: List the backups that have been made, with their status and content.
 createTime: 2026/09/01 22:03:26
 ---
+Lists the backups in **Backup history**: scheduled, manual, and uploaded.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-backup/api/log/query` |
+| Permission | Administrators |
+| Content type | `application/x-www-form-urlencoded` |
 
-**Request URL**
-```html
-/plugin/datafor-backup/api/log/query
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `id` | form | string | No | Only this backup. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-backup/api/log/query"
 ```
 
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
----
-
-**Preconditions**
-- The current user's user type **must be** `Administrator`.
-
----
-
-## **Params**
-
-| Name          | Location | Type    | Required | Description |
-|--------------|----------|---------|----------|-------------|
-| `Cookie`     | header   | string  | Yes      | Session cookie for authentication. |
-| `Content-Type` | header | string  | Yes      | Must be set to `application/json`. |
-
----
-
-### **Request Example**
-
-```json
-{}
-```
-
----
-
-## **Response Examples**
-
-### ✅ Success Response (200 OK)
 ```json
 {
+  "success": true,
   "msg": "",
   "data": [
     {
-      "cron": "{\"complexJobTrigger\":{\"endTime\":null,\"startTime\":\"2024-11-15T11:12:00.000+08:00\",\"uiPassParam\":\"DAILY\",\"repeatCount\":-1,\"daysOfWeek\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}}",
-      "update_time": "2025-02-26 11:12:00.35",
-      "folder": "backup/",
-      "add_by": "admin",
+      "id": "Backup_2026.10.10-02.00.00.205+0800",
       "backupid": "51b51905fc0b482f995f0f32b48105ba",
-      "name": "ll",
-      "id": "Backup_2025.02.26-11.12.00.205+0800",
-      "update_by": "admin",
-      "config": "[{\"id\":\"upload\"}]",
-      "add_time": "2025-02-26 11:12:00.207",
-      "status": "1"
+      "name": "Nightly",
+      "folder": "backup/",
+      "config": "[{\"id\":\"db\"},{\"id\":\"upload\"}]",
+      "status": "1",
+      "add_by": "admin",
+      "add_time": "2026-10-10 02:00:00.207",
+      "update_time": "2026-10-10 02:03:41.118"
     }
-  ],
-  "success": true
+  ]
 }
 ```
 
----
+| Field | Description |
+| --- | --- |
+| `id` | Backup ID; also the name of the zip file. Use it with [Download backup zip](/api/Extension%20Plugins/Backup/Download%20backup%20zip/). |
+| `backupid` | ID of the schedule that made the backup, from [Query backup configs](/api/Extension%20Plugins/Backup/Query%20backup%20configs/). |
+| `status` | `0` running, `1` succeeded, `2` failed (`msg` then has the reason). |
+| `config` | Backup content: `db` **Content and settings**, `upload` **Uploaded data files**, `file` **Application files**. |
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Backup logs retrieved successfully. |
-| 400              | Bad Request                                             | Invalid request parameters. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 403              | Forbidden                                               | User does not have permission. |
-| 500              | Internal Server Error                                   | Unexpected server error. |
+| Response | When |
+| --- | --- |
+| `{"success": false, "code": 403, "msg": "no permission"}` | The caller is not an administrator. |
+
+Related: [Backup and Restore](/documentation/System/backup/)

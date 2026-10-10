@@ -4,94 +4,72 @@ permalink: /api/User Settings/Get user settings and system information/
 tags:
   - api
   - User Settings
-description: null
+description: Find out whether the caller is signed in, who they are, and what the server offers them.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`GET`
+Returns the sign-in state of the caller and the information the console loads at start-up: user, roles, locale, enabled plugins and features. Call it without credentials to learn what the login page should show, for example whether a captcha is needed.
 
-**Request URL**
-```html
-/plugin/datafor/api/extension/auth/fetchUser
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor/api/extension/auth/fetchUser` |
+| Permission | Anyone |
+| Content type | None |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `includeSysauth` | query | string | No | `true` adds `sysauth`, the list of system actions the user may perform. |
+
+## Example
+
+```bash
+curl -u admin:password "http://localhost:28080/datafor/plugin/datafor/api/extension/auth/fetchUser"
 ```
-
-**Authorization**  
-Authentication is **not required** to use this API.
-
----
-
-### **Response Examples**
 
 ```json
 {
-  "ver": "C",
   "code": 200,
-  "__LOAD_VARIABLE__": "1740013039357",
-  "plugins": [
-    "datafor-modeler",
-    "datafor-backup",
-    "datafor"
-  ],
-  "roles": [
-    "Administrator",
-    "Authenticated"
-  ],
-  "lic": {
-    "valid": true,
-    "licenseType": "O",
-    "hasLicense": false,
-    "expire": 1742969448711
-  },
+  "islogged": true,
+  "userid": "admin",
+  "username": "admin",
+  "roles": ["Administrator", "Authenticated"],
+  "plugins": ["datafor", "datafor-modeler", "datafor-backup"],
   "canEdit": true,
+  "canAdminister": true,
+  "locale": "en",
+  "localeList": ["en", "es", "zh"],
   "serverNameFull": "http://localhost:28080/datafor/",
   "contextPath": "/datafor/",
-  "locale": "en",
-  "localeList": [
-    "en",
-    "es",
-    "zh"
-  ],
-  "islogged": true,
-  "username": "admin"
+  "ver": "C",
+  "ai-enable": true,
+  "canAI": true
 }
 ```
 
----
+The response is not wrapped in `success`/`data`, and `code` is a number here. The main fields:
 
-## **HTTP Responses**
+| Field | When present | Description |
+| --- | --- | --- |
+| `islogged` | Always | `true` when the caller is signed in. |
+| `serverNameFull`, `contextPath` | Always | Server address and web application path. |
+| `allowRegister`, `allowGoogleLogin` | Not signed in | Whether the login page offers sign-up and Google sign-in. |
+| `captchaEnable`, `needCaptcha` | Not signed in, captcha on | `needCaptcha` is `true` when every sign-in needs a captcha. See [Log in](/api/Authentication/Restful%20Login/#captcha). |
+| `userid`, `username`, `tenantId` | Signed in | The user. `tenantId` is the short tenant id. |
+| `roles` | Signed in | User type, business roles and built-in roles. |
+| `plugins` | Signed in | Installed server plugins. |
+| `canEdit` | Signed in | `true` when the user may create content (Creator or Administrator). |
+| `canAdminister` | Administrators only | `true`. Missing for other users. |
+| `locale`, `localeList` | Signed in | Current interface language and the languages the server offers. |
+| `ai-enable`, `canAI` | Signed in | Whether the AI Agent is on for the server, and for this user. |
+| `lic` | Signed in | License state of the tenant. |
+| `sysauth` | With `includeSysauth=true` | System actions the user may perform. |
 
-| HTTP Status Code | Meaning                                                                 | Description        | Data schema |
-|------------------|-------------------------------------------------------------------------|--------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                  | The request was successful. | Inline      |
+Other fields (`ver`, `globalFont`, `__LOAD_VARIABLE__`, `systemDefaults`, `ai-service-url`, `license`) serve the console itself.
 
-### **Response Data Schema (HTTP 200)**
+## Errors
 
-| Name                 | Type      | Required | Restrictions | Description           |
-|----------------------|-----------|----------|--------------|-----------------------|
-| `ver`                | string    | **Yes**  | none         | Version of the response. |
-| `code`               | integer   | **Yes**  | none         | Status code of the response. |
-| `__LOAD_VARIABLE__`  | string    | **Yes**  | none         | A load variable for tracking. |
-| `plugins`            | [string]  | **Yes**  | none         | List of enabled plugins. |
-| `roles`              | [string]  | **Yes**  | none         | List of roles assigned to the user. |
-| `lic`                | object    | **Yes**  | none         | License information. |
-| ├── `valid`          | boolean   | **Yes**  | none         | Whether the license is valid. |
-| ├── `licenseType`    | string    | **Yes**  | none         | Type of the license (e.g., `O`). |
-| ├── `hasLicense`     | boolean   | **Yes**  | none         | Whether the user has a license. |
-| ├── `expire`         | integer   | **Yes**  | none         | Expiration timestamp of the license. |
-| `canEdit`            | boolean   | **Yes**  | none         | Whether the user can edit settings. |
-| `serverNameFull`     | string    | **Yes**  | none         | Full server URL. |
-| `contextPath`        | string    | **Yes**  | none         | Context path of the server. |
-| `locale`             | string    | **No**   | none         | User's current locale (returned when logged). |
-| `localeList`         | [string]  | **No**   | none         | List of available locales (BCP47). |
-| `islogged`           | boolean   | **Yes**  | none         | Whether the user is logged in. |
-| `username`           | string    | **Yes**  | none         | Username of the logged-in user. |
-| `ai-enable`          | boolean   | **No**   | none         | Indicates if the AI feature is enabled.|
-| `ai-service-url`     | string    | **No**   | none         | The URL of the AI service endpoint.  |
----
+None; the call always answers. Check `islogged`.
 
-### **Enum Values**
-
-| Name | Value  |
-|------|--------|
-| `ver`| `C`, `F` |
+Related: [Getting Started](/api/index/), [Get user's own information](/api/Users/Get%20user's%20own%20information/)

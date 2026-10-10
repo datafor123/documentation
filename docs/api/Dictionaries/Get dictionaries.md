@@ -4,89 +4,58 @@ permalink: /api/Dictionaries/Get dictionaries/
 tags:
   - api
   - Dictionaries
-description: null
+description: List data dictionaries, or find one by name or ID.
 createTime: 2026/09/01 22:03:26
 ---
+Lists the data dictionaries, newest first, or returns the one matching `name` or `id`.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/dict/query` |
+| Permission | Any signed-in user |
+| Content type | `application/x-www-form-urlencoded` |
 
-**Request URL**
-```html
-/plugin/datafor/api/modeler/dict/query
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `name` | form | string | No | Exact dictionary name. |
+| `id` | form | string | No | Dictionary ID. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/dict/query"
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
----
-
-### **Parameters Schema**
-
-| Name      | Location | Type   | Required | Description |
-|-----------|----------|--------|----------|-------------|
-| **body**  | body     | object | No       | Empty object `{}` |
-
----
-
-### **Request Example**
-
-```json
-{}
-```
-
----
-
-## **Response Example**
 
 ```json
 {
+  "success": true,
   "msg": "",
   "data": [
     {
-      "dbconn": "foodmart",
-      "default": "1",
-      "update_time": "2024-08-06 10:20:17.532",
-      "expire": "86400",
-      "name": "dev",
-      "id": "dev",
-      "detail": "select warehouse_class_id,description from foodmart.warehouse_class",
+      "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+      "name": "product_names",
       "type": "2",
-      "update_by": "admin",
-      "add_time": "2024-08-06 10:16:32.634"
+      "dbconn": "Sales DW",
+      "detail": "select product_id, product_name from public.product",
+      "default": "Unknown product",
+      "expire": "3600",
+      "add_time": "2026-10-08 09:30:00.0",
+      "update_time": "2026-10-09 14:12:00.0",
+      "update_by": "admin"
     }
-  ],
-  "success": true
+  ]
 }
 ```
 
----
+Field meanings are on [Add or modify a dictionary](/api/Dictionaries/Add%20or%20modify%20a%20dictionary/). Empty fields are omitted.
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+| Response | When |
+| --- | --- |
+| `{"success": false, "msg": "..."}` | The dictionary store could not be read. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name       | Type    | Required | Description |
-|-----------|--------|----------|-------------|
-| `msg`     | string | No       | Response message |
-| `data`    | array  | Yes      | List of dictionaries |
-| ├── `dbconn`      | string  | No  | Database connection name |
-| ├── `default`     | string  | No  | Default value |
-| ├── `update_time` | string  | No  | Last update timestamp |
-| ├── `expire`      | string  | No  | Expiration time in seconds |
-| ├── `name`        | string  | Yes | Dictionary name |
-| ├── `id`          | string  | Yes | Dictionary ID |
-| ├── `detail`      | string  | No  | Dictionary details (SQL query or values) |
-| ├── `type`        | string  | Yes | `1` for list, `2` for SQL |
-| ├── `update_by`   | string  | No  | Last updated by user |
-| ├── `add_time`    | string  | No  | Creation timestamp |
-| `success` | boolean | Yes     | Indicates if the operation was successful |
-
+Related: [Data Dictionary](/documentation/Tools/Data-Dictionary/)

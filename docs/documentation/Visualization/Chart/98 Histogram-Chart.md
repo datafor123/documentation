@@ -9,8 +9,6 @@ createTime: 2026/09/03 09:56:42
 
 Show how numeric observations are distributed across intervals. Use it to inspect common values, spread, skew and unusual tails—for example, the distribution of transaction amounts. Use a bar chart for totals by named category.
 
-![Observation grain for Scatter, Box plot and Histogram](../images/current/observation-grain-concept.svg)
-
 ## Bind row-level values
 
 1. Add **Components → Charts → Distribution & correlation → Histogram** (a new histogram is 400 × 300 px) and choose an **Analysis model** in **Data**.
@@ -19,6 +17,8 @@ Show how numeric observations are distributed across intervals. Use it to inspec
 4. Start with **Style → Distribution → Bins → Auto** and inspect the result before choosing a fixed interval.
 
 Each detail row is a sample. Its raw numeric value is binned without aggregation; nulls are excluded. This is not a histogram of already grouped regional totals. A calculated aggregate measure is not a substitute for row-level observations.
+
+![The same detail rows two ways: Scatter and Box plot aggregate them to one value per Marker or Sample member and split by Legend or Group; Histogram bins every raw row value and skips empty values. Below, how a box is drawn: quartiles, median, 1.5 × IQR whiskers, outliers, and points only for fewer than 5 samples](./images/observation-grain-flow.svg)
 
 The automatic title and the X-axis name are the **Value** field's name.
 

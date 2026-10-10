@@ -9,8 +9,6 @@ createTime: 2026/10/06 20:51:07
 
 Compare the spread of a measure across observations, optionally separated into groups. For example, compare the distribution of store sales in each region rather than only each region's total. Box plot is new in 10.00.
 
-![Observation grain for Scatter, Box plot and Histogram](../images/current/observation-grain-concept.svg)
-
 ## Choose the observation first
 
 1. In **Components → Charts → Distribution & correlation**, add **Box plot** and select an **Analysis model** in **Data**.
@@ -26,6 +24,8 @@ Compare the spread of a measure across observations, optionally separated into g
 | **Tooltips** | Optional fields | Shown on outlier and point tooltips only, not on the box tooltip. |
 
 There is no **Color** slot. **Sample** defines the observation grain: Store gives a distribution of store-level values, an order identifier gives a different one. The chart does not use individual source rows unless the Sample field is that fine. Avoid a row limit on Sample: it silently removes observations and changes the distribution.
+
+![The same detail rows two ways: Scatter and Box plot aggregate them to one value per Marker or Sample member and split by Legend or Group; Histogram bins every raw row value and skips empty values. Below, how a box is drawn: quartiles, median, 1.5 × IQR whiskers, outliers, and points only for fewer than 5 samples](./images/observation-grain-flow.svg)
 
 The example below uses **Retail Chain Operations**, **Product** as Sample, **Region** as Group, **Net Sales** as Measure and **Year = 2025**. Each observation is one product's 2025 sales in a region, so every region has enough observations for a box. With **Store** as Sample instead, most regions have fewer than five stores and appear as individual points, which are not outliers.
 

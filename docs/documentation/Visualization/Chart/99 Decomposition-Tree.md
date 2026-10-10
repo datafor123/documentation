@@ -63,6 +63,10 @@ With **Style → Analysis settings → Smart split** on (default), the **+** men
 | **Absolute** (default) | Compares member values directly. Useful for finding the largest or smallest result. |
 | **Relative** | Compares a member value with the absolute average of its candidate dimension. Useful for finding a value that stands out within that dimension. |
 
+![Under East China, High value compares the best member of each unused field. Absolute scores by value, so Beverages (300) wins and the tree splits by Category L1; Relative divides by the field average, so S01 (240 ÷ 120 = 2.0) beats Beverages (300 ÷ 200 = 1.5) and the tree splits by Store. Remove level on Store also removes every level after it](./images/decomposition-smart-split.svg)
+
+On a tie the field listed first in **Explain by** wins. In **Relative** mode a field whose average is 0 is skipped.
+
 ![Style tab with Analysis settings (Smart split on, Comparison mode Absolute) and Tree layout (Density, Responsive, Node width, Level spacing)](./images/decomposition-tree-style-settings.png)
 
 A relative recommendation need not have the largest absolute sales. A high/low recommendation also does not mean good/bad performance. Use a manual split when the business question specifies a dimension or a candidate is unavailable under the current filters. When you add a manual level below High value or Low value levels, those levels are fixed to the dimension they picked.

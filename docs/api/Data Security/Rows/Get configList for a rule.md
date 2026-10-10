@@ -4,93 +4,59 @@ permalink: /api/Data Security/Rows/Get configList for a rule/
 tags:
   - api
   - Data Security
-description: null
+description: Return the tables and conditions of one Row access policy.
 createTime: 2026/09/01 22:03:26
 ---
+Returns the tables and conditions of one Row access policy. [Get rule list](/api/Data%20Security/Rows/Get%20rule%20list/) with `withConfig: true` returns the same data for several policies at once.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/auth/row/config/query` |
+| Permission | **Full control** on the connection |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/auth/row/config/query
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `dbconn` | body | string | Yes | Connection name. |
+| `group_id` | body | string | Yes | Policy ID. |
+| `schema` | body | string | No | Only conditions on this schema. |
+| `tbname` | body | string | No | Only conditions on this table. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/auth/row/config/query" \
+  -H "Content-Type: application/json" \
+  -d '{ "dbconn": "Sales DW", "group_id": "8699a11df24c49ddab9451e249ff2c97" }'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
-**Preconditions**
-- The current user’s type **cannot** be `SYS_Reader`.
-- The current user must have **administrative privileges** for the connection.
-
----
-
-### **Parameters Schema**
-
-| Name         | Location | Type   | Required | Description |
-|-------------|----------|--------|----------|-------------|
-| **body**    | body     | object | Yes      | Request payload |
-| ├── `group_id` | body | string | Yes      | Rule group ID |
-| ├── `dbconn`   | body | string | Yes      | Database connection name |
-
----
-
-### **Request Example**
 
 ```json
 {
-  "group_id": "b096f367be994cf9bf9080c72120df3e",
-  "dbconn": "Demo"
-}
-```
-
----
-
-## **Response Examples**
-
-```json
-{
-  "msg": "success",
+  "success": true,
   "code": "200",
   "data": [
     {
+      "id": "c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
+      "group_id": "8699a11df24c49ddab9451e249ff2c97",
+      "dbconn": "Sales DW",
       "schema": "public",
-      "dbconn": "Demo",
-      "tbname": "time_dim",
-      "group_id": "b096f367be994cf9bf9080c72120df3e",
-      "id": "d3a7e82ddd6d4126bcd749a6f1876e30",
-      "rows": "{\"field\":\"YEAR\",\"operator\":\"=\",\"value\":2005}",
-      "sql": "\"YEAR\"=2005"
+      "tbname": "stores",
+      "sql": "\"store_manager\" = #{system.username}"
     }
-  ],
-  "success": true
+  ]
 }
 ```
 
----
+`rows` is also returned when the policy was built in the console's condition builder.
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `400` | `dbconn cannot be empty` / `group_id cannot be empty` | A required field is missing. |
+| `401` | `No administrative privileges:<connection>` | The caller lacks Full control on the connection. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name        | Type     | Required | Description |
-|------------|---------|----------|-------------|
-| `msg`      | string  | No       | Response message |
-| `code`     | string  | No       | Response status code |
-| `data`     | array   | Yes      | List of configuration rules |
-| ├── `schema` | string | No      | Database schema |
-| ├── `dbconn` | string | No      | Database connection name |
-| ├── `tbname` | string | No      | Table name |
-| ├── `group_id` | string | No   | Rule group ID |
-| ├── `id` | string  | No       | Configuration rule ID |
-| ├── `rows` | string  | No       | Row filter condition in JSON format |
-| ├── `sql` | string  | No       | SQL condition |
-| `success`  | boolean | Yes      | Request success status |
+Related: [Data Security](/documentation/Datasource/Data-Security/)

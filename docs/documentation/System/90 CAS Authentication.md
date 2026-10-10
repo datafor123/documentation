@@ -6,11 +6,7 @@ description: Let users sign in to Datafor through a CAS server, configured on th
 createTime: 2026/09/01 22:03:26
 ---
 
-## Single sign-on page
-
-LDAP, OAuth 2.0, SAML 2.0 and CAS are configured on one page: **Settings › Access & Integration › Single sign-on**. A card per method at the top shows its status: **On** (enabled), **Off** (configured but not enabled), or **Not set up** (the method's address field is empty: **LDAP URL**, **Authorization endpoint**, **IdP SSO URL** or **CAS server URL**); **Unknown** means the status could not be read. Select a card to show that method's settings below it; if the current method has unsaved changes, Datafor asks you to save or discard them first. The cards refresh after each save. Each method has an **Enable** switch; while it is off, the fields are locked and the page shows "Turn on to edit." The **New users** group sets up accounts for first-time users: **Create users on first sign-in**, **Default user type** and **Default role**.
-
-See [LDAP](/documentation/System/LDAP/) for a screenshot of the page.
+CAS is set up on **Settings › Access & Integration › Single sign-on**. For the page, the sign-in flow, the addresses to register at the provider and the **New users** settings, see [Single Sign-On Overview](/documentation/System/Single-Sign-On/).
 
 ## 1. CAS settings
 
@@ -21,7 +17,7 @@ Select the **CAS** card ("Sign in through a CAS server"). Fields marked * are re
 | Server | **Enable** | Turn on to use CAS sign-in. | Turn on before editing the other fields. |
 | Server | **CAS server type** | CAS implementation of your server. | `jasig` (Jasig/Apereo CAS) is currently the only supported type. |
 | Addresses | **CAS server URL** * | Main entry point of the CAS server, e.g. `http://127.0.0.1:8080/cas`. | While empty, the card shows **Not set up**. |
-| Addresses | **Logout URL** * | CAS logout address, e.g. `http://127.0.0.1:8080/cas/logout`. | |
+| Addresses | **Logout URL** * | CAS logout address, e.g. `http://127.0.0.1:8080/cas/logout`. | Required, but **Logout** in Datafor does not send users there; see [Logout](/documentation/System/Single-Sign-On/#logout). |
 | Addresses | **Login URL** * | CAS login address that unauthenticated users are sent to, e.g. `http://127.0.0.1:8080/cas/login`. | |
 | Path rules | **Paths that skip single sign-on** | Paths that never go through single sign-on, e.g. `/plugin/datafor-modeler/api,/Login`. | One path per line, or separated by commas. A request matches when its URL contains the path. |
 | Path rules | **Paths that require single sign-on** | Paths that always go through single sign-on. | One path per line, or separated by commas. A request matches when its URL contains the path. |

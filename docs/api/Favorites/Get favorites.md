@@ -4,54 +4,52 @@ permalink: /api/Favorites/Get favorites/
 tags:
   - api
   - Favorites
-description: null
+description: List the signed-in user's favorite files.
 createTime: 2026/09/01 22:03:26
 ---
 
-**Method**  
-`GET`
+Returns the signed-in user's favorites, the `favorites` user setting.
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/user-settings/favorites
+| | |
+| --- | --- |
+| Method and path | `GET /plugin/datafor-modeler/api/user-settings/favorites` |
+| Permission | Any signed-in user (own favorites) |
+| Content type | None |
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `all` | query | boolean | No | `true` returns the stored list unchanged. By default, entries whose file no longer exists or that the user can no longer read are left out. |
+
+## Example
+
+```bash
+curl -u analyst1:password "http://localhost:28080/datafor/plugin/datafor-modeler/api/user-settings/favorites"
 ```
-
-**Authorization**  
-This API requires authentication.
-
-**Content Type**  
-`application/json`
-
----
-
-## **Response Examples**
 
 ```json
 [
   {
-    "fullPath": "/public/workshop.datafor",
-    "lastUse": 1722219194406,
-    "title": "workshop"
+    "fullPath": "/public/Sales/Sales overview.datafor",
+    "title": "Sales overview",
+    "lastUse": 1722219194406
   }
 ]
 ```
 
----
+The response is the array itself, not wrapped in `success`/`data`; `[]` when there are no favorites.
 
-## **HTTP Responses**
+| Field | Description |
+| --- | --- |
+| `fullPath` | Repository path of the file. |
+| `title` | Display name. |
+| `lastUse` | When the entry was added or last used, in milliseconds since 1970-01-01 UTC. |
 
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request successful. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 500              | Internal Server Error                                   | Unexpected error occurred. |
+Entries keep whatever other fields the client stored with them.
 
----
+## Errors
 
-## **Response Data Schema**
+On a server error the response is `{"success": false, "msg": "<reason>"}`.
 
-| Name       | Type    | Required | Description |
-|------------|--------|----------|-------------|
-| `fullPath` | string | **Yes**  | The full path of the favorite item. |
-| `lastUse`  | integer | **Yes**  | Timestamp of the last use. |
-| `title`    | string | **Yes**  | Title of the favorite item. |
+Related: [Modify favorites](/api/Favorites/Modify%20favorites/)

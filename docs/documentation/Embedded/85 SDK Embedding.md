@@ -7,14 +7,14 @@ createTime: 2026/09/01 22:03:26
 
 # SDK Embedding
 
-The JavaScript SDK renders a report directly in a `<div>` of your page instead of an `iframe`. Your backend signs an embed token (JWT) for the current user, and the SDK sends it with every request to the Datafor server.
+The JavaScript SDK renders a report directly in a `<div>` of your page instead of an `iframe`. Your backend signs an embed token (JWT) for the current user, and the SDK sends it with every request to the Datafor server. For the whole sign-in sequence, see [Signing In Users of Embedded Reports](/documentation/Embedded/Signing-In-Users/#embed-token).
 
 ## Before you start
 
 1. **Create an embed token configuration.** In **Settings › Access & Integration › Embed tokens (JWT)**, create and enable a configuration (see [JSON Web Token (JWT)](/documentation/System/JWT/)). Your backend signs a token for each user with that configuration's **Signature algorithm** and key (the **Secret key** for HS algorithms, or the private key that matches the configured public key), with the Datafor login name in the claim named by **Username field** and an `exp` claim (see [Send a token](/documentation/System/JWT/#_3-send-a-token)). Never sign tokens in the browser: the signing key must stay on your server.
-2. **Allow your page's origin (CORS).** The SDK calls the Datafor server from your page's origin. In **Settings › Access & Integration › Cross-origin access (CORS)**:
+2. **Allow your page's origin (CORS).** The SDK calls the Datafor server from your page's origin. In **Settings › Access & Integration › Cross-origin access (CORS)** (see [Cross-Origin Access (CORS)](/documentation/System/CORS/)):
    - Turn on **Enable CORS**.
-   - In **Allowed origins**, add the origin of the host page, for example `https://app.example.com` (one per line, without a path). Don't use `*` in production; while **Allow credentials** is on, `*` is not accepted.
+   - In **Allowed origins**, add the origin of the host page, for example `https://app.example.com`, without a path or trailing `/`. Separate several origins with commas. Don't use `*` in production; while **Allow credentials** is on, `*` is not accepted.
    - In **Allowed request headers**, add `Authorization`. The SDK sends the token as `Authorization: Bearer <jwt>`; without this header in the list, the browser blocks the requests.
    - The default **Allowed methods** are GET, HEAD and POST. If the browser console reports another blocked method, for example while saving in edit mode, add it.
 

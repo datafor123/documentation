@@ -84,23 +84,4 @@ Start it again with `docker start datafor-ee`.
 
 ## 5. Update
 
-Because the installation lives in the volume, pulling a newer image does not update an existing installation. Use the update package instead:
-
-1. Take a backup (see [Backup and Restore](/documentation/System/backup/)) and read the upgrade notes of the release, for example [10.00 Upgrade notes](/release/10.00/#upgrade-notes). Install all components of the update package together.
-2. Copy the update package into the container and give it to `biadmin`:
-
-   ```shell
-   docker cp datafor-updater.jar datafor-ee:/opt/bi-server/update/
-   docker exec -u root datafor-ee chown biadmin:biadmin /opt/bi-server/update/datafor-updater.jar
-   ```
-
-3. Restart Datafor:
-
-   ```shell
-   docker exec datafor-ee /opt/bi-server/stop-server.sh
-   docker restart datafor-ee
-   ```
-
-   `start-server.sh` applies every `.jar` file in `update` before it starts the server and renames it with a time stamp.
-
-> **Important**: The update package replaces `start-server.sh`, `set-env.sh` and `tomcat/conf/server.xml` as a whole and keeps the old files in `/opt/bi-server/update/backup<time stamp>/`. Before you update, write down any custom heap size (`-Xms`/`-Xmx` in `CATALINA_OPTS`) and any database connections, passwords or ports you changed in `server.xml`. After the update, stop Datafor, copy these settings from the backup folder into the new files, and start it again.
+Pulling a newer image does not update an existing installation, because the installation lives in the volume. Install update packages as described in [Upgrading Datafor](/documentation/Setup/Upgrading-Datafor/).

@@ -5,91 +5,44 @@ tags:
   - api
   - Extension Plugins
   - Authentication
-  - Cas
-description: null
+  - CAS
+description: Read the CAS single sign-on settings.
 createTime: 2026/09/01 22:03:26
 ---
+Returns the CAS single sign-on settings shown under **CAS settings** in the console.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-cas/api/query` |
+| Permission | Administrator user type; the CAS plugin must be installed |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-cas/api/query
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-cas/api/query" \
+  -H "Content-Type: application/json" -d '{}'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
----
-
-**Preconditions**
-1. The `datafor-cas` plugin must be installed.
-2. The current user's user type **must be** `Administrator`.
-
----
-
-## **Params**
-
-| Name          | Location | Type    | Required | Description |
-|--------------|----------|---------|----------|-------------|
-| `Cookie`     | header   | string  | Yes      | Session cookie for authentication. |
-| `Content-Type` | header | string  | Yes      | Must be set to `application/json`. |
-
----
-
-### **Request Example**
 
 ```json
 {
-  "logout_url": "https://127.0.0.1:8443/cas/logout",
-  "login_url": "https://127.0.0.1:8443/cas/login",
-  "enable": "1",
-  "inituser": "1",
-  "initpwd": "password"
-}
-```
-
----
-
-## **Response Examples**
-
-### ✅ Success Response (200 OK)
-```json
-{
+  "success": true,
   "code": "200",
   "data": {
-    "initroles": [
-      "SYS_Reader"
-    ],
-    "logout_url": "http://127.0.0.1:8080/cas/logout",
-    "center_url": "http://127.0.0.1:8080/cas",
-    "login_url": "http://127.0.0.1:8080/cas/login",
+    "enable": "1",
+    "type": "jasig",
+    "center_url": "https://cas.example.com/cas",
+    "login_url": "https://cas.example.com/cas/login",
+    "logout_url": "https://cas.example.com/cas/logout",
     "inituser": "1",
-    "initpwd": "password",
-    "enable": "0",
-    "ignoreList": [
-      "/plugin/datafor-modeler/api",
-      "/Login"
-    ],
-    "type": "jasig"
-  },
-  "success": true
+    "initroles": ["SYS_Reader"],
+    "ignoreList": ["/plugin/datafor-modeler/api", "/Login"],
+    "includeList": []
+  }
 }
 ```
 
----
+The fields are described on [Save CAS config](/api/Extension%20Plugins/Cas/Save%20CAS%20config/). `GET /plugin/datafor-cas/api/type/list` returns the supported CAS server types.
 
-## **HTTP Responses**
-
-| HTTP Status Code | Meaning                                                 | Description |
-|------------------|---------------------------------------------------------|-------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | CAS configuration retrieved successfully. |
-| 400              | Bad Request                                             | Invalid request parameters. |
-| 401              | Unauthorized                                            | Authentication required. |
-| 403              | Forbidden                                               | User does not have permission. |
-| 500              | Internal Server Error                                   | Unexpected server error. |
+Related: [CAS Authentication](/documentation/System/CAS-Authentication/)

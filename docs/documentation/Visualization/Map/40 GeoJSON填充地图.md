@@ -31,6 +31,8 @@ Each value of the Geographic field is looked up among the regions of the selecte
 
 The first match is used. Matching is exact, including letter case and spaces. An empty value matches nothing.
 
+![On the World map, Canada matches by name and CAN and CA by alias, so the three rows merge into Canada with 40 + 25 + 10 = 75; Georgia matches the country even if the data meant the US state; Calif. matches nothing and triggers the notice 1 of 3 regions do not match the current map. On the China map, adcode 110000 wins over the same alias on Liaoning](./images/filled-map-region-matching.svg)
+
 - **Several spellings, one region**: rows that resolve to the same region (for example `广东`, `粤` and `广东省`) and have the same other members are merged into one data point. Their values are **summed**, the tooltip lists all spellings and cross-filtering uses the first row's member. Averages and ratios are summed too, so keep one spelling per region when the measure is not additive.
 - **Colour scale**: its minimum and maximum come only from regions that match the map, so a misspelt row does not stretch the scale. If nothing matches, all rows are used.
 - **Unmatched regions**: in edit mode a yellow box at the top left reads *{count} of {total} regions do not match the current map*; hover it for the names (up to 30). It is not shown in view mode or when everything matches. A value that matches a different region is not reported: on the World map "Georgia" is the country and "CA" is Canada. Choose the map that fits the data.

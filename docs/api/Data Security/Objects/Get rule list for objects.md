@@ -4,138 +4,71 @@ permalink: /api/Data Security/Objs/Get rule list for objects/
 tags:
   - api
   - Data Security
-description: null
+description: List Table & column access policies, optionally with their objects and subjects.
 createTime: 2026/09/01 22:03:26
 ---
+Lists Table & column access policies. Without `dbconn`, policies on connections the caller cannot manage are left out.
 
-**Method**  
-`POST`
+| | |
+| --- | --- |
+| Method and path | `POST /plugin/datafor-modeler/api/auth/obj/query` |
+| Permission | **Full control** on the connection |
+| Content type | `application/json` |
 
-**Request URL**
-```html
-/plugin/datafor-modeler/api/auth/obj/query
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `dbconn` | body | string | No | Only policies on this connection. |
+| `id` | body | string | No | Only this policy. |
+| `enable` | body | string | No | `1` active only, `0` drafts only. |
+| `withConfig` | body | boolean | No | Default `false`. Include `configList` (tables and columns). |
+| `withGranted` | body | boolean | No | Default `false`. With `withConfig`, add `grantedList` and `visible` to each object. |
+
+## Example
+
+```bash
+curl -u admin:password -X POST \
+  "http://localhost:28080/datafor/plugin/datafor-modeler/api/auth/obj/query" \
+  -H "Content-Type: application/json" \
+  -d '{ "dbconn": "Sales DW", "withConfig": true, "withGranted": true }'
 ```
-
-**Authorization**  
-Use of this API requires authentication. For details about the authentication method, see  
-[Authorization](/api/index/#_5-authentication-security).
-
-**Content Type**  
-`application/json`
-
-**Preconditions**
-- The current user’s type **cannot** be `SYS_Reader`.
-- The current user must have **administrative privileges** for the connection.
-
----
-
-### **Parameters Schema**
-
-| Name            | Location | Type     | Required | Description |
-|----------------|----------|----------|----------|-------------|
-| **body**       | body     | object   | Yes      | Request payload |
-| ├── `id`       | body     | string   | No       | Rule ID |
-| ├── `dbconn`   | body     | string   | No       | Database connection name |
-| ├── `enable`   | body     | string   | No       | Rule enabled status |
-| ├── `withGranted` | body  | boolean  | No       | Include granted list |
-| ├── `withConfig` | body   | boolean  | No       | Include config list |
-| ├── `schema`   | body     | string   | No       | Database schema |
-| ├── `tbname`   | body     | string   | No       | Table name |
-| ├── `type`     | body     | string   | No       | Rule type |
-
----
-
-### **Request Example**
 
 ```json
 {
-  "id": "3a95ade7937743d6a04d27db8d4c69a3",
-  "dbconn": "Demo",
-  "schema": "public",
-  "tbname": "time_dim",
-  "enable": "1",
-  "withGranted": true,
-  "type": "1"
-}
-```
-
----
-
-## **Response Examples**
-
-```json
-{
-  "msg": "success",
+  "success": true,
   "code": "200",
   "data": [
     {
-      "dbconn": "foodmart",
-      "update_time": "2024-09-10 10:41:05.611",
-      "add_by": "admin",
+      "id": "371063d227944c5386fbe81faf8c3bc0",
+      "dbconn": "Sales DW",
+      "desc": "Salary - Finance only",
       "enable": "1",
       "editable": "1",
-      "id": "d8a0528c5c614146b683f49ff29a0b00",
+      "add_by": "admin",
       "update_by": "admin",
       "configList": [
         {
-          "schema": "foodmart",
+          "obj_key": "\"public\".\"employees\".\"salary\"",
+          "schema": "public",
+          "tbname": "employees",
+          "obj_type": "2",
+          "colname": "salary",
           "visible": "1",
-          "grantedList": [
-            {
-              "name": "admin",
-              "type": "0"
-            },
-            {
-              "name": "Administrator",
-              "type": "1"
-            }
-          ],
-          "tbname": "time_by_day",
-          "colname": "the_year",
-          "obj_key": "\"foodmart\".\"time_by_day\".\"the_year\"",
-          "obj_type": "2"
+          "grantedList": [ { "name": "Finance", "type": "1" } ]
         }
-      ],
-      "add_time": "2024-09-10 10:41:05.611",
-      "desc": "test"
+      ]
     }
-  ],
-  "success": true
+  ]
 }
 ```
 
----
+`desc` is the **Policy name**. `visible` `1` means **Only selected subjects can view**, `0` **Selected subjects cannot view**.
 
-## **HTTP Responses**
+## Errors
 
-| HTTP Status Code | Meaning                                                                 | Description | Data schema |
-|------------------|-------------------------------------------------------------------------|------------|------------|
-| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                | none       | Inline     |
+| `code` | `msg` | When |
+| --- | --- | --- |
+| `401` | `No administrative privileges:<connection>` | `dbconn` was sent and the caller lacks Full control on it. |
 
-### **Response Data Schema (HTTP 200)**
-
-| Name         | Type     | Required | Description |
-|-------------|---------|----------|-------------|
-| `msg`       | string  | Yes      | Response message |
-| `code`      | string  | Yes      | Response code |
-| `data`      | array   | Yes      | List of rules |
-| ├── `dbconn`  | string  | Yes      | Database connection name |
-| ├── `update_time` | string | No  | Last update timestamp |
-| ├── `add_by` | string | No      | Rule creator |
-| ├── `enable` | string | Yes     | Rule enabled status |
-| ├── `editable` | string | Yes   | Edit permission |
-| ├── `id` | string | Yes         | Rule ID |
-| ├── `update_by` | string | No   | Last updated by |
-| ├── `configList` | array  | Yes  | List of rule configurations |
-| │ ├── `schema` | string | Yes   | Database schema |
-| │ ├── `grantedList` | array | Yes | List of granted users/roles |
-| │ │ ├── `name` | string | Yes  | User or role name |
-| │ │ ├── `type` | string | Yes  | "0" for user, "1" for role |
-| │ ├── `tbname` | string | Yes  | Table name |
-| │ ├── `colname` | string | No  | Column name (if applicable) |
-| │ ├── `obj_key` | string | Yes  | Object key |
-| │ ├── `obj_type` | string | Yes  | "1" for table, "2" for column |
-| │ ├── `visible` | string | Yes  | "1" for visible, "0" for invisible |
-| ├── `add_time` | string | No    | Rule creation timestamp |
-| ├── `desc` | string | No        | Rule description |
-| `success`   | boolean | Yes      | Request success status |
+Related: [Data Security](/documentation/Datasource/Data-Security/)
