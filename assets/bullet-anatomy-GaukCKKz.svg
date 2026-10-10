@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 700 700" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">How a bullet row is built from boundaries, value and target</title>
+  <desc id="desc">One bullet row with a target of 100. Six boundaries, Minimum 0, Normal 50, Satisfactory 70, Good 90, Excellent 105 and Maximum 120, cut the background into five ranges, each with its own color setting. The value bar shows 82 and the target marker sits at 100. Each boundary comes from its measure in Data when that value is above 0, otherwise from the target times its percentage, otherwise it is not drawn and the range below it continues. The scale ends at the largest value when a Maximum is set; without one it ends at least 5 percent above the largest value, rounded up to two significant digits.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="700" fill="#FFFFFF"/>
+
+  <!-- Lane 1: one bullet row -->
+  <rect x="10" y="10" width="680" height="262" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="30" y="42" font-size="18" font-weight="700" fill="#3B4252">One bullet row: Value 82, Target 100</text>
+
+  <!-- boundary names and values (scale 0–120 mapped to x 40–640, 5 px per unit) -->
+  <g font-size="14" fill="#2B2B3A">
+    <text x="40" y="82" font-weight="700">Minimum</text><text x="40" y="100">0</text>
+    <text x="290" y="82" font-weight="700" text-anchor="middle">Normal</text><text x="290" y="100" text-anchor="middle">50</text>
+    <text x="390" y="82" font-weight="700" text-anchor="middle">Satisfactory</text><text x="390" y="100" text-anchor="middle">70</text>
+    <text x="490" y="82" font-weight="700" text-anchor="middle">Good</text><text x="490" y="100" text-anchor="middle">90</text>
+    <text x="565" y="82" font-weight="700" text-anchor="middle">Excellent</text><text x="565" y="100" text-anchor="middle">105</text>
+    <text x="640" y="82" font-weight="700" text-anchor="middle">Maximum</text><text x="640" y="100" text-anchor="middle">120</text>
+  </g>
+  <g stroke="#3B4252" stroke-width="1.2">
+    <line x1="40" y1="106" x2="40" y2="120"/>
+    <line x1="290" y1="106" x2="290" y2="120"/>
+    <line x1="390" y1="106" x2="390" y2="120"/>
+    <line x1="490" y1="106" x2="490" y2="120"/>
+    <line x1="565" y1="106" x2="565" y2="120"/>
+    <line x1="640" y1="106" x2="640" y2="120"/>
+  </g>
+
+  <!-- five ranges (default greys of a new bullet, dark to light) -->
+  <rect x="40" y="120" width="250" height="72" fill="#C4C4C4"/>
+  <rect x="290" y="120" width="100" height="72" fill="#D4D4D4"/>
+  <rect x="390" y="120" width="100" height="72" fill="#E0E0E0"/>
+  <rect x="490" y="120" width="75" height="72" fill="#EBEBEB"/>
+  <rect x="565" y="120" width="75" height="72" fill="#F5F5F5"/>
+  <rect x="40" y="120" width="600" height="72" fill="none" stroke="#B5BAC2"/>
+  <g font-size="14" fill="#2B2B3A" text-anchor="middle">
+    <text x="165" y="185">Minimum</text>
+    <text x="340" y="185">Normal</text>
+    <text x="440" y="185">Satisfactory</text>
+    <text x="512" y="185">Good</text>
+    <text x="602" y="185">Excellent</text>
+  </g>
+
+  <!-- value bar and target marker -->
+  <rect x="40" y="140" width="410" height="22" fill="#4285F4"/>
+  <rect x="538" y="126" width="5" height="60" fill="#1F4FD8"/>
+
+  <g stroke="#3B4252" stroke-width="1" stroke-dasharray="3 3">
+    <line x1="540" y1="188" x2="540" y2="214"/>
+  </g>
+  <text x="440" y="156" font-size="14" text-anchor="end" fill="#FFFFFF"><tspan font-weight="700">Value bar</tspan> 82</text>
+  <text x="546" y="232" font-size="14" fill="#2B2B3A"><tspan font-weight="700">Target marker</tspan> 100</text>
+  <text x="30" y="258" font-size="14" fill="#5B6472">Range names are the color settings: Colors → Minimum color … Excellent color.</text>
+
+  <!-- Lane 2: where a boundary comes from -->
+  <rect x="10" y="292" width="680" height="212" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="30" y="322" font-size="18" font-weight="700" fill="#1F4FD8">Where each boundary comes from</text>
+  <text x="30" y="344" font-size="14" fill="#5B6FB0">Checked per row for Minimum, Normal, Satisfactory, Good, Excellent and Maximum</text>
+
+  <rect x="30" y="358" width="180" height="88" rx="8" fill="#FFFFFF" stroke="#B9CCFF"/>
+  <text x="46" y="384" font-size="15" font-weight="700" fill="#2B2B3A">1  Measure in Data</text>
+  <text x="46" y="408" font-size="14" fill="#2B2B3A">used when the row's</text>
+  <text x="46" y="428" font-size="14" fill="#2B2B3A">value is above 0</text>
+
+  <rect x="255" y="358" width="180" height="88" rx="8" fill="#FFFFFF" stroke="#B9CCFF"/>
+  <text x="271" y="384" font-size="15" font-weight="700" fill="#2B2B3A">2  Target × %</text>
+  <text x="271" y="408" font-size="14" fill="#2B2B3A">Percentage settings;</text>
+  <text x="271" y="428" font-size="14" fill="#2B2B3A">needs a target</text>
+
+  <rect x="480" y="358" width="180" height="88" rx="8" fill="#FFFFFF" stroke="#B9CCFF"/>
+  <text x="496" y="384" font-size="15" font-weight="700" fill="#2B2B3A">3  No boundary</text>
+  <text x="496" y="408" font-size="14" fill="#2B2B3A">the range below it</text>
+  <text x="496" y="428" font-size="14" fill="#2B2B3A">extends further</text>
+
+  <text x="232" y="394" font-size="14" text-anchor="middle" fill="#5B6472">else</text>
+  <text x="457" y="394" font-size="14" text-anchor="middle" fill="#5B6472">else</text>
+
+  <text x="30" y="472" font-size="14" fill="#2B2B3A"><tspan font-weight="700">Target</tspan>: the Target value measure; when it is empty or 0,</text>
+  <text x="30" y="492" font-size="14" fill="#2B2B3A">Style → Data values → Target value.</text>
+
+  <!-- Lane 3: where the scale ends -->
+  <rect x="10" y="524" width="680" height="166" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="30" y="554" font-size="18" font-weight="700" fill="#9A5B00">Where the scale ends (each row separately)</text>
+
+  <rect x="30" y="568" width="310" height="80" rx="8" fill="#FFFFFF" stroke="#F2C98A"/>
+  <text x="46" y="592" font-size="15" font-weight="700" fill="#2B2B3A">Maximum measure or % set</text>
+  <text x="46" y="616" font-size="14" fill="#2B2B3A">Largest of value, target and</text>
+  <text x="46" y="636" font-size="14" fill="#2B2B3A">boundaries (here 120)</text>
+
+  <rect x="360" y="568" width="310" height="80" rx="8" fill="#FFFFFF" stroke="#F2C98A"/>
+  <text x="376" y="592" font-size="15" font-weight="700" fill="#2B2B3A">No Maximum</text>
+  <text x="376" y="616" font-size="14" fill="#2B2B3A">Largest + 5%, rounded up to two</text>
+  <text x="376" y="636" font-size="14" fill="#2B2B3A">significant digits: 1,052,565 → 1,200,000</text>
+
+  <text x="30" y="674" font-size="14" fill="#2B2B3A">The scale starts at 0; with a Minimum set, at the smallest of these values.</text>
+
+  <!-- Arrows are drawn after the lanes so the lane backgrounds do not cover them -->
+  <line x1="212" y1="404" x2="252" y2="404" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="437" y1="404" x2="477" y2="404" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+</svg>

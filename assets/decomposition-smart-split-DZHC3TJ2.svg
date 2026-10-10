@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="736" viewBox="0 0 700 736" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">How Smart split picks a level, and what Remove level removes</title>
+  <desc id="desc">Under the East China node with Net Sales 600, the unused Explain by fields are Category L1, with members 300, 200 and 100 and an average of 200, and Store, with members 240, 120, 100, 90 and 50 and an average of 120. High value in Absolute mode scores members by their value, so Beverages with 300 wins and the tree splits by Category L1. In Relative mode the score is the value divided by the absolute average of its field, so Beverages scores 1.5 and store S01 scores 2.0, and the tree splits by Store and selects S01. Low value takes the lowest score instead; on a tie the field listed first in Explain by wins. Remove level on a level removes that level and every level after it.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="736" fill="#FFFFFF"/>
+
+  <!-- Lane 1: candidates -->
+  <rect x="10" y="10" width="680" height="246" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="30" y="42" font-size="18" font-weight="700" fill="#3B4252">+ on East China (Net Sales 600) → High value</text>
+  <text x="30" y="64" font-size="14" fill="#5B6472">Every Explain by field not yet in the path is a candidate</text>
+
+  <rect x="30" y="78" width="300" height="162" rx="8" fill="#FFFFFF" stroke="#D5D9E0"/>
+  <text x="46" y="102" font-size="15" font-weight="700" fill="#2B2B3A">Category L1</text>
+  <g font-size="14" fill="#2B2B3A">
+    <text x="46" y="128">Beverages</text><text x="314" y="128" text-anchor="end">300</text>
+    <text x="46" y="150">Snacks</text><text x="314" y="150" text-anchor="end">200</text>
+    <text x="46" y="172">Household</text><text x="314" y="172" text-anchor="end">100</text>
+  </g>
+  <line x1="40" y1="206" x2="320" y2="206" stroke="#D5D9E0"/>
+  <text x="46" y="228" font-size="14" fill="#5B6472">Average</text><text x="314" y="228" font-size="14" text-anchor="end" fill="#5B6472">200</text>
+
+  <rect x="370" y="78" width="300" height="162" rx="8" fill="#FFFFFF" stroke="#D5D9E0"/>
+  <text x="386" y="102" font-size="15" font-weight="700" fill="#2B2B3A">Store</text>
+  <g font-size="14" fill="#2B2B3A">
+    <text x="386" y="128">S01</text><text x="654" y="128" text-anchor="end">240</text>
+    <text x="386" y="150">S02</text><text x="654" y="150" text-anchor="end">120</text>
+    <text x="386" y="172">S03</text><text x="654" y="172" text-anchor="end">100</text>
+    <text x="386" y="194">S04 · S05</text><text x="654" y="194" text-anchor="end">90 · 50</text>
+  </g>
+  <line x1="380" y1="206" x2="660" y2="206" stroke="#D5D9E0"/>
+  <text x="386" y="228" font-size="14" fill="#5B6472">Average</text><text x="654" y="228" font-size="14" text-anchor="end" fill="#5B6472">120</text>
+
+  <!-- Lane 2: Absolute -->
+  <rect x="10" y="296" width="335" height="250" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="30" y="328" font-size="18" font-weight="700" fill="#1F4FD8">Absolute (default)</text>
+  <text x="30" y="350" font-size="14" fill="#5B6FB0">Score = member value</text>
+  <rect x="30" y="364" width="295" height="94" rx="8" fill="#FFFFFF" stroke="#B9CCFF"/>
+  <g font-size="14" fill="#2B2B3A">
+    <text x="46" y="388" fill="#5B6472">Best member of each field</text>
+    <text x="46" y="414">Beverages</text><text x="309" y="414" text-anchor="end" font-weight="700">300</text>
+    <text x="46" y="438">S01</text><text x="309" y="438" text-anchor="end">240</text>
+  </g>
+  <text x="30" y="490" font-size="15" font-weight="700" fill="#2B2B3A">Splits by Category L1,</text>
+  <text x="30" y="512" font-size="15" font-weight="700" fill="#2B2B3A">selects Beverages</text>
+  <text x="30" y="532" font-size="14" fill="#5B6FB0">The largest result</text>
+
+  <!-- Lane 3: Relative -->
+  <rect x="355" y="296" width="335" height="250" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <text x="375" y="328" font-size="18" font-weight="700" fill="#5B3FBF">Relative</text>
+  <text x="375" y="350" font-size="14" fill="#7A6BB0">Score = value ÷ |average of its field|</text>
+  <rect x="375" y="364" width="295" height="94" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <g font-size="14" fill="#2B2B3A">
+    <text x="391" y="388" fill="#5B6472">Best member of each field</text>
+    <text x="391" y="414">Beverages</text><text x="654" y="414" text-anchor="end">300 ÷ 200 = 1.5</text>
+    <text x="391" y="438">S01</text><text x="654" y="438" text-anchor="end" font-weight="700">240 ÷ 120 = 2.0</text>
+  </g>
+  <text x="375" y="490" font-size="15" font-weight="700" fill="#2B2B3A">Splits by Store,</text>
+  <text x="375" y="512" font-size="15" font-weight="700" fill="#2B2B3A">selects S01</text>
+  <text x="375" y="532" font-size="14" fill="#7A6BB0">Stands out most within its field</text>
+
+  <text x="10" y="568" font-size="14" fill="#5B6472">Low value takes the lowest score instead. On a tie, the field listed first in Explain by wins.</text>
+
+  <!-- Lane 4: Remove level -->
+  <rect x="10" y="588" width="680" height="138" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="30" y="618" font-size="17" font-weight="700" fill="#9A5B00">× Remove level on Store</text>
+  <rect x="30" y="634" width="130" height="40" rx="8" fill="#FFFFFF" stroke="#F2C98A"/>
+  <text x="95" y="660" font-size="14" text-anchor="middle" fill="#2B2B3A">Net Sales</text>
+  <rect x="195" y="634" width="130" height="40" rx="8" fill="#FFFFFF" stroke="#F2C98A"/>
+  <text x="260" y="660" font-size="14" text-anchor="middle" fill="#2B2B3A">Region</text>
+  <rect x="360" y="634" width="130" height="40" rx="8" fill="#F5F6F8" stroke="#B5BAC2" stroke-dasharray="5 4"/>
+  <text x="425" y="660" font-size="14" text-anchor="middle" fill="#7A8390">Store ×</text>
+  <rect x="525" y="634" width="145" height="40" rx="8" fill="#F5F6F8" stroke="#B5BAC2" stroke-dasharray="5 4"/>
+  <text x="597" y="660" font-size="14" text-anchor="middle" fill="#7A8390">Category L1</text>
+  <text x="360" y="708" font-size="14" fill="#9A5B00">Removed: that level and every level after it</text>
+  <line x1="360" y1="688" x2="670" y2="688" stroke="#9A5B00" stroke-width="1.5"/>
+
+  <!-- Arrows are drawn after the lanes so the lane backgrounds do not cover them -->
+  <path d="M350,258 V276 H177 V293" fill="none" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M350,276 H522 V293" fill="none" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="161" y1="654" x2="192" y2="654" stroke="#3B4252" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="326" y1="654" x2="357" y2="654" stroke="#3B4252" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="491" y1="654" x2="522" y2="654" stroke="#3B4252" stroke-width="1.6" marker-end="url(#arrow)"/>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="560" viewBox="0 0 700 560" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Tree table and parent-child table: two data shapes, one indented tree</title>
+  <desc id="desc">A Tree table takes separate level columns, Category L1, Category L2 and Product, and shows each parent row with the measure for that member, so Tea shows 50 and Beverages 100. A Parent-child table takes an ID column and a parent ID column, such as employee_id and manager_id, and shows each parent row with the value of its own record, so Ann shows 90, not the 245 of her whole team.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="560" fill="#FFFFFF"/>
+
+  <!-- Lane 1: Tree table -->
+  <rect x="10" y="10" width="680" height="250" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="30" y="42" font-size="18" font-weight="700" fill="#1F4FD8">Separate level columns → Tree table</text>
+  <text x="30" y="64" font-size="14" fill="#5B6FB0">Hierarchy fields: Category L1, Category L2, Product. Fields: Net Sales</text>
+
+  <rect x="30" y="80" width="370" height="124" rx="8" fill="#FFFFFF" stroke="#B9CCFF"/>
+  <g font-size="14" font-weight="700" fill="#5B6472">
+    <text x="46" y="104">Category L1</text><text x="146" y="104">Category L2</text><text x="246" y="104">Product</text><text x="388" y="104" text-anchor="end">Net Sales</text>
+  </g>
+  <line x1="40" y1="112" x2="390" y2="112" stroke="#D5D9E0"/>
+  <g font-size="14" fill="#2B2B3A">
+    <text x="46" y="136">Beverages</text><text x="146" y="136">Tea</text><text x="246" y="136">Green Tea</text><text x="388" y="136" text-anchor="end">30</text>
+    <text x="46" y="160">Beverages</text><text x="146" y="160">Tea</text><text x="246" y="160">Black Tea</text><text x="388" y="160" text-anchor="end">20</text>
+    <text x="46" y="184">Beverages</text><text x="146" y="184">Coffee</text><text x="246" y="184">Espresso</text><text x="388" y="184" text-anchor="end">50</text>
+  </g>
+
+  <rect x="450" y="80" width="220" height="150" rx="8" fill="#FFFFFF" stroke="#B9CCFF"/>
+  <g fill="#3B4252">
+    <path d="M464,96 l10,0 l-5,7 z"/>
+    <path d="M482,120 l10,0 l-5,7 z"/>
+    <path d="M484,189 l0,10 l7,-5 z"/>
+  </g>
+  <g font-size="14" fill="#2B2B3A">
+    <text x="480" y="104" font-weight="700">Beverages</text><text x="656" y="104" text-anchor="end" font-weight="700">100</text>
+    <text x="498" y="128" font-weight="700">Tea</text><text x="656" y="128" text-anchor="end" font-weight="700">50</text>
+    <text x="516" y="152">Green Tea</text><text x="656" y="152" text-anchor="end">30</text>
+    <text x="516" y="176">Black Tea</text><text x="656" y="176" text-anchor="end">20</text>
+    <text x="498" y="200">Coffee</text><text x="656" y="200" text-anchor="end">50</text>
+  </g>
+  <text x="466" y="222" font-size="14" fill="#5B6FB0">Each level loads on expand</text>
+  <text x="30" y="240" font-size="14" fill="#2B2B3A"><tspan font-weight="700">Parent rows</tspan>: the measure for that member. Tea = 50, Beverages = 100.</text>
+
+  <!-- Lane 2: Parent-child table -->
+  <rect x="10" y="290" width="680" height="260" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <text x="30" y="322" font-size="18" font-weight="700" fill="#5B3FBF">ID and parent ID columns → Parent-child table</text>
+  <text x="30" y="344" font-size="14" fill="#7A6BB0">Parent: manager_id. Child: employee_id. Caption: name. Fields: Salary</text>
+
+  <rect x="30" y="360" width="370" height="146" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <g font-size="14" font-weight="700" fill="#5B6472">
+    <text x="46" y="384">employee_id</text><text x="156" y="384">manager_id</text><text x="266" y="384">name</text><text x="388" y="384" text-anchor="end">Salary</text>
+  </g>
+  <line x1="40" y1="392" x2="390" y2="392" stroke="#D5D9E0"/>
+  <g font-size="14" fill="#2B2B3A">
+    <text x="46" y="416">1</text><text x="156" y="416" font-style="italic" fill="#7A8390">empty</text><text x="266" y="416">Ann</text><text x="388" y="416" text-anchor="end">90</text>
+    <text x="46" y="440">2</text><text x="156" y="440">1</text><text x="266" y="440">Ben</text><text x="388" y="440" text-anchor="end">60</text>
+    <text x="46" y="464">3</text><text x="156" y="464">1</text><text x="266" y="464">Cleo</text><text x="388" y="464" text-anchor="end">55</text>
+    <text x="46" y="488">4</text><text x="156" y="488">2</text><text x="266" y="488">Dev</text><text x="388" y="488" text-anchor="end">40</text>
+  </g>
+
+  <rect x="450" y="360" width="220" height="146" rx="8" fill="#FFFFFF" stroke="#C9BBF2"/>
+  <g fill="#3B4252">
+    <path d="M464,376 l10,0 l-5,7 z"/>
+    <path d="M482,400 l10,0 l-5,7 z"/>
+  </g>
+  <g font-size="14" fill="#2B2B3A">
+    <text x="480" y="384" font-weight="700">Ann</text><text x="656" y="384" text-anchor="end" font-weight="700">90</text>
+    <text x="498" y="408" font-weight="700">Ben</text><text x="656" y="408" text-anchor="end" font-weight="700">60</text>
+    <text x="516" y="432">Dev</text><text x="656" y="432" text-anchor="end">40</text>
+    <text x="498" y="456">Cleo</text><text x="656" y="456" text-anchor="end">55</text>
+  </g>
+  <text x="466" y="494" font-size="14" fill="#7A6BB0">Depth comes from the data</text>
+  <text x="30" y="530" font-size="14" fill="#2B2B3A"><tspan font-weight="700">Parent rows</tspan>: their own record. Ann = 90, not 90 + 60 + 55 + 40 = 245.</text>
+
+  <!-- Arrows are drawn after the lanes so the lane backgrounds do not cover them -->
+  <line x1="404" y1="142" x2="446" y2="142" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="404" y1="432" x2="446" y2="432" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+</svg>

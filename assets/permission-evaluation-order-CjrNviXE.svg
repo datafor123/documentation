@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="840" viewBox="0 0 700 840" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Order in which to check a user's access</title>
+  <desc id="desc">Diagnosis order for an ordinary account. 1 Identity: the user, the User Type and all resolved roles. 2 Capability: the User Type must allow the action. 3 File and folder ACL: grants from the user, roles and User Type add up and unchecked boxes do not deny; with Inherit parent the nearest ancestor that does not inherit supplies the ACL; deleting needs Delete or Full control. 4 Object security (OLS): each policy is evaluated, exclusions accumulate, and any exclusion hides the table or column. 5 Row security (RLS): matching enabled policies combine with OR, a matching Return all rows policy removes the row limit, and no matching policy means all rows. 6 The report's ordinary filters narrow the permitted data. The built-in Administrator and SuperUser roles bypass OLS and RLS. A failure at one layer cannot be repaired by a grant at another.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9A5B00"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="840" fill="#FFFFFF"/>
+
+  <text x="20" y="30" font-size="18" font-weight="700" fill="#2B2B3A">Diagnosis order for an ordinary account</text>
+  <text x="20" y="52" font-size="14" fill="#5B6472">A checklist for explaining a result, not the exact order of every check</text>
+
+  <!-- 1 Identity -->
+  <rect x="20" y="70" width="460" height="62" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="38" y="95" font-size="16" font-weight="700" fill="#3B4252">1  Identity</text>
+  <text x="38" y="118" font-size="14" fill="#2B2B3A">The user, the User Type and all resolved roles</text>
+
+  <!-- 2 Capability -->
+  <rect x="20" y="158" width="460" height="62" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="38" y="183" font-size="16" font-weight="700" fill="#1F4FD8">2  Capability</text>
+  <text x="38" y="206" font-size="14" fill="#2B2B3A">The User Type must allow the action (Reader, Creator, …)</text>
+
+  <!-- 3 ACL -->
+  <rect x="20" y="246" width="460" height="124" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="38" y="271" font-size="16" font-weight="700" fill="#1F4FD8">3  File and folder ACL</text>
+  <text x="38" y="294" font-size="14" fill="#2B2B3A">Grants from user, roles and User Type add up</text>
+  <text x="38" y="314" font-size="14" fill="#2B2B3A">Unchecked boxes do not deny</text>
+  <text x="38" y="334" font-size="14" fill="#2B2B3A">Inherit parent: nearest ancestor that does not inherit</text>
+  <text x="38" y="354" font-size="14" fill="#2B2B3A">Deleting needs Delete or Full control; Edit is not enough</text>
+
+  <!-- 4 OLS -->
+  <rect x="20" y="396" width="460" height="104" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <text x="38" y="421" font-size="16" font-weight="700" fill="#5B3FBF">4  Object security (OLS)</text>
+  <text x="38" y="444" font-size="14" fill="#2B2B3A">Each policy is evaluated, then exclusions accumulate</text>
+  <text x="38" y="464" font-size="14" fill="#2B2B3A">Any exclusion hides the table or column</text>
+  <text x="38" y="484" font-size="14" fill="#2B2B3A">An allow in another policy does not restore it</text>
+
+  <!-- 5 RLS -->
+  <rect x="20" y="526" width="460" height="104" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <text x="38" y="551" font-size="16" font-weight="700" fill="#5B3FBF">5  Row security (RLS)</text>
+  <text x="38" y="574" font-size="14" fill="#2B2B3A">Matching enabled policies combine with OR</text>
+  <text x="38" y="594" font-size="14" fill="#2B2B3A">A matching Return all rows policy removes the limit</text>
+  <text x="38" y="614" font-size="14" fill="#2B2B3A">No matching policy: all rows, not zero rows</text>
+
+  <!-- 6 Report filters -->
+  <rect x="20" y="656" width="460" height="62" rx="12" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="38" y="681" font-size="16" font-weight="700" fill="#2E7D32">6  Report filters</text>
+  <text x="38" y="704" font-size="14" fill="#2B2B3A">Ordinary filters narrow the permitted data</text>
+
+  <!-- Result -->
+  <rect x="20" y="744" width="460" height="44" rx="12" fill="#FFFFFF" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="250" y="771" font-size="15" font-weight="700" fill="#2E7D32" text-anchor="middle">Rows and fields the user sees</text>
+
+  <!-- Side note: privileged roles -->
+  <rect x="510" y="396" width="180" height="234" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="526" y="424" font-size="15" font-weight="700" fill="#9A5B00">Administrator</text>
+  <text x="526" y="444" font-size="15" font-weight="700" fill="#9A5B00">and SuperUser</text>
+  <text x="526" y="470" font-size="14" fill="#2B2B3A">These built-in roles</text>
+  <text x="526" y="490" font-size="14" fill="#2B2B3A">bypass OLS and RLS.</text>
+  <text x="526" y="518" font-size="14" fill="#2B2B3A">Test restrictions with</text>
+  <text x="526" y="538" font-size="14" fill="#2B2B3A">an ordinary account,</text>
+  <text x="526" y="558" font-size="14" fill="#2B2B3A">not an owner or</text>
+  <text x="526" y="578" font-size="14" fill="#2B2B3A">administrator.</text>
+
+  <!-- Arrows (after boxes) -->
+  <line x1="250" y1="132" x2="250" y2="156" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="250" y1="220" x2="250" y2="244" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="250" y1="370" x2="250" y2="394" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="250" y1="500" x2="250" y2="524" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="250" y1="630" x2="250" y2="654" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="250" y1="718" x2="250" y2="742" stroke="#3B4252" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <!-- Bypass: side note points at OLS and RLS -->
+  <line x1="510" y1="448" x2="482" y2="448" stroke="#9A5B00" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrowAmber)"/>
+  <line x1="510" y1="578" x2="482" y2="578" stroke="#9A5B00" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrowAmber)"/>
+
+  <!-- Footer -->
+  <text x="20" y="816" font-size="14" fill="#5B6472">A failure at one layer cannot be repaired by a grant at another layer.</text>
+</svg>

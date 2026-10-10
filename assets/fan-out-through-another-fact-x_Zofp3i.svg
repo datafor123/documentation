@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="600" viewBox="0 0 700 600" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Which Dimensions a Measure Group reaches when another fact table is in the path</title>
+  <desc id="desc">Walking from inventory_fact, the step to product is many-to-one and the step from product to product_class is many-to-one, so both Dimensions are attached to the inventory Measure Group. The step from product to sales_fact is one-to-many, so the walk stops there and customer, which only sales_fact joins, is not attached to the inventory Measure Group. The sales Measure Group reaches product and customer directly and product_class through product. Before 10.00 the path through sales_fact was followed and inventory rows were repeated once per matching sales row.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2E7D32"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9A5B00"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="600" fill="#FFFFFF"/>
+
+  <text x="20" y="30" font-size="17" font-weight="700" fill="#3B4252">Walking the joins from inventory_fact</text>
+
+  <!-- Tables -->
+  <rect x="20" y="56" width="170" height="64" rx="10" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="36" y="82" font-size="15" font-weight="700" fill="#1F4FD8">inventory_fact</text>
+  <text x="36" y="104" font-size="14" fill="#5B6472">start: its fact table</text>
+
+  <rect x="260" y="56" width="170" height="64" rx="10" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="276" y="82" font-size="15" font-weight="700" fill="#2E7D32">product</text>
+  <text x="276" y="104" font-size="14" fill="#2B2B3A">attached</text>
+
+  <rect x="500" y="56" width="180" height="64" rx="10" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="516" y="82" font-size="15" font-weight="700" fill="#3B4252">sales_fact</text>
+  <text x="516" y="104" font-size="14" fill="#5B6472">another fact table</text>
+
+  <rect x="260" y="200" width="170" height="64" rx="10" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="276" y="226" font-size="15" font-weight="700" fill="#2E7D32">product_class</text>
+  <text x="276" y="248" font-size="14" fill="#2B2B3A">attached</text>
+
+  <rect x="500" y="200" width="180" height="64" rx="10" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="516" y="226" font-size="15" font-weight="700" fill="#3B4252">customer</text>
+  <text x="516" y="248" font-size="14" fill="#9A5B00">not attached</text>
+
+  <!-- Results -->
+  <rect x="20" y="300" width="660" height="128" rx="12" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="38" y="328" font-size="16" font-weight="700" fill="#1F4FD8">Inventory Measure Group</text>
+  <text x="38" y="352" font-size="14" fill="#2B2B3A">product: direct foreign key. product_class: many-to-one chain.</text>
+  <text x="38" y="374" font-size="14" fill="#2B2B3A">customer: reached only through sales_fact, so not related. A chart that</text>
+  <text x="38" y="396" font-size="14" fill="#2B2B3A">combines them does not split inventory by customer, and a row policy</text>
+  <text x="38" y="418" font-size="14" fill="#2B2B3A">on customer does not restrict inventory.</text>
+
+  <rect x="20" y="440" width="660" height="56" rx="12" fill="#F5F6F8" stroke="#D5D9E0" stroke-width="1.5"/>
+  <text x="38" y="465" font-size="16" font-weight="700" fill="#3B4252">Sales Measure Group</text>
+  <text x="38" y="486" font-size="14" fill="#2B2B3A">product and customer join sales_fact directly; product_class through product</text>
+
+  <rect x="20" y="508" width="660" height="80" rx="12" fill="#FFF6E5" stroke="#F2C98A" stroke-width="1.5"/>
+  <text x="38" y="533" font-size="16" font-weight="700" fill="#9A5B00">Before 10.00</text>
+  <text x="38" y="555" font-size="14" fill="#2B2B3A">the path was followed and each inventory row repeated once per matching</text>
+  <text x="38" y="576" font-size="14" fill="#2B2B3A">sales row. If customer applies to inventory, relate it to inventory_fact directly.</text>
+
+  <!-- Arrows are drawn after the boxes -->
+  <line x1="190" y1="88" x2="257" y2="88" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <text x="206" y="80" font-size="14" font-weight="700" fill="#2E7D32">N:1</text>
+
+  <line x1="345" y1="120" x2="345" y2="197" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <text x="355" y="164" font-size="14" font-weight="700" fill="#2E7D32">N:1</text>
+
+  <line x1="430" y1="88" x2="497" y2="88" stroke="#9A5B00" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowAmber)"/>
+  <text x="446" y="80" font-size="14" font-weight="700" fill="#9A5B00">1:N</text>
+  <text x="440" y="142" font-size="14" font-weight="700" fill="#9A5B00">walk stops at</text>
+  <text x="440" y="161" font-size="14" font-weight="700" fill="#9A5B00">a one-to-many</text>
+  <text x="440" y="180" font-size="14" font-weight="700" fill="#9A5B00">step</text>
+
+  <line x1="590" y1="120" x2="590" y2="197" stroke="#A0A7B2" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+  <text x="600" y="164" font-size="14" fill="#5B6472">not walked</text>
+</svg>
