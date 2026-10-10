@@ -60,7 +60,7 @@ Choosing the model adds a few seconds to the first answer of a conversation. Whe
 
 An automatically chosen model is shown in a card above the answer, and the selector changes to **Auto · *model***.
 
-<div align="left"><img src="./images/ai-auto-model.png" alt="Answer card: Answered from the analysis model Retail Chain Operations, with the basis, another usable model and an Answer with ... instead button" width="790px" /></div>
+<div align="left"><img src="./images/ai-auto-model-governed-metric.png" alt="Answer card: Answered from the analysis model Retail Chain Operations, Basis: the governed metric Gross Margin Rate is bound to this model; the selector shows Auto · Retail Chain Operations" width="700px" /></div>
 
 The card's title reads `Answered from the analysis model "X"`, followed by the basis:
 

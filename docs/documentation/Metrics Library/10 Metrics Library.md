@@ -161,9 +161,9 @@ A successful comparison also moves the binding to the metric's current version, 
 
 Example:
 
-> How did Gross Margin Rate change by month in 2025?
+> What was the gross margin rate by region in 2025?
 
-<div align="left"><img src="./images/gross-margin-rate-agent-result.jpg" alt="AI Agent chart for monthly Gross Margin Rate in Retail Chain Operations" width="100%" /></div>
+<div align="left"><img src="./images/gross-margin-rate-by-region-agent-answer.jpg" alt="AI Agent answer with Auto-select model: answered from Retail Chain Operations because the governed metric Gross Margin Rate is bound to it, with a column chart of 2025 gross margin rate by region" width="700px" /></div>
 
 Metrics Library supplies the governed meaning and synonyms. The model binding supplies the measure that is queried. A library record without a usable binding does not provide an executable value by itself.
 
