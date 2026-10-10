@@ -1,7 +1,7 @@
 ---
 title: Connect AI Clients (MCP)
 permalink: /documentation/AI-Agent/Connect-AI-Clients/
-description: Ask Datafor from Claude, Codex, Cursor and other MCP clients under your own permissions, set up each client from the Connect AI panel, and prepare the server as an administrator.
+description: Ask Datafor from Claude, Codex, Cursor and other MCP clients under your own permissions, sign in with a personal token from My account, and prepare the server as an administrator.
 createTime: 2026/10/09 18:00:00
 ---
 
@@ -11,7 +11,7 @@ Datafor offers an MCP (Model Context Protocol) server, so you can ask about your
 
 By default Datafor returns the result rows, the query behind them and any disclosures, and the AI client writes the answer from those rows. Datafor instructs the client never to change a value and to label anything it calculates itself as its own work.
 
-This page applies to Datafor 10.00 and later. 10.00 is the first version in which users see **Connect AI**.
+This page applies to Datafor 10.00 and later.
 
 ## 1. What the AI client can do
 
@@ -29,39 +29,26 @@ Once connected, the client has four Datafor tools:
 - **No raw access.** The client gets no SQL, MDX, back-end payloads or other users' data.
 - **Answers are written by the client.** The wording therefore differs from an answer on the **AI Agent** page. If you want Datafor's own written analysis, say so; the client then asks with `detail: "insight"` (see section 5).
 
-## 2. Open Connect AI
+## 2. Create your personal token
 
-1. Open **AI Agent** in the left navigation, below **Home**.
-2. Click **Connect AI** in the page header. In the embedded AI side panel, use the icon button with the tooltip "Connect AI".
+An AI client signs in to Datafor with a **personal token**. The token stands for you and your permissions: it contains only your user name and an expiry date, not your roles, so signing in with it gives you the permissions you have in Datafor at that moment. It never contains your password, it expires, and you can revoke it on its own.
 
-<div align="left"><img src="./images/ai-connect-panel.png" alt="Connect AI panel with the MCP address, the password notice and the client tabs" width="50%" /></div>
+1. In the portal, open the account menu at the top right and choose **My account**, then the **Personal tokens** tab.
+2. Note the **MCP address** at the top of the page. "This address only works on the computer Datafor is installed on…" means the server listens on that computer only; to connect from another computer, your administrator must publish an address (section 8.2). "No public address is configured…" means the administrator opened the server to the network without naming a public address; if it does not connect, ask for the public MCP address.
+3. Click **New token**, give it a name (for example the client it is for), choose how long it stays valid, and confirm.
+4. The token is shown **once**. Copy it now and paste it into your client as described in section 3.
 
-The **Connect your AI** panel contains:
+The page lists every token you have created: name, creation and expiry time, last use and status. When a token expires, when you change computers, or when it may have leaked, click **Revoke** on that row and create a new one. A revoked token is rejected immediately; a session that was opened with it before lasts until it times out.
 
-| Part | Content |
+| The page says | What it means |
 | --- | --- |
-| **MCP address** | The address your AI client connects to, with a copy button. "This address only works on the computer Datafor is installed on…" means the server listens on that computer only; to connect from another computer, your administrator must publish an address (section 8.2). "This address is built from the host name you are using to reach Datafor…" means the administrator opened the server to the network without naming a public address; if it does not connect, ask for the public MCP address. |
-| Sign-in notice | Either **Generate token**, or, when personal tokens are off, the password notice (see below). |
-| Client tabs | **AI agent prompt**, **Codex**, **Claude Code**, **Claude Desktop**, **JSON config**, each with a short instruction and **Copy**. |
-| **Once it's connected, try asking** | Sample first questions. |
-| **Tools the AI can use** | The tools listed in section 1. |
+| "Your administrator has not turned on personal tokens." | Self-service tokens are off on the server. Ask your administrator to enable them (section 8.1). Without them the AI client cannot connect. |
+| "This session was signed in with a token…" | You opened the portal with a token. Sign in with your account to create or revoke tokens. |
+| No MCP address | The AI Agent service is not reachable from the portal, or the MCP channel is switched off (section 8.3). |
 
-If the panel shows "The MCP connection is not turned on. Contact your administrator.", the MCP channel is switched off on the server (section 8.3).
-
-### Personal token or password
-
-Every snippet in the panel already contains the address and the sign-in headers. Which sign-in it uses depends on the server:
-
-| Sign-in | When | What to do |
-| --- | --- | --- |
-| **Personal token** | Your administrator has turned on personal tokens (section 8.1). The panel offers **Generate token**. | Click **Generate token**. The panel shows "Token generated, valid for _n_ days" and puts the token into every snippet (`Authorization: Bearer <token>`). Click **Generate again** when it expires or may have leaked, then update your client. |
-| **Password** | Personal tokens are off. The panel says "Your administrator has not turned on personal tokens, so the snippets need your password." | The snippets carry `X-Datafor-Username` (your user name), `X-Datafor-Password` with the placeholder `<YOUR_DATAFOR_PASSWORD>`, and where needed `X-Datafor-TenantId`. Replace the placeholder with your Datafor password in the AI client's configuration file, never in a chat. |
-
-A token stands for you and your permissions. It contains only your user name and an expiry date, not your roles: signing in with it gives you the permissions you have in Datafor at that moment. A session that was itself opened with a token, a share link or an anonymous session cannot generate a token.
+In the sections below, `<MCP address>` and `<token>` stand for these two values.
 
 ## 3. Set up your AI client
-
-Pick the tab for your client and click **Copy**. The examples below show the token form; the password form has the two `X-Datafor-…` headers instead.
 
 ### Claude Desktop
 
@@ -73,22 +60,20 @@ Claude Desktop reaches Datafor through the Datafor extension, `datafor.mcpb`. No
 
    | Field | Value |
    | --- | --- |
-   | **URL** | The **MCP address** from the panel. Default `http://127.0.0.1:38081/mcp`. |
-   | **Personal token** | Your token. With a token, leave the other fields empty. |
-   | **Username** / **Password** | Only when personal tokens are off. |
-   | **Tenant ID** | Usually empty. |
+   | **URL** | `<MCP address>`. Default `http://127.0.0.1:38081/mcp`. |
+   | **Personal token** | `<token>`. |
    | **npx path** | Usually empty. Fill in the full path only when Claude cannot find `npx`. |
 
 4. Open a **new** conversation (open conversations do not load a new extension) and ask: "Use Datafor to list the analysis models I can access."
 
-If Claude Desktop starts before Datafor is up, the extension keeps retrying for about two and a half minutes on its first connection. To upgrade the extension, uninstall the old version first, then install the new one.
+If Claude Desktop starts before Datafor is up, the extension keeps retrying for about two and a half minutes on its first connection. Without a token the extension does not start and writes the reason to its log. To upgrade the extension, uninstall the old version first, then install the new one.
 
 ### Claude Code
 
-Run the copied command in a terminal, then reopen Claude Code:
+Run this command in a terminal with your two values, then reopen Claude Code:
 
 ```bash
-claude mcp add --transport http datafor "http://127.0.0.1:38081/mcp" --header "Authorization: Bearer <token>"
+claude mcp add --transport http datafor "<MCP address>" --header "Authorization: Bearer <token>"
 ```
 
 `claude mcp list` should show the server as connected. Claude Code and Claude Desktop keep separate configurations: a server added with `claude mcp add` does not appear in Claude Desktop conversations, and the other way round.
@@ -96,11 +81,11 @@ claude mcp add --transport http datafor "http://127.0.0.1:38081/mcp" --header "A
 ### Codex (desktop app, CLI and IDE extension)
 
 1. Open your Codex user configuration: `~/.codex/config.toml` on macOS and Linux, `%USERPROFILE%\.codex\config.toml` on Windows, or `config.toml` in `$CODEX_HOME` when that is set.
-2. Merge the copied section into the file and keep the rest. If a `datafor` server is already there, update its section instead of adding a second one.
+2. Add this section and keep the rest of the file. If a `datafor` server is already there, update its section instead of adding a second one.
 
    ```toml
    [mcp_servers."datafor"]
-   url = "http://127.0.0.1:38081/mcp"
+   url = "<MCP address>"
    tool_timeout_sec = 600
 
    [mcp_servers."datafor".http_headers]
@@ -113,14 +98,14 @@ The desktop app, the CLI and the IDE extension on one computer share this config
 
 ### Cursor, VS Code, Cherry Studio and other clients with a JSON configuration
 
-Paste the **JSON config** tab into the client's MCP configuration file (see the client's own documentation for where it is), then restart the client:
+Paste this into the client's MCP configuration file (see the client's own documentation for where it is), then restart the client:
 
 ```json
 {
   "mcpServers": {
     "datafor": {
       "type": "http",
-      "url": "http://127.0.0.1:38081/mcp",
+      "url": "<MCP address>",
       "headers": { "Authorization": "Bearer <token>" }
     }
   }
@@ -131,9 +116,7 @@ If the client cuts tool calls off after a short time, raise its tool timeout. A 
 
 ### Any agent that supports MCP
 
-Copy the **AI agent prompt** tab and send it to the agent as it is. The prompt asks the agent to add an MCP server named `datafor` (Streamable HTTP) with the address and headers, to verify the connection with `list_models`, and to remember how to use Datafor: settle the model first, explore an unknown model, ask one step at a time in your words, pass `analysis_context_id` for follow-ups, answer `clarification_needed` and `needs_split`, write the answer from the rows and report every disclosure.
-
-With the password form, the prompt asks the agent to tell you which file holds the configuration, so that you replace `<YOUR_DATAFOR_PASSWORD>` there yourself. With the token form, it tells the agent to write the token only into its configuration and never repeat it.
+Any client that speaks MCP over Streamable HTTP can connect: the server address is `<MCP address>` and the request header is `Authorization: Bearer <token>`. Write the token only into the client's configuration or secret store, never into a chat. Once connected, Datafor hands the agent its own usage notes as server instructions (settle the model first, explore an unknown model, ask one step at a time, pass the context for follow-ups, keep Datafor's numbers), so no prompt needs to be pasted.
 
 ## 4. Check the connection
 
@@ -142,6 +125,8 @@ Ask these three questions in order. When all three return results, the connectio
 1. "Use Datafor to list the analysis models I can access."
 2. "Use Datafor to show the metrics and dimensions of the model "_model name_", then suggest a few questions I could ask."
 3. "Use Datafor to analyze: _a business question you care about_."
+
+Back on **My account › Personal tokens**, the token's **Last used** time updates.
 
 ## 5. Asking from an AI client
 
@@ -172,15 +157,16 @@ Ask these three questions in order. When all three return results, the connectio
 
 | Symptom | Cause and fix |
 | --- | --- |
-| Claude Desktop shows no Datafor tools | Open a new conversation; check that the extension is enabled. If Claude started before Datafor and the retries ran out, turn the extension off and on in **Settings › Extensions**, or restart Claude. |
+| **Personal tokens** shows "Your administrator has not turned on personal tokens." | Self-service tokens are off. The administrator enables them in the JWT configuration (section 8.1). |
+| Claude Desktop shows no Datafor tools | Open a new conversation; check that the extension is enabled and that a token is filled in. If Claude started before Datafor and the retries ran out, turn the extension off and on in **Settings › Extensions**, or restart Claude. |
 | Claude Desktop cannot find `npx` | Install Node.js 18 or later, or enter the full path in the extension's **npx path**. |
-| Codex shows no Datafor tools | Check that the section from the **Codex** tab is in the user `config.toml` that Codex actually uses, save, restart Codex, and check that the MCP address is reachable. |
+| Codex shows no Datafor tools | Check that the section is in the user `config.toml` that Codex actually uses, save, restart Codex, and check that the MCP address is reachable. |
 | Codex reports a duplicate section | A server name may appear only once. Update the existing `datafor` section and keep the other servers. |
-| `Missing Datafor MCP authentication.` | No credential reached the server: the token or headers are missing or malformed. Generate a token again and update the client configuration. |
-| 401 or a sign-in failure on a tool call | The token has expired or is wrong, or, with headers, the password is wrong or the account is disabled. |
+| `Missing Datafor MCP authentication.` | No credential reached the server: the token is missing or the header is malformed. Create a token and update the client configuration. |
+| 401 or a sign-in failure on a tool call | The token has expired, was revoked or is wrong, or the account is disabled. Create a new token and update the client configuration. |
+| `password_auth_disabled` | The client still sends user name and password headers. Switch it to a personal token (section 8.3). |
 | `421 Invalid Host header` | The server is reached under a host name that is not in `MCP_ALLOWED_HOSTS` (section 8.2). |
 | Cannot connect, or the call times out | The MCP server is not running, or the address only works on the Datafor computer. Ask your administrator. |
-| "The MCP connection is not turned on." | The administrator has switched the channel off (section 8.3). |
 | A question about a specific store or region loses its filter or cannot be answered | The model's knowledge index is not built or out of date. See [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/). |
 | The answer says Datafor cannot answer this | A capability limit, not a fault. Rephrase, or split the question. |
 
@@ -188,39 +174,33 @@ The Claude Desktop extension writes its log to `%LOCALAPPDATA%\Claude\logs\mcp-s
 
 ## 7. Security
 
-- A personal token or a password in a client configuration stands for you and all your permissions. Keep it only in your own AI client's configuration; do not paste it into a chat, commit it to a repository or forward it. On a shared computer, remove the configuration when you are done.
-- A new token does not invalidate the old one. If a token may have leaked, generate a new one and tell your administrator, who can revoke all tokens at once (section 8.1).
+- A personal token stands for you and all your permissions. Keep it only in your own AI client's configuration; do not paste it into a chat, commit it to a repository or forward it. On a shared computer, remove the configuration when you are done.
+- Use a separate token for each client and each computer, so that a leak costs you one token, not all of them.
+- If a token may have leaked, revoke it on **My account › Personal tokens** and create a new one. Revocation takes effect at once for new sign-ins (within a minute on every node of a cluster); a session opened with the token before lasts until it times out. An administrator can also invalidate every token of a configuration at once by changing its secret (section 8.1).
 
 ## 8. For administrators
 
 ### 8.1 Turn on personal tokens
 
-Without personal tokens, users connect with their Datafor password. To let them generate tokens, create a JWT configuration with self-service enabled. The setting `self_service` has no field in the console, so set it with an API call while signed in as an administrator:
+AI clients connect with personal tokens, and users create them for themselves once you allow it. On **Settings › Access & Integration › Embed tokens (JWT)**, create a configuration for this purpose:
 
-```text
-POST /datafor/plugin/datafor-modeler/api/token/update
-{"name":"ai-connect","token_name":"token","secret":"<at least 32 random characters>","expire":7776000,
- "algorithm":"HS256","enable":"1","inituser":"0","initroles":["SYS_Reader"],
- "fieldmap":{"username":"username","name":"name","email":"email"},"self_service":"1"}
-```
-
-| Key | Requirement |
+| Field | Value |
 | --- | --- |
-| `self_service` | `"1"`: signed-in users may issue a token for themselves. |
-| `enable` | `"1"`. |
-| `algorithm` | An HMAC algorithm such as `HS256`, with a `secret`. |
-| `expire` | Validity in seconds; `7776000` is 90 days. The panel shows it in days. |
-| `inituser` | Not required for personal tokens. |
+| **Name** | For example `ai-connect`. |
+| **Algorithm** | An HMAC algorithm such as `HS256`, with a **Secret** of at least 32 random characters. |
+| **Expiration time** | The longest validity a user may choose, in seconds; `7776000` is 90 days. The **Personal tokens** page offers shorter choices up to this value. |
+| **Initialize user** | Off. |
+| **Allow users to issue personal tokens** | On. |
 
-Editing the configuration later on **Settings › Access & Integration › Embed tokens (JWT)** keeps `self_service`. See [JSON Web Token (JWT)](/documentation/System/JWT/) for the other fields.
+See [JSON Web Token (JWT)](/documentation/System/JWT/) for the other fields. A token created on this configuration carries only the user name and an expiry; the user's roles and row-level permissions are read from Datafor at every sign-in.
 
-Changing the `secret` of the configuration invalidates every token issued from it at once. It is the only way to revoke tokens.
+Changing the **Secret** of the configuration invalidates every token issued from it at once. Users revoke individual tokens themselves on **My account › Personal tokens**.
 
 ### 8.2 Let other computers connect
 
 By default the MCP server listens on `127.0.0.1:38081`, so only AI clients on the Datafor computer can connect. It accepts the host names in `MCP_ALLOWED_HOSTS`, and sends each `ask_datafor` call under the user's own sign-in through Datafor's `/datafor/ai`:
 
-![AI clients connect to the MCP address shown in Connect AI (MCP_PUBLIC_URL) with a Bearer personal token; the MCP server on 38081 checks the host against MCP_ALLOWED_HOSTS and sends ask_datafor through Tomcat's /datafor/ai to the AI Agent API on 28081](./images/ai-agent-deployment-topology.svg)
+![AI clients connect to the MCP address shown on the Personal tokens page (MCP_PUBLIC_URL) with a Bearer personal token; the MCP server on 38081 checks the host against MCP_ALLOWED_HOSTS and sends ask_datafor through Tomcat's /datafor/ai to the AI Agent API on 28081](./images/ai-agent-deployment-topology.svg)
 
 Set these keys in `.env` in the AI Agent folder (`bi-server/ai-agent/.env`):
 
@@ -230,18 +210,18 @@ Set these keys in `.env` in the AI Agent folder (`bi-server/ai-agent/.env`):
 | `MCP_HTTP_PORT` | `38081` | Listen port. |
 | `MCP_ALLOWED_HOSTS` | empty | Comma-separated `Host` header values accepted besides the local addresses, for example `bi.example.com,bi.example.com:*`. Any other host name gets `421 Invalid Host header`. If `MCP_HTTP_HOST` is a network address and this key is empty, the server does not check the `Host` header at all and logs a warning; list your names to keep the check. |
 | `MCP_ALLOWED_ORIGINS` | empty | Comma-separated `Origin` values accepted besides the local ones, for browser-based clients. |
-| `MCP_PUBLIC_URL` | empty | The address shown in **Connect AI**, for example `https://bi.example.com/mcp`. Read by the AI Agent service, not by the MCP server. When it is empty, the panel shows `http://127.0.0.1:<port>/mcp` for a local listen address, or builds the address from the host name the user opened Datafor with. |
+| `MCP_PUBLIC_URL` | empty | The address shown on **My account › Personal tokens**, for example `https://bi.example.com/mcp`. Read by the AI Agent service, not by the MCP server. When it is empty, the page shows `http://127.0.0.1:<port>/mcp` for a local listen address, or builds the address from the host name the user opened Datafor with. |
 
 Then restart the AI Agent from its folder with `app-console.bat restart` (Windows) or `./app-console.sh restart` (Linux). Without a target this restarts the AI Agent and the MCP server; `MCP_PUBLIC_URL` is read by the AI Agent service and the listen settings by the MCP server.
 
 Behind a reverse proxy, forward `/mcp` to the MCP server, use HTTPS, list the public host name in `MCP_ALLOWED_HOSTS` and set `MCP_PUBLIC_URL` to the public address. Allow responses of up to five minutes. The server keeps no session between calls, so the proxy needs no sticky sessions, and connected clients keep working after Datafor or the AI Agent restarts or is upgraded.
 
-### 8.3 Switch the channel or password sign-in off
+### 8.3 Switch the channel off, or allow password sign-in
 
 | Key | Default | Effect |
 | --- | --- | --- |
-| `AGENT_VNEXT_MCP_ENABLED` | `true` | `false` switches the MCP channel off. The panel then says "The MCP connection is not turned on. Contact your administrator." |
-| `MCP_PASSWORD_SESSION_AUTH_ENABLED` | `true` | `false` rejects the `X-Datafor-Username` / `X-Datafor-Password` headers, so only personal tokens work. Turn on personal tokens first. |
+| `AGENT_VNEXT_MCP_ENABLED` | `true` | `false` switches the MCP channel off. The **Personal tokens** page then shows no MCP address. |
+| `MCP_PASSWORD_SESSION_AUTH_ENABLED` | `false` | `true` also accepts the `X-Datafor-Username` / `X-Datafor-Password` headers. Off by default: a password in a client configuration file cannot be revoked on its own, and accounts that sign in through SSO have none. Use it only as a bridge for an installation that has not turned on personal tokens yet. |
 
 Restart with `app-console.bat restart` or `./app-console.sh restart` after a change.
 
@@ -260,7 +240,8 @@ Set them in `ai-agent/.env` and restart with `app-console.bat restart` or `./app
 - Assign the **Question Suggestions** stage on the **LLM** page. Without it, `generate_sample_questions` can only use the LLM configured in Datafor whose ID is set as `AGENT_DEFAULT_LLM_ID` in `ai-agent/.env`, and for users who are not administrators only with the [shared secret](/documentation/AI-Agent/Agent-Shared-Secret/). With neither, it returns no questions.
 - Distribute `datafor.mcpb` to users of Claude Desktop.
 
-### 8.6 After upgrading to 10.00
+### 8.6 After upgrading
 
-- Claude Desktop users reinstall the extension: uninstall the old version first, then install the new one. The new version passes the token header correctly on Windows and waits for Datafor to start.
-- Nothing to do for Claude Code, Codex or JSON clients. Clients that were connected before the upgrade keep working.
+- Claude Desktop users reinstall the extension: uninstall the old version first, then install the new one. The current version takes only the personal token; user name and password fields are gone.
+- Clients that were set up with user name and password headers stop working unless `MCP_PASSWORD_SESSION_AUTH_ENABLED=true` is set. Turn on personal tokens (section 8.1) and let users switch their clients to a token instead.
+- Tokens generated by the former **Connect AI** panel keep working until they expire. They do not appear on **My account › Personal tokens** and cannot be revoked individually; users should create a new token there and update their clients.

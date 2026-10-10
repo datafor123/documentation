@@ -144,7 +144,7 @@ MCP_ALLOWED_HOSTS=bi.example.com,bi.example.com:*
 MCP_PUBLIC_URL=https://bi.example.com/mcp
 ```
 
-Keep `MCP_HTTP_HOST` at its default `127.0.0.1` when Nginx runs on the same machine. Then restart the AI Agent from its folder with `./app-console.sh restart` (Linux) or `app-console.bat restart` (Windows). Without `MCP_ALLOWED_HOSTS`, clients get `421 Invalid Host header`. `MCP_PUBLIC_URL` is the address shown to users in **Connect AI**.
+Keep `MCP_HTTP_HOST` at its default `127.0.0.1` when Nginx runs on the same machine. Then restart the AI Agent from its folder with `./app-console.sh restart` (Linux) or `app-console.bat restart` (Windows). Without `MCP_ALLOWED_HOSTS`, clients get `421 Invalid Host header`. `MCP_PUBLIC_URL` is the address shown to users on **My account › Personal tokens**.
 
 ## 3. Tell Tomcat about the proxy
 

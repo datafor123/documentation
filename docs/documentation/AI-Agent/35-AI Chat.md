@@ -15,16 +15,17 @@ Click **AI Agent** in the left navigation, directly below **Home**. The **AI Age
 
 **AI Agent** appears only when an administrator has enabled the AI service. A user without AI access who clicks it sees "Please contact your administrator to enable AI for this user" and stays on the current page.
 
-<div align="left"><img src="./images/ai-welcome-toolbar.png" alt="AI Assistant welcome screen with the toolbar buttons New Chat, History, Connect AI, Common Questions, Ops and LLM" width="100%" /></div>
+<div align="left"><img src="./images/ai-welcome-toolbar.png" alt="AI Assistant welcome screen with the toolbar buttons New Chat, History, Common Questions, Ops and LLM" width="100%" /></div>
 
 | Toolbar button | Use |
 | --- | --- |
 | **New Chat** | Start a separate conversation. |
 | **History** | Reopen an earlier conversation. |
-| **Connect AI** | Get the MCP address and ready-made configurations for AI clients such as Claude Desktop, Claude Code and Codex. See [Connect AI Clients](/documentation/AI-Agent/Connect-AI-Clients/). |
 | **Common Questions**, **Ops**, **LLM** | Administrators only; see section 9. |
 
-When the assistant is shown as a side panel, these functions are icon buttons, for example **Connect AI** and **Clear Chat**.
+When the assistant is shown as a side panel, these functions are icon buttons, for example **Clear Chat**.
+
+To use Datafor from an AI client such as Claude Desktop, Claude Code or Codex, create a personal token under **My account › Personal tokens**; see [Connect AI Clients](/documentation/AI-Agent/Connect-AI-Clients/).
 
 ## 2. Choose the analysis model, or let the Agent choose
 
