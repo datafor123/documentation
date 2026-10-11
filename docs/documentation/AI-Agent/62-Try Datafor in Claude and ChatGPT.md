@@ -45,7 +45,7 @@ The token stands for you and all your permissions. Paste it only into the app's 
 ### Claude Desktop
 
 1. Install Node.js 18 or later if it is not installed yet. The extension needs it to start.
-2. Get `datafor.mcpb` from your administrator.
+2. Download [datafor.mcpb](/downloads/datafor.mcpb). If you cannot download it, ask your administrator for the copy in the Datafor installation (`bi-server/ai-agent/claude-extension/datafor.mcpb`).
 3. In Claude Desktop, open **Settings › Extensions › Advanced settings › Install extension** and choose the file, or drag the file into the Claude window.
 4. Fill in the extension settings:
 
