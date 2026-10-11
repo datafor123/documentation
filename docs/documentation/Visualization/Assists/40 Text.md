@@ -34,8 +34,7 @@ The inserted value goes where the cursor was, as a placeholder such as `{{filter
 
 ## Actions
 
-- **Click action**: go to a report, open a link, switch a tab, reset filters and more.
-- **Visibility**: show the text only for some parameter values, users or roles.
+**Visibility**: show the text only for some parameter values, users or roles. Text has no click action; to make text clickable, use a [Rich text](/documentation/Visualization/TextBox/) link or an [Action button](/documentation/Visualization/Action-Button/).
 
 See [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
 

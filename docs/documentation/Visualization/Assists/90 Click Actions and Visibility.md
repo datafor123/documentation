@@ -9,7 +9,7 @@ createTime: 2026/10/09 16:00:00
 
 ## Click actions
 
-Text, Rich text, Image, Icon and Shape have **Actions → Click action → On click**. The Action button has the same actions, with the same names, under **Actions → Action → Click action**.
+Image, Icon and Shape have **Actions → Click action → On click** (Text and Rich text do not). The Action button has the same actions, with the same names, under **Actions → Action → Click action**.
 
 | Action | What it does | Settings |
 | --- | --- | --- |

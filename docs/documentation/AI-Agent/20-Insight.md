@@ -25,13 +25,13 @@ createTime: 2026/09/01 21:50:46
 3. Style the button under **Style**: **Border** (with background and effects), **Description of the image**, **Image Options** and **Hover Style**.
 4. Optionally set **Actions → Visibility** to show it only to some users, roles or parameter values.
 
-Clicking the component opens the insight, also in the editor; you do not need to preview first. The insight leaves out the AI insight component itself, empty components and Rich text value blocks, and says which components it skipped.
+Clicking the component opens the insight in **Preview** and in view mode. In the editor a click shows a message asking you to preview. The insight leaves out the AI insight component itself, empty components and Rich text value blocks, and says which components it skipped.
 
 The insight analyses only the data already loaded in the page's components and runs no extra queries. When that data is truncated or incomplete, the answer says so. **Generate business brief** writes a management brief from the same data.
 
 ## Open insight from other components
 
-Any Text, Rich text, Image, Icon, Shape or Action button can open the same insight: set its click action to **Open AI insight** and choose an **Analysis scope**. See [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
+Any Image, Icon, Shape or Action button can open the same insight: set its click action to **Open AI insight** and choose an **Analysis scope**. See [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
 
 ## Requirements
 

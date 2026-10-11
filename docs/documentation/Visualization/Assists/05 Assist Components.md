@@ -26,7 +26,7 @@ Assist components add titles, explanations, decoration and navigation to a repor
 ## What they share
 
 - **Style → Effects**: background (**Solid** or **Gradient** with start colour, end colour and angle), border, corner radius, shadow, **Padding**, **Opacity** (of the content, not the background) and **Hover effect** (**None**, **Lighten**, **Raise (shadow)**). Shapes have Opacity and Hover effect only; the Action button and Tabs have their own style settings.
-- **Actions → Click action**: go to a report, open a link, switch a tab, reset or clear filters and more. See [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
+- **Actions → Click action** (Image, Icon and Shape): go to a report, open a link, switch a tab, reset or clear filters and more. Text and Rich text have no click action; in Rich text, insert a link instead. See [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
 - **Actions → Visibility**: show the component always, never in the report, or only for some parameter values, users or roles.
 - **Dynamic values** such as `{{param.Region}}` or `{{date}}` in Text, Shape text, Rich text, Image URLs and Web page addresses. See [Dynamic Values](/documentation/Visualization/Dynamic-Values/).
 
