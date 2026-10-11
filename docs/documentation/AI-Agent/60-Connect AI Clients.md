@@ -1,19 +1,19 @@
 ---
 title: Connect AI Clients (MCP)
 permalink: /documentation/AI-Agent/Connect-AI-Clients/
-description: Ask Datafor from Claude, Codex, Cursor and other MCP clients under your own permissions, sign in with a personal token from My account, and prepare the server as an administrator.
+description: Ask Datafor from Claude, claude.ai, ChatGPT, Codex, Cursor and other MCP clients under your own permissions, sign in with a personal token from My account, and prepare the server as an administrator.
 createTime: 2026/10/09 18:00:00
 ---
 
 # Connect AI Clients (MCP)
 
-Datafor offers an MCP (Model Context Protocol) server, so you can ask about your data from the AI assistant you already use: Claude Desktop, Claude Code, Codex, Cursor, VS Code, Cherry Studio, or any agent that supports MCP. Each question runs as a governed query in Datafor under your own account. The AI client sees only the analysis models and data you can see in Datafor.
+Datafor offers an MCP (Model Context Protocol) server, so you can ask about your data from the AI assistant you already use: Claude Desktop, Claude Code, claude.ai, ChatGPT, Codex, Cursor, VS Code, Cherry Studio, or any agent that supports MCP. Each question runs as a governed query in Datafor under your own account. The AI client sees only the analysis models and data you can see in Datafor.
 
 By default Datafor returns the result rows, the query behind them and any disclosures, and the AI client writes the answer from those rows. Datafor instructs the client never to change a value and to label anything it calculates itself as its own work.
 
 This page applies to Datafor 10.00 and later.
 
-To try Datafor quickly in Claude Desktop, Claude Code or the ChatGPT desktop app, start with [Try Datafor in Claude and ChatGPT](/documentation/AI-Agent/Try-in-Claude-and-ChatGPT/).
+To try Datafor quickly in Claude or ChatGPT, start with [Try Datafor in Claude and ChatGPT](/documentation/AI-Agent/Try-in-Claude-and-ChatGPT/).
 
 ## 1. What the AI client can do
 
@@ -46,7 +46,7 @@ The page lists every token you have created: name, creation and expiry time, las
 | --- | --- |
 | "Your administrator has not turned on personal tokens." | Self-service tokens are off on the server. Ask your administrator to enable them (section 8.1). Without them the AI client cannot connect. |
 | "This session was signed in with a token…" | You opened the portal with a token. Sign in with your account to create or revoke tokens. |
-| No MCP address | The AI Agent service is not reachable from the portal, or the MCP channel is switched off (section 8.3). |
+| No MCP address | The AI Agent service is not reachable from the portal, or the MCP channel is switched off (section 8.4). |
 
 In the sections below, `<MCP address>` and `<token>` stand for these two values.
 
@@ -96,7 +96,22 @@ claude mcp add --transport http datafor "<MCP address>" --header "Authorization:
 
 3. Save, restart Codex, open a new conversation and ask: "Use Datafor to list the analysis models I can access."
 
-The desktop app, the CLI and the IDE extension on one computer share this configuration, and so do the ChatGPT desktop app's MCP servers (**Settings › Plugins › MCP**). The header value must start with `Bearer ` followed by the token. Codex connects to the HTTP server directly: no extension, Node.js or `codex mcp login` is needed. `tool_timeout_sec = 600` leaves time for slower analyses. In the CLI, `codex mcp list` shows the configuration and `/mcp` the connection status. Codex cloud tasks do not read the configuration on your computer.
+The desktop app, the CLI and the IDE extension on one computer share this configuration, and so do the ChatGPT desktop app's MCP servers (**Settings › Plugins › MCP**). Write the header value as `Bearer ` followed by the token; the token alone is also accepted. Codex connects to the HTTP server directly: no extension, Node.js or `codex mcp login` is needed. `tool_timeout_sec = 600` leaves time for slower analyses. In the CLI, `codex mcp list` shows the configuration and `/mcp` the connection status. Codex cloud tasks do not read the configuration on your computer.
+
+### claude.ai custom connectors and ChatGPT apps
+
+claude.ai (and its custom connectors in the Claude desktop and mobile apps) and ChatGPT on the web connect from Anthropic's and OpenAI's cloud, not from your computer. They cannot send a fixed request header for each user, so they sign in through OAuth instead:
+
+1. You add Datafor with `<MCP address>`. This works only when the address is published on the internet over HTTPS (section 8.3).
+2. The app registers itself with Datafor and opens a Datafor page in your browser that names the app and asks for a personal token.
+3. You paste a token created on **My account › Personal tokens** and click **Connect**. Datafor checks the token and hands it to the app, which then sends it with every call like any other client. **Cancel** aborts the connection.
+
+The app holds the token until the token expires, then asks you to connect again with a new one. Revoking the token disconnects the app.
+
+- **claude.ai:** **Customize › Connectors › + Add › Add custom connector**, URL `<MCP address>`, authentication **Sign in now**, OAuth client **Register automatically** (Datafor does not accept Claude's published identity), no request headers. On Team and Enterprise plans an owner adds the connector under **Organization settings › Connectors**, and each member connects with their own token.
+- **ChatGPT:** an app in developer mode, available in Business, Enterprise and Edu workspaces: **Apps › Create**, MCP server URL `<MCP address>`, authentication **OAuth**, then **Scan Tools** and **Create**. An admin publishes it for the workspace, and each member connects with their own token.
+
+Step-by-step instructions are in [Try Datafor in Claude and ChatGPT](/documentation/AI-Agent/Try-in-Claude-and-ChatGPT/).
 
 ### Cursor, VS Code, Cherry Studio and other clients with a JSON configuration
 
@@ -164,9 +179,13 @@ Back on **My account › Personal tokens**, the token's **Last used** time updat
 | Claude Desktop cannot find `npx` | Install Node.js 18 or later, or enter the full path in the extension's **npx path**. |
 | Codex shows no Datafor tools | Check that the section is in the user `config.toml` that Codex actually uses, save, restart Codex, and check that the MCP address is reachable. |
 | Codex reports a duplicate section | A server name may appear only once. Update the existing `datafor` section and keep the other servers. |
-| `Missing Datafor MCP authentication.` | No credential reached the server: the token is missing or the header is malformed. Create a token and update the client configuration. |
+| `Missing Datafor MCP authentication` or `Unsupported Authorization scheme` | No usable credential reached the server: the token is missing, or the header has a word other than `Bearer` in front of it. Send `Authorization: Bearer <token>`. |
+| claude.ai or ChatGPT cannot reach the server when Datafor is added | The MCP address is not published on the internet over HTTPS, or the reverse proxy does not forward the sign-in paths (section 8.3). |
+| claude.ai reports an error about the OAuth client | The connector was added with **Use Claude's published identity**. Remove it and add it again with **Register automatically**. |
+| Datafor's sign-in page says the link is invalid or has expired | The page is valid for 15 minutes, and only in the browser it opened in. Start the connection again from the app. |
+| Datafor's sign-in page does not accept the token | The token was copied incompletely, has expired or was revoked: create a new one. If the page says Datafor could not be reached, the MCP server cannot reach Datafor at `DATAFOR_URL`. |
 | 401 or a sign-in failure on a tool call | The token has expired, was revoked or is wrong, or the account is disabled. Create a new token and update the client configuration. |
-| `password_auth_disabled` | The client still sends user name and password headers. Switch it to a personal token (section 8.3). |
+| `password_auth_disabled` | The client still sends user name and password headers. Switch it to a personal token (section 8.4). |
 | `421 Invalid Host header` | The server is reached under a host name that is not in `MCP_ALLOWED_HOSTS` (section 8.2). |
 | Cannot connect, or the call times out | The MCP server is not running, or the address only works on the Datafor computer. Ask your administrator. |
 | A question about a specific store or region loses its filter or cannot be answered | The model's knowledge index is not built or out of date. See [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/). |
@@ -178,6 +197,7 @@ The Claude Desktop extension writes its log to `%LOCALAPPDATA%\Claude\logs\mcp-s
 
 - A personal token stands for you and all your permissions. Keep it only in your own AI client's configuration; do not paste it into a chat, commit it to a repository or forward it. On a shared computer, remove the configuration when you are done.
 - Use a separate token for each client and each computer, so that a leak costs you one token, not all of them.
+- Paste a token into Datafor's sign-in page only during a connection you started yourself from claude.ai or ChatGPT, and check that the page names that app. The app receives the token and acts with your permissions until the token expires or you revoke it.
 - If a token may have leaked, revoke it on **My account › Personal tokens** and create a new one. Revocation takes effect at once and ends the sessions opened with the token; MCP clients and other nodes of a cluster follow within a minute. An administrator can also invalidate every token of a configuration at once by changing its secret (section 8.1).
 
 ## 8. For administrators
@@ -212,13 +232,32 @@ Set these keys in `.env` in the AI Agent folder (`bi-server/ai-agent/.env`):
 | `MCP_HTTP_PORT` | `38081` | Listen port. |
 | `MCP_ALLOWED_HOSTS` | empty | Comma-separated `Host` header values accepted besides the local addresses, for example `bi.example.com,bi.example.com:*`. Any other host name gets `421 Invalid Host header`. If `MCP_HTTP_HOST` is a network address and this key is empty, the server does not check the `Host` header at all and logs a warning; list your names to keep the check. |
 | `MCP_ALLOWED_ORIGINS` | empty | Comma-separated `Origin` values accepted besides the local ones, for browser-based clients. |
-| `MCP_PUBLIC_URL` | empty | The address shown on **My account › Personal tokens**, for example `https://bi.example.com/mcp`. Read by the AI Agent service, not by the MCP server. When it is empty, the page shows `http://127.0.0.1:<port>/mcp` for a local listen address, or builds the address from the host name the user opened Datafor with. |
+| `MCP_PUBLIC_URL` | empty | The address shown on **My account › Personal tokens**, for example `https://bi.example.com/mcp`, and the address the MCP server gives cloud AI apps for signing in (section 8.3). When it is empty, the page shows `http://127.0.0.1:<port>/mcp` for a local listen address, or builds the address from the host name the user opened Datafor with. |
 
-Then restart the AI Agent from its folder with `app-console.bat restart` (Windows) or `./app-console.sh restart` (Linux). Without a target this restarts the AI Agent and the MCP server; `MCP_PUBLIC_URL` is read by the AI Agent service and the listen settings by the MCP server.
+Then restart the AI Agent from its folder with `app-console.bat restart` (Windows) or `./app-console.sh restart` (Linux). Without a target this restarts the AI Agent and the MCP server, which both read these settings.
 
-Behind a reverse proxy, forward `/mcp` to the MCP server, use HTTPS, list the public host name in `MCP_ALLOWED_HOSTS` and set `MCP_PUBLIC_URL` to the public address. Allow responses of up to five minutes. The server keeps no session between calls, so the proxy needs no sticky sessions, and connected clients keep working after Datafor or the AI Agent restarts or is upgraded.
+Behind a reverse proxy, forward `/mcp` to the MCP server, use HTTPS, list the public host name in `MCP_ALLOWED_HOSTS` and set `MCP_PUBLIC_URL` to the public address. For claude.ai and ChatGPT also forward the sign-in paths listed in section 8.3. Allow responses of up to five minutes. The server keeps no session between calls, so the proxy needs no sticky sessions, and connected clients keep working after Datafor or the AI Agent restarts or is upgraded.
 
-### 8.3 Switch the channel off, or allow password sign-in
+### 8.3 Let cloud AI apps sign in
+
+claude.ai custom connectors and ChatGPT apps connect from Anthropic's and OpenAI's cloud and sign in through OAuth (section 3). The MCP server is its own OAuth authorization server for this: it lets the app register itself, sends the user's browser to a page of its own where the user pastes a personal token, checks the token with Datafor and gives it to the app. Datafor itself needs no change, and clients configured with a token keep working as before.
+
+Sign-in is on by default when the AI Agent is started with `app-console.bat` or `app-console.sh`, because the launcher provides the [shared secret](/documentation/AI-Agent/Agent-Shared-Secret/) it needs. For the cloud apps to reach it:
+
+1. **Publish the MCP server over HTTPS on the internet**, usually behind a reverse proxy, and set `MCP_PUBLIC_URL` to that address, for example `https://bi.example.com/mcp` (section 8.2). Without it, the server announces its local address and the apps cannot sign in.
+2. **Forward the sign-in paths too.** Besides `/mcp` and everything below it (the sign-in page is `/mcp/oauth/connect`), forward `/.well-known/oauth-protected-resource` and `/.well-known/oauth-authorization-server`, including anything after them, from the root of the public host name to the MCP server. The apps look these up there to find out how to sign in.
+3. **Let the providers in.** If a firewall restricts access, allow the IP ranges Anthropic and OpenAI publish for their connectors.
+
+| Key in `ai-agent/.env` | Default | Effect |
+| --- | --- | --- |
+| `MCP_OAUTH_ENABLED` | on | `false` turns OAuth sign-in off; only clients configured with a token can connect. |
+| `DATAFOR_PUBLIC_URL` | `DATAFOR_URL` | The Datafor address users open in their browser. The sign-in page links to it so users can create a token. |
+
+On start, `mcp-server.log` says "MCP OAuth sign-in is on" with the public address, or "MCP OAuth sign-in is off" with the reason. The apps that registered and the one-time codes are kept in the AI Agent database, so every node of a cluster can serve any step of a sign-in. No refresh token is issued: when the token a user pasted expires, the app asks the user to connect again.
+
+Restart with `app-console.bat restart` or `./app-console.sh restart` after a change.
+
+### 8.4 Switch the channel off, or allow password sign-in
 
 | Key | Default | Effect |
 | --- | --- | --- |
@@ -227,22 +266,22 @@ Behind a reverse proxy, forward `/mcp` to the MCP server, use HTTPS, list the pu
 
 Restart with `app-console.bat restart` or `./app-console.sh restart` after a change.
 
-### 8.4 Wait time and time zone
+### 8.5 Wait time and time zone
 
 | Key | Default | Effect |
 | --- | --- | --- |
-| `MCP_ASK_TIMEOUT_SECONDS` | `200` | Seconds one `ask_datafor` call waits for the answer before it returns `pending` with the `run_id`. Keep it below the AI client's own tool-call limit (Codex: 60 seconds unless `tool_timeout_sec` is raised). |
+| `MCP_ASK_TIMEOUT_SECONDS` | `200` | Seconds one `ask_datafor` call waits for the answer before it returns `pending` with the `run_id`. Keep it below the AI client's own tool-call limit (claude.ai: 240 seconds; Codex: 60 seconds unless `tool_timeout_sec` is raised). |
 | `MCP_DEFAULT_TIMEZONE` | empty | IANA time zone, for example `Europe/Berlin`, in which relative dates such as "last month" resolve when the AI client sends none. Empty: the current UTC offset of the server, or UTC if that offset is not a whole number of hours. |
 
 Set them in `ai-agent/.env` and restart with `app-console.bat restart` or `./app-console.sh restart`.
 
-### 8.5 Prepare the models and the server
+### 8.6 Prepare the models and the server
 
 - Build the knowledge index of each model users will ask about (older versions called it the vector index). Without it, questions that name specific members can lose their filter. See [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
 - Assign the **Question Suggestions** stage on the **LLM** page. Without it, `generate_sample_questions` can only use the LLM configured in Datafor whose ID is set as `AGENT_DEFAULT_LLM_ID` in `ai-agent/.env`, and for users who are not administrators only with the [shared secret](/documentation/AI-Agent/Agent-Shared-Secret/). With neither, it returns no questions.
 - Users of Claude Desktop download [datafor.mcpb](/downloads/datafor.mcpb) themselves. Where they cannot reach this site, hand them the copy that ships with the installation, `bi-server/ai-agent/claude-extension/datafor.mcpb`.
 
-### 8.6 After upgrading
+### 8.7 After upgrading
 
 - Claude Desktop users reinstall the extension: uninstall the old version first, then install the new [datafor.mcpb](/downloads/datafor.mcpb) (also in `bi-server/ai-agent/claude-extension/` of the upgraded installation). The current version takes only the personal token; user name and password fields are gone.
 - Clients that were set up with user name and password headers stop working unless `MCP_PASSWORD_SESSION_AUTH_ENABLED=true` is set. Turn on personal tokens (section 8.1) and let users switch their clients to a token instead.
