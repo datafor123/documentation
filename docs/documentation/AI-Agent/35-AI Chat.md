@@ -57,6 +57,8 @@ A metric bound in several models is answered from one of them when the dimension
 
 Choosing the model adds a few seconds to the first answer of a conversation. When you know the model, select it.
 
+For the full decision steps and how to set up Metrics Library so the right model is chosen, see [Asking Without Choosing a Model](/documentation/AI-Agent/Asking-Without-Choosing-a-Model/).
+
 ### The answer card
 
 An automatically chosen model is shown in a card above the answer, and the selector changes to **Auto · *model***.

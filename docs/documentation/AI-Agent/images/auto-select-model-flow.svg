@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="800" viewBox="0 0 760 800" font-family="'Segoe UI','Helvetica Neue',Arial,'Microsoft YaHei','PingFang SC','Noto Sans',sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">How the AI Agent chooses a model when none is selected</title>
+  <desc id="desc">A follow-up keeps its model and a user with one visible model uses it. Otherwise only the models the user can see are kept. If the question names a Metrics Library metric bound to one of them, the bindings decide: one binding answers from that model; several are separated by dimensions or recent use, or the Agent asks. Without a bound metric, the Agent compares model names, descriptions, knowledge index matches and recent use, and answers when one model clearly fits or asks the user to choose.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+
+  <rect width="760" height="800" fill="#FFFFFF"/>
+
+  <!-- Start -->
+  <rect x="210" y="16" width="340" height="44" rx="22" fill="#EEF4FF" stroke="#B9CCFF" stroke-width="1.5"/>
+  <text x="380" y="43" text-anchor="middle" font-size="16" font-weight="700" fill="#1F4FD8">You ask without selecting a model</text>
+  <line x1="380" y1="60" x2="380" y2="86" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- D1: shortcuts -->
+  <rect x="200" y="88" width="360" height="56" rx="8" fill="#FFF6E0" stroke="#E8C66A" stroke-width="1.5"/>
+  <text x="380" y="111" text-anchor="middle" font-size="15" fill="#2B2B3A">A follow-up in this conversation, or</text>
+  <text x="380" y="131" text-anchor="middle" font-size="15" fill="#2B2B3A">only one model you can see?</text>
+  <line x1="560" y1="116" x2="598" y2="116" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="566" y="108" font-size="13" fill="#5B6472">Yes</text>
+  <rect x="600" y="88" width="144" height="56" rx="8" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="672" y="111" text-anchor="middle" font-size="15" font-weight="700" fill="#2E5E33">Use that model</text>
+  <text x="672" y="131" text-anchor="middle" font-size="13" fill="#2E5E33">no choice needed</text>
+  <line x1="380" y1="144" x2="380" y2="170" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="388" y="162" font-size="13" fill="#5B6472">No</text>
+
+  <!-- Permission filter -->
+  <rect x="200" y="172" width="360" height="56" rx="8" fill="#FFFFFF" stroke="#C8CED8" stroke-width="1.5"/>
+  <text x="380" y="195" text-anchor="middle" font-size="15" font-weight="700" fill="#2B2B3A">Keep only the models you can see</text>
+  <text x="380" y="215" text-anchor="middle" font-size="13" fill="#5B6472">Bindings to any other model are dropped</text>
+  <line x1="380" y1="228" x2="380" y2="254" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- D2: bound metric? -->
+  <rect x="170" y="256" width="420" height="56" rx="8" fill="#FFF6E0" stroke="#E8C66A" stroke-width="1.5"/>
+  <text x="380" y="279" text-anchor="middle" font-size="15" fill="#2B2B3A">Does the question name a Metrics Library</text>
+  <text x="380" y="299" text-anchor="middle" font-size="15" fill="#2B2B3A">metric bound to one of these models?</text>
+
+  <!-- Left lane: Metrics Library path -->
+  <rect x="16" y="330" width="356" height="336" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
+  <line x1="190" y1="312" x2="190" y2="350" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="198" y="337" font-size="13" font-weight="700" fill="#5B3FBF">Yes</text>
+
+  <rect x="32" y="352" width="190" height="52" rx="8" fill="#FFF6E0" stroke="#E8C66A" stroke-width="1.5"/>
+  <text x="127" y="374" text-anchor="middle" font-size="14" fill="#2B2B3A">Bound in just one</text>
+  <text x="127" y="393" text-anchor="middle" font-size="14" fill="#2B2B3A">of your models?</text>
+  <line x1="222" y1="378" x2="236" y2="378" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="238" y="352" width="120" height="52" rx="8" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="298" y="374" text-anchor="middle" font-size="14" font-weight="700" fill="#2E5E33">Answer from</text>
+  <text x="298" y="393" text-anchor="middle" font-size="14" font-weight="700" fill="#2E5E33">that model</text>
+  <line x1="127" y1="404" x2="127" y2="430" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="135" y="422" font-size="13" fill="#5B6472">No, several</text>
+
+  <rect x="32" y="432" width="190" height="70" rx="8" fill="#FFF6E0" stroke="#E8C66A" stroke-width="1.5"/>
+  <text x="127" y="455" text-anchor="middle" font-size="14" fill="#2B2B3A">Do your dimensions</text>
+  <text x="127" y="473" text-anchor="middle" font-size="14" fill="#2B2B3A">or recent use point</text>
+  <text x="127" y="491" text-anchor="middle" font-size="14" fill="#2B2B3A">to one of them?</text>
+  <line x1="222" y1="467" x2="236" y2="467" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="238" y="432" width="120" height="70" rx="8" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="298" y="455" text-anchor="middle" font-size="14" font-weight="700" fill="#2E5E33">Answer from it</text>
+  <text x="298" y="473" text-anchor="middle" font-size="13" fill="#2E5E33">the card lists</text>
+  <text x="298" y="491" text-anchor="middle" font-size="13" fill="#2E5E33">the others</text>
+  <line x1="127" y1="502" x2="127" y2="528" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="135" y="520" font-size="13" fill="#5B6472">No</text>
+
+  <rect x="32" y="530" width="190" height="52" rx="8" fill="#FDEBDD" stroke="#EDA772" stroke-width="1.5"/>
+  <text x="127" y="552" text-anchor="middle" font-size="14" font-weight="700" fill="#8A4B12">Ask you</text>
+  <text x="127" y="571" text-anchor="middle" font-size="14" font-weight="700" fill="#8A4B12">to choose</text>
+
+  <text x="32" y="614" font-size="16" font-weight="700" fill="#5B3FBF">Metrics Library path</text>
+  <text x="32" y="636" font-size="13" fill="#7A6BB0">Exact: a binding states which model</text>
+  <text x="32" y="654" font-size="13" fill="#7A6BB0">computes the metric</text>
+
+  <!-- Right lane: model content path -->
+  <rect x="388" y="330" width="356" height="336" rx="12" fill="#F4F5F7" stroke="#D5D9E0" stroke-width="1.5"/>
+  <line x1="566" y1="312" x2="566" y2="350" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="574" y="337" font-size="13" font-weight="700" fill="#5B6472">No</text>
+
+  <rect x="404" y="352" width="324" height="70" rx="8" fill="#FFFFFF" stroke="#C8CED8" stroke-width="1.5"/>
+  <text x="566" y="375" text-anchor="middle" font-size="14" fill="#2B2B3A">Compare model names and descriptions,</text>
+  <text x="566" y="393" text-anchor="middle" font-size="14" fill="#2B2B3A">the closest fields and values in each</text>
+  <text x="566" y="411" text-anchor="middle" font-size="14" fill="#2B2B3A">knowledge index, and your recent use</text>
+  <line x1="499" y1="422" x2="499" y2="448" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="404" y="450" width="190" height="52" rx="8" fill="#FFF6E0" stroke="#E8C66A" stroke-width="1.5"/>
+  <text x="499" y="472" text-anchor="middle" font-size="14" fill="#2B2B3A">Does one model</text>
+  <text x="499" y="491" text-anchor="middle" font-size="14" fill="#2B2B3A">clearly fit?</text>
+  <line x1="594" y1="476" x2="608" y2="476" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="610" y="450" width="120" height="52" rx="8" fill="#EAF6EC" stroke="#9CCFA4" stroke-width="1.5"/>
+  <text x="670" y="472" text-anchor="middle" font-size="14" font-weight="700" fill="#2E5E33">Answer from</text>
+  <text x="670" y="491" text-anchor="middle" font-size="14" font-weight="700" fill="#2E5E33">that model</text>
+  <line x1="499" y1="502" x2="499" y2="528" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="507" y="520" font-size="13" fill="#5B6472">No</text>
+
+  <rect x="404" y="530" width="190" height="52" rx="8" fill="#FDEBDD" stroke="#EDA772" stroke-width="1.5"/>
+  <text x="499" y="552" text-anchor="middle" font-size="14" font-weight="700" fill="#8A4B12">Ask you</text>
+  <text x="499" y="571" text-anchor="middle" font-size="14" font-weight="700" fill="#8A4B12">to choose</text>
+
+  <text x="404" y="614" font-size="16" font-weight="700" fill="#4A5363">Model content path</text>
+  <text x="404" y="636" font-size="13" fill="#6B7380">Similarity: the closest match is not</text>
+  <text x="404" y="654" font-size="13" fill="#6B7380">always the right model</text>
+
+  <!-- When asked -->
+  <rect x="16" y="686" width="728" height="98" rx="12" fill="#FFF8F2" stroke="#EDA772" stroke-width="1.5"/>
+  <text x="36" y="714" font-size="15" font-weight="700" fill="#8A4B12">When the Agent asks you to choose</text>
+  <text x="36" y="738" font-size="14" fill="#2B2B3A">Pick a candidate, or name or describe it in your own words: the answer comes from that model.</text>
+  <text x="36" y="760" font-size="14" fill="#2B2B3A">A reply that names none of them is not asked again: pick the model in the model selector.</text>
+</svg>
