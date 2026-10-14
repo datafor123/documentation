@@ -30,7 +30,7 @@ Below the state the page lists the reasons, the edition, the license number, the
 
 1. Install and start Datafor. A new server runs in a 90-day trial with 5 Creator seats.
 2. Open **Settings › License**, click **Get machine code** and copy the code.
-3. Send the machine code to Datafor (or paste it in the Datafor license portal if you have an account). You receive a license file named `license_<id>.lic`.
+3. Send the machine code to Datafor. You receive a license file named `license_<id>.lic`; if you have a license portal account you can also download it there.
 4. Click **Upload license** and select the file. A file issued for another server or an outdated file is rejected with a reason.
 
 A license belongs to one installation. Reinstalling Datafor from scratch creates a new installation and needs a new license file; see [Moving to another server](#4-moving-to-another-server).
