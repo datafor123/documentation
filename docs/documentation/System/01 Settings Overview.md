@@ -11,7 +11,7 @@ Administrators open **Settings** (gear icon) in the left navigation. Pages are g
 
 | Group | Page | Use it to | Guide |
 | --- | --- | --- | --- |
-| **General** | **License** | View and update the license | |
+| **General** | **License** | View and update the license, get the machine code | [License and Activation](/documentation/System/License/) |
 | | **Email** | Set the SMTP server for alerts, password-reset and registration codes, and upload approval results | [Mail Server Configuration](/documentation/System/Mail-Server-Configuration/) |
 | | **System configuration** | Defaults for new reports and models, query limits, first day of the week | [System Configuration](/documentation/System/System-Configuration/) |
 | | **Branding** | Logo, colours, login page, interface font | [White Label](/documentation/Console/Branding/) |
