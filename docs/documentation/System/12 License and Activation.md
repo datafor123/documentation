@@ -80,7 +80,7 @@ If the portal revokes a license, the next check-in marks the server restricted w
 
 ## 7. Upgrading a legacy license
 
-Servers upgraded from an earlier version keep working with their existing license file. The License page shows **License upgrade available**: click **Get machine code**, send the new code to Datafor, and upload the v2 file you receive. The legacy file stays valid until then.
+Servers upgraded from an earlier version keep working with their existing license file **for 14 days after the upgrade**. During that window the license state is **Grace**: reports, queries and exports work as usual, but new users, tenants and AI users cannot be added. The License page shows **License upgrade available** together with the deadline: click **Get machine code**, send the new code to Datafor, and upload the v2 file you receive. After the deadline the legacy file is no longer accepted (`Legacy license files are no longer accepted by this version`) and the server is restricted until a v2 license is uploaded. Plan the upgrade so that the new license is ready within those 14 days.
 
 ---
 
@@ -89,6 +89,7 @@ Servers upgraded from an earlier version keep working with their existing licens
 | Message | Cause | What to do |
 |---|---|---|
 | `License is bound to another deployment.` | The file was issued for a different Deployment ID. | Send this server's machine code and request a transfer. |
+| `Legacy license files are no longer accepted by this version; upload a v2 license.` | More than 14 days have passed since the upgrade and the server still uses the old license file. | Click **Get machine code**, request the v2 file and upload it. |
 | `An older revision of this license cannot replace the current one.` | You uploaded a file that predates the installed one. | Download the latest file from the portal. |
 | `Machine code mismatch.` | Hardware changed and the 14-day tolerance passed (or the binding mode is strict). | Re-activate with a new machine code. |
 | `Server clock has been set back.` | The system time is more than 24 hours earlier than the last time the server saw. | Correct the clock; the warning clears automatically. |
