@@ -35,6 +35,8 @@ Below the state the page lists the reasons, the edition, the license number and 
 
 The Deployment ID is created on first start and kept in the repository, so recreating a Docker container or changing network cards does not invalidate the license as long as the repository database is kept.
 
+**Docker:** give the container a fixed host name (`--hostname datafor-ee` for `docker run`, `hostname: datafor-ee` in Compose) and keep the installation in a volume, as shown in [Deploying Datafor Using Docker](/documentation/Setup/Deploying-Datafor-Using-Docker/). Without a fixed name the host name is the container ID and changes on every recreate; together with a new container IP address that counts as two hardware changes and triggers the 14-day warning described in section 4. For Kubernetes and other environments where containers are replaced routinely, ask for the **none** binding mode.
+
 ---
 
 ## 3. Renewing or changing capacity

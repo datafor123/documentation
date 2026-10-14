@@ -31,15 +31,35 @@ This pulls the `latest` tag. To pin a version, use one of the tags listed on Doc
 
 ```shell
 docker run -d --name datafor-ee \
+  --hostname datafor-ee \
   -p 28080:28080 \
   -v datafor-data:/opt/bi-server \
   datafor123/datafor-ee
+```
+
+The same with Docker Compose:
+
+```yaml
+services:
+  datafor:
+    image: datafor123/datafor-ee
+    container_name: datafor-ee
+    hostname: datafor-ee
+    ports:
+      - "28080:28080"
+    volumes:
+      - datafor-data:/opt/bi-server
+    restart: unless-stopped
+
+volumes:
+  datafor-data:
 ```
 
 | Option | Purpose |
 | --- | --- |
 | `-d` | Runs the container in the background. |
 | `--name datafor-ee` | The name used by the other commands on this page. |
+| `--hostname datafor-ee` | Gives the container a fixed host name. The license binds to the server's Deployment ID and, as a secondary check, to its host name, MAC address and CPU. Without this option the host name is the container ID, which changes every time the container is recreated; combined with a new IP address that counts as a hardware change and the license shows a warning for 14 days (see [License and Activation](/documentation/System/License/)). Any fixed name works; keep it the same when you recreate the container. |
 | `-p 28080:28080` | Publishes the web server. This is the only port users need. |
 | `-v datafor-data:/opt/bi-server` | Keeps the whole installation, including the database, configuration and AI Agent keys, in the named volume `datafor-data`. On the first start Docker fills the empty volume with the installation from the image. Use a named volume, not a host folder: an empty host folder would hide the installation. |
 
@@ -81,6 +101,8 @@ docker stop datafor-ee
 Start it again with `docker start datafor-ee`.
 
 `docker rm datafor-ee` removes the container. With the volume from step 2, the content stays in `datafor-data` and a new container started with the same `-v` option uses it. `docker volume rm datafor-data` deletes the content permanently.
+
+Recreate the container with the same `--hostname` (or `hostname:` in Compose) as before. The license is kept in the volume together with the server's Deployment ID, so a recreated container stays licensed; the fixed host name keeps the hardware fingerprint unchanged as well. If the volume is lost, the new installation gets a new Deployment ID and the license has to be transferred in the license portal (see [Moving to another server](/documentation/System/License/#4-moving-to-another-server)).
 
 ## 5. Update
 
