@@ -62,13 +62,29 @@ With the default **standard** binding mode, the server tolerates hardware change
 
 ---
 
-## 6. Upgrading a legacy license
+## 6. Online check-in
+
+Depending on the contract, a license may ask the server to check in with the Datafor license portal. The License page shows the check-in mode, the last successful check-in, the lease expiry and the last error.
+
+| Mode | Behaviour |
+|---|---|
+| **Not checking in** | The server never contacts the portal. Renewals are delivered as files. |
+| **Automatic check-in** | Once a day the server sends a small report to the portal and receives a signed lease. If the portal is unreachable nothing changes; the license file alone decides validity. A renewed license revision is installed automatically. |
+| **Check-in required** | As above, but the server must check in at least once per lease period (30 days by default). After the lease expires the server enters the grace period, then becomes restricted until a check-in succeeds. |
+
+What is sent: the Deployment ID, license number and revision, product version and build, a hash of the hardware fingerprint, seat usage counts (Creators, Readers, AI users, tenants, total users), the current license state, a timestamp and a random token. No user names, report names, queries or business data are sent. Only an outbound HTTPS connection to the portal address printed on the License page is needed; allow it in the firewall or proxy (`-Dhttps.proxyHost`/`-Dhttps.proxyPort` are honoured). Administrators can trigger a check-in at any time with **Check in now**.
+
+If the portal revokes a license, the next check-in marks the server restricted with the reason "License has been revoked".
+
+---
+
+## 7. Upgrading a legacy license
 
 Servers upgraded from an earlier version keep working with their existing license file. The License page shows **License upgrade available**: click **Get machine code**, send the new code to Datafor, and upload the v2 file you receive. The legacy file stays valid until then.
 
 ---
 
-## 7. Troubleshooting
+## 8. Troubleshooting
 
 | Message | Cause | What to do |
 |---|---|---|
