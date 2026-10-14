@@ -73,10 +73,22 @@ Depending on the contract, a license may ask the server to check in with the Dat
 | **Not checking in** | The server never contacts the portal. Renewals are delivered as files. |
 | **Automatic check-in** | Once a day the server sends a short status report to the portal. If the portal is unreachable nothing changes. Renewed license files are installed automatically. |
 | **Check-in required** | As above, but the server must check in at least once per lease period (30 days by default, shown on the License page). If it cannot, it enters the grace period and then becomes restricted until a check-in succeeds. |
+| **Offline check-in** | For servers without internet access. The server never contacts the portal itself; an administrator completes a check-in by hand (see below) at least once per lease period (180 days by default). Otherwise it behaves like **Check-in required**. |
 
 What is sent: the license number, the Deployment ID, the product version, an identifier of the server hardware, seat usage counts (Creators, Readers, AI users, tenants, total users) and the current license state. No user names, report names, queries or business data are sent. Only an outbound HTTPS connection to the portal address printed on the License page is needed; allow it in the firewall or proxy (`-Dhttps.proxyHost`/`-Dhttps.proxyPort` are honoured). Administrators can trigger a check-in at any time with **Check in now**.
 
-A license is for one installation. If the portal finds the same license in use by more than one installation, the License page shows a warning; with **Check-in required**, the servers become restricted after the lease period until the matter is settled with Datafor. If the portal revokes a license, the next check-in marks the server restricted.
+A license is for one installation. If the portal finds the same license in use by more than one installation, the License page shows a warning; with **Check-in required** or **Offline check-in**, the servers become restricted after the lease period until the matter is settled with Datafor. If the portal revokes a license, the next check-in marks the server restricted.
+
+### Checking in by hand
+
+When the server cannot reach the portal, the License page offers two ways to check in without it:
+
+- **Check in through this browser** – if the computer you are using has internet access, click the button; the browser carries the check-in to the portal and back. Nothing else is needed.
+- **Check-in code** – click **Generate check-in code** and copy the code. On any device with internet access open the portal's check-in page (the address is shown next to the code), paste the code and copy the lease code you receive. Back on the License page paste it under **Submit lease code**. A check-in code is valid for 30 days; the lease code only works on the server that generated the check-in code.
+
+### Reminders
+
+When a lease is about to run out, the License page and the administrator's top bar show "check-in due in N days" (from 7 days before the deadline, or earlier for long leases), and the portal emails the license contact. After the deadline the top bar shows how many days the check-in is overdue. License expiry is announced the same way: the top bar from 30 days before, and portal emails at 30, 14, 7 and 1 days before expiry, on the day, and a week after.
 
 ---
 
@@ -96,4 +108,4 @@ Servers upgraded from an earlier version keep working with their existing licens
 | `Machine code mismatch.` | The server hardware changed and the deadline shown earlier has passed. | Request a new license with the current machine code. |
 | `Server clock has been set back.` | The system time was moved backwards. | Correct the clock; the warning clears automatically. |
 | `License file is corrupted.` | The file was edited or truncated. | Download it again. |
-| `License check-in is overdue.` | A server with required check-in could not reach the portal for longer than the lease period. | Allow the outbound connection and click **Check in now**. |
+| `License check-in is overdue.` | A server with required or offline check-in has not checked in for longer than the lease period. | Allow the outbound connection and click **Check in now**, or check in by hand with a check-in code. |
