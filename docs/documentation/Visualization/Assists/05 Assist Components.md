@@ -7,7 +7,7 @@ createTime: 2026/10/09 16:00:00
 
 # Assist Components
 
-Assist components add titles, explanations, decoration and navigation to a report. They need no data model, except Rich text value blocks, which query a measure, and the Action button and Web page when you bind them to data.
+Assist components add titles, explanations, decoration and navigation to a report. They need no data model, except Rich text value blocks, which query a measure, and the Web page when you bind it to data.
 
 ![The Assists section of the palette](./images/assists-palette.png)
 
@@ -38,9 +38,9 @@ Assist components add titles, explanations, decoration and navigation to a repor
 | Image file | **Image** |
 | Font icon, SVG | **Icon** |
 | Rectangle, Line, Ellipse | **Shape** |
-| Image Button | **Action button** |
+| Image Button | **Action button** (no data binding); an Image Button bound to a model field stays a **Data button (legacy)** |
 | Iframe | **Web page** |
 | Insight | **AI insight** |
 | Image (in Charts) | **Dynamic image** (Charts → Other) |
 
-Old Rectangle, Line, Ellipse and SVG components in existing reports still work. They are no longer in the palette; a Rectangle, Line or Ellipse can be converted with **Style → Shape → Convert to shape**.
+Old Rectangle, Line, Ellipse, SVG and Data button components in existing reports still work. They are no longer in the palette; a Rectangle, Line or Ellipse can be converted with **Style → Shape → Convert to shape**, and a Data button without data binding with **Style → Content → Convert to Action button**.
