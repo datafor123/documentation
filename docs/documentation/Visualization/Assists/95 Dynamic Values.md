@@ -18,7 +18,7 @@ In Text and Shape, use **Style → Content (or Text) → Insert dynamic value**;
 | Placeholder | Becomes | Menu item |
 | --- | --- | --- |
 | `{{param.NAME}}` | The value of a report or global parameter, or a system variable such as `{{param.system.username}}` | **Report parameter value** |
-| `{{filter.NAME}}` | The selection of the filter component whose title or field is NAME; *All* when nothing is selected | **Current filter selection** |
+| `{{filter.NAME}}` | The selection of the filter component whose title or field is NAME; when that filter is *All* or there is no such filter, the members selected in a chart on the page (cross-filtering) for the field NAME; *All* when nothing is selected | **Current filter selection**, and the **Chart fields (cross-filter)** group |
 | `{{date}}`, `{{date:FORMAT}}` | The date and time the report was opened or refreshed; default format `YYYY-MM-DD` | **Today's date** |
 | `{{user.name}}` | The signed-in user | **Current user** |
 | `{{page.title}}` | The report name | **Report name** |

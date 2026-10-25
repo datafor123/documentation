@@ -45,6 +45,7 @@ Details of each action and rule: [Click Actions and Visibility](/documentation/V
 
 - **Pass filters by matching field names** (on by default): every filter on the page is passed to the field with the same name in the target report, so a target that uses the same analysis model needs no mapping. For another model, pick the **target field** for each **page filter** in the table, or choose **Do not pass**.
 - **Pass report parameters** (on by default): the current values of the report parameters go to the parameters with the same names in the target report.
+- Members the reader has selected in a chart on the page (cross-filtering, for example a bar clicked in a column chart) are passed too, so a button can carry the value the page is currently filtered by. Chart fields are listed in the table marked **(cross-filter)** and can be mapped or set to **Do not pass**; drill-down levels are not passed.
 - Date filters pass their start and end; hierarchy tree filters with several selected paths, numeric ranges and advanced filter expressions are not passed.
 
 ## Data button (legacy)
