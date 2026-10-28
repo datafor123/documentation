@@ -21,13 +21,13 @@ Open **Data > Models**. The list shows each model's **Name**, **ID**, **Datasour
 | **New report** | Opens a new report on this model. | Permission to create reports. Without a valid license Datafor shows "License is invalid, expired, or exceeds license limits". |
 | **Rename** | Opens **Edit**, where you change the **Model name**. The model ID stays the same. | Edit |
 | **Open in a new window** | Opens the model in the modeler in a new browser tab. | Read |
-| **Delete** | Moves the model to Trash after you confirm. | Delete or Full control |
+| **Delete** | Moves the model to Trash after you confirm. When reports or metrics depend on the model, the confirmation lists them first; see [Usage and Impact Analysis](/documentation/Lineage/Usage-and-Impact-Analysis/). | Delete or Full control |
 | **Create copy** | Opens **Save as** with the name `<name>_copy_<time stamp>`. Enter the **Analysis model name**; the **Analysis model ID** is taken from it, and **Modify** lets you enter a different ID. The copy keeps the data source and gives only you Full control. | Permission to create content, and Read on the data source |
 | **Download** | Downloads the model as a ZIP file, which **Upload** can import here or on another server. | Read |
-| **Change datasource** | Opens **Edit connection**, where you choose another **Datasource** for the model. | Delete or Full control on the model, and Read on the new data source |
+| **Change datasource** | Opens **Edit connection**, where you choose another **Datasource** for the model. The dialog lists the reports that use the model. | Delete or Full control on the model, and Read on the new data source |
 | **Permissions** | Opens **Access setting**, where you grant users and roles **Read**, **Edit**, **Delete** or **Full control**. See [Access Control List](/documentation/System/Access-Control-List/). | Full control |
 | **Copy permissions to...** | Copies this model's permissions to the models you tick in the **Copy** column. | Full control |
-| **View item lineage** | Shows the model, its data source and the reports that use it. See [Lineage Analysis](/documentation/Analysis/Lineage-Analysis/). | Read |
+| **View item lineage** | Shows the model, its data source and the reports that use it. See [Viewing an Item's Lineage](/documentation/Lineage/Viewing-an-Items-Lineage/). | Read |
 | **Prep data for AI** | Builds or updates the model's knowledge index in the background and opens **Settings › AI Agent › Knowledge indexes**. See [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/). | Administrator |
 
 **Apply data security** and **Cache expire** are set in the modeler, with the gear button in the toolbar: see [Data security and cache settings](/documentation/Model/Creating-an-Analysis-Model/#_6-data-security-and-cache-settings).

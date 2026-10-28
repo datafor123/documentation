@@ -40,6 +40,10 @@ Diagnostics can report:
 - Missing business descriptions or incomplete time settings.
 - Missing, stale, drifting, or duplicate enterprise metric bindings.
 
+### Unused fields
+
+For administrators, diagnostics also reports, at **Info** level, measures and attributes that no report uses: *"Store Manager" is not used by any report.* The rule reads the lineage usage records and runs only when all reports on the server are visible to you, so that a field used in another user's personal folder is never reported as unused. See [Usage and Impact Analysis](/documentation/Lineage/Usage-and-Impact-Analysis/).
+
 ## Diagnostics during Save
 
 When you save a model:

@@ -10,7 +10,7 @@ description: Get the lineage graph that links connections, models and report pag
 createTime: 2026/09/01 22:03:26
 ---
 
-Returns the lineage graph of connections, models and pages (report files): which model reads from which connection, which page uses which model, and which page links to which other page. It is the data behind [Lineage Analysis](/documentation/Analysis/Lineage-Analysis/).
+Returns the lineage graph of connections, models and pages (report files): which model reads from which connection, which page uses which model, and which page links to which other page. It is the data behind [Viewing an Item's Lineage](/documentation/Lineage/Viewing-an-Items-Lineage/) and [The Lineage Page](/documentation/Lineage/Lineage-Page/).
 
 | | |
 | --- | --- |
@@ -102,4 +102,4 @@ Pages also carry `pathTitle`, `createdDate`, `lastModifiedDate`, `versionId` and
 
 The call does not fail for unknown names: a model that does not exist or that the caller cannot read is left out, and a page path that cannot be read is skipped. A body that is not JSON gives an HTTP 500 error.
 
-Related: [Lineage Analysis](/documentation/Analysis/Lineage-Analysis/)
+Related: [Lineage Analysis](/documentation/Lineage/Viewing-an-Items-Lineage/)

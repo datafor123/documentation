@@ -25,11 +25,12 @@ A report created from Home is saved in **Personal** unless you choose another fo
 | --- | --- |
 | **Home** | Start a task or resume recent work |
 | **AI Agent** | Ask questions about your data in plain language. Shown when AI is enabled; users without AI permission see *Please contact your administrator to enable AI for this user*. See [AI Assistant](/documentation/AI-Agent/AI-Chat/). |
-| **Personal**, **Public** | Your own folders and the shared folders you may open |
+| **Personal**, **Public** | Your own folders and the shared folders you may open. **New** creates a folder, a dashboard **Report** or a [Paginated Report](/documentation/Paginated-Reports/Understanding-Paginated-Reports/). |
 | **Favorites**, **Recent** | Items you starred, items you opened recently |
 | **Datasource** | Database connections and uploaded files |
 | **Models** | Analysis models: fields, relationships, measures |
 | **Metrics Library** | Agreed definitions of business metrics. See [Metrics Library](/documentation/Metrics-Library/Metrics-Library/). |
+| **Lineage** | Which reports use which models and data sources, broken links and unused models. Shown to users who can create content. See [The Lineage Page](/documentation/Lineage/Lineage-Page/). |
 | **Tools** | Parameters, data dictionary, GeoJSON maps and other tools |
 | **Users** | Users, roles and their permissions |
 | **Settings** | Server administration. See [Settings Overview](/documentation/System/Settings-Overview/). |

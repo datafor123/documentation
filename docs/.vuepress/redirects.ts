@@ -24,6 +24,7 @@ export const redirects: Record<string, string> = {
 	"/documentation/AI-Agent/AI-Agent-Overview-and-Roadmap/": "/documentation/AI-Agent/AI-Agent-Overview/",
 	"/documentation/AI-Agent/LLM-Permission-Management/": "/documentation/AI-Agent/AI-Operations-and-Quotas/",
 	"/documentation/Analysis/Exploratory Analysis/": "/documentation/Analysis/Exploratory-Analysis/",
+	"/documentation/Analysis/Lineage-Analysis/": "/documentation/Lineage/Viewing-an-Items-Lineage/",
 	"/documentation/Analysis/Using-Parameters-in-Component-Titles/": "/documentation/Analysis/Creating-Parameters/#component-titles",
 	"/documentation/Best/Filter by last date in the cube/": "/documentation/Visualization/Datepicker/",
 	"/documentation/Embedded/How-SSO-Improves-the-Embedded-Analytics-Experience/": "/documentation/Embedded/Signing-In-Users/",

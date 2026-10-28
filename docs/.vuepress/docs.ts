@@ -63,6 +63,17 @@ export const documentationNote = defineNoteConfig({
 			items: "auto",
 		},
 		{
+			text: "Lineage",
+			collapsed: true,
+			prefix: "/documentation/Lineage/",
+			items: [
+				{ text: "Understanding Lineage", link: "/documentation/Lineage/Understanding-Lineage/" },
+				{ text: "The Lineage Page", link: "/documentation/Lineage/Lineage-Page/" },
+				{ text: "Viewing an Item's Lineage", link: "/documentation/Lineage/Viewing-an-Items-Lineage/" },
+				{ text: "Usage and Impact Analysis", link: "/documentation/Lineage/Usage-and-Impact-Analysis/" },
+			],
+		},
+		{
 			text: "Visualization",
 			collapsed: true,
 			prefix: "/documentation/Visualization/",
@@ -137,6 +148,22 @@ export const documentationNote = defineNoteConfig({
 			collapsed: true,
 			prefix: "/documentation/Analysis/",
 			items: "auto",
+		},
+		{
+			text: "Paginated Reports",
+			collapsed: true,
+			prefix: "/documentation/Paginated-Reports/",
+			items: [
+				{ text: "Understanding Paginated Reports", link: "/documentation/Paginated-Reports/Understanding-Paginated-Reports/" },
+				{ text: "Creating a Paginated Report", link: "/documentation/Paginated-Reports/Creating-a-Paginated-Report/" },
+				{ text: "Datasets and Parameters", link: "/documentation/Paginated-Reports/Datasets-and-Parameters/" },
+				{ text: "Tables and Crosstabs", link: "/documentation/Paginated-Reports/Tables-and-Crosstabs/" },
+				{ text: "Page Layout, Header and Footer", link: "/documentation/Paginated-Reports/Page-Layout-Header-and-Footer/" },
+				{ text: "Viewing, Pagination and Export", link: "/documentation/Paginated-Reports/Viewing-Pagination-and-Export/" },
+				{ text: "Report Downloads", link: "/documentation/Paginated-Reports/Report-Downloads/" },
+				{ text: "Distribution", link: "/documentation/Paginated-Reports/Distribution/" },
+				{ text: "Drill Through and Embedding", link: "/documentation/Paginated-Reports/Drill-Through-and-Embedding/" },
+			],
 		},
 		{
 			text: "AI Agent",
