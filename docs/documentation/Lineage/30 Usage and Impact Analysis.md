@@ -21,7 +21,7 @@ Open a model and select a measure, calculated member, attribute or hierarchy lev
 | --- | --- |
 | **Used by 43 reports (183 charts)** | Reports that query this member directly, and the total number of components in them that do. |
 | **Last used 2026-10-25** | The most recent save of any of those reports. |
-| **n of them via calculated members** | Reports that do not use the measure itself but a calculated member built on it. Such reports are marked *via <member>* in the list. |
+| **n of them via calculated members** | Reports that do not use the measure itself but a calculated member built on it. Such reports are marked *via \<member\>* in the list. |
 | **Bound metrics: …** | Metrics Library metrics bound to this measure. Deleting the measure breaks the binding. |
 | **Not used by any report.** | No visible report with a usage record uses it. |
 | Report list | Title, chart count, owner and date, newest first; **Open report** opens it in a new tab; **Show all n** expands the list. |
