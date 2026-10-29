@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" font-family="'Segoe UI','Helvetica Neue',Arial,'Microsoft YaHei','PingFang SC','Noto Sans',sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Where a parameter's value comes from</title>
+  <desc id="desc">On the left, the four Values from options of a parameter and what readers see: Manual is a typed box, Dataset and Global give a drop-down of choices, User is not shown. In the middle, the order in which the value is decided when the report runs: a User parameter, or a hidden parameter whose default is currentUser, always takes the signed-in user's value and ignores values from the panel, URL, drill-through or distribution; otherwise a supplied value is used, and an empty value means no filter; otherwise the report's default is used, then the global parameter's default; a required parameter that is still empty stops the report. On the right, where the value is used: model dataset filters, SQL placeholders, text placeholders and the filter summary.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+  <rect width="900" height="560" fill="#FFFFFF"/>
+
+  <!-- Lane 1: Values from -->
+  <rect x="10" y="10" width="250" height="540" rx="12" fill="#EEF4FF" stroke="#C7D6F2" stroke-width="1.5"/>
+  <text x="30" y="40" font-size="18" font-weight="700" fill="#2B2B3A">1. Values from</text>
+  <text x="30" y="62" font-size="13" fill="#5B6472">Set in the designer.</text>
+
+  <rect x="30" y="80" width="210" height="96" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="46" y="104" font-size="14" font-weight="700" fill="#2B2B3A">Manual</text>
+  <text x="46" y="124" font-size="12" fill="#5B6472">Readers type the value; dates</text>
+  <text x="46" y="141" font-size="12" fill="#5B6472">get a date picker, yes/no a</text>
+  <text x="46" y="158" font-size="12" fill="#5B6472">three-way choice.</text>
+
+  <rect x="30" y="188" width="210" height="96" rx="8" fill="#FFFFFF" stroke="#3F8F6B" stroke-width="1.5"/>
+  <text x="46" y="212" font-size="14" font-weight="700" fill="#2B2B3A">Dataset</text>
+  <text x="46" y="232" font-size="12" fill="#5B6472">Drop-down filled from a field</text>
+  <text x="46" y="249" font-size="12" fill="#5B6472">of a dataset in the report.</text>
+  <text x="46" y="266" font-size="12" fill="#7A8390">Can cascade from another one.</text>
+
+  <rect x="30" y="296" width="210" height="96" rx="8" fill="#FFFFFF" stroke="#C9A96E" stroke-width="1.5"/>
+  <text x="46" y="320" font-size="14" font-weight="700" fill="#2B2B3A">Global</text>
+  <text x="46" y="340" font-size="12" fill="#5B6472">Choices and default come from</text>
+  <text x="46" y="357" font-size="12" fill="#5B6472">Parameter Management.</text>
+  <text x="46" y="374" font-size="12" fill="#7A8390">Shared by many reports.</text>
+
+  <rect x="30" y="404" width="210" height="96" rx="8" fill="#FFFFFF" stroke="#B5546A" stroke-width="1.5"/>
+  <text x="46" y="428" font-size="14" font-weight="700" fill="#2B2B3A">User</text>
+  <text x="46" y="448" font-size="12" fill="#5B6472">A system variable such as</text>
+  <text x="46" y="465" font-size="12" fill="#5B6472">system.username.</text>
+  <text x="46" y="482" font-size="12" fill="#7A8390">Not shown to readers.</text>
+
+  <!-- Lane 2: When the report runs -->
+  <rect x="280" y="10" width="360" height="540" rx="12" fill="#F4F7FB" stroke="#D5DEEA" stroke-width="1.5"/>
+  <text x="300" y="40" font-size="18" font-weight="700" fill="#2B2B3A">2. When the report runs</text>
+  <text x="300" y="62" font-size="13" fill="#5B6472">The value is decided in this order.</text>
+
+  <rect x="300" y="80" width="320" height="76" rx="8" fill="#FFFFFF" stroke="#B5546A" stroke-width="1.5"/>
+  <text x="316" y="103" font-size="13" font-weight="700" fill="#2B2B3A">User source, or hidden + default currentUser?</text>
+  <text x="316" y="123" font-size="12" fill="#5B6472">Always the signed-in user's value. Values from</text>
+  <text x="316" y="140" font-size="12" fill="#5B6472">the panel, URL, drill-through or distribution are ignored.</text>
+
+  <line x1="460" y1="156" x2="460" y2="180" stroke="#3B4252" stroke-width="1.3" marker-end="url(#arrow)"/>
+  <text x="468" y="173" font-size="11" fill="#7A8390">otherwise</text>
+
+  <rect x="300" y="182" width="320" height="94" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="316" y="205" font-size="13" font-weight="700" fill="#2B2B3A">A value was supplied?</text>
+  <text x="316" y="225" font-size="12" fill="#5B6472">From the parameter panel, the URL (p_name=…),</text>
+  <text x="316" y="242" font-size="12" fill="#5B6472">a drill-through or a distribution: use it.</text>
+  <text x="316" y="262" font-size="12" fill="#7A8390">A cleared (empty) value means "no filter".</text>
+
+  <line x1="460" y1="276" x2="460" y2="300" stroke="#3B4252" stroke-width="1.3" marker-end="url(#arrow)"/>
+  <text x="468" y="293" font-size="11" fill="#7A8390">nothing supplied</text>
+
+  <rect x="300" y="302" width="320" height="94" rx="8" fill="#FFFFFF" stroke="#C9A96E" stroke-width="1.5"/>
+  <text x="316" y="325" font-size="13" font-weight="700" fill="#2B2B3A">Default</text>
+  <text x="316" y="345" font-size="12" fill="#5B6472">The report's default: a fixed value, a relative date</text>
+  <text x="316" y="362" font-size="12" fill="#5B6472">(today, firstDayOfMonth…) or currentUser.</text>
+  <text x="316" y="382" font-size="12" fill="#7A8390">None set: the global parameter's default.</text>
+
+  <line x1="460" y1="396" x2="460" y2="420" stroke="#3B4252" stroke-width="1.3" marker-end="url(#arrow)"/>
+
+  <rect x="300" y="422" width="320" height="76" rx="8" fill="#FFFFFF" stroke="#8C95A3" stroke-width="1.5"/>
+  <text x="316" y="445" font-size="13" font-weight="700" fill="#2B2B3A">Still empty?</text>
+  <text x="316" y="465" font-size="12" fill="#5B6472">Required: the report does not run.</text>
+  <text x="316" y="482" font-size="12" fill="#5B6472">Optional: it filters nothing (in SQL, use [[ ]]).</text>
+
+  <!-- Lane 3: Where it is used -->
+  <rect x="660" y="10" width="230" height="540" rx="12" fill="#EEF7F1" stroke="#C5E0CF" stroke-width="1.5"/>
+  <text x="680" y="40" font-size="18" font-weight="700" fill="#2B2B3A">3. Used by</text>
+  <text x="680" y="62" font-size="13" fill="#5B6472">One value, many places.</text>
+
+  <rect x="680" y="80" width="190" height="80" rx="8" fill="#FFFFFF" stroke="#3F8F6B" stroke-width="1.5"/>
+  <text x="696" y="104" font-size="14" font-weight="700" fill="#2B2B3A">Model dataset</text>
+  <text x="696" y="124" font-size="12" fill="#5B6472">Filters: Is one of,</text>
+  <text x="696" y="141" font-size="12" fill="#5B6472">Date range.</text>
+
+  <rect x="680" y="172" width="190" height="80" rx="8" fill="#FFFFFF" stroke="#3F8F6B" stroke-width="1.5"/>
+  <text x="696" y="196" font-size="14" font-weight="700" fill="#2B2B3A">SQL dataset</text>
+  <text x="696" y="216" font-size="12" fill="#5B6472">#{name} in the SQL,</text>
+  <text x="696" y="233" font-size="12" fill="#5B6472">[[ … ]] for optional parts.</text>
+
+  <rect x="680" y="264" width="190" height="80" rx="8" fill="#FFFFFF" stroke="#3F8F6B" stroke-width="1.5"/>
+  <text x="696" y="288" font-size="14" font-weight="700" fill="#2B2B3A">Text on the page</text>
+  <text x="696" y="308" font-size="12" fill="#5B6472">{name}, {_filters},</text>
+  <text x="696" y="325" font-size="12" fill="#5B6472">Param("name").</text>
+
+  <rect x="680" y="356" width="190" height="80" rx="8" fill="#FFFFFF" stroke="#3F8F6B" stroke-width="1.5"/>
+  <text x="696" y="380" font-size="14" font-weight="700" fill="#2B2B3A">Choices of others</text>
+  <text x="696" y="400" font-size="12" fill="#5B6472">A choices dataset that</text>
+  <text x="696" y="417" font-size="12" fill="#5B6472">reads it (cascading).</text>
+
+  <!-- Lane connectors -->
+  <line x1="260" y1="280" x2="296" y2="280" stroke="#3B4252" stroke-width="1.3" marker-end="url(#arrow)"/>
+  <line x1="640" y1="280" x2="676" y2="280" stroke="#3B4252" stroke-width="1.3" marker-end="url(#arrow)"/>
+</svg>

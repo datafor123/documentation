@@ -157,6 +157,7 @@ export const documentationNote = defineNoteConfig({
 				{ text: "Understanding Paginated Reports", link: "/documentation/Paginated-Reports/Understanding-Paginated-Reports/" },
 				{ text: "Creating a Paginated Report", link: "/documentation/Paginated-Reports/Creating-a-Paginated-Report/" },
 				{ text: "Datasets and Parameters", link: "/documentation/Paginated-Reports/Datasets-and-Parameters/" },
+				{ text: "Working with Parameters", link: "/documentation/Paginated-Reports/Working-with-Parameters/" },
 				{ text: "Tables and Crosstabs", link: "/documentation/Paginated-Reports/Tables-and-Crosstabs/" },
 				{ text: "Page Layout, Header and Footer", link: "/documentation/Paginated-Reports/Page-Layout-Header-and-Footer/" },
 				{ text: "Viewing, Pagination and Export", link: "/documentation/Paginated-Reports/Viewing-Pagination-and-Export/" },
