@@ -24,20 +24,21 @@ Lineage answers two questions before you change something: *where does this numb
 | Object | Where it comes from | What lineage knows about it |
 | --- | --- | --- |
 | **Dataset** | A CSV or Excel file uploaded under **Datasource › Datasets** | The connection it was loaded into, how many files and tables it has, which models use those tables |
-| **Data source** | A connection in **Datasource** | Database type, the models that read from it, the datasets loaded into it |
+| **Data source** | A connection in **Datasource** | Database type, the models that read from it, the paginated reports whose SQL datasets query it directly, the datasets loaded into it |
 | **Model** | An analysis model in **Models** | Its data source, its tables and columns, every measure, calculated member and attribute, the metrics bound to it, its AI knowledge index |
-| **Report** | A `.datafor` file in **Public** or a personal folder | The models it queries, the fields each chart and filter uses, the reports it opens through drill-through or embeds as a page |
+| **Report** | A dashboard report (`.datafor`) in **Public** or a personal folder | The models it queries, the fields each chart and filter uses, the reports it opens through drill-through or embeds as a page |
+| **Paginated report** | A `.pagereport` file in **Public** or a personal folder | The models its model datasets query, with the fields they use, and the connections its SQL datasets query directly |
 | **Metric** | A metric in **Metrics Library** | The models whose measures it is bound to, its status (Certified or Draft) |
 | **AI index** | A knowledge index built with **Prep data for AI** | The model it indexes and its status |
 
-Only components that run a query count. A text box, an image or a navigation button does not make its report depend on a model, so a page that holds nothing else is listed as **not using a model**. That is a statement, not a problem.
+Only components that run a query count. A text box, an image or a navigation button does not make its report depend on a model, so a page that holds nothing else is listed as **not using a model**. That is a statement, not a problem. A paginated report that only uses SQL datasets has no model either, but it is linked to its connections and is not counted as *not using a model*.
 
 ## Where the links come from
 
 Three sources feed the record, and they differ in how complete they are.
 
 1. **Model definitions.** Datafor reads the model's data source, tables, measures and bindings directly from the saved model. This part is always current.
-2. **Report content, read when a report is saved.** Since 10.00, every save of a report extracts the models it uses, the fields behind each chart (measures, hierarchies, filters, calculated members) and the reports it links to, and stores them with the file. Import does the same. Only reports with this record can take part in field-level answers such as "which charts use Net Sales".
+2. **Report content, read when a report is saved.** Since 10.00, every save of a report extracts the models it uses, the fields behind each chart (measures, hierarchies, filters, calculated members) and the reports it links to, and stores them with the file. Import does the same. Only reports with this record can take part in field-level answers such as "which charts use Net Sales". Paginated reports are read directly from their content, so they need no rebuild.
 3. **Rebuild lineage data.** Reports saved before the upgrade have no field-level record. An administrator runs **Rebuild lineage data** on the Lineage page once; it scans every report and writes the record without changing the reports. Until that happens, impact lists say how many reports could not be assessed.
 
 Links follow the file, not its name. When a linked report is renamed or moved, the link stays and the graph shows **Previously \<old path\>** on the target until the source report is saved again.

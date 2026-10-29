@@ -23,8 +23,10 @@ Distributions live with the report. Open the report in the viewer and click **Di
 
 Parameter values are taken from the viewer at the moment you create the distribution. To change them, set the parameters in the viewer, click **View**, then create or edit the distribution. Rows of a list whose parameter values are identical are generated once and sent to all of those recipients.
 
+**Dates that follow the run date.** When a date parameter still has the value of its relative default (for example *First day of last month*), the distribution stores the keyword, not the date. Each run recalculates it in the distribution's time zone, so a monthly distribution always covers the previous month and a daily one always covers yesterday. The editor shows such a value as *First day of last month (follows the run date; 2026-09-01 if run today)*. A date you changed to a fixed value stays fixed. The subject, message, file names and the report text show the calculated date. See [Relative dates](/documentation/Paginated-Reports/Datasets-and-Parameters/#relative-dates).
+
 ::: warning Who sees what
-The report is generated **as the person who created the distribution**, with the parameters stored in it. Recipients get the data those parameters produce, not data filtered by their own row-level security. To give different people different data, use **One per list row** and put each person's parameter values in their row. People who cannot open the report are skipped, not given access.
+The report is generated **as the person who created the distribution**, with the parameters stored in it. Recipients get the data those parameters produce, not data filtered by their own row-level security. Parameters whose values come from **User** take the creator's value. To give different people different data, use **One per list row** and put each person's parameter values in their row. People who cannot open the report are skipped, not given access.
 :::
 
 ## Recipients
@@ -74,6 +76,8 @@ Expand a distribution in the drawer to see its runs: time, whether it was schedu
 Each file counts against the same limits as an export: row limits per dataset type, the task time limit, and so on. A failed file shows the same reason as a failed download would.
 
 ## Managing distributions
+
+![Distribution drawer of the Regional Sales Statement: the Monthly regional statement distribution, its output, monthly schedule, next run, last result and the On switch](./images/viewer-distribution-drawer.png)
 
 - The switch in the **On** column pauses a distribution without deleting it.
 - **Edit** changes any setting; past runs are kept.

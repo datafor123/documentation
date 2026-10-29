@@ -46,7 +46,7 @@ https://bi.example.com/datafor/api/repos/:public:Docs:Regional Sales Statement.p
 | `toolbar=false` | No toolbar; page navigation moves to the floating bar at the bottom right, and readers cannot export. |
 | `locale=en-US` | Interface language of the viewer. |
 
-Hidden parameters (see [Datasets and Parameters](/documentation/Paginated-Reports/Datasets-and-Parameters/#parameters)) are the usual way to pass a value that readers should not change, such as a customer number: set it in the URL and keep it out of the panel and the filter summary.
+Hidden parameters (see [Datasets and Parameters](/documentation/Paginated-Reports/Datasets-and-Parameters/#parameters)) keep a value passed in the URL, such as a customer number, out of the panel and the filter summary. They do not stop anyone from editing the URL. When the data must depend on who is signed in, set the parameter's **Values from** to **User** instead: it always takes the signed-in user's value and ignores URL values.
 
 Sign-in works as for dashboards: the viewer uses the Datafor session, so embed it behind the same sign-in, or pass a token as described in [Signing In Users](/documentation/Embedded/Signing-In-Users/). Cross-origin iframes need the host added under [Cross-Origin Access](/documentation/System/CORS/).
 
@@ -55,7 +55,6 @@ Exports are also plain URLs: `…/plugin/datafor-pagereport/api/render/export?pa
 ## Not yet available
 
 - A dashboard component that embeds a paginated report inside the dashboard page, and parameter changes through cross-window messages, are planned for a later release. Until then use drill-through or an iframe with a URL.
-- Paginated reports do not appear in lineage graphs or usage records yet.
 
 ## Related topics
 

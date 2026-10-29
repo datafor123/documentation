@@ -17,11 +17,11 @@ Choose landscape or a larger paper for wide crosstabs and tables with many colum
 
 The **Header** and **Footer** bands repeat on every page. Each has a **Band height** in millimetres, which is a minimum: the band grows when its elements need more room. Select a band by clicking its label on the canvas, then **Add element**, or select an element to edit it.
 
-![Header text element selected: text with Insert parameter, font size and bold, the nine-cell Position grid, and the horizontal position and size fields](./images/designer-header-element.png)
+![Header text element selected, with the Insert menu open under the text: Current time, Current user, Parameters and Total; below it font size, bold and the nine-cell Position grid](./images/designer-header-element.png)
 
 | Element | Content |
 | --- | --- |
-| **Text** | Static text, `{parameter}` values, `{_filters}`, `{_user}`, and `{=…}` expressions such as `{=Now()}` or `{=Sum(amount)}`. **Insert parameter** adds the placeholder for you. |
+| **Text** | Static text, `{parameter}` values, `{_filters}`, `{_user}`, and `{=…}` expressions such as `{=Now()}` or `{=Sum(amount)}`. **Insert** under the text adds them for you: **Current time**, **Current user**, a parameter or `{_filters}` from **Parameters**, and a sum or row count of the main dataset from **Total**. The canvas shows a parameter placeholder as a blue tag, for example *Filter summary*. |
 | **Image** | A picture from the repository (`repo:/public/logo.png`) or an uploaded file; **Fit** contain, cover or stretch. |
 | **Page number** | A format with `{page}` and `{total}`, for example `Page {page} of {total}`. |
 | **Field** | A value from a dataset. With the dataset of the table or crosstab it shows the current row at the top of the page, so a header can print the group that the page starts with. With any other dataset it shows the first row of that dataset's result, useful for a company name or a period taken from a lookup query. **Format** applies number or date patterns. |

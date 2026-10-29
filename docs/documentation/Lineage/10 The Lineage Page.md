@@ -9,7 +9,7 @@ createTime: 2026/10/28 10:00:00
 
 Open **Data › Lineage** in the console. The page is for the people who look after models and data sources: it shows at a glance what is broken, what is unused, and what depends on what. It is available to users who can create content and to administrators.
 
-![The Lineage page: health bar at the top, the five object lists on the left with the org-sales model selected, and its details and focus graph on the right](./images/lineage-page-overview.png)
+![The Lineage page: health bar at the top, the five object lists on the left with the Retail Chain Operations model selected, and its details and focus graph on the right; the graph lists dashboard reports and paginated reports](./images/lineage-page-overview.png)
 
 The page has three parts:
 
@@ -22,12 +22,15 @@ The page has three parts:
 | Chip | Meaning | Where it filters |
 | --- | --- | --- |
 | **Reports on deleted models** | Reports whose query uses a model that no longer exists. They open with errors. Hover for the number of deleted models involved. | Reports, label **Deleted model** |
+| **Reports on missing data sources** | Paginated reports whose SQL dataset uses a connection that no longer exists. They fail to run. Hover for the number of missing data sources. | Reports, label **Missing data source** |
 | **Broken report links** | Drill-through or embedded-page links that point to a report that was deleted or moved without being saved again. Hover for the number of reports. | Reports, label **Broken link** |
 | **Models no report uses** | Models that no visible report queries. Shown only to administrators with **Include other users' personal folders** on, because only then is the answer reliable. | Models, label **Unused** |
 | **Metrics on deleted models** | Metrics Library metrics whose binding points to a deleted model. | Metrics, label **Deleted model** |
-| **Reports not using a model** | Reports with no querying component: empty pages, navigation or embedding pages, text-only pages. This is information, not a problem, and the chip stays grey. | Reports, label **No model** |
+| **Reports not using a model** | Reports with no querying component: empty pages, navigation or embedding pages, text-only pages. Paginated reports that only use SQL datasets are not counted. This is information, not a problem, and the chip stays grey. | Reports, label **No model** |
 
 A chip with a green check means that count is zero.
+
+![Health filter "Reports on missing data sources" active: the paginated report pagereport-verify has the Missing data source and Deleted model labels, and its focus graph shows the deleted connection erp and the deleted model sales](./images/lineage-page-missing-connection.png)
 
 ![Health filter "Reports on deleted models" active: the report list shows only affected reports, and the selected one has a Deleted model and a Broken link label, a Move to Trash button and the broken path](./images/lineage-page-deleted-models-filter.png)
 
@@ -39,11 +42,11 @@ Every row shows the name and a second line with what matters for that kind of ob
 | --- | --- | --- |
 | **Models** | Number of reports, data source | **Deleted**, **No permission**, **Unused** |
 | **Data sources** | Number of models and reports | **Deleted**, **No permission** |
-| **Reports** | Folder path and owner (file name when two reports share a title) | **Deleted model**, **Broken link**, **No model** |
+| **Reports** | Folder path and owner (file name when two reports share a title). Dashboard reports and paginated reports have different icons. | **Deleted model**, **Missing data source**, **Broken link**, **No model** |
 | **Datasets** | Number of tables and models | **Unused** |
 | **Metrics** | Number of models, status | **Deleted model** |
 
-Rows are sorted by how much depends on them (reports first), then by name; rows with problems sort first in the Reports and Metrics tabs. The search box matches name, path and owner. **Export CSV** writes the current list, with its filter and search applied, including the issue column.
+Rows are sorted by how much depends on them (reports first), then by name; rows with problems sort first in the Reports and Metrics tabs. The search box matches name, path and owner. **Export CSV** writes the current list, with its filter and search applied, including the issue column and, for reports, a **Type** column.
 
 Two controls above the lists change what the whole page covers:
 
@@ -57,14 +60,15 @@ Select a row to see its summary, for example for a model: *5 reports · Field re
 - **Field records n/m** says how many of the reports using this model have a field-level usage record (see [Understanding Lineage](/documentation/Lineage/Understanding-Lineage/#where-the-links-come-from)). When the two numbers differ, run **Rebuild lineage data** to complete them.
 - **Unused fields** counts the measures, calculated members and attributes that no recorded report uses. The modeler shows which ones; see [Usage and Impact Analysis](/documentation/Lineage/Usage-and-Impact-Analysis/).
 - A report shows its path, owner, the number of models, **Links to n reports**, **Linked from n reports**, and the **Broken links** paths in red.
+- A paginated report also lists **Data source** for the connections of its SQL datasets, and **Missing data sources** in red when one of them was deleted.
 - A data source shows its database type and the models, reports and datasets on it.
 
 Actions in the panel:
 
 | Button | On | What it does |
 | --- | --- | --- |
-| **Open** | Any existing object you may read | Opens the report, the model in the modeler, or the Datasource, Metrics Library or Datasets page in a new tab. Double-clicking a node in the graph does the same. |
-| **Move to Trash** | Reports with a **Deleted model** or **Broken link** label | Moves the report to Trash after the usual confirmation. It can be restored from **Trash**. Needs delete permission on the file. |
+| **Open** | Any existing object you may read | Opens the report (a paginated report in its viewer), the model in the modeler, or the Datasource, Metrics Library or Datasets page in a new tab. Double-clicking a node in the graph does the same. |
+| **Move to Trash** | Reports with a **Deleted model**, **Missing data source** or **Broken link** label | Moves the report to Trash after the usual confirmation. It can be restored from **Trash**. Needs delete permission on the file. |
 | **Handle these n reports** | A deleted model that reports still use | Switches to the Reports tab filtered to that model, so you can open each report to repoint it or move it to Trash one by one. |
 
 ![A deleted model selected: the detail header offers Handle these 14 reports, and the focus graph shows the deleted model with the reports that still query it](./images/lineage-page-deleted-model-detail.png)

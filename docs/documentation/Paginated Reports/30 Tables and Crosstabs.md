@@ -11,11 +11,11 @@ The body of a paginated report holds one data block: a **table** (a list of rows
 
 ## Table
 
-![Table Data tab: grand total row with its label, no-data message, Columns, Groups and a conditional format on Avg. Order Value](./images/designer-table-data.png)
+![Table Data tab: grand total row with its label, no-data message, the Region group with its Header and Subtotal tags, and four columns with their totals; Avg. Order Value carries one conditional format](./images/designer-table-data.png)
 
 ### Columns
 
-Add a column by dragging a field onto the table, with **Add column** in the panel, or with the field's context menu. Click a column header to edit it:
+Add a column by dragging a field onto the table or into **Columns** in the panel, with **+** next to **Columns**, or with the field's context menu. Each column row shows its total (for example **Σ Sum** or **Σ By model**) and the number of conditional formats it has. Click a column, on the canvas or in the list, to edit it:
 
 | Property | Notes |
 | --- | --- |
@@ -26,12 +26,13 @@ Add a column by dragging a field onto the table, with **Add column** in the pane
 | **Sort** | None, ascending or descending. Rows are sorted inside their group; several sorted columns apply in column order. |
 | **Total** | How the column is summed in subtotals and the grand total; see [Totals](#totals). |
 | **Font and color** | Font, size, bold, italic, underline, text colour and background of the detail cells. |
+| **Conditional formats** | Rules that colour this column's cells; see [Conditional formats](#conditional-formats). |
 
-Arrows in the panel header move the column; the trash icon removes it. On the canvas, drag a header to reorder, drag its right edge to resize, and click the sort mark to change the sort.
+Arrows in the panel header move the column; the trash icon removes it; **Group by this column** turns it into a group. On the canvas, drag a header to reorder, drag its right edge to resize, and click the sort mark to change the sort. A column whose field is no longer in the dataset is shown in red; see [When fields disappear](/documentation/Paginated-Reports/Datasets-and-Parameters/#when-fields-disappear).
 
 ### Groups
 
-A group breaks the rows by a field, in the order of the **Groups** strip above the table. Each group has:
+A group breaks the rows by a field, in the order of the **Groups** strip above the table and the **Groups** list in the panel. Add one by dropping a field on either, or with **+**. Tags in the list show which options are on (**Header**, **Subtotal**, **Page break**); **Change to column** turns a group back into a column. Each group has:
 
 | Property | Notes |
 | --- | --- |
@@ -63,26 +64,26 @@ Use **By model** for measures that cannot be added up: averages, distinct counts
 
 ### Conditional formats
 
-**Add rule** under **Conditional formats** colours cells by value: choose the field, a condition (**Less than**, **Less or equal**, **Greater than**, **Greater or equal**, **Equals**, **Not equals**, **Between**, **In**, **Contains**, **Is empty**), the value(s), and the look: text colour, background, bold, italic, with presets such as *Red text* or *Light green fill*. Rules apply to detail cells; the first matching rule wins.
+Conditional formats belong to a column: select the column and click **+** next to **Conditional formats**. A rule colours the column's cells by value: choose a condition (**Less than**, **Less or equal**, **Greater than**, **Greater or equal**, **Equals**, **Not equals**, **Between**, **In**, **Contains**, **Is empty**), the value(s) and the look: text colour, background, bold, italic, with presets such as *Red text* or *Light green fill*. Rules apply to detail cells; the first matching rule wins.
 
 ## Crosstab
 
 ![Crosstab in the viewer: regions on rows, quarters on columns, Net Sales and GM % per cell, subtotal and total columns and a total row](./images/viewer-crosstab.png)
 
-A crosstab has **Row dimensions**, **Column dimensions** and **Measures**. Drop fields onto the three zones on the canvas or add them in the Data tab.
+A crosstab has **Row dimensions**, **Column dimensions** and **Measures**. Drop fields onto the three zones on the canvas or into the lists in the **Data** tab, or use **+** next to each list. The arrow on a dimension (**Move to column dimensions** / **Move to row dimensions**) moves it to the other axis; **Show total row** and **Show total column** switch the totals.
 
 | Setting | Notes |
 | --- | --- |
-| **Total** on a row or column dimension | Adds a *Total* row or column for that level; inner levels get *Subtotal*. |
+| **Total** on a row or column dimension | Adds a *Total* row or column for that level; inner levels get *Subtotal*. With several row dimensions, the total label spans all inner row header columns. |
 | **Aggregate** of a measure | Sum, Count, Average, Min, Max or **By model**, with the same meaning as for table columns. Totals of ratios should be **By model**. |
 | **Format** of a measure | Number pattern. |
-| **Row header width** (mm) | Minimum width of the row dimension columns. |
-| **Cell width** (mm), **Fit to page width** | Value columns share the page width equally and never exceed twice the cell width. With **Fit to page width** on, they shrink down to 8 mm when there are many columns; off, they keep the cell width and anything beyond the page edge is cut. |
+| **Row header width** (mm), **Cell width** (mm) | On the **Style** tab. The canvas draws the crosstab at these widths. |
+| **Fit to page width** | Off for new crosstabs: value columns keep the cell width, so the layout is predictable. On: they shrink down to 8 mm when there are many columns. When the table is narrower than the paper, value columns are widened to fill it either way. |
 | **Row height** | Overrides the density of the style template. |
 
 Things to know:
 
-- A crosstab never breaks horizontally across pages. Reduce the number of column members (filter the column dimension, use landscape or a larger paper, or swap rows and columns) when it does not fit.
+- A crosstab never breaks horizontally across pages. When the sample data makes it wider than the page, the canvas says so (*the crosstab is about N mm wide, more than the usable width*) and offers **Widen paper to N mm**, which switches to a custom paper size that fits. The number of columns depends on the data, so also consider filtering the column dimension or swapping rows and columns. Columns beyond the paper are cut in PDF and print.
 - The dimension values on the column axis repeat at the top of every page; the column dimension title is printed once.
 - With one measure, its title is not repeated under every column member. With several, each column member gets one sub-column per measure.
 - Dimension members sort naturally: `2`, `10`, `11` rather than `10`, `11`, `2`; dates from a date hierarchy sort chronologically.

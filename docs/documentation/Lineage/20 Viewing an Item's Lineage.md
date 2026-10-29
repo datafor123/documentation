@@ -23,10 +23,12 @@ createTime: 2026/10/28 10:00:00
 
 ## Read the graph
 
-The graph flows left to right in the order of the data: **Dataset → Data source → Model → Report → Linked report**, with **Metric** and **AI index** nodes under the model. Each node has the icon and colour of its type (see the legend at the bottom left); the object you started from has a highlighted border.
+The graph flows left to right in the order of the data: **Dataset → Data source → Model → Report → Linked report**. A paginated report with SQL datasets is also linked straight from its data source; that edge runs in the gap between the columns, past the model column, with **Metric** and **AI index** nodes under the model. Each node has the icon and colour of its type (see the legend at the bottom left); the object you started from has a highlighted border.
+
+![Lineage of the paginated report Sales by Region and Quarter: its data source, the Retail Chain Operations model and the report](./images/lineage-page-paginated-report.png)
 
 - **Hover** a node for its details: path and owner of a report, database type of a data source, tables and files of a dataset, status and version of a metric, vectors of an AI index.
-- **Double-click** a node to open it: the report, the model in the modeler, or the Datasource, Metrics Library or Datasets page.
+- **Double-click** a node to open it: the report (a paginated report in its viewer), the model in the modeler, or the Datasource, Metrics Library or Datasets page.
 - **Groups.** When a model has many reports, the column shows the first few and a *n more reports, click to expand* tile; click it to expand and *Collapse n reports* to fold them again. **Expand all** opens every group.
 - **Labels.** **Deleted** marks an object that no longer exists (the model of an orphaned report, or the target of a broken link). **No permission** marks a model or data source you cannot read; the node stays in the graph so you can see the dependency, but its details are hidden. **Previously \<path\>** on a linked report means the link still points to the report's old path; it heals when the source report is saved again.
 - **Linked reports** are the reports this report opens through drill-through or embeds as a page. They sit in an extra column to the right, so a chain of drill-throughs reads left to right.

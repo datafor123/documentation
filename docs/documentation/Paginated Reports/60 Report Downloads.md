@@ -13,12 +13,14 @@ Files made by a [distribution](/documentation/Paginated-Reports/Distribution/) a
 
 ## Where to find your files
 
-- **In the viewer:** **Report downloads** in the toolbar opens a drawer with the tasks of this report. **Show all reports** switches to everything you generated.
+- **In the viewer:** **Report downloads** in the toolbar opens a drawer with the tasks of this report only. When the viewer runs inside the console, **View all in My account** at the top of the drawer opens the console page below. In the designer's preview the button is greyed out until the report has been saved once.
 - **In the console:** **My account › Report downloads** lists the tasks of all your reports, with filters by report and status. This page appears only when the paginated report plugin is installed.
 
-![My account › Report downloads with completed, running and failed tasks](./images/report-downloads-my-account.png)
+![Report downloads drawer in the viewer, listing the PDF and Excel (flat) files of this report with their parameters, status, submission time, duration and size](./images/viewer-report-downloads.png)
 
-Each row shows the report, the parameter summary (the same text as the `{_filters}` placeholder, without hidden parameters), the format, the status, when it was submitted, how long it ran and the file size. Actions:
+![My account › Report downloads listing the files of several reports, with report and status filters](./images/report-downloads-my-account.png)
+
+In My account each row also names the report. Each row shows the parameter summary (the same text as the `{_filters}` placeholder, without hidden parameters), the format, the status, when it was submitted, how long it ran and the file size. Actions:
 
 | Action | Available when |
 | --- | --- |

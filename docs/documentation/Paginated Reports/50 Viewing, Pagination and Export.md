@@ -11,19 +11,19 @@ createTime: 2026/10/28 10:00:00
 
 Clicking a paginated report in the console opens it in the viewer. Set the parameters on the left, click **View**, and page through the result.
 
-![Viewer with the parameter panel on the left, the toolbar with export, print, downloads and distribution, and page 1 of the report](./images/viewer-overview.png)
+![Viewer with Region and a date range in the parameter panel, the toolbar with export, print, downloads and distribution, and the first page filtered to 2026-01-01 – 2026-03-31](./images/viewer-overview.png)
 
 | Control | What it does |
 | --- | --- |
-| **Parameters › View** | Runs the report with the values entered. Required parameters are marked; the report does not run until they have a value. A list parameter with choices offers **Select all** and **Clear**; left empty it reads **All** and does not filter. A pair of from/to date parameters appears as one date range picker. |
+| **Parameters › View** | Runs the report with the values entered. Required parameters are marked; the report does not run until they have a value. A list parameter with choices offers **Select all** and **Clear**; left empty it reads **All** and does not filter. A pair of from/to date parameters appears as one date range picker. Clearing a parameter sets it back to **All** rather than to its default. The full rules are in [How values behave in the viewer](/documentation/Paginated-Reports/Datasets-and-Parameters/#how-values-behave-in-the-viewer). |
 | **First / Previous / Next / Last page** | Moves between pages. Pages are rendered once and cached, so paging does not query again. |
 | **Zoom** | Fit width, fit page, actual size, or a percentage; also on the floating bar at the bottom right. |
 | **Full screen** | Fills the browser window, also when the viewer is embedded in the console. |
 | **Export** | Downloads the report. See [Export formats](#export-formats). |
 | **Print (PDF)** | Generates a PDF and opens it in a new tab for printing. |
-| **Report downloads** | Files that were generated in the background. See [Report Downloads](/documentation/Paginated-Reports/Report-Downloads/). |
+| **Report downloads** | Files of this report that were generated in the background. See [Report Downloads](/documentation/Paginated-Reports/Report-Downloads/). |
 | **Distribution** | Scheduled delivery, for users with the *manage schedules* permission. See [Distribution](/documentation/Paginated-Reports/Distribution/). |
-| **Copy link** | Copies the viewer URL with the current parameter values, so the recipient opens the same view. |
+| **Copy link** | Copies the viewer URL with the parameters that differ from their defaults (cleared ones as empty values), so the recipient opens the same view. Relative date keywords that were in the address are kept as keywords. |
 | **Open in new tab**, **Edit** | Leave the console frame, or open the designer (needs write permission). |
 
 The parameter panel sits on the left or above the pages, as the report author chose in **Report properties › Parameter panel**. Readers can collapse it but not move it.
@@ -98,10 +98,10 @@ The viewer address is `…/datafor/api/repos/<path with ":" instead of "/">/view
 
 | Parameter | Values | Effect |
 | --- | --- | --- |
-| `p_<name>` | A value; repeat the key for a multi-value list, `p_region=East&p_region=North` | Sets a report parameter. Dates are `yyyy-MM-dd`, date-times `yyyy-MM-dd HH:mm:ss`, booleans `true`/`false`. |
-| `paramPanel` | `left`, `top`, `collapsed`, `hidden`, combinable as `top,collapsed` | Overrides the panel position; `hidden` runs the report at once with the URL and default values. |
+| `p_<name>` | A value; repeat the key for a multi-value list, `p_region=East&p_region=North` | Sets a report parameter. Dates are `yyyy-MM-dd` or a relative date keyword such as `firstDayOfLastMonth`, date-times `yyyy-MM-dd HH:mm:ss`, booleans `true`/`false`. A value that does not fit the type is dropped with a message. |
+| `paramPanel` | `left`, `top`, `collapsed`, `hidden`, combinable as `top,collapsed` | Overrides the panel position; `hidden` runs the report at once with the URL and default values. If a required parameter is still empty, the panel opens anyway so the reader can fill it in. |
 | `toolbar` | `false` | Hides the toolbar; paging moves to the floating bar at the bottom right. |
-| `locale` | `en-US`, `zh-CN`, … | Forces the interface language of the viewer. |
+| `locale` | `en-US`, `zh-CN`, … | Forces the interface language of the viewer. Without it the viewer uses the language of the signed-in user, the same as the console. |
 
 A complete embed URL therefore looks like `…/viewer?toolbar=false&paramPanel=hidden&p_region=East%20China`. Only the viewer page honours `paramPanel` and `toolbar`; the designer's preview always follows the report properties. For sign-in inside an iframe, see [Signing In Users](/documentation/Embedded/Signing-In-Users/).
 

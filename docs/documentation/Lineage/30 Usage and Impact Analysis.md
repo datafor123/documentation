@@ -45,7 +45,7 @@ When you confirm an action that can break reports, the dialog shows the impact f
 | Delete a table from the canvas | Modeler | Reports using any field of the table, metrics |
 | Delete a model, including several at once | **Models** list | Reports, metrics |
 | Change a model's data source | **Models › Change datasource** | Reports, in a compact form |
-| Delete a data source | **Datasource** list | Models on it, their reports and metrics, datasets loaded into it |
+| Delete a data source | **Datasource** list | Models on it, their reports and metrics, paginated reports whose SQL datasets use it, datasets loaded into it |
 | Delete a dataset file | **Datasource › Datasets** | Models that use its tables, their reports and metrics |
 
 Each list shows up to five reports with chart count, owner and last change, then *n more*; metrics and models appear as chips. **View lineage** in the dialog opens the full graph. Two notes can follow the list:
@@ -63,7 +63,7 @@ When nothing depends on the object, the dialog is the ordinary confirmation with
 
 - Usage records list the fields a component queries: measures, hierarchy levels, filters, calculated members, and report-level calculated measures. Fields used only inside a calculated measure defined in the report are attributed to that calculated measure, not to the report directly.
 - Static components (text, images, buttons) have no usage.
-- Paginated reports are not part of usage records in this release.
+- Paginated reports count with the fields of their model datasets. The fields an SQL dataset reads are not traced to the model; deleting or changing a data source lists those paginated reports in its impact.
 - Usage is cached per model for a short time and refreshed when the model or a report is saved; **Refresh** on the Lineage page forces it.
 
 ## Related topics
