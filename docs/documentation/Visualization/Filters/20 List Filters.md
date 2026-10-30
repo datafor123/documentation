@@ -55,8 +55,10 @@ After these come **Latest period** and, at the end, **Custom…**, where you set
 
 **Latest period** selects the most recent period that has data, for example the last month that has been loaded. Use it when data arrives late or monthly: *This Month* is empty until the month's data is loaded, while *Latest period* always lands on data.
 
-- It is the latest member in the filter's own list, so upstream cascading filters and data permissions apply: with a store selected upstream, it is that store's latest month.
+- A period has data when the model's fact tables hold at least one row for it. Periods that the date table holds in advance, such as months up to the end of the year, are skipped. When the model has several fact tables, a row in any of them counts.
+- Upstream cascading filters and data permissions apply: with a store selected upstream, it is that store's latest month with data.
 - It is chosen by date, not by position, so it stays the latest period when the field is sorted in descending order or by a measure.
+- The filter checks for data after its member list loads, so the selection can appear a moment after the list.
 - It does not move with today's date.
 - Time fields do not offer **First**: the earliest date is rarely a useful default. Hour, minute and second fields keep **First** and **Last**.
 - Older reports that chose **Last** on a time field now show it as **Latest period**.
