@@ -32,7 +32,7 @@ To make the filter set a parameter instead of filtering by a field, choose **Dat
 | Type | On a time field (year, quarter, month, week, day) | On any other field |
 | --- | --- | --- |
 | **Fixed** | The members you pick. | The members you pick; pick none to start with All. |
-| **Relative** | A period such as *This Month*, *Last Month* or *Same Month Last Year*, or a **Custom…** rule. | **First** or **Last** member. |
+| **Relative** | A period such as *This Month*, *Last Month* or *Same Month Last Year*, **Latest period**, or a **Custom…** rule. | **First** or **Last** member. |
 | **Parameter** | The current value of a parameter (**Parameter name**). | Same. |
 
 A relative period is recalculated from the viewer's current date every time the report opens or is refreshed. Linked components get a date range, even when the member list has not been loaded.
@@ -49,7 +49,17 @@ The relative choices follow the field's level:
 | Week | This Week, Last Week |
 | Day | Today, Yesterday |
 
-Every list ends with **Custom…**, where you set **Current** / **Back** / **Ahead**, a number and a unit, for example *12 months back* for the same month last year. See [Custom rules](/documentation/Analysis/Relative-Date-Filtering/#custom-rules).
+After these come **Latest period** and, at the end, **Custom…**, where you set **Current** / **Back** / **Ahead**, a number and a unit, for example *12 months back* for the same month last year. See [Custom rules](/documentation/Analysis/Relative-Date-Filtering/#custom-rules).
+
+### Latest period
+
+**Latest period** selects the most recent period that has data, for example the last month that has been loaded. Use it when data arrives late or monthly: *This Month* is empty until the month's data is loaded, while *Latest period* always lands on data.
+
+- It is the latest member in the filter's own list, so upstream cascading filters and data permissions apply: with a store selected upstream, it is that store's latest month.
+- It is chosen by date, not by position, so it stays the latest period when the field is sorted in descending order or by a measure.
+- It does not move with today's date.
+- Time fields do not offer **First**: the earliest date is rarely a useful default. Hour, minute and second fields keep **First** and **Last**.
+- Older reports that chose **Last** on a time field now show it as **Latest period**.
 
 If the computed period has no member in the data, it is still applied and shown in red with a strikethrough; see [Values that are no longer in the data](/documentation/Visualization/Filter-Subscriptions/#values-that-are-no-longer-in-the-data).
 

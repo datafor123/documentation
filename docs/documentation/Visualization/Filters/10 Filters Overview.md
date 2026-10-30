@@ -54,7 +54,7 @@ Every list filter, the Date component and the Numeric slider start with **Data â
 | Default value | Available in | Behaviour |
 | --- | --- | --- |
 | **Fixed** | List filters, Hierarchy table filter, Paginate, Date | The members or dates you pick. Pick nothing to start with All. |
-| **Relative** | List filters, Date | On a year, quarter, month, week or day field: a period such as *Last Month*, computed from the viewer's current date every time the report opens (see [Relative Date Filtering](/documentation/Analysis/Relative-Date-Filtering/)). On other fields: the **First** or **Last** member. |
+| **Relative** | List filters, Date | On a year, quarter, month, week or day field: a period such as *Last Month*, computed from the viewer's current date every time the report opens (see [Relative Date Filtering](/documentation/Analysis/Relative-Date-Filtering/)), or **Latest period**, the most recent period that has data. On other fields: the **First** or **Last** member. |
 | **All (no filter)** | Date | No date condition. New Date components start with it. |
 | **Parameter** | List filters, Date | The current value of a parameter. |
 
@@ -73,7 +73,7 @@ When a filter ends up with no selection, for example because a cascading filter 
 
 ![The filter toolbar with Clear selections](./images/filter-toolbar-clear.png)
 
-A value passed in the report URL as `default_<component title or id>=value1;value2` is applied on the first load and wins over Relative, First and Last defaults. **Refresh** returns to it.
+A value passed in the report URL as `default_<component title or id>=value1;value2` is applied on the first load and wins over Relative, Latest period, First and Last defaults. **Refresh** returns to it.
 
 ## Long lists and missing values
 

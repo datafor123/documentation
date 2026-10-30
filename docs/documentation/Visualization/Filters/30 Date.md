@@ -41,7 +41,7 @@ A less detailed time axis is not filtered: with **Granularity → Month**, a com
 ## Default values
 
 - **All (no filter)**: no date condition. The box shows **All dates** and has a clear button; **Reset to default** returns to no filter.
-- **Fixed**: the dates in the box below. Picking a date on the canvas while editing also sets a fixed default, rounded to the granularity. A reader's choice in view or preview mode never changes the saved default, so **Refresh** and **Reset to default** return to it.
+- **Fixed**: the dates in the box below. Picking a date on the canvas while editing also sets a fixed default, rounded to the granularity. A reader's choice in view or preview mode never changes the saved default, so **Refresh** and **Reset to default** return to it. Fixed dates are saved as calendar dates, so readers in every time zone see the same dates.
 - **Relative**: a period computed from the viewer's date every time the report opens. The list is grouped into **Current period**, **Previous period**, **Recent** and **Custom**, and each entry shows the range it resolves to today.
 - **Parameter**: the value of the parameter chosen in **Parameter name**. When the parameter has no value, the current period is used.
 
@@ -52,6 +52,10 @@ A less detailed time axis is not filtered: with **Granularity → Month**, a com
 ### Custom rules
 
 **Custom…** at the end of the relative list builds a rule from a direction (**Last**, **Next**, **This**, or **Current**, **Back**, **Ahead** for a single period), a number and unit, **Rolling** or **Calendar**, **Include today** or **Exclude today**, and **More → Shift back**. See [Custom rules](/documentation/Analysis/Relative-Date-Filtering/#custom-rules) for each part and examples.
+
+## Use the Date as a reference
+
+A chart's **Relative** component filter can count from the period chosen in a Date component instead of from today, for example *the month before the selected month*. In the filter's **Reference time**, pick the Date; for a range Date pick **All of** it (the default), **Start of** it or **End of** it. See [Relative component filters](/documentation/Analysis/Relative-Date-Filtering/#relative-component-filters).
 
 ## Interactions
 
