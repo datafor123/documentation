@@ -49,6 +49,19 @@ A less detailed time axis is not filtered: with **Granularity → Month**, a com
 
 *Last N days*, *Last N months* and *Last N years* include today: *Last 7 Days* on 9 October 2026 is 3–9 October.
 
+### Latest period
+
+With **Filter by → Field** and **Select → Single period**, the **Current period** group also offers **Latest period**: the most recent period that has data, rather than the period that contains today. Use it when data arrives late, for example monthly loads: *This Month* is empty until the month's data is loaded, while *Latest period* always lands on data.
+
+![Latest period in the relative list of a single-period Date, next to Today](./images/date-latest-period.png)
+
+- A period has data when the model's fact tables hold at least one row for it. Periods that the date table holds in advance, such as months up to the end of the year, are skipped. When the model has several fact tables, a row in any of them counts.
+- It is looked up each time the report opens, before the charts load, so they are filtered by it from the start, and again on **Refresh**. Its entry in the list shows the period found the last time.
+- It is not offered with **Filter by → Time axis** or for a **Range**. Switching to either replaces it with that mode's default.
+- A date passed in the report URL wins over it, as with other defaults.
+
+The same rule is used by [list filters](/documentation/Visualization/List-Box/#latest-period).
+
 ### Custom rules
 
 **Custom…** at the end of the relative list builds a rule from a direction (**Last**, **Next**, **This**, or **Current**, **Back**, **Ahead** for a single period), a number and unit, **Rolling** or **Calendar**, **Include today** or **Exclude today**, and **More → Shift back**. See [Custom rules](/documentation/Analysis/Relative-Date-Filtering/#custom-rules) for each part and examples.

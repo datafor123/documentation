@@ -59,7 +59,7 @@ After these come **Latest period** and, at the end, **Custom…**, where you set
 - Upstream cascading filters and data permissions apply: with a store selected upstream, it is that store's latest month with data.
 - It is chosen by date, not by position, so it stays the latest period when the field is sorted in descending order or by a measure.
 - The filter checks for data after its member list loads, so the selection can appear a moment after the list.
-- It does not move with today's date.
+- It does not move with today's date. It is looked up again each time the report opens and on **Refresh**, so newly loaded data is picked up.
 - Time fields do not offer **First**: the earliest date is rarely a useful default. Hour, minute and second fields keep **First** and **Last**.
 - Older reports that chose **Last** on a time field now show it as **Latest period**.
 
