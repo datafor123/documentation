@@ -10,6 +10,7 @@ description: Release notes for every Datafor version, newest first.
 
 # Release Notes
 
+- [Datafor 10.01](/release/10.01/)
 - [Datafor 10.00](/release/10.00/)
 - [Datafor 9.04](/release/9.04/)
 - [Datafor 9.01](/release/9.01/)

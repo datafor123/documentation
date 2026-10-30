@@ -9,7 +9,7 @@ createTime: 2026/10/28 10:00:00
 
 Lineage at the level of objects tells you that a report uses a model. Usage goes one level down: which reports, and which charts in them, use *this* measure or *this* attribute, and what will break if you remove a table or a column. Datafor shows this in two places: the **Usage** section of the modeler's property panel, and the confirmation dialog of every delete or change that can break reports.
 
-Both are built from the field-level record that is written when a report is saved (10.00 and later) or by **Rebuild lineage data**. Reports without the record cannot be assessed; Datafor says so rather than guessing.
+Both are built from the field-level record that is written when a report is saved (10.01 and later) or by **Rebuild lineage data**. Reports without the record cannot be assessed; Datafor says so rather than guessing.
 
 ## Usage in the modeler
 
@@ -50,7 +50,7 @@ When you confirm an action that can break reports, the dialog shows the impact f
 
 Each list shows up to five reports with chart count, owner and last change, then *n more*; metrics and models appear as chips. **View lineage** in the dialog opens the full graph. Two notes can follow the list:
 
-- *n more reports use this model but have no field-level record, so their impact is unknown.* These reports were saved before 10.00 and not rebuilt; they may or may not use the field. Run **Rebuild lineage data** on the Lineage page and open the dialog again.
+- *n more reports use this model but have no field-level record, so their impact is unknown.* These reports were saved before 10.01 and not rebuilt; they may or may not use the field. Run **Rebuild lineage data** on the Lineage page and open the dialog again.
 - *Based on the reports you can see.* You are not an administrator, so reports in other users' personal folders are missing from the count.
 
 When nothing depends on the object, the dialog is the ordinary confirmation with no impact block. The impact list informs; it does not block. In the modeler a delete can be undone with **Ctrl+Z** until you save.

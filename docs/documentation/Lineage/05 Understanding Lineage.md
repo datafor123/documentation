@@ -38,7 +38,7 @@ Only components that run a query count. A text box, an image or a navigation but
 Three sources feed the record, and they differ in how complete they are.
 
 1. **Model definitions.** Datafor reads the model's data source, tables, measures and bindings directly from the saved model. This part is always current.
-2. **Report content, read when a report is saved.** Since 10.00, every save of a report extracts the models it uses, the fields behind each chart (measures, hierarchies, filters, calculated members) and the reports it links to, and stores them with the file. Import does the same. Only reports with this record can take part in field-level answers such as "which charts use Net Sales". Paginated reports are read directly from their content, so they need no rebuild.
+2. **Report content, read when a report is saved.** Since 10.01, every save of a report extracts the models it uses, the fields behind each chart (measures, hierarchies, filters, calculated members) and the reports it links to, and stores them with the file. Import does the same. Only reports with this record can take part in field-level answers such as "which charts use Net Sales". Paginated reports are read directly from their content, so they need no rebuild.
 3. **Rebuild lineage data.** Reports saved before the upgrade have no field-level record. An administrator runs **Rebuild lineage data** on the Lineage page once; it scans every report and writes the record without changing the reports. Until that happens, impact lists say how many reports could not be assessed.
 
 Links follow the file, not its name. When a linked report is renamed or moved, the link stays and the graph shows **Previously \<old path\>** on the target until the source report is saved again.

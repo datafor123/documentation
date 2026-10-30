@@ -81,7 +81,7 @@ The graph under the details is the same lineage graph as **View item lineage**, 
 
 **Rebuild lineage data** (administrators only) scans every report on the server and writes, for each, the models it uses, the fields behind its charts and the reports it links to. Run it:
 
-- once after upgrading to 10.00 or later, so reports saved by older versions get a field-level record;
+- once after upgrading to 10.01 or later, so reports saved by older versions get a field-level record;
 - when the page shows **Field records** below the number of reports for a model;
 - when a lineage looks wrong, for example after restoring files from a backup.
 
