@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="548" viewBox="0 0 700 548" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Relative filters with a Date component as the reference</title>
+  <desc id="desc">The Date component is set to 1 to 31 August 2025, and Reference time is All of the Date. Last 1 month: 1 – 31 Jul: the month before the reference. Last 1 month, Include reference time: 1 – 31 Aug: one month ending with it. Next 1 month: 1 – 30 Sep: the month after the reference. Last 3 calendar months, Include current period: Jun – Aug. Current quarter: Jul – Sep: the quarter that contains the reference. Next 1 month, reference: Start of Date: 2 Aug – 1 Sep: counted from 1 Aug alone.</desc>
+  <rect width="700" height="548" fill="#FFFFFF"/>
+  <text x="20" y="34" font-size="18" font-weight="700" fill="#3B4252">Relative filters with a Date component as the reference</text>
+  <rect x="10" y="50" width="680" height="36" rx="8" fill="#F5F6F8" stroke="#D5D9E0"/>
+  <text x="78.3" y="73" text-anchor="middle" font-size="14" font-weight="700" fill="#3B4252">May 2025</text>
+  <text x="187.0" y="73" text-anchor="middle" font-size="14" font-weight="700" fill="#3B4252">Jun</text>
+  <text x="295.7" y="73" text-anchor="middle" font-size="14" font-weight="700" fill="#3B4252">Jul</text>
+  <text x="404.3" y="73" text-anchor="middle" font-size="14" font-weight="700" fill="#3B4252">Aug</text>
+  <text x="513.0" y="73" text-anchor="middle" font-size="14" font-weight="700" fill="#3B4252">Sep</text>
+  <text x="621.7" y="73" text-anchor="middle" font-size="14" font-weight="700" fill="#3B4252">Oct</text>
+  <rect x="10" y="96" width="680" height="58" fill="#F7F8FA"/>
+  <rect x="10" y="212" width="680" height="58" fill="#F7F8FA"/>
+  <rect x="10" y="328" width="680" height="58" fill="#F7F8FA"/>
+  <rect x="10" y="444" width="680" height="58" fill="#F7F8FA"/>
+  <rect x="350" y="86" width="108.7" height="416" fill="#9AA3AE" fill-opacity="0.12" stroke="#9AA3AE" stroke-dasharray="4 3"/>
+  <line x1="24.0" y1="86" x2="24.0" y2="502" stroke="#E2E5EA"/>
+  <line x1="132.7" y1="86" x2="132.7" y2="502" stroke="#E2E5EA"/>
+  <line x1="241.3" y1="86" x2="241.3" y2="502" stroke="#E2E5EA"/>
+  <line x1="350.0" y1="86" x2="350.0" y2="502" stroke="#E2E5EA"/>
+  <line x1="458.7" y1="86" x2="458.7" y2="502" stroke="#E2E5EA"/>
+  <line x1="567.3" y1="86" x2="567.3" y2="502" stroke="#E2E5EA"/>
+  <line x1="676.0" y1="86" x2="676.0" y2="502" stroke="#E2E5EA"/>
+  <text x="24" y="116" font-size="15" font-weight="700" fill="#2B2B3A">Reference: All of Date<tspan dx="12" font-size="14" font-weight="400" fill="#5B6472">1 – 31 Aug 2025 (or August at Month granularity)</tspan></text>
+  <rect x="350" y="125" width="108.7" height="20" rx="4" fill="#9AA3AE"/>
+  <text x="24" y="174" font-size="15" font-weight="700" fill="#2B2B3A">Last 1 month<tspan dx="12" font-size="14" font-weight="400" fill="#5B6472">1 – 31 Jul: the month before the reference</tspan></text>
+  <rect x="241.3" y="183" width="108.7" height="20" rx="4" fill="#4C74E0"/>
+  <text x="24" y="232" font-size="15" font-weight="700" fill="#2B2B3A">Last 1 month, Include reference time<tspan dx="12" font-size="14" font-weight="400" fill="#5B6472">1 – 31 Aug: one month ending with it</tspan></text>
+  <rect x="350" y="241" width="108.7" height="20" rx="4" fill="#7A5FD0"/>
+  <text x="24" y="290" font-size="15" font-weight="700" fill="#2B2B3A">Next 1 month<tspan dx="12" font-size="14" font-weight="400" fill="#5B6472">1 – 30 Sep: the month after the reference</tspan></text>
+  <rect x="458.7" y="299" width="108.6" height="20" rx="4" fill="#4C74E0"/>
+  <text x="24" y="348" font-size="15" font-weight="700" fill="#2B2B3A">Last 3 calendar months, Include current period<tspan dx="12" font-size="14" font-weight="400" fill="#5B6472">Jun – Aug</tspan></text>
+  <rect x="132.7" y="357" width="326.0" height="20" rx="4" fill="#7A5FD0"/>
+  <text x="24" y="406" font-size="15" font-weight="700" fill="#2B2B3A">Current quarter<tspan dx="12" font-size="14" font-weight="400" fill="#5B6472">Jul – Sep: the quarter that contains the reference</tspan></text>
+  <rect x="241.3" y="415" width="326.0" height="20" rx="4" fill="#4C74E0"/>
+  <text x="24" y="464" font-size="15" font-weight="700" fill="#2B2B3A">Next 1 month, reference: Start of Date<tspan dx="12" font-size="14" font-weight="400" fill="#5B6472">2 Aug – 1 Sep: counted from 1 Aug alone</tspan></text>
+  <rect x="353.5" y="473" width="108.8" height="20" rx="4" fill="#E08A2E"/>
+  <text x="20" y="532" font-size="13" fill="#5B6472">Dashed band: the reference period. Blue: before or after it; purple: includes it; orange: a single-day reference.</text>
+</svg>

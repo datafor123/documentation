@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="470" viewBox="0 0 860 470" font-family="'Segoe UI','Helvetica Neue',Arial,'Microsoft YaHei','PingFang SC','Noto Sans',sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">What Datafor lineage records</title>
+  <desc id="desc">Lineage links objects from left to right: an uploaded file dataset feeds a data source connection, analysis models read from the connection, reports query the models, and a report can link to another report through drill-through or an embedded page. Metrics Library metrics and AI knowledge indexes hang off the model. Below the chain, the sources of the information: model definitions give the data source and tables, report content saved since 10.01 gives the models, fields and linked reports, and Rebuild lineage data re-reads older reports.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+    <marker id="arrowGrey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8A93A3"/>
+    </marker>
+  </defs>
+  <rect width="860" height="470" fill="#FFFFFF"/>
+
+  <!-- Chain lane -->
+  <rect x="10" y="10" width="840" height="270" rx="12" fill="#F4F7FB" stroke="#D5DEEA" stroke-width="1.5"/>
+  <text x="30" y="40" font-size="18" font-weight="700" fill="#2B2B3A">The lineage chain</text>
+  <text x="30" y="62" font-size="13" fill="#5B6472">Read left to right: where data comes from, and what depends on it.</text>
+
+  <!-- Dataset -->
+  <rect x="30" y="120" width="120" height="64" rx="8" fill="#FFFFFF" stroke="#C9A96E" stroke-width="1.5"/>
+  <text x="90" y="146" font-size="14" font-weight="700" fill="#2B2B3A" text-anchor="middle">Dataset</text>
+  <text x="90" y="166" font-size="12" fill="#5B6472" text-anchor="middle">uploaded CSV / Excel</text>
+
+  <!-- Data source -->
+  <rect x="190" y="120" width="130" height="64" rx="8" fill="#FFFFFF" stroke="#3F8F6B" stroke-width="1.5"/>
+  <text x="255" y="146" font-size="14" font-weight="700" fill="#2B2B3A" text-anchor="middle">Data source</text>
+  <text x="255" y="166" font-size="12" fill="#5B6472" text-anchor="middle">JDBC connection</text>
+
+  <!-- Model -->
+  <rect x="360" y="120" width="130" height="64" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="425" y="146" font-size="14" font-weight="700" fill="#2B2B3A" text-anchor="middle">Analysis model</text>
+  <text x="425" y="166" font-size="12" fill="#5B6472" text-anchor="middle">tables, measures, fields</text>
+
+  <!-- Report -->
+  <rect x="530" y="120" width="130" height="64" rx="8" fill="#FFFFFF" stroke="#D96C4C" stroke-width="1.5"/>
+  <text x="595" y="146" font-size="14" font-weight="700" fill="#2B2B3A" text-anchor="middle">Report</text>
+  <text x="595" y="166" font-size="12" fill="#5B6472" text-anchor="middle">charts and filters</text>
+
+  <!-- Linked report -->
+  <rect x="700" y="120" width="130" height="64" rx="8" fill="#FFFFFF" stroke="#D96C4C" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="765" y="146" font-size="14" font-weight="700" fill="#2B2B3A" text-anchor="middle">Linked report</text>
+  <text x="765" y="166" font-size="12" fill="#5B6472" text-anchor="middle">drill-through, embed</text>
+
+  <!-- arrows along the chain -->
+  <line x1="150" y1="152" x2="188" y2="152" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="320" y1="152" x2="358" y2="152" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="490" y1="152" x2="528" y2="152" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="660" y1="152" x2="698" y2="152" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Metric and AI index under the model -->
+  <rect x="300" y="214" width="112" height="46" rx="8" fill="#FFFFFF" stroke="#7A6BB0" stroke-width="1.5"/>
+  <text x="356" y="234" font-size="13" font-weight="700" fill="#2B2B3A" text-anchor="middle">Metric</text>
+  <text x="356" y="250" font-size="11" fill="#5B6472" text-anchor="middle">bound to a measure</text>
+  <rect x="438" y="214" width="112" height="46" rx="8" fill="#FFFFFF" stroke="#8A93A3" stroke-width="1.5"/>
+  <text x="494" y="234" font-size="13" font-weight="700" fill="#2B2B3A" text-anchor="middle">AI index</text>
+  <text x="494" y="250" font-size="11" fill="#5B6472" text-anchor="middle">knowledge index</text>
+  <line x1="400" y1="184" x2="366" y2="212" stroke="#8A93A3" stroke-width="1.3" marker-end="url(#arrowGrey)"/>
+  <line x1="450" y1="184" x2="484" y2="212" stroke="#8A93A3" stroke-width="1.3" marker-end="url(#arrowGrey)"/>
+
+  <!-- labels on arrows -->
+  <text x="169" y="108" font-size="11" fill="#7A8390" text-anchor="middle">is a table in</text>
+  <text x="339" y="108" font-size="11" fill="#7A8390" text-anchor="middle">reads from</text>
+  <text x="509" y="108" font-size="11" fill="#7A8390" text-anchor="middle">queries</text>
+  <text x="679" y="108" font-size="11" fill="#7A8390" text-anchor="middle">opens</text>
+
+  <!-- Sources lane -->
+  <rect x="10" y="296" width="840" height="164" rx="12" fill="#FFF9EF" stroke="#EBD9B8" stroke-width="1.5"/>
+  <text x="30" y="326" font-size="18" font-weight="700" fill="#2B2B3A">Where the links come from</text>
+
+  <rect x="30" y="344" width="255" height="100" rx="8" fill="#FFFFFF" stroke="#EBD9B8"/>
+  <text x="46" y="368" font-size="13" font-weight="700" fill="#2B2B3A">Model definitions</text>
+  <text x="46" y="390" font-size="12" fill="#5B6472">Data source, tables and columns,</text>
+  <text x="46" y="408" font-size="12" fill="#5B6472">measures and fields, metric bindings.</text>
+  <text x="46" y="430" font-size="12" fill="#7A8390">Always available.</text>
+
+  <rect x="302" y="344" width="255" height="100" rx="8" fill="#FFFFFF" stroke="#EBD9B8"/>
+  <text x="318" y="368" font-size="13" font-weight="700" fill="#2B2B3A">Report content, read on save</text>
+  <text x="318" y="390" font-size="12" fill="#5B6472">Models used, fields per chart, filters,</text>
+  <text x="318" y="408" font-size="12" fill="#5B6472">linked reports. Written when a report is saved.</text>
+  <text x="318" y="430" font-size="12" fill="#7A8390">Field-level detail needs this record.</text>
+
+  <rect x="574" y="344" width="255" height="100" rx="8" fill="#FFFFFF" stroke="#EBD9B8"/>
+  <text x="590" y="368" font-size="13" font-weight="700" fill="#2B2B3A">Rebuild lineage data</text>
+  <text x="590" y="390" font-size="12" fill="#5B6472">Administrators scan every report once,</text>
+  <text x="590" y="408" font-size="12" fill="#5B6472">after an upgrade or when lineage looks wrong.</text>
+  <text x="590" y="430" font-size="12" fill="#7A8390">Reports themselves are not changed.</text>
+</svg>
