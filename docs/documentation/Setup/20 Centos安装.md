@@ -117,7 +117,7 @@ cd /opt/bi-server/ai-agent
 ./app-console.sh start
 ```
 
-`start` starts only the components that are not running, so it is safe to run it again. On the first start the launcher creates `instance-secrets.env` and writes the shared secret into Datafor's settings. If it prints `Set <agent-secret> in …`, restart Datafor once (Step 4, then Step 2) so that Datafor reads the value. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/).
+`start` starts only the components that are not running, so it is safe to run it again. On the first start the launcher creates `instance-secrets.env`, which also holds the secret Datafor shares with the AI Agent. Datafor reads it from that file, so it does not need a restart. Run the launcher as the same user as Datafor: the file is readable only by the user that created it. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/).
 
 Check that the AI Agent is ready:
 

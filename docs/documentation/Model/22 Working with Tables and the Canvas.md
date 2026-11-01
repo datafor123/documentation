@@ -53,9 +53,7 @@ Deleting a table, from its menu or with the Delete key on the canvas, opens a **
 
 ## Create or edit a SQL View
 
-Click **SQL** in the toolbar to enter a **View Name** and **SQL Expression**, then use **Check and preview** before adding the result to the model draft.
-
-Editing an existing SQL View rebuilds its model table. Existing relationships, Dimensions, and Measure Groups are removed from the draft, and default semantic objects are generated again. Review the complete workflow and safeguards in [Creating SQL Views](/documentation/Model/Creating-SQL-Views/) before confirming an edit.
+Click **SQL** in the toolbar, enter a **View Name** and a `SELECT` statement, click **Run** to see the fields and sample rows, then **OK** to add the view with a generated dimension and measure group. To change it, select **Edit** in the view's **⋯** menu: the view is updated in place and keeps its relationships and measures, and columns that the new SQL drops but the model still uses are listed before anything changes. See [Creating SQL Views](/documentation/Model/Creating-SQL-Views/).
 
 ## Select tables and fields on the canvas
 

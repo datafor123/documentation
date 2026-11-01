@@ -21,7 +21,7 @@ Open **Data > Models**. The list shows each model's **Name**, **ID**, **Datasour
 | **New report** | Opens a new report on this model. | Permission to create reports. Without a valid license Datafor shows "License is invalid, expired, or exceeds license limits". |
 | **Rename** | Opens **Edit**, where you change the **Model name**. The model ID stays the same. | Edit |
 | **Open in a new window** | Opens the model in the modeler in a new browser tab. | Read |
-| **Delete** | Moves the model to Trash after you confirm. When reports or metrics depend on the model, the confirmation lists them first; see [Usage and Impact Analysis](/documentation/Lineage/Usage-and-Impact-Analysis/). | Delete or Full control |
+| **Delete** | Moves the model to Trash after you confirm. See [Deleting a model](#deleting-a-model). | Delete or Full control |
 | **Create copy** | Opens **Save as** with the name `<name>_copy_<time stamp>`. Enter the **Analysis model name**; the **Analysis model ID** is taken from it, and **Modify** lets you enter a different ID. The copy keeps the data source and gives only you Full control. | Permission to create content, and Read on the data source |
 | **Download** | Downloads the model as a ZIP file, which **Upload** can import here or on another server. | Read |
 | **Change datasource** | Opens **Edit connection**, where you choose another **Datasource** for the model. The dialog lists the reports that use the model. | Delete or Full control on the model, and Read on the new data source |
@@ -31,6 +31,18 @@ Open **Data > Models**. The list shows each model's **Name**, **ID**, **Datasour
 | **Prep data for AI** | Builds or updates the model's knowledge index in the background and opens **Settings › AI Agent › Knowledge indexes**. See [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/). | Administrator |
 
 **Apply data security** and **Cache expire** are set in the modeler, with the gear button in the toolbar: see [Data security and cache settings](/documentation/Model/Creating-an-Analysis-Model/#_6-data-security-and-cache-settings).
+
+## Deleting a model
+
+**Delete** moves the model to Trash; you can delete one model from its actions menu, several from the list, or a model selected on the [Lineage page](/documentation/Lineage/Lineage-Page/). Reports that use the model stop working until the model is restored or the reports are pointed at another model.
+
+1. **Datafor checks what depends on the model.** The confirmation lists the reports, paginated reports and metrics that use it, so you can see what will break. See [Usage and Impact Analysis](/documentation/Lineage/Usage-and-Impact-Analysis/).
+2. **Reports you cannot see block the delete.** If a report that you have no access to, for example one in another user's **Personal** folder, still uses the model, Datafor does not delete it and shows **This model cannot be deleted**: "Reports you do not have access to still use *model*, so it cannot be deleted. Contact an administrator." When you select several models, the message names the ones that were blocked.
+3. **Administrators see every report**, so the check never blocks them; the confirmation lists all affected reports instead.
+
+The rule exists because Trash lists only the items you deleted yourself: the owner of a hidden report could not restore the model, and nobody would see that the report broke. An administrator can either delete the model after reviewing the full list, or ask the report owners to move their reports first.
+
+If a model was deleted by mistake, restore it from **Trash** with the account that deleted it. To find the reports that still point at a deleted model, use **Reports on deleted models** on the [Lineage page](/documentation/Lineage/Lineage-Page/).
 
 ## Upload and download
 

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="700" height="836" viewBox="0 0 700 836" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" role="img" aria-labelledby="title desc">
   <title id="title">How the AI Agent is deployed beside Datafor</title>
-  <desc id="desc">Browsers reach Datafor's Tomcat server on port 28080. Tomcat forwards requests under /datafor/ai to the AI Agent API on the Internal URL, by default http://127.0.0.1:28081/ai. The AI Agent consists of the API, one routing worker, one to eight dispatch workers (two by default) and the MCP server on port 38081. AI clients such as Claude and Codex connect to the MCP address with a Bearer personal token; the MCP server accepts the host names in MCP_ALLOWED_HOSTS and sends ask_datafor through /datafor/ai. The AI Agent calls Datafor at DATAFOR_URL and presents the shared secret in the X-Datafor-Agent-Secret header. On each start the launcher writes DATAFOR_AGENT_SECRET from instance-secrets.env into the agent-secret element of Datafor's settings.xml. The AI Agent stores its data in the bundled PostgreSQL database on port 25432 and calls the LLM and embedding providers.</desc>
+  <desc id="desc">Browsers reach Datafor's Tomcat server on port 28080. Tomcat forwards requests under /datafor/ai to the AI Agent API on the Internal URL, by default http://127.0.0.1:28081/ai. The AI Agent consists of the API, one routing worker, one to eight dispatch workers (two by default) and the MCP server on port 38081. AI clients such as Claude and Codex connect to the MCP address with a Bearer personal token; the MCP server accepts the host names in MCP_ALLOWED_HOSTS and sends ask_datafor through /datafor/ai. The AI Agent calls Datafor at DATAFOR_URL and presents the shared secret in the X-Datafor-Agent-Secret header. Datafor reads the same DATAFOR_AGENT_SECRET from the AI Agent folder beside it: ai-agent/.env if it holds a value, otherwise instance-secrets.env. The AI Agent stores its data in the bundled PostgreSQL database on port 25432 and calls the LLM and embedding providers.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
@@ -35,7 +35,7 @@
   <text x="44" y="186" font-size="16" font-weight="700" fill="#1F4FD8">Datafor web server (Tomcat) :28080</text>
   <text x="44" y="208" font-size="14" fill="#2B2B3A">/datafor: console, reports, REST APIs</text>
   <text x="44" y="228" font-size="14" fill="#2B2B3A">/datafor/ai/*: forwarded to the Internal URL</text>
-  <text x="44" y="248" font-size="14" fill="#2B2B3A">datafor-modeler/settings.xml: &lt;agent-secret&gt;</text>
+  <text x="44" y="248" font-size="14" fill="#2B2B3A">agent secret: read from ai-agent/.env or instance-secrets.env</text>
 
   <!-- AI Agent -->
   <rect x="28" y="320" width="644" height="242" rx="12" fill="#F3EFFF" stroke="#C9BBF2" stroke-width="1.5"/>
@@ -98,6 +98,6 @@
   <polyline points="44,468 19,468 19,244 25,244" fill="none" stroke="#5B3FBF" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#arrowPurple)"/>
 
   <!-- Legend -->
-  <text x="10" y="804" font-size="14" fill="#5B6472">Solid arrows: requests. Dashed arrow: on each start the launcher writes</text>
-  <text x="10" y="824" font-size="14" fill="#5B6472">DATAFOR_AGENT_SECRET into &lt;agent-secret&gt; in Datafor's settings.xml.</text>
+  <text x="10" y="804" font-size="14" fill="#5B6472">Solid arrows: requests. Dashed arrow: Datafor reads DATAFOR_AGENT_SECRET</text>
+  <text x="10" y="824" font-size="14" fill="#5B6472">from ai-agent/.env, or from instance-secrets.env when .env has none.</text>
 </svg>

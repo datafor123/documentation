@@ -51,7 +51,7 @@ Rows are sorted by how much depends on them (reports first), then by name; rows 
 Two controls above the lists change what the whole page covers:
 
 - **Include other users' personal folders** (administrators only). On by default. Turn it off to see only Public and your own folder; the **Models no report uses** chip disappears, because it cannot be judged on a partial view.
-- **Refresh** re-reads the snapshot. The page also refreshes itself after you move a report to Trash from it.
+- **Refresh** re-reads the snapshot. The page also refreshes itself after you move a report or model to Trash from it.
 
 ## Detail panel
 
@@ -69,7 +69,12 @@ Actions in the panel:
 | --- | --- | --- |
 | **Open** | Any existing object you may read | Opens the report (a paginated report in its viewer), the model in the modeler, or the Datasource, Metrics Library or Datasets page in a new tab. Double-clicking a node in the graph does the same. |
 | **Move to Trash** | Reports with a **Deleted model**, **Missing data source** or **Broken link** label | Moves the report to Trash after the usual confirmation. It can be restored from **Trash**. Needs delete permission on the file. |
+| **Move to Trash** | A model that still exists | Lists the reports that use the model, then moves it to Trash when you confirm. Disabled, with *You do not have permission to delete this model*, without Delete permission on the model. Refused with **This model cannot be deleted** while reports you cannot see still use it; see [Deleting a model](/documentation/Model/Managing-Analysis-Models/#deleting-a-model). |
 | **Handle these n reports** | A deleted model that reports still use | Switches to the Reports tab filtered to that model, so you can open each report to repoint it or move it to Trash one by one. |
+
+Use the model's **Move to Trash** to clean up a model that **Models no report uses** lists: the confirmation then shows no affected reports. If reports still use the model, they stop working until it is restored; tell their owners before you confirm.
+
+<div align="left"><img src="./images/lineage-model-move-to-trash.png" alt="Delete content: Delete org-sales? The content will be moved to Trash and can be restored there. This affects 5 reports, listed with owner and date, with Cancel and Delete" width="60%" /></div>
 
 ![A deleted model selected: the detail header offers Handle these 14 reports, and the focus graph shows the deleted model with the reports that still query it](./images/lineage-page-deleted-model-detail.png)
 

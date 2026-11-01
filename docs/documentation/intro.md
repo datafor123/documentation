@@ -34,6 +34,8 @@ Datafor is a business intelligence platform: connect databases, describe them on
 | Explore: drill, cross-filter, view details | [Exploratory Analysis](/documentation/Analysis/Exploratory-Analysis/) |
 | Ask questions in plain language | [AI Assistant](/documentation/AI-Agent/AI-Chat/) |
 | Export or share | [Export](/documentation/Visualization/Export/), [Share Link](/documentation/Embedded/Share-link/) |
+| Print, export or email a paged report | [Understanding Paginated Reports](/documentation/Paginated-Reports/Understanding-Paginated-Reports/), [Distribution](/documentation/Paginated-Reports/Distribution/) |
+| Check what breaks before changing a model | [Understanding Lineage](/documentation/Lineage/Understanding-Lineage/), [Usage and Impact Analysis](/documentation/Lineage/Usage-and-Impact-Analysis/) |
 | Embed reports in another application | [SDK Embedding](/documentation/Embedded/SDK-Embedding/) |
 | Administer users, security and settings | [Settings Overview](/documentation/System/Settings-Overview/), [Permission Evaluation Overview](/documentation/System/Permission-Evaluation-Overview/) |
 

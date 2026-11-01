@@ -11,7 +11,7 @@ An existing installation is upgraded in place with an update package, a `.jar` f
 
 ## 1. Before you upgrade
 
-1. **Read the upgrade notes** of the release, for example [10.00 Upgrade notes](/release/10.00/#upgrade-notes). They list behavior changes and steps that apply only to that release.
+1. **Read the upgrade notes** of the release, for example [10.01 Upgrade notes](/release/10.01/#upgrade-notes). They list behavior changes and steps that apply only to that release.
 2. **Create a backup** with **Content and settings** selected and download it to another computer (see [Backup and Restore](/documentation/System/backup/)). If the repository runs on your own PostgreSQL server ([Repository Separation](/documentation/Setup/Repository-Separation-Deployment-Guide/)), back up those databases with your own tools as well.
 3. **Copy two AI Agent files** to a safe place: `bi-server/ai-agent/instance-secrets.env` and `bi-server/ai-agent/.env`. No Datafor backup contains them. `instance-secrets.env` holds the key that encrypts the LLM API keys stored in the database; without it a restored system cannot read them. `.env` holds your AI Agent settings, such as `DATABASE_URL`, the `MCP_*` keys and `AI_AGENT_DISPATCH_WORKERS`.
 4. **Write down what you changed in the files the package replaces** (section 3): the Java heap in the start script, database connections, passwords and ports in `server.xml`, and any other file under `pentaho-solutions/system` you edited by hand.
@@ -32,7 +32,7 @@ Datafor applies update packages when it starts: `start-server` runs every `.jar`
    ```
 
 3. Start Datafor with `./start-server.sh` in `/opt/bi-server`. The package is applied first.
-4. Start the AI Agent with `./app-console.sh start` in `/opt/bi-server/ai-agent`. If it prints `Set <agent-secret> in …`, restart Datafor once (`./stop-server.sh`, then `./start-server.sh`) so that Datafor reads the shared secret.
+4. Start the AI Agent with `./app-console.sh start` in `/opt/bi-server/ai-agent`.
 
 **Windows:**
 
@@ -64,16 +64,29 @@ The replaced files are kept in `bi-server/update/backup<time stamp>/`, in the sa
 | Java heap (`-Xms`/`-Xmx` in `CATALINA_OPTS`) | `start-server.sh` or `start-server.bat` | Set the values again. |
 | Repository connections, passwords, ports, `RemoteIpValve` | `tomcat/conf/server.xml` | Copy your `<Resource>`, `<Connector>` and `<Valve>` settings into the new file. Without this, a [separated repository](/documentation/Setup/Repository-Separation-Deployment-Guide/) is replaced by the built-in database again, and a [proxy setup](/documentation/Setup/Deploying-Datafor-Behind-Nginx/) loses its forwarded-header handling. |
 | Connection pool defaults, engine properties | `pentaho-solutions/system/pentaho.xml`, `pentaho-solutions/system/datafor/mondrian.properties` | Set your values again. |
-| AI Agent shared secret | `pentaho-solutions/system/datafor-modeler/settings.xml` | Co-located AI Agent: its launcher writes the value back on its next start. AI Agent on another server: add `<agent-secret>` again ([AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/#_6-upgrades-and-moves)). |
+| AI Agent shared secret, AI Agent on another server | `-Ddatafor.agent.secret` in `CATALINA_OPTS` in `start-server.sh` or `start-server.bat` | Add the option again, or move the value to the `DATAFOR_AGENT_SECRET` environment variable, which updates do not touch. A co-located AI Agent needs nothing: Datafor reads the value from `ai-agent/instance-secrets.env`. Since 10.01 `<agent-secret>` in the modeler's `settings.xml` is ignored ([AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/#_7-upgrading-from-10-00)). |
 | AI Agent settings | `ai-agent/.env` | The package can change this file (it then appears in `change-list.md`). Compare it with your copy and restore your settings. |
 
 Stop Datafor, copy your values into the new files rather than copying the old files back (a new file can contain new entries), and start Datafor again.
 
-## 4. Steps for 10.00
+## 4. Steps for 10.01
+
+When you upgrade to 10.01, also do the following. If you come from a version before 10.00, do the steps for 10.00 (section 5) as well. The full list of changes is in the [10.01 Upgrade notes](/release/10.01/#upgrade-notes).
+
+- **Install the modeler plugin and the AI Agent together.** 10.01 moves the AI Agent shared secret out of the modeler's `settings.xml`, and a 10.00 modeler with a 10.01 AI Agent (or the other way round) loses it.
+- **AI Agent on another server.** If you set `<agent-secret>` in `settings.xml` by hand, 10.01 ignores it: set the same value as the `DATAFOR_AGENT_SECRET` environment variable of the Datafor server and restart Datafor. A co-located AI Agent needs nothing. See [Upgrading from 10.00](/documentation/AI-Agent/Agent-Shared-Secret/#_7-upgrading-from-10-00).
+- **Rebuild lineage data.** Sign in as an administrator, open **Data › Lineage** and run **Rebuild lineage data** once, so that reports saved before the upgrade appear in usage lists and in the impact lists of delete and change confirmations. See [The Lineage Page](/documentation/Lineage/Lineage-Page/#rebuild-lineage-data).
+- **Paginated reports** are a separate plugin (`datafor-pagereport`). Install it with the other components if you want **New › Paginated report**.
+- **Reports with relative component filters.** A filter with **Include reference time** now covers exactly N units, one day less than before. Open the reports whose numbers are checked against other systems and compare. See [Relative component filters](/documentation/Analysis/Relative-Date-Filtering/#relative-component-filters).
+- **Date components with fixed default dates** that were saved in another time zone open on the author's dates now. Save such a report once to store the dates in the new format.
+- **List filters on a time field that defaulted to Last** now default to **Latest period**: the most recent period that has data, no longer the last member of the date table. Check reports that relied on the old behavior to show a future month.
+- **Action buttons bound to a model field** keep working as **Data button (legacy)**. Nothing to do; see [Action button](/documentation/Visualization/Action-Button/#data-button-legacy) if you want to convert them.
+
+## 5. Steps for 10.00
 
 When you upgrade to 10.00, also do the following. The full list of changes is in the [10.00 Upgrade notes](/release/10.00/#upgrade-notes).
 
-- **AI Agent shared secret.** Datafor gives LLM API keys to the AI Agent only when both use the same secret. With the packaged layout the launcher sets it up (on Linux, restart Datafor once as in section 2). If the AI Agent runs on another server, configure it on both sides. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/).
+- **AI Agent shared secret.** Datafor gives LLM API keys to the AI Agent only when both use the same secret. With the packaged layout the AI Agent's launcher creates it and Datafor reads it from `ai-agent/instance-secrets.env`. If the AI Agent runs on another server, give Datafor the same value. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/).
 - **Model Resolution stage.** Open **AI Agent › LLM › Assignments**. The new stage runs on the **Workflow Routing** profile until it has its own assignment; click **Save** to record it, or choose another profile first. If **Workflow Routing** is unassigned too, assign both. See [LLM Configuration](/documentation/AI-Agent/LLM-Configuration/).
 - **Knowledge indexes.** Indexes are now built in the background when a model is saved, copied or imported. If you schedule index builds yourself, turn off **Auto-build knowledge index** in **Settings › General › System configuration**. Let each model's index build or sync once (save the model, run **Prep data for AI**, or wait for its schedule) so that members of numeric-keyed fields are recognized. See [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
 - **Metric bindings.** Run **Compare all** again on the **Metric bindings** tab of each model that has bindings. Verdicts stored under the old rules stay until then, and users see them as notes in answers. See [Model Diagnostics](/documentation/Model/Model-Diagnostics/).
@@ -82,7 +95,7 @@ When you upgrade to 10.00, also do the following. The full list of changes is in
 - **Permissions.** Deleting content needs **Delete** or **Full control**, and publishing a model or changing its data source needs Read on the data source. Check that users you disabled are still disabled. See [Managing Analysis Models](/documentation/Model/Managing-Analysis-Models/).
 - **Conversations.** A follow-up in a conversation started before the upgrade may not continue a hierarchy from the earlier turn; start **New Chat**.
 
-## 5. Check the upgrade
+## 6. Check the upgrade
 
 1. Check the server log (`tomcat/logs/catalina.out` on Linux, the server console on Windows) for errors during the update and start.
 2. Sign in as an administrator. Open a few reports and models and check that they show data. If your content is missing and only the sample content appears, Datafor is connected to the built-in database: reapply `server.xml` (section 3).

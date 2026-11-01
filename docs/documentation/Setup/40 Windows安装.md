@@ -23,7 +23,7 @@ Log in to Windows as an **Administrator** and extract the installation package t
 
 2. Stop Datafor by double-clicking `stop-server.bat`. It stops the database, the AI Agent and the web server.
 
-To restart only the AI Agent, use `ai-stop.bat` and `ai-start.bat` in the same folder. If `ai-start.bat` prints `set <agent-secret> in …`, restart Datafor once so that it reads the shared secret (see [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/)).
+To restart only the AI Agent, use `ai-stop.bat` and `ai-start.bat` in the same folder. Datafor reads the secret it shares with the AI Agent from `ai-agentinstance-secrets.env` and needs no restart for it (see [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/)).
 
 ## Check the AI Agent
 

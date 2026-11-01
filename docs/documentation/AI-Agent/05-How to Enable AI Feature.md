@@ -11,7 +11,7 @@ Datafor uses the AI Agent service for conversational analysis in the AI Assistan
 
 In the packaged installation the AI Agent runs on the Datafor server, and browsers reach it through Datafor:
 
-![Browsers call Tomcat on 28080; Tomcat forwards /datafor/ai to the AI Agent API on the Internal URL (default 127.0.0.1:28081/ai). The AI Agent runs the API, one routing worker, 1 to 8 dispatch workers and the MCP server on 38081, which AI clients reach with a Bearer token. The AI Agent calls Datafor at DATAFOR_URL with the X-Datafor-Agent-Secret header, stores its data in the bundled PostgreSQL on 25432, and calls the LLM and embedding providers. Its launcher writes DATAFOR_AGENT_SECRET from instance-secrets.env into Datafor's settings.xml](./images/ai-agent-deployment-topology.svg)
+![Browsers call Tomcat on 28080; Tomcat forwards /datafor/ai to the AI Agent API on the Internal URL (default 127.0.0.1:28081/ai). The AI Agent runs the API, one routing worker, 1 to 8 dispatch workers and the MCP server on 38081, which AI clients reach with a Bearer token. The AI Agent calls Datafor at DATAFOR_URL with the X-Datafor-Agent-Secret header, stores its data in the bundled PostgreSQL on 25432, and calls the LLM and embedding providers. Datafor reads the same DATAFOR_AGENT_SECRET from ai-agent/.env or instance-secrets.env](./images/ai-agent-deployment-topology.svg)
 
 ## 1. Open the AI service settings
 
