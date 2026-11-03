@@ -17,6 +17,8 @@ A filter affects only the components checked under **Actions â†’ Interactions â†
 2. Open **Linked components** and check the targets. The badge shows how many are linked, for example **2 linked**.
 3. Preview the report, change the filter and check each target.
 
+Components you add to the page later are linked to every filter automatically, also to filters whose list you edited or that cascade; uncheck them where a filter should not apply. (Before 10.01, a component added after **Linked components** or **Cascade other filters** was changed was left out, so check older reports.)
+
 A component on another analysis model can be linked when that model has the filtered field. Leave a headline KPI unlinked if it must always show the unfiltered total.
 
 The Date component uses **Filter all components** instead of a manual list by default; see [Date](/documentation/Visualization/Datepicker/).

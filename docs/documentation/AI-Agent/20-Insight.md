@@ -29,6 +29,23 @@ Clicking the component opens the insight in **Preview** and in view mode. In the
 
 The insight analyses only the data already loaded in the page's components and runs no extra queries. When that data is truncated or incomplete, the answer says so. **Generate business brief** writes a management brief from the same data.
 
+## Standard or detailed
+
+The insight dialog has a **Detail level** switch under its title:
+
+| Level | What you get | Typical wait |
+| --- | --- | --- |
+| **Standard** (default) | An overview and up to five key insights, the conclusions first with few numbers | About 30 seconds |
+| **Detailed** | Up to eight key insights, each with a sentence on what it means, plus a **Chart by chart** section with one paragraph per chart that has more than one row | Longer, up to two minutes |
+
+Switching the level generates the insight again. Datafor remembers the level in your browser and uses it the next time you open an insight. At the end of a result, **Generate detailed version** or **Switch to standard version** regenerates it at the other level.
+
+![Chart by chart section of a detailed dashboard insight: one paragraph each for Net Sales by Month, by Store, Gross Profit by Product, Net Sales by Region and by Channel Type](./images/dashboard-insight-chart-by-chart.png)
+
+In the **AI Agent** panel of a report, the **Dashboard Insights** quick action (lightning icon) produces the same insight in the conversation. Each switch adds a new answer instead of replacing the old one; insights in the conversation history have no switch.
+
+Both levels read the same data. Detailed does not load more rows; it covers every chart instead of only the most important findings.
+
 ## Open insight from other components
 
 Any Image, Icon, Shape or Action button can open the same insight: set its click action to **Open AI insight** and choose an **Analysis scope**. See [Click Actions and Visibility](/documentation/Visualization/Click-Actions-and-Visibility/).
@@ -46,3 +63,4 @@ Any Image, Icon, Shape or Action button can open the same insight: set its click
 | *The AI insight component is not loaded, so insight cannot be opened* | A button uses **Open AI insight** on a page where the insight extension could not load. Reload the report; check that the AI insight component is installed. |
 | The insight ignores a chart | The chart was empty, or it is outside the chosen **Analysis scope**. |
 | Nothing happens on click | Check that the AI Agent service is running and configured. |
+| The insight is too brief | Switch to **Detailed**. |

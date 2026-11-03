@@ -109,9 +109,23 @@ new Datafor.Visualizer(options)
 | `mobile` | Boolean | | `true` shows the report's [mobile layout](/documentation/Visualization/Mobile-Layout-View/). Default `false`. |
 | `initialFilterValues` | Object | | Opening values of filter components. See [initialFilterValues](#initialfiltervalues). |
 | `filters` | String | | Initial data filters that need no filter component. See [filters / setFilter](#filters-setfilter). |
-| `onRedirectEvent` | Function | | Called when the user switches page or mode (`edit` ↔ `read`) inside the report, with the options of the target page. Create a new instance with them, as in the quick start. Always set it. |
+| `onRedirectEvent` | Function | | Called when the user switches page or mode (`edit` ↔ `read`) inside the report, or when a drill-through or Action button opens another report in the **Current tab**, with the options of the target page. Create a new instance with them, as in the quick start. Always set it. See [onRedirectEvent](#onredirectevent). |
 | `onUpdatePageTitle` | Function | | Called with `(title, pathTitle)` when the report has loaded. |
 | `onPageContentReadyEvent` | Function | | Called with `(env, render)` before the report is drawn. If you set it, the SDK does not draw the report itself: call `render()`. Not needed for normal use. |
+
+### onRedirectEvent
+
+The SDK calls it when the container should show another report or mode. Merge the argument into your constructor options and create a new instance, as in the quick start:
+
+| Field | Description |
+| --- | --- |
+| `path`, `pageId`, `mode` | Target report and opening mode |
+| `reason` | `"drill"` when a drill-through or Action button opens a report in the **Current tab** |
+| `title` | Target title from the drill-through or click-action setup |
+| `drillFilters` | The values passed by the drill-through. They are applied together with your own `filters`, and the target shows them in a **Drill-through filters** bar that the reader can clear, leaving only your `filters`. |
+| `urlParams` | Parameters for the target's address, such as passed report parameters; they work like URL parameters |
+
+Without `onRedirectEvent`, a drill-through replaces the report in the same container, and the host page's address does not change. The SDK has no **Back**. **New tab** targets and links do not go through the callback.
 
 ### Instance methods
 

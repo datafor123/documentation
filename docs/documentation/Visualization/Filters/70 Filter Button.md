@@ -43,7 +43,7 @@ To return to immediate filtering, delete the Apply button.
 
 ## Notes
 
-- Only filter components are affected. Filters bound to a parameter, and parameter controllers in older reports, are not reset, cleared or deferred.
+- Only filter components are affected. A filter bound to a parameter is reset and cleared too, and writes the value back to the parameter, so formulas and other controls on that parameter follow; it is not deferred by **Apply**. Parameter controllers in older reports are not affected at all.
 - **Reset** does not clear the server cache; the report **Refresh** does.
 
 Related: [Filters](/documentation/Visualization/Filters/)

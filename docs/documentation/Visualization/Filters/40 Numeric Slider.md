@@ -35,6 +35,8 @@ Choose **Data source → Parameter** and a **Numeric** parameter with **Any valu
 
 If you leave the range empty, it is derived from the parameter's default: a positive value *v* gives 0 to 2*v*, a negative value 2*v* to 0, and 0 gives 0 to 20. The step follows the default's decimals (0.1 → 0.1, 0.05 → 0.01, an integer → 1).
 
+A value typed into the box outside the range is set to the nearest end: on a 0 to 2.4 slider, 5 becomes 2.4 and −3 becomes 0. (A slider on a model field keeps a typed value outside the data range and filters by it.)
+
 For a worked example, see [What-if Analysis](/documentation/Analysis/What-if-Analysis/).
 
 Related: [Filters](/documentation/Visualization/Filters/) · [Bind Filters to Parameters](/documentation/Analysis/Parameter-Controllers/)
