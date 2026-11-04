@@ -57,7 +57,7 @@ In the sections below, `<MCP address>` and `<token>` stand for these two values.
 Claude Desktop reaches Datafor through the Datafor extension, `datafor.mcpb`. Node.js 18 or later must be installed, because the extension runs `npx`. On its first start, `npx` downloads the `mcp-remote` package.
 
 1. Download [datafor.mcpb](/downloads/datafor.mcpb). The same file is in every Datafor installation, at `bi-server/ai-agent/claude-extension/datafor.mcpb` on the Datafor computer; if you cannot download it, ask your administrator for that copy. One file serves Windows and macOS.
-2. In Claude Desktop, open **Settings › Extensions › Advanced settings › Install extension** and choose the file. You can also drag the file into the Claude window.
+2. In Claude Desktop, open **Settings › Desktop app**, click **Manage** next to **Extensions**, then **Advanced settings › Install extension**, and choose the file. You can also drag the file into the Claude window.
 3. Fill in the extension settings:
 
    | Field | Value |
@@ -175,7 +175,7 @@ Back on **My account › Personal tokens**, the token's **Last used** time updat
 | Symptom | Cause and fix |
 | --- | --- |
 | **Personal tokens** shows "Your administrator has not turned on personal tokens." | Self-service tokens are off. The administrator enables them in the JWT configuration (section 8.1). |
-| Claude Desktop shows no Datafor tools | Open a new conversation; check that the extension is enabled and that a token is filled in. If Claude started before Datafor and the retries ran out, turn the extension off and on in **Settings › Extensions**, or restart Claude. |
+| Claude Desktop shows no Datafor tools | Open a new conversation; check that the extension is enabled and that a token is filled in. If Claude started before Datafor and the retries ran out, turn the extension off and on in **Settings › Desktop app › Extensions › Manage**, or restart Claude. |
 | Claude Desktop cannot find `npx` | Install Node.js 18 or later, or enter the full path in the extension's **npx path**. |
 | Codex shows no Datafor tools | Check that the section is in the user `config.toml` that Codex actually uses, save, restart Codex, and check that the MCP address is reachable. |
 | Codex reports a duplicate section | A server name may appear only once. Update the existing `datafor` section and keep the other servers. |

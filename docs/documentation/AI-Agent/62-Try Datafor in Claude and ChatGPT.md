@@ -46,7 +46,7 @@ The token stands for you and all your permissions. Paste it only into the app's 
 
 1. Install Node.js 18 or later if it is not installed yet. The extension needs it to start.
 2. Download [datafor.mcpb](/downloads/datafor.mcpb). If you cannot download it, ask your administrator for the copy in the Datafor installation (`bi-server/ai-agent/claude-extension/datafor.mcpb`).
-3. In Claude Desktop, open **Settings › Extensions › Advanced settings › Install extension** and choose the file, or drag the file into the Claude window.
+3. In Claude Desktop, open **Settings › Desktop app**, click **Manage** next to **Extensions**, then **Advanced settings › Install extension**, and choose the file, or drag the file into the Claude window.
 4. Fill in the extension settings:
 
    | Field | Value |
@@ -167,7 +167,7 @@ If the app asks permission before it uses a Datafor tool, allow it. The tools on
 
 | What you see | What to do |
 | --- | --- |
-| No Datafor tools in Claude Desktop | Open a new conversation and check that the extension is enabled and has a token. If Claude started before Datafor was running, turn the extension off and on under **Settings › Extensions**, or restart Claude. |
+| No Datafor tools in Claude Desktop | Open a new conversation and check that the extension is enabled and has a token. If Claude started before Datafor was running, turn the extension off and on under **Settings › Desktop app › Extensions › Manage**, or restart Claude. |
 | Claude Desktop cannot find `npx` | Install Node.js 18 or later, or enter the full path to `npx` in the extension's **npx path**. |
 | No Datafor tools in ChatGPT | Check that Datafor is listed and enabled on **Settings › Plugins › MCP**, then quit and restart the app. |
 | `Missing Datafor MCP authentication` or `Unsupported Authorization scheme` | No usable token reached Datafor. In the ChatGPT desktop app, check that the header value is `Bearer ` followed by the token and restart the app; in Claude Code, check the `--header` value. |
