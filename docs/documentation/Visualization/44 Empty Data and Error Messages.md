@@ -11,13 +11,15 @@ A component that has nothing to draw says why, in grey text in the middle of the
 
 ## Empty results
 
-| Message | Cause | Buttons |
-| --- | --- | --- |
-| *No data under the current filters* | A filter, a parameter or a value passed in the URL leaves no rows. | **View conditions** lists the conditions. |
-| *No data under the current link conditions* | A click on another chart (cross-filtering) leaves no rows. | **Clear links**, **View conditions** |
-| *No data* (or your own text) | The query returns no rows without any condition. | – |
+| Message | Cause |
+| --- | --- |
+| *No data under the current filters* | A filter, a parameter or a value passed in the URL leaves no rows. |
+| *No data under the current link conditions* | A click on another chart (cross-filtering) leaves no rows. |
+| *No data* (or your own text) | The query returns no rows without any condition. |
 
-![Empty result with View conditions open](./images/conditions-empty.png)
+The message has no buttons. Point to the component: its toolbar appears as usual, and **Conditions** lists every condition applied, with **Clear** for each link and **Clear all links**. If **Style → Toolbar → Display mode** is **Hidden** (the default for cards), the component has no toolbar and readers cannot open the list; set it to **Show on hover** to let them.
+
+![Empty result with the toolbar and its Conditions button on hover](./images/conditions-empty.png)
 
 Some charts have their own empty state: a pie whose values are all 0 shows a grey ring *All values are 0*; a gauge or ring progress without data shows the message instead of an empty scale.
 

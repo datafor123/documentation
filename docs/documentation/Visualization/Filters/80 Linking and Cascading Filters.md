@@ -62,7 +62,7 @@ A relative period with no member in the data, such as last month before that mon
 | Symptom | Check |
 | --- | --- |
 | A chart does not change. | The chart is not in the filter's Linked components, or its model lacks the field. |
-| A chart shows *No data under the current filters*. | Click **View conditions**, or hover the chart and open **Conditions**, to see every condition applied; the combination may have no rows, or a relative default may point to a period with no data yet. |
+| A chart shows *No data under the current filters*. | Hover the chart and open **Conditions** to see every condition applied; the combination may have no rows, or a relative default may point to a period with no data yet. |
 | A summary changes unexpectedly. | Remove it from the filter's Linked components. |
 | A downstream filter lost its selection. | The value no longer exists under the upstream selection. |
 | A value is shown in red with a strikethrough. | It is not in the current data, but still applied. See [Values that are no longer in the data](#values-that-are-no-longer-in-the-data). |

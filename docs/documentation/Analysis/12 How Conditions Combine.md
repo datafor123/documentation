@@ -89,6 +89,6 @@ Point to the component and click the funnel with a count in its toolbar. The lis
 
 Each row reads *Field is value* or *Field is not value*. Ranges read *Field is 10,000 ~ 39,696*, with *≥* or *≤* when one end is open; a Hierarchy table filter lists the members selected at each level, for example *Family · Department is Drink · Beverages*. A rule such as *contains* or a relative period reads *Field matches a custom condition*, and *Field is (none)* means the conditions on that field left no member. Hover a row to see the full condition and where it comes from, for example *From: Passed from jump*.
 
-Parameters and the drill-down of the chart itself are not listed; the drill path shows the drill. When a component is empty, it says *No data under the current link conditions* with **Clear links**, or *No data under the current filters* with **View conditions**, which opens the same list.
+Parameters and the drill-down of the chart itself are not listed; the drill path shows the drill. When a component is empty, it says *No data under the current link conditions* or *No data under the current filters*; the toolbar still appears on hover, and **Conditions** opens the same list, where links can be cleared.
 
 Related: [Exploratory Analysis](/documentation/Analysis/Exploratory-Analysis/) · [Linking and Cascading Filters](/documentation/Visualization/Filter-Subscriptions/) · [Creating Parameters](/documentation/Analysis/Creating-Parameters/)

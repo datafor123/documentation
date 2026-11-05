@@ -107,7 +107,7 @@ With **(Current time)** on 30 October 2026:
 
 ## Things to check
 
-- **No data yet.** A relative period after the last loaded date returns no data. In a list filter the period is shown in red with a strikethrough and still applied; charts say *No data under the current filters*, and **View conditions** shows the range.
+- **No data yet.** A relative period after the last loaded date returns no data. In a list filter the period is shown in red with a strikethrough and still applied; charts say *No data under the current filters*, and the chart's **Conditions** button shows the range.
 - **Weeks** start on the day set in **Settings › General › System configuration › Modeling › First day of the week**.
 - **Older reports**: *Last 7 Days* and the other *Last N* presets cover one day less than before 10.00, and *Last Year*, *Last Month*, *Last Quarter*, *This Year to Last Month* and *Year to Date* were corrected for edge cases.
 - **Older relative component filters** may return a slightly different period: *Include reference time* now covers exactly N units (one day fewer than before); a calendar unit is no longer moved by an include setting that was hidden for calendar units; a count of 0 counts as 1; and *last N hours* relative to the current time ends at the current hour instead of at midnight.

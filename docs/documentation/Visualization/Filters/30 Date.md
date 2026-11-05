@@ -100,7 +100,7 @@ With **Data source → Parameter** and a **Date** parameter with **Any value**, 
 
 | Symptom | Check |
 | --- | --- |
-| The charts show *No data under the current filters*. | The relative period may lie after the last loaded date. Use **View conditions** on the chart to see the date range. |
+| The charts show *No data under the current filters*. | The relative period may lie after the last loaded date. Hover the chart and open **Conditions** to see the date range. |
 | A component is not filtered. | In Time axis mode it needs a **Time axis** field at the Date's granularity or finer; see [Filter by time axis](#filter-by-time-axis). |
 | *Last 7 Days* differs from an older report by one day. | Since 10.00 the *Last N* presets include today. |
 
