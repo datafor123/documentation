@@ -118,12 +118,6 @@ export const apiNote = defineNoteConfig({
 			],
 		},
 		{
-			text: "Alert",
-			collapsed: true,
-			prefix: "/api/Alert/",
-			items: "auto",
-		},
-		{
 			text: "Lineage",
 			collapsed: true,
 			prefix: "/api/Lineage/",

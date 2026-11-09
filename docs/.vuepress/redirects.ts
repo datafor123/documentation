@@ -5,7 +5,6 @@
  * static redirect page at each old path so bookmarks and search results work.
  */
 export const redirects: Record<string, string> = {
-	"/api/Alert/Execute one by name/": "/api/Alert/Delete an alert by name/",
 	"/api/Extension Plugins/SAML2/saml consumer/": "/documentation/System/Single-Sign-On/",
 	"/api/Extension Plugins/White Label/Get favicon/": "/api/Extension Plugins/White Label/Get a branding image/",
 	"/api/Extension Plugins/White Label/Get login logo/": "/api/Extension Plugins/White Label/Get a branding image/",
