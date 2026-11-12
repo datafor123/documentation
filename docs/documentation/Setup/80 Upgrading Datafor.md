@@ -24,15 +24,13 @@ Datafor applies update packages when it starts: `start-server` runs every `.jar`
 **Linux** (installation in `/opt/bi-server`):
 
 1. Copy the package into `/opt/bi-server/update` and give it to `biadmin`: `chown biadmin:biadmin /opt/bi-server/update/datafor-updater.jar`.
-2. Switch to `biadmin` with `su - biadmin`. Stop the AI Agent and Datafor:
+2. Switch to `biadmin` with `su - biadmin`. Stop Datafor, which also stops the AI Agent:
 
    ```bash
-   cd /opt/bi-server/ai-agent && ./app-console.sh stop
    cd /opt/bi-server && ./stop-server.sh
    ```
 
-3. Start Datafor with `./start-server.sh` in `/opt/bi-server`. The package is applied first.
-4. Start the AI Agent with `./app-console.sh start` in `/opt/bi-server/ai-agent`.
+3. Start Datafor with `./start-server.sh` in `/opt/bi-server`. It applies the package, then starts the database, the AI Agent and the web server.
 
 **Windows:**
 

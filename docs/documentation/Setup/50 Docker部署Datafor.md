@@ -80,14 +80,13 @@ docker logs -f datafor-ee
 
 The log shows the Tomcat output; Datafor is ready when it prints `Server startup in [...] milliseconds`. Press Ctrl+C to leave the log. Then open `http://localhost:28080` and sign in with `admin` / `password`. Change that password right away (see [Modify Password](/documentation/System/Users/#_6-resetting-a-password)), and change the password of the `demo` user (`demo` / `demo`) or delete that user.
 
-If the image contains the AI Agent (the folder `/opt/bi-server/ai-agent`), start it and check it with:
+`start-server.sh` also starts the AI Agent. Check that it is ready with:
 
 ```shell
-docker exec datafor-ee /opt/bi-server/ai-agent/app-console.sh start
 docker exec datafor-ee curl -s http://127.0.0.1:28081/ai/health
 ```
 
-`start` starts only the components that are not running. Run it again after every container restart if the AI Agent is not running. See [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/).
+See [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/).
 
 ## 4. Stop, start and remove the container
 

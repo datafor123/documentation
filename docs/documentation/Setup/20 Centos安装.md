@@ -88,7 +88,7 @@ cd /opt/bi-server/
 ./start-server.sh
 ```
 
-The script starts the built-in PostgreSQL database and then the Datafor web server (Tomcat).
+The script starts the built-in PostgreSQL database, the AI Agent and the Datafor web server (Tomcat).
 
 **Console output example:**
 
@@ -108,33 +108,14 @@ Using CATALINA_OPTS: -Xms2048m -Xmx6144m ...
 Tomcat started.
 ```
 
-## Step 3: Start the AI Agent
-
-The AI Agent is in `/opt/bi-server/ai-agent` and runs the API on port 28081, a routing worker, dispatch workers (two by default) and the MCP server on port 38081. Start it with its launcher:
+## Step 3: Stop Datafor
 
 ```bash
-cd /opt/bi-server/ai-agent
-./app-console.sh start
-```
-
-`start` starts only the components that are not running, so it is safe to run it again. On the first start the launcher creates `instance-secrets.env`, which also holds the secret Datafor shares with the AI Agent. Datafor reads it from that file, so it does not need a restart. Run the launcher as the same user as Datafor: the file is readable only by the user that created it. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/).
-
-Check that the AI Agent is ready:
-
-```bash
-curl -i http://127.0.0.1:28081/ai/health
-```
-
-`HTTP/1.1 200` means it is ready. `503` means it cannot work yet; the response body says whether the database, the schema migration or the worker queues are the cause. To set up the AI features, see [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/).
-
-## Step 4: Stop Datafor
-
-```bash
-cd /opt/bi-server/ai-agent
-./app-console.sh stop
 cd /opt/bi-server/
 ./stop-server.sh
 ```
+
+The script stops the web server, the AI Agent and the database.
 
 **Console output example:**
 
@@ -144,7 +125,7 @@ LOG: database system is shut down
 server stopped
 ```
 
-## Step 5: Check whether Datafor is running
+## Step 4: Check whether Datafor is running
 
 ```bash
 ps -ef | grep [t]omcat
