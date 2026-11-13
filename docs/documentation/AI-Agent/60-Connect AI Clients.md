@@ -103,13 +103,15 @@ The desktop app, the CLI and the IDE extension on one computer share this config
 claude.ai (and its custom connectors in the Claude desktop and mobile apps) and ChatGPT on the web connect from Anthropic's and OpenAI's cloud, not from your computer. They cannot send a fixed request header for each user, so they sign in through OAuth instead:
 
 1. You add Datafor with `<MCP address>`. This works only when the address is published on the internet over HTTPS (section 8.3).
-2. The app registers itself with Datafor and opens a Datafor page in your browser that names the app and asks for a personal token.
-3. You paste a token created on **My account › Personal tokens** and click **Connect**. Datafor checks the token and hands it to the app, which then sends it with every call like any other client. **Cancel** aborts the connection.
+2. The app registers itself with Datafor and opens a Datafor page in your browser. If you are not signed in to Datafor, you sign in first (single sign-on works as usual) and come back to the page automatically.
+3. The page names the app and the site it will send you back to, and shows the account you are signed in with. Click **Allow**. Datafor creates a personal token for the app and hands it over; you do not create, copy or paste anything. **Cancel** aborts the connection.
 
-The app holds the token until the token expires, then asks you to connect again with a new one. Revoking the token disconnects the app.
+The app holds the token until the token expires, then asks you to connect again: click **Allow** once more. The token is listed on **My account › Personal tokens** as "AI client · *app name*"; revoking it there disconnects the app.
 
-- **claude.ai:** **Customize › Connectors › + Add › Add custom connector**, URL `<MCP address>`, authentication **Sign in now**, OAuth client **Register automatically** (Datafor does not accept Claude's published identity), no request headers. On Team and Enterprise plans an owner adds the connector under **Organization settings › Connectors**, and each member connects with their own token.
-- **ChatGPT:** an app in developer mode, available in Business, Enterprise and Edu workspaces: **Apps › Create**, MCP server URL `<MCP address>`, authentication **OAuth**, then **Scan Tools** and **Create**. An admin publishes it for the workspace, and each member connects with their own token.
+If the page asks you to paste a personal token instead, the Datafor server does not have the connection page yet (it is older than the MCP server). Create a token as in section 2 and paste it. Adding `?manual=1` to the sign-in address opens that page on purpose.
+
+- **claude.ai:** **Customize › Connectors › + Add › Add custom connector**, URL `<MCP address>`, authentication **Sign in now**, OAuth client **Register automatically** (Datafor does not accept Claude's published identity), no request headers. On Team and Enterprise plans an owner adds the connector under **Organization settings › Connectors**, and each member connects with their own Datafor account.
+- **ChatGPT:** an app in developer mode, available in Business, Enterprise and Edu workspaces: **Apps › Create**, MCP server URL `<MCP address>`, authentication **OAuth**, then **Scan Tools** and **Create**. An admin publishes it for the workspace, and each member connects with their own Datafor account.
 
 Step-by-step instructions are in [Try Datafor in Claude and ChatGPT](/documentation/AI-Agent/Try-in-Claude-and-ChatGPT/).
 
@@ -182,8 +184,11 @@ Back on **My account › Personal tokens**, the token's **Last used** time updat
 | `Missing Datafor MCP authentication` or `Unsupported Authorization scheme` | No usable credential reached the server: the token is missing, or the header has a word other than `Bearer` in front of it. Send `Authorization: Bearer <token>`. |
 | claude.ai or ChatGPT cannot reach the server when Datafor is added | The MCP address is not published on the internet over HTTPS, or the reverse proxy does not forward the sign-in paths (section 8.3). |
 | claude.ai reports an error about the OAuth client | The connector was added with **Use Claude's published identity**. Remove it and add it again with **Register automatically**. |
-| Datafor's sign-in page says the link is invalid or has expired | The page is valid for 15 minutes, and only in the browser it opened in. Start the connection again from the app. |
-| Datafor's sign-in page does not accept the token | The token was copied incompletely, has expired or was revoked: create a new one. If the page says Datafor could not be reached, the MCP server cannot reach Datafor at `DATAFOR_URL`. |
+| Datafor's connection page says the link is invalid or has expired | The page is valid for 15 minutes, and only in the browser it opened in. Start the connection again from the app. |
+| The connection page says personal tokens are not turned on | Self-service tokens are off. The administrator enables them in the JWT configuration (section 8.1). |
+| The connection page says this session was signed in with a token | You opened Datafor with a token. Sign in with your account, then start the connection again. |
+| You get a page that asks for a personal token instead of **Allow** | The Datafor server is older than the MCP server, or the two do not share the same secret. `mcp-server.log` says which (section 8.3). You can still connect by pasting a token. |
+| The paste-a-token page does not accept the token | The token was copied incompletely, has expired or was revoked: create a new one. If the page says Datafor could not be reached, the MCP server cannot reach Datafor at `DATAFOR_URL`. |
 | 401 or a sign-in failure on a tool call | The token has expired, was revoked or is wrong, or the account is disabled. Create a new token and update the client configuration. |
 | `password_auth_disabled` | The client still sends user name and password headers. Switch it to a personal token (section 8.4). |
 | `421 Invalid Host header` | The server is reached under a host name that is not in `MCP_ALLOWED_HOSTS` (section 8.2). |
@@ -197,7 +202,7 @@ The Claude Desktop extension writes its log to `%LOCALAPPDATA%\Claude\logs\mcp-s
 
 - A personal token stands for you and all your permissions. Keep it only in your own AI client's configuration; do not paste it into a chat, commit it to a repository or forward it. On a shared computer, remove the configuration when you are done.
 - Use a separate token for each client and each computer, so that a leak costs you one token, not all of them.
-- Paste a token into Datafor's sign-in page only during a connection you started yourself from claude.ai or ChatGPT, and check that the page names that app. The app receives the token and acts with your permissions until the token expires or you revoke it.
+- Click **Allow** on Datafor's connection page only during a connection you started yourself from claude.ai or ChatGPT, and check the app name and the site the page says it will return to. The app receives a token and acts with your permissions until the token expires or you revoke it. Removing the connector in the app does not revoke the token; revoke it on **My account › Personal tokens**.
 - If a token may have leaked, revoke it on **My account › Personal tokens** and create a new one. Revocation takes effect at once and ends the sessions opened with the token; MCP clients and other nodes of a cluster follow within a minute. An administrator can also invalidate every token of a configuration at once by changing its secret (section 8.1).
 
 ## 8. For administrators
@@ -240,7 +245,7 @@ Behind a reverse proxy, forward `/mcp` to the MCP server, use HTTPS, list the pu
 
 ### 8.3 Let cloud AI apps sign in
 
-claude.ai custom connectors and ChatGPT apps connect from Anthropic's and OpenAI's cloud and sign in through OAuth (section 3). The MCP server is its own OAuth authorization server for this: it lets the app register itself, sends the user's browser to a page of its own where the user pastes a personal token, checks the token with Datafor and gives it to the app. Datafor itself needs no change, and clients configured with a token keep working as before.
+claude.ai custom connectors and ChatGPT apps connect from Anthropic's and OpenAI's cloud and sign in through OAuth (section 3). The MCP server is its own OAuth authorization server for this: it lets the app register itself and sends the user's browser to Datafor, where the signed-in user confirms the connection. Datafor then issues a personal token for that user and passes it to the MCP server sealed with the shared secret, and the MCP server gives it to the app. With a Datafor server that does not have the connection page yet, the MCP server shows a page of its own where the user pastes a personal token. Clients configured with a token keep working as before.
 
 Sign-in is on by default when the AI Agent is started with `app-console.bat` or `app-console.sh`, because the launcher provides the [shared secret](/documentation/AI-Agent/Agent-Shared-Secret/) it needs. For the cloud apps to reach it:
 
@@ -251,9 +256,9 @@ Sign-in is on by default when the AI Agent is started with `app-console.bat` or 
 | Key in `ai-agent/.env` | Default | Effect |
 | --- | --- | --- |
 | `MCP_OAUTH_ENABLED` | on | `false` turns OAuth sign-in off; only clients configured with a token can connect. |
-| `DATAFOR_PUBLIC_URL` | `DATAFOR_URL` | The Datafor address users open in their browser. The sign-in page links to it so users can create a token. |
+| `DATAFOR_PUBLIC_URL` | `DATAFOR_URL` | The Datafor address users open in their browser. Users are sent there to confirm the connection, so it must be reachable from their browsers, not only from the MCP server. |
 
-On start, `mcp-server.log` says "MCP OAuth sign-in is on" with the public address, or "MCP OAuth sign-in is off" with the reason. The apps that registered and the one-time codes are kept in the AI Agent database, so every node of a cluster can serve any step of a sign-in. No refresh token is issued: when the token a user pasted expires, the app asks the user to connect again.
+On start, `mcp-server.log` says "MCP OAuth sign-in is on" with the public address, or "MCP OAuth sign-in is off" with the reason. On the first connection it adds whether users confirm in the Datafor console or get the paste-a-token page, and in the second case why. The apps that registered and the one-time codes are kept in the AI Agent database, so every node of a cluster can serve any step of a sign-in. No refresh token is issued: when the token expires, the app asks the user to connect again. How long that takes is the **Expiration time** of the personal-token configuration (section 8.1).
 
 Restart with `app-console.bat restart` or `./app-console.sh restart` after a change.
 

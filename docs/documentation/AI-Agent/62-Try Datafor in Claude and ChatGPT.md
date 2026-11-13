@@ -37,7 +37,7 @@ You need two values. The steps below call them `<MCP address>` and `<token>`.
 If the page says "Your administrator has not turned on personal tokens", ask your administrator to turn them on (see [Turn on personal tokens](/documentation/AI-Agent/Connect-AI-Clients/#_8-1-turn-on-personal-tokens)).
 
 ::: warning Keep the token out of chats
-The token stands for you and all your permissions. Paste it only into the app's settings or configuration file, or into the Datafor page that asks for it during a sign-in you started yourself; never into a conversation. Create one token per app and computer, so you can revoke one without breaking the others.
+The token stands for you and all your permissions. Paste it only into the app's settings or configuration file; never into a conversation. claude.ai and ChatGPT on the web do not need you to paste one: you confirm the connection on a Datafor page instead. Create one token per app and computer, so you can revoke one without breaking the others.
 :::
 
 ## 3. Set up Claude
@@ -66,10 +66,10 @@ This works on claude.ai and, once added, in the Claude desktop and mobile apps a
 1. On claude.ai, open **Customize › Connectors**, click **+ Add**, then **Add custom connector**. On a Team or Enterprise plan an owner adds it instead under **Organization settings › Connectors** (**Add › Custom › Web**) with the same settings, and each member then clicks **Connect** on it under **Customize › Connectors**.
 2. Enter the name `Datafor` and `<MCP address>` as the URL, then click **Continue**.
 3. Under **Authentication**, choose **Sign in now**. Under **OAuth client**, choose **Register automatically**: Datafor does not accept **Use Claude's published identity**. Leave **Request headers** empty.
-4. Click **Add**. A Datafor page opens in your browser. Check that it names Claude, paste a personal token (create one named `claude.ai`) and click **Connect**.
+4. Click **Add**. A Datafor page opens in your browser; sign in to Datafor if it asks. Check that the page names Claude and shows your account, then click **Allow**. You do not need to create or paste a token.
 5. In a conversation, click **+**, choose **Connectors** and turn on **Datafor**.
 
-The connector keeps the token until the token expires. Claude then asks you to connect again: create a new token and paste it on the same page. To disconnect, revoke the token on **My account › Personal tokens** or remove the connector.
+Datafor creates a personal token for the connector, listed on **My account › Personal tokens** as "AI client · *app name*". The connector keeps it until it expires; Claude then asks you to connect again, and you click **Allow** once more. To disconnect, revoke that token on **My account › Personal tokens**; removing the connector in Claude does not revoke it.
 
 ### Claude Code
 
@@ -136,10 +136,10 @@ On chatgpt.com, Datafor is added as an app in **developer mode**. This is availa
 
 1. A workspace admin turns on developer mode in the workspace settings, under **Permissions & Roles › Connected Data**. On Enterprise and Edu, admins can allow it for selected members, who then turn it on in their own **Apps** settings.
 2. In the settings, open **Apps** and click **Create**. Enter the name `Datafor`, `<MCP address>` as the MCP server URL, and choose **OAuth** as the authentication.
-3. Click **Scan Tools**. A Datafor page opens: paste a personal token (create one named `ChatGPT`) and click **Connect**. When the scan has listed the four Datafor tools, click **Create**.
+3. Click **Scan Tools**. A Datafor page opens; sign in to Datafor if it asks, check that the page names ChatGPT and shows your account, and click **Allow**. When the scan has listed the four Datafor tools, click **Create**.
 4. The app is now a draft, marked **Dev** in your own settings. To offer it to the workspace, an admin publishes it from **Workspace settings › Apps**. Every member then connects it and pastes their own token, so each one queries Datafor with their own permissions.
 
-ChatGPT keeps the token until it expires and then asks you to connect again: create a new token and paste it. When Datafor's tools change after an upgrade, an admin clicks **Refresh** on the app so ChatGPT picks up the new list.
+ChatGPT keeps the token Datafor created for it until it expires and then asks you to connect again: click **Allow** once more. When Datafor's tools change after an upgrade, an admin clicks **Refresh** on the app so ChatGPT picks up the new list.
 
 ## 6. Try it
 
@@ -176,9 +176,9 @@ If the app asks permission before it uses a Datafor tool, allow it. The tools on
 | claude.ai or ChatGPT cannot reach the server when you add Datafor | The MCP address is not reachable from the internet over HTTPS. Ask your administrator to publish it ([Let cloud AI apps sign in](/documentation/AI-Agent/Connect-AI-Clients/#_8-3-let-cloud-ai-apps-sign-in)). |
 | claude.ai reports an error about the OAuth client | Remove the connector and add it again with **Register automatically** under **OAuth client**. |
 | The Datafor page says the link is invalid or has expired | The page is valid for 15 minutes and works only in the browser it opened in. Start the connection again from Claude or ChatGPT. |
-| The Datafor page says Datafor did not accept the token | The token was copied incompletely, has expired or was revoked. Create a new one and paste it. |
+| The Datafor page asks you to paste a personal token instead of showing **Allow** | The Datafor server does not have the connection page yet. Create a token on **My account › Personal tokens** and paste it. If the page then says Datafor did not accept it, the token was copied incompletely, has expired or was revoked: create a new one. |
 | The Datafor page says Datafor could not be reached | Datafor is down or restarting. Try again in a moment, or ask your administrator. |
-| The connector or app asks you to connect again | The token you pasted has expired. Create a new one and paste it on the Datafor page. |
+| The connector or app asks you to connect again | The token has expired or was revoked. Connect again and click **Allow** on the Datafor page. |
 | The answer stops after about a minute | ChatGPT: add `tool_timeout_sec = 600` (section 4, *Allow slower answers*). Other apps: raise their tool timeout. |
 
 More cases, the server logs and the administrator settings are in [Connect AI Clients (MCP)](/documentation/AI-Agent/Connect-AI-Clients/#_6-troubleshooting).
