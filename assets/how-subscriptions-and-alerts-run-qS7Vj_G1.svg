@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" font-family="'Segoe UI','Helvetica Neue',Arial,'Microsoft YaHei','PingFang SC','Noto Sans',sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">How subscriptions and alerts run</title>
+  <desc id="desc">A subscription runs on its schedule or with Run now and renders the dashboard as each recipient; recipients with the same permissions share one render. An alert checks on its schedule, queries the metric as its owner and tests the conditions, and continues only when they are met. Both build the message from the administrator's template. People and roles in Send to each receive it the way they chose in My account, by email or IM direct message; roles are expanded at every run. Channels in Post to channels get one shared message. Below: a subscription to a person carries that person's data, a subscription posted to a channel carries the owner's data, and an alert carries the owner's data for everyone, skipping people who cannot use the model.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+  <rect width="900" height="520" fill="#FFFFFF"/>
+
+  <!-- Flow lane -->
+  <rect x="10" y="10" width="880" height="300" rx="12" fill="#F4F7FB" stroke="#D5DEEA" stroke-width="1.5"/>
+  <text x="30" y="40" font-size="18" font-weight="700" fill="#2B2B3A">What happens at each run</text>
+
+  <!-- Subscription row -->
+  <rect x="30" y="66" width="140" height="70" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="100" y="95" font-size="14" font-weight="700" fill="#2B2B3A" text-anchor="middle">Subscription</text>
+  <text x="100" y="115" font-size="12" fill="#5B6472" text-anchor="middle">schedule or Run now</text>
+
+  <rect x="200" y="66" width="220" height="70" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="310" y="89" font-size="14" font-weight="700" fill="#2B2B3A" text-anchor="middle">Render the dashboard</text>
+  <text x="310" y="108" font-size="12" fill="#5B6472" text-anchor="middle">as each recipient; people with the</text>
+  <text x="310" y="124" font-size="12" fill="#5B6472" text-anchor="middle">same permissions share a render</text>
+
+  <!-- Alert row -->
+  <rect x="30" y="196" width="140" height="70" rx="8" fill="#FFFFFF" stroke="#D96C4C" stroke-width="1.5"/>
+  <text x="100" y="225" font-size="14" font-weight="700" fill="#2B2B3A" text-anchor="middle">Alert</text>
+  <text x="100" y="245" font-size="12" fill="#5B6472" text-anchor="middle">checks on its schedule</text>
+
+  <rect x="200" y="196" width="220" height="70" rx="8" fill="#FFFFFF" stroke="#D96C4C" stroke-width="1.5"/>
+  <text x="310" y="219" font-size="14" font-weight="700" fill="#2B2B3A" text-anchor="middle">Query the metric as the owner</text>
+  <text x="310" y="238" font-size="12" fill="#5B6472" text-anchor="middle">continue only when the conditions</text>
+  <text x="310" y="254" font-size="12" fill="#5B6472" text-anchor="middle">are met and the notify rule allows</text>
+
+  <!-- Message -->
+  <rect x="450" y="131" width="140" height="70" rx="8" fill="#FFFFFF" stroke="#8A93A3" stroke-width="1.5"/>
+  <text x="520" y="157" font-size="14" font-weight="700" fill="#2B2B3A" text-anchor="middle">Build the message</text>
+  <text x="520" y="177" font-size="12" fill="#5B6472" text-anchor="middle">from the template</text>
+  <text x="520" y="192" font-size="12" fill="#5B6472" text-anchor="middle">set by the admin</text>
+
+  <!-- Delivery -->
+  <rect x="620" y="60" width="250" height="104" rx="8" fill="#FFFFFF" stroke="#3F8F6B" stroke-width="1.5"/>
+  <text x="635" y="84" font-size="14" font-weight="700" fill="#2B2B3A">Send to: people and roles</text>
+  <text x="635" y="104" font-size="12" fill="#5B6472">Roles are expanded at every run.</text>
+  <text x="635" y="121" font-size="12" fill="#5B6472">Each person gets it the way they</text>
+  <text x="635" y="138" font-size="12" fill="#5B6472">chose in My account: email and/or</text>
+  <text x="635" y="155" font-size="12" fill="#5B6472">an IM direct message.</text>
+
+  <rect x="620" y="190" width="250" height="86" rx="8" fill="#FFFFFF" stroke="#C9A96E" stroke-width="1.5"/>
+  <text x="635" y="214" font-size="14" font-weight="700" fill="#2B2B3A">Post to channels</text>
+  <text x="635" y="234" font-size="12" fill="#5B6472">Slack or Teams channels, group</text>
+  <text x="635" y="251" font-size="12" fill="#5B6472">robots, webhooks: one message</text>
+  <text x="635" y="268" font-size="12" fill="#5B6472">that everyone in the channel sees.</text>
+
+  <!-- Arrows -->
+  <line x1="170" y1="101" x2="198" y2="101" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="170" y1="231" x2="198" y2="231" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M420,101 L434,101 L434,152 L448,152" fill="none" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M420,231 L434,231 L434,180 L448,180" fill="none" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M590,152 L604,152 L604,112 L618,112" fill="none" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M590,180 L604,180 L604,233 L618,233" fill="none" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Whose data lane -->
+  <rect x="10" y="326" width="880" height="184" rx="12" fill="#FBF8F2" stroke="#E6DCC8" stroke-width="1.5"/>
+  <text x="30" y="356" font-size="18" font-weight="700" fill="#2B2B3A">Whose data is in the message</text>
+
+  <rect x="30" y="378" width="270" height="110" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="45" y="404" font-size="14" font-weight="700" fill="#2B2B3A">Subscription → a person</text>
+  <text x="45" y="426" font-size="12" fill="#5B6472">That person's own permissions,</text>
+  <text x="45" y="443" font-size="12" fill="#5B6472">row-level security included.</text>
+  <text x="45" y="460" font-size="12" fill="#5B6472">People who cannot open the</text>
+  <text x="45" y="477" font-size="12" fill="#5B6472">report are skipped.</text>
+
+  <rect x="315" y="378" width="270" height="110" rx="8" fill="#FFFFFF" stroke="#C9A96E" stroke-width="1.5"/>
+  <text x="330" y="404" font-size="14" font-weight="700" fill="#2B2B3A">Subscription → a channel</text>
+  <text x="330" y="426" font-size="12" fill="#5B6472">The owner's permissions. A channel</text>
+  <text x="330" y="443" font-size="12" fill="#5B6472">has no single identity, so everyone</text>
+  <text x="330" y="460" font-size="12" fill="#5B6472">in it sees what the owner sees.</text>
+
+  <rect x="600" y="378" width="270" height="110" rx="8" fill="#FFFFFF" stroke="#D96C4C" stroke-width="1.5"/>
+  <text x="615" y="404" font-size="14" font-weight="700" fill="#2B2B3A">Alert → anyone</text>
+  <text x="615" y="426" font-size="12" fill="#5B6472">The owner's permissions: one result</text>
+  <text x="615" y="443" font-size="12" fill="#5B6472">for all recipients. People who cannot</text>
+  <text x="615" y="460" font-size="12" fill="#5B6472">use the model or open the report</text>
+  <text x="615" y="477" font-size="12" fill="#5B6472">are skipped.</text>
+</svg>
