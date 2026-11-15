@@ -26,6 +26,7 @@ Datafor adds a trailing `/` if it is missing. Until a value is saved, the field 
 | --- | --- |
 | **Multi-tenancy** list | The address of each tenant: **Site URL** followed by `t/<tenant id>`, for example `https://bi.example.com/datafor/t/tenant16`. See [Multi-tenancy](/documentation/Multi-tenancy/Multi-tenancy/). |
 | AI Agent | While **Public URL** in **Settings › AI Agent › AI service** is empty, browsers reach the AI Agent at **Site URL** followed by `ai`, for example `https://bi.example.com/datafor/ai`. See [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/). |
+| **IM platforms** | The callback, app home page and redirect addresses that you enter in WeCom, DingTalk and Feishu, for example `https://bi.example.com/datafor/plugin/datafor-im/api/sso/dingtalk/<app id>/start`. See [IM Platforms](/documentation/System/IM-Platforms/#addresses-to-enter-in-the-platform). |
 
 With the shipped value, these addresses point to `localhost` and work only on the server itself.
 

@@ -18,7 +18,7 @@ This page is for administrators. Everything here is under **Settings › Notific
 | Render service | Runs with the AI Agent, see [below](#render-service) | Subscriptions send only text and the report link |
 | Temporary links | A rule in the platform security file, see [below](#temporary-links) | DingTalk, Feishu, webhook, Slack Webhook and Teams Webhook messages carry no images or files |
 | AI service and budgets | [AI service](/documentation/AI-Agent/AI-Feature/); budgets on the [Settings tab](/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/#settings-tab) | No AI brief in subscriptions, no AI analysis in alerts |
-| IM apps | **Settings › Notifications › IM platforms** | No direct messages, no Slack or Teams channels |
+| IM apps | **Settings › Notifications › IM platforms**, see [IM Platforms](/documentation/System/IM-Platforms/) | No direct messages, no Slack or Teams channels |
 | Group robots and webhooks | **Settings › Notifications › Delivery channels** | No WeCom, DingTalk or Feishu group messages, no webhooks |
 | System time zone | **Subscriptions & alerts › Settings** | Times follow the server's zone, which may not be your business zone |
 
@@ -74,9 +74,9 @@ The links must be reachable from the IM platform's servers: a server that only h
 
 ## IM apps
 
-**Settings › Notifications › IM platforms** connects a WeCom, DingTalk, Feishu, Slack or Microsoft Teams app to Datafor. One app serves several purposes: sign-in from the IM, directory sync, asking the AI assistant in chat, and delivery. For subscriptions and alerts it provides:
+**Settings › Notifications › IM platforms** connects a WeCom, DingTalk, Feishu, Slack or Microsoft Teams app to Datafor. One app serves several purposes: sign-in from the IM, directory sync, asking the AI assistant in chat, and delivery. Creating the apps, the addresses to enter in each platform and linking people are described in [IM Platforms](/documentation/System/IM-Platforms/). For subscriptions and alerts an app provides:
 
-- **Direct messages** to each person. Create a delivery channel of the matching type (**Slack direct message**, **Teams direct message**, **WeCom app message**, **DingTalk app message** or **Feishu app message**) and pick the app; from then on every user sees it under **How I receive**. People must be linked to the app: through directory sync, by opening Datafor from the IM app once, or by an administrator with **IM accounts** on the user's row under **Users**. Slack and Teams also match people by email address.
+- **Direct messages** to each person. Saving a Slack or Teams app creates its **Slack direct message** or **Teams direct message** channel. For WeCom, DingTalk and Feishu, create a delivery channel of type **WeCom app message**, **DingTalk app message** or **Feishu app message** and pick the app. From then on every user sees it under **How I receive**. People must be linked to the app: through directory sync, by opening Datafor from the IM app once, or by an administrator with **IM accounts** on the user's row under **Users**. Slack and Teams also match people by email address.
 - **Slack and Teams channels**, which users pick directly in **Post to channels** from the app's channel list. No delivery channel is needed. For a private Slack channel, invite the bot into it first. Teams lists standard channels and installs the app into the team when the subscription is saved.
 
 ## Delivery channels

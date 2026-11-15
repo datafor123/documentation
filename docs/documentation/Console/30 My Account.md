@@ -113,7 +113,7 @@ Filter by report or status, **Refresh**, and use **Download**, **Cancel** (queue
 
 **Subscriptions & alerts** sets how you receive subscriptions and alerts (**How I receive**: email, an IM direct message, or both) and lists the dashboard subscriptions, metric alerts and paginated report subscriptions you created, with their runs. See [Managing Your Subscriptions and Alerts](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/).
 
-**Linked IM accounts** lists the WeCom, DingTalk, Feishu, Slack or Teams accounts linked to your user, where you can unlink them. **Subscriptions & alerts** appears when the subscriptions and alerts plugin is installed, **Linked IM accounts** when an administrator has connected IM platforms.
+**Linked IM accounts** lists the WeCom, DingTalk, Feishu, Slack or Teams accounts linked to your user, where you can unlink them. How accounts get linked is described in [Using Datafor in IM Apps](/documentation/System/Using-Datafor-in-IM-Apps/). **Subscriptions & alerts** appears when the subscriptions and alerts plugin is installed, **Linked IM accounts** when an administrator has connected IM platforms.
 
 ## Handle unsaved changes
 
