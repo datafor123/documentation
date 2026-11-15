@@ -79,7 +79,9 @@ Create a self-built app in the WeCom admin console under **App Management**. The
 | **Agent ID**, **Secret** | The app's detail page |
 | **Callback token**, **Callback EncodingAESKey** | The app's **Receive Messages › Set API Receiving**, where you generate both. Optional: without them the app only sends, and people cannot ask questions in WeCom. |
 
-WeCom delivers messages only by callback, so the **Callback URL** must be reachable from the internet. In the WeCom app also set the **Trusted domain** (web authorization), the **App homepage** and, under **Receive Messages**, the **Callback URL** from [Addresses to enter in the platform](#addresses-to-enter-in-the-platform). Recently created WeCom apps can call WeCom only from the enterprise's trusted IP addresses; if **Check credentials** reports error `60020`, add the Datafor server's outgoing IP address to the app's trusted IPs.
+WeCom delivers messages only by callback, so the **Callback URL** must be reachable from the internet. In the WeCom app also set the **Trusted domain** (web authorization), the **App homepage** and, under **Receive Messages**, the **Callback URL** from [Addresses to enter in the platform](#addresses-to-enter-in-the-platform). WeCom checks the trusted domain with a verification file (`WW_verify_….txt`) that must be reachable at the root of that domain, so serve it from your web server or reverse proxy.
+
+Newer WeCom apps accept API calls only from the IP addresses listed under **Enterprise trusted IP** at the bottom of the app's page, which you can fill in once the trusted domain or the Receive Messages URL is set. If **Check credentials** reports `60020` (*not allow to access from your ip*), add the IP address shown in the error, which is the Datafor server's outgoing public address.
 
 New WeCom apps do not receive members' mobile numbers and email addresses. Match users by **Platform ID equals login name** when the WeCom user IDs equal Datafor login names, or let people link themselves by opening the app once.
 
@@ -181,7 +183,7 @@ Directory sync reads the members of the platform's directory and links them to D
 | **Scheduled sync**, **Sync schedule** | Run the sync daily, weekly or monthly at the time and time zone you choose. **Sync now** in the row menu runs it at once. One sync runs at a time per app. |
 | **Match order** | Tick the fields used to find the Datafor user for each member, and drag to reorder: **Mobile number** (country code `+86` and non-digits are ignored), **Email** (case-insensitive), **Employee ID**, and **Platform ID equals login name**. Fields are tried in order and the first that finds a user wins. Slack and Teams offer only **Email** and **Platform ID equals login name**. |
 | **Departments** | Platform department IDs to sync, sub-departments included; press Enter after each. Empty syncs every department the app can see, which is the app's visibility range in the platform. Not shown for Slack and Teams. |
-| **Create Reader users for unmatched people** | Creates a Reader user for each member that matched nobody, with the platform user ID as login name, the platform's name and email, and a random password. Available only when `auto-create-reader` is `true` in the [server settings](#server-settings); otherwise the switch is disabled. |
+| **Create Reader users for unmatched people** | Creates a Reader user for each member that matched nobody, with the platform user ID as login name, the platform's name and email, and a random password. Available only when **Allow creating Reader users in sync** is on in [Settings for all apps](#settings-for-all-apps); otherwise the switch is disabled. |
 | **Match accounts by email automatically** | Slack and Teams only, on by default. A person is linked as soon as Datafor needs them (a message to send, or a message they send to the bot) if exactly one Datafor user has the same email address. For Teams, a Datafor email or login name equal to the person's Microsoft 365 email or sign-in name also counts. Guests and people from other workspaces or tenants are never matched. |
 
 What a sync does and does not change:
@@ -202,7 +204,7 @@ What a sync does and does not change:
 
 ## Asking questions in chat
 
-**Allow asking questions in chat** (on by default; not available for Teams) lets people send questions to the app. The AI assistant answers each question with the permissions of the person who asked, and the question counts against that person's daily AI quota (see [AI Operations and Quotas](/documentation/AI-Agent/AI-Operations-and-Quotas/)). When it is off, the app replies that data questions are not enabled there. Chat commands for subscriptions and alerts keep working.
+**Allow asking questions in chat** (on by default; not available for Teams) lets people send questions to the app. The AI assistant answers each question with the permissions of the person who asked, and the question counts against that person's daily AI quota (see [AI Operations and Quotas](/documentation/AI-Agent/AI-Operations-and-Quotas/)). When it is off, here or for all apps in [Settings for all apps](#settings-for-all-apps), the app replies that data questions are not enabled there. Chat commands for subscriptions and alerts keep working.
 
 Asking needs a working inbound connection, the AI service, and a linked account for the person asking. In groups, the answer is posted to the group, so everyone in it sees data calculated with the asker's permissions; the card says whose. What people see is described in [Using Datafor in IM Apps](/documentation/System/Using-Datafor-in-IM-Apps/#ask-questions).
 
@@ -231,7 +233,20 @@ The **IM accounts** column of the user list shows one icon for each platform tha
 
 **Delete** removes the app together with its sign-in, sync history and all account links. It is refused while a delivery channel uses the app, or while a subscription or alert posts to one of its channels; change or delete those first. To stop an app only for a while, turn **Enabled** off instead.
 
-Creating, editing and deleting apps, linking and unlinking users and directory syncs can be recorded in the [Audit Log](/documentation/System/Audit-Log/) under the **IM platforms** group.
+Creating, editing and deleting apps, linking and unlinking users, directory syncs and changes to the settings below can be recorded in the [Audit Log](/documentation/System/Audit-Log/) under the **IM platforms** group.
+
+## Settings for all apps
+
+The **Settings for all apps** section below the apps table applies to every app. Changes take effect when you click **Save**, without a restart.
+
+| Setting | Default | Effect |
+| --- | --- | --- |
+| **Receive messages from IM apps** | On | Off: no app receives messages, so nobody can ask questions or use chat commands. Sending is not affected. |
+| **Allow asking questions in chat** | On | Off: no app answers questions, whatever the app's own switch says. Chat commands keep working. |
+| **Allow creating Reader users in sync** | Off | Lets an app turn on **Create Reader users for unmatched people** in its [directory sync](#directory-sync). |
+| **Messages per person per minute** | 10 | Further messages within the minute get *Too many messages, please try again later.* |
+
+The defaults come from the plugin's `settings.xml` (keys `inbound-enabled`, `ask-enabled`, `auto-create-reader` and `inbound-rate-per-user-minute`). What you save here overrides them and is kept in `settings-override.json` in the output directory, so it survives restarts. **Restore settings.xml values** appears once something is overridden and removes the overrides.
 
 ## Server settings
 
@@ -239,10 +254,6 @@ The plugin's `settings.xml`, in `pentaho-solutions/system/datafor-im/`, holds th
 
 | Key | Default | Meaning |
 | --- | --- | --- |
-| `auto-create-reader` | `false` | Allows **Create Reader users for unmatched people** |
-| `inbound-enabled` | `true` | Receive messages from the IM at all |
-| `inbound-rate-per-user-minute` | 10 | Messages one person can send per minute; more get *Too many messages, please try again later.* |
-| `ask-enabled` | `true` | Asking questions in chat for all apps |
 | `ask-timeout-seconds` | 120 | How long the app waits for an answer before pointing to Datafor |
 | `ask-context-minutes` | 30 | How long a reply counts as a follow-up to the previous question |
 | `agent-url` | empty | AI Agent address; empty goes through Datafor's own `/ai` address |
@@ -256,7 +267,7 @@ The plugin's `settings.xml`, in `pentaho-solutions/system/datafor-im/`, holds th
 
 | Symptom | Cause and fix |
 | --- | --- |
-| **Credentials** shows **Failed** | Run **Check credentials** and read the platform's error. Usually a wrong secret, a secret that was reset in the platform, or for WeCom error `60020`, the server's IP address missing from the trusted IPs. |
+| **Credentials** shows **Failed** | Run **Check credentials** and read the platform's error. Usually a wrong secret, a secret that was reset in the platform, or for WeCom error `60020`, the server's IP address missing from the app's **Enterprise trusted IP**. |
 | **Inbound** stays **Connecting** or **Disconnected** | The server cannot open the outgoing connection: check outbound access and any proxy. For Slack, check that Socket Mode is still on in the Slack app and that the App-Level Token is valid. |
 | **Awaiting callbacks**, but the app never answers | The platform cannot reach the **Callback URL**. Check the site address and that the address is reachable from the internet, and compare the token and key with the platform. |
 | Opening the app in the IM shows the Datafor login page | The security rule in [Before you start](#before-you-start) is missing, or the **App home page URL** or **Redirect URL** in the platform does not match the current site address. |

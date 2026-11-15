@@ -47,7 +47,7 @@ The app first replies *Analysing, please wait…*. The answer contains the AI as
 - **Permissions.** Answers always use your permissions. In a group, everyone in the group sees the answer to your question.
 - **Limits.** Questions count against your daily AI quota. After 2 minutes without a result, the app tells you to check the result in Datafor later. You can send up to 10 messages per minute.
 
-If the app replies that data questions are not enabled, the administrator has turned asking off for that app.
+If the app replies that data questions are not enabled, the administrator has turned asking off for that app or for all apps.
 
 ## Chat commands
 
