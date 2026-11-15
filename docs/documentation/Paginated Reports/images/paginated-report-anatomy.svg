@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="860" height="520" viewBox="0 0 860 520" font-family="'Segoe UI','Helvetica Neue',Arial,'Microsoft YaHei','PingFang SC','Noto Sans',sans-serif" role="img" aria-labelledby="title desc">
   <title id="title">How a paginated report is put together</title>
-  <desc id="desc">On the left, data: a model dataset built from an analysis model or an SQL dataset on a database connection, both filtered by report parameters that readers set in the viewer. In the middle, the page: a header band repeated on every page, a body with text blocks and one table or crosstab that flows across pages, and a footer band. On the right, outputs: the viewer pages, formatted exports PDF, Excel and Word, data exports flat Excel and CSV, scheduled distribution by email or to a repository folder, and drill-through from dashboards.</desc>
+  <desc id="desc">On the left, data: a model dataset built from an analysis model or an SQL dataset on a database connection, both filtered by report parameters that readers set in the viewer. In the middle, the page: a header band repeated on every page, a body with text blocks and one table or crosstab that flows across pages, and a footer band. On the right, outputs: the viewer pages, formatted exports PDF, Excel and Word, data exports flat Excel and CSV, subscriptions that send the report on a schedule to people, roles and channels, and drill-through from dashboards.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
@@ -34,7 +34,7 @@
   <line x1="135" y1="300" x2="135" y2="278" stroke="none"/>
   <text x="30" y="428" font-size="12" fill="#7A8390">Set by the reader in the viewer,</text>
   <text x="30" y="445" font-size="12" fill="#7A8390">by a URL (p_name=value), by a</text>
-  <text x="30" y="462" font-size="12" fill="#7A8390">drill-through, or by a distribution.</text>
+  <text x="30" y="462" font-size="12" fill="#7A8390">drill-through, or by a subscription.</text>
 
   <!-- Page lane -->
   <rect x="280" y="10" width="300" height="500" rx="12" fill="#F4F7FB" stroke="#D5DEEA" stroke-width="1.5"/>
@@ -99,10 +99,10 @@
   <text x="636" y="310" font-size="12" fill="#5B6472">per record, no totals or merges.</text>
 
   <rect x="620" y="332" width="210" height="80" rx="8" fill="#FFFFFF" stroke="#BFE0C6"/>
-  <text x="636" y="354" font-size="13" font-weight="700" fill="#2B2B3A">Distribution</text>
-  <text x="636" y="372" font-size="12" fill="#5B6472">Daily, weekly or monthly: email</text>
-  <text x="636" y="388" font-size="12" fill="#5B6472">attachments or a repository folder,</text>
-  <text x="636" y="404" font-size="12" fill="#5B6472">one copy per parameter value or row.</text>
+  <text x="636" y="354" font-size="13" font-weight="700" fill="#2B2B3A">Subscription</text>
+  <text x="636" y="372" font-size="12" fill="#5B6472">On a schedule or on demand, to</text>
+  <text x="636" y="388" font-size="12" fill="#5B6472">people, roles and channels; one</text>
+  <text x="636" y="404" font-size="12" fill="#5B6472">copy per parameter value or person.</text>
 
   <rect x="620" y="424" width="210" height="66" rx="8" fill="#FFFFFF" stroke="#BFE0C6"/>
   <text x="636" y="446" font-size="13" font-weight="700" fill="#2B2B3A">From a dashboard</text>

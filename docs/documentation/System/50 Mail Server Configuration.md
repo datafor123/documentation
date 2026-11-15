@@ -9,7 +9,7 @@ createTime: 2026/09/01 22:03:26
 
 Datafor sends all its email through the SMTP server configured on the **Email** page:
 
-- alert notifications;
+- subscriptions, metric alerts and paginated report subscriptions sent by email, and the notices to their owners when a run fails (see [Understanding Subscriptions and Alerts](/documentation/Subscriptions-and-Alerts/Understanding-Subscriptions-and-Alerts/));
 - verification codes for a forgotten password;
 - verification codes for self-registration, when registration is allowed;
 - the result of a data upload approval, sent to the user who uploaded the file.
@@ -18,7 +18,7 @@ Without a working mail server, these emails are not sent. Only administrators ca
 
 ## 1. Open the Email page
 
-Go to **Settings › General › Email**.
+Go to **Settings › Notifications › Email**.
 
 <div align="left"><img src="./images/settings-email.png" alt="Email settings page" width="80%" /></div>
 

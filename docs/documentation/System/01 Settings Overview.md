@@ -12,13 +12,16 @@ Administrators open **Settings** (gear icon) in the left navigation. Pages are g
 | Group | Page | Use it to | Guide |
 | --- | --- | --- | --- |
 | **General** | **License** | View and update the license, get the machine code | [License and Activation](/documentation/System/License/) |
-| | **Email** | Set the SMTP server for alerts, password-reset and registration codes, and upload approval results | [Mail Server Configuration](/documentation/System/Mail-Server-Configuration/) |
 | | **System configuration** | Defaults for new reports and models, query limits, first day of the week | [System Configuration](/documentation/System/System-Configuration/) |
 | | **Branding** | Logo, colours, login page, interface font | [White Label](/documentation/Console/Branding/) |
 | **Access & Integration** | **Single sign-on** | LDAP, OAuth 2.0, SAML 2.0 and CAS | [Single Sign-On Overview](/documentation/System/Single-Sign-On/), [LDAP](/documentation/System/LDAP/), [OAuth2](/documentation/System/OAuth2-Authentication/), [SAML2](/documentation/System/SAML2/), [CAS](/documentation/System/CAS-Authentication/) |
 | | **Site address** | The public address of the server | [Site Address](/documentation/System/Site-Address/) |
 | | **Embed tokens (JWT)** | Sign-in for embedded reports | [JSON Web Token (JWT)](/documentation/System/JWT/) |
 | | **Cross-origin access (CORS)** | Allow other sites to call the server from the browser, for example the SDK | [Cross-Origin Access (CORS)](/documentation/System/CORS/) |
+| **Notifications** | **Email** | Set the SMTP server for subscriptions and alerts, password-reset and registration codes, and upload approval results | [Mail Server Configuration](/documentation/System/Mail-Server-Configuration/) |
+| | **IM platforms** | Connect WeCom, DingTalk, Feishu, Slack or Microsoft Teams apps for sign-in, directory sync, asking in chat and message delivery | [Setting Up Delivery](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#im-apps) |
+| | **Delivery channels** | Group robots, webhooks and direct-message channels for subscriptions and alerts, and who may use them | [Setting Up Delivery](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#delivery-channels) |
+| | **Subscriptions & alerts** | Status, everyone's subscriptions and alerts, run history, time zone, default delivery, quotas and message templates | [Monitoring and Limits](/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/) |
 | **Data** | **Database drivers** | Upload JDBC drivers | [JDBC Driver Management](/documentation/Datasource/JDBC-Driver-Management/) |
 | | **Query engine** | Query limits and display of special values | [Query Engine](/documentation/System/Query-Engine/) |
 | | **Maps** | Tile and geocoding services for GIS maps | [GIS Map Settings](/documentation/Visualization/GIS-Map-Settings/) |

@@ -50,7 +50,7 @@ Hidden parameters (see [Datasets and Parameters](/documentation/Paginated-Report
 
 Sign-in works as for dashboards: the viewer uses the Datafor session, so embed it behind the same sign-in, or pass a token as described in [Signing In Users](/documentation/Embedded/Signing-In-Users/). Cross-origin iframes need the host added under [Cross-Origin Access](/documentation/System/CORS/).
 
-Exports are also plain URLs: `…/plugin/datafor-pagereport/api/render/export?path=<report path>&format=pdf&p_region=East%20China` returns the file directly (synchronously, with the same row limits as the viewer). For scheduled files use a [distribution](/documentation/Paginated-Reports/Distribution/).
+Exports are also plain URLs: `…/plugin/datafor-pagereport/api/render/export?path=<report path>&format=pdf&p_region=East%20China` returns the file directly (synchronously, with the same row limits as the viewer). For scheduled files use a [subscription](/documentation/Paginated-Reports/Subscriptions/).
 
 ## Not yet available
 

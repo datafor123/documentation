@@ -31,7 +31,7 @@ A paginated report can be the target of a dashboard's drill-through, so the two 
 
 ## How a report is put together
 
-![A paginated report has three parts: data from a model dataset or an SQL dataset filtered by parameters, a page with a header band, a body holding text and one table or crosstab, and a footer band, and outputs such as the viewer, formatted exports, data exports, distribution and drill-through from dashboards](./images/paginated-report-anatomy.svg)
+![A paginated report has three parts: data from a model dataset or an SQL dataset filtered by parameters, a page with a header band, a body holding text and one table or crosstab, and a footer band, and outputs such as the viewer, formatted exports, data exports, subscriptions and drill-through from dashboards](./images/paginated-report-anatomy.svg)
 
 **Datasets** return rows. A **model dataset** takes fields from an analysis model, in the same way a dashboard chart does, and the query is generated from the fields you place on the report; row-level security applies as usual. An **SQL dataset** runs SQL you write on a database connection, with `#{parameter}` placeholders bound as query parameters; writing SQL needs raw SQL permission on the connection. Model datasets suit summaries; SQL datasets suit long detail lists.
 
@@ -39,7 +39,7 @@ A paginated report can be the target of a dashboard's drill-through, so the two 
 
 **The page** has a fixed paper size, orientation and margins. The **header** and **footer** bands repeat on every page and hold text, images, page numbers and field values. The **body** holds text blocks and the data block: a **table** (columns, groups with subtotals, a grand total) or a **crosstab** (row and column dimensions with measures and totals). Tables and crosstabs take their look from a style template, the same templates as the dashboard pivot table.
 
-**Outputs** are produced from the same definition. Readers page through the report in the viewer, export it, or print it. Exports come in two groups: *formatted* (PDF, Excel, Word) keep the page layout, *data only* (flat Excel, CSV) give one row per record for further work in a spreadsheet. A **distribution** generates the report on a schedule and emails it or saves it to a folder.
+**Outputs** are produced from the same definition. Readers page through the report in the viewer, export it, or print it. Exports come in two groups: *formatted* (PDF, Excel, Word) keep the page layout, *data only* (flat Excel, CSV) give one row per record for further work in a spreadsheet. A **subscription** generates the report on a schedule and sends it to people, roles and channels.
 
 ## Where paginated reports appear
 
@@ -66,4 +66,4 @@ Permissions follow the folder: you need write permission on a folder to save a r
 - [Datasets and Parameters](/documentation/Paginated-Reports/Datasets-and-Parameters/)
 - [Tables and Crosstabs](/documentation/Paginated-Reports/Tables-and-Crosstabs/)
 - [Viewing, Pagination and Export](/documentation/Paginated-Reports/Viewing-Pagination-and-Export/)
-- [Distribution](/documentation/Paginated-Reports/Distribution/)
+- [Subscriptions](/documentation/Paginated-Reports/Subscriptions/)

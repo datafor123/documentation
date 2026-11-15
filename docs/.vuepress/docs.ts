@@ -162,8 +162,21 @@ export const documentationNote = defineNoteConfig({
 				{ text: "Page Layout, Header and Footer", link: "/documentation/Paginated-Reports/Page-Layout-Header-and-Footer/" },
 				{ text: "Viewing, Pagination and Export", link: "/documentation/Paginated-Reports/Viewing-Pagination-and-Export/" },
 				{ text: "Report Downloads", link: "/documentation/Paginated-Reports/Report-Downloads/" },
-				{ text: "Distribution", link: "/documentation/Paginated-Reports/Distribution/" },
+				{ text: "Subscriptions", link: "/documentation/Paginated-Reports/Subscriptions/" },
 				{ text: "Drill Through and Embedding", link: "/documentation/Paginated-Reports/Drill-Through-and-Embedding/" },
+			],
+		},
+		{
+			text: "Subscriptions & Alerts",
+			collapsed: true,
+			prefix: "/documentation/Subscriptions-and-Alerts/",
+			items: [
+				{ text: "Understanding Subscriptions and Alerts", link: "/documentation/Subscriptions-and-Alerts/Understanding-Subscriptions-and-Alerts/" },
+				{ text: "Subscribing to a Dashboard", link: "/documentation/Subscriptions-and-Alerts/Dashboard-Subscriptions/" },
+				{ text: "Metric Alerts", link: "/documentation/Subscriptions-and-Alerts/Metric-Alerts/" },
+				{ text: "Managing Your Subscriptions and Alerts", link: "/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/" },
+				{ text: "Setting Up Delivery", link: "/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/" },
+				{ text: "Monitoring and Limits", link: "/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/" },
 			],
 		},
 		{

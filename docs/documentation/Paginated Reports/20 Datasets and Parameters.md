@@ -100,8 +100,8 @@ Parameters are listed at the top of the **Data** tab. Each row shows the paramet
 | **Label** | What readers see in the parameter panel and in `{_filters}`. |
 | **Type** | **Text**, **Number**, **Date**, **Date time**, **Yes/No** or **List** (several values). Changing the type clears a default that no longer fits. |
 | **Default** | The value used when none is passed. It must fit the type, or the save fails. Dates take a relative date (below) or a fixed date such as `2026-01-31`; text accepts `currentUser`; with choices, pick the default from them. |
-| **Required** | The report does not run until the parameter has a value. Checked in the viewer and again on the server for previews, exports and distributions. |
-| **Hide in the parameter panel** | The parameter is not shown; its value comes from the URL (`p_name`), a distribution or the default, and it is left out of `{_filters}`. A hidden required parameter without a default produces a validation warning. |
+| **Required** | The report does not run until the parameter has a value. Checked in the viewer and again on the server for previews, exports and subscriptions. |
+| **Hide in the parameter panel** | The parameter is not shown; its value comes from the URL (`p_name`), a subscription or the default, and it is left out of `{_filters}`. A hidden required parameter without a default produces a validation warning. |
 | **Values from** | Where readers' choices come from; see below. |
 
 Deleting a parameter that is still referenced first lists the references. Saving warns about parameters that no dataset, text or field uses.
@@ -113,7 +113,7 @@ Deleting a parameter that is still referenced first lists the references. Saving
 | **Manual** | A field to type the value in. Dates and date-times always get a date picker. |
 | **Dataset** | A drop-down filled from a dataset: **Dataset**, **Stored value** (the field whose value is passed on) and optionally **Shown as** (the field readers see). |
 | **Global** | A parameter from **Parameter Management**. Its default and choices are used when the report sets none; a query-type global parameter runs its read-only SQL (first column the value, second column the label). |
-| **User** | A system variable, always the signed-in user's value. The parameter is not shown in the viewer, and values passed in a URL, a request or a distribution are ignored, so readers cannot impersonate someone else. Distributions and background downloads use the value of the person who runs them. |
+| **User** | A system variable, always the signed-in user's value. The parameter is not shown in the viewer, and values passed in a URL, a request or a subscription are ignored, so readers cannot impersonate someone else. Background downloads use the value of the person who runs them; subscriptions use the owner's value, except **Different parameters per person**, which uses each recipient's user name. |
 
 To restrict data to the person viewing the report, use **User**. A visible parameter with the default `currentUser` only *suggests* the user name and can be changed by readers; the designer warns when such a parameter feeds a dataset. A hidden parameter with the default `currentUser` also accepts only the signed-in user.
 
@@ -132,7 +132,7 @@ Date and date-time parameters can default to a date that is calculated each time
 | `firstDayOfQuarter`, `lastDayOfQuarter`, `firstDayOfLastQuarter`, `lastDayOfLastQuarter` | This quarter and last quarter |
 | `firstDayOfYear`, `lastDayOfYear`, `firstDayOfLastYear`, `lastDayOfLastYear` | This year and last year |
 
-Weeks start on Monday. For a date-time parameter, `today` is the current moment, `lastDayOf…` ends at 23:59:59 and the others start at 00:00. The keywords also work in a URL (`p_startDate=firstDayOfLastMonth`) and in distributions, which recalculate them on every run; this is how a daily, weekly or monthly report always covers the right period.
+Weeks start on Monday. For a date-time parameter, `today` is the current moment, `lastDayOf…` ends at 23:59:59 and the others start at 00:00. The keywords also work in a URL (`p_startDate=firstDayOfLastMonth`) and in subscriptions, which recalculate them on every run; this is how a daily, weekly or monthly report always covers the right period.
 
 ### How values behave in the viewer
 
@@ -151,7 +151,7 @@ Text blocks and header or footer text can show parameter values and totals. **In
 | --- | --- |
 | `{region}` | The parameter's display label (its choice label when it has one), several values separated by commas, **All** when empty; dates as `2026-10-27`, date-times as `2026-10-27 09:30`, yes/no as Yes/No. |
 | `{_filters}` | All visible parameters as `Label: value; Label: value`. A from/to date pair is shown as one item: `Date: 2026-06-01 – 2026-06-30`, `from 2026-06-01` or `until 2026-06-30` when only one end is set. The designer adds a `{_filters}` text block above the table when you create the first parameter; move it to the header if you want it on every page. |
-| `{_user}` | The signed-in user. In a distribution, the distribution's owner. |
+| `{_user}` | The signed-in user. In a subscription, the owner; with **Different parameters per person**, the recipient. |
 | `{=Sum(amount)}`, `{=Count()}`, `{=Avg(x)}`, `{=Min(x)}`, `{=Max(x)}` | A total over the whole dataset, so it can stand above the table or in the header. |
 | `{=Now()}` | Date and time of rendering, `yyyy-MM-dd HH:mm`. |
 | `{=Format(Sum(amount), "#,##0.00")}` | A formatted value; `If(cond, a, b)`, `Param("name")`, `Field("name")`, `User()` are also available. |
@@ -162,7 +162,7 @@ A lone total is shown as `#,##0.##` and a lone `Now()` as `yyyy-MM-dd HH:mm`; us
 
 - **URL:** `…/viewer?p_region=East%20China&p_startDate=2026-01-01`. See [Viewer URL parameters](/documentation/Paginated-Reports/Viewing-Pagination-and-Export/#viewer-url-parameters).
 - **Drill-through from a dashboard:** the dialog maps the clicked fields to report parameters. See [Drill Through to a Paginated Report](/documentation/Paginated-Reports/Drill-Through-and-Embedding/).
-- **Distribution:** stored with the distribution or taken from a list row. See [Distribution](/documentation/Paginated-Reports/Distribution/).
+- **Subscription:** stored with the subscription or taken from its recipient table. See [Subscriptions](/documentation/Paginated-Reports/Subscriptions/).
 
 Values from outside are converted as strictly as defaults: dates `yyyy-MM-dd` or a relative date keyword, date-times `yyyy-MM-dd HH:mm:ss` (a `T` is also accepted), yes/no only `true`, `false`, `1`, `0`. Anything else, such as `2026-02-30` or `yes`, is refused with an error that names the parameter by its label.
 

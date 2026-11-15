@@ -30,6 +30,7 @@ export const redirects: Record<string, string> = {
 	"/documentation/Embedded/Reports-REST-API/": "/documentation/Embedded/Report-URLs/",
 	"/documentation/Embedded/White-Label/": "/documentation/Console/Branding/",
 	"/documentation/FAQs/Time-Axis/": "/documentation/Visualization/Datepicker/#filter-by-time-axis",
+	"/documentation/Paginated-Reports/Distribution/": "/documentation/Paginated-Reports/Subscriptions/",
 	"/documentation/Pass-parameters-through-URL/": "/documentation/Embedded/URL-Parameters/",
 	"/documentation/SDK-Embedding/": "/documentation/Embedded/SDK-Embedding/",
 	"/documentation/Setup/Deploying-Datafor-Using-Dockers/": "/documentation/Setup/Deploying-Datafor-Using-Docker/",

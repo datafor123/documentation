@@ -9,7 +9,7 @@ createTime: 2026/10/28 10:00:00
 
 Every export or print of a paginated report is a **task** that runs on the server. Small reports finish within a few seconds and download straight away, so you will not notice. Larger ones keep running after the viewer says *This report is large and is being generated in the background*; when the file is ready, a notification with a **Download** button appears, and the file waits for you in **Report downloads**.
 
-Files made by a [distribution](/documentation/Paginated-Reports/Distribution/) are tasks too, owned by the person who created the distribution.
+Files made by a [subscription](/documentation/Paginated-Reports/Subscriptions/) are tasks too, owned by the person who created the subscription.
 
 ## Where to find your files
 
@@ -66,5 +66,5 @@ The viewer uses tasks, but the export address can also be opened directly, for e
 ## Related topics
 
 - [Viewing, Pagination and Export](/documentation/Paginated-Reports/Viewing-Pagination-and-Export/)
-- [Distribution](/documentation/Paginated-Reports/Distribution/)
+- [Subscriptions](/documentation/Paginated-Reports/Subscriptions/)
 - [My Account](/documentation/Console/My-Account/)

@@ -42,6 +42,7 @@ An operation is recorded only while **Record audit logs** and that operation are
 | **Datasources** | **Create data source**, **Edit data source**, **Delete data source** |
 | **Security** | **Create row security**, **Edit row security**, **Delete row security**, **Create object security**, **Edit object security**, **Delete object security** |
 | **Dictionaries** | **Create dictionary**, **Edit dictionary**, **Delete dictionary** |
+| **Subscriptions & alerts** | **Create subscription**, **Edit subscription**, **Delete subscription**, **Enable or disable subscription**, **Run subscription**, **Create alert**, **Edit alert**, **Delete alert**, **Enable or disable alert**, **Run alert**, **Silence alert**, **Create channel**, **Edit channel**, **Delete channel**, **Test channel**, **Edit subscription & alert settings**, **Rotate notify system token** (when the subscriptions and alerts plugin is installed) |
 | **Other operations** | **Create parameter**, **Edit parameter**, **Delete parameter**, **Create token**, **Edit token**, **Delete token**, **System settings changes** |
 
 The page lists the operations the server reports, so a server with other plugins may show more or fewer.

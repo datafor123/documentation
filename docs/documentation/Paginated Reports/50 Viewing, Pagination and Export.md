@@ -11,7 +11,7 @@ createTime: 2026/10/28 10:00:00
 
 Clicking a paginated report in the console opens it in the viewer. Set the parameters on the left, click **View**, and page through the result.
 
-![Viewer with Region and a date range in the parameter panel, the toolbar with export, print, downloads and distribution, and the first page filtered to 2026-01-01 – 2026-03-31](./images/viewer-overview.png)
+![Viewer with Region and a date range in the parameter panel, the toolbar with export, print, downloads and subscriptions, and the first page filtered to 2026-01-01 – 2026-03-31](./images/viewer-overview.png)
 
 | Control | What it does |
 | --- | --- |
@@ -22,7 +22,7 @@ Clicking a paginated report in the console opens it in the viewer. Set the param
 | **Export** | Downloads the report. See [Export formats](#export-formats). |
 | **Print (PDF)** | Generates a PDF and opens it in a new tab for printing. |
 | **Report downloads** | Files of this report that were generated in the background. See [Report Downloads](/documentation/Paginated-Reports/Report-Downloads/). |
-| **Distribution** | Scheduled delivery, for users with the *manage schedules* permission. See [Distribution](/documentation/Paginated-Reports/Distribution/). |
+| **Subscriptions** | Scheduled delivery to people, roles and channels, for users with the *manage schedules* permission. Shown only when the subscriptions and alerts plugin is installed. See [Subscriptions](/documentation/Paginated-Reports/Subscriptions/). |
 | **Copy link** | Copies the viewer URL with the parameters that differ from their defaults (cleared ones as empty values), so the recipient opens the same view. Relative date keywords that were in the address are kept as keywords. |
 | **Open in new tab**, **Edit** | Leave the console frame, or open the designer (needs write permission). |
 
@@ -89,7 +89,7 @@ Exports and prints run as background tasks. Anything that finishes within a few 
 ## Large reports
 
 - **Summaries from a model, details from SQL.** A model dataset is calculated by the analysis engine and held in memory as a whole result; it is limited to 100,000 exported rows and runs one at a time in the background. A detail listing of tens of thousands of rows should be an SQL dataset.
-- **Narrow with parameters.** A date range or a region parameter keeps each run to the rows that are needed, and lets a distribution produce one file per value instead of one huge file.
+- **Narrow with parameters.** A date range or a region parameter keeps each run to the rows that are needed, and lets a subscription produce one file per value instead of one huge file.
 - **Choose a data export** for large row counts.
 
 ## Viewer URL parameters
@@ -108,5 +108,5 @@ A complete embed URL therefore looks like `…/viewer?toolbar=false&paramPanel=h
 ## Related topics
 
 - [Report Downloads](/documentation/Paginated-Reports/Report-Downloads/)
-- [Distribution](/documentation/Paginated-Reports/Distribution/)
+- [Subscriptions](/documentation/Paginated-Reports/Subscriptions/)
 - [Page Layout, Header and Footer](/documentation/Paginated-Reports/Page-Layout-Header-and-Footer/)

@@ -19,10 +19,10 @@ A parameter is a value that readers set before the pages are produced: a period,
 
 ![A parameter's value comes from one of four sources set in the designer, is decided at run time in a fixed order (an enforced user value first, then a supplied value, then the default, then the required check), and is then used by model dataset filters, SQL placeholders, text on the page and the choices of other parameters](./images/parameter-value-sources.svg)
 
-Each time the report runs (in the viewer, an export, a distribution or a link), every parameter's value is decided in this order:
+Each time the report runs (in the viewer, an export, a subscription or a link), every parameter's value is decided in this order:
 
 1. **Enforced user value.** A **User** parameter, and a hidden parameter whose default is `currentUser`, take the signed-in user's value. Anything passed in is ignored.
-2. **Supplied value.** A value from the parameter panel, the URL (`p_name=…`), a drill-through or a distribution. A value the reader cleared counts as supplied and empty: it means "no filter", and the default is not filled back in.
+2. **Supplied value.** A value from the parameter panel, the URL (`p_name=…`), a drill-through or a subscription. A value the reader cleared counts as supplied and empty: it means "no filter", and the default is not filled back in.
 3. **Default.** The report's default; for a **Global** parameter without one, the global parameter's default.
 4. **Required check.** A required parameter that is still empty stops the report. An optional one filters nothing: model dataset filters on it are skipped, and in SQL you wrap its condition in `[[ … ]]`.
 
@@ -46,7 +46,7 @@ Manual is the right choice when a list of choices would be useless or impossible
 - **Thresholds**: a **Number** such as "amount over" or "top N", `where amount > #{minAmount}`.
 - **Dates**: a **Date** parameter always gets a date picker, and its default can be a relative date.
 - **Switches**: a **Yes/No** such as "include cancelled orders".
-- **Hidden values**: parameters filled by a URL, a drill-through or a distribution, which readers never type.
+- **Hidden values**: parameters filled by a URL, a drill-through or a subscription, which readers never type.
 
 ![Parameter salesperson with Type Text and Values from Manual. The note reads "Typed in when viewing; no drop-down choices", the Default box contains currentUser, and the hint below explains that viewers can change it](./images/parameter-source-manual.png)
 
@@ -70,7 +70,7 @@ If the global parameter is later deleted or renamed, the panel says *Not found i
 
 ### User: filter by who is reading
 
-Pick a system variable; `system.username` is chosen for you. The parameter always holds the reader's own value, is hidden in the viewer, and ignores values passed in a URL, a drill-through or a distribution. Distributions and background downloads use the value of the person who runs them.
+Pick a system variable; `system.username` is chosen for you. The parameter always holds the reader's own value, is hidden in the viewer, and ignores values passed in a URL, a drill-through or a subscription. Background downloads use the value of the person who runs them; subscriptions use the owner's value, except **Different parameters per person**, which uses each recipient's user name.
 
 ![Parameter login_user with Values from User, system variable system.username, the note "Takes the signed-in user's value; hidden in the viewer, URL values are ignored" and "Your current value: admin"](./images/parameter-source-user.png)
 
@@ -87,7 +87,7 @@ Other useful variables are `system.dept`, `system.company` and `system.business-
 The **Default** is the value a parameter starts with in the viewer and the value used when nothing is supplied. It must fit the type; a default that does not is shown in red.
 
 - **Fixed values**: a number, a text, a date such as `2026-01-31`, or several values for a **List**.
-- **Relative dates** for date parameters, such as `firstDayOfMonth` or `yesterday`, calculated on the day the report is opened or run. A pair `firstDayOfLastMonth` / `lastDayOfLastMonth` makes a monthly distribution always cover last month. All keywords are listed in [Relative dates](/documentation/Paginated-Reports/Datasets-and-Parameters/#relative-dates).
+- **Relative dates** for date parameters, such as `firstDayOfMonth` or `yesterday`, calculated on the day the report is opened or run. A pair `firstDayOfLastMonth` / `lastDayOfLastMonth` makes a monthly subscription always cover last month. All keywords are listed in [Relative dates](/documentation/Paginated-Reports/Datasets-and-Parameters/#relative-dates).
 - **`currentUser`** for text and list parameters, described next.
 
 ![Date parameter as_of with the Default drop-down open: Today · today, Yesterday · yesterday, Monday this week · firstDayOfWeek and more](./images/parameter-default-relative-dates.png)
@@ -134,5 +134,5 @@ An empty list shows **All** and does not filter. Put a `{_filters}` text block o
 
 - [Datasets and Parameters](/documentation/Paginated-Reports/Datasets-and-Parameters/)
 - [Viewing, Pagination and Export](/documentation/Paginated-Reports/Viewing-Pagination-and-Export/)
-- [Distribution](/documentation/Paginated-Reports/Distribution/)
+- [Subscriptions](/documentation/Paginated-Reports/Subscriptions/)
 - [Creating Parameters](/documentation/Analysis/Creating-Parameters/) (global parameters and system variables)

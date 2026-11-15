@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" font-family="'Segoe UI','Helvetica Neue',Arial,'Microsoft YaHei','PingFang SC','Noto Sans',sans-serif" role="img" aria-labelledby="title desc">
   <title id="title">Where a parameter's value comes from</title>
-  <desc id="desc">On the left, the four Values from options of a parameter and what readers see: Manual is a typed box, Dataset and Global give a drop-down of choices, User is not shown. In the middle, the order in which the value is decided when the report runs: a User parameter, or a hidden parameter whose default is currentUser, always takes the signed-in user's value and ignores values from the panel, URL, drill-through or distribution; otherwise a supplied value is used, and an empty value means no filter; otherwise the report's default is used, then the global parameter's default; a required parameter that is still empty stops the report. On the right, where the value is used: model dataset filters, SQL placeholders, text placeholders and the filter summary.</desc>
+  <desc id="desc">On the left, the four Values from options of a parameter and what readers see: Manual is a typed box, Dataset and Global give a drop-down of choices, User is not shown. In the middle, the order in which the value is decided when the report runs: a User parameter, or a hidden parameter whose default is currentUser, always takes the signed-in user's value and ignores values from the panel, URL, drill-through or subscription; otherwise a supplied value is used, and an empty value means no filter; otherwise the report's default is used, then the global parameter's default; a required parameter that is still empty stops the report. On the right, where the value is used: model dataset filters, SQL placeholders, text placeholders and the filter summary.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
@@ -45,7 +45,7 @@
   <rect x="300" y="80" width="320" height="76" rx="8" fill="#FFFFFF" stroke="#B5546A" stroke-width="1.5"/>
   <text x="316" y="103" font-size="13" font-weight="700" fill="#2B2B3A">User source, or hidden + default currentUser?</text>
   <text x="316" y="123" font-size="12" fill="#5B6472">Always the signed-in user's value. Values from</text>
-  <text x="316" y="140" font-size="12" fill="#5B6472">the panel, URL, drill-through or distribution are ignored.</text>
+  <text x="316" y="140" font-size="12" fill="#5B6472">the panel, URL, drill-through or subscription are ignored.</text>
 
   <line x1="460" y1="156" x2="460" y2="180" stroke="#3B4252" stroke-width="1.3" marker-end="url(#arrow)"/>
   <text x="468" y="173" font-size="11" fill="#7A8390">otherwise</text>
@@ -53,7 +53,7 @@
   <rect x="300" y="182" width="320" height="94" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
   <text x="316" y="205" font-size="13" font-weight="700" fill="#2B2B3A">A value was supplied?</text>
   <text x="316" y="225" font-size="12" fill="#5B6472">From the parameter panel, the URL (p_name=…),</text>
-  <text x="316" y="242" font-size="12" fill="#5B6472">a drill-through or a distribution: use it.</text>
+  <text x="316" y="242" font-size="12" fill="#5B6472">a drill-through or a subscription: use it.</text>
   <text x="316" y="262" font-size="12" fill="#7A8390">A cleared (empty) value means "no filter".</text>
 
   <line x1="460" y1="276" x2="460" y2="300" stroke="#3B4252" stroke-width="1.3" marker-end="url(#arrow)"/>
