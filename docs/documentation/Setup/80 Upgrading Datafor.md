@@ -11,7 +11,7 @@ An existing installation is upgraded in place with an update package, a `.jar` f
 
 ## 1. Before you upgrade
 
-1. **Read the upgrade notes** of the release, for example [10.01 Upgrade notes](/release/10.01/#upgrade-notes). They list behavior changes and steps that apply only to that release.
+1. **Read the upgrade notes** of the release, for example [10.02 Upgrade notes](/release/10.02/#upgrade-notes). They list behavior changes and steps that apply only to that release.
 2. **Create a backup** with **Content and settings** selected and download it to another computer (see [Backup and Restore](/documentation/System/backup/)). If the repository runs on your own PostgreSQL server ([Repository Separation](/documentation/Setup/Repository-Separation-Deployment-Guide/)), back up those databases with your own tools as well.
 3. **Copy two AI Agent files** to a safe place: `bi-server/ai-agent/instance-secrets.env` and `bi-server/ai-agent/.env`. No Datafor backup contains them. `instance-secrets.env` holds the key that encrypts the LLM API keys stored in the database; without it a restored system cannot read them. `.env` holds your AI Agent settings, such as `DATABASE_URL`, the `MCP_*` keys and `AI_AGENT_DISPATCH_WORKERS`.
 4. **Write down what you changed in the files the package replaces** (section 3): the Java heap in the start script, database connections, passwords and ports in `server.xml`, and any other file under `pentaho-solutions/system` you edited by hand.
@@ -67,9 +67,22 @@ The replaced files are kept in `bi-server/update/backup<time stamp>/`, in the sa
 
 Stop Datafor, copy your values into the new files rather than copying the old files back (a new file can contain new entries), and start Datafor again.
 
-## 4. Steps for 10.01
+## 4. Steps for 10.02
 
-When you upgrade to 10.01, also do the following. If you come from a version before 10.00, do the steps for 10.00 (section 5) as well. The full list of changes is in the [10.01 Upgrade notes](/release/10.01/#upgrade-notes).
+When you upgrade to 10.02, also do the following. If you come from an earlier version, do the steps for 10.01 (section 5) and 10.00 (section 6) as well. The full list of changes is in the [10.02 Upgrade notes](/release/10.02/#upgrade-notes).
+
+- **Install the new plugins with the others.** Subscriptions and alerts (`datafor-notify`) and IM platforms (`datafor-im`) are new; the audit log (`datafor-audit`) is rebuilt. Paginated report subscriptions send nothing without `datafor-notify`.
+- **Render service.** If the AI Agent you upgrade has no render service yet, copy the `ai-agent-render` program, its start scripts, `render-runtime-*.properties` and the whole `browsers` folder from the new package. Without them, subscriptions go out without screenshots and PDF. On Linux, install the libraries and fonts listed in [Render service](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#render-service).
+- **Your own `applicationContext-spring-security.xml`.** If you maintain it yourself, replace `wecomFilter` with `imFilter` and add the two anonymous rules listed in the [upgrade notes](/release/10.02/#upgrade-notes); otherwise Datafor does not start.
+- **WeCom.** The old WeCom integration is removed and its settings are not carried over. Register the WeCom app again under **Settings › Notifications › IM platforms** and set its home page to the address shown there. See [IM Platforms](/documentation/System/IM-Platforms/).
+- **Audit log.** Where audit settings were never saved, auditing is on after the upgrade, with 180 days of retention. Check **Settings › Operations › Audit log**. See [Audit Log](/documentation/System/Audit-Log/).
+- **System time zone.** Set it in **Settings › General › System configuration** if the server's zone is not your business zone. Subscription and alert schedules, including those of existing paginated report subscriptions, use it.
+- **Mapbox maps.** Click **Clear geocoding cache** on the Mapbox card under **Settings › Data › Maps**. See [GIS Map Settings](/documentation/Visualization/GIS-Map-Settings/#geocoding-and-its-cache).
+- **Cookies.** Set `session-expired-dialog` to `false` in `pentaho-solutions/system/pentaho.xml` so that the `session-expiry` and `server-time` cookies are no longer sent.
+
+## 5. Steps for 10.01
+
+When you upgrade to 10.01, also do the following. If you come from a version before 10.00, do the steps for 10.00 (section 6) as well. The full list of changes is in the [10.01 Upgrade notes](/release/10.01/#upgrade-notes).
 
 - **Install the modeler plugin and the AI Agent together.** 10.01 moves the AI Agent shared secret out of the modeler's `settings.xml`, and a 10.00 modeler with a 10.01 AI Agent (or the other way round) loses it.
 - **AI Agent on another server.** If you set `<agent-secret>` in `settings.xml` by hand, 10.01 ignores it: set the same value as the `DATAFOR_AGENT_SECRET` environment variable of the Datafor server and restart Datafor. A co-located AI Agent needs nothing. See [Upgrading from 10.00](/documentation/AI-Agent/Agent-Shared-Secret/#_7-upgrading-from-10-00).
@@ -80,7 +93,7 @@ When you upgrade to 10.01, also do the following. If you come from a version bef
 - **List filters on a time field that defaulted to Last** now default to **Latest period**: the most recent period that has data, no longer the last member of the date table. Check reports that relied on the old behavior to show a future month.
 - **Action buttons bound to a model field** keep working as **Data button (legacy)**. Nothing to do; see [Action button](/documentation/Visualization/Action-Button/#data-button-legacy) if you want to convert them.
 
-## 5. Steps for 10.00
+## 6. Steps for 10.00
 
 When you upgrade to 10.00, also do the following. The full list of changes is in the [10.00 Upgrade notes](/release/10.00/#upgrade-notes).
 
@@ -93,11 +106,11 @@ When you upgrade to 10.00, also do the following. The full list of changes is in
 - **Permissions.** Deleting content needs **Delete** or **Full control**, and publishing a model or changing its data source needs Read on the data source. Check that users you disabled are still disabled. See [Managing Analysis Models](/documentation/Model/Managing-Analysis-Models/).
 - **Conversations.** A follow-up in a conversation started before the upgrade may not continue a hierarchy from the earlier turn; start **New Chat**.
 
-## 6. Check the upgrade
+## 7. Check the upgrade
 
 1. Check the server log (`tomcat/logs/catalina.out` on Linux, the server console on Windows) for errors during the update and start.
 2. Sign in as an administrator. Open a few reports and models and check that they show data. If your content is missing and only the sample content appears, Datafor is connected to the built-in database: reapply `server.xml` (section 3).
-3. Run `curl -i http://127.0.0.1:28081/ai/health` on the server. `HTTP/1.1 200` means the AI Agent is ready; a `503` body names the cause.
+3. Run `curl -i http://127.0.0.1:28081/ai/health` on the server. `HTTP/1.1 200` means the AI Agent is ready; a `503` body names the cause. Run `curl http://127.0.0.1:38082/health` for the render service; it answers `"ok":true`. Then send yourself a test of a dashboard subscription (**Subscribe › Send me a test**) and check that it has a screenshot.
 4. Open **AI Agent › LLM** and check that **Assignments** shows **16/16 assigned**.
 5. If **Dashboard Review**, **Model Brief** or **Question Suggestions** has no assignment of its own, try that feature as a user who is not an administrator. A model error there points to the shared secret.
 6. Behind Nginx, ask a question in the AI Assistant and check that the progress title moves through several stages ([Deploying Datafor Behind Nginx](/documentation/Setup/Deploying-Datafor-Behind-Nginx/#_4-enable-and-verify-the-nginx-configuration)).

@@ -34,14 +34,14 @@ curl -u admin:password "http://localhost:28080/datafor/plugin/datafor/api/versio
 {
   "success": true,
   "current": {
-    "version": "10.00",
+    "version": "10.02.0",
     "branch": "commercial",
-    "buildId": "datafor-2026-10-01"
+    "buildId": "datafor-2026-11-16-120000"
   },
   "newest": {
-    "version": "10.00",
+    "version": "10.02.0",
     "branch": "commercial",
-    "buildId": "datafor-2026-10-01"
+    "buildId": "datafor-2026-11-16-120000"
   },
   "status": 0
 }
@@ -59,4 +59,4 @@ curl -u admin:password "http://localhost:28080/datafor/plugin/datafor/api/versio
 
 If the version information cannot be assembled, `success` is `false` and `msg` is `cannot fetch version info`.
 
-Related: [Release notes for 10.00](/release/10.00/)
+Related: [Release notes for 10.02](/release/10.02/)
