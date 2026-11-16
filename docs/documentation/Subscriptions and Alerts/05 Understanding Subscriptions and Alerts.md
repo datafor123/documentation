@@ -63,7 +63,7 @@ The **Subscribe** button and **Set alert** appear once the subscriptions and ale
 | Screenshots, PDF, Excel, figures and the AI brief | The render service, installed with the AI Agent. Without it a subscription still sends its message with the **Open report** link, but none of these. Alerts do not need it. |
 | AI brief and AI analysis of alerts | The AI extension and a configured AI service, plus a daily budget above 0 |
 | IM direct messages and Slack or Teams channels | An app under **Settings › Notifications › IM platforms**, and people linked to it |
-| Group robots and webhooks | A channel under **Settings › Notifications › Delivery channels** |
+| Group robots and webhooks | A channel under **Settings › Notifications › Delivery channels**, see [Delivery Channels](/documentation/Subscriptions-and-Alerts/Delivery-Channels/) |
 | Links that work outside the server | **Settings › Access & Integration › Site address** set to the address people use |
 
 Schedules, relative dates and alert periods all use one **system time zone** set by the administrator. Editors show the next run in that zone and add the offset, such as *(UTC+08:00)*, when your browser is in a different one.
@@ -74,4 +74,5 @@ Schedules, relative dates and alert periods all use one **system time zone** set
 - [Metric Alerts](/documentation/Subscriptions-and-Alerts/Metric-Alerts/)
 - [Managing Your Subscriptions and Alerts](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/)
 - [Setting Up Delivery](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/) (administrators)
+- [Delivery Channels](/documentation/Subscriptions-and-Alerts/Delivery-Channels/) (administrators)
 - [Monitoring and Limits](/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/) (administrators)

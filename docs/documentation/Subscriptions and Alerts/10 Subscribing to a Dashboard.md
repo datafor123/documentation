@@ -30,9 +30,11 @@ A subscription can address up to 50 people by default, roles counted after expan
 
 Adds one shared message in a group chat. The list is a tree:
 
-- **Slack · *app name***: the channels of the Slack app. A private channel appears only after you invite the Datafor bot into it.
+- **Slack · *app name***: the public channels of the Slack app. Private channels are listed for administrators only, after the Datafor bot has been invited into them.
 - **Microsoft Teams · *app name***: teams, and under each team its standard channels. Datafor installs the app into the team when you save.
-- **Groups set up by admins**: WeCom, DingTalk and Feishu group robots and webhooks that an administrator has created and authorized for you.
+- **Groups set up by admins**: WeCom, DingTalk and Feishu group robots and webhooks that an administrator has created and authorized for you, see [Delivery Channels](/documentation/Subscriptions-and-Alerts/Delivery-Channels/).
+
+An administrator can turn off **Let users choose channels** for a Slack or Teams app; its channels are then listed for administrators only.
 
 ![The Post to channels tree open, with Slack · datafor-slack collapsed, Microsoft Teams · datafor expanded to its teams and the General channel, and Groups set up by admins](./images/subscribe-channels.png)
 

@@ -25,7 +25,7 @@ What an app can do depends on the platform:
 | Asking questions and chat commands | Direct messages to the app | Direct messages and @ in groups | Direct messages and @ in groups | Direct messages and @ in channels, needs the App-Level Token | — |
 | Datafor must be reachable from the internet | Yes | Only in Callback mode | Only in Callback mode | No | No |
 
-Group robots and webhooks that only post to one group do not need an app; they are delivery channels, see [Setting Up Delivery](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#delivery-channels).
+Group robots and webhooks that only post to one group do not need an app; they are delivery channels, see [Delivery Channels](/documentation/Subscriptions-and-Alerts/Delivery-Channels/).
 
 ## Before you start
 
@@ -141,7 +141,7 @@ The app is ready when the editor shows *The app package is in your organization'
 ### Direct messages and channels
 
 - **Slack and Teams.** Saving a new app also creates its direct-message delivery channel (**Slack direct message** or **Teams direct message**), so people can choose it under **How I receive** right away. **Let users choose channels** (on by default) lets everyone who can create subscriptions and alerts pick the app's public channels in **Post to channels**; when off, only administrators can. Private channels are always for administrators only, and a private Slack channel must invite the bot first. **Destinations** in the editor lists the channels that subscriptions and alerts send to, who uses them and the last delivery; to stop sending to a channel, disable or edit those subscriptions and alerts.
-- **WeCom, DingTalk and Feishu.** Create a delivery channel of type **WeCom app message**, **DingTalk app message** or **Feishu app message** and choose the app, see [Setting Up Delivery](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#im-apps).
+- **WeCom, DingTalk and Feishu.** Create a delivery channel of type **WeCom app message**, **DingTalk app message** or **Feishu app message** and choose the app, see [Setting Up Delivery](/documentation/Subscriptions-and-Alerts/Delivery-Channels/#direct-message-channels).
 
 ## Addresses to enter in the platform
 

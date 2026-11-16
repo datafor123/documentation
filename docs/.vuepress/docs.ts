@@ -176,6 +176,7 @@ export const documentationNote = defineNoteConfig({
 				{ text: "Metric Alerts", link: "/documentation/Subscriptions-and-Alerts/Metric-Alerts/" },
 				{ text: "Managing Your Subscriptions and Alerts", link: "/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/" },
 				{ text: "Setting Up Delivery", link: "/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/" },
+				{ text: "Delivery Channels", link: "/documentation/Subscriptions-and-Alerts/Delivery-Channels/" },
 				{ text: "Monitoring and Limits", link: "/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/" },
 			],
 		},

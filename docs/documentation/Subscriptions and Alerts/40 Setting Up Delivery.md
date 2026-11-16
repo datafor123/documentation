@@ -19,7 +19,7 @@ This page is for administrators. Everything here is under **Settings › Notific
 | Temporary links | A rule in the platform security file, see [below](#temporary-links) | DingTalk, Feishu, webhook, Slack Webhook and Teams Webhook messages carry no images or files |
 | AI service and budgets | [AI service](/documentation/AI-Agent/AI-Feature/); budgets on the [Settings tab](/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/#settings-tab) | No AI brief in subscriptions, no AI analysis in alerts |
 | IM apps | **Settings › Notifications › IM platforms**, see [IM Platforms](/documentation/System/IM-Platforms/) | No direct messages, no Slack or Teams channels |
-| Group robots and webhooks | **Settings › Notifications › Delivery channels** | No WeCom, DingTalk or Feishu group messages, no webhooks |
+| Group robots and webhooks | **Settings › Notifications › Delivery channels**, see [Delivery Channels](/documentation/Subscriptions-and-Alerts/Delivery-Channels/) | No WeCom, DingTalk or Feishu group messages, no webhooks |
 | System time zone | **Subscriptions & alerts › Settings** | Times follow the server's zone, which may not be your business zone |
 
 Check the result on the **Overview** tab of **Subscriptions & alerts**: the status line shows the render service, temporary links and the scheduler. See [Monitoring and Limits](/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/).
@@ -77,56 +77,11 @@ The links must be reachable from the IM platform's servers: a server that only h
 **Settings › Notifications › IM platforms** connects a WeCom, DingTalk, Feishu, Slack or Microsoft Teams app to Datafor. One app serves several purposes: sign-in from the IM, directory sync, asking the AI assistant in chat, and delivery. Creating the apps, the addresses to enter in each platform and linking people are described in [IM Platforms](/documentation/System/IM-Platforms/). For subscriptions and alerts an app provides:
 
 - **Direct messages** to each person. Saving a Slack or Teams app creates its **Slack direct message** or **Teams direct message** channel. For WeCom, DingTalk and Feishu, create a delivery channel of type **WeCom app message**, **DingTalk app message** or **Feishu app message** and pick the app. From then on every user sees it under **How I receive**. People must be linked to the app: through directory sync, by opening Datafor from the IM app once, or by an administrator with **IM accounts** on the user's row under **Users**. Slack and Teams also match people by email address.
-- **Slack and Teams channels**, which users pick directly in **Post to channels** from the app's channel list. No delivery channel is needed. For a private Slack channel, invite the bot into it first. Teams lists standard channels and installs the app into the team when the subscription is saved.
+- **Slack and Teams channels**, which users pick directly in **Post to channels** from the app's channel list. No delivery channel is needed. Other users than administrators see an app's public channels only while **Let users choose channels** is on for that app (the default); private channels are for administrators only, and a private Slack channel must invite the bot first. Teams lists standard channels and installs the app into the team when the subscription is saved.
 
 ## Delivery channels
 
-**Settings › Notifications › Delivery channels** lists the destinations that subscriptions and alerts can use besides Slack and Teams channels.
-
-![Delivery channels: the built-in Email channel and the datafor Teams direct message and datafor-slack Slack direct message channels, each available to everyone, with last delivery OK, the Enabled switch and Test, Edit and Delete](./images/delivery-channels.png)
-
-The built-in **Email** channel uses the mail server and cannot be deleted. **New channel** adds one of these types:
-
-| Type | Where the URL or credentials come from |
-| --- | --- |
-| **WeCom group robot** | In the WeCom group: **Group settings › Group robots › Add robot**; paste the webhook URL. |
-| **DingTalk robot** | In the DingTalk group: **Group settings › Group assistant › Add robot › Custom**. Prefer the **Sign** security option and paste its secret; without a secret the robot must use keyword or IP allow-list security. |
-| **Feishu robot** | In the Feishu group: **Settings › Group bots › Add bot › Custom bot**. If **Signature verification** is on, paste the secret. |
-| **Teams Webhook** | In the Teams channel: **Workflows › Post to a channel when a webhook request is received**; paste the URL it generates. |
-| **Slack Webhook** | In your Slack app, turn on **Incoming Webhooks**, pick the channel and paste the `https://hooks.slack.com/…` URL. |
-| **Generic webhook** | Your own endpoint, see [below](#generic-webhook). |
-| **… direct message**, **… app message** | An app from **IM platforms**; delivers to each person, see [IM apps](#im-apps). |
-
-![New channel dialog for a DingTalk robot with setup instructions, Name, Webhook URL, Secret, Available to everyone, Authorized users and Authorized roles](./images/delivery-channel-new.png)
-
-Webhook URLs and secrets are credentials; they are stored encrypted and shown masked. When editing, leave a masked field unchanged to keep its value.
-
-**Who can use a group channel.** Turn on **Available to everyone**, or list **Authorized users** and **Authorized roles**. Only they see the channel under **Post to channels**; administrators can always use it, and Readers never can. Remember that messages posted to a channel are rendered with the permissions of the person who created the subscription or alert.
-
-**Test** posts a short test message. **Last delivery** shows whether the most recent message went through. A channel used by a subscription or alert cannot be deleted; the error tells you how many use it. Robots are limited to 18 messages per minute each, below the platforms' own limit of 20, and messages over the limit wait in a queue.
-
-### Generic webhook
-
-Datafor sends an HTTP `POST` (or the **Method** you set) with a JSON body to the **URL**, adding any **Headers** you list, one `Name: Value` per line, for example an `Authorization` header. With a **Secret**, the `X-Datafor-Signature` header carries `sha256=` followed by the hex HMAC-SHA256 of the raw body, keyed with the secret; verify it before trusting the message. A response other than 2xx counts as a failure and is retried for 5xx and 429.
-
-A subscription delivery looks like this:
-
-```json
-{
-  "event": "subscription.delivered",
-  "sentAt": "2026-11-16T00:00:05Z",
-  "subscription": { "id": "sub_01…", "name": "Retail Operations Overview EN · Weekly on Mon at 08:00", "owner": "admin" },
-  "report": { "path": "/public/demo/Retail Operations Overview EN.datafor", "title": "Retail Operations Overview EN", "link": "https://bi.example.com/datafor/…" },
-  "recipient": { "kind": "channel" },
-  "filters": { "Region": "East China", "Year": "2026" },
-  "summary": [ { "title": "Net Sales", "formatted": "5.09M" } ],
-  "insight": { "level": "standard", "markdown": "…" },
-  "assets": [ { "kind": "png", "label": "View screenshot", "url": "https://…", "bytes": 482113, "expiresAt": "2026-11-23T00:00:05Z" } ],
-  "runId": "run_01…"
-}
-```
-
-An alert sends `"event": "alert.fired"` or `"alert.recovered"` with `alert` (`id`, `name`, `owner`, `severity`, `metric`), `outcome`, `evaluation` (period, value, comparison, matched conditions, members), `filters`, `condition` and the AI analysis when there is one. **Test** sends `"event": "channel.test"`. Read the event from the body's `event` field.
+**Settings › Notifications › Delivery channels** holds the group robots (WeCom, DingTalk, Feishu), the Teams and Slack webhooks, generic webhooks and the direct-message channels of IM apps, and decides who may post to each group. How to create each one on its platform, what a group receives, testing and troubleshooting are in [Delivery Channels](/documentation/Subscriptions-and-Alerts/Delivery-Channels/).
 
 ## Defaults for everyone
 
