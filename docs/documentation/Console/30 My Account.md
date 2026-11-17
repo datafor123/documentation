@@ -109,11 +109,11 @@ For link creation, access options, and disabling sharing, see [Share Link](/docu
 
 Filter by report or status, **Refresh**, and use **Download**, **Cancel** (queued or running tasks) or **Delete** on a row. Failed rows show the reason. Files are kept for 90 days by default. See [Report Downloads](/documentation/Paginated-Reports/Report-Downloads/) for the limits and messages.
 
-## Subscriptions & alerts
+## My subscriptions & alerts
 
-**Subscriptions & alerts** sets how you receive subscriptions and alerts (**How I receive**: email, an IM direct message, or both) and lists the dashboard subscriptions, metric alerts and paginated report subscriptions you created, with their runs. See [Managing Your Subscriptions and Alerts](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/).
+**My subscriptions & alerts** sets how you receive subscriptions and alerts (**How I receive**: email, an IM direct message, or both), lists the dashboard subscriptions, metric alerts and paginated report subscriptions you created (**Created by me**), and what other people send you, where you can stop receiving any of it (**Sent to me**). See [Managing Your Subscriptions and Alerts](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/).
 
-**Linked IM accounts** lists the WeCom, DingTalk, Feishu, Slack or Teams accounts linked to your user, where you can unlink them. How accounts get linked is described in [Using Datafor in IM Apps](/documentation/System/Using-Datafor-in-IM-Apps/). **Subscriptions & alerts** appears when the subscriptions and alerts plugin is installed, **Linked IM accounts** when an administrator has connected IM platforms.
+**Linked IM accounts** lists the WeCom, DingTalk, Feishu, Slack or Teams accounts linked to your user, where you can unlink them. How accounts get linked is described in [Using Datafor in IM Apps](/documentation/System/Using-Datafor-in-IM-Apps/). **My subscriptions & alerts** appears when the subscriptions and alerts plugin is installed, **Linked IM accounts** when an administrator has connected IM platforms.
 
 ## Handle unsaved changes
 

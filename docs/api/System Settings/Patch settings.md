@@ -68,7 +68,7 @@ curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor/ap
 }
 ```
 
-`data` is the new snapshot; keep its `revision` for the next patch. If nothing actually changes, the current snapshot comes back unchanged. With the audit log recording **System settings changes**, each changed key is logged with its old and new value; if writing the audit entry fails, the change is still saved and `data.auditWarning` is `true`.
+`data` is the new snapshot; keep its `revision` for the next patch. If nothing actually changes, the current snapshot comes back unchanged. With the audit log on, the patch is recorded as **Edit system settings** and each changed key is logged with its old and new value; if writing the audit entry fails, the change is still saved and `data.auditWarning` is `true`.
 
 ## Errors
 

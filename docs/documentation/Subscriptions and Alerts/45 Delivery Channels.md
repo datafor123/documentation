@@ -194,7 +194,7 @@ The built-in **Email** channel uses the mail server and cannot be deleted.
 
 1. In the DingTalk group *East China sales*, add a custom robot named *Datafor* with **Sign**, and copy the webhook and the secret.
 2. Under **Delivery channels**, click **New channel**, choose **DingTalk robot**, name it *East China sales*, paste the webhook and the secret, and add the role *East China managers* to **Authorized roles**. Save, then **Test**: the group shows the test message.
-3. On the **Overview** tab of **Subscriptions & alerts**, check that **Temporary links** is **Available**, so the screenshot shows in the card.
+3. On the **Overview** tab of **Subscriptions & alerts**, check under **Details** that **Temporary links** is **Available**, so the screenshot shows in the card.
 4. A member of *East China managers* opens the dashboard, sets **Region** to *East China*, clicks **Subscribe**, adds *East China sales (DingTalk robot)* under **Post to channels › Groups set up by admins**, sets **When** to **Workdays** at 08:00 and saves.
 5. To see the result without waiting, they click **Run now** in the subscription list. **Send me a test** does not post to channels.
 

@@ -16,6 +16,8 @@ A subscription sends one dashboard on a schedule. Each person receives a copy re
 3. Check **Send to**, **When** and **Data**, add channels if needed, and open **More settings** for the outputs.
 4. Click **Send me a test** to see the result in your own inbox or IM, then **Save**.
 
+If you cannot access the data a component of the dashboard uses, a warning at the top of the editor names the models: *You do not have access to the data this report uses (…), so what you receive will be empty or say "no permission"*. Ask for access before relying on the subscription.
+
 ![Subscribe dialog for Retail Operations Overview EN: Send to administrator (me), Post to channels empty, When Daily 08:00 with Next 2026-11-16 08:00 (UTC+08:00), and Data expanded with Year set to This Year, Region set to East China and the other filters following the report default](./images/subscribe-editor.png)
 
 ### Send to
@@ -24,7 +26,7 @@ People and roles. You are added by default. Type to search; results are grouped 
 
 Under the field, *Each person gets it the way they chose in My account* is a reminder that you do not pick email or IM for other people. If anyone would be skipped, the editor lists them below the field with the reason before you save, for example *Recipient cannot read this report* or *No email address and no linked IM account*. Skipped people never receive the dashboard; to include them, share the report with them first.
 
-A subscription can address up to 50 people by default, roles counted after expansion. Readers can only subscribe for themselves.
+A subscription can address up to 50 people by default, roles counted after expansion. For Readers, **Send to** is a read-only line such as *Me (Email)*: they can only subscribe themselves, the way they chose to receive.
 
 ### Post to channels
 
@@ -70,8 +72,8 @@ The line reads *Using the report's default filters* or lists the values you chan
 | --- | --- |
 | **Scope** | **Whole page**, or **One tab** of a tabbed report (only offered when the report has tabs). |
 | **Layout** | **Desktop**, or **Mobile** for a tall image that reads well in IM apps. Mobile is available only when the report has a [mobile layout](/documentation/Visualization/Mobile-Layout-View/). |
-| **Outputs** | **Screenshot (PNG)**: an image of the page. **Figures summary**: the values of the report's metric and KPI cards written into the message, one *name: value* per line. **PDF**: the page as a PDF. **Excel**: appears when the report has tables; choose up to 5 table components, each exported to its own Excel file. At least one output is required. |
-| **AI brief** | A short written summary of the dashboard, generated at send time **as each recipient**, so it only discusses data that person can see. **Standard** takes about 30 seconds, **Detailed** up to 2 minutes. Needs the AI extension; briefs count against a site-wide daily budget, and once it is used up the day's remaining runs go out without a brief. |
+| **Outputs** | **Screenshot (PNG)**: an image of the page. **Figures summary**: the values of the report's metric and KPI cards written into the message, one *name: value* per line; no AI is involved. **PDF**: the page as a PDF. **Excel**: appears when the report has tables; choose up to 5 table components, each exported to its own Excel file. At least one output is required. |
+| **AI brief** | A short written summary of the dashboard, generated at send time **as each recipient**, so it only discusses data that person can see. **Standard** takes about 30 seconds, **Detailed** up to 2 minutes. Needs the AI extension; briefs count against a site-wide daily budget, and once it is used up the day's remaining runs go out without a brief. When an administrator sets the budget to 0, the option is not shown. |
 | **Active dates** | Optional start and end dates. After the end date the subscription switches itself off and you get an email. |
 | **Name** | Generated as *Report · schedule*, for example *Retail Operations Overview EN · Daily at 08:00*, and updated when you change the schedule until you edit it yourself. Up to 60 characters. |
 
@@ -81,7 +83,7 @@ The line reads *Using the report's default filters* or lists the values you chan
 
 ## What recipients receive
 
-The subject is *Report name* and the date, unless the administrator changed the [message template](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#message-templates). An email contains, in order: the title, a *Filters* line with the values used, the AI brief, the figures summary, an **Open report** button that opens the dashboard with the same filters, the screenshot, and a footer naming whose permissions the data reflects. The PDF and Excel files are attached; when the attachments exceed the mail limit (25 MB by default), the email carries links instead.
+The subject is *Report name* and the date, unless the administrator changed the [message template](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#message-templates). An email contains, in order: the title, a *Filters* line with the values used, the AI brief, the figures summary, an **Open report** button that opens the dashboard with the same filters, the screenshot, and a footer naming whose permissions the data reflects, with a **Manage what I receive** link (see [Sent to me](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/#sent-to-me)). The PDF and Excel files are attached; when the attachments exceed the mail limit (25 MB by default), the email carries links instead.
 
 IM messages carry the same text as a card. How images and files travel depends on the platform:
 
@@ -100,11 +102,11 @@ All outputs, the figures and Excel files included, are produced by the render se
 
 ## Manage the subscriptions of this report
 
-With at least one subscription, **Subscribe** opens a drawer listing this report's subscriptions: schedule, next run, last result, and an **Enabled** switch to pause one without deleting it. **Run now** sends it immediately to everyone; the **⋯** menu has **Edit**, **Runs** and **Delete**. Administrators see everyone's subscriptions of the report here.
+With at least one subscription, **Subscribe** opens a drawer listing this report's subscriptions: schedule, next run, last result, and an **Enabled** switch to pause one without deleting it. **Run now** sends it immediately to everyone; the **⋯** menu has **Edit**, **Runs** and **Delete**. Administrators see everyone's subscriptions of the report here. When the dashboard is open in the console, **Manage all my subscriptions** at the top right opens your subscriptions across all reports.
 
 ![Subscriptions drawer of Retail Operations Overview EN listing one weekly subscription with its schedule, next run, Not run yet and the Enabled switch](./images/subscriptions-drawer.png)
 
-All your subscriptions, across reports, are in **My account › Subscriptions & alerts**. See [Managing Your Subscriptions and Alerts](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/), which also explains run results and problems. When a run fails or some recipients are skipped, you get an email listing what went wrong.
+All your subscriptions, across reports, are in **My account › My subscriptions & alerts**. See [Managing Your Subscriptions and Alerts](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/), which also explains run results and problems. When a run ends **Partial** or **Failed**, you get an email listing what went wrong.
 
 ## Limits
 

@@ -56,7 +56,7 @@ curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor/ap
 }
 ```
 
-With the audit log recording **System settings changes**, changes to the report and modeling defaults made here are logged as with patch; changes to other keys are not.
+With the audit log on, changes to the report and modeling defaults made here are recorded as **Edit system settings**, as with patch; changes to other keys are not.
 
 ## Errors
 

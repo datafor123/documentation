@@ -1,15 +1,28 @@
 ---
 title: System Configuration
 permalink: /documentation/System/System-Configuration/
-description: Tenant-wide defaults for new reports and models, query and refresh limits, the first day of the week and automatic AI knowledge indexes.
+description: The server's time zone, tenant-wide defaults for new reports and models, query and refresh limits, the first day of the week and automatic AI knowledge indexes.
 createTime: 2026/10/09 17:30:00
 ---
 
 # System Configuration
 
-**Settings › General › System configuration** holds tenant-wide defaults. Only administrators see it.
+**Settings › General › System configuration** holds the server's time zone and tenant-wide defaults. Only administrators see it.
 
-![System configuration and the Settings navigation](./images/settings-sysconfig-top.png)
+![System configuration: the Time zone section with System time zone set to Asia/Shanghai, above the Reports settings](./images/settings-sysconfig-top.png)
+
+## Time zone
+
+**System time zone** is one setting for the whole server, shared by all tenants. It decides:
+
+- when subscriptions and alerts run, and what *today*, *last month* or *this year* mean in their filters and alert periods;
+- which day each record is counted in on the [Audit Log](/documentation/System/Audit-Log/#overview-tab) dashboards.
+
+The default, **Same as server (*zone*)**, follows the time zone of the Datafor server's operating system. Pick the zone your business days are counted in. Only region names such as *Asia/Shanghai*, *Europe/Berlin* or *America/New_York*, and *UTC*, are offered: they carry daylight saving rules, which a fixed offset such as UTC+08:00 does not.
+
+The row has its own **Save** button, which appears once you change the value. After a change, the next run time of every subscription and alert is recalculated, and the audit statistics are counted again, which can take a while on a large log.
+
+Only an administrator of the default tenant can change it; administrators of other tenants see it read-only. A change is recorded in the audit log as **Edit system settings**.
 
 ## Settings
 
@@ -42,7 +55,7 @@ With the switch on, saving a model in the modeler (also **Save as**), copying a 
 - Each row shows **Using defaults** or **Custom**; a changed row shows its default and **Restore default**.
 - **Save** sends only the changed settings; **Discard changes** drops them. Leaving the page with unsaved changes asks **Keep editing**, **Discard changes** or **Save and leave**.
 - If another administrator saved in the meantime, nothing is overwritten: the latest values are loaded with your edits kept, and you review them before saving again.
-- With **Settings › Operations › Audit log** recording **System settings changes**, every saved change is logged with its old and new value.
+- Every saved change is recorded in the [Audit Log](/documentation/System/Audit-Log/) as **Edit system settings**, with its old and new value.
 
 Settings are stored per tenant.
 

@@ -62,7 +62,7 @@ curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor-mo
 }
 ```
 
-The change applies to the next token that arrives. With the audit log on, it is recorded as **Token add** or **Token edit**.
+The change applies to the next token that arrives. With the audit log on, it is recorded as **Create token** or **Edit token**.
 
 ## Errors
 

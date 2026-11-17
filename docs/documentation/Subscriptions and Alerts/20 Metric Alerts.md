@@ -35,7 +35,7 @@ The time field list starts with the fields **Used in this chart**, then the mode
 
 The period is counted on the calendar from the day of the check, in the system time zone:
 
-| Grain | Choices | Default |
+| Grain | Calendar choices | Default |
 | --- | --- | --- |
 | Day | **Yesterday**, **Today (so far)** | Yesterday |
 | Week | **Last week**, **This week (to date)** | Last week |
@@ -45,7 +45,9 @@ The period is counted on the calendar from the day of the check, in the system t
 
 The default for day, week, month and quarter is the last *complete* period. A period still in progress only holds part of its data, so a threshold such as *below 500,000* on *This month* would fire on the 2nd of every month.
 
-Below the field, *Currently: 2026-10* names the period the alert would evaluate today. *No data yet for 2026-10* means the model has nothing for that period yet; threshold and change conditions are then not met, so use **No new data for** if a missing load should alert you.
+Every grain also offers **Latest *month* with data** (the word follows the grain): the most recent period that has data, whatever today's date. Use it for models whose data stops before today, such as a monthly load that arrives weeks later or a historical sample.
+
+Below the field, *Currently: 2026-10* names the period the alert would evaluate today. *No data yet for 2026-10* means the model has nothing for that period yet; threshold and change conditions are then not met. The hint then offers **Use the latest *month* with data**; or keep the calendar period and add **No new data for** if a missing load should alert you.
 
 When the field's values are not recognizable as dates (month names without a year, quarter numbers such as *Q3*, keys like *2026 Q3*), the editor says *This time field isn't recognized as dates* and falls back to **Latest *month* with data** and **The *month* before that**. These follow the data, not the calendar, so a load that stopped in September keeps being evaluated as September. Prefer a date-based field when the model has one.
 
@@ -68,7 +70,7 @@ As soon as the condition is complete, the editor runs it against current data an
 
 ### Severity
 
-**Info**, **Warning** or **Critical**. It appears in the subject of the message, as in *[Warning] Net Sales Alert triggered*, and in the alert lists.
+**Info**, **Warning** or **Critical**. It appears in the subject of the message, as in *[Warning] Net Sales below 1,500,000 · Alert triggered*, and in the alert lists.
 
 ### Check
 
@@ -95,7 +97,7 @@ An alert is evaluated **with your permissions** and every recipient gets the sam
 | **Filters** | Restrict the measure to some members, for example *Channel = Online*. Up to 10 filters. |
 | **Check separately** | Choose a field, such as *Region* or *Store*, to evaluate the condition for each of its members. The alert fires when **any** member meets the condition, and the message lists the members that did. Only the first 200 members are checked. Each member has its own state, so a second region going below the line is reported even while the first is still in alarm. |
 | **Notifications** | **Notify once when it becomes abnormal** (default): one message when the condition starts being met, nothing more while it stays met. **Keep reminding while abnormal**, every N hours (up to 168): a *still abnormal* message at that interval. **Notify on recovery** (on by default) sends a message when the condition stops being met. |
-| **Attach AI analysis** | When the alert fires, the AI assistant breaks the change down by the dimensions you choose (up to 3; leave them empty to let the assistant choose) and the breakdown is added to the message. It waits up to 3 minutes; if the analysis is not finished, the alert is sent anyway with a note, and the result appears in the alert history. The breakdown shows which parts contributed to the change, not why it happened. Needs the AI extension and counts against a site-wide daily budget. |
+| **Attach AI analysis** | When the alert fires, the AI assistant breaks the change down by the dimensions you choose (up to 3; leave them empty to let the assistant choose) and the breakdown is added to the message. It waits up to 3 minutes; if the analysis is not finished, the alert is sent anyway with a note, and the result appears in the alert history. The breakdown shows which parts contributed to the change, not why it happened. Needs the AI extension and counts against a site-wide daily budget; the option is not shown when the budget is 0 or the AI assistant cannot take the task. |
 | **Check result** | The detailed result of the live check: the period and comparison period with their values, the change, which conditions matched, and with **Check separately** a table per member. |
 
 Changing the measure, the filters or the conditions of a saved alert resets its state to normal when you save, so the next check that meets the condition notifies again.
@@ -113,13 +115,13 @@ A silenced alert is still evaluated and its state still changes; messages are he
 
 ## What recipients receive
 
-The default subject is *[Severity] Metric status*, for example *[Critical] Net Sales Alert triggered* or *[Critical] Net Sales Recovered*. The message gives the current value and period, the comparison value and change, the condition that matched, the filters, and with **Check separately** the members that matched. Then come the AI breakdown if attached, and these links:
+The default subject is *[Severity] Alert name · status*, for example *[Critical] Net Sales below 1,500,000 · Alert triggered* or *[Critical] Net Sales below 1,500,000 · Recovered*. The message names the metric and gives the current value and period, the comparison value and change, the condition that matched, the filters, and with **Check separately** the members that matched. Then come the AI breakdown if attached, and these links:
 
 - **Open report**, when the alert was created from a dashboard.
 - **Ask the AI assistant** opens the assistant with a question about the change, to keep investigating.
-- **Silence for 24 hours** opens a confirmation page; confirming it silences the alert for everyone for 24 hours. The link works without signing in for the owner and for people added to **Send to** by name, and expires after 7 days.
+- **Silence for 24 hours** opens a confirmation page; confirming it silences the alert for all its recipients for 24 hours, and the page then says until when and who silenced it. The link works without signing in for the owner and for people added to **Send to** by name, and expires after 7 days.
 
-The footer says the result was calculated with the owner's permissions. Administrators can change the wording through the [alert message template](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#message-templates).
+The footer says the result was calculated with the owner's permissions, and in messages to a person adds a **Manage what I receive** link, where they can [stop receiving](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/#sent-to-me) the alert. Administrators can change the wording through the [alert message template](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#message-templates).
 
 ## Restricted alerts for Readers
 

@@ -44,7 +44,7 @@ curl -u admin:password -X POST "http://localhost:28080/datafor/plugin/datafor-mo
 }
 ```
 
-Deletion is permanent; configurations do not go to the trash. With the audit log on, each one is recorded as **Token delete**.
+Deletion is permanent; configurations do not go to the trash. With the audit log on, each one is recorded as **Delete token**.
 
 ## Errors
 

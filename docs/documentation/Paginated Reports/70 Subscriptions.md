@@ -17,20 +17,20 @@ Open the report in the viewer and click **Subscriptions** in the toolbar. The bu
 
 ## Create a subscription
 
-1. In the viewer, set the parameters and click **View**. The subscription takes the parameter values on screen.
+1. In the viewer, set the parameters and click **View**. The subscription starts from the parameter values on screen; you can still change them in the editor.
 2. Click **Subscriptions › New subscription**.
 3. Choose the **Output**, who receives it, **When** and the **Format**, then **Send me a test** and **Save**.
 
-![Subscribe · Regional Sales Statement: Output Single, Send to administrator (me), Post to channels, When Daily 08:00 with the next run in the system time zone, Format PDF, Data showing the parameters Region All and dates 2026-01-01 to 2026-03-31, More settings, Send me a test](./images/pr-subscription-editor.png)
+![Subscribe · Regional Sales Statement: Output Single, Send to administrator (me), Post to channels, When Daily 08:00 with the next run in the system time zone, Format PDF, Data with the report's Region and Date parameter controls set to All and 2026-01-01 to 2026-03-31, More settings, Send me a test](./images/pr-subscription-editor.png)
 
 | Field | What it does |
 | --- | --- |
 | **Output** | How many copies to make, see [below](#how-a-subscription-produces-its-files). |
 | **Send to** | People and roles; you are added by default. A role is expanded at every run, so new members of the role receive the next run. People who will be skipped are listed under the field with the reason before you save. |
 | **Post to channels** | Slack and Teams channels and the group robots an administrator authorized for you; see [Post to channels](/documentation/Subscriptions-and-Alerts/Dashboard-Subscriptions/#post-to-channels). Not available with **Different parameters per person**, because each copy holds different data. |
-| **When** | **Daily**, **Workdays** (Monday to Friday), **Weekly** on chosen weekdays, **Monthly** on a day or the last day, or **Manual**. Times are in the system time zone; **Next:** shows the next run. |
+| **When** | **Daily**, **Workdays** (Monday to Friday), **Weekly** on chosen weekdays, **Monthly** on a day or the last day, or **Manual only**. Times are in the system time zone; **Next:** shows the next run. |
 | **Format** | **PDF**, **Excel**, **Word (RTF)**, **Excel (flat)** or **CSV**. |
-| **Data** | The parameter values the subscription uses. To change them, close the editor, change the parameters in the viewer, click **View**, and edit the subscription again. |
+| **Data** | The parameter values the subscription uses, in the report's own parameter panel. Change them here, also when editing a saved subscription. A date parameter you leave at its relative default stays relative (see below). |
 | **More settings** | **Active dates** (optional start and end; after the end date the subscription switches itself off and you are notified) and **Name** (generated as *Report · schedule* until you type your own). |
 
 ## How a subscription produces its files
@@ -76,7 +76,7 @@ The table holds up to 1,000 rows; beyond that only the first 1,000 are processed
 
 ## Delivery
 
-- Each person receives the message the way they chose under **My account › Subscriptions & alerts › How I receive**: email, an IM direct message, or both. People who cannot be reached are skipped and the reason recorded.
+- Each person receives the message the way they chose under **My account › My subscriptions & alerts › How I receive**: email, an IM direct message, or both. People who cannot be reached are skipped and the reason recorded.
 - The subject and text follow the administrator's [subscription template](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#message-templates). The default subject is the report name and the date; the parameter values appear as a *Parameters* line. Messages end with an **Open report** link, which opens the report with the recipient's own default parameters.
 - **Files.** Email attaches them; when one email's attachments exceed 25 MB, it lists download links instead. Slack uploads files up to the IM file limit (20 MB) and links larger ones; Teams always gets links. Download links require signing in: a recipient can download the copy sent to them, and a copy posted to a channel can be downloaded by anyone who can open the report. Files are kept for 90 days.
 - Every file is also a background task of yours, listed under **My account › Report downloads**. See [Report Downloads](/documentation/Paginated-Reports/Report-Downloads/).
@@ -96,14 +96,14 @@ A recipient is skipped, and the reason recorded, when the user does not exist or
 
 ## Run history and management
 
-Expand a subscription in the drawer to see its runs: time, scheduled or manual, how many files were produced, how many failed, how many deliveries went out, and the problems. Runs are kept for 90 days. When a run fails or partly fails, you are notified with the problems.
+Expand a subscription in the drawer to see its runs: time, scheduled or manual, how many files were produced, how many failed, how many deliveries went out, and the problems. Runs are kept for 90 days. When a run fails or partly fails, you are notified with the problems. Recipients who [stopped receiving](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/#sent-to-me) the subscription are listed in grey; they are not problems.
 
 - The **On** switch pauses a subscription without deleting it.
 - **Edit** changes any setting; past runs are kept.
 - **More › Delete** removes the subscription and its history. Files already delivered are not affected.
 - You see the subscriptions you created; administrators see everyone's.
 
-Your paginated report subscriptions are also listed in **My account › Subscriptions & alerts › Paginated reports**, and administrators see all of them under **Settings › Notifications › Subscriptions & alerts**. Edit them in the viewer.
+Your paginated report subscriptions are also listed with your dashboard subscriptions in **My account › My subscriptions & alerts**; when the report is open in the console, **Manage all my subscriptions** at the top right of the drawer opens it. Administrators see all of them under **Settings › Notifications › Subscriptions & alerts**, where they can also [transfer](/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/#transfer-to-another-owner) them to another owner. Edit them in the viewer.
 
 Administrators can change the list row limit and the retention period in the plugin's `settings.xml` (`dist-list-max-rows`, `task-retention-days`).
 

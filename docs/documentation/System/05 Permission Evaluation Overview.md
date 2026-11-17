@@ -233,7 +233,16 @@ Share links can use the sharer's data permissions; do not assume they enforce pe
 
 ## 8. Audit permission changes
 
-Row and object security policy changes and system settings changes can be recorded in the audit log; file and folder ACL edits, role memberships and User Type changes have no equivalent entries. See [Audit Log](/documentation/System/Audit-Log/).
+The [Audit Log](/documentation/System/Audit-Log/) records permission changes with their old and new values:
+
+| Change | Recorded as |
+| --- | --- |
+| Row and object security policies created, edited, switched on or off, deleted | **Create**, **Edit**, **Delete row security** / **object security** |
+| File, folder, model, data source, token or AI service permissions, owner and inheritance | **Change access permissions**, one row per user or role whose permission changed |
+| A user's roles, User Type and enabled state | **Edit user** |
+| Roles created or deleted | **Create role**, **Delete role** |
+
+To answer *who gave this person access*, open the user's row menu in **Users** and choose **View changes to this account**, or **View activity** on the report or folder. Memberships that come from an external identity provider (LDAP, SSO) are not changes made in Datafor; keep that system's own audit records.
 
 ## Related topics
 

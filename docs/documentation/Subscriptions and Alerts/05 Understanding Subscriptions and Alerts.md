@@ -21,7 +21,7 @@ All three use the same recipients, the same delivery channels and the same messa
 | **Created from** | **Subscribe** in the dashboard toolbar | **Set alert** in a chart's menu, or in a Metrics Library metric |
 | **Runs** | Daily, on workdays, weekly, monthly, or only when you click **Run now** | Hourly, daily, weekly or monthly |
 | **Data shown to a person** | That person's own data | The owner's data, the same for everyone |
-| **Managed in** | **My account › Subscriptions & alerts** | **My account › Subscriptions & alerts** |
+| **Managed in** | **My account › My subscriptions & alerts** | **My account › My subscriptions & alerts** |
 
 The AI assistant inside a dashboard can also set either one up from a sentence such as *send me this dashboard every Monday at 8* or *tell me when net sales drop more than 10% month on month*. It replies with a suggestion card; **Create** opens the normal editor with the fields filled in, and nothing is saved until you click **Save**.
 
@@ -39,7 +39,9 @@ Recipients who could not see the data themselves are skipped, not given access: 
 
 ## How people receive messages
 
-Recipients do not depend on the person who created the subscription for the delivery method. Each person chooses in **My account › Subscriptions & alerts › How I receive**: email, a direct message in an IM app the administrator has connected (Microsoft Teams, Slack, WeCom, DingTalk, Feishu), or both. People who never chose get the administrator's default, which is **Email only** unless it has been changed. If none of a person's chosen ways can reach them (for example they ticked Slack but are not linked to it), email is used instead.
+Recipients do not depend on the person who created the subscription for the delivery method. Each person chooses in **My account › My subscriptions & alerts › How I receive**: email, a direct message in an IM app the administrator has connected (Microsoft Teams, Slack, WeCom, DingTalk, Feishu), or both. People who never chose get the administrator's default, which is **Email only** unless it has been changed. If none of a person's chosen ways can reach them (for example they ticked Slack but are not linked to it), email is used instead.
+
+Recipients can also opt out: under **Sent to me** each person sees what others send them and can turn off **Receive** for any of it. The owner sees who stopped, but cannot turn it back on for them.
 
 Channels are different: a message posted to a Slack or Teams channel, or to a group robot (WeCom, DingTalk, Feishu) or webhook set up by an administrator, is one shared message.
 
@@ -51,7 +53,7 @@ Channels are different: a message posted to a Slack or Teams channel, or to a gr
 | **Creator** | Up to 20 by default; any recipients and roles; only the channels an administrator has authorized | Up to 20 by default |
 | **Reader** | Only for themselves, up to 5 by default; no channels | Only *restricted* alerts from a chart, sent to themselves, up to 5 by default |
 
-Administrators change these limits on the [Subscriptions & alerts settings page](/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/#settings-tab). Everyone sees and manages only their own subscriptions and alerts; administrators see everyone's on that page.
+Administrators change these limits on the [Subscriptions & alerts settings page](/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/#settings-tab). Everyone sees and manages only their own subscriptions and alerts; administrators see everyone's on that page and can edit, delete or transfer them to another owner.
 
 ## What the server needs
 
@@ -66,7 +68,7 @@ The **Subscribe** button and **Set alert** appear once the subscriptions and ale
 | Group robots and webhooks | A channel under **Settings › Notifications › Delivery channels**, see [Delivery Channels](/documentation/Subscriptions-and-Alerts/Delivery-Channels/) |
 | Links that work outside the server | **Settings › Access & Integration › Site address** set to the address people use |
 
-Schedules, relative dates and alert periods all use one **system time zone** set by the administrator. Editors show the next run in that zone and add the offset, such as *(UTC+08:00)*, when your browser is in a different one.
+Schedules, relative dates and alert periods all use one [system time zone](/documentation/System/System-Configuration/#time-zone) set by the administrator. Editors show the next run in that zone and add the offset, such as *(UTC+08:00)*, when your browser is in a different one.
 
 ## In this section
 
