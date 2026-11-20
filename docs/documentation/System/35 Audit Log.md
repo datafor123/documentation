@@ -69,6 +69,7 @@ Operations that change settings keep the old and new value of each field: **Edit
 - **Failed login** records the reason: wrong username or password (an unknown username counts as this too), wrong verification code, account locked, disabled or expired, or an invalid token. To keep a password-guessing attack from flooding the log, at most 20 failures per minute are recorded for one IP and username, and 100 per minute for one IP; the number left out is noted in the next record.
 - **Log out** records whether the user signed out, the session timed out, or the server was shut down, and how long the session lasted.
 - **Shares**: the object is the shared report, not the share ID; people who open a link without signing in are shown as **Anonymous visitor**.
+- **Export data** is recorded when someone exports a component's data to Excel or CSV, or exports a paginated report; the object is the report, with its path. The details give the format and the component title; the Excel files a subscription attaches are recorded too, marked as made by the render service.
 - **Change access permissions** is recorded only when something changed. Saving the permission dialog without changes leaves no record. Batch changes give one record per file.
 - **Run subscription** is recorded once per run, when it ends. Scheduled runs are recorded under the owner with the source **System**; **Run now** is recorded under the person who clicked it. A run that reached only some recipients is **Succeeded**, and its details give how many were delivered and not delivered.
 - **Run alert**: scheduled checks are recorded only when they sent a notification or failed, because most checks find nothing. **Evaluate now** is always recorded. **Send me a test** and **Check now** in the editors are not recorded.
@@ -91,8 +92,9 @@ The tab shows one of three dashboards; pick it at the top. **Open in new window*
 
 Things to know when reading them:
 
-- The figures come from a daily summary of the records, counted into days in the [system time zone](/documentation/System/System-Configuration/#time-zone). **Updated** shows when the summary last ran; **Updating (N days left to summarize)** appears while it catches up, for example after the time zone was changed, which recounts every day.
-- Runs and syncs the server starts on its own (source **System**) do not make anyone an active user.
+- The figures come from a daily summary of the records, counted into days in the tenant's [time zone](/documentation/System/System-Configuration/#time-zone). **Updated** shows when the summary last ran; **Updating (N days left to summarize)** appears while it catches up, for example after the time zone was changed, which recounts every day of that tenant only.
+- Work the server does on its own (source **System**) is left out of the figures: scheduled runs and syncs, and the sign-ins and report opens of the render service when it opens a dashboard as each recipient of a subscription or alert. So a subscription sent to 200 people does not add 200 report opens or 200 sign-ins, and does not keep an otherwise unused report off the *not opened for a long time* list.
+- **Anonymous visitor** (share links opened without signing in, silence links in alert messages) is not counted as an active user. Statistics summarized before this rule are recounted once after the upgrade.
 - If an operation a dashboard needs is not recorded, a banner says so, for example *Open report not recorded; related charts are empty*, with **Turn on**.
 - When viewing records are kept for less time than the rest, a note says how far back the viewing charts go.
 - Clicking a user or a report in a dashboard opens **Activity** filtered to it, in a new window.

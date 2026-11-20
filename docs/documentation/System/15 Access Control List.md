@@ -44,7 +44,7 @@ Permissions must be explicitly granted to users, roles, or user types for each r
 
 4. Click **Save**.
 
-5. If the notice **Permissions saved** appears, some of the users or roles you granted lack **Read** on what the content depends on: the data source of a granted model, or the models and data sources used by a granted report or folder. Grant that access in the **Models** and **Datasource** lists, then click **Got it**. The notice does not change any permissions. The same check runs after **Model permissions** and **File permissions** on the **Users** and **Roles** pages. See [Check what grantees still need](/documentation/System/Permission-Evaluation-Overview/#check-what-grantees-still-need).
+5. If the notice **Permissions saved** appears, some of the users or roles you granted lack **Read** on what the content depends on: the data source of a granted model, or the models and data sources used by a granted report or folder. Grant that access in the **Models** and **Data sources** lists, then click **Got it**. The notice does not change any permissions. The same check runs after **Model permissions** and **File permissions** on the **Users** and **Roles** pages. See [Check what grantees still need](/documentation/System/Permission-Evaluation-Overview/#check-what-grantees-still-need).
 
 ### 2.2 User-Type-Based Authorization
 

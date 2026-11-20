@@ -112,7 +112,7 @@ The AI brief and the alert analysis do not count against anyone's personal AI qu
 | **Clean up now** | Deletes runs and files older than the retention period immediately |
 | **Rotate system token secret** | Regenerates the key the plugin uses to open reports as each recipient. Runs in progress may fail, so do it when nothing is running. |
 
-The system time zone that schedules use is set in [System Configuration](/documentation/System/System-Configuration/#time-zone).
+The time zone that schedules use is set in [System Configuration](/documentation/System/System-Configuration/#time-zone), per tenant. Counts for *today* on this page use the tenant's zone; a platform administrator looking at all tenants sees them in the platform zone.
 
 ## Other limits
 

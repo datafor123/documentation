@@ -27,7 +27,7 @@ The link page is valid for 10 minutes and works once. If it says **Link not vali
 
 ## Receive subscriptions and alerts
 
-Under **My account › Subscriptions & alerts › How I receive**, tick the app's direct-message option, such as **DingTalk app message** or **Slack direct message**. Only a linked app can be ticked. Messages arrive as cards with buttons such as **Open report**, and alerts also with **Ask the AI assistant** and **Silence**. See [Managing Your Subscriptions and Alerts](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/).
+Under **My account › My subscriptions & alerts › How I receive**, tick the app's direct-message option, such as **DingTalk app message** or **Slack direct message**. Only a linked app can be ticked. Messages arrive as cards with buttons such as **Open report**, and alerts also with **Ask the AI assistant** and **Silence**. See [Managing Your Subscriptions and Alerts](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/).
 
 ## Ask questions
 
@@ -40,12 +40,20 @@ Send your question to the app as you would type it in the AI assistant, for exam
 | Slack | In a direct message to the bot, or in a channel by @-mentioning it; the answer comes in a thread |
 | Microsoft Teams | Not available; the Teams app only sends messages |
 
-The app first replies *Analysing, please wait…*. The answer contains the AI assistant's text, a table with the first 10 rows and 5 columns of the result, a line saying whose permissions it was calculated with, and **Open in Datafor**, which opens the full answer in the AI Agent.
+The app first replies *Analysing, please wait…*. The answer contains the AI assistant's text, a table with the first 10 rows and 5 columns of the result, a line saying whose permissions it was calculated with, and **Continue in the Datafor AI assistant**, which opens the AI assistant page of the console (after sign-in if needed) to keep asking there. The question asked in the IM app is not in that page's history.
+
+Other replies you may get:
+
+- *Query result:* followed by the table, when the assistant found values but wrote no explanation.
+- *No matching data: the period or scope you asked about may not have any data yet. Try another period.* The question was understood, but the result is empty, for example *today* before today's data is loaded.
+- *This question can't be answered as asked:* followed by the assistant's reason, for example that the model has no such field. Rephrase, or name the model in the question (*in Retail Chain Operations, …*): a model you name is used even when the app has a default model.
+- *This analysis is taking longer; no result this time.* after 2 minutes. Ask again later, or in the AI assistant.
 
 - **Follow-up questions.** Reply within 30 minutes to build on the previous answer, for example *Break it down by product*.
 - **Clarifications.** When the assistant needs more information, it lists the options; reply with the number or the name.
 - **Permissions.** Answers always use your permissions. In a group, everyone in the group sees the answer to your question.
-- **Limits.** Questions count against your daily AI quota. After 2 minutes without a result, the app tells you to check the result in Datafor later. You can send up to 10 messages per minute.
+- **Limits.** Questions count against your daily AI quota. You can send up to 10 messages per minute.
+- **Dates.** *Today* or *last month* are counted in your own time zone when the platform sends it (Slack), otherwise in the tenant's [time zone](/documentation/System/System-Configuration/#time-zone).
 
 If the app replies that data questions are not enabled, the administrator has turned asking off for that app or for all apps.
 
@@ -61,6 +69,8 @@ These commands work in the same places as questions, also when asking is turned 
 | `silence alert NAME [hours]` | Silences an alert, for 24 hours unless you give the hours |
 | `unsilence alert NAME` | Ends the silence |
 | `pause alert NAME`, `resume alert NAME` | Turns an alert off or on |
+
+The lists end with **Manage in Datafor**, which opens **My subscriptions & alerts** in the console.
 
 If a name is not found, send `my subscriptions` or `my alerts` to see the exact names. All commands also work in Chinese, and the two list commands in the other interface languages as well.
 

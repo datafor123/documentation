@@ -30,7 +30,7 @@ Use the severity controls and **All categories** filter to narrow the list. Sele
 Diagnostics can report:
 
 - Duplicate table aliases.
-- Missing table or field metadata.
+- Missing table or field metadata. A table that the data source says does not exist is an **Error**: *Table "store" can't be found in data source "foodmart".* A table whose metadata could not be read at the moment (a timeout, a dropped connection) stays a **Warning**.
 - Relationships that reference missing tables or fields.
 - Empty calculated-column or calculated-measure expressions.
 - Missing or invalid Measure aggregations.
@@ -39,10 +39,6 @@ Diagnostics can report:
 - Relationship cycles in single-fact components. Components with multiple Measure Group tables are exempt from this cycle warning, so inspect each fact-to-Dimension route manually.
 - Missing business descriptions or incomplete time settings.
 - Missing, stale, drifting, or duplicate enterprise metric bindings.
-
-### Unused fields
-
-For administrators, diagnostics also reports, at **Info** level, measures and attributes that no report uses: *"Store Manager" is not used by any report.* The rule reads the lineage usage records and runs only when all reports on the server are visible to you, so that a field used in another user's personal folder is never reported as unused. See [Usage and Impact Analysis](/documentation/Lineage/Usage-and-Impact-Analysis/).
 
 ## Diagnostics during Save
 

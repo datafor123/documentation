@@ -1,264 +1,132 @@
 ---
 title: Multi-tenancy
 permalink: /documentation/Multi-tenancy/Multi-tenancy/
+description: For the platform administrator. Create tenants with their admin password, seat and AI user limits and end date, reset a tenant administrator's password, repair permissions, disable and delete tenants, and know what a tenant administrator can and cannot change.
 createTime: 2026/09/01 22:03:26
 ---
 
 # Multi-tenancy
 
-This document is intended for **Super Admin** users. It explains how to use Datafor’s **Multi-tenancy** feature to create tenants, configure entitlements (**Plan / Seats / Trial End Date**), maintain tenant administrators, enable/disable tenants, review audit logs, and delete tenants.
+One Datafor server can host several tenants. Each tenant has its own users, roles, content, models, data sources and settings, and its own sign-in address `…/datafor/t/<tenant-id>`. The **default tenant** is the platform itself; the other tenants are created from a template tenant, **template0**.
 
-## 1. Overview
+This page is for the **platform administrator**: the `superadmin` account, the only one that sees **Settings › Operations › Multi-tenancy**. Upgrade packages do not create `superadmin`; create it by hand after upgrading.
 
-**Multi-tenancy** is Datafor’s centralized tenant management console. Super Admins can manage multiple tenants from one place. Typical tasks include:
+## Who controls what
 
-- Creating a tenant for a new customer and setting up a trial period
-- Assigning a subscription plan (**Plan**) and seat quotas (**Creator / Reader Seats**)
-- Maintaining the tenant administrator (**Admin Email**)
-- Enabling / disabling a tenant
-- Viewing tenant change audit logs (**Activity Logs**)
-- Deleting a tenant (irreversible)
+| Setting | Platform administrator | Tenant administrator |
+| --- | --- | --- |
+| Tenants, their plan, seat and AI user limits, end date | **Multi-tenancy** | — |
+| Admin password of a tenant | **Reset admin password** | Changes it in **My account** |
+| [Site address](/documentation/System/Site-Address/) | One value for the whole server | Not shown; the server's value is used |
+| [Time zone](/documentation/System/System-Configuration/#time-zone) | **Platform time zone**, the default of every tenant | Its own **System time zone**, or **Same as platform** |
+| Query engine, license, backup, JDBC drivers | Yes | Not shown |
+| Users, roles, content, data sources, embed tokens, CORS and trusted domains, AI services, subscriptions and alerts settings | For the default tenant | For its own tenant |
 
-## 2. Access and Permissions
+Settings that a tenant keeps for itself are not shared: a tenant needs its own [AI service](/documentation/AI-Agent/LLM-Configuration/) and its own embed token configurations. An embed token configuration created in the default tenant signs in to the default tenant only.
 
-### 2.1 Permission Requirements
+## The tenant list
 
-Only users signed in with the **superadmin** account can see the **Multi-tenancy** page under **Settings › Operations**.
+![Multi-tenancy tenant list: New tenant, Search, All statuses and All plans; columns Tenant ID with the tenant name below, Status, Plan, Seats, Admin Email and Trial End Date](./images/multi-tenancy-tenant-list.png)
 
-> Important: If you upgrade the system using an **upgrade package**, you must **manually create** the **`superadmin`** account. The upgrade process does not automatically create this account.
+| Column | Shows |
+| --- | --- |
+| **Tenant ID** | The ID, with the tenant name below it. The copy icon copies the tenant's sign-in address. Click to open the details. |
+| **Status** | **Enabled** or **Disabled** |
+| **Plan** | The plan |
+| **Seats** | *Creator 5 · Reader 20 · AI 2*; *Unlimited* where there is no limit |
+| **Admin Email** | Email of the tenant's `admin` account |
+| **Trial End Date** | The end date, or **Follows license** when the tenant has none |
 
-### 2.2 Navigation Path
+**Search** finds a tenant by ID, name or admin email; **All statuses** and **All plans** filter the list. The **⋮** menu of a row has **Details**, **Enable** or **Disable**, **Reset admin password**, **Repair permissions** and **Delete** (not for template0).
 
-**Settings › Operations › Multi-tenancy**
+## template0
 
+Every new tenant is a copy of **template0**: its branding, data sources, models, sample reports and folders. Changes to template0 apply to tenants created afterwards, not to existing ones. template0 cannot be deleted; keep it as a template and do not give it to a customer.
 
-## 3. Tenant List Page
+An upgrade package does not create template0. Until it exists, creating a tenant fails with *Tenant template0 does not exist,create it first*. Create it with **New tenant** and the Tenant ID `template0`; it is the only tenant that can be created without a template.
 
-After entering Multi-tenancy, the system displays the tenant list by default. This page provides an overview and helps you quickly locate tenants.
+## Create a tenant
 
-<div align="left"><img src="./images/multi-tenancy-tenant-list-template0.png" alt="Multi-tenancy tenant list under Settings › Operations, with the + button, Search, All statuses and All plans filters, and the template0 row" width="100%" /></div>
+1. Click **New tenant**.
+2. Fill in the fields below and click **Create**.
+3. The **Tenant created** dialog shows the **Sign-in URL**, the **Account** (`admin`) and the **Password**. Click the copy icon (**Copy all**) and pass them to the tenant administrator. *The password is shown only once.*
 
-### 3.1 Column Descriptions
+![New tenant dialog: Tenant ID, Tenant Name, Plan, Admin Email, Admin Password with Generate, Creator Seat Limit, Reader Seat Limit, AI User Limit with the remaining AI users of the license, Enable Trial and Trial End Date](./images/multi-tenancy-create-tenant-dialog.png)
 
-The list includes the following columns:
+| Field | What to enter |
+| --- | --- |
+| **Tenant ID** | Letters, digits and underscores, starting with a letter or underscore, for example `acme` or `t_acme`. It is part of the sign-in address and cannot be changed. |
+| **Tenant Name** | The display name |
+| **Plan** | The plan; changeable later |
+| **Admin Email** | Email of the tenant's `admin` account. Password resets by email go there. |
+| **Admin Password** | Filled in with a generated 16-character password; **Generate** makes another one, or type your own. There is no default password. |
+| **Creator Seat Limit**, **Reader Seat Limit** | Whole numbers of at least 1 |
+| **AI User Limit** | How many users of the tenant may use the AI Agent. **0** (the default) means none. When the license limits AI users, the field is required and the hint says how many the license can still assign; otherwise leave it empty for no limit. Hidden when the license has no AI. |
+| **Enable Trial**, **Trial End Date** | On by default, one month from today. Turn **Enable Trial** off for a tenant that runs as long as the platform license. |
 
-- **Tenant ID**: The unique identifier of the tenant. Use the copy icon next to the Tenant ID to copy the tenant URL (see Section 11).
-- **Tenant Name**: The tenant name (click to open tenant details)
-- **Status**: Tenant status (e.g., Enabled)
-- **Plan**: Subscription plan (e.g., Enterprise, Pro)
-- **Creator Seats**: Total creator seat quota
-- **Reader Seats**: Total reader seat quota
-- **Admin Email**: Tenant administrator email
-- **Trial End Date**: Trial end date / expiration date
-- **Last Updated**: Most recent update time
+Datafor refuses limits the license cannot cover, with the reason:
 
-### 3.2 Search and Filters
+- *Sum of tenant seat quotas exceeds the license seats.* The Creator and Reader limits of all tenants together may not exceed the license.
+- *Sum of tenant AI user limits exceeds the AI users in the license.*
+- *Maximum number of tenants in the license exceeded.* The default tenant and template0 do not count.
 
-Above the tenant list, on the right:
+## Tenant details
 
-- **Search**: Search by keywords such as Tenant ID / Tenant Name / Admin Email
-- **All statuses**: Filter by status
-- **All plans**: Filter by plan
+Click a Tenant ID, or **Details** in the row menu. The page has **Details**, **Admin** and **Activity Logs** tabs, and **Back to List**, **Disable** or **Enable**, and **Delete** at the top.
 
-### 3.3 Create Tenant Entry (“+”)
+![Tenant details, Details tab: Current Plan with Change Plan; Seats with Creators, Readers and AI users as used/limit and Change Quotas; the expiration date with Change Expiration Date](./images/multi-tenancy-tenant-details.png)
 
-Click **+** at the top-left of the tenant list, left of **Search**, to open the **Create Tenant** dialog (see Section 4).
+### Plan, seats and AI users
 
-### 3.4 Tenant Template (template0)
+**Seats** shows **Creators**, **Readers** and **AI users** as used/limit; a number above its limit is red. **Change Quotas** changes the three limits. Besides the license totals above, a limit cannot be set below what the tenant already uses, for example *AI user limit cannot be lower than the 3 AI users this tenant already has*.
 
-In the tenant list, you may see a tenant named **template0** (as shown in the screenshot in Section 3). It is a built-in **Tenant Template** used to initialize new tenants.
+Inside the tenant, the AI user limit is checked whenever an administrator turns on **Enable AI Agent** for a user or enables a disabled user who has it. At the limit, the tenant administrator sees *This tenant has reached its AI user limit. Ask the platform administrator to raise it.* Lowering a limit never takes AI away from anyone; it only blocks new grants.
 
-> Important: If you upgrade the system using an **upgrade package**, the tenant template (**template0**) is **not created automatically**. Until it exists, creating any other tenant fails with "Tenant template0 does not exist,create it first". To create it, click **+** and create a tenant with **Tenant ID** `template0` (see Section 4); it is the only tenant that can be created without a template.
+### End date
 
-- **Default behavior**: When you create a new tenant, the system **copies (clones) template0** to generate the tenant’s initial content and default configuration.
-- **Copy scope**: the tenant's initial content and configuration, including:
-  - **White-label configuration**: brand name, logo, theme color/appearance, etc.
-  - **Data sources**: configured connections and related settings
-  - **Analytic models**: published/available models and semantic configurations
-  - **Sample pages / sample content**: sample reports, dashboards/pages, demo assets and folder structure
-- **Impact**: Changes to **template0** apply to tenants created after the change. Existing tenants are not updated.
-- **template0** cannot be deleted from the list: its row menu has no **Delete**. Its details page still shows a **Delete** button; do not use it on template0.
+**Change Expiration Date** offers **Set an end date** or **No separate end date (follows the platform license)**; removing a date asks for confirmation first. After the end date, users of the tenant can no longer view or analyze data: the license check of the tenant fails with *License has expired.* from the day after the date (one day of grace for time zones). Set a later date to restore access.
 
-> Recommendation: Treat **template0** as a system template tenant. Avoid using it as a real customer tenant. If you need to change the “default content/configuration for new tenants”, update template0 carefully, assess impact, and verify the initialization result by creating a new tenant.
+### Admin password
 
-### 3.5 Copy Tenant URL (from Tenant ID)
+The **Admin** tab shows the admin email (**Change Admin** changes it) and **Reset admin password**, which is also in the row menu. Use it when a tenant administrator is locked out:
 
-On the tenant list page, the **copy** button next to a **Tenant ID** is used to copy the tenant’s URL.
+1. Click **Reset admin password** and confirm with **Reset**. The current password stops working at once.
+2. The **Password reset** dialog shows the sign-in address, account and a new generated password, once. Copy it and pass it on; it is not emailed.
 
-### 3.6 Row Menu
+Only the tenant's `admin` account is reset; its roles, email and open sessions are not changed. Other users of a tenant are handled by the tenant administrator on the **Users** page.
 
-Hover a row to show its menu (**⋮**) at the far right of the table, after **Last Updated**; scroll the table horizontally if that column is out of view. The menu offers **Details** (opens the tenant details page), **Enabled** (shown when the tenant is disabled), **Disabled** (shown when the tenant is enabled), and **Delete** (not shown for **template0**).
+### Activity Logs
 
-## 4. Create Tenant
+The tenant's change history: `add` (created), `enabled` and `disabled`, `plan`, `quota`, `expireDay`, `title`, `email`, `password` (admin password reset; the password itself is not logged) and `repairAcl`. **Search** filters it.
 
-On the tenant list page, click **“+”** to open the **Create Tenant** dialog.
+## Repair permissions
 
-<div align="left"><img src="./images/multi-tenancy-create-tenant-dialog.png" alt="Create Tenant dialog with Tenant ID, Tenant Name, Plan, Admin Email, Creator Seat Limit, Reader Seat Limit, Enable Trial and Trial End Date" width="600px"/></div>
+Tenants created by Datafor versions before 10.02 got the permissions of template0's files pointing at the default tenant's roles. Their Readers and Creators then cannot see the template's models and connections: model lists come back empty, paginated reports on the sample connection are refused, and Lineage shows no models.
 
-### 4.1 Steps
+Run **Repair permissions** from the row menu on each tenant created before the upgrade, and on template0:
 
-1. Click **“+”**
-2. Fill in the required fields (marked with `*`)
-3. Click **Create Tenant** to create the tenant
-   - To cancel: click **Cancel**
+1. Datafor first checks the tenant. *Nothing to repair.* means it is fine.
+2. Otherwise it asks *Repair this tenant's permissions?* with the number of files concerned. Click **Repair**.
+3. Roles of another tenant are replaced by the roles of the same name in this tenant, other tenants' users are removed from the permissions, and administrators keep full control. The result says how many files were repaired.
 
-### 4.2 Field Descriptions (Create Tenant)
+Only the tenant's `/etc` folder is touched (models, connections, uploads, map files); reports and home folders are not. The previous permissions are saved to `pentaho-solutions/system/tenant-acl-backup/<tenant>-<date-time>.json`. Tenants created with 10.02 get correct permissions and need no repair.
 
-| Field                  | Required                       | Description                                                  |
-| ---------------------- | ------------------------------ | ------------------------------------------------------------ |
-| **Tenant ID**          | Yes                            | The tenant’s unique identifier, used in the tenant URL. It must start with a letter or underscore (the field hint reads "Start with a letter or underscore") and contain only letters, digits, and underscores (e.g., `tenant16`, `t_abc`). |
-| **Tenant Name**        | Yes                            | The tenant display name (e.g., “ABC SaaS”).                  |
-| **Plan**               | Yes                            | Subscription plan (dropdown). After creation, you can adjust it via **Change Plan** on the tenant details page. |
-| **Admin Email**        | Yes                            | Email address of the tenant’s **admin account**. After creation, you can update this email on the **Admin** tab via **Change Admin**. |
-| **Creator Seat Limit** | Yes                            | Maximum number of Creator seats for the tenant.              |
-| **Reader Seat Limit**  | Yes                            | Maximum number of Reader seats for the tenant.               |
-| **Enable Trial**       | No                             | On by default. Turn it off to create the tenant without a trial end date. |
-| **Trial End Date**     | Required when trial is enabled | Defaults to one month from today.                            |
+## Disable or delete a tenant
 
-### 4.3 Recommendations and Notes
+**Disable** (top of the details page, or the row menu) asks for confirmation: *Users of this tenant who are signed in will be signed out.* They are signed out on their next click, and nobody can sign in to the tenant, also not with tokens, single sign-on, LDAP or from an IM app. **Enable** restores access.
 
-- **Tenant ID must be unique**: Use a consistent naming convention (e.g., `tenant_<customer_short_name>`).
-- **Seat limits should be integers**: Set Creator/Reader limits according to your licensing or contract terms.
-- **Global license seat cap**: The **sum of seat quotas across all tenants** (Creators / Readers) **must not exceed** the seat count allowed by the system license. Before increasing quotas for a tenant, confirm your remaining license capacity.
-- **Trial settings**: If trial mode is enabled, ensure **Trial End Date** is set correctly to avoid unexpected expiration.
-- **New-tenant baseline**: New tenants are initialized by copying the tenant template **template0** (see 3.4).
+**Delete** removes the tenant with its users and content and cannot be undone. Type the Tenant ID to confirm. Disable a tenant first if you may need it again.
 
-## 5. Tenant Details Page
-Click **Tenant Name** or **Tenant ID** on the list page to open the tenant details page. The details page has three tabs:
+## Signing in to a tenant
 
-- **Details**: Plan, seats, and expiration date
-- **Admin**: Administrator maintenance
-- **Activity Logs**: Audit logs
+- **Address.** `https://<site address>/datafor/t/<tenant-id>`, built from the server's [site address](/documentation/System/Site-Address/). When the session of a tenant user expires, Datafor returns them to this address, not to the platform sign-in page.
+- **Forgotten password.** The **Forgot password** page belongs to the platform, so a tenant user must enter their **email address** there (*Tenant users: enter your email address.*); a user name is looked up in the default tenant only. When one email belongs to accounts in several tenants, no code is sent; the tenant administrator resets that person's password on the **Users** page instead.
+- **AI clients.** Tenant users can connect claude.ai, ChatGPT or another MCP client with the same MCP address as everyone else; Datafor signs them in to their own tenant. They need **Enable AI Agent** (within the tenant's AI user limit), an AI service configured in the tenant, and personal tokens allowed, either by the tenant's own embed token configuration or by the platform's configuration with **Share with all tenants** ticked. See [Connect AI Clients](/documentation/AI-Agent/Connect-AI-Clients/).
 
-Common action buttons in the top-right corner:
+## Upgrading tenants to 10.02
 
-- **Back to List**: Return to the tenant list
-- **Disabled**: Disable the tenant (when the tenant is currently Enabled)
-- **Enabled** (may appear after disabling): Re-enable the tenant
-- **Delete**: Delete the tenant (irreversible)
-
-## 6. Details: Plan, Seats, and Expiration Date
-
-The **Details** tab is used to manage a tenant’s core entitlements.
-
-<div align="left"><img src="./images/image-20260218161704757.png" width="100%"/></div>
-
-### 6.1 Change Plan
-
-- View: **Current Plan**
-- Update: Click **Change Plan**, select a new plan, and save
-
-> Recommendation: Plans may control feature entitlements. Ensure changes align with your commercial policy.
-
-### 6.2 Change Seats (Quotas)
-
-The Seats section shows **used/total** (e.g., Creators 1/5, Readers 0/5).
-
-- Update: Click **Change Quotas**
-- Items:
-  - **Creators**: Total creator seat quota
-  - **Readers**: Total reader seat quota
-
-> Notes:
->
-> - Saving a quota does not check the total across tenants; keep the sum of all tenants' quotas within the license seat count yourself. Each tenant is limited to the lower of its own quota and the license seat count.
-
-### 6.3 Change Expiration Date (Expiration / Trial End)
-
-- View: The current date is shown in the Expiration Date area
-- Update: Click **Change Expiration Date** to set a new date
-
-## 7. Admin: Update the Tenant Admin Account Email
-
-<div align="left"><img src="./images/multi-tenancy-tenant-admin-tab.png" alt="Tenant details page for template0 on the Admin tab, showing the current admin email and the Change Admin button" width="100%"/></div>
-
-- In the **Admin** tab, you can view and update the email address of the tenant’s **admin account**.
-  - View: **Current admin:** followed by the email address
-  - Update: Click **Change Admin**, enter the new email address, and save
-
-> Note: **Change Admin updates the email of the tenant’s admin account** (i.e., it changes the *email address* associated with that admin account for the tenant).
-
-## 8. Activity Logs: Audit and Tracking
-
-<div align="left"><img src="./images/image-20260213144703873.png" width="100%"/></div>
-
-The **Activity Logs** tab displays key changes for the tenant, useful for auditing and troubleshooting.
-
-### 8.1 Column Descriptions
-
-- **Time**: When the action occurred
-- **Action**: Action type
-
-### 8.2 Common Action Examples
-
-You may see records such as:
-
-- **add**: Tenant created
-- **enabled / disabled**: Tenant enabled/disabled
-- **expireDay**: Expiration date changed
-- **email**: Admin email changed (or an email-related admin action)
-
-### 8.3 Search and Pagination
-
-- **Search** (top-right): Filter logs by keyword
-- Pagination (bottom): Browse additional log pages
-
-## 9. Enable / Disable Tenant
-
-On the tenant details page (top-right):
-
-- Click **Disabled** to disable the tenant (suspend access)
-- After disabling, the button may change to **Enabled** to re-enable the tenant
-
-Before deleting a tenant, consider disabling it first: a disabled tenant can be re-enabled, a deleted one cannot be restored.
-
-## 10. Delete Tenant (Irreversible)
-
-Deleting a tenant is a high-risk operation: it **cannot be undone** and will remove the tenant’s **users and associated data**.
-
-<div align="left"><img src="./images/image-20260213144946113.png" width="100%"/></div>
-
-### 10.1 Steps
-
-1. On the tenant details page, click **Delete**
-2. The **Confirm Deletion** dialog appears
-3. Verify the prompt information (Tenant Name / Tenant ID)
-4. Enter the specified **Tenant ID** in the input box (e.g., `tenant16`)
-5. Click **Delete** to confirm
-   - To cancel: click **Cancel**
-
-## 11. Tenant URL and Default Admin Credentials
-
-### 11.1 Tenant URL
-
-- Tenant URL format:
-  - `http://your-server:28080/datafor/t/<tenant-id>`
-  - Example: `http://your-server:28080/datafor/t/tenant16`
-- You can click the **copy** icon next to **Tenant ID** on the tenant list page to copy the full tenant URL.
-
-### 11.2 Default Tenant Admin Account
-
-For each tenant, the built-in tenant administrator account is:
-
-- **Username**: `admin`
-- **Default password**: `password`
-
-> Security recommendation: Change the default password after first login and follow your organization’s password policy.
-
-## 12. FAQ
-
-### Q1: Why can’t I see Multi-tenancy?
-
-Only **superadmin** users can see this menu. Confirm you are logged in with the correct account and permissions.
-
-### Q2: What happens when Trial End Date / Expiration Date is reached?
-
-From the day after the date (one day of grace for time zones), the tenant's license check fails with "License has expired." and the tenant can no longer use system features. To restore access, set a later date with **Change Expiration Date**.
-
-### Q3: How do I quickly find a tenant?
-
-Use **Search** on the list page and enter Tenant ID / Tenant Name / Admin Email. You can also refine results using **All statuses** and **All plans**.
-
-### Q4: Can a deleted tenant be restored?
-
-No. Deletion removes tenant data and users, and requires strong confirmation (entering the Tenant ID).
+- **AI user limits start at 0.** Users who already have the AI Agent keep it, but no one else can get it, and MCP clients do not work for new users, until you set **AI User Limit** with **Change Quotas**.
+- **Run Repair permissions** on every existing tenant and on template0 (see above).
+- **Site addresses saved inside tenants are ignored.** Only the default tenant's value counts. Trusted domains keep their per-tenant values and now appear on the [CORS](/documentation/System/CORS/) page.
+- **Embedding with a default-tenant token configuration and `?tenantId=` stops working.** Create an embed token configuration in each tenant that embeds content.
+- **Time zones.** Every tenant follows the platform time zone until its administrator sets another.

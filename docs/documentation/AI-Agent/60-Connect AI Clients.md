@@ -37,10 +37,19 @@ An AI client signs in to Datafor with a **personal token**. The token stands for
 
 1. In the portal, open the account menu at the top right and choose **My account**, then the **Personal tokens** tab.
 2. Note the **MCP address** at the top of the page. "This address only works on the computer Datafor is installed on…" means the server listens on that computer only; to connect from another computer, your administrator must publish an address (section 8.2). "No public address is configured…" means the administrator opened the server to the network without naming a public address; if it does not connect, ask for the public MCP address.
-3. Click **New token**, give it a name (for example the client it is for), choose how long it stays valid, and confirm.
+3. Click **New token**, give it a name (for example the client it is for), choose how long it stays valid (7, 30, 90 or 180 days, up to the maximum your administrator set, never more than 365), and confirm.
 4. The token is shown **once**. Copy it now and paste it into your client as described in section 3.
 
-The page lists every token you have created: name, creation and expiry time, last use and status. When a token expires, when you change computers, or when it may have leaked, click **Revoke** on that row and create a new one. A revoked token stops working at once, and the sessions opened with it end. An AI client connected over MCP can keep working for up to a minute, because the MCP server caches token checks for 60 seconds; other nodes of a cluster also follow within a minute.
+The page lists every token you have created: name, creation and expiry time, last use and status:
+
+| Status | Meaning |
+| --- | --- |
+| **Active** | The token works. Only active tokens have **Revoke**. |
+| **Expired** | Past its expiry date |
+| **Inactive** | Not used for 90 days in a row (or never used in the 90 days after it was created). It does not come back; create a new token. |
+| **Revoked** | Revoked by you or an administrator |
+
+Expired, inactive and revoked tokens disappear from the list after 90 days. When you change computers or a token may have leaked, click **Revoke** on that row and create a new one. A revoked token stops working at once, and the sessions opened with it end. An AI client connected over MCP can keep working for up to a minute, because the MCP server caches token checks for 60 seconds; other nodes of a cluster also follow within a minute.
 
 | The page says | What it means |
 | --- | --- |
@@ -106,7 +115,9 @@ claude.ai (and its custom connectors in the Claude desktop and mobile apps) and 
 2. The app registers itself with Datafor and opens a Datafor page in your browser. If you are not signed in to Datafor, you sign in first (single sign-on works as usual) and come back to the page automatically.
 3. The page names the app and the site it will send you back to, and shows the account you are signed in with. Click **Allow**. Datafor creates a personal token for the app and hands it over; you do not create, copy or paste anything. **Cancel** aborts the connection.
 
-The app holds the token until the token expires, then asks you to connect again: click **Allow** once more. The token is listed on **My account › Personal tokens** as "AI client · *app name*"; revoking it there disconnects the app.
+The app holds the token until the token expires (one year) or has not been used for 90 days, then asks you to connect again: click **Allow** once more. The token is listed on **My account › Personal tokens** as "AI client · *app name* · *date*"; revoking it there disconnects the app. Connecting an app that is already connected replaces its connection: the page says *… is already connected to Datafor. Allowing replaces that connection, and the token it was given before is revoked.*
+
+Users of a tenant connect with the same address and are signed in to their own tenant. If they are not signed in, Datafor sends them to the sign-in page of the tenant they last signed in to; on the platform sign-in page they see *Tenant users: sign in at your tenant's sign-in address first, then connect again from your AI client.*
 
 If the page asks you to paste a personal token instead, the Datafor server does not have the connection page yet (it is older than the MCP server). Create a token as in section 2 and paste it. Adding `?manual=1` to the sign-in address opens that page on purpose.
 
@@ -215,11 +226,14 @@ AI clients connect with personal tokens, and users create them for themselves on
 | --- | --- |
 | **Name** | For example `ai-connect`. |
 | **Algorithm** | An HMAC algorithm such as `HS256`, with a **Secret** of at least 32 random characters. |
-| **Expiration time** | The longest validity a user may choose, in seconds; `7776000` is 90 days. The **Personal tokens** page offers shorter choices up to this value. |
+| **Expiration time** | The longest validity a user may choose, in seconds; `7776000` is 90 days. The **Personal tokens** page offers shorter choices up to this value. Personal tokens never last more than one year (`31536000`): a larger or empty value counts as one year, and AI client tokens always get the full value. |
 | **Initialize user** | Off. |
-| **Allow users to issue personal tokens** | On. |
+| **Allow users to create personal access tokens** | On. |
+| **Share with all tenants** | Shown in the default tenant once the option above is on. Tick it to let users of every tenant without its own configuration create personal tokens from this one; such a token signs in only to its owner's tenant. |
 
 See [JSON Web Token (JWT)](/documentation/System/JWT/) for the other fields. A token created on this configuration carries only the user name and an expiry; the user's roles and row-level permissions are read from Datafor at every sign-in.
+
+Whatever the expiry, a personal token that is not used for 90 days in a row stops working (status **Inactive**). Use counts once an hour, so a client in daily use never runs into it.
 
 Changing the **Secret** of the configuration invalidates every token issued from it at once. Users revoke individual tokens themselves on **My account › Personal tokens**.
 
@@ -290,4 +304,6 @@ Set them in `ai-agent/.env` and restart with `app-console.bat restart` or `./app
 
 - Claude Desktop users reinstall the extension: uninstall the old version first, then install the new [datafor.mcpb](/downloads/datafor.mcpb) (also in `bi-server/ai-agent/claude-extension/` of the upgraded installation). The current version takes only the personal token; user name and password fields are gone.
 - Clients that were set up with user name and password headers stop working unless `MCP_PASSWORD_SESSION_AUTH_ENABLED=true` is set. Turn on personal tokens (section 8.1) and let users switch their clients to a token instead.
+- **10.02: idle tokens.** The 90-day rule starts from the last use already recorded, without a grace period. Personal tokens unused for 90 days or more, or never used and older than 90 days, are **Inactive** right after the upgrade; their users create new ones. Tokens issued with more than one year of validity keep their expiry date.
+- **10.02: tenants.** A tenant's users can create personal tokens only when the tenant has its own configuration or the default tenant's configuration has **Share with all tenants** ticked, and use AI clients only within the tenant's AI user limit. See [Multi-tenancy](/documentation/Multi-tenancy/Multi-tenancy/#signing-in-to-a-tenant).
 - Tokens generated by the former **Connect AI** panel keep working until they expire. They do not appear on **My account › Personal tokens** and cannot be revoked individually; users should create a new token there and update their clients.

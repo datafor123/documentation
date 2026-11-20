@@ -69,7 +69,7 @@ This works on claude.ai and, once added, in the Claude desktop and mobile apps a
 4. Click **Add**. A Datafor page opens in your browser; sign in to Datafor if it asks. Check that the page names Claude and shows your account, then click **Allow**. You do not need to create or paste a token.
 5. In a conversation, click **+**, choose **Connectors** and turn on **Datafor**.
 
-Datafor creates a personal token for the connector, listed on **My account › Personal tokens** as "AI client · *app name*". The connector keeps it until it expires; Claude then asks you to connect again, and you click **Allow** once more. To disconnect, revoke that token on **My account › Personal tokens**; removing the connector in Claude does not revoke it.
+Datafor creates a personal token for the connector, listed on **My account › Personal tokens** as "AI client · *app name* · *date*". The connector keeps it until it expires after a year or goes unused for 90 days; Claude then asks you to connect again, and you click **Allow** once more. To disconnect, revoke that token on **My account › Personal tokens**; removing the connector in Claude does not revoke it.
 
 ### Claude Code
 

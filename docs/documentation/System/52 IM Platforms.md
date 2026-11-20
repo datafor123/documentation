@@ -170,7 +170,7 @@ Inbound is how people's messages to the app reach Datafor. Datafor needs it to a
 | **Callback** | WeCom (only mode), DingTalk, Feishu | The platform posts each message to the **Callback URL**, which must be reachable from the internet. |
 | **Notifications only** | Teams; Slack without an App-Level Token | Nothing comes in. |
 
-The **Inbound** column shows the state of the connection: **Connected**, **Connecting**, **Disconnected** (Datafor reconnects on its own), **Off** (the app or inbound is disabled), **Awaiting callbacks** or **Error**.
+The **Inbound** column shows the state of the connection: **Connected**, **Connecting**, **Disconnected** (Datafor reconnects on its own), **Off** (the app or inbound is disabled), **Awaiting callbacks** or **Error**. Saving new credentials rebuilds the connection with them at once; no restart is needed. In DingTalk Callback mode, Datafor checks the signature of every callback and drops those that do not match.
 
 ## Directory sync
 
@@ -188,19 +188,35 @@ Directory sync reads the members of the platform's directory and links them to D
 
 What a sync does and does not change:
 
-- A member who matches exactly one Datafor user is linked, with source **Sync**.
+- A member who matches exactly one enabled Datafor user is linked, with source **Sync**.
 - A member who matches several users, or whose user is already linked to another account in this app, is a **conflict** and is not linked.
 - Links that people made themselves (**Self-service**) or that an administrator made (**Manual**) are never replaced.
-- Members who are no longer in the directory are marked **Left**. Their links are kept, but nothing is sent to them.
+- If the Datafor user a member was linked to has been deleted, the link is dropped and the member is matched again, or gets a new Reader user when creation is on (**Re-linked**). A link to a *disabled* user is kept, and no second account is created for that person.
+- **Create Reader users** skips guests, and never reuses a login name that a disabled user still holds.
+- Members who are no longer in the directory, or whom the platform reports as deactivated, are marked **Left**. Their links are kept, but nothing is sent to them. When not all members could be read (a timeout, a department that failed, the member limit), nobody is marked **Left** in that run, so a partial read never cuts people off.
 - Mobile numbers and email addresses from the platform are stored only as hashes.
 
 ### Sync history
 
-**Sync history** in the row menu, or a click on **Last sync**, lists the last 100 syncs of the app with the trigger, status and counts. Expand a run to see its problems, the **Unmatched** members and the **Conflicts** with their candidate Datafor users (up to 500 of each).
+**Sync history** in the row menu, or a click on **Last sync**, lists the syncs of the app, newest first, with the trigger, status and a result that names only what happened, for example *852 members: 837 matched, 3 created, 4 unmatched, 2 left* (people created in the run are not counted as matched), or *852 members, all matched*. **Only runs with changes** hides the runs that changed nothing. In the app list, **Last sync** shows the same summary and turns orange when the run left people unmatched or in conflict.
 
-![Sync history of DingTalk Datafor: three runs, the latest expanded with 852 members, 846 matched, 4 unmatched, 2 conflicts, 0 created, 3 left; the Unmatched list with platform ID, name and department, and the Conflicts list with candidate Datafor users such as wanglei and wang.lei](./images/im-sync-history.png)
+![Sync history of DingTalk Datafor with Only runs with changes: the latest run, Done, 852 members: 837 matched, 3 created, 4 unmatched, 2 left, expanded to Unmatched (4) with Returned by the platform Email 812/852, Mobile number 852/852 and the reasons, Created (3) with their Datafor logins, Re-linked (1) Wang Lei from wanglei to wang.lei, Left (2) with Not in the directory this time and Deactivated or left on the platform, and Not included in matching: 3 guests](./images/im-sync-history.png)
 
-**Done** means the sync finished without problems. **Partial** means it finished with problems, for example a department that could not be read; **Problems** shows what the platform returned. **Failed** means the directory could not be read at all, for example because the credentials no longer work. To resolve an unmatched member or a conflict, fill in the user's mobile number, email or employee ID in Datafor so that exactly one user matches, link the person by hand, or let them link themselves.
+Expand a run to see who was affected; only lists with entries are shown, or *No changes*:
+
+| List | What it shows |
+| --- | --- |
+| **Unmatched** | Members that matched nobody, with the **Reason**: *The platform gave nothing to compare* (none of the fields in **Match order** came back for that person) or *No active Datafor user matches* |
+| **Conflicts** | Members that matched several users, with the candidate Datafor users |
+| **Created** | Reader users created in this run, with their **Datafor login** |
+| **Re-linked** | Members whose Datafor user had been deleted and who were matched again, with the **Previous login** |
+| **Left** | Members marked **Left** in this run, with their Datafor login and the reason: *Not in the directory this time* or *Deactivated or left on the platform* |
+
+Above the lists, *Returned by the platform: Email 812/852, Mobile number 852/852, Employee ID 0/852* tells you which fields the platform actually sent. When it sent no email or mobile number for anyone, the run says so directly (*The platform returned no … for any member, so nobody could be matched. Check the app's directory permissions.*). Guests and members deactivated on the platform are counted under *Not included in matching*. Slack and Teams runs have no department column.
+
+**Done** means the sync finished without problems. **Partial** means it finished with problems, for example a department that could not be read or *Over the member limit; only the first … members were synced*. **Failed** means the directory could not be read at all, for example because the credentials no longer work, or *The server restarted and the sync was interrupted*. When the platform refused because of permissions, the run names it: **App is missing permissions** lists the permissions to grant (for Feishu, grant one and publish a new version of the app), and **Contact range too narrow** means the app's visibility range does not cover the departments being synced. **Grant permission** opens the platform's console where it can, and **Original message** shows what the platform returned.
+
+To resolve an unmatched member or a conflict, fill in the user's mobile number, email or employee ID in Datafor so that exactly one user matches, link the person by hand, or let them link themselves.
 
 ## Asking questions in chat
 

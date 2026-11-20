@@ -77,7 +77,7 @@ A chart's **Relative** component filter can count from the period chosen in a Da
 - **Filter all components** (on by default) filters every component that can be filtered by the date, including components added later. Turn it off and check components in **Subscriber** to choose them yourself.
 - Components that cannot be filtered yet are listed greyed, for example *No time axis – not filtered yet* or *Time axis less detailed than the date – not filtered yet*. You can still check them.
 - With **Filter by → Field**, components that use another model can be filtered too; they are listed separately.
-- **Write to parameter** also writes the selected date to a report or global parameter: `YYYY-MM-DD` for a single date, `["start","end"]` for a range.
+- **Write to parameter** also writes the selected date to a report or global parameter: `YYYY-MM-DD` for a single date, `["start","end"]` for a range. The list shows date parameters first, then text parameters; global parameters are marked *(global)*. Numeric parameters are listed but cannot be chosen, because they cannot hold a date.
 
 ## Bind the Date component to a parameter
 

@@ -13,7 +13,7 @@ A metric alert checks one measure on a schedule and sends a message only when it
 
 - **From a chart.** In a dashboard, hover the chart, click **⋮** and choose **Set alert**. The editor starts with the chart's measure, its time field and the member filters saved in the chart. Selections made in the dashboard's filter controls are not carried over; add them under **More settings › Filters** if the alert should watch that slice.
 - **From the Metrics Library.** Open a metric and click **Set alert**. When the metric is bound to several models, pick one first. You choose the time field yourself.
-- **From the AI assistant.** In a dashboard, ask for example *tell me when net sales drop more than 10% month on month*. The assistant answers with a suggestion card; **Create** opens this editor with what it understood filled in and highlights anything it could not work out, such as the measure or the threshold.
+- **From the AI assistant.** In a dashboard, ask for example *tell me when net sales drop more than 10% month on month*. The assistant answers with a suggestion card; **Create** opens this editor with what it understood filled in and highlights anything it could not work out, such as the measure or the threshold. The top of the editor repeats the suggestion, and **Period** is marked **Check this** until you change it: the period and filters named in the sentence are not filled in for you, so set them before saving.
 
 ![The ⋮ menu of the Net Sales card with Export, Data preview and Set alert](./images/alert-chart-menu.png)
 
@@ -22,6 +22,10 @@ Administrators and Creators can create alerts (20 per Creator by default). Reade
 ## The editor
 
 ![Alert · Net Sales: Name Net Sales below 2,500,000.00, Period Year · Date Hierarchy and This year (to date), Currently 2026, Condition Below 2500000, the live check Now 2,051,342.07 (2026) · With current data: would trigger, Severity Warning, Check Daily 08:00 with the next run, Send to administrator (me), Post to channels and More settings](./images/alert-editor.png)
+
+### Measure
+
+Shown as the first row only when the editor opens without a measure: from **Set alert** on a chart with several measures, or when the AI assistant could not tell which one you meant (*The AI assistant could not pin down the measure (you said "…"); pick it here*). When the chart has two to four measures they appear as buttons, with the model's other measures in the **Other measure** list beside them; otherwise there is one list, **Choose a measure**. Nothing is selected for you; saving without a measure marks the field. Otherwise the measure is under **More settings**.
 
 ### Name
 
@@ -33,7 +37,7 @@ Two choices: the **time field** to look along, and **which period** to evaluate.
 
 The time field list starts with the fields **Used in this chart**, then the model's other fields. The level you pick sets the grain: day, week, month, quarter or year.
 
-The period is counted on the calendar from the day of the check, in the system time zone:
+The period is counted on the calendar from the day of the check, in your tenant's time zone:
 
 | Grain | Calendar choices | Default |
 | --- | --- | --- |
@@ -79,7 +83,7 @@ How often the alert is evaluated:
 - **Hourly**, on the hour, **All day** or only **Between** two times (for example 08:00 to 20:00).
 - **Daily**, **Weekly** (on the weekdays you tick) or **Monthly** (on a day of the month), at a time you set.
 
-**Next:** shows the next check in the system time zone. Checking more often than the data is loaded only repeats the same result; for a model refreshed nightly, **Daily** after the load is enough.
+**Next:** shows the next check in your tenant's time zone. Checking more often than the data is loaded only repeats the same result; for a model refreshed nightly, **Daily** after the load is enough.
 
 ### Send to and Post to channels
 

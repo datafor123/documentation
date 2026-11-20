@@ -25,7 +25,7 @@ Amounts are in CNY. All names are generated; the data describes no real company 
 
 ## 1. Upload the workbook as a file dataset
 
-1. Open **Data › Datasource** and select the **File datasets** tab.
+1. Open **Data › Data sources** and select the **File datasets** tab.
 2. Under **Upload a file dataset**, click **+** on the **CSV / Excel Files** card and choose `retail-chain-operations.xlsx`.
 3. In the upload dialog:
    - **Dataset**: enter `retail_chain_operations` exactly. The model refers to its tables by this name.

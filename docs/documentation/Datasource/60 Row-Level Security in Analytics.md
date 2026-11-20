@@ -84,7 +84,7 @@ Use a disposable datasource and ordinary test accounts. The following is an exam
 
 Create the business roles `North`, `South`, and `Executive`, and assign them to the ordinary test users as shown in the expected-results table below. Give the test users ACL access to the same test report and its required resources. Enable **Apply data security** in the model settings. For this example, assume no other row policies, OLS exclusions, or report filters affect the table.
 
-You need **Full control** on the datasource to manage policies. Open **Datasource → Database sources → select the datasource → Actions → Data security → Row access**. Create the following policies with **New policy**, selecting the same schema and `sales` table each time:
+You need **Full control** on the datasource to manage policies. Open **Data sources → Database connections → select the datasource → Actions → Data security → Row access**. Create the following policies with **New policy**, selecting the same schema and `sales` table each time:
 
 | Policy name | Applies to: role | Access rule | Field / operator / value |
 | --- | --- | --- | --- |

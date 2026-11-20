@@ -16,7 +16,7 @@ createTime: 2026/10/28 10:00:00
 | A report you are editing or viewing | Report toolbar menu › **Report lineage** (disabled until a new report is saved) | The report |
 | A report in a folder | The file's actions menu › **View item lineage** (not offered on folders) | The report |
 | An analysis model | **Models** › the model's actions menu › **View item lineage** | The model |
-| A data source | **Datasource** › the connection's **Actions** menu › **View item lineage** | The data source |
+| A data source | **Data sources** › the connection's **Actions** menu › **View item lineage** | The data source |
 | Any object | **Data › Lineage**, select it | The object, in the page's focus graph |
 
 ![Lineage of the Retail Chain Operations model opened from the Models list: dataset and data source on the left, the model in the middle, its reports grouped on the right with the bound metrics below](./images/lineage-modal-model.png)

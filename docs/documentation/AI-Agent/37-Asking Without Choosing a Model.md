@@ -21,12 +21,14 @@ This page explains the steps, then what each role can do. For the composer, the 
 
 <div align="left"><img src="./images/auto-select-model-flow.svg" alt="How the AI Agent chooses a model when none is selected: a follow-up keeps its model and a single visible model is used; otherwise only visible models are kept. A question naming a Metrics Library metric bound to one of them follows the bindings (one binding answers; several are separated by dimensions or recent use, or the Agent asks). Without a bound metric, model names, descriptions, knowledge index matches and recent use decide, or the Agent asks you to choose." width="100%" /></div>
 
-### Two cases are settled without any judgement
+### Cases settled without any judgement
 
 | Case | Result |
 | --- | --- |
 | The question continues an earlier analysis in the conversation | It stays on that analysis's model. The Agent never switches models in the middle of a conversation. |
 | You can see only one analysis model | That model is used. |
+| The question names one model you can see, by its name or by its full title of at least 3 characters (*sales of workshop-model last month*) | That model is used. Metrics Library bindings cannot move the question to another model. When the question names several models, the choice stays among them. |
+| The question comes from an IM app that has a default model, and names none | The app's default model, if you can see it |
 
 Everything below applies to the first question of a conversation when you can see two or more models.
 

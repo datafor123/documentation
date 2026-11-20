@@ -32,10 +32,10 @@ Use the search box above the list to filter it.
 
 | Field | What to enter | Notes |
 | --- | --- | --- |
-| **Enable** | Turn on to accept tokens for this configuration. | While it is off, the dialog shows "Token access is disabled. Enable token authentication before configuring this setting." |
+| **Enable** | Turn on to accept tokens for this configuration. | While it is off, the other fields are greyed out. |
 | **Name** * | Unique name of the configuration, e.g. `ERP`. | |
 | **Token name** * | Name of the URL parameter that carries the JWT, e.g. `token`. | Defaults to `token`. See [Send a token](#_3-send-a-token). |
-| **Expiration time** * | Validity period, in **seconds**, of tokens that Datafor itself issues for this configuration, e.g. `86400` (24 hours). | Has no effect on tokens issued by the external system: their own `exp` claim decides when they expire. |
+| **Expiration time** * | Validity period, in **seconds**, of tokens that Datafor itself issues for this configuration, e.g. `86400` (24 hours). | Has no effect on tokens issued by the external system: their own `exp` claim decides when they expire. Personal tokens issued from this configuration last at most one year. |
 | **Signature algorithm** * | Algorithm used to sign and verify the token: **HS256**, **HS384**, **HS512**, **RS256**, **RS384**, **RS512**, **ES256**, **ES384** or **ES512**. | Must match the external system. |
 | **Secret key** * | For **HS256**/**HS384**/**HS512**: the shared secret used to sign and verify tokens. For **RS*** and **ES*** algorithms: the external system's **public key**, Base64-encoded (the body of a PEM `PUBLIC KEY` without the `-----BEGIN`/`-----END` lines). | Keep an HS secret confidential. With RS*/ES*, the private key stays with the issuer and is never entered here. |
 

@@ -11,7 +11,7 @@ Lineage is the record of which objects depend on which: a report queries analysi
 
 - **Data › Lineage**, a page that lists every model, data source, report, dataset and metric you can see, flags broken or unused objects, and draws the lineage of the selected one. See [The Lineage Page](/documentation/Lineage/Lineage-Page/).
 - **View item lineage**, a graph you open from one report, model or data source. See [Viewing an Item's Lineage](/documentation/Lineage/Viewing-an-Items-Lineage/).
-- **Usage and impact**, in the modeler and in every delete or change confirmation: which reports use this measure, and what breaks if you remove this table. See [Usage and Impact Analysis](/documentation/Lineage/Usage-and-Impact-Analysis/).
+- **Usage and impact**, in every delete or change confirmation: which reports use this measure, and what breaks if you remove this table. See [Usage and Impact Analysis](/documentation/Lineage/Usage-and-Impact-Analysis/).
 
 ::: tip In short
 Lineage answers two questions before you change something: *where does this number come from?* and *who will notice if I change it?*
@@ -23,8 +23,8 @@ Lineage answers two questions before you change something: *where does this numb
 
 | Object | Where it comes from | What lineage knows about it |
 | --- | --- | --- |
-| **Dataset** | A CSV or Excel file uploaded under **Datasource › Datasets** | The connection it was loaded into, how many files and tables it has, which models use those tables |
-| **Data source** | A connection in **Datasource** | Database type, the models that read from it, the paginated reports whose SQL datasets query it directly, the datasets loaded into it |
+| **Dataset** | A CSV or Excel file uploaded under **Data sources › File datasets** | The connection it was loaded into, how many files and tables it has, which models use those tables |
+| **Data source** | A connection in **Data sources** | Database type, the models that read from it, the paginated reports whose SQL datasets query it directly, the datasets loaded into it |
 | **Model** | An analysis model in **Models** | Its data source, its tables and columns, every measure, calculated member and attribute, the metrics bound to it, its AI knowledge index |
 | **Report** | A dashboard report (`.datafor`) in **Public** or a personal folder | The models it queries, the fields each chart and filter uses, the reports it opens through drill-through or embeds as a page |
 | **Paginated report** | A `.pagereport` file in **Public** or a personal folder | The models its model datasets query, with the fields they use, and the connections its SQL datasets query directly |
@@ -57,7 +57,7 @@ Because of this, a non-administrator can never conclude that a model is unused: 
 ## When the record updates
 
 - The Lineage page and graphs read a snapshot that Datafor keeps per user for a few minutes. Saving, renaming, moving or deleting a report or model refreshes it at once; **Refresh** on the Lineage page re-reads it on demand.
-- The modeler's **Usage** section is based on the last saved version of the model. A measure you have added but not yet saved cannot be used by any report.
+- Impact lists in the modeler are based on the last saved version of the model. A measure you have added but not yet saved cannot be used by any report.
 - Rebuilding lineage data is a background job. You can close the dialog and come back; only one rebuild runs at a time.
 
 ## What lineage does not do

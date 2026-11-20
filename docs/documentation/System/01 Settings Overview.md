@@ -12,7 +12,7 @@ Administrators open **Settings** (gear icon) in the left navigation. Pages are g
 | Group | Page | Use it to | Guide |
 | --- | --- | --- | --- |
 | **General** | **License** | View and update the license, get the machine code | [License and Activation](/documentation/System/License/) |
-| | **System configuration** | The server's time zone, defaults for new reports and models, query limits, first day of the week | [System Configuration](/documentation/System/System-Configuration/) |
+| | **System configuration** | The platform or tenant time zone, defaults for new reports and models, query limits, first day of the week | [System Configuration](/documentation/System/System-Configuration/) |
 | | **Branding** | Logo, colours, login page, interface font | [White Label](/documentation/Console/Branding/) |
 | **Access & Integration** | **Single sign-on** | LDAP, OAuth 2.0, SAML 2.0 and CAS | [Single Sign-On Overview](/documentation/System/Single-Sign-On/), [LDAP](/documentation/System/LDAP/), [OAuth2](/documentation/System/OAuth2-Authentication/), [SAML2](/documentation/System/SAML2/), [CAS](/documentation/System/CAS-Authentication/) |
 | | **Site address** | The public address of the server | [Site Address](/documentation/System/Site-Address/) |

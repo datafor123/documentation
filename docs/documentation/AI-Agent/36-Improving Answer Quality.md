@@ -75,7 +75,7 @@ After binding and saving, click **Compare definition** in the measure's **Defini
 
 ### 2.3 After changing the model: the knowledge index
 
-Once the model is saved, the Agent sees the new metadata immediately. The **knowledge index** follows on its own while **Auto-build knowledge index** is on, which is the default (**Settings › General › System configuration**): saving the model, including **Save as**, copying it, or importing it as a new model builds or updates its index in the background. Check the result on **Settings › AI Agent › Knowledge indexes**.
+Once the model is saved, the Agent sees the new metadata immediately. The **knowledge index** follows on its own while **Auto-build knowledge index** is on, which is the default (at the top of **Settings › AI Agent › Knowledge indexes**): saving the model, including **Save as**, copying it, or importing it as a new model builds or updates its index in the background. Check the result on **Settings › AI Agent › Knowledge indexes**.
 
 - A caption-only rename does not update the index.
 - When the switch is off, run **Prep data for AI** for the model after changing descriptions, aliases, fields, or hierarchies.
@@ -123,7 +123,7 @@ Metrics Library changes reach the Agent within about a minute; no index rebuild 
 
 ## 4. If you administer the platform: the knowledge index
 
-Without an index the Agent still answers, but noticeably worse: recognition of business terms, near-synonyms, and member values drops sharply, and the chat page shows **Vector index is temporarily unavailable** at the top (the AI Assistant still uses the old term). Indexes are built or updated automatically when models are saved, as long as **Settings › General › System configuration → Auto-build knowledge index** stays on (the default). Your part is to watch **Settings › AI Agent › Knowledge indexes** for failed builds, to run **Prep data for AI** for models that have no index yet, and to add a refresh schedule where member values change often. Details: [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
+Without an index the Agent still answers, but noticeably worse: recognition of business terms, near-synonyms, and member values drops sharply, and the chat page shows **Vector index is temporarily unavailable** at the top (the AI Assistant still uses the old term). Indexes are built or updated automatically when models are saved, as long as **Auto-build knowledge index** at the top of **Settings › AI Agent › Knowledge indexes** stays on (the default). Your part is to watch **Settings › AI Agent › Knowledge indexes** for failed builds, to run **Prep data for AI** for models that have no index yet, and to add a refresh schedule where member values change often. Details: [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
 
 One reminder: **after changing the embedding model, click Rebuild index for every index.** The old index was built with the old model and cannot be used with the new one.
 

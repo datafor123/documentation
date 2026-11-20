@@ -109,7 +109,7 @@ A grant on a model is not usable without Read on its data source, and a report g
 | A model's **Access setting** in the **Models** list, or **Users** / **Roles** → **Model permissions** | The model's data source |
 | A report's or folder's **Permissions** in the content list, or **Users** / **Roles** → **File permissions** | The models and data sources those reports use |
 
-Each entry is headed **Model** or **Data source** with the item's name and lists the users and roles concerned. Grant their Read in the **Models** and **Datasource** lists, then click **Got it**. The notice is a hint only; it changes no permissions.
+Each entry is headed **Model** or **Data source** with the item's name and lists the users and roles concerned. Grant their Read in the **Models** and **Data sources** lists, then click **Got it**. The notice is a hint only; it changes no permissions.
 
 - For a folder, only reports that inherit this grant are checked, and at most 200 ("The folder contains many reports; only the first 200 were checked.").
 - A user counts as having Read when a grant to the user, one of their roles, their User Type, or Authenticated provides it. Roles and User Types you grant are checked for their direct grants only; if their members have access through another role, ignore the entry.

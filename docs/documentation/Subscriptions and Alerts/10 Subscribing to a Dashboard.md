@@ -13,12 +13,18 @@ A subscription sends one dashboard on a schedule. Each person receives a copy re
 
 1. Open the dashboard and set its filters to what the recipients should see. The subscription starts from the filter values on screen.
 2. Click **Subscribe** in the toolbar (the calendar icon next to the PDF export). If the dashboard has no subscription of yours yet, the editor opens directly; otherwise a drawer lists the existing ones and **New subscription** opens the editor.
-3. Check **Send to**, **When** and **Data**, add channels if needed, and open **More settings** for the outputs.
+3. Check **Name**, **Send to**, **When** and **Data**, add channels if needed, and open **More settings** for the outputs.
 4. Click **Send me a test** to see the result in your own inbox or IM, then **Save**.
 
-If you cannot access the data a component of the dashboard uses, a warning at the top of the editor names the models: *You do not have access to the data this report uses (…), so what you receive will be empty or say "no permission"*. Ask for access before relying on the subscription.
+If you cannot access the data the dashboard uses, a warning at the top of the editor names the models: *You do not have access to the data this report uses (…), so what you receive will be empty or say "no permission".* When only some components are affected, the warning says so: those components show *no permission* in what you receive and the rest are delivered as usual. When an administrator edits someone else's subscription, the warning names the owner instead, because the owner's permissions decide what channels receive. Ask for access before relying on the subscription.
 
-![Subscribe dialog for Retail Operations Overview EN: Send to administrator (me), Post to channels empty, When Daily 08:00 with Next 2026-11-16 08:00 (UTC+08:00), and Data expanded with Year set to This Year, Region set to East China and the other filters following the report default](./images/subscribe-editor.png)
+**Opened from the AI assistant.** When you click **Create** on the assistant's suggestion card, the top of the editor repeats the suggestion, for example *AI assistant's suggestion: Send this dashboard every Monday at 08:00. Any filter it mentions is not applied for you; check Data before saving.* **Data** is marked **Check this** until you change it. Set the filters yourself: the editor starts from the report's defaults, not from what the sentence says. When the report has no filters to change, the note says the subscription sends the report's default data.
+
+![Subscribe dialog for Retail Operations Overview EN: Name Retail Operations Overview EN · Daily at 08:00, Send to administrator (me), Post to channels empty, When Daily 08:00 with Next 2026-11-21 08:00 (UTC+08:00), Data using the report's default filters with Change, and More settings collapsed](./images/subscribe-editor.png)
+
+### Name
+
+The first row. It is generated as *Report · schedule*, for example *Retail Operations Overview EN · Daily at 08:00*, and updated when you change the schedule until you edit it yourself. Up to 60 characters.
 
 ### Send to
 
@@ -52,7 +58,7 @@ The row is hidden when there is nothing you may post to. Channel messages are re
 | **Monthly** | On a day of the month, or the last day |
 | **Manual only** | Never on its own; only when you click **Run now** |
 
-Times are in the system time zone set by the administrator. **Next:** under the field shows the next run, with the zone offset when your browser is elsewhere.
+Times are in your tenant's [time zone](/documentation/System/System-Configuration/#time-zone). **Next:** under the field shows the next run, with the zone offset when your browser is elsewhere.
 
 If the server was down at a scheduled time, a run missed by less than an hour is made up once after the restart; older ones are skipped. A run that starts while the previous one is still going is skipped and recorded as such.
 
@@ -66,7 +72,7 @@ The line reads *Using the report's default filters* or lists the values you chan
 
 ## More settings
 
-![More settings: Scope Whole page or One tab, Layout Desktop or Mobile, Outputs Screenshot (PNG), Figures summary and PDF, the AI brief switch, Active dates and the generated Name](./images/subscribe-more-settings.png)
+![More settings: Scope Whole page or One tab, Layout Desktop or Mobile, Outputs Screenshot (PNG), Figures summary and PDF, the AI brief switch, and Active dates](./images/subscribe-more-settings.png)
 
 | Setting | What it does |
 | --- | --- |
@@ -75,7 +81,6 @@ The line reads *Using the report's default filters* or lists the values you chan
 | **Outputs** | **Screenshot (PNG)**: an image of the page. **Figures summary**: the values of the report's metric and KPI cards written into the message, one *name: value* per line; no AI is involved. **PDF**: the page as a PDF. **Excel**: appears when the report has tables; choose up to 5 table components, each exported to its own Excel file. At least one output is required. |
 | **AI brief** | A short written summary of the dashboard, generated at send time **as each recipient**, so it only discusses data that person can see. **Standard** takes about 30 seconds, **Detailed** up to 2 minutes. Needs the AI extension; briefs count against a site-wide daily budget, and once it is used up the day's remaining runs go out without a brief. When an administrator sets the budget to 0, the option is not shown. |
 | **Active dates** | Optional start and end dates. After the end date the subscription switches itself off and you get an email. |
-| **Name** | Generated as *Report · schedule*, for example *Retail Operations Overview EN · Daily at 08:00*, and updated when you change the schedule until you edit it yourself. Up to 60 characters. |
 
 ## Send me a test
 

@@ -54,7 +54,8 @@ Point to a component to show its own toolbar in the top-right corner: **Lock** (
 
 - **Undo** and **Redo** keep the last 100 steps. The history is cleared when you save or leave the editor.
 - **Preview** shows the report as readers see it, with all interactions; **Edit** returns to the editor. Clicking a chart in the editor also cross-filters the other charts, so you can test interactions without previewing.
-- **Save** stores the report; the first save asks for a folder and a name. **Save as** stores a separate copy.
+- **Save** (the highlighted button) stores the report; the first save asks for a folder and a name. **Save as** stores a separate copy.
+- Leaving the editor for another console page with unsaved changes asks **Unsaved changes** with **Keep editing** or **Discard changes**; save first if you want to keep them. This also applies when you came to the editor from a report's **Edit** button.
 - The last save wins: if two people, or two browser tabs, edit the same report, the later save replaces the earlier one.
 
 For a worked example, follow [Create Your First Analysis Report](/documentation/Start/Create-Your-First-Analysis-Report/).

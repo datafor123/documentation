@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="482" viewBox="0 0 900 482" font-family="'Segoe UI','Helvetica Neue',Arial,'Microsoft YaHei','PingFang SC','Noto Sans',sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Which time zone a tenant uses</title>
+  <desc id="desc">A tenant uses its own time zone if an administrator of the tenant set one. If it is left at Same as platform, it uses the platform time zone set in the default tenant. If that is left at Same as server, it uses the time zone of the server's operating system. The resulting zone drives schedules, relative dates and alert periods, dates in messages and file names, paginated report subscriptions, IM questions without a user time zone and audit statistics. Example: a subscription at Daily 08:00 runs at 08:00 Shanghai time in a tenant that follows the platform set to Asia/Shanghai, and at 08:00 Los Angeles time in a tenant set to America/Los_Angeles.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+  <rect width="900" height="482" fill="#FFFFFF"/>
+
+  <!-- Resolution lane -->
+  <rect x="10" y="10" width="520" height="290" rx="12" fill="#F4F7FB" stroke="#D5DEEA" stroke-width="1.5"/>
+  <text x="30" y="40" font-size="18" font-weight="700" fill="#2B2B3A">Which zone a tenant uses</text>
+
+  <rect x="30" y="62" width="300" height="62" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="46" y="87" font-size="14" font-weight="700" fill="#2B2B3A">1. The tenant's own time zone</text>
+  <text x="46" y="108" font-size="12" fill="#5B6472">System time zone, set by a tenant administrator</text>
+
+  <rect x="30" y="148" width="300" height="62" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="46" y="173" font-size="14" font-weight="700" fill="#2B2B3A">2. Platform time zone</text>
+  <text x="46" y="194" font-size="12" fill="#5B6472">set in the default tenant by a platform admin</text>
+
+  <rect x="30" y="234" width="300" height="50" rx="8" fill="#FFFFFF" stroke="#8A94A6" stroke-width="1.5"/>
+  <text x="46" y="264" font-size="14" font-weight="700" fill="#2B2B3A">3. The server's operating system zone</text>
+
+  <line x1="180" y1="124" x2="180" y2="146" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="190" y="140" font-size="12" fill="#5B6472">left at Same as platform</text>
+  <line x1="180" y1="210" x2="180" y2="232" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="190" y="226" font-size="12" fill="#5B6472">left at Same as server</text>
+
+  <text x="350" y="92" font-size="12" fill="#2B2B3A">Changed only by</text>
+  <text x="350" y="108" font-size="12" fill="#2B2B3A">that tenant's admins</text>
+  <text x="350" y="178" font-size="12" fill="#2B2B3A">A change moves every</text>
+  <text x="350" y="194" font-size="12" fill="#2B2B3A">tenant that follows it</text>
+  <text x="350" y="264" font-size="12" fill="#5B6472">The default for all</text>
+
+  <!-- Uses lane -->
+  <rect x="550" y="10" width="340" height="290" rx="12" fill="#FFFFFF" stroke="#D5DEEA" stroke-width="1.5"/>
+  <text x="570" y="40" font-size="18" font-weight="700" fill="#2B2B3A">What the zone decides</text>
+  <g font-size="13" fill="#2B2B3A">
+    <text x="570" y="74">• When subscriptions and alerts run</text>
+    <text x="570" y="104">• Today, last month, this year in filters</text>
+    <text x="582" y="122">and alert periods</text>
+    <text x="570" y="152">• Dates in messages and file names</text>
+    <text x="570" y="182">• Paginated report subscriptions</text>
+    <text x="570" y="212">• IM: questions without a user zone,</text>
+    <text x="582" y="230">silence times, directory sync</text>
+    <text x="570" y="260">• Which day audit statistics count</text>
+    <text x="582" y="278">a record in</text>
+  </g>
+
+  <!-- Example -->
+  <rect x="10" y="318" width="880" height="152" rx="12" fill="#FFF8EC" stroke="#E8D3A8" stroke-width="1.5"/>
+  <text x="30" y="346" font-size="16" font-weight="700" fill="#2B2B3A">Example: the same subscription, "Daily 08:00", in three tenants</text>
+  <text x="30" y="368" font-size="12" fill="#5B6472">Platform time zone: Asia/Shanghai</text>
+
+  <rect x="30" y="382" width="270" height="74" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="44" y="405" font-size="13" font-weight="700" fill="#2B2B3A">Default tenant</text>
+  <text x="44" y="427" font-size="12" fill="#5B6472">runs 08:00 Shanghai</text>
+
+  <rect x="315" y="382" width="270" height="74" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="329" y="405" font-size="13" font-weight="700" fill="#2B2B3A">Tenant east · Same as platform</text>
+  <text x="329" y="427" font-size="12" fill="#5B6472">runs 08:00 Shanghai</text>
+
+  <rect x="600" y="382" width="270" height="74" rx="8" fill="#FFFFFF" stroke="#D96C4C" stroke-width="1.5"/>
+  <text x="614" y="405" font-size="13" font-weight="700" fill="#2B2B3A">Tenant us · America/Los_Angeles</text>
+  <text x="614" y="427" font-size="12" fill="#5B6472">runs 08:00 Los Angeles, which is</text>
+  <text x="614" y="441" font-size="12" fill="#5B6472">00:00 Shanghai the next day in winter</text>
+</svg>

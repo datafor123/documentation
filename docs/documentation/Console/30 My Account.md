@@ -9,7 +9,7 @@ description: Update your profile and password, choose an interface language, and
 createTime: 2026/09/01 22:03:26
 ---
 
-Use **My account** to manage the profile, password, interface language, and home page for the account you are signed in with, and to see your share links, report downloads, subscriptions and alerts.
+Use **My account** to manage the profile, password, interface language, and home page for the account you are signed in with, and to see your share links, report downloads, subscriptions and alerts, and personal tokens.
 
 ## Open My account
 
@@ -114,6 +114,10 @@ Filter by report or status, **Refresh**, and use **Download**, **Cancel** (queue
 **My subscriptions & alerts** sets how you receive subscriptions and alerts (**How I receive**: email, an IM direct message, or both), lists the dashboard subscriptions, metric alerts and paginated report subscriptions you created (**Created by me**), and what other people send you, where you can stop receiving any of it (**Sent to me**). See [Managing Your Subscriptions and Alerts](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/).
 
 **Linked IM accounts** lists the WeCom, DingTalk, Feishu, Slack or Teams accounts linked to your user, where you can unlink them. How accounts get linked is described in [Using Datafor in IM Apps](/documentation/System/Using-Datafor-in-IM-Apps/). **My subscriptions & alerts** appears when the subscriptions and alerts plugin is installed, **Linked IM accounts** when an administrator has connected IM platforms.
+
+## Personal tokens
+
+**Personal tokens** creates the tokens that AI clients such as Claude, ChatGPT or Cursor use to sign in as you, and lists the ones AI clients created when you clicked **Allow** (*AI client · app name · date*). A token is valid for at most one year and stops working when it has not been used for 90 days in a row; the list then shows it as **Inactive**. **Revoke** ends a token and its sessions at once. The tab appears when an administrator allows personal tokens. See [Connect AI Clients](/documentation/AI-Agent/Connect-AI-Clients/).
 
 ## Handle unsaved changes
 

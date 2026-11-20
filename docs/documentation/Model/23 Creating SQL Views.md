@@ -11,7 +11,7 @@ A SQL View adds a query result to an Analysis Model as a model table. Use one wh
 
 ## Create a SQL View
 
-1. In the modeler toolbar, click **SQL**. The **Create SQL View** dialog shows the model's **Datasource**; the SQL runs on that connection.
+1. In the modeler toolbar, click **SQL**. The **Create SQL View** dialog shows the model's **Data source**; the SQL runs on that connection.
 2. Enter a **View Name**. It must differ from every other table and SQL View in the model; a name in use is refused with *The name "…" is already used by another table*. The name is how the rest of the model refers to the view, so choose a stable one.
 3. Enter one `SELECT` statement in **SQL Expression**, without a trailing semicolon, in the SQL dialect of the data source. Qualify table names with the schema when the connection does not default to it, for example `foodmart.sales_fact`. Give every computed column an alias (`SUM(f.unit_sales) AS units`): the column names become the view's fields.
 4. Click **Run**. The dialog shows *Fetched n rows, n fields*, and a sample of up to 50 rows with each field's type in the column header. Check the field names and that numeric columns come back as numbers (Integer, BigNumber) rather than String.

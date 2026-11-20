@@ -31,14 +31,14 @@ Datafor opens the database connection from its server, not from your web browser
 
 ## 1. Open the MySQL connection form
 
-1. In the left navigation, select **Datasource**.
-2. Open **Database sources**.
+1. In the left navigation, select **Data sources**.
+2. Open **Database connections**.
 3. Under **Choose a database type**, select **MySQL**. You can search for `MySQL` and press **Enter** to locate the connector.
 4. If an existing connection is open, click **New** beside **Connections** to return to the connector selector.
 
 ![MySQL connector shown under Choose a database type after searching for MySQL](./images/mysql-connector-selection-en.png)
 
-The form contains four collapsible sections: **Basic**, **Advanced**, **Option**, and **Pooling**. Scroll inside the form to reach the lower sections. **Test**, **Cancel**, and **Save** remain at the bottom.
+The form contains four collapsible sections: **Basic**, **Advanced**, **Option**, and **Pooling**. Scroll inside the form to reach the lower sections. **Test connection**, **Cancel**, and **Save** remain at the bottom.
 
 ## 2. Enter the Basic settings
 
@@ -131,11 +131,11 @@ To override a value, switch its row on and enter the value; only rows that are s
 
 Connections saved before 10.00 keep the values they saved (in 9.04 the form saved `maxActive` 200, `maxIdle` 20, `minIdle` 5, `initialSize` 5 and `select 1`); rows they never set now show the server default. To change the defaults for every connection that does not override them, edit `dbcp-defaults` and restart Datafor.
 
-Change idle validation, abandoned-connection cleanup, and prepared-statement pooling only when investigating a specific operational need. Then **Test** and **Save**. Database privileges, rather than a pool's read-only setting alone, should enforce read-only access.
+Change idle validation, abandoned-connection cleanup, and prepared-statement pooling only when investigating a specific operational need. Then **Test connection** and **Save**. Database privileges, rather than a pool's read-only setting alone, should enforce read-only access.
 
 ## 6. Test, save, and verify table access
 
-1. Click **Test**. It uses the values currently entered in the form; you do not have to save first.
+1. Click **Test connection**. It uses the values currently entered in the form; you do not have to save first.
 2. Wait for the result. Resolve any failure before using the connection for analysis. If the message is too brief, ask your administrator to inspect the server log at the time of the test.
 3. Click **Save** to persist the connection. Confirm that its name appears under **Connections**.
 4. Select the saved connection to reopen it and check its settings. **Save confirms that the configuration was stored; it does not replace a successful connectivity test.**
@@ -169,10 +169,10 @@ Datafor permissions do not grant privileges inside MySQL. The database account m
 | **Too many connections, or waiting for a pooled connection** | Review pool capacity across datasources and server instances, the MySQL connection limit, and long-running queries. Distinguish a pool wait from a network or query timeout. |
 | **Failures start after adding Advanced SQL** | Recheck the initialization statements and their required privileges. In a test connection, remove the added statements and retest to isolate the cause. |
 
-When requesting support, provide the datasource name, approximate test time, error text, MySQL version, JDBC driver name/version, and whether the failure occurs during **Test**, model table discovery, or query execution. Share logs through your approved support channel and remove passwords, tokens, and unrelated data.
+When requesting support, provide the datasource name, approximate test time, error text, MySQL version, JDBC driver name/version, and whether the failure occurs during **Test connection**, model table discovery, or query execution. Share logs through your approved support channel and remove passwords, tokens, and unrelated data.
 
 ## Update an existing connection
 
-Select its name under **Connections**, edit the relevant fields, click **Test**, and then **Save**. After a credential rotation or a host, database, driver, TLS, or timezone change, verify an existing model and a representative report as well as the connection itself.
+Select its name under **Connections**, edit the relevant fields, click **Test connection**, and then **Save**. After a credential rotation or a host, database, driver, TLS, or timezone change, verify an existing model and a representative report as well as the connection itself.
 
 Use **View item lineage** to assess dependencies before a disruptive change or deletion. Do not delete a connection that existing models still need. If you only want to abandon unsaved edits, use **Cancel** and follow the unsaved-changes prompt if one appears.

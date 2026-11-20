@@ -123,7 +123,7 @@ In the `bi-server` folder:
 
 1. Start Datafor and the AI Agent, and check `tomcat/logs/catalina.out` (Linux) or the server console (Windows) for connection errors.
 2. Sign in as `admin`. Open reports and models in the **Public** folder and check that they display data.
-3. Open **Datasource** and update connections that pointed to the built-in server, such as the sample `foodmart`, if you moved that database too.
+3. Open **Data sources** and update connections that pointed to the built-in server, such as the sample `foodmart`, if you moved that database too.
 4. Check the AI Agent: `curl -i http://127.0.0.1:28081/ai/health` must return `200`. A `503` with `database.reachable: false` means `DATABASE_URL` is wrong.
 5. Take a new backup.
 

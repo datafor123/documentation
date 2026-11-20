@@ -9,6 +9,19 @@ createTime: 2026/11/15 10:00:00
 
 This page is for administrators. Everything here is under **Settings › Notifications**, in the order you usually set it up: **Email**, **IM platforms**, **Delivery channels**, then **Subscriptions & alerts** for the defaults and templates.
 
+## IM platforms or delivery channels?
+
+The two pages work together, and many setups need both. **IM platforms** connects an app that you create in WeCom, DingTalk, Feishu, Slack or Microsoft Teams; depending on the platform, one app gives direct messages, sign-in from the IM, directory sync and asking questions in chat (see [IM Platforms](/documentation/System/IM-Platforms/)). **Delivery channels** lists the destinations that subscriptions and alerts send to, and decides who may post to each group.
+
+| To send to | Set up |
+| --- | --- |
+| A WeCom, DingTalk or Feishu group | A group robot under **Delivery channels**, one per group. No app is needed. |
+| A Slack or Teams channel | An app under **IM platforms**. Users then pick the channel in the editor, nothing is added under **Delivery channels**, and screenshots and files arrive without Datafor needing a public address. Without an app, a **Slack Webhook** or **Teams Webhook** per channel under **Delivery channels**. |
+| Each person, as a direct message | An app under **IM platforms**, plus its direct-message channel under **Delivery channels**. Saving a Slack or Teams app creates that channel; for WeCom, DingTalk and Feishu you add it. |
+| Another system, such as a ticketing tool | A **Generic webhook** under **Delivery channels** |
+
+If you only post reports into a few WeCom, DingTalk or Feishu groups, group robots are enough. Set up an IM app when people should receive their own messages, when they should sign in or ask questions from the IM, or when you use Slack or Teams.
+
 ## Checklist
 
 | What | Where | Without it |
@@ -20,7 +33,7 @@ This page is for administrators. Everything here is under **Settings › Notific
 | AI service and budgets | [AI service](/documentation/AI-Agent/AI-Feature/); budgets on the [Settings tab](/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/#settings-tab) | No AI brief in subscriptions, no AI analysis in alerts |
 | IM apps | **Settings › Notifications › IM platforms**, see [IM Platforms](/documentation/System/IM-Platforms/) | No direct messages, no Slack or Teams channels |
 | Group robots and webhooks | **Settings › Notifications › Delivery channels**, see [Delivery Channels](/documentation/Subscriptions-and-Alerts/Delivery-Channels/) | No WeCom, DingTalk or Feishu group messages, no webhooks |
-| System time zone | **Settings › General › System configuration**, see [Time zone](/documentation/System/System-Configuration/#time-zone) | Times follow the server's zone, which may not be your business zone |
+| Time zone | **Settings › General › System configuration**: **Platform time zone** in the default tenant, **System time zone** in other tenants. See [Time zone](/documentation/System/System-Configuration/#time-zone) | Times follow the server's zone, which may not be your business zone |
 
 Check the result on the **Overview** tab of **Subscriptions & alerts**: the status line reads **Services are running normally** or names what is not working, and **Details** shows the render service, temporary links and the scheduler. See [Monitoring and Limits](/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/).
 
@@ -87,7 +100,7 @@ The links must be reachable from the IM platform's servers: a server that only h
 
 **Default delivery**, under **Basics** on **Settings › Notifications › Subscriptions & alerts › Settings**, decides how people who have not chosen in **My account** receive messages: **Email only** (the default), **IM when linked, otherwise email**, or **Both email and IM**. Pick an IM option once most people are linked to an IM app.
 
-Every schedule, relative date and alert period uses the server's [system time zone](/documentation/System/System-Configuration/#time-zone), set on **Settings › General › System configuration**. Changing it recalculates all next run times.
+Every schedule, relative date and alert period uses the tenant's [time zone](/documentation/System/System-Configuration/#time-zone), set on **Settings › General › System configuration**: the platform time zone, or the tenant's own when a tenant administrator set one. Changing it rearranges the next run times of that tenant, or of every tenant that follows the platform.
 
 Recipients with the same permissions share one render; switching that off is a server setting, `merge-renders` in [Other limits](/documentation/Subscriptions-and-Alerts/Monitoring-and-Limits/#other-limits).
 
@@ -103,7 +116,7 @@ Every subscription and alert message uses the templates in **Message templates**
 | --- | --- |
 | `{report}` | Report name |
 | `{page}` | Tab name; the report name when no tab is chosen |
-| `{date}`, `{time}` | Send date and time in the system time zone |
+| `{date}`, `{time}` | Send date and time in the tenant's time zone |
 | `{filters}` | Filter values used for this run. They are shown under the title automatically unless the body contains `{filters}`. |
 | `{owner}` | The owner, whose permissions apply to channel messages |
 | `{recipient}` | The recipient's name; empty in channels |

@@ -25,7 +25,7 @@ Open **Settings › Access & Integration › Single sign-on**. Each method has a
 
 Each card shows the method's status: **On** (enabled), **Off** (configured but not enabled), **Not set up** (the method's address field is empty: **LDAP URL**, **Authorization endpoint**, **IdP SSO URL** or **CAS server URL**) or **Unknown** (the status could not be read). Select a card to show that method's settings below the cards. If the current method has unsaved changes, Datafor asks you to save or discard them first; the cards refresh after each save.
 
-Each method has its own **Enable** switch. While it is off, the fields are locked and the page shows "Turn on to edit."
+Each method has its own **Enable** switch. While it is off, the fields are greyed out.
 
 <div align="left"><img src="./images/settings-sso.png" alt="Single sign-on page with the LDAP, OAuth 2.0, SAML 2.0 and CAS cards, each showing Not set up, and the LDAP settings below" width="80%" /></div>
 

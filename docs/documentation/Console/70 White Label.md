@@ -21,7 +21,7 @@ The page has four configuration areas:
 | Area | What it controls |
 | --- | --- |
 | **Login** | Login logo, welcome message, background, form styling, login-option visibility, and footer. |
-| **Console** | Expanded and collapsed logos, Home title and tagline, sidebar, top bar, search box, and help/resource visibility. |
+| **Console** | Expanded and collapsed logos, Home title and tagline, primary color, sidebar, top bar, search box, and help/resource visibility. |
 | **Sample pages** | The report cards in **Home > Report templates**: titles, images, destinations, order, and opening behavior. |
 | **Other** | Default browser title, interface font, and website icon. |
 
@@ -92,6 +92,14 @@ In **Names**, **Product name** replaces the large heading on Home, and **Product
 
 This is different from **Other > Browser title**, which controls the default browser-tab title. Changing a Home heading does not rename reports.
 
+### Primary color
+
+![The Primary color group in the Console area of Branding, with Reset to default and a color field set to eb4e40ff](./images/white-label-primary-color.png)
+
+**Primary color** (between **Features** and **Sidebar**) recolors the console's primary buttons, links, selected tabs and menu items; hover states and light backgrounds are derived from it. The default is `#1677ff`. A color with transparency (8 digits) is used without it.
+
+It covers the console pages only: Home, the content lists, **Settings**, **My account**, the users and data pages. It does not change the report editor and viewer (also embedded, shared or on phones), report content and charts, the paginated report designer and viewer, the modeler, the AI assistant panel, emails, or the login page, which has its own button colors under **Login**. Pick a color that keeps white button text readable.
+
 ### Navigation and feature visibility
 
 Use **Sidebar**, **Top bar**, and **Search box** to coordinate backgrounds, text, icons, active states, and font sizes. Test a selected menu item, a hovered item, and the search placeholder as well as the normal state.
@@ -152,6 +160,7 @@ Reset means “use product defaults,” not “restore my previously saved custo
 
 - Open the login page in a separate signed-out browser session. Check the logo, background, footer link, field focus, and button hover states.
 - Check Home, then expand and collapse the sidebar. Confirm that the logos and active-menu text remain readable.
+- With a custom **Primary color**, check a primary button, a link and a selected tab in **Settings**. Reports keep their own colors.
 - Verify the Home heading, browser title, help menu and report cards independently.
 - Open each visible card as an intended reader, including any required report filters or data-access restrictions.
 - Test a narrower window and a second browser or device for clipping, font fallback, and unreadable text.

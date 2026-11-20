@@ -45,7 +45,7 @@ When a parameter takes its choices from a level of a model dataset and no datase
 
 ### SQL dataset
 
-An SQL dataset runs the SQL you write on a **database connection** from **Datasource**. **Run** executes it with the current parameter values and shows the fields and sample rows; the field names are the result's column names.
+An SQL dataset runs the SQL you write on a **database connection** from **Data sources**. **Run** executes it with the current parameter values and shows the fields and sample rows; the field names are the result's column names.
 
 ![SQL dataset on the SampleData connection with an optional condition on #{regions}, the syntax hint below the SQL, a value field for the regions parameter and the Run button](./images/dataset-dialog-sql.png)
 

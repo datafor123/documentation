@@ -29,12 +29,14 @@ Some charts have their own empty state: a pie whose values are all 0 shows a gre
 | --- | --- | --- |
 | Component | Style → **Empty data** | This component |
 | Page | Page → Style → **Empty data** | Components that have no setting of their own |
-| System | Settings › General › System configuration › Reports › **Empty data message** | New reports |
+| System | Settings › General › System configuration › Reports › **Empty data message** | Every report and component without its own setting, from the next time the report opens |
 
 ![Page Empty data settings](./images/page-empty-data.png)
 
 - **Show empty data message**: when off, the component stays blank for readers (authors still see a faint message).
-- **Empty data text**: leave empty for *No data* in the reader's language.
+- **Empty data text**: leave empty to use the system text, which the box shows as its placeholder, or *No data* in the reader's language when the system has none. Once the system has a text, a report can show *No data* again only by typing it.
+
+Reports saved between 10.00 and 10.02 while the system message was customised carry that text in the report itself and keep it; clear the page's **Empty data text** to follow the system setting again.
 - **Font**: size and colour of the message.
 
 A Measure card can show a placeholder instead: Style → Empty data → **Show blank main value as**.

@@ -169,7 +169,7 @@ Before users start asking the AI Agent about a model:
 4. Set the model's Default time dimension when most Measures follow the same date, and give each Measure that follows a different date its own Default time field; the Agent reads the Measure's field first and the model's Dimension when the Measure declares none.
 5. Resolve semantic-completeness hints in Diagnostics.
 
-Saving the model builds or updates its AI knowledge index in the background while **Auto-build knowledge index** is on (the default, under **Settings › General › System configuration**). Administrators can also start it from the model's **Prep data for AI** action on the Models page, and follow its progress under **Settings › AI Agent › Knowledge indexes**.
+Saving the model builds or updates its AI knowledge index in the background while **Auto-build knowledge index** is on (the default, at the top of **Settings › AI Agent › Knowledge indexes**). Administrators can also start it from the model's **Prep data for AI** action on the Models page, and follow its progress under **Settings › AI Agent › Knowledge indexes**.
 
 ## Related topics
 

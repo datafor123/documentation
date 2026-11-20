@@ -7,7 +7,7 @@ createTime: 2026/10/10 10:00:00
 
 # Managing Analysis Models
 
-Open **Data > Models**. The list shows each model's **Name**, **ID**, **Datasource**, **Last edit**, **Modified by**, **Create time** and **Creator**. An error icon in the **Datasource** column means the model's connection has a problem; hover over it for the reason.
+Open **Data > Models**. The list shows each model's **Name**, **ID**, **Data source**, **Last modified**, **Modified by**, **Created** and **Created by**. An error icon in the **Datasource** column means the model's connection has a problem; hover over it for the reason.
 
 - **New** creates a model (see [Creating an Analysis Model](/documentation/Model/Creating-an-Analysis-Model/)).
 - **Upload** imports models from a ZIP file created by **Download**.
@@ -24,7 +24,7 @@ Open **Data > Models**. The list shows each model's **Name**, **ID**, **Datasour
 | **Delete** | Moves the model to Trash after you confirm. See [Deleting a model](#deleting-a-model). | Delete or Full control |
 | **Create copy** | Opens **Save as** with the name `<name>_copy_<time stamp>`. Enter the **Analysis model name**; the **Analysis model ID** is taken from it, and **Modify** lets you enter a different ID. The copy keeps the data source and gives only you Full control. | Permission to create content, and Read on the data source |
 | **Download** | Downloads the model as a ZIP file, which **Upload** can import here or on another server. | Read |
-| **Change datasource** | Opens **Edit connection**, where you choose another **Datasource** for the model. The dialog lists the reports that use the model. | Delete or Full control on the model, and Read on the new data source |
+| **Change datasource** | Opens **Edit connection**, where you choose another **Data source** for the model. The dialog lists the reports that use the model. | Delete or Full control on the model, and Read on the new data source |
 | **Permissions** | Opens **Access setting**, where you grant users and roles **Read**, **Edit**, **Delete** or **Full control**. See [Access Control List](/documentation/System/Access-Control-List/). | Full control |
 | **Copy permissions to...** | Copies this model's permissions to the models you tick in the **Copy** column. | Full control |
 | **View item lineage** | Shows the model, its data source and the reports that use it. See [Viewing an Item's Lineage](/documentation/Lineage/Viewing-an-Items-Lineage/). | Read |
@@ -61,8 +61,8 @@ To upload, click **Upload**, choose the ZIP file with **Please select upload fil
 - **Read on the data source.** Saving a new model, copying one, and changing a model's data source need Read on that data source. Without it Datafor refuses with "Connection READ permission is required: *data source*". Administrators are exempt.
 - **Delete needs Delete.** Edit permission alone no longer lets you delete a model. When a model cannot be deleted, the error names it, for example `Delete Denied: <model ID>`, and the model stays in the list.
 - **Models created through the API.** A model created through the API without permissions in the request is visible only to the user who created it, with Full control. It no longer inherits the permissions of the models folder.
-- **Granting a model is not enough on its own.** After you save permissions, **Permissions saved** lists the users and roles that also need Read on the model's data source: "The following users and roles also need Read permission on these data sources, or they won't be able to use the models you granted". Grant it in the **Datasource** list.
-- **Knowledge index.** While **Auto-build knowledge index** is on (**Settings › General › System configuration**) and AI is enabled, Datafor builds or updates a model's knowledge index in the background when the model is saved, copied or uploaded.
+- **Granting a model is not enough on its own.** After you save permissions, **Permissions saved** lists the users and roles that also need Read on the model's data source: "The following users and roles also need Read permission on these data sources, or they won't be able to use the models you granted". Grant it in the **Data sources** list.
+- **Knowledge index.** While **Auto-build knowledge index** is on (**Settings › AI Agent › Knowledge indexes**) and AI is enabled, Datafor builds or updates a model's knowledge index in the background when the model is saved, copied or uploaded.
 - **The model ID is permanent.** It is set on the first save ("This ID cannot be changed after saving"). **Rename** and **Create copy** cannot change it; a copy gets its own ID.
 
 ## Related topics

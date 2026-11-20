@@ -23,6 +23,7 @@ Open **Settings › Access & Integration › Cross-origin access (CORS)**. The s
 | --- | --- | --- | --- |
 | **Basic settings** | **Enable CORS** | Off | While off, Datafor sends no CORS headers and browsers block calls from other origins. |
 | | **Allowed origins** | Empty | Origins allowed to call Datafor, written exactly as the browser sends them: scheme, host and port if it is not the default, without a path or trailing `/`, for example `https://app.example.com` or `http://localhost:5173`. Separate several origins with commas. `*` allows every origin; don't use it in production. |
+| | **Trusted domains** | Empty | More origins, separated by commas, that are treated like **Allowed origins** while **Enable CORS** is on. Until 10.02 this field was on the Site address page; existing values were kept. |
 | | **Allowed methods** | GET, HEAD, POST | HTTP methods other origins may use. Click **Add**, type a method and press Enter. |
 | **Request and response headers** | **Allowed request headers** | Content-Type, X-CSRF-Token | Headers other origins may send; click **Add header** to add one. Add `Authorization` for the SDK. If you remove every entry, Datafor allows whatever headers the browser asks for. |
 | | **Exposed response headers** | Empty | Response headers that scripts on other origins may read, for example `Content-Disposition`. |
@@ -30,19 +31,21 @@ Open **Settings › Access & Integration › Cross-origin access (CORS)**. The s
 
 Click **Save**. **Discard changes** restores the saved values.
 
-::: warning Separate origins with commas
-The hint under **Allowed origins** says "One per line", but Datafor splits the list only at commas. Two origins on separate lines without a comma are read as one value, and neither is allowed. Write `https://app.example.com, https://portal.example.com`.
-:::
+You can enter **Allowed origins** one per line, as the hint says: saving turns line breaks and spaces into commas, also for **Trusted domains**. The server itself splits only at commas, so if you write the setting by other means, separate the origins with commas: `https://app.example.com,https://portal.example.com`.
 
 ## How Datafor answers
 
-When **Enable CORS** is on and a request carries an `Origin` header that is in **Allowed origins**, Datafor adds to the response:
+When **Enable CORS** is on and a request carries an `Origin` header that is in **Allowed origins** or **Trusted domains**, Datafor adds to the response:
 
 - `Access-Control-Allow-Origin` with that origin, and `Vary: Origin`;
 - `Access-Control-Allow-Credentials: true` while **Allow credentials** is on;
 - `Access-Control-Allow-Methods`, `Access-Control-Allow-Headers` and, if set, `Access-Control-Expose-Headers` from the settings above.
 
 Datafor answers the browser's `OPTIONS` preflight requests itself with status 200. Requests from origins that are not allowed get no CORS headers, so the browser blocks them.
+
+An origin in either list also gets a `Content-Security-Policy` header that names it in `frame-ancestors`, `script-src`, `style-src` and `font-src`, so a page on that origin can frame Datafor. This header is sent even while **Enable CORS** is off.
+
+A request to a tenant address (`/datafor/t/<tenant id>/…`) is checked against that tenant's lists.
 
 ## Set up CORS for the SDK
 
@@ -68,7 +71,7 @@ curl -i -X OPTIONS \
 
 | Browser console message | Likely cause | What to do |
 | --- | --- | --- |
-| No `Access-Control-Allow-Origin` header is present | **Enable CORS** is off, or the page's origin is not in **Allowed origins** exactly (different scheme or port, a path or trailing `/`, or origins separated only by line breaks) | Turn on **Enable CORS** and enter the origin as the browser shows it in the request's `Origin` header. |
+| No `Access-Control-Allow-Origin` header is present | **Enable CORS** is off, or the page's origin is not in **Allowed origins** exactly (different scheme or port, a path or trailing `/`) | Turn on **Enable CORS** and enter the origin as the browser shows it in the request's `Origin` header. |
 | Request header field `authorization` is not allowed | `Authorization` is missing from **Allowed request headers** | Add it and save. |
 | Method `PUT` (or another method) is not allowed | The method is missing from **Allowed methods** | Add it and save. |
-| Calls work in one tenant but not in another | Settings are per tenant | Repeat the settings in that tenant. |
+| Calls work in one tenant but not in another | Settings, including **Trusted domains**, are per tenant | Repeat the settings in that tenant. |

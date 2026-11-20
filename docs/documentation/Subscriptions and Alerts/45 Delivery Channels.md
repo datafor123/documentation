@@ -151,7 +151,7 @@ Answer with any 2xx status. Other answers count as failures; 5xx and 429 are ret
 - **Slack and Teams.** Saving a Slack or Teams app under **IM platforms** creates its **Slack direct message** or **Teams direct message** channel; there is nothing to add here.
 - **WeCom, DingTalk and Feishu.** Click **New channel**, choose **WeCom app message**, **DingTalk app message** or **Feishu app message**, and pick the **IM app**. The list is empty until an app for that platform exists under **IM platforms**.
 
-Every user then sees the channel under **My account › Subscriptions & alerts › How I receive**, marked **Linked** or **Not linked**. A person receives direct messages only once their account is linked to the app; see [How people get linked](/documentation/System/IM-Platforms/#how-people-get-linked). The default for people who never chose is set by **Default delivery**, see [Setting Up Delivery](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#defaults-for-everyone). The availability settings below apply only to group channels.
+Every user then sees the channel under **My account › My subscriptions & alerts › How I receive**, marked **Linked** or **Not linked**. A person receives direct messages only once their account is linked to the app; see [How people get linked](/documentation/System/IM-Platforms/#how-people-get-linked). The default for people who never chose is set by **Default delivery**, see [Setting Up Delivery](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#defaults-for-everyone). The availability settings below apply only to group channels.
 
 ## Who can post to a group channel
 

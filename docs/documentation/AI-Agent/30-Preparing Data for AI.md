@@ -24,7 +24,7 @@ Changing the embedding model later makes every existing index incompatible. Rebu
 
 ## 2. Let indexes build automatically
 
-With **Auto-build knowledge index** on, Datafor builds or updates a model's index in the background whenever the model is written. The switch is in **Settings › General › System configuration**, group **AI Agent**: "Built in the background after an analysis model is saved or uploaded." It is **on by default**.
+With **Auto-build knowledge index** on, Datafor builds or updates a model's index in the background whenever the model is written. The switch is at the top of **Settings › AI Agent › Knowledge indexes** and takes effect as soon as you flip it: "Built in the background after an analysis model is saved or uploaded." It is **on by default**.
 
 | Action on the model | Effect on its knowledge index |
 | --- | --- |

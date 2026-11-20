@@ -25,13 +25,14 @@ Open the report in the viewer and click **Subscriptions** in the toolbar. The bu
 
 | Field | What it does |
 | --- | --- |
+| **Name** | The first row. Generated as *Report · schedule* until you type your own. |
 | **Output** | How many copies to make, see [below](#how-a-subscription-produces-its-files). |
-| **Send to** | People and roles; you are added by default. A role is expanded at every run, so new members of the role receive the next run. People who will be skipped are listed under the field with the reason before you save. |
+| **Send to** | People and roles; you are added by default. Type part of a name to search; roles are searched the same way as people. A role is expanded at every run, so new members of the role receive the next run. People who will be skipped are listed under the field with the reason before you save. |
 | **Post to channels** | Slack and Teams channels and the group robots an administrator authorized for you; see [Post to channels](/documentation/Subscriptions-and-Alerts/Dashboard-Subscriptions/#post-to-channels). Not available with **Different parameters per person**, because each copy holds different data. |
-| **When** | **Daily**, **Workdays** (Monday to Friday), **Weekly** on chosen weekdays, **Monthly** on a day or the last day, or **Manual only**. Times are in the system time zone; **Next:** shows the next run. |
+| **When** | **Daily**, **Workdays** (Monday to Friday), **Weekly** on chosen weekdays, **Monthly** on a day or the last day, or **Manual only**. Times are in your tenant's [time zone](/documentation/System/System-Configuration/#time-zone); **Next:** shows the next run. |
 | **Format** | **PDF**, **Excel**, **Word (RTF)**, **Excel (flat)** or **CSV**. |
 | **Data** | The parameter values the subscription uses, in the report's own parameter panel. Change them here, also when editing a saved subscription. A date parameter you leave at its relative default stays relative (see below). |
-| **More settings** | **Active dates** (optional start and end; after the end date the subscription switches itself off and you are notified) and **Name** (generated as *Report · schedule* until you type your own). |
+| **More settings** | **Active dates**: optional start and end; after the end date the subscription switches itself off and you are notified. |
 
 ## How a subscription produces its files
 
@@ -41,7 +42,7 @@ Open the report in the viewer and click **Subscriptions** in the toolbar. The bu
 | **Per parameter value** | One file per value of the parameter you choose: the selected values, or every candidate value when nothing is selected. The editor lists the copies it will make. | Everyone in **Send to** and every channel, all files in one message |
 | **Different parameters per person** | One file per row of a recipient table; the row supplies the parameter values | The person or role in that row |
 
-**Dates that follow the run date.** When a date parameter still has its relative default (for example *First day of last month*), the subscription stores the keyword, not the date. Each run recalculates it in the system time zone, so a monthly subscription always covers the previous month. The parameter summary shows it as *First day of last month (follows the run date; 2026-09-01 if run today)*. A date you changed to a fixed value stays fixed. See [Relative dates](/documentation/Paginated-Reports/Datasets-and-Parameters/#relative-dates).
+**Dates that follow the run date.** When a date parameter still has its relative default (for example *First day of last month*), the subscription stores the keyword, not the date. Each run recalculates it in the tenant's time zone, so a monthly subscription always covers the previous month. The parameter summary shows it as *First day of last month (follows the run date; 2026-09-01 if run today)*. A date you changed to a fixed value stays fixed. See [Relative dates](/documentation/Paginated-Reports/Datasets-and-Parameters/#relative-dates).
 
 ::: warning Whose data recipients see
 The report is generated **as you**, with the parameters stored in the subscription. Recipients get the data those parameters produce, not data filtered by their own row-level security, and a channel shows the same file to everyone in it. To give different people different data, use **Different parameters per person**.
@@ -62,15 +63,18 @@ The report is generated **as you**, with the parameters stored in the subscripti
 
 The table holds up to 1,000 rows; beyond that only the first 1,000 are processed and you are told. For long lists:
 
-- **Import from xlsx / csv** reads a file into the table, where you can keep editing. The first row holds column names; case does not matter.
+- **Download template** saves a CSV with a **Recipient** column followed by one column per ticked parameter. Fill it in Excel and read it back with **Import from xlsx / csv**, which loads the file into the table, where you can keep editing. The first row holds column names; case does not matter.
 
   | Column | Meaning |
   | --- | --- |
-  | `user`, `email` or `role` | The recipient: a user name, an email address of a Datafor user, or a role |
+  | `Recipient` | The recipient. A value with `@` is the email address of a Datafor user, `Role: Sales East` is a role, anything else is a user name. The column header of the table in your interface language also works. |
+  | `user`, `email` or `role` | The same, with the kind of recipient given by the column |
   | A column named like a report parameter, for example `region` | That row's value. Multi-value parameters take a comma-separated list. |
   | `format` (optional) | `pdf`, `xlsx`, `xlsxflat`, `csv` or `rtf`; rows without it use the subscription's format |
 
   A `subject` column is ignored: subjects come from the message template.
+
+  After the import, the editor lists what it could not use, by table row: columns it did not recognize (*These columns were not recognized and were ignored: …*), rows without a recipient (skipped when saving), values that are not allowed values of the parameter, and rows identical to an earlier one. Fix them in the table or in the file and import again.
 
 - **Query with SQL on every run instead** runs a query on a connection at each run; its columns follow the same rules.
 
@@ -96,7 +100,7 @@ A recipient is skipped, and the reason recorded, when the user does not exist or
 
 ## Run history and management
 
-Expand a subscription in the drawer to see its runs: time, scheduled or manual, how many files were produced, how many failed, how many deliveries went out, and the problems. Runs are kept for 90 days. When a run fails or partly fails, you are notified with the problems. Recipients who [stopped receiving](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/#sent-to-me) the subscription are listed in grey; they are not problems.
+Point to a **Failed** or **Partly** last result in the drawer to see its first three problems; click it, or expand the subscription, to see its runs: time, scheduled or manual, how many files were produced, how many failed, how many deliveries went out, and the problems. Runs are kept for 90 days. When a run fails or partly fails, you are notified with the problems. Recipients who [stopped receiving](/documentation/Subscriptions-and-Alerts/Managing-Subscriptions-and-Alerts/#sent-to-me) the subscription are listed in grey; they are not problems.
 
 - The **On** switch pauses a subscription without deleting it.
 - **Edit** changes any setting; past runs are kept.

@@ -58,7 +58,7 @@ Two controls above the lists change what the whole page covers:
 Select a row to see its summary, for example for a model: *5 reports · Field records 5/5 · 1 dataset · 7 unused fields · Data source: org-sales*.
 
 - **Field records n/m** says how many of the reports using this model have a field-level usage record (see [Understanding Lineage](/documentation/Lineage/Understanding-Lineage/#where-the-links-come-from)). When the two numbers differ, run **Rebuild lineage data** to complete them.
-- **Unused fields** counts the measures, calculated members and attributes that no recorded report uses. The modeler shows which ones; see [Usage and Impact Analysis](/documentation/Lineage/Usage-and-Impact-Analysis/).
+- **Unused fields** counts the measures, calculated members and attributes that no recorded report uses. To see whether one particular field is used, start deleting it in the modeler and read the impact list; see [Usage and Impact Analysis](/documentation/Lineage/Usage-and-Impact-Analysis/#finding-fields-no-report-uses).
 - A report shows its path, owner, the number of models, **Links to n reports**, **Linked from n reports**, and the **Broken links** paths in red.
 - A paginated report also lists **Data source** for the connections of its SQL datasets, and **Missing data sources** in red when one of them was deleted.
 - A data source shows its database type and the models, reports and datasets on it.

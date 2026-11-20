@@ -46,7 +46,7 @@ For a worked example, a Numeric slider bound to a *GrowthRate* parameter that dr
 
 ## Write a Date component's value to a parameter
 
-A Date component that filters by a field can also copy its value into a parameter: **Actions → Interactions → Write to parameter**. A single date is written as `YYYY-MM-DD`, a range as `["start","end"]`.
+A Date component that filters by a field can also copy its value into a parameter: **Actions → Interactions → Write to parameter**. A single date is written as `YYYY-MM-DD`, a range as `["start","end"]`, so the parameter must be a date or text parameter.
 
 ## Troubleshooting
 

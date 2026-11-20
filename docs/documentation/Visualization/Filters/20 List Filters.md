@@ -76,6 +76,8 @@ If the computed period has no member in the data, it is still applied and shown 
 
 Dropdown and List box can show a search box (**Style → Search**). The list loads at most 1,000 members; typing searches all of them on the server. See [Long member lists](/documentation/Visualization/Filter-Subscriptions/#long-member-lists).
 
+In a single-select Dropdown, opening the list puts the selected member's name in the search box, fully selected: type to replace it, or click into it to edit part of the name. The full list stays visible until you type.
+
 In a List box, the search filters as you type (it waits while an input method is composing), and the result scrolls to the top.
 
 ![A Dropdown with its search box](./images/dropdown-open.png)
