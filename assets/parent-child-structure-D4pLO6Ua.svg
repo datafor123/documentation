@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="400" viewBox="0 0 900 400" font-family="'Segoe UI','Helvetica Neue',Arial,'Microsoft YaHei','PingFang SC','Noto Sans',sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">How a parent-child table is built from a structure dataset</title>
+  <desc id="desc">A ledger has balances only for the lowest accounts, so the table's dataset returns rows A11, A12 and A21 but none for the parents A, A1 and A2. The structure dataset lists every account with its ID, parent ID and name. The report takes the tree from the structure dataset, matches the balances to it by ID, indents each level, and adds total rows: Total Current Assets 1,490 is 1,200 plus 290, Total Non-current Assets is 800, and Total Assets is 2,290. Without the structure dataset the three balance rows would all be placed at the top level.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+  <rect width="900" height="400" fill="#FFFFFF"/>
+
+  <!-- Structure dataset -->
+  <text x="20" y="30" font-size="15" font-weight="700" fill="#2B2B3A">Structure dataset (account list)</text>
+  <g font-size="12">
+    <rect x="20" y="42" width="270" height="26" fill="#E8EEF8"/>
+    <text x="30" y="60" font-weight="700" fill="#2B2B3A">ID</text><text x="80" y="60" font-weight="700" fill="#2B2B3A">Parent</text><text x="140" y="60" font-weight="700" fill="#2B2B3A">Name</text>
+    <g fill="#2B2B3A">
+      <text x="30" y="88">A</text><text x="80" y="88" fill="#8A94A6">(empty)</text><text x="140" y="88">Assets</text>
+      <text x="30" y="112">A1</text><text x="80" y="112">A</text><text x="140" y="112">Current Assets</text>
+      <text x="30" y="136">A11</text><text x="80" y="136">A1</text><text x="140" y="136">Cash</text>
+      <text x="30" y="160">A12</text><text x="80" y="160">A1</text><text x="140" y="160">Inventories</text>
+      <text x="30" y="184">A2</text><text x="80" y="184">A</text><text x="140" y="184">Non-current Assets</text>
+      <text x="30" y="208">A21</text><text x="80" y="208">A2</text><text x="140" y="208">Property and plant</text>
+    </g>
+    <rect x="20" y="42" width="270" height="176" fill="none" stroke="#D5DEEA" stroke-width="1.5"/>
+  </g>
+  <text x="20" y="240" font-size="12" fill="#5B6472">Every node, including parents with no balance.</text>
+  <text x="20" y="256" font-size="12" fill="#5B6472">Gives the tree: node field, parent field, name.</text>
+
+  <!-- Table dataset -->
+  <text x="20" y="296" font-size="15" font-weight="700" fill="#2B2B3A">Table's dataset (balances)</text>
+  <g font-size="12">
+    <rect x="20" y="308" width="270" height="26" fill="#E8EEF8"/>
+    <text x="30" y="326" font-weight="700" fill="#2B2B3A">ID</text><text x="140" y="326" font-weight="700" fill="#2B2B3A">Closing balance</text>
+    <g fill="#2B2B3A">
+      <text x="30" y="352">A11</text><text x="140" y="352">1,200</text>
+      <text x="30" y="372">A12</text><text x="140" y="372">290</text>
+      <text x="30" y="392">A21</text><text x="140" y="392">800</text>
+    </g>
+  </g>
+
+  <!-- arrows -->
+  <line x1="300" y1="130" x2="430" y2="170" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="318" y="128" font-size="12" fill="#5B6472">tree</text>
+  <line x1="300" y1="350" x2="430" y2="250" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="330" y="362" font-size="12" fill="#5B6472">values,</text><text x="330" y="378" font-size="12" fill="#5B6472">matched by ID</text>
+
+  <!-- Result -->
+  <text x="440" y="30" font-size="15" font-weight="700" fill="#2B2B3A">Printed table</text>
+  <g font-size="13">
+    <rect x="440" y="42" width="440" height="28" fill="#E8EEF8"/>
+    <text x="452" y="61" font-weight="700" fill="#2B2B3A">Item</text><text x="870" y="61" font-weight="700" fill="#2B2B3A" text-anchor="end">Closing balance</text>
+    <text x="452" y="92" font-weight="700" fill="#2B2B3A">Assets</text>
+    <text x="472" y="118" font-weight="700" fill="#2B2B3A">Current Assets</text>
+    <text x="492" y="144" fill="#2B2B3A">Cash</text><text x="870" y="144" fill="#2B2B3A" text-anchor="end">1,200</text>
+    <text x="492" y="170" fill="#2B2B3A">Inventories</text><text x="870" y="170" fill="#2B2B3A" text-anchor="end">290</text>
+    <rect x="440" y="178" width="440" height="26" fill="#F1F4F9"/>
+    <text x="472" y="196" font-weight="700" fill="#2B2B3A">Total Current Assets</text><text x="870" y="196" font-weight="700" fill="#2B2B3A" text-anchor="end">1,490</text>
+    <text x="472" y="226" font-weight="700" fill="#2B2B3A">Non-current Assets</text>
+    <text x="492" y="252" fill="#2B2B3A">Property and plant</text><text x="870" y="252" fill="#2B2B3A" text-anchor="end">800</text>
+    <rect x="440" y="260" width="440" height="26" fill="#F1F4F9"/>
+    <text x="472" y="278" font-weight="700" fill="#2B2B3A">Total Non-current Assets</text><text x="870" y="278" font-weight="700" fill="#2B2B3A" text-anchor="end">800</text>
+    <line x1="440" y1="292" x2="880" y2="292" stroke="#2B2B3A" stroke-width="1.2"/>
+    <rect x="440" y="293" width="440" height="26" fill="#E8EEF8"/>
+    <text x="452" y="311" font-weight="700" fill="#2B2B3A">Total Assets</text><text x="870" y="311" font-weight="700" fill="#2B2B3A" text-anchor="end">2,290</text>
+  </g>
+  <g font-size="12" fill="#5B6472">
+    <text x="440" y="346">Parent rows: group header style. Total rows: subtotal style;</text>
+    <text x="440" y="362">the top-level total uses the grand total style.</text>
+    <text x="440" y="384">Without the structure dataset, A1, A2 and A are missing and the</text>
+    <text x="440" y="400" dy="-2">three balance rows are all placed at the top level.</text>
+  </g>
+</svg>

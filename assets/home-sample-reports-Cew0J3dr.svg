@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="470" viewBox="0 0 900 470" font-family="'Segoe UI','Helvetica Neue',Arial,'Microsoft YaHei','PingFang SC','Noto Sans',sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">What Home shows under Sample reports</title>
+  <desc id="desc">Home checks four cases in order. If branding is on and saved branding cards exist, it shows those cards. Otherwise, if the samples folder set in System configuration exists and holds reports the user can read, it shows the five most recently modified reports placed directly in that folder, with View all opening the folder. Otherwise, on an installation upgraded from before 10.02 that still has the old hidden samples, it shows the old sample list without View all. Otherwise the section is hidden. Each report card's cover is the uploaded cover if an administrator set one, else an automatic screenshot for dashboards, else a placeholder.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3B4252"/>
+    </marker>
+  </defs>
+  <rect width="900" height="470" fill="#FFFFFF"/>
+
+  <!-- Decision lane -->
+  <rect x="10" y="10" width="540" height="450" rx="12" fill="#F4F7FB" stroke="#D5DEEA" stroke-width="1.5"/>
+  <text x="30" y="40" font-size="18" font-weight="700" fill="#2B2B3A">Which list Home shows (first match wins)</text>
+
+  <rect x="30" y="60" width="500" height="70" rx="8" fill="#FFFFFF" stroke="#8A94A6" stroke-width="1.5"/>
+  <text x="46" y="85" font-size="14" font-weight="700" fill="#2B2B3A">1. Branding is on and has saved cards</text>
+  <text x="46" y="106" font-size="12" fill="#5B6472">Shows those cards, as before 10.02. Only installations that saved</text>
+  <text x="46" y="122" font-size="12" fill="#5B6472">cards earlier have them. Branding › Home › Move to the samples folder</text>
+
+  <rect x="30" y="160" width="500" height="104" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="2"/>
+  <text x="46" y="185" font-size="14" font-weight="700" fill="#2B2B3A">2. The samples folder has reports the user can read</text>
+  <text x="46" y="206" font-size="12" fill="#5B6472">Folder: System configuration › Home page › Samples folder (/public/Samples)</text>
+  <text x="46" y="224" font-size="12" fill="#2B2B3A">Shows the 5 most recently modified reports placed directly in it</text>
+  <text x="46" y="241" font-size="12" fill="#5B6472">(dashboards, paginated reports, .prpt; subfolders are not read).</text>
+  <text x="46" y="258" font-size="12" fill="#5B6472">View all opens the folder. Each user sees only reports they can read.</text>
+
+  <rect x="30" y="294" width="500" height="70" rx="8" fill="#FFFFFF" stroke="#8A94A6" stroke-width="1.5"/>
+  <text x="46" y="319" font-size="14" font-weight="700" fill="#2B2B3A">3. Upgraded installation without that folder</text>
+  <text x="46" y="340" font-size="12" fill="#5B6472">Shows the same five samples as before the upgrade, without View all.</text>
+  <text x="46" y="356" font-size="12" fill="#5B6472">Point the setting at a folder of your own to switch.</text>
+
+  <rect x="30" y="394" width="500" height="46" rx="8" fill="#FFFFFF" stroke="#C4CBD6" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="46" y="422" font-size="14" font-weight="700" fill="#5B6472">4. Otherwise: no Sample reports section</text>
+
+  <line x1="110" y1="130" x2="110" y2="158" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="120" y="149" font-size="12" fill="#5B6472">no cards</text>
+  <line x1="110" y1="264" x2="110" y2="292" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="120" y="283" font-size="12" fill="#5B6472">folder missing or nothing readable</text>
+  <line x1="110" y1="364" x2="110" y2="392" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="120" y="383" font-size="12" fill="#5B6472">no old samples either</text>
+
+  <!-- Cover lane -->
+  <rect x="570" y="10" width="320" height="450" rx="12" fill="#FFFFFF" stroke="#D5DEEA" stroke-width="1.5"/>
+  <text x="590" y="40" font-size="18" font-weight="700" fill="#2B2B3A">Cover of each card</text>
+
+  <rect x="590" y="60" width="280" height="80" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="606" y="85" font-size="14" font-weight="700" fill="#2B2B3A">Uploaded cover</text>
+  <text x="606" y="106" font-size="12" fill="#5B6472">File menu › Set cover, administrators</text>
+  <text x="606" y="122" font-size="12" fill="#5B6472">only. PNG or JPG, up to 2 MB</text>
+
+  <rect x="590" y="170" width="280" height="112" rx="8" fill="#FFFFFF" stroke="#4C7BD9" stroke-width="1.5"/>
+  <text x="606" y="195" font-size="14" font-weight="700" fill="#2B2B3A">Automatic screenshot</text>
+  <text x="606" y="216" font-size="12" fill="#5B6472">Dashboards only. Taken in the</text>
+  <text x="606" y="232" font-size="12" fill="#5B6472">background by the render service</text>
+  <text x="606" y="248" font-size="12" fill="#5B6472">the first time it is needed, and again</text>
+  <text x="606" y="264" font-size="12" fill="#5B6472">after the report is modified</text>
+
+  <rect x="590" y="312" width="280" height="62" rx="8" fill="#FFFFFF" stroke="#8A94A6" stroke-width="1.5"/>
+  <text x="606" y="337" font-size="14" font-weight="700" fill="#2B2B3A">Placeholder by report type</text>
+  <text x="606" y="358" font-size="12" fill="#5B6472">until a screenshot exists</text>
+
+  <line x1="730" y1="140" x2="730" y2="168" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="740" y="159" font-size="12" fill="#5B6472">none uploaded</text>
+  <line x1="730" y1="282" x2="730" y2="310" stroke="#3B4252" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="740" y="301" font-size="12" fill="#5B6472">none yet</text>
+
+  <text x="590" y="408" font-size="12" fill="#5B6472">Anyone who can see a report on Home</text>
+  <text x="590" y="424" font-size="12" fill="#5B6472">can see its cover. Covers are stored per</text>
+  <text x="590" y="440" font-size="12" fill="#5B6472">tenant and do not change the report.</text>
+</svg>
