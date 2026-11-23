@@ -18,7 +18,7 @@ A new 10.02 installation already has the sample reports in **Public › Samples*
 | --- | --- |
 | [datafor-samples-10.02.zip](/downloads/datafor-samples-10.02.zip) (1.9 MB) | The importer, `import.bat` and `import.sh`, `import-settings.txt` and a README, plus the content below. |
 
-SHA-256: `838288aa7360f25fb4cd754893bb51135b245e47c00169fc244c8aa937b6a0e7`
+SHA-256: `a09eb74dfa6ddf63d0e035a60c7142aedd0f04e38d75db01e06d0c7e29d8e12c`
 
 What it adds:
 
@@ -74,12 +74,12 @@ The messages follow the language of the computer it runs on; add `--lang en` or 
 ## After the import
 
 - **Home.** **Sample reports** now lists reports from **Public › Samples**, with **View all**. Which five it shows depends on the order the samples were imported in; to bring a report to the front, open it and save it again. Dashboard covers appear the first time Home shows them, which needs the render service. If [Branding](/documentation/Console/Branding/#cards-saved-in-an-earlier-version) still has saved report cards, Home keeps showing those. See [Sample reports](/documentation/Console/Quick-Tour-of-the-Console/#sample-reports).
-- **Permissions.** **Public › Samples** is read-only for signed-in users and fully editable by administrators. The **Authenticated** role (all signed-in users) can read the 8 models and the database connections of the 8 datasets, so people who are not administrators can open the samples too.
+- **Permissions.** **Public › Samples** is read-only for signed-in users and fully editable by administrators. The 8 models and the database connections of the 8 datasets are read-only for the **Authenticated** role (all signed-in users) and fully editable by administrators, so people who are not administrators can open the samples but cannot change or delete them.
 - **Tenants.** The samples go into the tenant you signed in to. Other tenants are not changed and keep their Home as it was.
 
 ## Running it again
 
-Running the importer again is safe: datasets, models and reports that already exist are skipped, and the check at the end runs again.
+Running the importer again is safe: datasets, models and reports that already exist are skipped, and the check at the end runs again. It also sets the permissions of existing sample models and connections back to read-only for signed-in users.
 
 | Situation | What happens |
 | --- | --- |
@@ -120,7 +120,8 @@ A file dataset's name is unique on the whole server, across tenants. The samples
 | `Sign-in failed. Check the account, password and tenant ID.` | Check all three. A tenant administrator needs the tenant ID. |
 | `This account is not an administrator.` | Use an administrator account. |
 | `Java was not found. Enter the Datafor bi-server folder` | Enter the folder that contains `jre`, for example `/opt/bi-server`, or set `DATAFOR_JAVA` to the full path of `java` and run again. |
-| `[NOTE] … read access for all signed-in users could not be added …` | The item was imported, but only administrators can open it. Give the **Authenticated** role read access to the model or database connection named in the message. |
+| `[NOTE] … read access for all signed-in users could not be added to its database connection …` | The dataset was imported, but only administrators can open the samples built on it. Give the **Authenticated** role read access to the database connection named in the message. |
+| `[NOTE] … the model's permissions could not be set …` | The model was imported with the permissions it inherits. Set it yourself: **Authenticated** read, **Administrator** full control, not inherited. |
 | `[FAIL] Model query failed` or `Paginated report does not render` | Open the log in the package folder; it has the server's answer. Run the importer again after fixing the cause: what was imported is skipped. |
 
 ## Removing the samples
