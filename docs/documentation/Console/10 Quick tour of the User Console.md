@@ -32,7 +32,7 @@ A report created from Home is saved in **Personal** unless you choose another fo
 
 ![Set cover dialog for Larkwood - Sales Overview: the current automatic screenshot, Choose image, the size and format hint, Cancel and Save](./images/set-cover-dialog.png)
 
-On an installation upgraded from before 10.02 there is no samples folder, so Home keeps showing the samples it showed before, without **View all**. To switch, create a folder under Public, put reports in it and choose it as the samples folder. If [Branding](/documentation/Console/Branding/#cards-saved-in-an-earlier-version) has saved report cards, Home shows the cards until they are moved to the samples folder.
+On an installation upgraded from before 10.02 there is no samples folder, so Home keeps showing the samples it showed before, without **View all**. To switch, [import the 10.02 sample package](/documentation/Setup/Importing-the-Sample-Reports/), which creates **Public › Samples**, or create a folder under Public, put reports in it and choose it as the samples folder. If [Branding](/documentation/Console/Branding/#cards-saved-in-an-earlier-version) has saved report cards, Home shows the cards until they are moved to the samples folder.
 
 ## Left navigation
 
