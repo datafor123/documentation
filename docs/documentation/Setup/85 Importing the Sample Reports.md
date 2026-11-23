@@ -18,7 +18,7 @@ A new 10.02 installation already has the sample reports in **Public › Samples*
 | --- | --- |
 | [datafor-samples-10.02.zip](/downloads/datafor-samples-10.02.zip) (1.9 MB) | The importer, `import.bat` and `import.sh`, `import-settings.txt` and a README, plus the content below. |
 
-SHA-256: `a09eb74dfa6ddf63d0e035a60c7142aedd0f04e38d75db01e06d0c7e29d8e12c`
+SHA-256: `0082c1405eb634474e258272ecdc9d8489e3f03a3739771bb19e9b354f9eb72f`
 
 What it adds:
 
@@ -106,9 +106,17 @@ DATAFOR_PASSWORD='…' sh import.sh --url http://localhost:28080/datafor --user 
 
 **Settings file.** Instead of typing the address, account and tenant each time, fill them in once in `import-settings.txt` in the package folder (`url`, `user`, `tenant`, and optionally `overwrite`, `yes` and `lang`). When `url` is set, the importer asks only for the password. Options on the command line win over the file. Do not put the password in the file.
 
-## One tenant per server
+## Tenants and template0
 
-A file dataset's name is unique on the whole server, across tenants. The samples can therefore be imported into one tenant per server; importing into a second tenant stops with `this dataset name is already used by another tenant on this server`.
+A file dataset's name is unique on the whole server, across tenants. The samples can therefore be imported into one ordinary tenant per server; importing into a second one stops with `this dataset name is already used by another tenant on this server`, before any report is added.
+
+**template0**, the template new tenants are created from, is the exception. Import into it with its administrator account:
+
+```bash
+sh import.sh --user admin-/pentaho/template0 --tenant template0
+```
+
+template0 gets its own copy of the datasets, named with ` Template` at the end (for example *Larkwood Retail Demo Template*), and its models are pointed at them. It does not matter whether the default tenant already has the samples. Tenants created from template0 afterwards get the samples, models and connections with it, and read template0's copy of the data. Tenants that already exist are not changed.
 
 ## Troubleshooting
 
@@ -127,4 +135,4 @@ A file dataset's name is unique on the whole server, across tenants. The samples
 ## Removing the samples
 
 1. Delete the **Public › Samples** folder in the console.
-2. Delete the 8 analysis models and then the 8 file datasets listed in [Download](#download).
+2. Delete the 8 analysis models and then the 8 file datasets listed in [Download](#download). In template0 the datasets' names end with ` Template`.
