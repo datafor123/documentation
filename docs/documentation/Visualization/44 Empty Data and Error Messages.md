@@ -47,10 +47,11 @@ A Measure card can show a placeholder instead: Style → Empty data → **Show b
 | --- | --- | --- |
 | *The query timed out. Narrow the filters and try again* | The query took longer than the engine's query timeout. | Narrow the filters, or ask an administrator to check the model or the timeout. |
 | *You don't have permission to view this data* | The user may not read the model or its data. | Ask for access. |
+| *The analysis model used by this component failed to load. Please ask an administrator to check the model* | The model itself is broken for everyone, for example a table or SQL view it uses no longer exists or does not return a key column. Before 10.02 this showed as a permission or *model damaged* error. | An administrator opens the model; the server log has a line *Analysis model: name failed to load: reason*. |
 | *A field used by this component no longer exists* | A field or member was renamed or removed in the model. | Replace the field on the Data tab. |
 | *Failed to load data* | Any other error. | Click **Retry**. |
 
-**Retry** appears for time-outs and other errors. Authors also get **Details**, which shows the server's error text; readers never see it.
+**Retry** appears for time-outs and other errors, not for a model that failed to load. Authors also get **Details**, which shows the server's error text; readers never see it.
 
 ## Truncated results
 

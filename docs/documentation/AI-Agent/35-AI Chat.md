@@ -1,21 +1,21 @@
 ---
-title: AI Assistant
+title: AI Agent
 permalink: /documentation/AI-Agent/AI-Chat/
-description: Ask questions about your data in the AI Assistant, with or without choosing an analysis model, and read change breakdowns, partial answers and messages.
+description: Ask questions about your data in the AI Agent, with or without choosing an analysis model, and read change breakdowns, partial answers and messages.
 createTime: 2026/09/01 21:50:48
 ---
 
-# AI Assistant
+# AI Agent
 
-The **AI Assistant** is Datafor's full-page conversational analysis. You ask in your own words; the answer comes from a governed query on an analysis model, under your own data permissions.
+The **AI Agent** page is Datafor's full-page conversational analysis (called *AI Assistant* in the English interface before 10.02). You ask in your own words; the answer comes from a governed query on an analysis model, under your own data permissions.
 
-## 1. Open the AI Assistant
+## 1. Open the AI Agent
 
 Click **AI Agent** in the left navigation, directly below **Home**. The **AI Agent** card on **Home** opens the same page.
 
 **AI Agent** appears only when an administrator has enabled the AI service. A user without AI access who clicks it sees "Please contact your administrator to enable AI for this user" and stays on the current page.
 
-<div align="left"><img src="./images/ai-welcome-toolbar.png" alt="AI Assistant welcome screen with the toolbar buttons New Chat, History, Common Questions, Ops and LLM" width="100%" /></div>
+<div align="left"><img src="./images/ai-welcome-toolbar.png" alt="AI Agent welcome screen with the toolbar buttons New Chat, History, Common Questions, Ops and LLM" width="100%" /></div>
 
 | Toolbar button | Use |
 | --- | --- |
@@ -39,7 +39,7 @@ The list has four places: Common Questions configured by an administrator come f
 
 To start from a metric instead of a question, pick the metric on the welcome screen and choose one of the **Quick Actions**: **Metric change check**, **Generate metric report**, **View trends**, **Breakdown analysis** or **Compare and rank**, with a time range of your choice.
 
-<div align="left"><img src="./images/ai-assistant-retail-model-selected.png" alt="AI Assistant with Retail Chain Operations selected: the model brief, four suggested questions under You can ask with Regenerate, and All 36 metrics" width="700px" /></div>
+<div align="left"><img src="./images/ai-assistant-retail-model-selected.png" alt="AI Agent with Retail Chain Operations selected: the model brief, four suggested questions under You can ask with Regenerate, and All 36 metrics" width="700px" /></div>
 
 ### How Auto-select model chooses
 
@@ -142,7 +142,7 @@ Contributions show where a change sits in the data, not why it happened. A quest
 
 A question that no single query can answer, such as `Which stores have both high sales and a high return rate?`, runs as a multi-step analysis. The Agent sets a plan of a few steps before it starts, runs independent steps in parallel, shows the result and evidence of each step, and then combines them into one conclusion. It does not explore open-endedly.
 
-The query steps of one multi-step analysis may run for 180 seconds in the AI Assistant and in embedded applications. Writing the answer afterwards is not cut off by this limit. At the limit:
+The query steps of one multi-step analysis may run for 180 seconds in the AI Agent and in embedded applications. Writing the answer afterwards is not cut off by this limit. At the limit:
 
 - steps that have not started are skipped, and running steps stop;
 - the steps that finished are combined into a **partial** answer that names what did not finish.
@@ -210,7 +210,7 @@ Under the progress steps, **Technical details** opens **How I read the question*
 | "This question names specific values (such as a store or a region), and matching them to this model's data needs the model's vector index, which is not ready yet. …" | The question needs the knowledge index. An administrator has to build it. |
 | "…which is being built right now. It usually takes a few minutes; after that the question will work as asked." | The first build is running. Ask again in a few minutes. |
 
-The AI Assistant still says "vector index" where the console now says **knowledge index**. See [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
+The AI Agent still says "vector index" where the console now says **knowledge index**. See [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
 
 ## 8. Continue or review conversations
 

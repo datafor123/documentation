@@ -85,7 +85,7 @@ Return to **Assignments**. All 16 rows must be assigned before **Save** is enabl
 | Assignment | Runtime key | Used for |
 | --- | --- | --- |
 | Workflow Routing | `workflow.routing` | Choosing the governed workflow for the request. |
-| Model Resolution | `model.resolution` | Choosing the analysis model for a request that names none, from the user's visible models and the Metrics Library bindings (**Auto-select model** in the AI Assistant, and MCP calls without a model). |
+| Model Resolution | `model.resolution` | Choosing the analysis model for a request that names none, from the user's visible models and the Metrics Library bindings (**Auto-select model** in the AI Agent, and MCP calls without a model). |
 | Semantic Binding | `semantic.binding` | Checking business meaning against model implementation. |
 | Semantic Draft | `semantic.draft` | Producing the semantic query draft. |
 | Analysis Strategy | `analysis.strategy` | Planning a bounded multi-step investigation. |
@@ -106,7 +106,7 @@ Agent-stage selectors list verified chat profiles. The **Embedding Model** selec
 Click the **Save** button at the top of **Assignments** after any change. Assignment changes are not saved automatically. Saved assignments are read for each subsequent stage call and do not require a service restart. A required stage does not fall back to an old model ID or an unassigned spare profile. The one exception is **Model Resolution**: while it has no assignment of its own (see the note in section 1), it uses the **Workflow Routing** assignment.
 
 ::: tip Models configured in Datafor
-Questions in the AI Assistant use only the assignments on this page. A few features fall back to a model configured in Datafor when their stage has no assignment, for example dashboard insight, the model brief and sample questions. For users who are not administrators, that fallback works only when the AI Agent and the Datafor server share the same secret. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/).
+Questions in the AI Agent use only the assignments on this page. A few features fall back to a model configured in Datafor when their stage has no assignment, for example dashboard insight, the model brief and sample questions. For users who are not administrators, that fallback works only when the AI Agent and the Datafor server share the same secret. See [AI Agent Shared Secret](/documentation/AI-Agent/Agent-Shared-Secret/).
 :::
 
 ## 6. Use schemes

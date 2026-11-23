@@ -31,7 +31,7 @@ CAS only issues tickets to services it knows. Add Datafor to the CAS server's se
 
 ## 3. Save and test
 
-1. Click **Save**. The button is available once something has changed.
+1. Click **Save** in the bar that appears at the bottom once something has changed; **Discard** drops the changes.
 2. Sign in through CAS in a separate browser session to check the setup. There is no **Test connection** button for CAS.
 
 - To switch CAS off, turn off **Enable** and click **Save**. With **Enable** off, Datafor saves without checking the required fields.

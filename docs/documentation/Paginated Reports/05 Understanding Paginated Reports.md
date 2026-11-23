@@ -53,8 +53,9 @@ Permissions follow the folder: you need write permission on a folder to save a r
 
 ## Limits in this release
 
-- One table or crosstab per report. Several text and image blocks are fine. Reports that need two data blocks are planned; until then, split them into two reports.
+- One table or crosstab per report. Several text and image blocks are fine. Reports that need two data blocks are planned; until then, split them into two reports. A balance sheet in account form (assets left, liabilities right) does not need two blocks: it is one [parent-child table](/documentation/Paginated-Reports/Tables-and-Crosstabs/#parent-child-table) set side by side.
 - No charts, barcodes or sub-reports yet.
+- Parent-child hierarchies work in tables, not in crosstabs, and cannot be combined with groups.
 - A crosstab does not split across pages horizontally; wide crosstabs are cut at the page edge unless you widen the paper or let them compress (see [Viewing, Pagination and Export](/documentation/Paginated-Reports/Viewing-Pagination-and-Export/)).
 - Word export is RTF.
 - The preview shows at most 5,000 rows; exports stop at 200,000 rows for SQL datasets and 100,000 rows for model datasets. Administrators can change these limits in the plugin's `settings.xml`.

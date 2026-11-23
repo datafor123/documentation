@@ -45,7 +45,7 @@ Select the **SAML 2.0** card ("Sign in through a SAML identity provider"). Field
 
 ## 3. Save and test
 
-1. Click **Save**. The button is available once something has changed.
+1. Click **Save** in the bar that appears at the bottom once something has changed; **Discard** drops the changes.
 2. Sign in through the IdP in a separate browser session to check the setup. There is no **Test connection** button for SAML 2.0.
 
 - To switch SAML 2.0 off, turn off **Enable** and click **Save**. With **Enable** off, Datafor saves without checking the required fields.

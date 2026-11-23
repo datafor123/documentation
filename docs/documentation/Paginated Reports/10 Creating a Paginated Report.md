@@ -22,11 +22,11 @@ A new report opens with the wizard. It builds a complete table or crosstab in tw
 ![Wizard step 1, Data: Model dataset selected, Retail Chain Operations as the analysis model and cube](./images/wizard-step1-data.png)
 
 1. **Data.** Choose **Model dataset** (an analysis model and its cube) or **SQL dataset** (a connection and a query); see [Datasets and Parameters](/documentation/Paginated-Reports/Datasets-and-Parameters/). If the report already has datasets, you can **Use a dataset in this report** instead. For an SQL dataset, **Next** runs the query first if you have not run it; an error keeps you on this step.
-2. **Layout.** Pick the shape at the top: **Detail table** (one row per record, optional total), **Grouped report** (groups with subtotals and optional page breaks) or **Crosstab** (rows by columns with totals; greyed out when the dataset has no numeric field). Then choose the fields and set the **Report title**.
+2. **Layout.** Pick the shape at the top: **Detail table** (one row per record, optional total), **Grouped report** (groups with subtotals and optional page breaks), **Crosstab** (rows by columns with totals; greyed out when the dataset has no numeric field) or **Parent-child** (indented by parent and child, with parents totalled; see below). Then choose the fields and set the **Report title**.
 
 ![Wizard step 2, Layout: Grouped report with Region as Group and City, Net Sales, Order Count and Average Order Value as Columns, subtotal and grand total ticked](./images/wizard-step2-layout.png)
 
-Fields go into areas on the right: **Group** and **Column** for a grouped report, **Row**, **Column** and **Value** for a crosstab, **Column** for a detail table.
+Fields go into areas on the right: **Group** and **Column** for a grouped report, **Row**, **Column** and **Value** for a crosstab, **Column** for a detail table, and **Node ID**, **Parent ID**, **Name** and **Other columns** for a parent-child table.
 
 - Tick a field on the left to add it with a default role: the first dimension becomes the group (or row), the next the column, measures become columns (or values). Or drag fields into an area, between two fields, or from one area to another; drag a field back to the left to remove it.
 - Areas that cannot take the dragged field fade and say why: **Value** takes only measures (model measures, numeric SQL fields), and a model measure can only be a column or a value. The role drop-down greys out the same choices.
@@ -34,6 +34,20 @@ Fields go into areas on the right: **Group** and **Column** for a grouped report
 - Options below add a **Subtotal per group**, a **Grand total row**, a **Page break after each group** or, for crosstabs, **Row and column totals**.
 - The **Report title** starts as the cube name for a model dataset; it becomes the report name and the title in the header.
 - A crosstab, or a table whose columns are estimated wider than portrait paper, shows *Landscape paper will be used* and switches the page to landscape.
+
+### Parent-child layout
+
+![Wizard step 2 with Parent-child selected: Item ID as Node ID, Parent Item ID as Parent ID, Item as Name, Closing Balance and Opening Balance in Other columns, Fill in parents that have no data of their own ticked](./images/wizard-parent-child.png)
+
+For a balance sheet, a chart of accounts or an organization list. When the field names make it obvious, the wizard fills in **Node ID**, **Parent ID** and **Name** for you (*Chosen by field name; drag a field out to replace it*). Each of the three takes one dimension field (any field for an SQL dataset); dropping another one replaces it. **Other columns** take the numbers that parents total from their children, such as balances, and any further columns. **Generate** stays disabled until the first three are filled; hovering it says which one is missing.
+
+| Option | Effect |
+| --- | --- |
+| **Show the ID column** | Off by default: the IDs drive the tree but are not printed. On: the node ID becomes a column after the name. |
+| **Fill in parents that have no data of their own** | Model datasets only, on by default. Adds a structure dataset on the same model, so parent accounts without balances still appear. Leave it on unless every parent has its own row in the data. |
+| **Side by side (account form)** | Left and right halves with both totals on one row; switches to landscape paper. |
+
+How the result works and what to change afterwards is in [Parent-child table](/documentation/Paginated-Reports/Tables-and-Crosstabs/#parent-child-table).
 
 **Generate** replaces the body with the table and fills it with sample rows. Numeric measures that are sums or counts in the model are totalled; averages, distinct counts and calculated measures are set to **By model**, so their subtotals come from the model rather than from adding rows. If the result is not what you wanted, **Undo** (Ctrl+Z) returns to the empty report; **Use the wizard** on an empty body opens it again.
 
@@ -59,13 +73,18 @@ The canvas is live:
 
 With nothing selected, the property panel shows the report:
 
+<img src="./images/report-properties-language.png" alt="Report properties: Name Halden Group - Balance Sheet, Default font Times New Roman, Report language English with its description, Parameter panel Top" width="300" align="right" />
+
 | Property | Notes |
 | --- | --- |
 | **Name** | Shown in the header by default and used as the file name on the first save. |
-| **Default font** | Leave empty to use the server's default font (a CJK font, so Chinese text renders in PDF). See [Page Layout, Header and Footer](/documentation/Paginated-Reports/Page-Layout-Header-and-Footer/#fonts). |
+| **Default font** | Leave empty to use the server's default font (a CJK font, so Chinese text renders in PDF). Fonts without Chinese glyphs are marked *no Chinese glyphs* in the list. See [Page Layout, Header and Footer](/documentation/Paginated-Reports/Page-Layout-Header-and-Footer/#fonts). |
+| **Report language** | The language of the words the report engine writes into the report: the filter summary, *All*, subtotal and total labels, the no-data message, Yes/No, the *–* between dates, the **Level** column of flat exports. **Follow the interface language** (default) uses the language of whoever views the report, and for a subscription the language saved with it; pick a language to print an English report in English for everyone. The viewer's toolbar and parameter panel always follow the interface language. |
 | **Parameter panel** | **Left** or **Top** in the viewer. Readers can collapse it but not move it. |
 | **Paper**, **Orientation**, **Margins (mm)** | A3, A4, A5, B5, Letter, Legal or **Custom** width and height. The **Usable width** under the margins is the space your columns must fit in. |
 | **Table style** | Template, accent colour and density that tables and crosstabs inherit; see [Tables and Crosstabs](/documentation/Paginated-Reports/Tables-and-Crosstabs/#table-style). |
+
+<br clear="all" />
 
 ## Save, validate, preview
 

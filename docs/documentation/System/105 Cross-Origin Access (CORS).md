@@ -29,7 +29,7 @@ Open **Settings › Access & Integration › Cross-origin access (CORS)**. The s
 | | **Exposed response headers** | Empty | Response headers that scripts on other origins may read, for example `Content-Disposition`. |
 | | **Allow credentials** | On | Lets the browser send and receive cookies on calls from allowed origins. While it is on, **Allowed origins** cannot contain `*`; saving shows "Allowed domains cannot be * when credentials are allowed. Enter explicit origin domains." |
 
-Click **Save**. **Discard changes** restores the saved values.
+Click **Save** in the bar at the bottom. **Discard** restores the saved values.
 
 You can enter **Allowed origins** one per line, as the hint says: saving turns line breaks and spaces into commas, also for **Trusted domains**. The server itself splits only at commas, so if you write the setting by other means, separate the origins with commas: `https://app.example.com,https://portal.example.com`.
 

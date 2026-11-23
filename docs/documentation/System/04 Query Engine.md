@@ -20,7 +20,7 @@ createTime: 2026/10/09 17:30:00
 | **Query timeout (seconds)** | A query running longer is stopped; 0 = no timeout. Reports wait this long plus 10 seconds before showing *The query timed out*. | `300` |
 | **UseAggregates** / **ReadAggregates** | Let the engine read and use mapped aggregation tables; both must be on. Loaded models pick up the change after the model cache is cleared or the server restarts. See [Use Aggregation Tables](/documentation/Model/Use-Aggregation-Tables/). | Off |
 
-**Reset to default** returns every engine setting to its factory value, including settings this page does not show. **Save** applies the changes.
+Changes are counted in a bar at the bottom (a value set back to its saved value does not count), with **Discard** and **Save**. **More › Reset to default** at the top of the page returns every engine setting to its factory value, including settings this page does not show; **Save** applies it.
 
 A report page can lower the rows per component with **Page → Settings → Performance → Max query records**; the default for that is in [System Configuration](/documentation/System/System-Configuration/).
 

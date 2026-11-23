@@ -84,7 +84,7 @@ All runs of all three kinds in one list, newest first: type, **Schedule** or **M
 
 ![Settings tab: Basics with Default delivery Email only, Retention 90 days and the links to delivery channels and IM platforms, then Limits for creators, readers and recipients](./images/ops-settings.png)
 
-Settings take effect without a restart. One **Save** at the bottom saves the whole tab.
+Settings take effect without a restart. Changes are counted in a bar at the bottom with **Discard** and **Save**, which saves the whole tab. Switching to another tab with unsaved changes asks whether to keep editing, discard them or save first.
 
 **Basics**: **Default delivery** (see [Defaults for everyone](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#defaults-for-everyone)) and **Retention (days)**: how long runs and generated files are kept, 90 by default. Cleanup runs every day at 03:00.
 

@@ -13,7 +13,7 @@ Administrators open **Settings** (gear icon) in the left navigation. Pages are g
 | --- | --- | --- | --- |
 | **General** | **License** | View and update the license, get the machine code | [License and Activation](/documentation/System/License/) |
 | | **System configuration** | The platform or tenant time zone, defaults for new reports and models, query limits, first day of the week | [System Configuration](/documentation/System/System-Configuration/) |
-| | **Branding** | Logo, colours, login page, interface font | [White Label](/documentation/Console/Branding/) |
+| | **Branding** | Logo, product name, brand color, sign-in page, Home title, help menu | [Branding](/documentation/Console/Branding/) |
 | **Access & Integration** | **Single sign-on** | LDAP, OAuth 2.0, SAML 2.0 and CAS | [Single Sign-On Overview](/documentation/System/Single-Sign-On/), [LDAP](/documentation/System/LDAP/), [OAuth2](/documentation/System/OAuth2-Authentication/), [SAML2](/documentation/System/SAML2/), [CAS](/documentation/System/CAS-Authentication/) |
 | | **Site address** | The public address of the server | [Site Address](/documentation/System/Site-Address/) |
 | | **Embed tokens (JWT)** | Sign-in for embedded reports | [JSON Web Token (JWT)](/documentation/System/JWT/) |
@@ -31,6 +31,6 @@ Administrators open **Settings** (gear icon) in the left navigation. Pages are g
 | | **Audit log** | Usage dashboards, searchable records of sign-ins, changes and views, and what is recorded for how long | [Audit Log](/documentation/System/Audit-Log/) |
 | | **Multi-tenancy** | Create and manage tenants | [Multi-tenancy](/documentation/Multi-tenancy/Multi-tenancy/) |
 
-Each page has its own address (for example `#/settings/sso/ldap`), so reloading stays on the page and the browser's Back button returns to the previous settings page. Pages with unsaved changes ask before you leave. Below 1,280 px window width the second-level navigation becomes a list at the top.
+Each page has its own address (for example `#/settings/sso/ldap`), so reloading stays on the page and the browser's Back button returns to the previous settings page. Form pages (System configuration, Branding, Single sign-on, Site address, Cross-origin access, Email, Query engine, Maps, AI service, and the **Settings** tabs of Subscriptions & alerts and Audit log) share one way of saving: once you change something, a bar at the bottom shows *n unsaved changes* with **Discard** and **Save**; setting a value back removes it from the count, and a save that fails validation scrolls to the first field in error. Leaving the page, switching tabs inside it, or closing or reloading the browser tab with unsaved changes asks first. Pages edited in dialogs or by switches (License, Embed tokens, Delivery channels, Database drivers, Knowledge indexes, Backup, Multi-tenancy) save each change on its own. Below 1,280 px window width the second-level navigation becomes a list at the top.
 
 Names before 10.00: *White label* is now **Branding**, *Vector indexes* **Knowledge indexes**, the OLAP page **Query engine**, the JDBC page **Database drivers**; LDAP, OAuth2, SAML2 and CAS are tabs of **Single sign-on**, and *Vector jobs* is the **Refresh schedule** column of Knowledge indexes.

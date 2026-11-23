@@ -7,7 +7,7 @@ createTime: 2026/10/12 10:00:00
 
 # Asking Without Choosing a Model
 
-With **Auto-select model** in the AI Assistant, or an MCP call without a model, the Agent first has to decide which analysis model answers your question. Everything after that, from reading the fields to running the query, happens inside that one model. A wrong choice at this step cannot be repaired by a better question later in the conversation.
+With **Auto-select model** in the AI Agent, or an MCP call without a model, the Agent first has to decide which analysis model answers your question. Everything after that, from reading the fields to running the query, happens inside that one model. A wrong choice at this step cannot be repaired by a better question later in the conversation.
 
 ::: tip In short
 - A metric from **Metrics Library** in your question decides the model through its **binding**. This is the only governed, exact signal the Agent has.
@@ -15,7 +15,7 @@ With **Auto-select model** in the AI Assistant, or an MCP call without a model, 
 - When the evidence does not settle it, the Agent asks you. It never picks by list order.
 :::
 
-This page explains the steps, then what each role can do. For the composer, the answer card and the buttons, see [AI Assistant](/documentation/AI-Agent/AI-Chat/#_2-choose-the-analysis-model-or-let-the-agent-choose).
+This page explains the steps, then what each role can do. For the composer, the answer card and the buttons, see [AI Agent](/documentation/AI-Agent/AI-Chat/#_2-choose-the-analysis-model-or-let-the-agent-choose).
 
 ## 1. What happens before the first answer
 
@@ -178,7 +178,7 @@ For the other messages, see [When no model can be chosen](/documentation/AI-Agen
 
 ## Related topics
 
-- [AI Assistant](/documentation/AI-Agent/AI-Chat/)
+- [AI Agent](/documentation/AI-Agent/AI-Chat/)
 - [Understanding Metrics Library](/documentation/Metrics-Library/Understanding-Metrics-Library/)
 - [Metrics Library](/documentation/Metrics-Library/Metrics-Library/)
 - [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/)

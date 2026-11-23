@@ -13,9 +13,15 @@ createTime: 2026/09/01 22:03:26
 
 | Area | What it is for |
 | --- | --- |
-| **Toolbar** (top) | Undo, display mode, size, arrange, chart switch, share, mobile layout, parameters, lineage, AI Agent, **Save as**, **Save**, **Preview** |
+| **Toolbar** (top) | See below |
 | **Canvas** (centre) | The report page. Components are placed and arranged here. |
 | **Panel** (right) | Settings of the selected item. Its title says what is selected: **Page** or the component type. |
+
+## The toolbar
+
+![Editor toolbar: refresh, Grid, Undo, Redo, Fit to page, W(px) and H(px), Delete, Create copy, Move layer, Align, Distribute, Chart switch, then Share, Mobile layout and Manage parameters, then View item lineage and AI Agent, and Save as, Save and Preview](../Visualization/images/current/editor-toolbar.png)
+
+From left to right: refresh, **Grid**, **Undo** and **Redo**, the display mode (**Fit to page**), **W(px)** and **H(px)**, then the arrange buttons for the selection (**Delete**, **Create copy**, **Move layer**, align, distribute, chart switch). The next group is about the whole report: **Share**, **Mobile layout** and **Manage parameters**; then **View item lineage** and **AI Agent**. **Save as**, **Save** and **Preview** sit on the right. Hover a button to see its name.
 
 ## The panel
 

@@ -29,8 +29,8 @@ Select the **LDAP** card ("Sign in with a directory account and password"). Fiel
 
 ## 2. Test and save
 
-1. Click **Test connection** to check the connection to the LDAP server with the values currently in the form; you don't have to save first. The button is available only while **Enable** is on. A successful check shows **Validation successful**; otherwise the error is shown.
-2. Click **Save**. The button is available once something has changed.
+1. Click **Test connection**, at the end of the **Authentication** settings, to check the connection to the LDAP server with the values currently in the form; you don't have to save first. The button is available only while **Enable** is on. A successful check shows **Validation successful**; otherwise the error is shown.
+2. Click **Save** in the bar that appears at the bottom once something has changed; **Discard** drops the changes.
 
 - To switch LDAP off, turn off **Enable** and click **Save**. With **Enable** off, Datafor saves without checking the required fields.
 - If **Create users on first sign-in** is cleared when you save, **Default user type** and **Default role** are cleared as well.

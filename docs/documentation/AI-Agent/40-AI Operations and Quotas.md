@@ -7,7 +7,7 @@ createTime: 2026/09/01 21:50:50
 
 # AI Operations and Quotas
 
-The **Ops** panel of the AI Assistant shows usage statistics and holds the daily question quota.
+The **Ops** panel of the AI Agent shows usage statistics and holds the daily question quota.
 
 ## 1. Open Ops
 

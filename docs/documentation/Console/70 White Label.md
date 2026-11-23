@@ -4,168 +4,148 @@ permalink: /documentation/Console/Branding/
 tags:
   - Brand
   - White label
-description: Customize the login page, console branding, Home report cards and browser defaults, and save, import and restore the configuration.
+description: Replace the Datafor logo, name and colors in the console, sign-in page, About dialog, emails and IM messages; how the brand color drives the other colors, what tenants inherit, Home sample reports, and import, export and restore.
 createTime: 2026/09/01 22:03:26
 ---
 
 # Branding (White Label)
 
-**Branding** (called *White Label* before 10.00) lets you give the Datafor login page and console a consistent identity: your logos, product copy, colors, navigation styling, and selected reports on Home. Use it for the application around your reports; it is not a replacement for designing individual report pages or configuring embedded authentication.
+**Settings › General › Branding** replaces the Datafor logo, product name and colors that users see around their reports: the console, the sign-in page, the About dialog, and the emails and IM messages Datafor sends. Only administrators see the page. If it is missing, your license may not include branding.
 
-## Open the configuration
+![The console after branding: the Northstar logo in the sidebar, teal selected menu and buttons, and the Home subtitle Sales and operations in one place](./images/branding-result-home.jpg)
 
-Sign in with an administrator account and go to **Settings › General › Branding**. If the entry is unavailable, ask your administrator to check your access and the features available in your deployment.
+Three settings under **Basics** give a complete brand: **Logo**, **Product name** and **Brand color**. Everything else has a default that matches the standard Datafor look and follows the brand color, so leave it alone unless you need it.
 
-The page has four configuration areas:
+## Turn branding on
 
-| Area | What it controls |
+The first card, **Use custom branding**, decides whether anyone sees your settings:
+
+- **On**: every user sees the branding on the page.
+- **Off**: everyone sees the default Datafor look. Your settings and images are kept, so you can prepare a brand with the switch off and turn it on later.
+
+The switch is saved together with the rest of the page. Changes apply as soon as you click **Save**: other users see them after they refresh the page, and you can check your own result in a new browser window. To check the sign-in page, open it in a private window, because a signed-in browser is sent straight to the console.
+
+The message after saving tells you what happened: *Saved and turned on*, *Saved and turned off*, or *Saved. Custom branding is still off; turn on the switch at the top to apply it.*
+
+## Find your way around the page
+
+- The buttons under the title (**Basics**, **Sign-in page**, **Navigation**, **Home**, **About and help**) jump to a section; the page itself is one long form. **Search settings** finds any setting by name, including ones inside **Advanced settings**.
+- Each section shows the common settings. **Advanced settings (*n*)** opens the detailed colors, font sizes and corner radii; the label says how many of them you have customized.
+- A setting you changed shows **Customized (default: …)** and **Restore default**. Color settings you have not touched show **Follows brand color**.
+- An edited row turns tinted and says **Unsaved**. A bar at the bottom counts the changes, with **View changes** (a list of each setting before and after), **Discard** and **Save**. Leaving the page with unsaved changes asks first.
+
+![The floating bar: 1 unsaved changes, View changes, Discard and Save, over the edited Product name row marked Unsaved](./images/branding-unsaved-bar.png)
+
+**More** at the top right holds **Export**, **Import** and **Restore all defaults** (in a tenant: **Use platform branding**); see [Reuse or restore a configuration](#reuse-or-restore-a-configuration).
+
+## Basics
+
+![Basics: Logo with Sidebar and Sign-in page previews, Small icon, Product name Northstar Analytics, Brand color #0F766E with Button, Link text and Selected menu samples, and Interface font](./images/branding-basics.png)
+
+| Setting | What it changes |
 | --- | --- |
-| **Login** | Login logo, welcome message, background, form styling, login-option visibility, and footer. |
-| **Console** | Expanded and collapsed logos, Home title and tagline, primary color, sidebar, top bar, search box, and help/resource visibility. |
-| **Sample pages** | The report cards in **Home > Report templates**: titles, images, destinations, order, and opening behavior. |
-| **Other** | Default browser title, interface font, and website icon. |
+| **Logo** | The expanded sidebar and the sign-in page. The previews draw it on the real background so you can see whether it is too small or too faint. PNG or JPG with a transparent background, at least 80 px high, up to 1 MB; SVG is not accepted. Turn off **Use the same image on the sign-in page and the sidebar** to upload a second version, for example a light logo for a dark sidebar. |
+| **Small icon** | The collapsed sidebar and the browser tab. PNG, 64 × 64 recommended. Without one, the logo is scaled down into a square. |
+| **Product name** | Replaces "Datafor" where users and message recipients see it (see below). Empty means *Datafor*. |
+| **Brand color** | Buttons, links, selected menu items and tabs, the sign-in button and input focus. Hover and light shades are calculated from it, and button text switches between white and dark by contrast. A very light color shows a warning that links may be hard to read. |
+| **Interface font** | Text of the console and the report editor. It does not change fonts inside reports; the default font of new reports is in [System Configuration](/documentation/System/System-Configuration/). See [Fonts](/documentation/Console/Fonts/). |
+| Advanced: **Browser title** | Title of the browser tab. Empty means the product name. With a report open, the tab shows *Report name - title*. |
+| Advanced: **Browser icon** | A separate ICO or PNG (32 × 32 or 48 × 48) for the tab. Empty means the small icon. |
 
-The screenshots below show the English editor with example values. Image previews and editable values are not proof that branding is active: check the main **Enabled / Disabled** switch and save your changes.
+Every image slot has **Upload image** and **Remove**; removing returns to the default image. A file of the wrong type or size is refused with the reason under the slot.
 
-## Enable and save
+### Where the product name appears
 
-Before editing an existing configuration, use **Export** to keep a copy of the saved settings. Export does not capture unsaved form edits.
+With branding on and a product name filled in, it replaces "Datafor" in:
 
-1. Make your changes in the relevant configuration areas. Selecting an image displays a preview; it is saved with the configuration.
-2. Turn the main switch on when you want to use the custom branding.
-3. Click **Save**. The console applies the branding at once, without reloading.
-4. Check Home and the login page, not just the settings editor.
+- the browser tab (unless **Browser title** is set), the About dialog and the sign-up page title;
+- the paginated report viewer's tab, which also takes your icon and interface font;
+- pages ordinary users meet outside the console: linking an IM account, authorizing an AI client over MCP, and the personal access token description in **My account**;
+- messages: email subjects, the footer of subscription and alert emails and IM messages, delivery channel test messages, the page that opens from an alert's *pause notifications* link, and the replies of the IM bot.
 
-| Control | Effect |
+Subscription and paginated report emails also draw their buttons in the brand color. Settings pages that only administrators see keep the name Datafor.
+
+## Sign-in page
+
+![Sign-in page section: Background color #F6F8FB, Welcome text Welcome to Northstar, Sign-in options with Single sign-on and Google sign-in on, and the Footer with copyright text and an empty second line](./images/branding-sign-in-page.png)
+
+| Setting | Notes |
 | --- | --- |
-| Main **Enabled / Disabled** switch | Chooses whether Datafor uses the custom branding. Changing the switch alone is an unsaved edit. |
-| **Save** | Saves the whole form, including changes in other configuration areas, and applies it to the console. |
+| **Background** | A **Color**, or an **Image** (JPG or PNG, 1920 × 1080 recommended, up to 2 MB) that fills the page and is cropped from the center. Keep text out of the edges of the image. |
+| **Welcome text** | The line above the sign-in form, with **Show**. |
+| **Sign-in options** | **Remember me**, **Forgot password**, **Single sign-on**, **Sign up**, **Google sign-in**. **Sign up** also opens self-registration, so turn it on only if anyone who reaches the page may create an account. The single sign-on and Google buttons appear only for methods configured under [Single Sign-On](/documentation/System/Single-Sign-On/). |
+| **Footer** | **Copyright text** (also used in the About dialog) with an optional **Footer link**, and a **Second line** with its own link, for example a website registration number. An empty second line is hidden. |
 
-Leaving the page with unsaved changes asks whether to save or discard them. **Save is not a private draft:** with branding enabled, saved changes affect every user. Use a test deployment when preparing a new design.
+**Advanced settings** cover the welcome text style, the sign-in card (width, corner radius, shadow, background, border), input boxes, the sign-in button and the footer style. Their colors follow the brand color until you change them.
 
-To stop using custom branding without clearing its values, turn the main switch off and click **Save**.
+With branding on, the sign-up and forgot-password pages use the same logo, background, card and button colors, and the sign-in page uses your browser title, interface font and brand-colored links.
 
-## Customize the login experience
+## Navigation
 
-<img src="./images/white-label-login-en.jpg" alt="Branding, Login area: Background and Card layout groups, the main switch, Export, Import and Save" />
+![Navigation colors: Light, Dark and Brand color presets and a selected Custom colors tile](./images/branding-navigation.png)
 
-Start with **Branding**: upload the login logo, set **Logo max height**, and decide whether to show a welcome message. Use **Welcome text** for a short greeting such as “Welcome to Northstar Analytics”; it is separate from the console's product name.
+**Navigation colors** sets the sidebar, top bar and search box in one click: **Light**, **Dark** or **Brand color**. After picking one you can still change single colors in **Advanced settings (18)**: sidebar background, text, group titles, selected background and text, icons, hover text, font size, and the same for the top bar and search box. Once you change one of them the tile shows **Custom colors**.
 
-The remaining groups control different parts of the page:
+A dark logo can disappear on a dark or brand-colored sidebar. Turn off **Use the same image** under **Basics** and upload a light version for the sidebar.
 
-- **Background** sets the page's image and background color. A background image fills the page and may be cropped to fit the screen, so keep essential text out of the image.
-- **Card layout** controls the login card's width, corner radius, shadow, background, and border.
-- **Inputs** controls field corners, borders, focus-ring color, and font size. Keep the focused field easy to identify.
-- **Buttons** controls the primary login button's normal and hover colors, text, corners, and font size.
-- **Google button** controls the Google login button's appearance and visibility. It does not configure the OAuth provider.
-- **Visibility** includes **Show 'Remember me'**, **Show 'Sign up'**, **Show 'Forgot password'**, and **Show SSO area**.
-- **Legal** sets the footer's **Copyright text**, **Footer link**, text color, and font size. The link is attached to the footer text; enter the intended destination, such as your company's legal page.
+## Home
 
-Only show login options that your deployment supports. The Google button requires **Show Google button** and **Show SSO area** to be on, as well as the underlying OAuth login service to be enabled. Turning on a display switch is not sufficient. Verify registration and password recovery end to end before exposing their links. See [OAuth2 Authentication](/documentation/System/OAuth2-Authentication/) for provider configuration.
+![Home section: Title Welcome back, {name}, Subtitle Sales and operations in one place, and Sample reports showing Public / Samples, 8 reports, with five cover thumbnails](./images/branding-home-section.png)
 
-### Prepare suitable images
+- **Title and subtitle** are the large heading at the top of Home and the line below it. `{name}` is replaced with the user's name. Their font sizes are under **Advanced settings**.
+- **Sample reports** shows the samples folder, how many reports it has, and the five covers Home shows. The folder itself is chosen in **System configuration**; see [Sample reports on Home](/documentation/Console/Quick-Tour-of-the-Console/#sample-reports).
 
-| Asset | Preparation guidance |
+### Cards saved in an earlier version
+
+Before 10.02, Home showed report cards configured here. If your configuration has such cards, Home keeps showing them and this section says *Home shows the n cards configured earlier*, with **Edit cards** (title, image, link, order and visibility as before) and **Move to the samples folder**.
+
+**Move to the samples folder** lists each visible card and what will happen, then:
+
+1. copies each card's report into the samples folder under the card title (a report already in the folder only gets its title and cover);
+2. makes the card image the report's cover;
+3. clears the cards and saves, so Home lists the folder from then on.
+
+Afterwards Home shows the 5 most recently modified reports instead of your manual order, reports open in a console tab, hidden cards are not moved, and the copies are not synchronized with the originals. If any card fails, the cards are kept and the failures are listed; reports already copied stay in the folder.
+
+## About and help
+
+| Setting | Notes |
 | --- | --- |
-| Login logo | Use PNG. A wide logo around **4.2:1** with a transparent background is a useful starting point; adjust **Logo max height** to fit the login card. |
-| Home page logo | Use a wide PNG, around **4.2:1**, for the expanded sidebar. |
-| Collapsed logo | Use a square PNG, around **1:1**, with a recognizable symbol rather than small text. |
-| Website icon | Use ICO at **32 × 32** or **48 × 48** pixels. Configure it under **Other**. |
-| Background and card images | Use browser-compatible images such as PNG or JPEG. Check the actual crop and readability at the intended display size. |
+| **Show help menu** | The **?** at the right of the top bar, with **Documentation** and **About**. Hiding it does not restrict anything; give users another way to reach support. |
+| **Show version in About** | The Datafor version number at the bottom of the About dialog. |
+| **Documentation address** | Opened by **Documentation** in the help menu. It points to the Datafor documentation until you change it; **Hide Documentation** removes the item. |
+| **Support email** | Shown in the About dialog; leave it empty to hide the line. It is the Datafor support address until you change it. |
 
-Keep each image **5 MB or smaller**. The image picker rejects larger files. These aspect ratios are design recommendations, not mandatory pixel dimensions.
+With branding on, the About dialog shows the product name, the footer copyright text, the support email and, if switched on, the version.
 
-Choose logo colors to contrast with the background you actually configure. A light logo is suitable for a dark sidebar, but can disappear against the default light sidebar. Avoid excessive transparent padding, which makes the visible logo look small even when the image dimensions are large.
+## Tenants
 
-## Brand the console
+A [tenant](/documentation/Multi-tenancy/Multi-tenancy/) that has never saved its own branding uses the platform's: the default tenant's whole configuration and images, including on the tenant's sign-in page. The page then says *This tenant uses the platform branding* and shows the platform values. Cards are not inherited; the tenant's Home uses its own samples folder.
 
-<img src="./images/white-label-console-en.jpg" alt="Console area: Names and Features groups" />
-
-### Logos and product copy
-
-In **Console > Branding**, set **Home page logo** for the expanded sidebar and **Collapsed logo (sidebar)** for the compact navigation. Check both states after applying.
-
-In **Names**, **Product name** replaces the large heading on Home, and **Product tagline** supplies the line below it. Their font-size controls affect those Home elements. For example:
-
-- **Product name:** `Northstar Analytics`
-- **Product tagline:** `One place to explore sales and operations`
-
-This is different from **Other > Browser title**, which controls the default browser-tab title. Changing a Home heading does not rename reports.
-
-### Primary color
-
-![The Primary color group in the Console area of Branding, with Reset to default and a color field set to eb4e40ff](./images/white-label-primary-color.png)
-
-**Primary color** (between **Features** and **Sidebar**) recolors the console's primary buttons, links, selected tabs and menu items; hover states and light backgrounds are derived from it. The default is `#1677ff`. A color with transparency (8 digits) is used without it.
-
-It covers the console pages only: Home, the content lists, **Settings**, **My account**, the users and data pages. It does not change the report editor and viewer (also embedded, shared or on phones), report content and charts, the paginated report designer and viewer, the modeler, the AI assistant panel, emails, or the login page, which has its own button colors under **Login**. Pick a color that keeps white button text readable.
-
-### Navigation and feature visibility
-
-Use **Sidebar**, **Top bar**, and **Search box** to coordinate backgrounds, text, icons, active states, and font sizes. Test a selected menu item, a hovered item, and the search placeholder as well as the normal state.
-
-For manual color entry, the field already supplies `#`. Enter hexadecimal digits, for example `1677ffff`: the final `ff` makes the color fully opaque. Click outside the field to finish editing it.
-
-**Features** has one switch: **Show help menu** controls the top-bar help menu. If you hide it, provide another route to documentation and support for your users. (*Show Start Using Module* was removed together with the Learn & resources section of Home.)
-
-Hiding a visual entry point is not an access-control rule. Manage report permissions separately through [Access Control List](/documentation/System/Access-Control-List/).
-
-## Choose the report cards shown on Home
-
-**Sample pages** configures the cards under **Home > Report templates**.
-
-<img src="./images/white-label-sample-pages-en.jpg" alt="Sample pages: cards with title, page link, visibility, image and reorder controls" />
-
-To add a useful starting point for your audience:
-
-1. Make the report available in **Public**, with the permissions its intended readers need.
-2. Open **Sample pages** and select **Add card**. The editor supports up to **10 cards**, including hidden cards.
-3. Enter a short **Title** that explains the report's purpose.
-4. Choose its **Page link** from the resource picker. The picker browses accessible resources under Public; this is not a free-text external website URL field.
-5. Upload a **Card image**. This is a thumbnail, not a live report preview; replace it when the report's appearance changes.
-6. Turn **Visible** on, and choose whether to **Open in new tab**. Use the up/down arrows to arrange the cards.
-7. Click **Save**, open Home, and test the card with a representative reader account.
-
-A card links to a resource; it does not grant permission to open the report or query its data. An administrator's successful test is not sufficient evidence that readers can use it.
-
-Turn **Visible** off to keep a card configured without showing it. The delete control removes the card configuration, not the linked report. To hide all template cards, turn their visibility off rather than deleting every card: an empty card configuration falls back to the built-in samples.
-
-## Set browser defaults
-
-<img src="./images/white-label-other-en.jpg" alt="Other area: Browser title, Interface font and Favicon" />
-
-Under **Other**:
-
-- **Browser title** sets the default tab title. When a resource is open, its own title may take precedence.
-- **Interface font** sets the font of the console and the editor, chosen from a list. It does not affect report fonts; the default font of new reports is set in [System Configuration](/documentation/System/System-Configuration/). See [Fonts](/documentation/Console/Fonts/).
-- **Favicon → Icon** replaces the browser-tab icon. Use a simple symbol that remains recognizable at browser-tab size.
+When a tenant administrator saves the page, the tenant gets its own complete copy and no longer follows the platform, even for settings it did not change. **More › Use platform branding** deletes the tenant's own settings and images and goes back to the platform branding at once.
 
 ## Reuse or restore a configuration
 
-### Export and import
+- **Export** downloads the saved configuration and images as a ZIP. Unsaved edits are not included.
+- **Import** reads the package first and shows what it replaces (*n settings, n images, n cards*); nothing changes until you confirm. Only branding packages are accepted, and unsaved edits on the page are lost. Packages exported by earlier versions can be imported.
+- **Restore all defaults** returns every setting to the default Datafor look after a confirmation; the on/off switch and the cards stay as they are. Click **Save** to apply it.
 
-Use **Export** to download the saved configuration for backup or reuse. Save intended changes before exporting them.
+For a single setting, use **Restore default** on its row.
 
-**Import** accepts a ZIP configuration package. Selecting the file starts the import immediately; it is not held as a form draft until you click Save. Export the destination's current configuration first, and import only a package you trust and intend to use there.
+### Configurations from earlier versions
 
-After a successful import, check the main enable switch, reload the console, and review all four areas. When moving between environments, confirm that linked reports exist at the expected paths and that users can access them.
+Upgrading does not change how a branded installation looks. Colors you saved keep their values and are shown as **Customized**; they do not start following the brand color. Navigation shows **Colors from the earlier configuration** as the selected preset.
 
-### Reset to default
+Settings that still hold the old version's default values are marked **Default from an earlier version**, and a banner counts them. **Review and update** lists each one with its current value and the new default; **Update** fills in the new defaults (colors then follow the brand color), and **Save** applies them.
 
-Each **Reset to default** button resets its own group of settings. For example, resetting Login **Branding** does not reset its **Background** or the Console settings. The reset changes the form first; click **Save** to keep it.
-
-Reset means “use product defaults,” not “restore my previously saved custom values.” To discard unsaved edits, leave the page and choose to discard them. To recover a previous custom design after saving changes, use your exported configuration.
+With branding on, four things do change on upgrade: the About dialog shows your copyright text, the sign-up and forgot-password pages take the sign-in page styling, the sign-in page uses your browser title, and it uses your interface font and link color.
 
 ## Check before rollout
 
-- Open the login page in a separate signed-out browser session. Check the logo, background, footer link, field focus, and button hover states.
-- Check Home, then expand and collapse the sidebar. Confirm that the logos and active-menu text remain readable.
-- With a custom **Primary color**, check a primary button, a link and a selected tab in **Settings**. Reports keep their own colors.
-- Verify the Home heading, browser title, help menu and report cards independently.
-- Open each visible card as an intended reader, including any required report filters or data-access restrictions.
-- Test a narrower window and a second browser or device for clipping, font fallback, and unreadable text.
+- Open the sign-in page in a private window: logo, background, footer link, focus and hover states.
+- Expand and collapse the sidebar; check a selected and a hovered menu item.
+- Open the About dialog and the help menu.
+- Send yourself a test from a [delivery channel](/documentation/Subscriptions-and-Alerts/Delivery-Channels/) or a subscription to see the email with your name and button color.
+- In a multi-tenant installation, open a tenant that has no branding of its own.
 
-If saved branding does not appear, first confirm that the main switch is **Enabled**, then reload the affected page. If only an image or favicon is stale, test in a fresh browser session to distinguish cached assets from an incorrect configuration. If a selected image never appears in the editor, check its format and file size.
-
-For embedding and authentication, continue with [SDK Embedding](/documentation/Embedded/SDK-Embedding/) and [SSO for Embedded Analytics](/documentation/Embedded/Signing-In-Users/). Branding changes the surrounding experience; embedding, authentication, and permissions still need their own configuration.
-
+Branding changes the surroundings of reports only. Report colors and fonts are set per report and in [System Configuration](/documentation/System/System-Configuration/); embedding and sign-in need their own setup, see [SDK Embedding](/documentation/Embedded/SDK-Embedding/) and [SSO for Embedded Analytics](/documentation/Embedded/Signing-In-Users/).

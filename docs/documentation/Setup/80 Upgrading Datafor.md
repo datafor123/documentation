@@ -82,6 +82,8 @@ When you upgrade to 10.02, also do the following. If you come from an earlier ve
 - **File datasets.** Seeing the uploads, original files and table previews of a file dataset now needs **Edit** on it. Give Edit to the people who maintain a dataset's files; Read still lets people build models and reports on it.
 - **Mapbox maps.** Click **Clear geocoding cache** on the Mapbox card under **Settings › Data › Maps**. See [GIS Map Settings](/documentation/Visualization/GIS-Map-Settings/#geocoding-and-its-cache).
 - **Cookies.** Set `session-expired-dialog` to `false` in `pentaho-solutions/system/pentaho.xml` so that the `session-expiry` and `server-time` cookies are no longer sent.
+- **Branding.** If you use branding, open **Settings › General › Branding**: settings still on the old version's defaults are marked, and **Review and update** moves them to the current look and to the brand color. Fill in **Product name**, **Documentation address** and **Support email** if they should not say Datafor. In a multi-tenant installation, tenants without branding of their own now show the default tenant's; see [Branding › Tenants](/documentation/Console/Branding/#tenants).
+- **Home sample reports.** Home keeps the samples it showed before. To list your own reports, create a folder under **Public** with read-only access for readers and choose it in **Settings › General › System configuration › Home page**; dashboard covers need the render service. See [Sample reports](/documentation/Console/Quick-Tour-of-the-Console/#sample-reports).
 
 ## 5. Steps for 10.01
 
@@ -116,6 +118,6 @@ When you upgrade to 10.00, also do the following. The full list of changes is in
 3. Run `curl -i http://127.0.0.1:28081/ai/health` on the server. `HTTP/1.1 200` means the AI Agent is ready; a `503` body names the cause. Run `curl http://127.0.0.1:38082/health` for the render service; it answers `"ok":true`. Then send yourself a test of a dashboard subscription (**Subscribe › Send me a test**) and check that it has a screenshot.
 4. Open **AI Agent › LLM** and check that **Assignments** shows **16/16 assigned**.
 5. If **Dashboard Review**, **Model Brief** or **Question Suggestions** has no assignment of its own, try that feature as a user who is not an administrator. A model error there points to the shared secret.
-6. Behind Nginx, ask a question in the AI Assistant and check that the progress title moves through several stages ([Deploying Datafor Behind Nginx](/documentation/Setup/Deploying-Datafor-Behind-Nginx/#_4-enable-and-verify-the-nginx-configuration)).
+6. Behind Nginx, ask a question in the AI Agent and check that the progress title moves through several stages ([Deploying Datafor Behind Nginx](/documentation/Setup/Deploying-Datafor-Behind-Nginx/#_4-enable-and-verify-the-nginx-configuration)).
 7. Open **Settings › AI Agent › Knowledge indexes** and check that the builds succeed.
 8. Create a new backup.

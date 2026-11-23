@@ -1,7 +1,7 @@
 ---
 title: Tables and Crosstabs
 permalink: /documentation/Paginated-Reports/Tables-and-Crosstabs/
-description: Columns, groups, subtotals and grand totals of a table; rows, columns, measures and totals of a crosstab; how totals are calculated, especially "By model"; conditional formats; and the table style templates.
+description: Columns, groups, subtotals and grand totals of a table; parent-child tables for balance sheets and other indented statements, including the account form; rows, columns, measures and totals of a crosstab; how totals are calculated, especially "By model"; conditional formats; and the table style templates.
 createTime: 2026/10/28 10:00:00
 ---
 
@@ -66,6 +66,75 @@ Use **By model** for measures that cannot be added up: averages, distinct counts
 
 Conditional formats belong to a column: select the column and click **+** next to **Conditional formats**. A rule colours the column's cells by value: choose a condition (**Less than**, **Less or equal**, **Greater than**, **Greater or equal**, **Equals**, **Not equals**, **Between**, **In**, **Contains**, **Is empty**), the value(s) and the look: text colour, background, bold, italic, with presets such as *Red text* or *Light green fill*. Rules apply to detail cells; the first matching rule wins.
 
+## Parent-child table
+
+A table can arrange its rows as a tree instead of groups: each row has its own ID and the ID of its parent, rows are indented under their parents, and parents are totalled from the rows below them. This is how balance sheets, cash flow statements, income statements with intermediate totals, organization lists and bills of materials are laid out, with branches of different depths in one indented column.
+
+![Balance Sheet in the designer: Assets, Current Assets and Non-current Assets indented, Total Current Assets and Total Assets rows; the table's Data tab on the right with the Parent-child hierarchy section](./images/designer-tree-table.png)
+
+### Set it up
+
+The quickest way is the wizard's **Parent-child** layout (see [Creating a Paginated Report](/documentation/Paginated-Reports/Creating-a-Paginated-Report/#build-the-first-table-with-the-wizard)). On an existing table, select it and tick **Data › Parent-child hierarchy › Arrange rows as a parent-child hierarchy**; the node and parent fields are filled in when their names make them obvious (for example *item_id* and *parent_id*). Groups and a parent-child hierarchy cannot be combined; remove the groups first.
+
+<img src="./images/designer-tree-panel.png" alt="Parent-child hierarchy settings: Structure dataset ds2, node and parent fields in the structure, Order of siblings Line No, ID field in the table's dataset, Totals On a separate row after the children, Total row label Total {name}, Indent per level 5 mm, Show levels down to All, and Side by side (account form)" width="300" align="right" />
+
+| Setting | Notes |
+| --- | --- |
+| **Node field** | The ID of each row, for example the account code. |
+| **Parent field** | The ID of the row's parent, in the same numbering as the node field. A row whose parent is empty, or not in the data, goes to the top level. |
+| **Order of siblings** | A field to sort children of the same parent by, such as a line number, or **Dataset order**. |
+| **Totals** | **On a separate row after the children** (default), **On the parent row**, or **No totals**. |
+| **Total row label**, **Top-level total row label** | Text of the total rows; `{name}` is the parent's name, so `Total {name}` prints *Total Current Assets*. The default follows the report language. |
+| **Indent per level** | Millimetres per level in the first column; default 5. |
+| **Show levels down to** | Print only the top levels, for a summary version. Deeper rows are not printed but are still added into the totals. |
+| **Structure dataset** | Where the tree comes from when parents have no data rows of their own; see below. |
+
+Both ID fields are compared by value. In a model, use levels without a separate display name for them and add the name as its own column; a level that shows display names returns the names, not the codes. When rows cannot be placed under their parent, a note above the canvas and under the parent field says so, for example *17 rows have parents (A1, A2, L1…) that are not in the data and are placed at the top level*.
+
+<br clear="all" />
+
+### Columns and totals
+
+The first column is indented by level; other columns are not. A column's **Total** decides what parent and total rows show:
+
+| Total | Parent or total row shows |
+| --- | --- |
+| **Sum**, **Count**, **Average**, **Min**, **Max** | The aggregate over all **lowest-level** rows below it. A value stored on the parent row itself is ignored. |
+| **None** | The parent row's own value. Use it when the data already stores totals on the parent items. |
+| **By model** | Left empty. |
+
+A ratio column, such as a change in percent, therefore needs **None** and a value for each row in the data. A text placeholder such as `{=Sum(amount)}` adds up every row of the dataset, so do not use it for a figure the table already totals.
+
+Parent rows use the **Group header row** style of the [table style](#table-style), total rows the **Subtotal** style and the top-level total the **Total** style, so templates and accent colours apply as usual.
+
+### When parents have no data: the structure dataset
+
+![A structure dataset lists every account with ID, parent and name; the table's dataset has balances for the lowest accounts only; the printed table takes the tree from the structure, matches the balances by ID and adds Total Current Assets 1,490, Total Non-current Assets 800 and Total Assets 2,290](./images/parent-child-structure.svg)
+
+A general ledger has balances only for the lowest accounts. A model dataset returns only rows with data, so *Current Assets* or *Assets* never appear and every balance lands at the top level. Add a **structure dataset**: a second dataset that lists every node with its ID, parent and name. The tree is taken from it, and the table's rows are matched to it by ID.
+
+- In **Structure dataset**, choose **New from the same model**, or click **New structure dataset from the same model** under the note. The designer adds a dataset on the same model with only the hierarchy levels and no measures, and fills in **Node field in the structure**, **Parent field in the structure** and **ID field in the table's dataset**. For an SQL dataset, first add an SQL dataset that returns IDs, parents and names with **+** next to **Datasets**, then choose it here.
+- In the model, put ID, parent ID, name and line number in **one** multi-level hierarchy. Separate attribute hierarchies are joined through the fact table, which drops the parents without data again.
+- Columns can also take fields of the structure dataset, such as the name: **+** next to **Columns** › **Add a field of the structure dataset**.
+- Rows of the table's dataset whose ID is not in the structure are not printed, and a note says how many.
+
+### Account form: side by side
+
+**Side by side (account form)** puts some top-level nodes on the left and the rest on the right: the statutory layout of a balance sheet, with assets on the left and liabilities and equity on the right. The halves are aligned so that both totals land on the same last row.
+
+![Balance sheet in account form in the viewer: Assets on the left, Liabilities and Equity on the right, Total Assets and Total Liabilities and Equity both 3,010,284 on the last row](./images/tree-account-form-viewer.png)
+
+- **Top-level IDs on the right**: the IDs of the top-level nodes for the right half, separated by commas. Empty means the second half of the top-level nodes.
+- **Gap between the halves** in millimetres; default 6.
+- The columns are printed twice, so their widths count twice against the usable page width. Use landscape paper; the wizard switches to it when you tick the option there.
+- There is no grand total row in this layout.
+
+### What the canvas and exports show
+
+The canvas draws the real tree from the first 60 rows, with the parameters' default values, and redraws half a second after you change a setting. On a parent-child table, column headers on the canvas can be selected but not dragged, resized or renamed; use the property panel. PDF, HTML and the formatted Excel export keep the indentation (Excel as cell indent levels). The CSV and flat Excel exports write the rows in tree order with an extra **Level** column and no indentation in the names.
+
+The *Halden Group - Balance Sheet* samples in **Public › Samples › Paginated Reports** show both layouts with a structure dataset.
+
 ## Crosstab
 
 ![Crosstab in the viewer: regions on rows, quarters on columns, Net Sales and GM % per cell, subtotal and total columns and a total row](./images/viewer-crosstab.png)
@@ -74,7 +143,7 @@ A crosstab has **Row dimensions**, **Column dimensions** and **Measures**. Drop 
 
 | Setting | Notes |
 | --- | --- |
-| **Total** on a row or column dimension | Adds a *Total* row or column for that level; inner levels get *Subtotal*. With several row dimensions, the total label spans all inner row header columns. |
+| **Total** on a row or column dimension | Adds a *Total* row or column for that level; inner levels get *Subtotal*. With several row dimensions, the total label spans all inner row header columns. Total rows of the outermost row dimension use the **Total** style, those of inner levels the **Subtotal** style, as in tables. |
 | **Aggregate** of a measure | Sum, Count, Average, Min, Max or **By model**, with the same meaning as for table columns. Totals of ratios should be **By model**. |
 | **Format** of a measure | Number pattern. |
 | **Row header width** (mm), **Cell width** (mm) | On the **Style** tab. The canvas draws the crosstab at these widths. |

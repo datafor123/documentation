@@ -16,7 +16,7 @@ A subscription sends one dashboard on a schedule. Each person receives a copy re
 3. Check **Name**, **Send to**, **When** and **Data**, add channels if needed, and open **More settings** for the outputs.
 4. Click **Send me a test** to see the result in your own inbox or IM, then **Save**.
 
-If you cannot access the data the dashboard uses, a warning at the top of the editor names the models: *You do not have access to the data this report uses (…), so what you receive will be empty or say "no permission".* When only some components are affected, the warning says so: those components show *no permission* in what you receive and the rest are delivered as usual. When an administrator edits someone else's subscription, the warning names the owner instead, because the owner's permissions decide what channels receive. Ask for access before relying on the subscription.
+What you receive is what the dashboard shows you: a component you have no data permission for shows *no permission* in the delivered copy too, as it does on screen. The editor no longer checks model permissions beforehand; check the dashboard while signed in as the owner of the subscription.
 
 **Opened from the AI assistant.** When you click **Create** on the assistant's suggestion card, the top of the editor repeats the suggestion, for example *AI assistant's suggestion: Send this dashboard every Monday at 08:00. Any filter it mentions is not applied for you; check Data before saving.* **Data** is marked **Check this** until you change it. Set the filters yourself: the editor starts from the report's defaults, not from what the sentence says. When the report has no filters to change, the note says the subscription sends the report's default data.
 

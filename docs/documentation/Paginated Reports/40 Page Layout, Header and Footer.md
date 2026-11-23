@@ -59,6 +59,14 @@ PDF and HTML behave differently:
 - **In the viewer and HTML**, the browser substitutes glyphs the chosen font lacks, so any font looks right.
 - **In PDF**, each element is drawn with one embedded font. A Latin font such as Arial has no Chinese glyphs, so Chinese text in an Arial element would be lost; the server therefore falls back to an installed CJK font (PingFang, Microsoft YaHei, Hiragino, Noto Sans CJK, SimHei, WenQuanYi, SimSun, in that order) whenever the chosen font is not installed on the server, and keeps the PDF base fonts Helvetica, Times and Courier as they are. If the server has no CJK font at all, Chinese text is written in the standard PDF font STSong-Light, which is not embedded: PDF readers (Acrobat, Chrome, Edge, macOS Preview) display it with their own Song font, and Latin text in those elements is set in fixed-width half-width characters. For PDFs that look the same everywhere, an administrator can install a CJK font such as Noto Sans CJK on the server or put its TTF file into `pentaho-solutions/system/datafor-pagereport/fonts` and restart. For reports with Chinese or Japanese text, keep the default font or pick a CJK font.
 
+Since 10.02, when a Latin font such as Arial is chosen and installed:
+
+- **Fixed text is switched automatically.** Labels, text blocks after their parameters are filled in, header and footer text, group titles, subtotal and total labels and the no-data message are checked one by one. An element containing characters the font cannot draw is set in an installed Chinese font of the same kind (a Song-style font for serif fonts, a sans-serif one otherwise); every other element keeps your font. So a Chinese title, or a filter summary that shows Chinese member names, no longer loses characters in PDF.
+- **Data is not.** Table and crosstab cells and the results of `{=…}` expressions are only known when the report runs. Chinese data in a column set in Arial is still lost in PDF; choose a font with Chinese glyphs for such columns.
+- The font lists in the designer mark fonts that have no Chinese glyphs with *no Chinese glyphs*, and choosing one shows a reminder.
+
+The words the engine adds itself (filter summary, *All*, *Subtotal*, *Total*) follow **Report properties › Report language**. Setting it to English keeps an English report in English when someone with a Chinese interface exports it; see [Report properties](/documentation/Paginated-Reports/Creating-a-Paginated-Report/#report-properties).
+
 The font list in the designer is the same list the dashboard editor offers, including Chinese and Japanese fonts in those interface languages.
 
 ## Parameter panel position

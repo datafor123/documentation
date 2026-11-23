@@ -40,7 +40,7 @@ The Agent is not an automatic monitoring or report-writing tool, and it is not a
 
 | To | See |
 | --- | --- |
-| Ask questions in the portal: model selection, change breakdowns, multi-step analyses, clarifications, views, export and **Add to page** | [AI Assistant](/documentation/AI-Agent/AI-Chat/) |
+| Ask questions in the portal: model selection, change breakdowns, multi-step analyses, clarifications, views, export and **Add to page** | [AI Agent](/documentation/AI-Agent/AI-Chat/) |
 | Explain the data on a dashboard or report page | [AI Insight Component](/documentation/AI-Agent/Insight-Component/) |
 | Ask Datafor from Claude Desktop, Claude Code, Codex and other MCP clients | [Connect AI Clients](/documentation/AI-Agent/Connect-AI-Clients/) |
 | Turn the AI Agent on and give users access | [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/) |
@@ -59,7 +59,7 @@ All entry points use the same permissions, the same governed queries and the sam
 
 From top to bottom, these are the layers a question passes through:
 
-1. **Entry points**: the AI Assistant in the portal, dashboard AI insight, embedded applications, and AI clients. Behind all four is the same Agent.
+1. **Entry points**: the AI Agent in the portal, dashboard AI insight, embedded applications, and AI clients. Behind all four is the same Agent.
 2. **AI Agent (understand, plan, explain)**: the layer where the large language model works. It understands the question, picks the data model when you have not chosen one, matches your words to the model's metrics, dimensions and member values, decides between one query and a few steps, and, once the results are back, writes the insights, marks the evidence and limits, and suggests follow-up questions. The LLM service is external and chosen by your administrator.
 3. **Governed boundary**: the AI only proposes a structured query intent; it never writes SQL or MDX. The metadata it sees is already filtered by your permissions, and Datafor compiles, validates and executes the query. However capable the AI is, it cannot step over your permissions or change how the data is calculated.
 4. **Datafor BI platform**: the semantic model, permissions, the query engine, the Metrics Library, dashboards and reports.
@@ -90,7 +90,7 @@ To save you from trying the same thing repeatedly, here is what the Agent cannot
 | Attribution and causation | Change questions get a contribution breakdown across up to three dimensions, plus factor splits for declared ratio and difference metrics. Contributions are not causes, and causes outside the data are not claimed. | Name the dimensions or the factors you want in the question |
 | Ratios without a declared numerator and denominator (for example a formula with `*100` or a function) | Period comparisons and decompositions of such a ratio may be partial | Ask the model author to write the ratio as numerator / denominator; see [Write ratios as numerator and denominator](/documentation/Model/Business-Semantics-for-AI/#write-ratios-as-numerator-and-denominator) |
 | Several data models at once | One conversation works on one data model; the model can be picked automatically from the question | Change the model in the selector or start **New Chat** |
-| Long multi-step analyses | Query steps stop at the time limit (180 seconds in the AI Assistant); finished steps are returned as a partial answer | Ask a narrower question, or one dimension at a time |
+| Long multi-step analyses | Query steps stop at the time limit (180 seconds in the AI Agent); finished steps are returned as a partial answer | Ask a narrower question, or one dimension at a time |
 | Problems in the data itself | The Agent does not correct, fill in or redefine data | Follow your data governance process |
 | Very complex combined questions | The Agent may suggest splitting the question in two | Doing so usually gets the answer |
 

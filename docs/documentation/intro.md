@@ -32,7 +32,7 @@ Datafor is a business intelligence platform: connect databases, describe them on
 | Let readers filter | [Filters](/documentation/Visualization/Filters/) |
 | Format numbers, colours and tooltips | [Display Units](/documentation/Visualization/Display-Units/), [Colors](/documentation/Visualization/Colors/), [Conditional Formatting](/documentation/Visualization/Conditional-Colors/) |
 | Explore: drill, cross-filter, view details | [Exploratory Analysis](/documentation/Analysis/Exploratory-Analysis/) |
-| Ask questions in plain language | [AI Assistant](/documentation/AI-Agent/AI-Chat/) |
+| Ask questions in plain language | [AI Agent](/documentation/AI-Agent/AI-Chat/) |
 | Export or share | [Export](/documentation/Visualization/Export/), [Share Link](/documentation/Embedded/Share-link/) |
 | Print, export or email a paged report | [Understanding Paginated Reports](/documentation/Paginated-Reports/Understanding-Paginated-Reports/), [Paginated Report Subscriptions](/documentation/Paginated-Reports/Subscriptions/) |
 | Send a dashboard on a schedule, or get told when a number crosses a line | [Understanding Subscriptions and Alerts](/documentation/Subscriptions-and-Alerts/Understanding-Subscriptions-and-Alerts/), [Metric Alerts](/documentation/Subscriptions-and-Alerts/Metric-Alerts/) |

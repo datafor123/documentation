@@ -8,7 +8,7 @@ createTime: 2026/09/07 15:40:00
 
 Datafor serves the console, reports, and the AI Agent from its built-in Tomcat server on port **28080** over plain HTTP. In production you usually place **Nginx** in front of it to terminate HTTPS, publish a friendly host name, and keep the internal ports off the network. This guide provides a complete Nginx configuration, explains the settings Datafor depends on, and shows how to verify the result.
 
-One setting deserves special attention: the AI Assistant reports its progress through a long-lived streaming response. If Nginx buffers that response, the progress title stays at **Understanding your question** and the whole answer appears at once when the analysis ends. Section 2 shows how to keep the stream real time.
+One setting deserves special attention: the AI Agent reports its progress through a long-lived streaming response. If Nginx buffers that response, the progress title stays at **Understanding your question** and the whole answer appears at once when the analysis ends. Section 2 shows how to keep the stream real time.
 
 The examples use the host name `bi.example.com`, a Datafor server on the same machine as Nginx, and Nginx 1.18 or later. Replace the host name, certificate paths, and addresses with your own values.
 
@@ -122,7 +122,7 @@ If you cannot use HTTPS yet, keep a single `server { listen 80; ... }` block wit
 
 ### Why the AI Agent location is special
 
-The AI Assistant shows what it is doing stage by stage: **Understanding question**, **Generate query model**, **Validate query**, **Executing query**, **Generating insight**, and so on. These updates travel over one long-lived HTTP response, a Server-Sent Events stream at `/datafor/ai/api/v2/runs/<run-id>/events/stream`, and each stage is sent as soon as it finishes.
+The AI Agent shows what it is doing stage by stage: **Understanding question**, **Generate query model**, **Validate query**, **Executing query**, **Generating insight**, and so on. These updates travel over one long-lived HTTP response, a Server-Sent Events stream at `/datafor/ai/api/v2/runs/<run-id>/events/stream`, and each stage is sent as soon as it finishes.
 
 By default Nginx **buffers** responses from the upstream server (`proxy_buffering on`). It forwards data to the browser only when a buffer fills up or the response ends. A progress stream is small and stays open for the whole analysis, so with buffering enabled the browser receives nothing until the analysis is complete. The stage title remains **Understanding your question** for the entire wait, and the result appears all at once.
 
@@ -207,7 +207,7 @@ Then verify each part of the deployment:
 Go to **Settings › AI Agent › AI service** (see [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/)).
 
 - If **Public URL** is empty, browsers use **Site URL** followed by `ai`, for example `https://bi.example.com/datafor/ai`. Nothing needs to change once **Site URL** is set as in section 3.2.
-- If it is set explicitly, it must be the public HTTPS address, for example `https://bi.example.com/datafor/ai`. Browsers block an `http://` address on an HTTPS page as mixed content, and the AI Assistant will not load.
+- If it is set explicitly, it must be the public HTTPS address, for example `https://bi.example.com/datafor/ai`. Browsers block an `http://` address on an HTTPS page as mixed content, and the AI Agent will not load.
 - **Internal URL** is used by the Datafor backend only and does not go through Nginx. Leave it as configured.
 
 ## 6. Restrict direct access to the internal ports
@@ -218,7 +218,7 @@ Once Nginx is in place, allow port 28080 only from the Nginx host, or only on th
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
-| The AI Assistant shows **Understanding your question** until the complete answer appears at once. | The progress stream is buffered by Nginx or by another proxy layer. | Confirm that the `location ^~ /datafor/ai/` block with `proxy_buffering off` and `gzip off` is present and loaded (`nginx -T` prints the active configuration). Check every proxy, WAF, CDN, or load balancer in front of Datafor. |
+| The AI Agent shows **Understanding your question** until the complete answer appears at once. | The progress stream is buffered by Nginx or by another proxy layer. | Confirm that the `location ^~ /datafor/ai/` block with `proxy_buffering off` and `gzip off` is present and loaded (`nginx -T` prints the active configuration). Check every proxy, WAF, CDN, or load balancer in front of Datafor. |
 | AI answers stop with a connection error after about a minute. | `proxy_read_timeout` is too short for the AI Agent location. | Set `proxy_read_timeout 3600s` inside `location ^~ /datafor/ai/`. |
 | `502 Bad Gateway`, and the Nginx error log says `upstream sent too big header`. | The response headers exceed the proxy buffer size. | Set `proxy_buffer_size 64k` and `proxy_buffers 8 64k` as in the example. |
 | `400 Request Header Or Cookie Too Large`. | The request headers exceed the client header buffers. | Set `large_client_header_buffers 4 64k`. |
@@ -235,6 +235,6 @@ Once Nginx is in place, allow port 28080 only from the Nginx host, or only on th
 - [Installation (Windows)](/documentation/Setup/Installation-windows/)
 - [Deploying Datafor Using Docker](/documentation/Setup/Deploying-Datafor-Using-Docker/)
 - [How to Enable the AI Feature](/documentation/AI-Agent/AI-Feature/)
-- [AI Assistant](/documentation/AI-Agent/AI-Chat/)
+- [AI Agent](/documentation/AI-Agent/AI-Chat/)
 - [Managing High Concurrency](/documentation/AI-Agent/Managing-High-Concurrency/)
 - [File Dataset](/documentation/Datasource/File-Dataset/)

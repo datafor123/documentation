@@ -1,7 +1,7 @@
 ---
 title: System Configuration
 permalink: /documentation/System/System-Configuration/
-description: The platform and tenant time zones, tenant-wide defaults for reports and models, query and refresh limits and the first day of the week.
+description: The platform and tenant time zones, tenant-wide defaults for reports and models, query and refresh limits, the first day of the week and the samples folder shown on Home.
 createTime: 2026/10/09 17:30:00
 ---
 
@@ -32,7 +32,7 @@ There are two levels. In the default tenant the row is called **Platform time zo
 
 Pick the zone your business days are counted in. Only region names such as *Asia/Shanghai*, *Europe/Berlin* or *America/New_York*, and *UTC*, are offered: they carry daylight saving rules, which a fixed offset such as UTC+08:00 does not. Type in the list to search; the search matches the text shown, so typing *Same* finds the follow option again after you picked a zone.
 
-The row has its own **Save** button, which appears once you change the value. After a change, the next run times of the affected tenants' subscriptions and alerts are rearranged within about 30 seconds, and their audit statistics are summarized again, which can take a while on a large log. Other tenants are not touched. A change is recorded in the audit log as **Edit system settings**.
+A time zone change is saved with the other settings on the page. After a change, the next run times of the affected tenants' subscriptions and alerts are rearranged within about 30 seconds, and their audit statistics are summarized again, which can take a while on a large log. Other tenants are not touched. A change is recorded in the audit log as **Edit system settings**.
 
 ## Settings
 
@@ -56,12 +56,20 @@ Query timeout and concurrency are on the [Query engine](/documentation/System/Qu
 
 The **Auto-build knowledge index** switch, here until 10.02, is now at the top of **Settings › AI Agent › Knowledge indexes**; see [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
 
+## Home page
+
+![Home page section: Samples folder set to /public/Samples, with its description and Using defaults](./images/settings-sysconfig-samples-folder.png)
+
+**Samples folder** is the folder whose reports Home lists under **Sample reports**: the five most recently modified reports placed directly in it, and **View all** opens it. The default is **Public › Samples**; the picker offers only folders under **Public**, and saving checks that the folder exists. The change shows after users refresh Home. How the list and the covers are made is described in [Sample reports](/documentation/Console/Quick-Tour-of-the-Console/#sample-reports).
+
+The folder's permissions are yours to set: everyone who can read a report in it sees it on Home, together with its cover. Give readers read-only access so that a reader who opens a sample and saves it does not change it for everyone.
+
 ## Working on the page
 
 - **Search settings** filters the rows by name and description.
 - Each row shows **Using defaults** or **Custom**; a changed row shows its default and **Restore default**.
-- **Save** sends only the changed settings; **Discard changes** drops them. Leaving the page with unsaved changes asks **Keep editing**, **Discard changes** or **Save and leave**.
-- If another administrator saved in the meantime, nothing is overwritten: the latest values are loaded with your edits kept, and you review them before saving again.
+- Once you change something, a bar at the bottom counts the changes (*n unsaved changes*) and offers **View changes** (each setting's old and new value), **Discard** and **Save**. Setting a value back to what it was removes it from the count. **Save** sends only the changed settings, the time zone included. Leaving the page, or closing or reloading the browser tab, with unsaved changes asks first.
+- Two administrators can save at the same time without overwriting each other's settings; if both change the same setting, the later save wins. After saving, the page shows the latest values, including other administrators' changes.
 - Every saved change is recorded in the [Audit Log](/documentation/System/Audit-Log/) as **Edit system settings**, with its old and new value.
 
 Settings are stored per tenant.

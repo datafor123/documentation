@@ -156,7 +156,9 @@ Text blocks and header or footer text can show parameter values and totals. **In
 | `{=Now()}` | Date and time of rendering, `yyyy-MM-dd HH:mm`. |
 | `{=Format(Sum(amount), "#,##0.00")}` | A formatted value; `If(cond, a, b)`, `Param("name")`, `Field("name")`, `User()` are also available. |
 
-A lone total is shown as `#,##0.##` and a lone `Now()` as `yyyy-MM-dd HH:mm`; use `Format()` for anything else. An expression that does not parse is reported by validation and printed as written. Field names are written as they appear in the dataset, without brackets.
+A lone total is shown as `#,##0.##` and a lone `Now()` as `yyyy-MM-dd HH:mm`; use `Format()` for anything else. An expression that does not parse is reported by validation and printed as written. Field names are written as they appear in the dataset, without brackets or quotes, including names with spaces or non-Latin characters: `{=Sum(Net Sales)}`, `Field(Store Name)`. A name may not contain brackets, commas or quotes.
+
+An expression that fails while the report runs, such as a division by zero or a value of the wrong type, prints nothing for that `{=…}` part; the rest of the text and other expressions in it are printed as usual. Before 10.02 the whole line showed an error such as `LibFormulaErrorValue{…}`. To print something else, test the case yourself: `{=If(Sum(sales_ly) > 0, Format(Sum(sales) / Sum(sales_ly) - 1, "+0.0%"), "n/a")}`.
 
 ## Parameters from outside the viewer
 

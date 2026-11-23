@@ -33,7 +33,7 @@ If your organization has registered enterprise metrics in Metrics Library (for e
 - "How is net sales defined?" returns the business definition, its caveats, unit, and direction from Metrics Library, and says which model currently implements it. No query is executed. If the answer contains a business definition and an owner, the term is registered.
 - When one word matches two metrics (for example **Profit Rate** as a synonym of both **Gross Margin Rate** and **Contribution Margin Rate**), the Agent lists the candidates and asks you to choose. It never picks one silently.
 
-With **Auto-select model**, the metric name also picks the model: the answer card says "Basis: the governed metric … is bound to this model." See [AI Assistant](/documentation/AI-Agent/AI-Chat/).
+With **Auto-select model**, the metric name also picks the model: the answer card says "Basis: the governed metric … is bound to this model." See [AI Agent](/documentation/AI-Agent/AI-Chat/).
 
 ### 1.2 Read the governance notes in an answer
 
@@ -123,7 +123,7 @@ Metrics Library changes reach the Agent within about a minute; no index rebuild 
 
 ## 4. If you administer the platform: the knowledge index
 
-Without an index the Agent still answers, but noticeably worse: recognition of business terms, near-synonyms, and member values drops sharply, and the chat page shows **Vector index is temporarily unavailable** at the top (the AI Assistant still uses the old term). Indexes are built or updated automatically when models are saved, as long as **Auto-build knowledge index** at the top of **Settings › AI Agent › Knowledge indexes** stays on (the default). Your part is to watch **Settings › AI Agent › Knowledge indexes** for failed builds, to run **Prep data for AI** for models that have no index yet, and to add a refresh schedule where member values change often. Details: [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
+Without an index the Agent still answers, but noticeably worse: recognition of business terms, near-synonyms, and member values drops sharply, and the chat page shows **Vector index is temporarily unavailable** at the top (the AI Agent still uses the old term). Indexes are built or updated automatically when models are saved, as long as **Auto-build knowledge index** at the top of **Settings › AI Agent › Knowledge indexes** stays on (the default). Your part is to watch **Settings › AI Agent › Knowledge indexes** for failed builds, to run **Prep data for AI** for models that have no index yet, and to add a refresh schedule where member values change often. Details: [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/).
 
 One reminder: **after changing the embedding model, click Rebuild index for every index.** The old index was built with the old model and cannot be used with the new one.
 
@@ -169,7 +169,7 @@ Ongoing maintenance is one task: keep adding the new wordings that show up in us
 
 ## Related topics
 
-- [AI Assistant](/documentation/AI-Agent/AI-Chat/)
+- [AI Agent](/documentation/AI-Agent/AI-Chat/)
 - [Preparing Data for AI](/documentation/AI-Agent/Preparing-Data-for-AI/)
 - [Business Semantics for AI](/documentation/Model/Business-Semantics-for-AI/)
 - [Time Semantics and Default Time Settings](/documentation/Model/Time-Dimensions-and-Time-Intelligence/)

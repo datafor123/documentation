@@ -18,6 +18,7 @@ Assist components add titles, explanations, decoration and navigation to a repor
 | [Image](/documentation/Visualization/Image/) | Logos and fixed pictures | 240 × 160 |
 | [Icon](/documentation/Visualization/Icon/) | Font icons or an uploaded SVG | 64 × 64 |
 | [Shape](/documentation/Visualization/Shapes/) | Rectangles, lines, arrows, callouts and more, with text | 160 × 100 |
+| [Line](/documentation/Visualization/Shapes/#connectors) | A Shape that starts as a horizontal line; change its type for an arrow, an elbow connector or a fork connector | 200 × 12 |
 | [Action button](/documentation/Visualization/Action-Button/) | Navigation and actions such as reset filters | 120 × 36 |
 | [Web page](/documentation/Visualization/Web-Page/) | An embedded web page | 480 × 300 |
 | [AI insight](/documentation/AI-Agent/Insight-Component/) | One click opens an automatic reading of the data | 400 × 240 |
@@ -43,4 +44,4 @@ Assist components add titles, explanations, decoration and navigation to a repor
 | Insight | **AI insight** |
 | Image (in Charts) | **Dynamic image** (Charts → Other) |
 
-Old Rectangle, Line, Ellipse, SVG and Data button components in existing reports still work. They are no longer in the palette; a Rectangle, Line or Ellipse can be converted with **Style → Shape → Convert to shape**, and a Data button without data binding with **Style → Content → Convert to Action button**.
+Old Rectangle, Line, Ellipse, SVG and Data button components in existing reports still work. They are no longer in the palette (the **Line** entry now creates a Shape); a Rectangle, Line or Ellipse can be converted with **Style → Shape → Convert to shape**, and a Data button without data binding with **Style → Content → Convert to Action button**.

@@ -98,7 +98,7 @@ For example, many users reading previous answers can place less analysis load on
 
 Increasing `LIMIT_CONCURRENCY` does not add analysis workers: it controls HTTP concurrency. Changing an LLM profile parameter also does not change the number of dispatch processes.
 
-**Time limit of multi-step analyses.** The query steps of one multi-step analysis have a time limit per channel: 180 seconds for the AI Assistant and embedded applications, 120 seconds for MCP clients that request the full analysis. At the limit, finished steps are returned as a partial answer. The defaults rarely need changing. To change them, add this line to the same `.env` file and run `restart agent`:
+**Time limit of multi-step analyses.** The query steps of one multi-step analysis have a time limit per channel: 180 seconds for the AI Agent and embedded applications, 120 seconds for MCP clients that request the full analysis. At the limit, finished steps are returned as a partial answer. The defaults rarely need changing. To change them, add this line to the same `.env` file and run `restart agent`:
 
 ```dotenv
 AGENT_VNEXT_INVESTIGATION_EVIDENCE_DEADLINE_SECONDS=ui=180,embed=180,mcp=120

@@ -109,6 +109,6 @@ On the China map the South China Sea islands are drawn at a smaller scale in a f
 
 ## Drill down and switching
 
-- [Drill down](/documentation/Analysis/Drill-down/) from a region to its sub-regions needs a sub-map for that region in the GeoJSON Map tool. Without one the map shows *No GeoJSON map available for this region*.
+- [Drill down](/documentation/Analysis/Drill-down/) from a region to its sub-regions needs a sub-map for that region in the GeoJSON Map tool. Clicking a region that has no sub-map, or a point outside the map's regions, does not drill: it acts as an ordinary click, so the region is highlighted and cross-filters other components. Only when the sub-map cannot be loaded (a server error) does a short message at the top say *Couldn't load the map for this region*.
 - **Chart switch** lists Marker map first; the fields and the selected map carry over.
 - Clicking a region can [cross-filter](/documentation/Analysis/Cross-Filtering/) other components.

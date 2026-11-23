@@ -7,7 +7,7 @@ createTime: 2026/09/01 21:50:47
 
 # Preparing Data for AI
 
-A **knowledge index** holds what the AI Agent has learned from an analysis model: its fields, dimensions, business meaning and member values, stored as vectors made by the embedding model. Versions before 10.00 called it a *vector index*, and the AI Assistant's messages still use that term.
+A **knowledge index** holds what the AI Agent has learned from an analysis model: its fields, dimensions, business meaning and member values, stored as vectors made by the embedding model. Versions before 10.00 called it a *vector index*, and the AI Agent's messages still use that term.
 
 The Agent uses the index to recognise business terms, near-synonyms and member values ("East Region", "Completed"), to pick the relevant fields of a large model, and as evidence when it chooses the analysis model for a question that names none. Without an index the Agent still answers, but noticeably worse.
 
@@ -82,7 +82,7 @@ A schedule belongs to the analysis model, so every index row of that model shows
 
 ## 6. What users see while an index is not ready
 
-| Situation | What the AI Assistant does |
+| Situation | What the AI Agent does |
 | --- | --- |
 | No usable index: never built, the first build failed, or it was built with another embedding model | Shows the banner **Vector index is temporarily unavailable** at the top. A question that names specific values ends with "This question names specific values (such as a store or a region), and matching them to this model's data needs the model's vector index, which is not ready yet. Ask an administrator to build it; after that the question will work as asked." For a model with very many fields: "This model has too many fields to read all of them at once, and the vector index that picks the relevant ones is not ready yet. …" Asking again does not help until the index is built. |
 | The first build is running | No banner. Questions that need the index end with the same messages, worded "…which is being built right now. It usually takes a few minutes; after that the question will work as asked." |

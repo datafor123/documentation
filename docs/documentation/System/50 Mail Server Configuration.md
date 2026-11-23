@@ -40,7 +40,7 @@ All fields in **Server** and **Sender** are required.
 
 ## 3. Test the connection
 
-Click **Test connection** at the bottom of the page.
+Click **Test connection**, at the end of the **Encryption** settings.
 
 - The test uses the values **currently in the form**, including changes you have not saved, so you can try settings before saving them.
 - All required fields must be filled in before the test runs.
@@ -48,7 +48,7 @@ Click **Test connection** at the bottom of the page.
 
 ## 4. Save
 
-Click **Save**. The button is available once you have changed something. If you leave the page with unsaved changes, Datafor asks you to keep editing, discard the changes, or save and leave.
+Once you change something, a bar at the bottom shows the number of unsaved changes with **Discard** and **Save**. Click **Save**; if a required field is missing, the page scrolls to it. If you leave the page with unsaved changes, Datafor asks you to keep editing, discard the changes, or save and leave.
 
 ## 5. Troubleshooting
 

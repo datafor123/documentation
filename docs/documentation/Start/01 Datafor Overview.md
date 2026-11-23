@@ -21,7 +21,7 @@ The areas in the console's left navigation:
 | Area | What you do there | Start with |
 | --- | --- | --- |
 | **Home**, **Personal**, **Public**, **Favorites**, **Recent** | Open, organize and share reports and other content. | [Quick Tour of the Console](/documentation/Console/Quick-Tour-of-the-Console/) |
-| **AI Agent** | Ask about a model in your own words and get charts, tables and conclusions. Selecting a model is optional: with **Auto-select model** the Agent picks one. An administrator sets up the AI service first. | [AI Assistant](/documentation/AI-Agent/AI-Chat/), [AI Agent Overview](/documentation/AI-Agent/AI-Agent-Overview/) |
+| **AI Agent** | Ask about a model in your own words and get charts, tables and conclusions. Selecting a model is optional: with **Auto-select model** the Agent picks one. An administrator sets up the AI service first. | [AI Agent](/documentation/AI-Agent/AI-Chat/), [AI Agent Overview](/documentation/AI-Agent/AI-Agent-Overview/) |
 | **Data sources** | Connect databases and warehouses, or import Excel and CSV files. | [Supported Databases](/documentation/Datasource/Supported-Databases/), [File Dataset](/documentation/Datasource/File-Dataset/) |
 | **Models** | Build analysis models: tables, relationships, hierarchies, measures and calculated measures. | [Analysis Model Overview](/documentation/Model/Analysis-Model-Overview/) |
 | **Metrics Library** | Keep the official definition of each business metric, with owner, synonyms and certification, and bind it to the measure that calculates it in each model. | [Understanding Metrics Library](/documentation/Metrics-Library/Understanding-Metrics-Library/) |
@@ -36,7 +36,7 @@ Data access needs configuring: having no matching enabled row policy does not au
 
 | Your starting point | Next step |
 | --- | --- |
-| A model is already available and you want to explore it | Open [AI Assistant](/documentation/AI-Agent/AI-Chat/) if AI is configured, or create a report from the model |
+| A model is already available and you want to explore it | Open [AI Agent](/documentation/AI-Agent/AI-Chat/) if AI is configured, or create a report from the model |
 | You want to build your first dashboard | Follow [Create Your First Analysis Report](/documentation/Start/Create-Your-First-Analysis-Report/) |
 | You need to prepare data for your team | Start with [Creating an Analysis Model](/documentation/Model/Creating-an-Analysis-Model/) |
 | You are bringing analytics into a product | Start with [SDK Embedding](/documentation/Embedded/SDK-Embedding/) |

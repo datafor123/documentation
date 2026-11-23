@@ -21,6 +21,7 @@ Compare two numeric measures to find clusters, unusual observations and possible
 | **Y Axis** | Gross Margin Rate | Vertical position. |
 | **Size** | Optional order count | Bubble size as a third measure. |
 | **Legend** | Optional Region | Separates groups of points by colour. Not drillable. |
+| **Color** | Optional field | Colours the points by this field; set the colour of each value in the field's menu. |
 | **Tooltips** | Optional context | Extra values shown when hovering a point. |
 | **Time axis** | Optional date field | Lets a page **Date** filter that filters by time axis filter this chart; see [Date](/documentation/Visualization/Datepicker/). |
 
@@ -48,6 +49,8 @@ All in the **Style** tab.
 | **Gridlines** | X and Y gridlines and their style. | On |
 | **Zoom slider → Zoom** | Zoom into a dense area. | Off |
 | **Tooltip → Show Tooltip** | Turns the hover tooltip on or off. | On |
+
+Point colours follow the same rules as other charts: the **Color** field and its colours, member colours kept consistent across the page, and a palette set on the chart itself before the page palette; see [Colors and Color Schemes](/documentation/Visualization/Colors/). The measure menu has no series colour for Scatter, because X, Y and Size are axes rather than series. Reports made before 10.02 drew points only from the page palette in legend order, so their colours can change when you open them now.
 
 Scatter has no Display units setting; format the axes with the measure's **Format**. In the **Analytics** tab you can add lines (fixed or statistic; a statistic of the X measure gives a vertical line), bands and one **Diagonal** (y = x). See [Reference lines](/documentation/Analysis/Chart-Reference-Lines/).
 

@@ -35,7 +35,7 @@ Select the **OAuth 2.0** card ("Sign in at the identity provider, then return").
 
 ## 2. Save and test
 
-1. Click **Save**. The button is available once something has changed.
+1. Click **Save** in the bar that appears at the bottom once something has changed; **Discard** drops the changes.
 2. Sign in through the provider in a separate browser session to check the setup. There is no **Test connection** button for OAuth 2.0.
 
 - To switch OAuth 2.0 off, turn off **Enable** and click **Save**. With **Enable** off, Datafor saves without checking the required fields.
