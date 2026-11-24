@@ -34,6 +34,16 @@ Nothing to do.
 Complete!
 ```
 
+Then install the libraries and fonts the render service needs. The render service produces the screenshots, PDF, figures and Excel files that subscriptions send, using the Chromium that comes with the installation; Chromium's system libraries do not come with it. Without them the render service stops right after it starts and subscriptions go out with the report link only. Without a CJK font, Chinese and Japanese text renders as boxes.
+
+```bash
+yum install -y alsa-lib at-spi2-atk atk at-spi2-core cairo cups-libs dbus-libs libdrm mesa-libgbm \
+  glib2 nspr nss pango libX11 libxcb libXcomposite libXdamage libXext libXfixes libxkbcommon libXrandr \
+  google-noto-sans-cjk-ttc-fonts liberation-fonts
+```
+
+See [Render service](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#render-service) for how to check it.
+
 ## Step 2: Create the `biadmin` user group
 
 ```bash
