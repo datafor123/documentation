@@ -23,14 +23,31 @@ Datafor applies update packages when it starts: `start-server` runs every `.jar`
 
 **Linux** (installation in `/opt/bi-server`):
 
-1. Copy the package into `/opt/bi-server/update` and give it to `biadmin`: `chown biadmin:biadmin /opt/bi-server/update/datafor-updater.jar`.
-2. Switch to `biadmin` with `su - biadmin`. Stop Datafor, which also stops the AI Agent:
+1. As `root`, install the libraries and fonts of the render service. The update package installs the render service from 10.02 on, and the Chromium it uses needs them from the system. Without them the upgrade completes, but the render service stops right after it starts and subscriptions go out with the report link only; without a CJK font, Chinese and Japanese text renders as boxes. Skip this step if `curl http://127.0.0.1:38082/health` already answers `"ok":true`.
+
+   ```bash
+   # RHEL / Rocky / AlmaLinux / openEuler
+   yum install -y alsa-lib at-spi2-atk atk at-spi2-core cairo cups-libs dbus-libs libdrm mesa-libgbm \
+     glib2 nspr nss pango libX11 libxcb libXcomposite libXdamage libXext libXfixes libxkbcommon libXrandr \
+     google-noto-sans-cjk-ttc-fonts liberation-fonts
+   ```
+
+   ```bash
+   # Debian 12 / Ubuntu 22.04 (on Ubuntu 24.04 several packages end in t64)
+   apt-get install -y libasound2 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcairo2 \
+     libcups2 libdbus-1-3 libdrm2 libgbm1 libglib2.0-0 libnspr4 libnss3 libpango-1.0-0 \
+     libx11-6 libxcb1 libxcomposite1 libxdamage1 libxext6 libxfixes3 libxkbcommon0 libxrandr2 \
+     fonts-noto-cjk fonts-liberation
+   ```
+
+2. Copy the package into `/opt/bi-server/update` and give it to `biadmin`: `chown biadmin:biadmin /opt/bi-server/update/datafor-updater.jar`.
+3. Switch to `biadmin` with `su - biadmin`. Stop Datafor, which also stops the AI Agent:
 
    ```bash
    cd /opt/bi-server && ./stop-server.sh
    ```
 
-3. Start Datafor with `./start-server.sh` in `/opt/bi-server`. It applies the package, then starts the database, the AI Agent and the web server.
+4. Start Datafor with `./start-server.sh` in `/opt/bi-server`. It applies the package, then starts the database, the AI Agent and the web server.
 
 **Windows:**
 
@@ -72,7 +89,7 @@ Stop Datafor, copy your values into the new files rather than copying the old fi
 When you upgrade to 10.02, also do the following. If you come from an earlier version, do the steps for 10.01 (section 5) and 10.00 (section 6) as well. The full list of changes is in the [10.02 Upgrade notes](/release/10.02/#upgrade-notes).
 
 - **Install the new plugins with the others.** Subscriptions and alerts (`datafor-notify`) and IM platforms (`datafor-im`) are new; the audit log (`datafor-audit`) is rebuilt. Paginated report subscriptions send nothing without `datafor-notify`.
-- **Render service.** If the AI Agent you upgrade has no render service yet, copy the `ai-agent-render` program, its start scripts, `render-runtime-*.properties` and the whole `browsers` folder from the new package. Without them, subscriptions go out without screenshots and PDF. On Linux, install the libraries and fonts listed in [Render service](/documentation/Subscriptions-and-Alerts/Setting-Up-Delivery/#render-service).
+- **Render service.** If the AI Agent you upgrade has no render service yet, copy the `ai-agent-render` program, its start scripts, `render-runtime-*.properties` and the whole `browsers` folder from the new package. Without them, subscriptions go out without screenshots and PDF. On Linux, install its libraries and fonts before you apply the package (step 1 of the Linux steps in section 2).
 - **Your own `applicationContext-spring-security.xml`.** If you maintain it yourself, replace `wecomFilter` with `imFilter` and add the three anonymous rules listed in the [upgrade notes](/release/10.02/#upgrade-notes); otherwise Datafor does not start.
 - **WeCom.** The old WeCom integration is removed and its settings are not carried over. Register the WeCom app again under **Settings › Notifications › IM platforms** and set its home page to the address shown there. See [IM Platforms](/documentation/System/IM-Platforms/).
 - **Audit log.** Where audit settings were never saved, auditing is on after the upgrade, with 180 days of retention. Check **Settings › Operations › Audit log**. See [Audit Log](/documentation/System/Audit-Log/).
